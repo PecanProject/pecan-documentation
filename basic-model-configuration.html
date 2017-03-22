@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="user-appendix.html">
-<link rel="next" href="model-output-variables.html">
+<link rel="prev" href="the-model-site-page.html">
+<link rel="next" href="vm-desktop-conversion.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -450,789 +450,84 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pecan-models" class="section level1">
-<h1><span class="header-section-number">15</span> PEcAn Models</h1>
-<p>This section will contain information about all models and output variables that are supported by PEcAn.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Name</th>
-<th align="left">Available in the VM</th>
-<th align="left">Prescribed Inputs</th>
-<th align="left">Input Functions/Values</th>
-<th align="left">Restart Function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="ubuntu.html#biocro-2">BioCro</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="pecan-models.html#clm">CLM</a></td>
-<td align="left">No</td>
-<td align="left">No</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="ubuntu.html#dalec-2">DALEC</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="pecan-models.html#ed">ED</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">FATES</td>
-<td align="left">No</td>
-<td align="left">Yes</td>
-<td align="left"></td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="ubuntu.html#gday-1">GDAY</a></td>
-<td align="left">No</td>
-<td align="left">No</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="ubuntu.html#linkages-4">LINKAGES</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="ubuntu.html#lpj-guess-1">LPJ-GUESS</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="ubuntu.html#maespa-1">MAESPA</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="pecan-models.html#preles">PRELES</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">Partially</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="ubuntu.html#sipnet-2">Sipnet</a></td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Output Variables</strong></p>
-<p>PEcAn converts all model outputs to a single <a href="Model%20Output%20Variables">standard</a>. This standard evolved out of MsTMIP project, which is itself based on NACP, LBA, and other model-intercomparison projects. This standard was expanded for the PalEON MIP and the needs of the PEcAn modeling community to support variables not in these standards.</p>
-<p><em>Model developers</em>: do not add variables to your PEcAn output without first adding them to the PEcAn standard table! Also, do not create new variables equivalent to existing variables but just with different names or units.</p>
+<div id="basic-model-configuration" class="section level1">
+<h1><span class="header-section-number">4</span> Basic model configuration</h1>
+<p>This page is used for basic model configuration, including when your model will run and what input data it will use.</p>
 
-<div id="biocro" class="section level2">
-<h2><span class="header-section-number">15.1</span> BioCro</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>BioCro uses a config.xml file similar to ED2. At this time, no other template files are required.</p>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
+<div id="choosing-meteorology" class="section level2">
+<h2><span class="header-section-number">4.1</span> Choosing meteorology</h2>
+<p>Once a Machine, Model, and Site have been selected, PEcAn will take you to the Input selection page. From this page you will select what Plant Functional Type (PFT) you want to run at a site, the start and end dates of the run, and various Input selections. The most common of these across all models is the need to specify meteorological forcing data. The exact name of the menu item for meteorology will vary by model because all of the Input requirements are generated individually for each model based on the MODEL_TYPE table. In general there are 3 possible cases for meteorology</p>
+<ul>
+<li>PEcAn already has driver files in its database</li>
+<li>PEcAn does not have drivers, but can generate them from publicly available data</li>
+<li>You need (or want) to upload your own drivers</li>
+</ul>
+<p>The first two cases will appear automatically in the the pull down menu. For meteorological files that already exist you will see the date range that’s available. By contrast, met that can be generated will appear as “Use <source>”, where <source> is the origin of the data (e.g. “Use Ameriflux” will use the micromet from an Ameriflux eddy covariance tower, if one is present at the site).</p>
+<p>If you want to upload your own met data this can be done in three ways. The standard way is to upload data in PEcAn’s standard meteorological format (netCDF files, CF metadata). See <a href="../../developers_guide/Adding-an-Input-Converter.md#met-data">here</a> for details about variables and units. From this standard, PEcAn can then convert the file to the model-specific format required by the model you have chosen. This approach is preferred because PEcAn will also be able to convert the file into the format required by any other model as well. The second option for adding met data is to add it in a model-specific format, which is often easiest if you’ve already been running your model at a site and are just switching to using PEcAn. The final way to add met data is to incorporate it into the overall meteorological processing workflow. This is preferred if you are working with a common meteorological data product that is not yet in PEcAn’s workflow. Details are <a href="../../developers_guide/Adding-an-Input-Converter.md#met-data">here</a>, though at this stage you would also be strongly encouraged to contact the PEcAn development team.</p>
+<div id="met-workflow" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Met workflow</h3>
+<p>In a nutshell, the PEcAn met workflow is designed to reduce the problem of converting <em>n</em> possible met inputs into <em>m</em> possible model formats, which requires <em>n x m</em> conversion functions as well as numerous custom functions for downscaling, gap filling, etc. Instead, PEcAn works with a single met standard, and thus requires <em>n</em> conversion functions, one for converting each data source into the PEcAn standard, and then <em>m</em> conversion functions for converting from that standard to what an individual model requires. For a new model joining the PEcAn system the burden in particularly low – writing one conversion function provides access to <em>n</em> inputs. Similarly, PEcAn performs all other operations/manipulations (extracting a site, downscaling, gap filling, etc) within the PEcAn standard, which means these operations only need be implemented once.</p>
+<p>Consider a generic met data product named MET for simplicity. PEcAn will use a function, download.MET, to pull data for the selected year from a public data source (e.g. Ameriflux, North American Regional Reanalysis, etc). Next, PEcAn will use a function, met2CF.MET, to convert the data into the PEcAn standard. If the data is already at the site scale it will then gapfill the data. If the data is a regional or global data product, PEcAn will then permute the data to allow easier site-level extraction, then it will extract data for the requested site and data range. Modules to address the temporal and spatial downscaling of meteorological data products, as well as their uncertainties, are in development but not yet part of the operational workflow. All of these functions are located within the data.atmosphere module.</p>
+<p>Once data is in the standard format and processed, it will be converted to the model-specific format using a met2model.MODEL function (located in that MODEL’s module).</p>
+</div>
+<div id="troubleshooting-meteorological-conversions" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Troubleshooting meteorological conversions</h3>
+<p>At the current moment (PEcAn 1.4.0), most of the issues below address possible errors that the Ameriflux meteorology workflow might report</p>
+<div id="could-not-do-gapfill-the-following-variables-have-nas" class="section level4">
+<h4><span class="header-section-number">4.1.2.1</span> Could not do gapfill … The following variables have NA’s</h4>
+<p>This error message means that there were gaps in the downloaded data, for whatever variables that were listed, which were larger than the current algorithm could fill. Particularly common is missing radiation or PAR data, as Ameriflux frequently converts nighttime data to NULL, and work is in progress to detect this based on solar geometry. Also common are incomplete years (first or last year of tower operations).</p>
+</div>
+<div id="could-not-get-information-about-.-is-this-an-ameriflux-site" class="section level4">
+<h4><span class="header-section-number">4.1.2.2</span> Could not get information about <site> . Is this an Ameriflux site?</h4>
+<p>This message occurs when PEcAn believes that a site is part of Ameriflux (because it was listed on the Ameriflux or FLUXNET webpage and has a US-* site code), but no data is present on the Ameriflux server. The most common reasons for this is that you have selected a site that has not submitted data to Ameriflux yet (or that data hasn’t been processed yet), or you have selected a year that’s outside the tower’s operational period. Visit <a href="http://ameriflux.lbl.gov/sites/site-list-and-pages/">Ameriflux</a> and <a href="http://fluxnet.ornl.gov/site_status">FLUXNET</a> for lists of available site years.</p>
+</div>
+<div id="could-not-download-data-for-for-the-year" class="section level4">
+<h4><span class="header-section-number">4.1.2.3</span> Could not download data for <site> for the year <YEAR></h4>
+<p>This is similar to the previous error, but in this case PEcAn did find data for the site listed, but just not for the year requested. This can usually be fixed by just altering the years of the run to match those with available data.</p>
+</div>
+<div id="i-could-not-find-the-requested-var-or-dimvar-in-the-file" class="section level4">
+<h4><span class="header-section-number">4.1.2.4</span> I could not find the requested var (or dimvar) in the file!</h4>
+<p>PEcAn could not find a required variable within the downloaded file. Most likely this is due to that variable not being measured at this site. The most common cause of failure is the absence of atmospheric pressure data (PRESS), but since most models have a low sensitivity to this variable we are working on methods to estimate this from other sources.</p>
 
 </div>
-<div id="biocro-configuration" class="section level2">
-<h2><span class="header-section-number">15.2</span> BioCro Configuration</h2>
-<p>BioCro uses a config.xml file similar to ED2. At this time, no other template files are required.</p>
-
-</div>
-<div id="clm" class="section level2">
-<h2><span class="header-section-number">15.3</span> CLM</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong> List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="dalec" class="section level2">
-<h2><span class="header-section-number">15.4</span> DALEC</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="ed" class="section level2">
-<h2><span class="header-section-number">15.5</span> ED</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"><a href="http://moorcroftlab.oeb.harvard.edu/" class="uri">http://moorcroftlab.oeb.harvard.edu/</a></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"><a href="https://github.com/EDmodel/ED2" class="uri">https://github.com/EDmodel/ED2</a></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left">Paul Moorcroft, …</td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left">Michael Dietze, Rob Kooper</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about ED model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>ED2 is configured using 2 files which are placed in the run folder.</p>
-<ul>
-<li><strong>ED2IN</strong> : template for this file is located at models/ed/inst/ED2IN.&lt;revision&gt;. The values in this template that need to be modified are described below and are surrounded with @ symbols.</li>
-<li><strong>config.xml</strong> : this file is generated by PEcAn. Some values are stored in the pecan.xml in &lt;pfts&gt;&lt;pft&gt;&lt;constants&gt; section as well as in &lt;model&gt; section.</li>
-</ul>
-<p>An example of the template can be found in <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/ED2IN.r82">ED2IN.r82</a></p>
-<p>The ED2IN template can contain the following variables. These will be replaced with actual values when the model configuration is written.</p>
-<ul>
-<li><p><a href="mailto:**@ENSNAME@*">**@ENSNAME@*</a>* : run id of the simulation, used in template for NL%EXPNME</p></li>
-<li><a href="mailto:**@START_MONTH@*">**@START_MONTH@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IMONTHA<br />
-</li>
-<li><a href="mailto:**@START_DAY@*">**@START_DAY@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IDATEA<br />
-</li>
-<li><a href="mailto:**@START_YEAR@*">**@START_YEAR@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IYEARA<br />
-</li>
-<li><a href="mailto:**@END_MONTH@*">**@END_MONTH@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IMONTHZ<br />
-</li>
-<li><a href="mailto:**@END_DAY@*">**@END_DAY@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IDATEZ<br />
-</li>
-<li><p><a href="mailto:**@END_YEAR@*">**@END_YEAR@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IYEARZ</p></li>
-<li><a href="mailto:**@SITE_LAT@*">**@SITE_LAT@*</a>* : site latitude location, from &lt;run&gt;&lt;site&gt;&lt;lat&gt;, used in template for NL%POI_LAT<br />
-</li>
-<li><p><a href="mailto:**@SITE_LON@*">**@SITE_LON@*</a>* : site longitude location, from &lt;run&gt;&lt;site&gt;&lt;lon&gt;, used in template for NL%POI_LON</p></li>
-<li><a href="mailto:**@SITE_MET@*">**@SITE_MET@*</a>* : met header location, from &lt;run&gt;&lt;site&gt;&lt;met&gt;, used in template for NL%ED_MET_DRIVER_DB<br />
-</li>
-<li><a href="mailto:**@MET_START@*">**@MET_START@*</a>* : first year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.start&gt;, used in template for NL%METCYC1<br />
-</li>
-<li><p><a href="mailto:**@MET_END@*">**@MET_END@*</a>* : last year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.end&gt;, used in template for NL%METCYCF</p></li>
-<li><a href="mailto:**@PHENOL_SCHEME@*">**@PHENOL_SCHEME@*</a>* : phenology scheme, if this variabe is 1 the following 3 fields will be used, otherwise they will be set to empty strings, from &lt;model&gt;&lt;phenol.scheme&gt;, used in template for NL%IPHEN_SCHEME<br />
-</li>
-<li><a href="mailto:**@PHENOL_START@*">**@PHENOL_START@*</a>* : first year for phenology, from &lt;model&gt;&lt;phenol.start&gt;, used in template for NL%IPHENYS1 and NL%IPHENYF1<br />
-</li>
-<li><p><a href="mailto:**@PHENOL_END@*">**@PHENOL_END@*</a>* : last year for phenology, from &lt;model&gt;&lt;phenol.end&gt;, used in template for NL%IPHENYSF and NL%IPHENYFF<br />
-<a href="mailto:**@PHENOL@*">**@PHENOL@*</a>* : path and prefix of the prescribed phenology data, from * <model\>&lt;phenol&gt;, used in template for NL%PHENPATH</p></li>
-<li><a href="mailto:**@SITE_PSSCSS@*">**@SITE_PSSCSS@*</a>* : path and prefix of the previous ecosystem state, from &lt;model&gt;&lt;psscss&gt;, used in template for NL%SFILIN<br />
-</li>
-<li><a href="mailto:**@ED_VEG@*">**@ED_VEG@*</a>* : path and prefix of the vegetation database, used only to determine the land/water mask, from &lt;model&gt;&lt;veg&gt;, used in template for NL%VEG_DATABASE<br />
-</li>
-<li><a href="mailto:**@ED_SOIL@*">**@ED_SOIL@*</a>* : path and prefix of the soil database, used to determine the soil type, from &lt;model&gt;&lt;soil&gt;, used in template for NL%SOIL_DATABASE<br />
-</li>
-<li><p><a href="mailto:**@ED_INPUTS@*">**@ED_INPUTS@*</a>* : input directory with dataset to initialise chilling degrees and growing degree days, which is used to drive the cold-deciduous phenology, from &lt;model&gt;&lt;inputs&gt;, used in template for NL%THSUMS_DATABASE</p></li>
-<li><a href="mailto:**@FFILOUT@*">**@FFILOUT@*</a>* : path and prefix for analysis files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/analysis, used in template for NL%FFILOUT<br />
-</li>
-<li><p><a href="mailto:**@SFILOUT@*">**@SFILOUT@*</a>* : path and prefix for history files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/history, used in template for NL%SFILOUT</p></li>
-<li><p><a href="mailto:**@CONFIGFILE@*">**@CONFIGFILE@*</a>* : XML file containing additional parameter settings, this is always “config.xml”, used in template for NL%IEDCNFGF</p></li>
-<li><a href="mailto:**@OUTDIR@*">**@OUTDIR@*</a>* : location where output files are written (<strong>without the runid</strong>), from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;, should not be used.<br />
-</li>
-<li><p><a href="mailto:**@SCRATCH@*">**@SCRATCH@*</a>* : local scratch space for outputs, generated /scratch/&lt;username&gt;/run$scratch, should not be used right now since it only works on ebi-cluster</p></li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-<p>** BU geo**</p>
-<p><strong>TACC lonestar</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar
-<span class="kw">make</span> OPT=lonestar</code></pre></div>
-<p><strong>TACC stampede</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede
-<span class="kw">make</span> OPT=stampede</code></pre></div>
-
-<div id="ed-configuration" class="section level3">
-<h3><span class="header-section-number">15.5.1</span> ED Configuration</h3>
-<p>ED2 is configured using 2 files which are placed in the run folder.</p>
-<ul>
-<li><strong>ED2IN</strong> : template for this file is located at models/ed/inst/ED2IN.&lt;revision&gt;. The values in this template that need to be modified are described below and are surrounded with @ symbols.</li>
-<li><strong>config.xml</strong> : this file is generated by PEcAn. Some values are stored in the pecan.xml in &lt;pfts&gt;&lt;pft&gt;&lt;constants&gt; section as well as in &lt;model&gt; section.</li>
-</ul>
-<p>An example of the template can be found in <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/ED2IN.r82">ED2IN.r82</a></p>
 </div>
 </div>
-<div id="ed2in-configuration-variables" class="section level2">
-<h2><span class="header-section-number">15.6</span> ED2IN configuration variables</h2>
-<p><a href="mailto:**@ENSNAME@*">**@ENSNAME@*</a>* : run id of the simulation, used in template for NL%EXPNME</p>
-<p><a href="mailto:**@START_MONTH@*">**@START_MONTH@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IMONTHA<br />
-<a href="mailto:**@START_DAY@*">**@START_DAY@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IDATEA<br />
-<a href="mailto:**@START_YEAR@*">**@START_YEAR@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IYEARA<br />
-<a href="mailto:**@END_MONTH@*">**@END_MONTH@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IMONTHZ<br />
-<a href="mailto:**@END_DAY@*">**@END_DAY@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IDATEZ<br />
-<a href="mailto:**@END_YEAR@*">**@END_YEAR@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IYEARZ</p>
-<p><a href="mailto:**@SITE_LAT@*">**@SITE_LAT@*</a>* : site latitude location, from &lt;run&gt;&lt;site&gt;&lt;lat&gt;, used in template for NL%POI_LAT<br />
-<a href="mailto:**@SITE_LON@*">**@SITE_LON@*</a>* : site longitude location, from &lt;run&gt;&lt;site&gt;&lt;lon&gt;, used in template for NL%POI_LON</p>
-<p><a href="mailto:**@SITE_MET@*">**@SITE_MET@*</a>* : met header location, from &lt;run&gt;&lt;site&gt;&lt;met&gt;, used in template for NL%ED_MET_DRIVER_DB<br />
-<a href="mailto:**@MET_START@*">**@MET_START@*</a>* : first year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.start&gt;, used in template for NL%METCYC1<br />
-<a href="mailto:**@MET_END@*">**@MET_END@*</a>* : last year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.end&gt;, used in template for NL%METCYCF</p>
-<p><a href="mailto:**@PHENOL_SCHEME@*">**@PHENOL_SCHEME@*</a>* : phenology scheme, if this variabe is 1 the following 3 fields will be used, otherwise they will be set to empty strings, from &lt;model&gt;&lt;phenol.scheme&gt;, used in template for NL%IPHEN_SCHEME<br />
-<a href="mailto:**@PHENOL_START@*">**@PHENOL_START@*</a>* : first year for phenology, from &lt;model&gt;&lt;phenol.start&gt;, used in template for NL%IPHENYS1 and NL%IPHENYF1<br />
-<a href="mailto:**@PHENOL_END@*">**@PHENOL_END@*</a>* : last year for phenology, from &lt;model&gt;&lt;phenol.end&gt;, used in template for NL%IPHENYSF and NL%IPHENYFF<br />
-<a href="mailto:**@PHENOL@*">**@PHENOL@*</a>* : path and prefix of the prescribed phenology data, from &lt;model&gt;&lt;phenol&gt;, used in template for NL%PHENPATH</p>
-<p><a href="mailto:**@SITE_PSSCSS@*">**@SITE_PSSCSS@*</a>* : path and prefix of the previous ecosystem state, from &lt;model&gt;&lt;psscss&gt;, used in template for NL%SFILIN<br />
-<a href="mailto:**@ED_VEG@*">**@ED_VEG@*</a>* : path and prefix of the vegetation database, used only to determine the land/water mask, from &lt;model&gt;&lt;veg&gt;, used in template for NL%VEG_DATABASE<br />
-<a href="mailto:**@ED_SOIL@*">**@ED_SOIL@*</a>* : path and prefix of the soil database, used to determine the soil type, from &lt;model&gt;&lt;soil&gt;, used in template for NL%SOIL_DATABASE<br />
-<a href="mailto:**@ED_INPUTS@*">**@ED_INPUTS@*</a>* : input directory with dataset to initialise chilling degrees and growing degree days, which is used to drive the cold-deciduous phenology, from &lt;model&gt;&lt;inputs&gt;, used in template for NL%THSUMS_DATABASE</p>
-<p><a href="mailto:**@FFILOUT@*">**@FFILOUT@*</a>* : path and prefix for analysis files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/analysis, used in template for NL%FFILOUT<br />
-<a href="mailto:**@SFILOUT@*">**@SFILOUT@*</a>* : path and prefix for history files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/history, used in template for NL%SFILOUT</p>
-<p><a href="mailto:**@CONFIGFILE@*">**@CONFIGFILE@*</a>* : XML file containing additional parameter settings, this is always “config.xml”, used in template for NL%IEDCNFGF</p>
-<p><a href="mailto:**@OUTDIR@*">**@OUTDIR@*</a>* : location where output files are written (<strong>without the runid</strong>), from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;, should not be used.<br />
-<a href="mailto:**@SCRATCH@*">**@SCRATCH@*</a>* : local scratch space for outputs, generated /scratch/&lt;username&gt;/run$scratch, should not be used right now since it only works on ebi-cluster</p>
-<p><strong>ED Computation HPC</strong></p>
-<p><strong>TACC lonestar</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar
-<span class="kw">make</span> OPT=lonestar</code></pre></div>
-<p><strong>TACC stampede</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede
-<span class="kw">make</span> OPT=stampede</code></pre></div>
+<div id="choosing-initial-vegetation" class="section level2">
+<h2><span class="header-section-number">4.2</span> Choosing initial vegetation</h2>
+<p>On the Input Selection webpage, in addition to selecting PFTs, start &amp; end dates, and meteorology, many models also require some way of specifying the initial conditions for the vegetation, which may range from setting the aboveground biomass and LAI up to detailed inventory-like data on species composition and stand structure.</p>
+<p>At the moment, PEcAn has two cases for initial conditions and they only exist as required Inputs for the ED2 model:</p>
+<p>If files already exist in the database, they can simply be selected from the menu. For ED2, there are 3 different veg files (site, pss, css) and it is important that you select a complete set, not mix and match.</p>
+<p>If files don’t exist they can be uploaded following the instructions on [[How to insert new Input data]]. Information on the ED2-specific format is located <a href="../../ED-configuration.md">here</a></p>
+<p>Two additional options are in development:</p>
+<ul>
+<li>Model spin-up</li>
+<li>Automated workflows</li>
+</ul>
+<div id="spin-up" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Spin up</h3>
+<p>A number of ecosystem models are typically initialized by spinning up to steady state. At the moment PEcAn doesn’t handle spin up automatically (e.g. looping met, checking for stability), but there are various ways to achieve a spin-up within the system.</p>
+<p><strong>Option 1:</strong> If there are model-specific settings in a model’s settings/config file, then that file can be accessed by clicking on the <strong>Edit model config</strong> check box. If this box is selected then PEcAn will pause the site run workflow after it has generated your model config file, but before it runs the model, and give you an opportunity to edit the file by hand, allowing you to change any model-specific spin up settings (e.g met recycling, spin up length)</p>
+<p><strong>Option 2:</strong> Set start_year very early and set the met drivers to be a long time series (e.g. PalEON, something custom uploaded to Inputs)</p>
+<p><strong>Option 3:</strong> In the MODEL_TYPE table, add your model’s restart format as an optional input, modify the model specific write.config function to use that restart, and then load a previous spin-up to the Inputs table</p>
+<p>Beyond these options, we hope to eventually develop more general, model-agnostic tools for spin up. In particular, we have started to explore the accelerated spin-up and semi-analytical techniques being developed by Yiqi Luo’s lab</p>
+</div>
+<div id="veg-workflow" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Veg workflow</h3>
+<p>As with meteorology, PEcAn is working to develop a model-agnostic workflow for converting various sources of vegetation data to common standards, developing common processing tools, and then writing out to model-specific formats. This process is in a much early stage than the meteorology workflow, as we are still researching what the options are for standard formats, but ultimately aims to be much more broad in scope, considering not just plot inventory data but also historical documentation, paleoecological proxies, satellite remote sensing (e.g. LANDSAT), airborne hyperspectral imagery, and active remote sensing (Lidar, Radar).</p>
+<p>At the moment, what is functional is a model-specific workflow for the ED2 model that can query the USFS Forest Inventory and Analysis and then construct initial condition files for ED2. This tool works with an internal copy of the FIA that is uploaded to a postGRES database along side BETY, however for space reasons this database does not ship with the PEcAn VM. To turn this feature on:</p>
+<ol style="list-style-type: decimal">
+<li><a href="../../developers_guide/Installing-PEcAn-Data.md">Download and Install the FIA database</a></li>
+<li>For web-base runs, specify the database settings in the <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">config.php</a></li>
+<li>For R-based runs, specify the database settings in the <a href="../advanced_users_guide/PEcAn-Configuration.md#database-access">pecan.xml</a></li>
+</ol>
 
 </div>
-<div id="gday" class="section level2">
-<h2><span class="header-section-number">15.7</span> GDAY</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
 </div>
-<div id="linkages" class="section level2">
-<h2><span class="header-section-number">15.8</span> LINKAGES</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="lpj-guess" class="section level2">
-<h2><span class="header-section-number">15.9</span> LPJ-GUESS</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="maespa" class="section level2">
-<h2><span class="header-section-number">15.10</span> MAESPA</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"><a href="http://maespa.github.io/" class="uri">http://maespa.github.io/</a></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"><a href="http://maespa.github.io/download.html" class="uri">http://maespa.github.io/download.html</a></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left">Belinda Medlyn and Remko Duursma</td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left">Tony Gardella, Martim DeKauwe, Remki Duursma</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p><strong>Model specific input files</strong></p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>Installing the MAESPA model requires cloning the MAESPA Bitbucket Repository, executing the makefile, and ensuring that the Maeswarp R package is correctly installed.</p>
-<p>To clone and compile the model, execute this code at the command line</p>
-<pre><code>git clone https://bitbucket.org/remkoduursma/maespa.git
-
-cd maespa
-
-make clean
-
-make</code></pre>
-<p><code>maespa.out</code> is your executable. Example input files can be found in the inputfiles directory. Executing measpa.out from within one of the example directories will produce output.</p>
-<p>MAESPA developers have also developed a wrapper package called <code>Maeswrap</code>. The usual R package installation method <code>install.packages</code> may present issues with downloading an unpacking a dependency package called <code>rgl</code>. Here are a couple of solutions:</p>
-<p>Solution 1</p>
-<p><strong>From the Command Line</strong></p>
-<pre><code>sudo apt-get install r-cran-rgl
-
-then from within R
-
-install.packages(&quot;Maeswrap&quot;)</code></pre>
-<p>Solution 2</p>
-<p><strong>From the Command line</strong></p>
-<pre><code>sudo apt-get install libglu1-mesa-dev
-
-then from within R
-
-install.packages(&quot;Maeswrap&quot;)
-
-</code></pre>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="preles" class="section level2">
-<h2><span class="header-section-number">15.11</span> PRELES</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="sipnet" class="section level2">
-<h2><span class="header-section-number">15.12</span> Sipnet</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left">Michael Dietze, Rob Kooper</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>SIPNET is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>sipnet.in</strong> : template for this file is located at models/sipnet/inst/sipnet.in and is not modified.<br />
-</li>
-<li><strong>sipnet.param-spatial</strong> : template for this file is located at models/sipnet/inst/template.param-spatial and is not modified.<br />
-</li>
-<li><strong>sipnet.param</strong> : template for this file is in models/sipnet/inst/template.param or it is specified in the &lt;model&gt; section as &lt;default.param&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p>SIPNET version unk:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_unk ]; then
-  cd
-  curl -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/PEcAn/models/sipnet_unk.tar.gz
-  tar zxf sipnet_unk.tar.gz
-  rm sipnet_unk.tar.gz
-fi
-cd ${HOME}/sipnet_unk/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.runk
-make clean</code></pre>
-<p>SIPNET version 136:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_r136 ]; then
-  cd
-  curl -o sipnet_r136.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_r136.tar.gz
-  tar zxf sipnet_r136.tar.gz
-  rm sipnet_r136.tar.gz
-  sed -i &#39;s#$(LD) $(LIBLINKS) \(.*\)#$(LD) \1 $(LIBLINKS)#&#39; ${HOME}/sipnet_r136/Makefile
-fi
-cd ${HOME}/sipnet_r136/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.r136
-make clean</code></pre>
-<p><strong>VM</strong></p>
-
-<p>SIPNET is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>sipnet.in</strong> : template for this file is located at models/sipnet/inst/sipnet.in and is not modified.<br />
-</li>
-<li><strong>sipnet.param-spatial</strong> : template for this file is located at models/sipnet/inst/template.param-spatial and is not modified.<br />
-</li>
-<li><strong>sipnet.param</strong> : template for this file is in models/sipnet/inst/template.param or it is specified in the &lt;model&gt; section as &lt;default.param&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
+<div id="selecting-a-soils-product" class="section level2">
+<h2><span class="header-section-number">4.3</span> Selecting a soils product</h2>
+<p>Many models have requirements for soils information, which may include: site-specific soil texture and depth information; soil biogeochemical initial conditions (e.g. soil carbon and nitrogen pools); soil moisture initial conditions; and soil thermal initial conditions.</p>
+<p>As with [<a href="basic-model-configuration.html#choosing-initial-vegetation">Choosing initial vegetation</a>], we eventually hope to develop data standards, soils workflows, and spin-up tools, but at the moment model requirements need to be met by [[inserting Input data|How to insert new Input data]] into the database or using files that have already been uploaded.</p>
+<p>Finally, any other model-specific inputs (e.g. N deposition, land use history, etc), should be met by [[inserting Input data|How to insert new Input data]] into the database or using files that have already been uploaded.</p>
 
 </div>
 </div>
@@ -1241,8 +536,8 @@ make clean</code></pre>
           </div>
         </div>
       </div>
-<a href="user-appendix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="model-output-variables.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="the-model-site-page.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vm-desktop-conversion.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
