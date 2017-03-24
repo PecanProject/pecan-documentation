@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="the-pecan-bety-connection.html">
-<link rel="next" href="using-git.html">
+<link rel="prev" href="user-appendix.html">
+<link rel="next" href="pecan-models.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -454,109 +454,38 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="overview" class="section level1">
-<h1><span class="header-section-number">21</span> Overview</h1>
-<p>We use GitHub to track development.</p>
-<p>To learn about GitHub, it is worth taking some time to read through the <a href="https://help.github.com/">FAQ</a>. When in doubt, the first step is to click the “Help” button at the top of the page.</p>
+<div id="updating-pecan-code-and-bety-database" class="section level1">
+<h1><span class="header-section-number">15</span> Updating PEcAn Code and Bety Database</h1>
+<p>Release notes for all releases can be found <a href="https://github.com/PecanProject/pecan/releases">here</a>.</p>
+<p>This page will only list any steps you have to do to upgrade an existing system. When updating PEcAn it is highly encouraged to update BETY. You can find instructions on how to do this, as well on how to update the database in the <a href="https://pecan.gitbooks.io/betydb-documentation/content/updating_betydb_when_new_versions_are_released.html">Updating BETYdb</a> gitbook page.</p>
+<div id="updating-pecan" class="section level3">
+<h3><span class="header-section-number">15.0.1</span> Updating PEcAn</h3>
+<p>The latest version of PEcAn code can be obtained from the PEcAn repository on GitHub:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> pecan        <span class="co"># If you are not already in the PEcAn directory</span>
+<span class="kw">git</span> pull</code></pre></div>
+<p>The PEcAn build system is based on GNU Make. The simplest way to install is to run <code>make</code> from inside the PEcAn directory. This will update the documentation for all packages and install them, as well as all required dependencies.</p>
+<p>For more control, the following <code>make</code> commands are available:</p>
 <ul>
-<li><strong>To address specific people</strong>, use a github feature called <a href="mailto:%22@mentions">&quot;@mentions</a>&quot; e.g. write <span class="citation">@dlebauer</span>, <span class="citation">@robkooper</span>, <span class="citation">@mdietze</span>, or <span class="citation">@serbinsh</span> … in the issue to alert the user as described in the <a href="https://help.github.com/articles/notifications">GitHub documentation on notifications</a></li>
+<li><p><code>make document</code> – Use <code>devtools::document</code> to update the documentation for all package. Under the hood, this uses the <code>roxygen2</code> documentation system.</p></li>
+<li><p><code>make install</code> – Install all packages and their dependnencies using <code>devtools::install</code>. By default, this only installs packages that have had their code changed and any dependent packages.</p></li>
+<li><p><code>make check</code> – Perform a rigorous check of packages using <code>devtools::check</code></p></li>
+<li><p><code>make test</code> – Run all unit tests (based on <code>testthat</code> package) for all packages, using <code>devtools::test</code></p></li>
+<li><p><code>make clean</code> – Remove the make build cache, which is used to track which packages have changed. Cache files are stored in the <code>.doc</code>, <code>.install</code>, <code>.check</code>, and <code>.test</code> subdirectories in the PEcAn main directory. Running <code>make clean</code> will force the next invocation of <code>make</code> commands to operate on all PEcAn packages, regardless of changes.</p></li>
 </ul>
-<div id="bugs-issues-features-etc." class="section level2">
-<h2><span class="header-section-number">21.1</span> Bugs, Issues, Features, etc.</h2>
-<div id="reporting-a-bug" class="section level3">
-<h3><span class="header-section-number">21.1.1</span> Reporting a bug</h3>
-<ol style="list-style-type: decimal">
-<li>(For developers) work through debugging (see <a href="debugging.md">debugging</a> wiki).</li>
-<li>Once you have identified a problem, that you can not resolve, you can write a bug report</li>
-<li>Write a bug report</li>
-<li>submit the bug report</li>
-<li>If you do find the answer, explain the resolution (in the issue) and close the issue</li>
-</ol>
-</div>
-<div id="required-content" class="section level3">
-<h3><span class="header-section-number">21.1.2</span> Required content</h3>
-<p>Note:</p>
+<p>The following are some additional <code>make</code> tricks that may be useful:</p>
 <ul>
-<li><strong>a bug is only a bug if it is reproducible</strong></li>
-<li><strong>clear bug reports save time</strong></li>
+<li><p>Install, check, document, or test a specific package – <code>make .&lt;cmd&gt;/&lt;pkg-dir&gt;</code>; e.g. <code>make .install/utils</code> or <code>make .check/modules/rtm</code></p></li>
+<li><p>Force <code>make</code> to run, even if package has not changed – <code>make -B &lt;command&gt;</code></p></li>
+<li><p>Run <code>make</code> commands in parallel – <code>make -j&lt;ncores&gt;</code>; e.g. <code>make -j4 install</code> to install packages using four parallel processes.</p></li>
 </ul>
-<ol style="list-style-type: decimal">
-<li>Clear, specific title</li>
-<li>Description -</li>
-</ol>
-<ul>
-<li>What you did</li>
-<li>What you expected to happen</li>
-<li>What actually happened</li>
-<li>What does work, under what conditions does it fail?</li>
-<li>Reproduction steps - minimum steps required to reproduce the bug</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>additional materials that could help identify the cause:</li>
-</ol>
-<ul>
-<li>screen shots</li>
-<li>stack traces, logs, scripts, output</li>
-<li>specific code and data / settings / configuration files required to reproduce the bug</li>
-<li>environment (operating system, browser, hardware)</li>
-</ul>
-</div>
-</div>
-<div id="requesting-a-feature" class="section level2">
-<h2><span class="header-section-number">21.2</span> Requesting a feature</h2>
-<p>(from The Pragmatic Programmer, available as <a href="http://proquestcombo.safaribooksonline.com/0-201-61622-X/223">ebook</a> through UI libraries, hardcopy on David’s bookshelf)<br />
- * focus on “user stories”, e.g. specific use cases * Be as specific as possible,</p>
-<ul>
-<li>Here is an example:</li>
-</ul>
-<ol style="list-style-type: decimal">
-<li>Bob is at www.mysite.edu/maps</li>
-<li>map of the the region (based on user location, e.g. US, Asia, etc)</li>
-<li>option to “use current location” is provided, if clicked, map zooms in to, e.g. state or county level
-<ol start="4" style="list-style-type: decimal">
-<li>for site run:
-<ol style="list-style-type: decimal">
-<li>option to select existing site or specify point by lat/lon</li>
-<li>option to specify a bounding box and grid resolution in either lat/lon or polar stereographic.</li>
-</ol></li>
-<li>asked to specify start and end times in terms of year, month, day, hour, minute. Time is recorded in UTC not local time, this should be indicated</li>
-</ol></li>
-</ol>
-</div>
-<div id="closing-an-issue" class="section level2">
-<h2><span class="header-section-number">21.3</span> Closing an issue</h2>
-<ol style="list-style-type: decimal">
-<li>Definition of “Done”</li>
-</ol>
-<ul>
-<li>test</li>
-<li>documentation</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>when issue is resolved:</li>
-</ol>
-<ul>
-<li>status is changed to “resolved”</li>
-<li>assignee is changed to original author</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>if original author agrees that issue has been resolved</li>
-</ol>
-<ul>
-<li>original author changes status to “closed”</li>
-</ul>
-<ol start="4" style="list-style-type: decimal">
-<li>except for trivial issues, issues are only closed by the author</li>
-</ol>
-</div>
-<div id="when-to-submit-an-issue" class="section level2">
-<h2><span class="header-section-number">21.4</span> When to submit an issue?</h2>
-<div id="ideally-non-trivial-code-changes-will-be-linked-to-an-issue-and-a-commit." class="section level3">
-<h3><span class="header-section-number">21.4.1</span> Ideally, non-trivial code changes will be linked to an issue and a commit.</h3>
-<p>This requires creating issues for each task, making small commits, and referencing the issue within your commit message. Issues can be created <a href="https://github.com/PecanProject/pecan/issues/new">on GitHub</a>. These issues can be linked to commits by adding text such as <code>fixes gh-5</code> (see [[Using Git During Development|Using-Git#during-development]]).</p>
-<p>Rationale: This workflow is a small upfront investment that reduces error and time spent re-creating and debugging errors. Associating issues and commits, makes it easier to identify why a change was made, and potential bugs that could arise when the code is changed. In addition, knowing which issue you are working on clarifies the scope and objectives of your current task.</p>
+<p>All instructions for the <code>make</code> build system are contained in the <code>Makefile</code> in the PEcAn root directory. For full documentation on <code>make</code>, see the man pages by running <code>man make</code> from a terminal.</p>
+<p><em>Point of contact: Alexey Shiklomanov GitHub/Gitter: <span class="citation">@ashiklom</span> email: <a href="mailto:ashiklom@bu.edu">ashiklom@bu.edu</a></em></p>
 
 </div>
+<div id="updating-bety" class="section level2">
+<h2><span class="header-section-number">15.1</span> Updating BETY</h2>
+<p>Moved to: <a href="https://pecan.gitbooks.io/betydb-documentation/content/updating_betydb_when_new_versions_are_released.html" class="uri">https://pecan.gitbooks.io/betydb-documentation/content/updating_betydb_when_new_versions_are_released.html</a></p>
+
 </div>
 </div>
             </section>
@@ -564,8 +493,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="the-pecan-bety-connection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="using-git.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="user-appendix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pecan-models.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
