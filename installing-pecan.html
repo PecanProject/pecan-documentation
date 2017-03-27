@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="model-output-variables.html">
-<link rel="next" href="workflow.html">
+<link rel="prev" href="logging.html">
+<link rel="next" href="creating-a-virtual-machine.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -455,85 +455,390 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="available-meteorological-drivers" class="section level1">
-<h1><span class="header-section-number">18</span> Available Meteorological Drivers</h1>
-<div id="ameriflux" class="section level2">
-<h2><span class="header-section-number">18.1</span> Ameriflux</h2>
-<p>Scale: site</p>
-<p>Resolution: 30 or 60 min</p>
-<p>Availability: varies by site <a href="http:\/\/ameriflux.lbl.gov\/data\/data-availability\/" class="uri">http:\/\/ameriflux.lbl.gov\/data\/data-availability\/</a></p>
-<p>Notes: Old ORNL server, use is deprecated</p>
+<div id="installing-pecan" class="section level1">
+<h1><span class="header-section-number">31</span> Installing PEcAn</h1>
+<p>We recommend that new users download the <a href="http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN">PEcAn VM</a> instead of creating from one from scratch. These instructions are provided to document how to install PEcAn on different Operating Systems.</p>
+<div id="installing-prerequisites" class="section level2">
+<h2><span class="header-section-number">31.1</span> Installing Prerequisites</h2>
+<p>Check specific notes in:</p>
+<ul>
+<li><a href="VM-Creation.md">VM Creation</a></li>
+<li><a href="Installing-PEcAn-Data.md">Installing PEcAn Data</a></li>
+<li><a href="../users_guide/advanced_users_guide/Enabling-Remote-Execution.md">Enabling Remote Execution</a></li>
+</ul>
+<p>OS specific installation instructions:</p>
+<ul>
+<li><a href="Installing-PEcAn-Ubuntu.md">Installing PEcAn Ubuntu</a></li>
+<li><a href="Installing-PEcAn-OSX.md">Installing PEcAn OSX</a></li>
+<li><a href="Installing-PEcAn-CentOS.md">Installing PEcAn CentOS</a></li>
+<li><a href="Installing-PEcAn-RedHat.md">Installing PEcAn RedHat</a> <strong>deprecated</strong> <!--[[Installing PEcAn HPC]]--></li>
+</ul>
+<p>To update PEcAn see:</p>
+<ul>
+<li><a href="../users_guide/basic_users_guide/Updating-PEcAn.md">Updating PEcAn</a></li>
+<li><a href="https://github.com/PecanProject/bety/wiki/Updating-BETY">Updating BETY</a></li>
+</ul>
+<p>The rest of the instructions assumes you have done the appropriate steps in each of the above guides.</p>
+<div id="set-r_libs_user" class="section level3">
+<h3><span class="header-section-number">31.1.1</span> Set <code>R_LIBS_USER</code></h3>
+<p><a href="http://cran.r-project.org/doc/manuals/r-devel/R-admin.html#Managing-libraries">CRAN Reference</a></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># point R to personal lib folder</span>
+<span class="kw">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="kw">&gt;&gt;</span> ~/.profile
+<span class="kw">source</span> ~/.profile
+<span class="kw">mkdir</span> -p <span class="ot">${R_LIBS_USER}</span></code></pre></div>
 </div>
-<div id="amerifluxlbl" class="section level2">
-<h2><span class="header-section-number">18.2</span> AmerifluxLBL</h2>
-<p>Scale: site</p>
-<p>Resolution: 30 or 60 min</p>
-<p>Availability: varies by site <a href="http:\/\/ameriflux.lbl.gov\/data\/data-availability\/" class="uri">http:\/\/ameriflux.lbl.gov\/data\/data-availability\/</a></p>
-<p>Notes: new Lawrence Berkeley Lab server</p>
 </div>
-<div id="fluxnet2015" class="section level2">
-<h2><span class="header-section-number">18.3</span> Fluxnet2015</h2>
-<p>Scale: site</p>
-<p>Resolution: 30 or 60 min</p>
-<p>Availability: varies by site <a href="http://fluxnet.fluxdata.org/sites/site-list-and-pages/">http://fluxnet.fluxdata.org/sites/site-list-and-pages</a></p>
-<p>Notes: Fluxnet 2015 synthesis product. Does not cover all FLUXNET sites</p>
+<div id="install-models" class="section level2">
+<h2><span class="header-section-number">31.2</span> Install models</h2>
+<div id="ed2" class="section level3">
+<h3><span class="header-section-number">31.2.1</span> ED2</h3>
+<div id="ed2.2-r46-used-in-pecan-manuscript" class="section level4">
+<h4><span class="header-section-number">31.2.1.1</span> ED2.2 r46 (used in PEcAn manuscript)</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># ----------------------------------------------------------------------</span>
+<span class="co"># Get version r46 with a few patches for ubuntu</span>
+<span class="kw">cd</span>
+<span class="kw">curl</span> -o ED.r46.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r46.tgz
+<span class="kw">tar</span> zxf ED.r46.tgz
+<span class="kw">rm</span> ED.r46.tgz
+<span class="co"># ----------------------------------------------------------------------</span>
+<span class="co"># configure and compile ed</span>
+<span class="kw">cd</span> ~/ED.r46/ED/build/bin
+<span class="kw">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`uname</span> -s<span class="kw">`</span>
+<span class="kw">make</span> OPT=VM
+<span class="kw">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r46</code></pre></div>
+<p>Perform a test run using pre configured ED settings for ED2.2 r46</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># ----------------------------------------------------------------------</span>
+<span class="co"># Create sample run</span>
+<span class="kw">cd</span>
+<span class="kw">mkdir</span> testrun.ed.r46
+<span class="kw">cd</span> testrun.ed.r46
+<span class="kw">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r46
+<span class="kw">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="ot">$HOME</span><span class="st">#&quot;</span> ED2IN
+<span class="kw">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r46.xml
+<span class="co"># execute test run</span>
+<span class="kw">time</span> ed2.r46</code></pre></div>
 </div>
-<div id="narr" class="section level2">
-<h2><span class="header-section-number">18.4</span> NARR</h2>
-<p>Scale: North America</p>
-<p>Resolution: 3 hr, approx. 32km <span class="math inline">\(Lambert conical projection\)</span></p>
-<p>Availability: 1979-present</p>
+<div id="ed-2.2-r82" class="section level4">
+<h4><span class="header-section-number">31.2.1.2</span> ED 2.2 r82</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
+<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
+<span class="kw">tar</span> zxf ED.r82.tgz
+<span class="kw">rm</span> ED.r82.tgz
+
+<span class="kw">cd</span> ED.r82
+<span class="kw">curl</span> -o ED.r82.patch http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.patch
+<span class="kw">patch</span> -p1 <span class="kw">&lt;</span> ED.r82.patch
+<span class="kw">cd</span> ED/build/bin
+<span class="kw">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`uname</span> -s<span class="kw">`</span>
+<span class="kw">make</span> OPT=VM
+<span class="kw">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r82</code></pre></div>
+<p>Perform a test run using pre configured ED settings for ED2.2 r82</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
+<span class="kw">mkdir</span> testrun.ed.r82
+<span class="kw">cd</span> testrun.ed.r82
+<span class="kw">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r82
+<span class="kw">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="ot">$HOME</span><span class="st">#&quot;</span> ED2IN
+<span class="kw">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r82.xml
+<span class="co"># execute test run</span>
+<span class="kw">time</span> ed2.r82</code></pre></div>
 </div>
-<div id="cruncep" class="section level2">
-<h2><span class="header-section-number">18.5</span> CRUNCEP</h2>
-<p>Scale: global</p>
-<p>Resolution: 6hr, 0.5 degree</p>
-<p>Availability: 1901-2010</p>
+<div id="ed-2.2-bleeding-edge" class="section level4">
+<h4><span class="header-section-number">31.2.1.3</span> ED 2.2 bleeding edge</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
+<span class="kw">git</span> clone https://github.com/EDmodel/ED2.git
+
+<span class="kw">cd</span> ED2/ED/build/bin
+<span class="kw">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`uname</span> -s<span class="kw">`</span>
+<span class="kw">./generate_deps.sh</span>
+<span class="kw">make</span> OPT=VM
+<span class="kw">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.git</code></pre></div>
 </div>
-<div id="cmip5" class="section level2">
-<h2><span class="header-section-number">18.6</span> CMIP5</h2>
-<p>Scale: varies by model</p>
-<p>Resolution: 3 hr</p>
-<p>Availability: 2000-2100</p>
-<p>Currently only GFDL available. Different scenerios and ensemble members can be set via Advanced Edit.</p>
 </div>
-<div id="nldas" class="section level2">
-<h2><span class="header-section-number">18.7</span> NLDAS</h2>
-<p>Scale: Lower 48 + buffer,</p>
-<p>Resolution: 1 hour, .125 degree</p>
-<p>Availability: 1980-present</p>
+<div id="sipnet-1" class="section level3">
+<h3><span class="header-section-number">31.2.2</span> SIPNET</h3>
+<div id="sipnet-installation" class="section level4">
+<h4><span class="header-section-number">31.2.2.1</span> Sipnet Installation</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
+<span class="kw">curl</span> -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_unk.tar.gz
+<span class="kw">tar</span> zxf sipnet_unk.tar.gz
+<span class="kw">rm</span> sipnet_unk.tar.gz
+
+<span class="kw">cd</span> sipnet_unk
+<span class="kw">make</span>
+<span class="kw">sudo</span> cp sipnet /usr/local/bin/sipnet.runk</code></pre></div>
 </div>
-<div id="gldas" class="section level2">
-<h2><span class="header-section-number">18.8</span> GLDAS</h2>
-<p>Scale: Global</p>
-<p>Resolution: 3hr, 1 degree</p>
-<p>Availability: 1948-2010</p>
+<div id="sipnet-testrun" class="section level4">
+<h4><span class="header-section-number">31.2.2.2</span> SIPNET testrun</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
+<span class="kw">curl</span> -o testrun.sipnet.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.sipnet.tar.gz
+<span class="kw">tar</span> zxf testrun.sipnet.tar.gz
+<span class="kw">rm</span> testrun.sipnet.tar.gz
+<span class="kw">cd</span> testrun.sipnet
+<span class="kw">sipnet.runk</span></code></pre></div>
 </div>
-<div id="paleon" class="section level2">
-<h2><span class="header-section-number">18.9</span> PalEON</h2>
-<p>Scale: -100 to -60 W Lon, 35 to 50 N Latitude <span class="math inline">\(US northern hardwoods + buffer\)</span></p>
-<p>Resolution: 6hr, 0.5 degree</p>
-<p>Availability: 850-2010</p>
 </div>
-<div id="fluxnetlathuile" class="section level2">
-<h2><span class="header-section-number">18.10</span> FluxnetLaThuile</h2>
-<p>Scale: site</p>
-<p>Resolution: 30 or 60 min</p>
-<p>Availability: varies by site <a href="http:\/\/www.fluxdata.org\/DataInfo\/Dataset%20Doc%20Lib\/SynthDataSummary.aspx">http:\/\/www.fluxdata.org\/DataInfo\/Dataset%20Doc%20Lib\/SynthDataSummary.aspx</a></p>
-<p>Notes: 2007 synthesis. Fluxnet2015 supercedes this for sites that have been updated</p>
+<div id="biocro-1" class="section level3">
+<h3><span class="header-section-number">31.2.3</span> BioCro</h3>
+<div id="installation" class="section level4">
+<h4><span class="header-section-number">31.2.3.1</span> Installation</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Public</span>
+echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro&quot;)&#39;</span> |<span class="st"> </span>R --vanilla
+<span class="co"># Development:</span>
+echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro-dev&quot;)&#39;</span> |<span class="st"> </span>R --vanilla</code></pre></div>
+<p><em>BioCro Developers:</em> request from <span class="citation">[@dlebauer on GitHub]</span>(<a href="https://github.com/dlebauer" class="uri">https://github.com/dlebauer</a>)</p>
+</div>
+</div>
+<div id="linkages-1" class="section level3">
+<h3><span class="header-section-number">31.2.4</span> Linkages</h3>
+<div id="installation-1" class="section level4">
+<h4><span class="header-section-number">31.2.4.1</span> Installation</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Public</span>
+echo <span class="st">&#39;devtools::install_github(&quot;araiho/linkages_package&quot;)&#39;</span> |<span class="st"> </span>R --vanilla</code></pre></div>
+</div>
+</div>
+<div id="dalec-1" class="section level3">
+<h3><span class="header-section-number">31.2.5</span> DALEC</h3>
+<div id="installation-2" class="section level4">
+<h4><span class="header-section-number">31.2.5.1</span> Installation</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
+<span class="kw">curl</span> -o dalec_EnKF_pub.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/dalec_EnKF_pub.tgz
+<span class="kw">tar</span> zxf dalec_EnKF_pub.tgz
+<span class="kw">rm</span> dalec_EnKF_pub.tgz
+
+<span class="kw">cd</span> dalec_EnKF_pub
+<span class="kw">make</span> dalec_EnKF
+<span class="kw">make</span> dalec_seqMH
+<span class="kw">sudo</span> cp dalec_EnKF dalec_seqMH /usr/local/bin</code></pre></div>
+</div>
+</div>
+<div id="linkages-2" class="section level3">
+<h3><span class="header-section-number">31.2.6</span> LINKAGES</h3>
+<div id="installation-3" class="section level4">
+<h4><span class="header-section-number">31.2.6.1</span> Installation</h4>
+<pre><code>#FORTRAN VERSION
+cd
+git clone https://github.com/araiho/Linkages.git
+cd Linkages
+gfortran -o linkages linkages.f
+sudo cp linkages /usr/local/bin/linkages.git
+
+#R Version
+git clone https://github.com/araiho/linkages_package.git
+R CMD INSTALL --no-multiarch --with-keep.source linkages_package</code></pre>
+</div>
+</div>
+<div id="clm-4.5" class="section level3">
+<h3><span class="header-section-number">31.2.7</span> CLM 4.5</h3>
+<p>The version of CLM installed on PEcAn is the ORNL branch provided by Dan Ricciuto. This version includes Dan’s point-level CLM processing scripts</p>
+<p>Download the code (~300M compressed), input data (1.7GB compressed and expands to 14 GB), and a few misc inputs.</p>
+<pre><code>mkdir models
+cd models
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm4_5_1_r085.tar.gz
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/ccsm_inputdata.tar.gz
+tar -xvzf clm4_5*
+tar -xvzf ccsm_inputdata.tar.gz
+
+#Parameter file:
+mkdir /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata
+cd  /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c130821.nc
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c140423.nc
+
+#Domain file:
+cd /home/carya/models/ccsm_inputdata/share/domains/domain.clm/
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/domain.lnd.1x1pt_US-UMB_navy.nc
+
+#Aggregated met data file:
+cd /home/carya/models/ccsm_inputdata/atm/datm7/CLM1PT_data/1x1pt_US-UMB
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/all_hourly.nc 
+
+## lightning database
+cd /home/carya/models/ccsm_inputdata/atm/datm7/NASA_LIS/
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clmforc.Li_2012_climo1995-2011.T62.lnfm_Total_c140423.nc
+
+## surface data
+cd /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_360x720cru_simyr1850_c130927.nc
+cd /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata_map
+wget ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new
+mv surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc</code></pre>
+<p>Required libraries</p>
+<pre><code>sudo apt-get install mercurial csh tcsh subversion cmake
+
+sudo ln -s /usr/bin/make /usr/bin/gmake</code></pre>
+<p>Compile and build default inputs</p>
+<pre><code>cd ~/carya/models/clm4_5_1_r085/scripts
+python runCLM.py --site US-UMB ––compset I1850CLM45CN --mach ubuntu --ccsm_input /home/carya/models/ccsm_inputdata --tstep 1 --nopointdata --coldstart --cpl_bypass --clean_build</code></pre>
+<div id="clm-test-run" class="section level4">
+<h4><span class="header-section-number">31.2.7.1</span> CLM Test Run</h4>
+<p>You will see a new directory in scripts: US-UMB_I1850CLM45CN Enter this directory and run (you shouldn’t have to do this normally, but there is a bug with the python script and doing this ensures all files get to the right place):</p>
+<pre><code>./US-UMB_I1850CLM45CN.build</code></pre>
+<p>Next you are ready to go to the run directory:</p>
+<pre><code>/home/carya/models/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/run</code></pre>
+<p>Open to edit file: datm.streams.txt.CLM1PT.CLM_USRDAT and check file paths such that all paths start with /home/carya/models/ccsm_inputdata</p>
+<p>From this directory, launch the executable that resides in the bld directory:</p>
+<pre><code>/home/carya/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/bld/cesm.exe</code></pre>
+<p>not sure this was the right location, but wherever the executable is</p>
+<p>You should begin to see output files that look like this: US-UMB_I1850CLM45CN.clm2.h0.yyyy-mm.nc (yyyy is year, mm is month) These are netcdf files containing monthly averages of lots of variables.</p>
+<p>The lnd_in file in the run directory can be modified to change the output file frequency and variables.</p>
+</div>
+</div>
+</div>
+<div id="clm-fates" class="section level2">
+<h2><span class="header-section-number">31.3</span> CLM-FATES</h2>
+<p>Prerequisites</p>
+<pre><code>sudo apt-get upgrade libnetcdf-dev
+sudo apt-get install subversion
+sudo apt-get install csh
+sudo apt-get install cmake
+sudo ln -s /usr/bin/make /usr/bin/gmake
+sudo rm /bin/sh
+sudo ln -s /bin/bash /bin/sh
+
+wget https://github.com/Unidata/netcdf-fortran/archive/v4.4.4.tar.gz
+cd netcdf-4.4.4
+./configure
+make
+sudo make install</code></pre>
+<p>you might need to mess around with installing netcdf and netcdf-fortran to get a version FATES likes…</p>
+<p>Get code from Github (currently private) and go to cime/scripts directory</p>
+<pre><code>git clone git@github.com:NGEET/ed-clm.git
+cd ed-clm/cime/scripts/</code></pre>
+<p>Within CLM-FATES, to be able to build an executable we need to create a reference run. We’ll also use this reference run to grab defaults from, so we’ll be registering the location of both the reference <strong>case</strong> (location of executable, scripts, etc) and the reference <strong>inputs</strong> with the PEcAn database. To begin, copy reference run script from pecan</p>
+<pre><code>cp ~/pecan/models/fates/inst/create_1x1_ref_case.sh .</code></pre>
+<p>Edit reference case script to set NETCDF_HOME, CROOT (reference run case), DIN_LOC_ROOT (reference run inputs). Also, make sure DIN_LOC_ROOT exists as FATES will not create it itself. Then run the script</p>
+<pre><code>./create_1x1_ref_case.sh</code></pre>
+<p>Be aware that this script WILL ask you for your password on the NCAR server to download the reference case input data (the guest password may work, haven’t tried this). If it gives an error at the pio stage check the log, but the most likely error is it being unable to find a version of netcdf it likes.</p>
+<p>Once FATES is installed, set the whole reference case directory as the Model path (leave filename blank) and set the whole inputs directory as an Input with format clm_defaults.</p>
+</div>
+<div id="pecan-installation" class="section level2">
+<h2><span class="header-section-number">31.4</span> PEcAn Installation</h2>
+<p>PEcAn is the software package that ties all the pieces together.</p>
+</div>
+<div id="installing-pecan-1" class="section level2">
+<h2><span class="header-section-number">31.5</span> Installing PEcAn</h2>
+<p>Download, compile and install PEcAn</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># download pecan</span>
+<span class="kw">cd</span>
+<span class="kw">git</span> clone https://github.com/PecanProject/pecan.git
+
+<span class="co"># compile pecan</span>
+<span class="kw">cd</span> pecan
+<span class="kw">./scripts/build.sh</span> --dependencies</code></pre></div>
+<p>Following will run a small script to setup some hooks to prevent people from using the pecan demo user account to check in any code.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># prevent pecan user from checking in code</span>
+<span class="kw">./scripts/create-hooks.sh</span></code></pre></div>
+</div>
+<div id="installing-bety" class="section level2">
+<h2><span class="header-section-number">31.6</span> Installing BETY</h2>
+<div id="install-postgres" class="section level3">
+<h3><span class="header-section-number">31.6.1</span> Install Postgres</h3>
+<p>See OS-specific instructions for installing Postgres + PostGIS * <a href="Installing-PEcAn-Ubuntu.md#install-postgres">Ubuntu</a> * <a href="Installing-PEcAn-OSX#install-postgres">OSX</a> * <a href="https://github.com/PecanProject/bety/wiki/Installing-Postgresql">RedHat / CentOS</a></p>
+</div>
+<div id="install-database-data" class="section level3">
+<h3><span class="header-section-number">31.6.2</span> Install Database + Data</h3>
+<ul>
+<li><em>note</em> To install BETYdb without PEcAn, first download the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/scripts/load.bety.sh"><code>load.bety.sh</code> script</a></li>
+</ul>
+<pre class="sh"><code># install database (code assumes password is bety)
+sudo -u postgres createuser -d -l -P -R -S bety
+sudo -u postgres createdb -O bety bety
+sudo -u postgres ./scripts/load.bety.sh -c YES -u YES -r 0
+sudo -u postgres ./scripts/load.bety.sh -r 1
+sudo -u postgres ./scripts/load.bety.sh -r 2
+
+# configure for PEcAn web app (change password if needed)
+cp web/config.example.php web/config.php 
+
+# add models to database (VM only)
+./scripts/add.models.sh
+
+# add data to database
+./scripts/add.data.sh
+
+# create outputs folder
+mkdir ~/output
+chmod 777 ~/output</code></pre>
+</div>
+<div id="installing-betydb-web-application" class="section level3">
+<h3><span class="header-section-number">31.6.3</span> Installing BETYdb Web Application</h3>
+<p>There are two flavors of BETY, PHP and RUBY. The PHP version allows for a minimal interaction with the database while the RUBY version allows for full interaction with the database.</p>
+<div id="php-version" class="section level4">
+<h4><span class="header-section-number">31.6.3.1</span> PHP version</h4>
+<p>The php version comes with PEcAn and is already configured.</p>
+</div>
+<div id="ruby-version" class="section level4">
+<h4><span class="header-section-number">31.6.3.2</span> RUBY version</h4>
+<p>The RUBY version requires a few extra packages to be installed first.</p>
+<p>Next we install the web app.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># install bety</span>
+<span class="kw">cd</span>
+<span class="kw">git</span> clone https://github.com/PecanProject/bety.git
+
+<span class="co"># install gems</span>
+<span class="kw">cd</span> bety
+<span class="kw">sudo</span> gem2.0 install bundler
+<span class="kw">bundle</span> install --without development:test:javascript_testing:debug</code></pre></div>
+<p>and configure BETY</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># create folders for upload folders</span>
+<span class="kw">mkdir</span> paperclip/files paperclip/file_names
+<span class="kw">chmod</span> 777 paperclip/files paperclip/file_names
+
+<span class="co"># create folder for log files</span>
+<span class="kw">mkdir</span> log
+<span class="kw">touch</span> log/production.log
+<span class="kw">chmod</span> 0666 log/production.log
+
+<span class="co"># fix configuration for vm</span>
+<span class="kw">cp</span> config/additional_environment_vm.rb config/additional_environment.rb
+<span class="kw">chmod</span> go+w public/javascripts/cache/
+
+<span class="co"># setup bety database configuration</span>
+<span class="kw">cat</span> <span class="kw">&gt;</span> config/database.yml &lt;&lt; EOF
+production:
+  adapter: postgis
+  encoding: utf-8
+  reconnect: fa<span class="kw">lse</span>
+  databas<span class="kw">e</span>: <span class="kw">bety</span>
+  pool: 5
+  username: bet<span class="kw">y</span>
+  password: bet<span class="kw">y</span>
+EOF
+
+# setup login tokens
+cat &gt; config/initializers/site_ke<span class="kw">ys.rb</span> &lt;&lt; EOF
+REST_AUTH_SITE_KEY         = &#39;thisisnotasecret&#39;
+REST_AUTH_DIGEST_STRETCHES = 10
+EOF</code></pre></div>
+</div>
+</div>
+<div id="pecan-testrun" class="section level3">
+<h3><span class="header-section-number">31.6.4</span> PEcAn Testrun</h3>
+<p>Do the run, this assumes you have installed the BETY database, sites tar file and sipnet.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># create folder</span>
+<span class="kw">cd</span>
+<span class="kw">mkdir</span> testrun.pecan
+<span class="kw">cd</span> testrun.pecan
+
+<span class="co"># copy example of pecan workflow and configuration file</span>
+<span class="kw">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml
+<span class="kw">cp</span> ../pecan/scripts/workflow.R workflow.R
+
+<span class="co"># exectute workflow</span>
+<span class="kw">rm</span> -rf pecan
+<span class="kw">./workflow.R</span> pecan.xml</code></pre></div>
+<p>NB: pecan.xml is configured for the virtual machine, you will need to change the <met> field from ‘/home/carya/’ to wherever you installed your ‘sites’, usually $HOME</p>
 
 </div>
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="model-output-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="workflow.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="logging.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="creating-a-virtual-machine.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
