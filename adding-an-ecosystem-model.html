@@ -25,7 +25,7 @@
 
 
 
-<meta name="date" content="2017-03-25">
+<meta name="date" content="2017-03-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -558,7 +558,7 @@ met2model.MODEL &lt;- function(in.path, in.prefix, outfolder, start_date, end_da
 <div id="met2model.model" class="section level3">
 <h3><span class="header-section-number">24.9.7</span> met2model.MODEL</h3>
 <p><code>met2model.MODEL(in.path, in.prefix, outfolder, start_date, end_date)</code></p>
-<p>Converts meteorology input files from the PEcAn standard (netCDF, CF metadata) to the format required by the model. This file is optional if you want to load all of your met files into the Inputs table as described in [How to insert new Input data], which is often the easiest way to get up and running quickly. However, this function is required if you want to benefit from PEcAn’s meteorology workflows and model run cloning. You’ll want to take a close look at [Adding-an-Input-Converter] to see the exact variable names and units that PEcAn will be providing. Also note that PEcAn splits all meteorology up into ANNUAL files, with the year number explicitly included in the file name, and thus what PEcAn will actually be providing is <strong>in.path</strong>, the input path to the folder where multiple met files may stored, and <strong>in.prefix</strong>, the start of the filename that precedes the year (i.e. an individual file will be named <in.prefix>.YEAR.nc). It is valid for in.prefix to be blank. The additional REQUIRED arguments to met2model.MODEL are <strong>outfolder</strong>, the output folder where PEcAn wants you to write your meteorology, and <strong>start_date</strong> and <strong>end_date</strong>, the time range the user has asked the meteorology to be processed for.</p>
+<p>Converts meteorology input files from the PEcAn standard (netCDF, CF metadata) to the format required by the model. This file is optional if you want to load all of your met files into the Inputs table as described in [How to insert new Input data], which is often the easiest way to get up and running quickly. However, this function is required if you want to benefit from PEcAn’s meteorology workflows and model run cloning. You’ll want to take a close look at [Adding-an-Input-Converter] to see the exact variable names and units that PEcAn will be providing. Also note that PEcAn splits all meteorology up into ANNUAL files, with the year number explicitly included in the file name, and thus what PEcAn will actually be providing is <strong>in.path</strong>, the input path to the folder where multiple met files may stored, and <strong>in.prefix</strong>, the start of the filename that precedes the year (i.e. an individual file will be named <code>&lt;in.prefix&gt;.YEAR.nc</code>). It is valid for in.prefix to be blank. The additional REQUIRED arguments to met2model.MODEL are <strong>outfolder</strong>, the output folder where PEcAn wants you to write your meteorology, and <strong>start_date</strong> and <strong>end_date</strong>, the time range the user has asked the meteorology to be processed for.</p>
 </div>
 <div id="commit-changes" class="section level3">
 <h3><span class="header-section-number">24.9.8</span> Commit changes</h3>
