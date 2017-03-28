@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="creating-a-virtual-machine.html">
-<link rel="next" href="centos-rhel.html">
+<link rel="prev" href="global-sensitivity-shiny.html">
+<link rel="next" href="advanced-web-interface-guide.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -511,185 +511,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="centosredhat" class="section level1">
-<h1><span class="header-section-number">38</span> CentOS/RedHat</h1>
-<p>These are specific notes for installing PEcAn on CentOS (7) and will be referenced from the main <a href="Installing-PEcAn">installing PEcAn</a> page. You will at least need to install the build environment and Postgres sections. If you want to access the database/PEcAn using a web browser you will need to install Apache. To access the database using the BETY interface, you will need to have Ruby installed.</p>
-<p>This document also contains information on how to install the Rstudio server edition as well as any other packages that can be helpful.</p>
-<div id="install-build-environment" class="section level2">
-<h2><span class="header-section-number">38.1</span> Install build environment</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -s
-
-<span class="co"># install packages needed for PEcAn</span>
-<span class="kw">yum</span> -y groupinstall <span class="st">&#39;Development Tools&#39;</span> 
-<span class="kw">yum</span> -y install git netcdf-fortran-openmpi-devel R bc curl libxml2-devel openssl-devel ed  udunits2 udunits2-devel netcdf netcdf-devel gmp-devel python-devel gdal-devel proj-devel proj-epsg expect
-
-<span class="co"># jags</span>
-<span class="kw">yum</span> -y install http://download.opensuse.org/repositories/home:/cornell_vrdc/CentOS_7/x86_64/jags3-3.4.0-54.1.x86_64.rpm
-<span class="kw">yum</span> -y install http://download.opensuse.org/repositories/home:/cornell_vrdc/CentOS_7/x86_64/jags3-devel-3.4.0-54.1.x86_64.rpm
-
-<span class="co"># fix include folder for udunits2</span>
-<span class="kw">ln</span> -s /usr/include/udunits2/* /usr/include/
-
-<span class="co"># install packages needed for ED2</span>
-<span class="kw">yum</span> -y install environment-modules openmpi-bin libopenmpi-dev
-
-<span class="co"># install requirements for DALEC</span>
-<span class="kw">yum</span> -y install gsl-devel
-
-<span class="co"># install packages for webserver</span>
-<span class="kw">yum</span> -y install httpd php
-<span class="kw">systemctl</span> enable httpd
-<span class="kw">systemctl</span> start httpd
-<span class="kw">firewall-cmd</span> --zone=public --add-port=80/tcp --permanent
-<span class="kw">firewall-cmd</span> --reload
-
-<span class="co"># install packages to compile docs</span>
-<span class="co">#apt-get -y install texinfo texlive-latex-base texlive-latex-extra texlive-fonts-recommended</span>
-
-<span class="co"># install devtools</span>
-<span class="kw">echo</span> <span class="st">&#39;install.packages(&quot;devtools&quot;, repos=&quot;http://cran.rstudio.com/&quot;)&#39;</span> <span class="kw">|</span> <span class="kw">R</span> --vanilla
-
-<span class="co"># done as root</span>
-<span class="kw">exit</span>
-
-<span class="kw">echo</span> <span class="st">&quot;module load mpi&quot;</span> <span class="kw">&gt;&gt;</span> ~/.bashrc
-<span class="kw">module</span> load mpi</code></pre></div>
+<div id="next-steps-1" class="section level1">
+<h1><span class="header-section-number">10</span> Next Steps</h1>
+<p>The next set of tutorials will focus on the process of data assimilation and parameter estimation. The next two steps are in “.Rmd” files which can be viewed online.</p>
+<div id="assimilation-by-hand" class="section level3">
+<h3><span class="header-section-number">10.0.1</span> Assimilation ‘by hand’</h3>
+<p><a href="https://github.com/PecanProject/pecan/blob/master/documentation/tutorials/sensitivity/PEcAn_sensitivity_tutorial_v1.0.Rmd">Explore</a> how model error changes as a function of parameter value (i.e. data assimilation ‘by hand’)</p>
 </div>
-<div id="install-postgres-1" class="section level2">
-<h2><span class="header-section-number">38.2</span> Install Postgres</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -s
-
-<span class="co"># point to latest PostgreSQL</span>
-<span class="kw">yum</span> install -y epel-release 
-<span class="kw">yum</span> -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
-
-<span class="co"># install packages for postgresql (using a newer version than default)</span>
-<span class="kw">yum</span> -y install postgresql94-server postgresql94-contrib postgis2_94 postgresql94-devel
-
-<span class="co"># install following if you want to run pecan through the web</span>
-<span class="kw">yum</span> -y install php-pgsql
-
-<span class="co"># enable bety user to login with trust by adding the following lines after</span>
-<span class="co"># the ability of postgres user to login in /var/lib/pgsql/9.4/data/pg_hba.conf</span>
-<span class="kw">local</span>   <span class="ot">all</span>             <span class="ot">bety</span>                                    <span class="ot">trust</span>
-<span class="kw">host</span>    all             bety            127.0.0.1/32            trust
-<span class="kw">host</span>    all             bety            ::1/128                 trust
-
-<span class="co"># Create database</span>
-<span class="kw">/usr/pgsql-9.4/bin/postgresql94-setup</span> initdb
-
-<span class="co"># Enable postgres</span>
-<span class="kw">systemctl</span> enable postgresql-9.4
-<span class="kw">systemctl</span> start postgresql-9.4
-
-<span class="kw">exit</span></code></pre></div>
+<div id="mcmc-concepts" class="section level3">
+<h3><span class="header-section-number">10.0.2</span> MCMC Concepts</h3>
+<p><a href="https://github.com/PecanProject/pecan/blob/master/documentation/tutorials/MCMC/MCMC_Concepts.Rmd">Explore</a> Bayesian MCMC concepts using the photosynthesis module</p>
 </div>
-<div id="apache-configuration-pecan" class="section level2">
-<h2><span class="header-section-number">38.3</span> Apache Configuration PEcAn</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># become root</span>
-<span class="kw">sudo</span> -s
-
-<span class="co"># get index page</span>
-<span class="kw">rm</span> /var/www/html/index.html
-<span class="kw">ln</span> -s /home/carya/pecan/documentation/index_vm.html /var/www/html/index.html
-
-<span class="co"># fix selinux context (does this need to be done after PEcAn is installed?)</span>
-<span class="kw">chcon</span> -R -t httpd_sys_content_t /home/carya/pecan /home/carya/output
-
-<span class="co"># setup a redirect</span>
-<span class="kw">cat</span> <span class="kw">&gt;</span> /etc/httpd/conf.d/pecan.conf &lt;&lt; EOF
-Alias /pecan /home/carya/pecan/web
-&lt;Directory /home/carya/pecan/web&gt;
-  DirectoryIndex index.php
-  Options +ExecCGI
-  Require all granted
-&lt;/Directory&gt;
-EOF
-a2encon<span class="kw">f</span> <span class="kw">pecan</span>
-/etc/i<span class="kw">nit.d/apache2</span> restart
-
-# done as root
-exit</code></pre></div>
-</div>
-<div id="apache-configuration-bety" class="section level2">
-<h2><span class="header-section-number">38.4</span> Apache Configuration BETY</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -s
-
-<span class="co"># install all ruby related packages</span>
-<span class="kw">sudo</span> curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
-<span class="kw">yum</span> -y install ruby ruby-devel mod_passenger
-
-<span class="co"># link static content</span>
-<span class="kw">ln</span> -s /home/carya/bety/public /var/www/html/bety
-
-<span class="co"># fix GemFile</span>
-<span class="kw">echo</span> <span class="st">&#39;gem &quot;test-unit&quot;&#39;</span> <span class="kw">&gt;&gt;</span> bety/Gemlile
-
-<span class="co"># fix selinux context (does this need to be done after bety is installed?)</span>
-<span class="kw">chcon</span> -R -t httpd_sys_content_t /home/carya/bety
-
-<span class="co"># setup a redirect</span>
-<span class="kw">cat</span> <span class="kw">&gt;</span> /etc/httpd/conf.d/bety.conf &lt;&lt; EOF
-RailsEnv production
-RailsBaseURI /bety
-PassengerRuby /usr/bin/ruby
-&lt;Directory /var/www/html/bety&gt;
-  Options +FollowSymLinks
-  Require all granted
-&lt;/Directory&gt;
-EOF
-systemctl restart httpd</code></pre></div>
-</div>
-<div id="rstudio-server" class="section level2">
-<h2><span class="header-section-number">38.5</span> Rstudio-server</h2>
-<p>NEED FIXING</p>
-<p><em>NOTE This will allow anybody to login to the machine through the rstudio interface and run any arbitrary code. The login used however is the same as the system login/password.</em></p>
-<p>Based on version of ubuntu 32/64 use either of the following</p>
-<p><em>32bit only</em></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-i386.deb</code></pre></div>
-<p><em>64bit only</em></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-amd64.deb</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># bceome root</span>
-<span class="kw">sudo</span> -s
-
-<span class="co"># install required packages</span>
-<span class="kw">apt-get</span> -y install libapparmor1 apparmor-utils libssl0.9.8
-
-<span class="co"># install rstudio</span>
-<span class="kw">dpkg</span> -i rstudio-server-*
-<span class="kw">rm</span> rstudio-server-*
-<span class="kw">echo</span> <span class="st">&quot;www-address=127.0.0.1&quot;</span> <span class="kw">&gt;&gt;</span> /etc/rstudio/rserver.conf
-<span class="kw">echo</span> <span class="st">&quot;r-libs-user=~/R/library&quot;</span> <span class="kw">&gt;&gt;</span> /etc/rstudio/rsession.conf
-<span class="kw">rstudio-server</span> restart
-
-<span class="co"># setup rstudio forwarding in apache</span>
-<span class="kw">a2enmod</span> proxy_http
-<span class="kw">cat</span> <span class="kw">&gt;</span> /etc/apache2/conf-available/rstudio.conf &lt;&lt; EOF
-ProxyPass        /rstudio/ http://localhost:8787/
-ProxyPassReverse /rstudio/ http://localhost:8787/
-RedirectMatch permanent ^/rstudio$ /rstudio/
-EOF
-a2encon<span class="kw">f</span> <span class="kw">rstudio</span>
-/etc/init.d/apache2 restart
-
-# all d<span class="kw">one</span>, exit root
-<span class="kw">exit</span></code></pre></div>
-</div>
-<div id="additional-packages" class="section level2">
-<h2><span class="header-section-number">38.6</span> Additional packages</h2>
-<p>NEED FIXING</p>
-<p>HDF5 Tools, netcdf, GDB and emacs</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get -y install hdf5-tools cdo nco netcdf-bin ncview gdb emacs ess nedit</code></pre></div>
+<div id="more-info-about-tools-analyses-and-specific-tasks" class="section level3">
+<h3><span class="header-section-number">10.0.3</span> More info about tools, analyses, and specific tasks…</h3>
+<p>Additional information about specific tasks (adding sites, models, data; software updates; etc.) and analyses (e.g. data assimilation) can be found in the PEcAn <a href="https://pecanproject.github.io/pecan-documentation/">documentation</a></p>
+<p>If you encounter a problem with PEcAn that’s not covered in the documentation, or if PEcAn is missing functionality you need, please search <a href="https://github.com/PecanProject/pecan/issues?q=">known bugs and issues</a>, submit a <a href="https://github.com/PecanProject/pecan/issues/new">bug report</a>, or ask a question in our <a href="https://gitter.im/PecanProject/pecan">chat room</a>. Additional questions can be directed to the <a href="mailto:tonygard@bu.edu?subject=PEcAn%20Demo::">project manager</a></p>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="creating-a-virtual-machine.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="centos-rhel.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="global-sensitivity-shiny.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="advanced-web-interface-guide.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
