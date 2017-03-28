@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="using-git.html">
-<link rel="next" href="adding-an-ecosystem-model.html">
+<link rel="prev" href="vm-desktop-conversion.html">
+<link rel="next" href="demo-01-basic-run.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -495,52 +495,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="directory-structure" class="section level1">
-<h1><span class="header-section-number">25</span> Directory structure</h1>
-<div id="overview-of-pecan-repository-as-of-pecan-1.2" class="section level2">
-<h2><span class="header-section-number">25.1</span> Overview of PEcAn repository as of PEcAn 1.2</h2>
-<!--This needsto be updated to the latest version-->
-<!--Should Also include a guideline to structurs so that people know where to put things as they add them-->
-<pre><code>trunk/             # Overall repository
- +- all            # Dummy Package to load all PEcAn R packages
- +- common         # Core functions
- +- db             # Modules for querying the database
- +- depreciated    # code from PEcAn &lt; 1.1 for reference or merging into new packages
- +- models         # Directory of wrapper scripts for each ecosystem model
-    +- ed          # Wrapper scripts for running ED within PEcAn
-    +- sipnet      # Wrapper scripts for running SIPNET within PEcAn
-    +- ...         # Wrapper scripts for running [MODELX] within PEcAn
- +- modules        # Core modules
-    +- allometry
-    +- data.atmosphere
-    +- data.hydrology
-    +- data.land
-    +- meta.analysis
-    +- priors
-    +- rtm
-    +- uncertainty
- +- qaqc           # Database and model QAQC scripts
- +- scripts        # R and Shell scripts for use with PEcAn
-    +- shell       # Shell scripts, e.g.. install.all.sh, check.all.sh
-    +- R           # R scripts e.g. pft.add.spp.R, workflow.R, install.dependencies.R 
-    +- fia         # FIA module
- +- utils          # Misc. utility functions
- +- visualization  # Advanced PEcAn visualization module
- +- web            # Main PEcAn website files
- +- documentation  # index_vm.html, references, other misc.</code></pre>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">6</span> Introduction</h1>
+<div id="objective" class="section level2">
+<h2><span class="header-section-number">6.1</span> Objective</h2>
+<p>We will begin by exploring a set of web-based tools that are designed to run single-site model runs. A lot of the detail about what’s going on under the hood, and all the outputs that PEcAn produces, are left to Demo 2. This demo will also demonstrate how to use PEcAn outputs in additional analyses outside of PEcAn.</p>
 </div>
-<div id="generic-r-package-structure" class="section level2">
-<h2><span class="header-section-number">25.2</span> Generic R package structure:</h2>
-<p>see the R development wiki for more information on writing code and adding data.</p>
-<pre><code> +- DESCRIPTION    # short description of the PEcAn library
- +- R/             # location of R source code
- +- man/           # Documentation
- +- tests/         # runall.R script to call all R test scripts
- +- inst/          # location of install scripts and misc.
-    +- tests/      # location of PEcAn testing scripts
-    +- extdata/    # misc. data files (in misc. formats)
- +- data/          # data used in testing and examples (saved as *.RData or *.rda files)</code></pre>
-
+<div id="pecan-url" class="section level2">
+<h2><span class="header-section-number">6.2</span> PEcAn URL</h2>
+<p>In the following demo, <strong>URL</strong> is the web address of a PEcAn server and will refer to one of the following:</p>
+<ul>
+<li>If you are doing a live demo with the PEcAn team, <strong>URL was provided</strong></li>
+<li>If you <a href="https://pecanproject.github.io/pecan-documentation/getting-started.html#working-with-the-pecan-vm">downloaded the PEcAn VM</a>, <strong>URL = localhost:6480</strong></li>
+<li>If you are <a href="https://pecanproject.github.io/pecan-documentation/getting-started.html#using-amazonweb-services-aws">running PEcAn on Amazon AWS</a>, <strong>URL is the Public IP</strong></li>
+<li>If you <a href="https://pecanproject.github.io/pecan-documentation/installing-pecan.html">installed PEcAn on your server</a>, <strong>URL is your server’s IP</strong></li>
+</ul>
 </div>
 </div>
             </section>
@@ -548,8 +517,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="using-git.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="adding-an-ecosystem-model.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="vm-desktop-conversion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="demo-01-basic-run.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
