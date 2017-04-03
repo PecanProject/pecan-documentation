@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="advanced-command-line-guide.html">
-<link rel="next" href="working-with-the-vm.html">
+<link rel="prev" href="parameter-data-assimilation-1.html">
+<link rel="next" href="specific-model-configurations.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -477,17 +477,187 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="run-pecan-from-command-line" class="section level1">
-<h1><span class="header-section-number">14</span> Run PEcAn from COmmand Line</h1>
+<div id="state-data-assimilation" class="section level1">
+<h1><span class="header-section-number">10</span> State Data Assimilation</h1>
+<div id="sda.enkf.r-is-housed-within-pecanmodulesassim.sequentialr" class="section level2">
+<h2><span class="header-section-number">10.1</span> sda.enkf.R is housed within: <strong>/pecan/modules/assim.sequential/R</strong></h2>
+</div>
+<div id="the-tree-ring-tutorial-is-housed-within-pecandocumentationtutorialsstateassimilation" class="section level2">
+<h2><span class="header-section-number">10.2</span> The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></h2>
+<div id="sda.enkf.r-description" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> <strong>sda.enkf.R Description</strong></h3>
+<p>This is the main ensemble Kalman filter and generalized filter code. Originally, this was just ensemble Kalman filter code. Mike Dietze and Ann Raiho added a generalized ensemble filter to avoid filter divergence. The output of this function will be all the of run outputs, a PDF of diagnostics, and an Rdata object that includes three lists:</p>
+<ul>
+<li>FORECAST will be the ensemble forecasts for each year</li>
+<li>ANALYSIS will be the updated ensemble sample given the NPP observations</li>
+<li>enkf.params contains the prior and posterior mean vector and covariance matrix for each time step.</li>
+</ul>
+</div>
+<div id="sda.enkf.r-arguments" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> <strong>sda.enkf.R Arguments</strong></h3>
+<ul>
+<li><p>settings - (required) <a href="state-data-assimilation.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>obs.mean - (required) a list of observation means named with dates in YYYY/MM/DD format</p></li>
+<li><p>obs.cov - (required) a list of observation covariances names with dates in YYYY/MM/DD format</p></li>
+<li><p>IC - (optional) initial condition matrix (dimensions: ensemble memeber # by state variables). Default is NULL.</p></li>
+<li><p>Q - (optional) process covariance matrix (dimensions: state variable by state variables). Defualt is NULL.</p></li>
+</ul>
+</div>
+<div id="state-data-assimilation-workflow" class="section level3">
+<h3><span class="header-section-number">10.2.3</span> State Data Assimilation Workflow</h3>
+<p>Before running sda.enkf, these tasks must be completed (in no particular order),</p>
+<ul>
+<li><p>Read in a <a href="state-data-assimilation.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings file with tags listed below. i.e. read.settings(‘pecan.SDA.xml’)</p></li>
+<li><p>Load data means (obs.mean) and covariances (obs.cov) as lists with PEcAn naming and unit conventions. Each observation must have a date in YYYY/MM/DD format (optional time) associated with it. If there are missing data, the date must still be represented in the list with an NA as the list object.</p></li>
+<li><p>Create initial conditions matrix (IC) that is state variables columns by ensemble members rows in dimension. <a href="state-data-assimilation.html#sample.ic.model.r">sample.IC.MODEL</a> can be used to create the IC matrix, but it is not required. This IC matrix is fed into write.configs for the initial model runs.</p></li>
+</ul>
+<p>The main parts of the SDA function are:</p>
+<p>Setting up for initial runs:</p>
+<ul>
+<li><p>Set parameters</p></li>
+<li><p>Load initial run inputs via <a href="state-data-assimilation.html#split.inputs.model.r">split.inputs.MODEL</a></p></li>
+<li><p>Open database connection</p></li>
+<li><p>Get new workflow ids</p></li>
+<li><p>Create ensemble ids</p></li>
+</ul>
+<p>Performing the initial set of runs</p>
+<p>Set up for data assimilation</p>
+<p>Loop over time</p>
+<ul>
+<li><p><a href="state-data-assimilation.html#read.restart.model.r">read.restart.MODEL</a> - read model restart files corresponding to start.time and stop.time that you want to assimilate data into</p></li>
+<li><p>Analysis - There are four choices based on if process variance is TRUE or FALSE and if there is data or not. <a href="state-data-assimilation.html#analysis-options">See explaination below.</a></p></li>
+<li><p><a href="state-data-assimilation.html#write.restart.model.r">write.restart.MODEL</a> - This function has two jobs. First, to insert adjusted state back into model restart file. Second, to update start.time, stop.time, and job.sh.</p></li>
+<li><p>run model</p></li>
+</ul>
+<p>Save outputs</p>
+<p>Create diagnostics</p>
+</div>
+<div id="state-data-assimilation-tags-example" class="section level3">
+<h3><span class="header-section-number">10.2.4</span> State Data Assimilation Tags Example</h3>
+<pre><code>&lt;state.data.assimilation&gt;
+  &lt;n.ensemble&gt;25&lt;/n.ensemble&gt;
+  &lt;process.variance&gt;FALSE&lt;/process.variance&gt;
+  &lt;sample.parameters&gt;FALSE&lt;/sample.parameters&gt;
+   &lt;state.variables&gt;
+    &lt;variable&gt;
+      &lt;variable.name&gt;AGB.pft&lt;/variable.name&gt;
+      &lt;unit&gt;MgC/ha/yr&lt;/unit&gt;
+      &lt;min_value&gt;0&lt;/min_value&gt;
+      &lt;max_value&gt;100000000&lt;/max_value&gt;
+    &lt;/variable&gt;
+    &lt;variable&gt;
+      &lt;variable.name&gt;TotSoilCarb&lt;/variable.name&gt;
+      &lt;unit&gt;KgC/m^2&lt;/unit&gt;
+      &lt;min_value&gt;0&lt;/min_value&gt;
+      &lt;max_value&gt;100000000&lt;/max_value&gt;
+    &lt;/variable&gt;
+  &lt;/state.variables&gt;
+  &lt;spin.up&gt;
+    &lt;start.date&gt;1950/01/01&lt;/start.date&gt;
+    &lt;end.date&gt;1960/12/31&lt;/end.date&gt;
+  &lt;/spin.up&gt;
+  &lt;forecast.time.step&gt;1&lt;/forecast.time.step&gt;
+  &lt;start.date&gt;1961/01/01&lt;/start.date&gt;
+  &lt;end.date&gt;2010/12/31&lt;/end.date&gt;
+ &lt;/state.data.assimilation&gt;</code></pre>
+</div>
+<div id="state-data-assimilation-tags-descriptions" class="section level3">
+<h3><span class="header-section-number">10.2.5</span> State Data Assimilation Tags Descriptions</h3>
+<ul>
+<li><strong>n.ensemble</strong> : [required] Number of ensemble members. Should be much larger than number of state variables you are assimilating.</li>
+<li><strong>process.variance</strong> : [optional] TRUE/FLASE flag for if process variance should be estimated (TRUE) or not (FALSE). If TRUE, a generalized ensemble filter will be used. If FALSE, an ensemble Kalman filter will be used. Default is FALSE.</li>
+<li><strong>sample.parameters</strong> : [optional] TRUE/FLASE flag for if parameters should be sampled for each ensemble member or not. This allows for more spread in the initial conditions of the forecast.</li>
+<li><strong>state.variable</strong> : [required] State variable that is to be assimilated (in PEcAn standard format).</li>
+<li><strong>spin.up</strong> : [required] start.date and end.date for initial model runs.</li>
+<li><strong><em>NOTE:</em></strong> start.date and end.date are distinct from values set in the run tag because initial runs can be done over a subset of the full run.</li>
+<li><strong>forecast.time.step</strong> : [optional] In the future, this will be used to allow the forecast time step to vary from the data time step.</li>
+<li><strong>start.date</strong> : [optional] start date of the state data assimilation (in YYYY/MM/DD format)</li>
+<li><strong>end.date</strong> : [optional] end date of the state data assimilation (in YYYY/MM/DD format)</li>
+<li><strong><em>NOTE:</em></strong> start.date and end.date are distinct from values set in the run tag because this analysis can be done over a subset of the run.</li>
+</ul>
+</div>
+<div id="model-specific-functions-for-sda-workflow" class="section level3">
+<h3><span class="header-section-number">10.2.6</span> Model Specific Functions for SDA Workflow</h3>
+<div id="read.restart.model.r" class="section level4">
+<h4><span class="header-section-number">10.2.6.1</span> read.restart.MODEL.R</h4>
+<p>The purpose of read.restart is to read model restart files and return a matrix that is site rows by state variable columns. The state variables must be in PEcAn names and units. The arguments are:</p>
+<ul>
+<li><p>outdir - output directory</p></li>
+<li><p>runid - ensemble member run ID</p></li>
+<li><p>stop.time - used to determine which restart file to read (in POSIX format)</p></li>
+<li><p>settings - <a href="state-data-assimilation.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>var.names - vector with state variable names with PEcAn standard naming. Example: c(‘AGB.pft’, ‘TotSoilCarb’)</p></li>
+<li><p>params - parameters used by ensemble member (same format as write.configs)</p></li>
+</ul>
+</div>
+<div id="write.restart.model.r" class="section level4">
+<h4><span class="header-section-number">10.2.6.2</span> write.restart.MODEL.R</h4>
+<p>This model specific function takes in new state and new parameter matrices from sda.enkf.R after the analysis step and translates new variables back to the model variables. Then, updates start.time, stop.time, and job.sh so that start.model.runs() does the correct runs with the new states. In write.restart.LINKAGES and write.restart.SIPNET, job.sh is updated by using write.configs.MODEL.</p>
+<ul>
+<li><p>outdir - output directory</p></li>
+<li><p>runid - run ID for ensemble member</p></li>
+<li><p>start.time - beginning of model run (in POSIX format)</p></li>
+<li><p>stop.time - end of model run (in POSIX format)</p></li>
+<li><p>settings - <a href="state-data-assimilation.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>new.state - matrix from analysis of updated state variables with PEcAn names (dimensions: site rows by state variables columns)</p></li>
+<li><p>new.params - In the future, this will allow us to update parameters based on states (same format as write.configs)</p></li>
+<li><p>inputs - model specific inputs from <a href="state-data-assimilation.html#split.inputs.model.r">split.inputs.MODEL</a> used to run the model from start.time to stop.time</p></li>
+<li><p>RENAME - [optional] Flag used in write.restart.LINKAGES.R for development.</p></li>
+</ul>
+</div>
+<div id="split.inputs.model.r" class="section level4">
+<h4><span class="header-section-number">10.2.6.3</span> split.inputs.MODEL.R</h4>
+<p>This model specific function gives the correct met and/or other model inputs to settings<span class="math inline">\(run\)</span>inputs. This function returns settings<span class="math inline">\(run\)</span>inputs to an inputs argument in sda.enkf.R. But, the inputs will not need to change for all models and should return settings<span class="math inline">\(run\)</span>inputs unchanged if that is the case.</p>
+<ul>
+<li><p>settings - <a href="state-data-assimilation.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>start.time - start time for model run (in POSIX format)</p></li>
+<li><p>stop.time - stop time for model run (in POSIX format)</p></li>
+</ul>
+</div>
+<div id="sample.ic.model.r" class="section level4">
+<h4><span class="header-section-number">10.2.6.4</span> sample.IC.MODEL.R</h4>
+<p>This model specific function is optional. But, it can be used to create initial condition matrix (IC) with # state variables columns by # ensemble rows. This IC matrix is used for the initial runs in sda.enkf.R in the write.configs.MODEL function.</p>
+<ul>
+<li><p>ne - number of ensemble members</p></li>
+<li><p>state - matrix of state variables to get initial conditions from</p></li>
+<li><p>year - used to determine which year to sample initial conditions from</p></li>
+</ul>
+</div>
+</div>
+<div id="analysis-options" class="section level3">
+<h3><span class="header-section-number">10.2.7</span> Analysis Options</h3>
+<p>There are four options depending on whether process variance is TRUE/FALSE and whether or not there is data or not.</p>
+<ul>
+<li><p>If there is no data and process variance = FALSE, there is no analysis step.</p></li>
+<li><p>If there is no data and process variance = TRUE, process variance is added to the forecast.</p></li>
+<li><p>If there is data and process variance = TRUE, <a href="state-data-assimilation.html#the-generalized-ensemble-filter">the generalized ensemble filter</a> is implemented with MCMC.</p></li>
+<li><p>If there is data and process variance = FALSE, the Kalman filter is used and solved analytically.</p></li>
+</ul>
+</div>
+<div id="the-generalized-ensemble-filter" class="section level3">
+<h3><span class="header-section-number">10.2.8</span> The Generalized Ensemble Filter</h3>
+<p>An ensemble filter is a sequential data assimilation algorithm with two procedures at every time step: a forecast followed by an analysis. The forecast ensembles arise from a model while the analysis makes an adjustment of the forecasts ensembles from the model towards the data. An ensemble Kalman filter is typically suggested for this type of analysis because of its computationally efficient analytical solution and its ability to update states based on an estimate of covariance structure. But, in some cases, the ensemble Kalman filter fails because of filter divergence. Filter divergence occurs when forecast variability is too small, which causes the analysis to favor the forecast and diverge from the data. Models often produce low forecast variability because there is little internal stochasticity. Our ensemble filter overcomes this problem in a Bayesian framework by including an estimation of model process variance. This methodology also maintains the benefits of the ensemble Kalman filter by updating the state vector based on the estimated covariance structure.</p>
+<p>This process begins after the model is spun up to equilibrium.</p>
+<p>The likelihood function uses the data vector <span class="math inline">\(\left(\boldsymbol{y_{t}}\right)\)</span> conditional on the estimated state vector <span class="math inline">\(\left(\boldsymbol{x_{t}}\right)\)</span> such that</p>
+<p><span class="math inline">\(\boldsymbol{y}_{t}\sim\mathrm{multivariate\:normal}(\boldsymbol{x}_{t},\boldsymbol{R}_{t})\)</span></p>
+<p>where <span class="math inline">\(\boldsymbol{R}_{t}=\boldsymbol{\sigma}_{t}^{2}\boldsymbol{I}\)</span> and <span class="math inline">\(\boldsymbol{\sigma}_{t}^{2}\)</span> is a vector of data variances. To obtain an estimate of the state vector <span class="math inline">\(\left(\boldsymbol{x}_{t}\right)\)</span>, we use a process model that incorporates a process covariance matrix <span class="math inline">\(\left(\boldsymbol{Q}_{t}\right)\)</span>. This process covariance matrix differentiates our methods from past ensemble filters. Our process model contains the following equations</p>
+<p><span class="math inline">\(\boldsymbol{x}_{t} \sim \mathrm{multivariate\: normal}(\boldsymbol{x}_{model_{t}},\boldsymbol{Q}_{t})\)</span></p>
+<p><span class="math inline">\(\boldsymbol{x}_{model_{t}} \sim \mathrm{multivariate\: normal}(\boldsymbol{\mu}_{forecast_{t}},\boldsymbol{P}_{forecast_{t}})\)</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\mu}_{forecast_{t}}\)</span> is a vector of means from the ensemble forecasts and <span class="math inline">\(\boldsymbol{P}_{forecast_{t}}\)</span> is a covariance matrix calculated from the ensemble forecasts. The prior for our process covariance matrix is <span class="math inline">\(\boldsymbol{Q}_{t}\sim\mathrm{Wishart}(\boldsymbol{V}_{t},n_{t})\)</span> where <span class="math inline">\(\boldsymbol{V}_{t}\)</span> is a scale matrix and <span class="math inline">\(n_{t}\)</span> is the degrees of freedom. The prior shape parameters are updated at each time step through moment matching such that</p>
+<p><span class="math inline">\(\boldsymbol{V}_{t+1} = n_{t}\bar{\boldsymbol{Q}}_{t}\)</span></p>
+<p><span class="math inline">\(n_{t+1} = \frac{\sum_{i=1}^{I}\sum_{j=1}^{J}\frac{v_{ijt}^{2}+v_{iit}v_{jjt}}{Var(\boldsymbol{\bar{Q}}_{t})}}{I\times J}\)</span></p>
+<p>where we calculate the mean of the process covariance matrix <span class="math inline">\(\left(\bar{\boldsymbol{Q}_{t}}\right)\)</span> from the posterior samples at time t. Degrees of freedom for the Wishart are typically calculated element by element where <span class="math inline">\(v_{ij}\)</span> are the elements of <span class="math inline">\(\boldsymbol{V}_{t}\)</span>. <span class="math inline">\(I\)</span> and <span class="math inline">\(J\)</span> index rows and columns of <span class="math inline">\(\boldsymbol{V}\)</span>. Here, we calculate a mean number of degrees of freedom for <span class="math inline">\(t+1\)</span> by summing over all the elements of the scale matrix <span class="math inline">\(\left(\boldsymbol{V}\right)\)</span> and dividing by the count of those elements <span class="math inline">\(\left(I\times J\right)\)</span>. We fit this model sequentially through time in the R computing environment using R package ‘rjags.’</p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="advanced-command-line-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="working-with-the-vm.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="parameter-data-assimilation-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="specific-model-configurations.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
