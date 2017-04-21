@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>The Predictive Ecosystem Analyzer</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="The Predictive Ecosystem Analyzer">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="The Predictive Ecosystem Analyzer" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="The Predictive Ecosystem Analyzer" />
+  
+  
+  
+
+
+
+<meta name="date" content="2017-04-21">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="advanced-web-interface-guide.html">
+<link rel="next" href="pecan-xml-configuration.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="project-overview.html"><a href="project-overview.html"><i class="fa fa-check"></i>Project Overview</a></li>
+<li class="chapter" data-level="" data-path="contributor-covenant-code-of-conduct.html"><a href="contributor-covenant-code-of-conduct.html"><i class="fa fa-check"></i>Contributor Covenant Code of Conduct</a></li>
+<li class="chapter" data-level="1" data-path="about-the-pecan-book.html"><a href="about-the-pecan-book.html"><i class="fa fa-check"></i><b>1</b> About the PEcAn Book</a><ul>
+<li class="chapter" data-level="1.1" data-path="about-the-pecan-book.html"><a href="about-the-pecan-book.html#how-to-contribute"><i class="fa fa-check"></i><b>1.1</b> How to Contribute</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="about-the-pecan-book.html"><a href="about-the-pecan-book.html#editing-the-book-yourself"><i class="fa fa-check"></i><b>1.1.1</b> Editing the book yourself</a></li>
+<li class="chapter" data-level="1.1.2" data-path="about-the-pecan-book.html"><a href="about-the-pecan-book.html#feedbackcommentssuggestions"><i class="fa fa-check"></i><b>1.1.2</b> Feedback/Comments/Suggestions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="about-the-pecan-book.html"><a href="about-the-pecan-book.html#how-this-book-is-organized"><i class="fa fa-check"></i><b>1.2</b> How this Book is organized</a></li>
+</ul></li>
+<li class="part"><span><b>I Basic User Guide</b></span></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
+<li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#how-pecan-works-in-a-nutshell"><i class="fa fa-check"></i><b>2.1</b> How PEcAn Works in a nutshell</a></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#quick-start"><i class="fa fa-check"></i><b>2.2</b> Quick Start</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#working-with-the-pecan-vm"><i class="fa fa-check"></i><b>2.2.1</b> Working with the PEcAn VM</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-started.html"><a href="getting-started.html#using-amazonweb-services-aws"><i class="fa fa-check"></i><b>2.2.2</b> Using AmazonWeb Services (AWS)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-model-site-page.html"><a href="the-model-site-page.html"><i class="fa fa-check"></i><b>3</b> The model-site page</a><ul>
+<li class="chapter" data-level="3.1" data-path="the-model-site-page.html"><a href="the-model-site-page.html#selecting-a-model"><i class="fa fa-check"></i><b>3.1</b> Selecting a model</a></li>
+<li class="chapter" data-level="3.2" data-path="the-model-site-page.html"><a href="the-model-site-page.html#selecting-a-site"><i class="fa fa-check"></i><b>3.2</b> Selecting a site</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="the-model-site-page.html"><a href="the-model-site-page.html#using-existing-sites"><i class="fa fa-check"></i><b>3.2.1</b> Using existing sites</a></li>
+<li class="chapter" data-level="3.2.2" data-path="the-model-site-page.html"><a href="the-model-site-page.html#adding-a-new-site"><i class="fa fa-check"></i><b>3.2.2</b> Adding a new site</a></li>
+<li class="chapter" data-level="3.2.3" data-path="the-model-site-page.html"><a href="the-model-site-page.html#troubleshooting"><i class="fa fa-check"></i><b>3.2.3</b> Troubleshooting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html"><i class="fa fa-check"></i><b>4</b> Basic model configuration</a><ul>
+<li class="chapter" data-level="4.1" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#choosing-meteorology"><i class="fa fa-check"></i><b>4.1</b> Choosing meteorology</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#met-workflow"><i class="fa fa-check"></i><b>4.1.1</b> Met workflow</a></li>
+<li class="chapter" data-level="4.1.2" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#troubleshooting-meteorological-conversions"><i class="fa fa-check"></i><b>4.1.2</b> Troubleshooting meteorological conversions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#choosing-initial-vegetation"><i class="fa fa-check"></i><b>4.2</b> Choosing initial vegetation</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#spin-up"><i class="fa fa-check"></i><b>4.2.1</b> Spin up</a></li>
+<li class="chapter" data-level="4.2.2" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#veg-workflow"><i class="fa fa-check"></i><b>4.2.2</b> Veg workflow</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#selecting-a-soils-product"><i class="fa fa-check"></i><b>4.3</b> Selecting a soils product</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html"><i class="fa fa-check"></i><b>5</b> VM Desktop Conversion</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html#install-rstudio-desktop"><i class="fa fa-check"></i><b>5.0.1</b> Install RStudio Desktop</a></li>
+</ul></li>
+<li class="part"><span><b>II Advanced User Guide - Web</b></span></li>
+<li class="chapter" data-level="6" data-path="advanced-web-interface-guide.html"><a href="advanced-web-interface-guide.html"><i class="fa fa-check"></i><b>6</b> Advanced Web Interface Guide</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="advanced-web-interface-guide.html"><a href="advanced-web-interface-guide.html#what-do-all-those-other-buttons-on-the-web-interface-do"><i class="fa fa-check"></i><b>6.0.1</b> What do all those other buttons on the web interface do?</a></li>
+<li class="chapter" data-level="6.0.2" data-path="advanced-web-interface-guide.html"><a href="advanced-web-interface-guide.html#how-do-i-perform-specific-analyses"><i class="fa fa-check"></i><b>6.0.2</b> How do I perform specific analyses?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="using-browndog.html"><a href="using-browndog.html"><i class="fa fa-check"></i><b>7</b> Using Browndog</a></li>
+<li class="chapter" data-level="8" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html"><i class="fa fa-check"></i><b>8</b> PEcAn XML Configuration</a><ul>
+<li class="chapter" data-level="8.1" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#pecan-folders"><i class="fa fa-check"></i><b>8.1</b> PEcAn folders</a></li>
+<li class="chapter" data-level="8.2" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#database-access"><i class="fa fa-check"></i><b>8.2</b> Database Access</a></li>
+<li class="chapter" data-level="8.3" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#bety-database-configuration"><i class="fa fa-check"></i><b>8.3</b> BETY Database Configuration</a></li>
+<li class="chapter" data-level="8.4" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#brown-dog-configuration"><i class="fa fa-check"></i><b>8.4</b> Brown Dog Configuration</a></li>
+<li class="chapter" data-level="8.5" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#pft-selection"><i class="fa fa-check"></i><b>8.5</b> PFT Selection</a></li>
+<li class="chapter" data-level="8.6" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#meta-analysis"><i class="fa fa-check"></i><b>8.6</b> Meta Analysis</a></li>
+<li class="chapter" data-level="8.7" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#ensemble-runs"><i class="fa fa-check"></i><b>8.7</b> Ensemble Runs</a></li>
+<li class="chapter" data-level="8.8" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#sensitivity-runs"><i class="fa fa-check"></i><b>8.8</b> Sensitivity Runs</a></li>
+<li class="chapter" data-level="8.9" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#model-setup"><i class="fa fa-check"></i><b>8.9</b> Model Setup</a></li>
+<li class="chapter" data-level="8.10" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#run-setup"><i class="fa fa-check"></i><b>8.10</b> Run Setup</a></li>
+<li class="chapter" data-level="8.11" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#state-data-assimilation-tags"><i class="fa fa-check"></i><b>8.11</b> State Data Assimilation Tags</a></li>
+<li class="chapter" data-level="8.12" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#parameter-data-assimilation"><i class="fa fa-check"></i><b>8.12</b> Parameter Data Assimilation</a></li>
+<li class="chapter" data-level="8.13" data-path="pecan-xml-configuration.html"><a href="pecan-xml-configuration.html#benchmarking"><i class="fa fa-check"></i><b>8.13</b> Benchmarking</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html"><i class="fa fa-check"></i><b>9</b> Parameter Data Assimilation</a><ul>
+<li class="chapter" data-level="9.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#all-functions-pertaining-to-parameter-data-assimilation-are-housed-within-pecanmodulesassim.batch"><i class="fa fa-check"></i><b>9.1</b> All functions pertaining to Parameter Data Assimilation are housed within: <strong>pecan/modules/assim.batch</strong></a><ul>
+<li class="chapter" data-level="9.1.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#pda.mcmc.r"><i class="fa fa-check"></i><b>9.1.1</b> <strong>pda.mcmc.R</strong></a></li>
+<li class="chapter" data-level="9.1.2" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#pda.mcmc.bs.r"><i class="fa fa-check"></i><b>9.1.2</b> <strong>pda.mcmc.bs.R</strong></a></li>
+<li class="chapter" data-level="9.1.3" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#pda.emulator"><i class="fa fa-check"></i><b>9.1.3</b> <strong>pda.emulator</strong></a></li>
+<li class="chapter" data-level="9.1.4" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#pda.mcmc.recover.r"><i class="fa fa-check"></i><b>9.1.4</b> <strong>pda.mcmc.recover.R</strong></a></li>
+<li class="chapter" data-level="9.1.5" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#pda.utils.r"><i class="fa fa-check"></i><b>9.1.5</b> <strong>pda.utils.R</strong></a></li>
+<li class="chapter" data-level="9.1.6" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#get.da.data..r-plot.da.r-old-codes-written-by-carl-davidson.-defunct-now-but-may-contain-good-ideas-so-currently-left-in."><i class="fa fa-check"></i><b>9.1.6</b> **get.da.data.*.R, plot.da.R** Old codes written by Carl Davidson. Defunct now, but may contain good ideas so currently left in.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html"><i class="fa fa-check"></i><b>10</b> State Data Assimilation</a><ul>
+<li class="chapter" data-level="10.1" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#sda.enkf.r-is-housed-within-pecanmodulesassim.sequentialr"><i class="fa fa-check"></i><b>10.1</b> sda.enkf.R is housed within: <strong>/pecan/modules/assim.sequential/R</strong></a></li>
+<li class="chapter" data-level="10.2" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#the-tree-ring-tutorial-is-housed-within-pecandocumentationtutorialsstateassimilation"><i class="fa fa-check"></i><b>10.2</b> The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></a><ul>
+<li class="chapter" data-level="10.2.1" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#sda.enkf.r-description"><i class="fa fa-check"></i><b>10.2.1</b> <strong>sda.enkf.R Description</strong></a></li>
+<li class="chapter" data-level="10.2.2" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#sda.enkf.r-arguments"><i class="fa fa-check"></i><b>10.2.2</b> <strong>sda.enkf.R Arguments</strong></a></li>
+<li class="chapter" data-level="10.2.3" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#state-data-assimilation-workflow"><i class="fa fa-check"></i><b>10.2.3</b> State Data Assimilation Workflow</a></li>
+<li class="chapter" data-level="10.2.4" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#state-data-assimilation-tags-example"><i class="fa fa-check"></i><b>10.2.4</b> State Data Assimilation Tags Example</a></li>
+<li class="chapter" data-level="10.2.5" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#state-data-assimilation-tags-descriptions"><i class="fa fa-check"></i><b>10.2.5</b> State Data Assimilation Tags Descriptions</a></li>
+<li class="chapter" data-level="10.2.6" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#model-specific-functions-for-sda-workflow"><i class="fa fa-check"></i><b>10.2.6</b> Model Specific Functions for SDA Workflow</a></li>
+<li class="chapter" data-level="10.2.7" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#analysis-options"><i class="fa fa-check"></i><b>10.2.7</b> Analysis Options</a></li>
+<li class="chapter" data-level="10.2.8" data-path="state-data-assimilation.html"><a href="state-data-assimilation.html#the-generalized-ensemble-filter"><i class="fa fa-check"></i><b>10.2.8</b> The Generalized Ensemble Filter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="specific-model-configurations.html"><a href="specific-model-configurations.html"><i class="fa fa-check"></i><b>11</b> Specific Model Configurations</a></li>
+<li class="chapter" data-level="12" data-path="advanced-setup.html"><a href="advanced-setup.html"><i class="fa fa-check"></i><b>12</b> Advanced Setup</a></li>
+<li class="part"><span><b>III Advanced User Guide - Cmd Line</b></span></li>
+<li class="chapter" data-level="13" data-path="advanced-command-line-guide.html"><a href="advanced-command-line-guide.html"><i class="fa fa-check"></i><b>13</b> Advanced Command Line Guide</a></li>
+<li class="chapter" data-level="14" data-path="run-pecan-from-command-line.html"><a href="run-pecan-from-command-line.html"><i class="fa fa-check"></i><b>14</b> Run PEcAn from COmmand Line</a></li>
+<li class="chapter" data-level="15" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html"><i class="fa fa-check"></i><b>15</b> Working with the VM</a><ul>
+<li class="chapter" data-level="15.1" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html#connecting-to-the-vm-via-ssh"><i class="fa fa-check"></i><b>15.1</b> Connecting to the VM via SSH</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="extra-tools-in-pecan.html"><a href="extra-tools-in-pecan.html"><i class="fa fa-check"></i><b>16</b> Extra Tools In PEcAn</a></li>
+<li class="part"><span><b>IV User Appendix</b></span></li>
+<li class="chapter" data-level="17" data-path="user-appendix.html"><a href="user-appendix.html"><i class="fa fa-check"></i><b>17</b> User Appendix</a></li>
+<li class="chapter" data-level="18" data-path="updating-pecan-code-and-bety-database.html"><a href="updating-pecan-code-and-bety-database.html"><i class="fa fa-check"></i><b>18</b> Updating PEcAn Code and Bety Database</a><ul>
+<li class="chapter" data-level="18.0.1" data-path="updating-pecan-code-and-bety-database.html"><a href="updating-pecan-code-and-bety-database.html#updating-pecan"><i class="fa fa-check"></i><b>18.0.1</b> Updating PEcAn</a></li>
+<li class="chapter" data-level="18.1" data-path="updating-pecan-code-and-bety-database.html"><a href="updating-pecan-code-and-bety-database.html#updating-bety"><i class="fa fa-check"></i><b>18.1</b> Updating BETY</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>19</b> PEcAn Models</a><ul>
+<li class="chapter" data-level="19.1" data-path="pecan-models.html"><a href="pecan-models.html#biocro"><i class="fa fa-check"></i><b>19.1</b> BioCro</a></li>
+<li class="chapter" data-level="19.2" data-path="pecan-models.html"><a href="pecan-models.html#biocro-configuration"><i class="fa fa-check"></i><b>19.2</b> BioCro Configuration</a></li>
+<li class="chapter" data-level="19.3" data-path="pecan-models.html"><a href="pecan-models.html#clm"><i class="fa fa-check"></i><b>19.3</b> CLM</a></li>
+<li class="chapter" data-level="19.4" data-path="pecan-models.html"><a href="pecan-models.html#dalec"><i class="fa fa-check"></i><b>19.4</b> DALEC</a></li>
+<li class="chapter" data-level="19.5" data-path="pecan-models.html"><a href="pecan-models.html#ed"><i class="fa fa-check"></i><b>19.5</b> ED</a><ul>
+<li class="chapter" data-level="19.5.1" data-path="pecan-models.html"><a href="pecan-models.html#ed-configuration"><i class="fa fa-check"></i><b>19.5.1</b> ED Configuration</a></li>
+</ul></li>
+<li class="chapter" data-level="19.6" data-path="pecan-models.html"><a href="pecan-models.html#ed2in-configuration-variables"><i class="fa fa-check"></i><b>19.6</b> ED2IN configuration variables</a></li>
+<li class="chapter" data-level="19.7" data-path="pecan-models.html"><a href="pecan-models.html#gday"><i class="fa fa-check"></i><b>19.7</b> GDAY</a></li>
+<li class="chapter" data-level="19.8" data-path="pecan-models.html"><a href="pecan-models.html#linkages"><i class="fa fa-check"></i><b>19.8</b> LINKAGES</a></li>
+<li class="chapter" data-level="19.9" data-path="pecan-models.html"><a href="pecan-models.html#lpj-guess"><i class="fa fa-check"></i><b>19.9</b> LPJ-GUESS</a></li>
+<li class="chapter" data-level="19.10" data-path="pecan-models.html"><a href="pecan-models.html#maespa"><i class="fa fa-check"></i><b>19.10</b> MAESPA</a></li>
+<li class="chapter" data-level="19.11" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>19.11</b> PRELES</a></li>
+<li class="chapter" data-level="19.12" data-path="pecan-models.html"><a href="pecan-models.html#sipnet"><i class="fa fa-check"></i><b>19.12</b> Sipnet</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="model-output-variables.html"><a href="model-output-variables.html"><i class="fa fa-check"></i><b>20</b> Model Output Variables</a></li>
+<li class="chapter" data-level="21" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>21</b> Available Meteorological Drivers</a><ul>
+<li class="chapter" data-level="21.1" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#ameriflux"><i class="fa fa-check"></i><b>21.1</b> Ameriflux</a></li>
+<li class="chapter" data-level="21.2" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#amerifluxlbl"><i class="fa fa-check"></i><b>21.2</b> AmerifluxLBL</a></li>
+<li class="chapter" data-level="21.3" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnet2015"><i class="fa fa-check"></i><b>21.3</b> Fluxnet2015</a></li>
+<li class="chapter" data-level="21.4" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#narr"><i class="fa fa-check"></i><b>21.4</b> NARR</a></li>
+<li class="chapter" data-level="21.5" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cruncep"><i class="fa fa-check"></i><b>21.5</b> CRUNCEP</a></li>
+<li class="chapter" data-level="21.6" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cmip5"><i class="fa fa-check"></i><b>21.6</b> CMIP5</a></li>
+<li class="chapter" data-level="21.7" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#nldas"><i class="fa fa-check"></i><b>21.7</b> NLDAS</a></li>
+<li class="chapter" data-level="21.8" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#gldas"><i class="fa fa-check"></i><b>21.8</b> GLDAS</a></li>
+<li class="chapter" data-level="21.9" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#paleon"><i class="fa fa-check"></i><b>21.9</b> PalEON</a></li>
+<li class="chapter" data-level="21.10" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnetlathuile"><i class="fa fa-check"></i><b>21.10</b> FluxnetLaThuile</a></li>
+</ul></li>
+<li class="part"><span><b>V PEcAn Workflow</b></span></li>
+<li class="chapter" data-level="22" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>22</b> Workflow</a></li>
+<li class="chapter" data-level="23" data-path="the-pecan-bety-connection.html"><a href="the-pecan-bety-connection.html"><i class="fa fa-check"></i><b>23</b> The PEcAN BETY connection</a></li>
+<li class="part"><span><b>VI Development Guide</b></span></li>
+<li class="chapter" data-level="24" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>24</b> Overview</a><ul>
+<li class="chapter" data-level="24.1" data-path="overview.html"><a href="overview.html#bugs-issues-features-etc."><i class="fa fa-check"></i><b>24.1</b> Bugs, Issues, Features, etc.</a><ul>
+<li class="chapter" data-level="24.1.1" data-path="overview.html"><a href="overview.html#reporting-a-bug"><i class="fa fa-check"></i><b>24.1.1</b> Reporting a bug</a></li>
+<li class="chapter" data-level="24.1.2" data-path="overview.html"><a href="overview.html#required-content"><i class="fa fa-check"></i><b>24.1.2</b> Required content</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="overview.html"><a href="overview.html#requesting-a-feature"><i class="fa fa-check"></i><b>24.2</b> Requesting a feature</a></li>
+<li class="chapter" data-level="24.3" data-path="overview.html"><a href="overview.html#closing-an-issue"><i class="fa fa-check"></i><b>24.3</b> Closing an issue</a></li>
+<li class="chapter" data-level="24.4" data-path="overview.html"><a href="overview.html#when-to-submit-an-issue"><i class="fa fa-check"></i><b>24.4</b> When to submit an issue?</a><ul>
+<li class="chapter" data-level="24.4.1" data-path="overview.html"><a href="overview.html#ideally-non-trivial-code-changes-will-be-linked-to-an-issue-and-a-commit."><i class="fa fa-check"></i><b>24.4.1</b> Ideally, non-trivial code changes will be linked to an issue and a commit.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="using-git.html"><a href="using-git.html"><i class="fa fa-check"></i><b>25</b> Using Git</a><ul>
+<li class="chapter" data-level="25.1" data-path="using-git.html"><a href="using-git.html#git"><i class="fa fa-check"></i><b>25.1</b> Git</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="using-git.html"><a href="using-git.html#pecanproject-on-github-httpsgithub.comorganizationspecanproject"><i class="fa fa-check"></i><b>25.1.1</b> PEcAnProject on GitHub: <a href="https://github.com/organizations/PecanProject" class="uri">https://github.com/organizations/PecanProject</a></a></li>
+<li class="chapter" data-level="25.1.2" data-path="using-git.html"><a href="using-git.html#milestones-issues-tasks"><i class="fa fa-check"></i><b>25.1.2</b> Milestones, Issues, Tasks</a></li>
+<li class="chapter" data-level="25.1.3" data-path="using-git.html"><a href="using-git.html#quick-and-easy"><i class="fa fa-check"></i><b>25.1.3</b> Quick and Easy</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="using-git.html"><a href="using-git.html#recommended-git-workflow"><i class="fa fa-check"></i><b>25.2</b> Recommended Git Workflow</a><ul>
+<li class="chapter" data-level="25.2.1" data-path="using-git.html"><a href="using-git.html#before-any-work-is-done"><i class="fa fa-check"></i><b>25.2.1</b> Before any work is done:</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="using-git.html"><a href="using-git.html#during-development"><i class="fa fa-check"></i><b>25.3</b> During development:</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="using-git.html"><a href="using-git.html#basic-workflow"><i class="fa fa-check"></i><b>25.3.1</b> Basic Workflow</a></li>
+<li class="chapter" data-level="25.3.2" data-path="using-git.html"><a href="using-git.html#advanced-workflow-a-new-branch-for-each-change"><i class="fa fa-check"></i><b>25.3.2</b> Advanced Workflow: A new branch for each change</a></li>
+<li class="chapter" data-level="25.3.3" data-path="using-git.html"><a href="using-git.html#after-pull-request-is-merged"><i class="fa fa-check"></i><b>25.3.3</b> After pull request is merged</a></li>
+<li class="chapter" data-level="25.3.4" data-path="using-git.html"><a href="using-git.html#link-commits-to-issues"><i class="fa fa-check"></i><b>25.3.4</b> Link commits to issues</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="using-git.html"><a href="using-git.html#for-pecan"><i class="fa fa-check"></i><b>25.4</b> For PEcAn</a><ul>
+<li class="chapter" data-level="25.4.1" data-path="using-git.html"><a href="using-git.html#committing-changes-using-pull-requests"><i class="fa fa-check"></i><b>25.4.1</b> Committing Changes Using Pull Requests</a></li>
+<li class="chapter" data-level="25.4.2" data-path="using-git.html"><a href="using-git.html#other-useful-git-commands"><i class="fa fa-check"></i><b>25.4.2</b> Other Useful Git Commands:</a></li>
+<li class="chapter" data-level="25.4.3" data-path="using-git.html"><a href="using-git.html#tags-7"><i class="fa fa-check"></i><b>25.4.3</b> Tags</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="using-git.html"><a href="using-git.html#git-rstudio"><i class="fa fa-check"></i><b>25.5</b> Git + Rstudio</a><ul>
+<li class="chapter" data-level="25.5.1" data-path="using-git.html"><a href="using-git.html#creating-a-read-only-version"><i class="fa fa-check"></i><b>25.5.1</b> Creating a Read-only version:</a></li>
+</ul></li>
+<li class="chapter" data-level="25.6" data-path="using-git.html"><a href="using-git.html#for-development"><i class="fa fa-check"></i><b>25.6</b> For development:</a></li>
+<li class="chapter" data-level="25.7" data-path="using-git.html"><a href="using-git.html#references"><i class="fa fa-check"></i><b>25.7</b> References:</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="directory-structure.html"><a href="directory-structure.html"><i class="fa fa-check"></i><b>26</b> Directory structure</a><ul>
+<li class="chapter" data-level="26.1" data-path="directory-structure.html"><a href="directory-structure.html#overview-of-pecan-repository-as-of-pecan-1.2"><i class="fa fa-check"></i><b>26.1</b> Overview of PEcAn repository as of PEcAn 1.2</a></li>
+<li class="chapter" data-level="26.2" data-path="directory-structure.html"><a href="directory-structure.html#generic-r-package-structure"><i class="fa fa-check"></i><b>26.2</b> Generic R package structure:</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html"><i class="fa fa-check"></i><b>27</b> Adding An Ecosystem Model</a><ul>
+<li class="chapter" data-level="27.1" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#pecan-database"><i class="fa fa-check"></i><b>27.1</b> PEcAn Database</a></li>
+<li class="chapter" data-level="27.2" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#define-model_type"><i class="fa fa-check"></i><b>27.2</b> Define MODEL_TYPE</a></li>
+<li class="chapter" data-level="27.3" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#machine"><i class="fa fa-check"></i><b>27.3</b> MACHINE</a></li>
+<li class="chapter" data-level="27.4" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#model"><i class="fa fa-check"></i><b>27.4</b> MODEL</a></li>
+<li class="chapter" data-level="27.5" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#formats"><i class="fa fa-check"></i><b>27.5</b> FORMATS</a><ul>
+<li class="chapter" data-level="27.5.1" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#formats---variables"><i class="fa fa-check"></i><b>27.5.1</b> Formats -&gt; Variables</a></li>
+<li class="chapter" data-level="27.5.2" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#model_type---formats"><i class="fa fa-check"></i><b>27.5.2</b> MODEL_TYPE -&gt; Formats</a></li>
+</ul></li>
+<li class="chapter" data-level="27.6" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#inputs"><i class="fa fa-check"></i><b>27.6</b> INPUTS</a></li>
+<li class="chapter" data-level="27.7" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#pfts-plant-functional-types"><i class="fa fa-check"></i><b>27.7</b> PFTS (Plant Functional Types)</a><ul>
+<li class="chapter" data-level="27.7.1" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#species"><i class="fa fa-check"></i><b>27.7.1</b> Species</a></li>
+</ul></li>
+<li class="chapter" data-level="27.8" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#priors"><i class="fa fa-check"></i><b>27.8</b> PRIORS</a></li>
+<li class="chapter" data-level="27.9" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#interface-modules"><i class="fa fa-check"></i><b>27.9</b> Interface Modules</a><ul>
+<li class="chapter" data-level="27.9.1" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#setting-up-the-module-directory-required"><i class="fa fa-check"></i><b>27.9.1</b> Setting up the module directory (required)</a></li>
+<li class="chapter" data-level="27.9.2" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#description"><i class="fa fa-check"></i><b>27.9.2</b> DESCRIPTION</a></li>
+<li class="chapter" data-level="27.9.3" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#namespace"><i class="fa fa-check"></i><b>27.9.3</b> NAMESPACE</a></li>
+<li class="chapter" data-level="27.9.4" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#building-the-package"><i class="fa fa-check"></i><b>27.9.4</b> Building the package</a></li>
+<li class="chapter" data-level="27.9.5" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#write.config.model-required"><i class="fa fa-check"></i><b>27.9.5</b> write.config.MODEL (required)</a></li>
+<li class="chapter" data-level="27.9.6" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#output-conversions"><i class="fa fa-check"></i><b>27.9.6</b> Output Conversions</a></li>
+<li class="chapter" data-level="27.9.7" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#met2model.model"><i class="fa fa-check"></i><b>27.9.7</b> met2model.MODEL</a></li>
+<li class="chapter" data-level="27.9.8" data-path="adding-an-ecosystem-model.html"><a href="adding-an-ecosystem-model.html#commit-changes"><i class="fa fa-check"></i><b>27.9.8</b> Commit changes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="met-data.html"><a href="met-data.html"><i class="fa fa-check"></i><b>28</b> Met Data</a><ul>
+<li class="chapter" data-level="28.1" data-path="met-data.html"><a href="met-data.html#dimensions"><i class="fa fa-check"></i><b>28.1</b> Dimensions:</a></li>
+<li class="chapter" data-level="28.2" data-path="met-data.html"><a href="met-data.html#the-variable-names-should-be-standard_name"><i class="fa fa-check"></i><b>28.2</b> The variable names should be <code>standard_name</code></a><ul>
+<li class="chapter" data-level="28.2.1" data-path="met-data.html"><a href="met-data.html#pecan-configuration-files"><i class="fa fa-check"></i><b>28.2.1</b> <a href="PEcAn-Configuration">PEcAn Configuration Files</a></a></li>
+<li class="chapter" data-level="28.2.2" data-path="met-data.html"><a href="met-data.html#model-specific-configuration-files"><i class="fa fa-check"></i><b>28.2.2</b> Model-specific configuration files</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="coding-style.html"><a href="coding-style.html"><i class="fa fa-check"></i><b>29</b> Coding Style</a><ul>
+<li class="chapter" data-level="29.1" data-path="coding-style.html"><a href="coding-style.html#use-roxygen2-documentation"><i class="fa fa-check"></i><b>29.1</b> Use Roxygen2 documentation</a></li>
+<li class="chapter" data-level="29.2" data-path="coding-style.html"><a href="coding-style.html#write-your-name-at-the-top"><i class="fa fa-check"></i><b>29.2</b> Write your name at the top</a></li>
+<li class="chapter" data-level="29.3" data-path="coding-style.html"><a href="coding-style.html#use-testthat-testing-package"><i class="fa fa-check"></i><b>29.3</b> Use testthat testing package</a></li>
+<li class="chapter" data-level="29.4" data-path="coding-style.html"><a href="coding-style.html#dont-use-shortcuts"><i class="fa fa-check"></i><b>29.4</b> Don’t use shortcuts</a><ul>
+<li class="chapter" data-level="29.4.1" data-path="coding-style.html"><a href="coding-style.html#function-names-verb.noun"><i class="fa fa-check"></i><b>29.4.1</b> Function Names (<code>verb.noun</code>)</a></li>
+<li class="chapter" data-level="29.4.2" data-path="coding-style.html"><a href="coding-style.html#file-names"><i class="fa fa-check"></i><b>29.4.2</b> File Names</a></li>
+<li class="chapter" data-level="29.4.3" data-path="coding-style.html"><a href="coding-style.html#use---as-an-assignment-operator"><i class="fa fa-check"></i><b>29.4.3</b> Use “&lt;-” as an assignment operator</a></li>
+<li class="chapter" data-level="29.4.4" data-path="coding-style.html"><a href="coding-style.html#use-spaces"><i class="fa fa-check"></i><b>29.4.4</b> Use Spaces</a></li>
+<li class="chapter" data-level="29.4.5" data-path="coding-style.html"><a href="coding-style.html#use-curly-braces"><i class="fa fa-check"></i><b>29.4.5</b> Use curly braces</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="coding-style.html"><a href="coding-style.html#package-dependencies"><i class="fa fa-check"></i><b>29.5</b> Package Dependencies:</a><ul>
+<li class="chapter" data-level="29.5.1" data-path="coding-style.html"><a href="coding-style.html#library-vs-require"><i class="fa fa-check"></i><b>29.5.1</b> library vs require</a></li>
+<li class="chapter" data-level="29.5.2" data-path="coding-style.html"><a href="coding-style.html#depends-suggests-imports"><i class="fa fa-check"></i><b>29.5.2</b> DEPENDS, SUGGESTS, IMPORTS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="roxygen2.html"><a href="roxygen2.html"><i class="fa fa-check"></i><b>30</b> Roxygen2</a><ul>
+<li class="chapter" data-level="30.1" data-path="roxygen2.html"><a href="roxygen2.html#canonical-references"><i class="fa fa-check"></i><b>30.1</b> Canonical references:</a></li>
+<li class="chapter" data-level="30.2" data-path="roxygen2.html"><a href="roxygen2.html#basic-roxygen2-instructions"><i class="fa fa-check"></i><b>30.2</b> Basic Roxygen2 instructions:</a><ul>
+<li class="chapter" data-level="30.2.1" data-path="roxygen2.html"><a href="roxygen2.html#tags-8"><i class="fa fa-check"></i><b>30.2.1</b> <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Documenting-functions">Tags</a></a></li>
+<li class="chapter" data-level="30.2.2" data-path="roxygen2.html"><a href="roxygen2.html#text-markup"><i class="fa fa-check"></i><b>30.2.2</b> Text markup</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="roxygen2.html"><a href="roxygen2.html#example"><i class="fa fa-check"></i><b>30.3</b> Example</a></li>
+<li class="chapter" data-level="30.4" data-path="roxygen2.html"><a href="roxygen2.html#updating-documentation"><i class="fa fa-check"></i><b>30.4</b> Updating documentation</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="testing.html"><a href="testing.html"><i class="fa fa-check"></i><b>31</b> Testing</a><ul>
+<li class="chapter" data-level="31.1" data-path="testing.html"><a href="testing.html#rationale"><i class="fa fa-check"></i><b>31.1</b> Rationale</a></li>
+<li class="chapter" data-level="31.2" data-path="testing.html"><a href="testing.html#tests-makes-development-easier-and-less-error-prone"><i class="fa fa-check"></i><b>31.2</b> Tests makes development easier and less error prone</a></li>
+<li class="chapter" data-level="31.3" data-path="testing.html"><a href="testing.html#quick-start-1"><i class="fa fa-check"></i><b>31.3</b> Quick Start:</a></li>
+<li class="chapter" data-level="31.4" data-path="testing.html"><a href="testing.html#test-files"><i class="fa fa-check"></i><b>31.4</b> Test files</a><ul>
+<li class="chapter" data-level="31.4.1" data-path="testing.html"><a href="testing.html#settings"><i class="fa fa-check"></i><b>31.4.1</b> Settings</a></li>
+<li class="chapter" data-level="31.4.2" data-path="testing.html"><a href="testing.html#helper-functions-created-to-make-testing-easier"><i class="fa fa-check"></i><b>31.4.2</b> Helper functions created to make testing easier</a></li>
+<li class="chapter" data-level="31.4.3" data-path="testing.html"><a href="testing.html#when-should-i-test"><i class="fa fa-check"></i><b>31.4.3</b> When should I test?</a></li>
+<li class="chapter" data-level="31.4.4" data-path="testing.html"><a href="testing.html#what-types-of-testing-are-important-to-understand"><i class="fa fa-check"></i><b>31.4.4</b> What types of testing are important to understand?</a></li>
+<li class="chapter" data-level="31.4.5" data-path="testing.html"><a href="testing.html#unit-testing-test-driven-development"><i class="fa fa-check"></i><b>31.4.5</b> Unit Testing / Test Driven Development</a></li>
+<li class="chapter" data-level="31.4.6" data-path="testing.html"><a href="testing.html#regression-testing"><i class="fa fa-check"></i><b>31.4.6</b> Regression Testing</a></li>
+<li class="chapter" data-level="31.4.7" data-path="testing.html"><a href="testing.html#how-should-i-test-in-r-the-testthat-package."><i class="fa fa-check"></i><b>31.4.7</b> How should I test in R? The testthat package.</a></li>
+<li class="chapter" data-level="31.4.8" data-path="testing.html"><a href="testing.html#basic-use-of-the-testthat-package"><i class="fa fa-check"></i><b>31.4.8</b> basic use of the testthat package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="package-data.html"><a href="package-data.html"><i class="fa fa-check"></i><b>32</b> Package Data</a><ul>
+<li class="chapter" data-level="32.1" data-path="package-data.html"><a href="package-data.html#summary"><i class="fa fa-check"></i><b>32.1</b> Summary:</a></li>
+<li class="chapter" data-level="32.2" data-path="package-data.html"><a href="package-data.html#accessing-data"><i class="fa fa-check"></i><b>32.2</b> Accessing data</a></li>
+<li class="chapter" data-level="32.3" data-path="package-data.html"><a href="package-data.html#packages-used-in-development"><i class="fa fa-check"></i><b>32.3</b> Packages used in development</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="package-data.html"><a href="package-data.html#roxygen2-1"><i class="fa fa-check"></i><b>32.3.1</b> roxygen2</a></li>
+<li class="chapter" data-level="32.3.2" data-path="package-data.html"><a href="package-data.html#devtools"><i class="fa fa-check"></i><b>32.3.2</b> devtools</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="logging.html"><a href="logging.html"><i class="fa fa-check"></i><b>33</b> Logging</a><ul>
+<li class="chapter" data-level="33.1" data-path="logging.html"><a href="logging.html#pecan-logging-functions"><i class="fa fa-check"></i><b>33.1</b> PEcAn logging functions</a><ul>
+<li class="chapter" data-level="33.1.1" data-path="logging.html"><a href="logging.html#examples"><i class="fa fa-check"></i><b>33.1.1</b> Examples</a></li>
+<li class="chapter" data-level="33.1.2" data-path="logging.html"><a href="logging.html#related-issues-requires-redmine-developer-account"><i class="fa fa-check"></i><b>33.1.2</b> Related Issues (requires Redmine developer account)</a></li>
+</ul></li>
+<li class="chapter" data-level="33.2" data-path="logging.html"><a href="logging.html#other-r-logging-packages"><i class="fa fa-check"></i><b>33.2</b> Other R logging packages</a><ul>
+<li class="chapter" data-level="33.2.1" data-path="logging.html"><a href="logging.html#logging-1"><i class="fa fa-check"></i><b>33.2.1</b> logging</a></li>
+<li class="chapter" data-level="33.2.2" data-path="logging.html"><a href="logging.html#futile"><i class="fa fa-check"></i><b>33.2.2</b> futile</a></li>
+</ul></li>
+<li class="chapter" data-level="33.3" data-path="logging.html"><a href="logging.html#example-usage"><i class="fa fa-check"></i><b>33.3</b> Example Usage</a></li>
+<li class="chapter" data-level="33.4" data-path="logging.html"><a href="logging.html#inputs-1"><i class="fa fa-check"></i><b>33.4</b> Inputs</a><ul>
+<li class="chapter" data-level="33.4.1" data-path="logging.html"><a href="logging.html#defining-new-input-formats"><i class="fa fa-check"></i><b>33.4.1</b> Defining new input formats</a></li>
+</ul></li>
+<li class="chapter" data-level="33.5" data-path="logging.html"><a href="logging.html#outputs"><i class="fa fa-check"></i><b>33.5</b> Outputs</a></li>
+</ul></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="34" data-path="installing-pecan.html"><a href="installing-pecan.html"><i class="fa fa-check"></i><b>34</b> Installing PEcAn</a><ul>
+<li class="chapter" data-level="34.1" data-path="installing-pecan.html"><a href="installing-pecan.html#installing-prerequisites"><i class="fa fa-check"></i><b>34.1</b> Installing Prerequisites</a><ul>
+<li class="chapter" data-level="34.1.1" data-path="installing-pecan.html"><a href="installing-pecan.html#set-r_libs_user"><i class="fa fa-check"></i><b>34.1.1</b> Set <code>R_LIBS_USER</code></a></li>
+</ul></li>
+<li class="chapter" data-level="34.2" data-path="installing-pecan.html"><a href="installing-pecan.html#install-models"><i class="fa fa-check"></i><b>34.2</b> Install models</a><ul>
+<li class="chapter" data-level="34.2.1" data-path="installing-pecan.html"><a href="installing-pecan.html#ed2"><i class="fa fa-check"></i><b>34.2.1</b> ED2</a></li>
+<li class="chapter" data-level="34.2.2" data-path="installing-pecan.html"><a href="installing-pecan.html#sipnet-1"><i class="fa fa-check"></i><b>34.2.2</b> SIPNET</a></li>
+<li class="chapter" data-level="34.2.3" data-path="installing-pecan.html"><a href="installing-pecan.html#biocro-1"><i class="fa fa-check"></i><b>34.2.3</b> BioCro</a></li>
+<li class="chapter" data-level="34.2.4" data-path="installing-pecan.html"><a href="installing-pecan.html#linkages-1"><i class="fa fa-check"></i><b>34.2.4</b> Linkages</a></li>
+<li class="chapter" data-level="34.2.5" data-path="installing-pecan.html"><a href="installing-pecan.html#dalec-1"><i class="fa fa-check"></i><b>34.2.5</b> DALEC</a></li>
+<li class="chapter" data-level="34.2.6" data-path="installing-pecan.html"><a href="installing-pecan.html#linkages-2"><i class="fa fa-check"></i><b>34.2.6</b> LINKAGES</a></li>
+<li class="chapter" data-level="34.2.7" data-path="installing-pecan.html"><a href="installing-pecan.html#clm-4.5"><i class="fa fa-check"></i><b>34.2.7</b> CLM 4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="34.3" data-path="installing-pecan.html"><a href="installing-pecan.html#clm-fates"><i class="fa fa-check"></i><b>34.3</b> CLM-FATES</a></li>
+<li class="chapter" data-level="34.4" data-path="installing-pecan.html"><a href="installing-pecan.html#pecan-installation"><i class="fa fa-check"></i><b>34.4</b> PEcAn Installation</a></li>
+<li class="chapter" data-level="34.5" data-path="installing-pecan.html"><a href="installing-pecan.html#installing-pecan-1"><i class="fa fa-check"></i><b>34.5</b> Installing PEcAn</a></li>
+<li class="chapter" data-level="34.6" data-path="installing-pecan.html"><a href="installing-pecan.html#installing-bety"><i class="fa fa-check"></i><b>34.6</b> Installing BETY</a><ul>
+<li class="chapter" data-level="34.6.1" data-path="installing-pecan.html"><a href="installing-pecan.html#install-postgres"><i class="fa fa-check"></i><b>34.6.1</b> Install Postgres</a></li>
+<li class="chapter" data-level="34.6.2" data-path="installing-pecan.html"><a href="installing-pecan.html#install-database-data"><i class="fa fa-check"></i><b>34.6.2</b> Install Database + Data</a></li>
+<li class="chapter" data-level="34.6.3" data-path="installing-pecan.html"><a href="installing-pecan.html#installing-betydb-web-application"><i class="fa fa-check"></i><b>34.6.3</b> Installing BETYdb Web Application</a></li>
+<li class="chapter" data-level="34.6.4" data-path="installing-pecan.html"><a href="installing-pecan.html#pecan-testrun"><i class="fa fa-check"></i><b>34.6.4</b> PEcAn Testrun</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="creating-a-virtual-machine.html"><a href="creating-a-virtual-machine.html"><i class="fa fa-check"></i><b>35</b> Creating a Virtual Machine</a></li>
+<li class="chapter" data-level="36" data-path="centosredhat.html"><a href="centosredhat.html"><i class="fa fa-check"></i><b>36</b> CentOS/RedHat</a><ul>
+<li class="chapter" data-level="36.1" data-path="centosredhat.html"><a href="centosredhat.html#install-build-environment"><i class="fa fa-check"></i><b>36.1</b> Install build environment</a></li>
+<li class="chapter" data-level="36.2" data-path="centosredhat.html"><a href="centosredhat.html#install-postgres-1"><i class="fa fa-check"></i><b>36.2</b> Install Postgres</a></li>
+<li class="chapter" data-level="36.3" data-path="centosredhat.html"><a href="centosredhat.html#apache-configuration-pecan"><i class="fa fa-check"></i><b>36.3</b> Apache Configuration PEcAn</a></li>
+<li class="chapter" data-level="36.4" data-path="centosredhat.html"><a href="centosredhat.html#apache-configuration-bety"><i class="fa fa-check"></i><b>36.4</b> Apache Configuration BETY</a></li>
+<li class="chapter" data-level="36.5" data-path="centosredhat.html"><a href="centosredhat.html#rstudio-server"><i class="fa fa-check"></i><b>36.5</b> Rstudio-server</a></li>
+<li class="chapter" data-level="36.6" data-path="centosredhat.html"><a href="centosredhat.html#additional-packages"><i class="fa fa-check"></i><b>36.6</b> Additional packages</a></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="centos-rhel.html"><a href="centos-rhel.html"><i class="fa fa-check"></i><b>37</b> CentOS / RHEL</a><ul>
+<li class="chapter" data-level="37.1" data-path="centos-rhel.html"><a href="centos-rhel.html#install-build-environment-1"><i class="fa fa-check"></i><b>37.1</b> Install build environment</a></li>
+<li class="chapter" data-level="37.2" data-path="centos-rhel.html"><a href="centos-rhel.html#apache-configuration"><i class="fa fa-check"></i><b>37.2</b> Apache Configuration</a></li>
+<li class="chapter" data-level="37.3" data-path="centos-rhel.html"><a href="centos-rhel.html#install-and-configure-rstudio-server"><i class="fa fa-check"></i><b>37.3</b> Install and configure Rstudio-server</a></li>
+<li class="chapter" data-level="37.4" data-path="centos-rhel.html"><a href="centos-rhel.html#install-postgres-2"><i class="fa fa-check"></i><b>37.4</b> Install Postgres</a></li>
+</ul></li>
+<li class="chapter" data-level="38" data-path="mac-osx.html"><a href="mac-osx.html"><i class="fa fa-check"></i><b>38</b> Mac OSX</a><ul>
+<li class="chapter" data-level="38.1" data-path="mac-osx.html"><a href="mac-osx.html#install-build-environment-2"><i class="fa fa-check"></i><b>38.1</b> Install build environment</a></li>
+<li class="chapter" data-level="38.2" data-path="mac-osx.html"><a href="mac-osx.html#install-postgres-3"><i class="fa fa-check"></i><b>38.2</b> Install Postgres</a></li>
+<li class="chapter" data-level="38.3" data-path="mac-osx.html"><a href="mac-osx.html#additional-installs"><i class="fa fa-check"></i><b>38.3</b> Additional installs</a><ul>
+<li class="chapter" data-level="38.3.1" data-path="mac-osx.html"><a href="mac-osx.html#install-jags"><i class="fa fa-check"></i><b>38.3.1</b> Install JAGS</a></li>
+<li class="chapter" data-level="38.3.2" data-path="mac-osx.html"><a href="mac-osx.html#install-udunits"><i class="fa fa-check"></i><b>38.3.2</b> Install udunits</a></li>
+</ul></li>
+<li class="chapter" data-level="38.4" data-path="mac-osx.html"><a href="mac-osx.html#apache-configuration-1"><i class="fa fa-check"></i><b>38.4</b> Apache Configuration</a></li>
+<li class="chapter" data-level="38.5" data-path="mac-osx.html"><a href="mac-osx.html#ruby"><i class="fa fa-check"></i><b>38.5</b> Ruby</a></li>
+<li class="chapter" data-level="38.6" data-path="mac-osx.html"><a href="mac-osx.html#rstudio-server-1"><i class="fa fa-check"></i><b>38.6</b> Rstudio Server</a></li>
+</ul></li>
+<li class="chapter" data-level="39" data-path="ubuntu.html"><a href="ubuntu.html"><i class="fa fa-check"></i><b>39</b> Ubuntu</a><ul>
+<li class="chapter" data-level="39.1" data-path="ubuntu.html"><a href="ubuntu.html#install-build-environment-3"><i class="fa fa-check"></i><b>39.1</b> Install build environment</a></li>
+<li class="chapter" data-level="39.2" data-path="ubuntu.html"><a href="ubuntu.html#install-postgres-4"><i class="fa fa-check"></i><b>39.2</b> Install Postgres</a></li>
+<li class="chapter" data-level="39.3" data-path="ubuntu.html"><a href="ubuntu.html#apache-configuration-bety-1"><i class="fa fa-check"></i><b>39.3</b> Apache Configuration BETY</a></li>
+<li class="chapter" data-level="39.4" data-path="ubuntu.html"><a href="ubuntu.html#rstudio-server-2"><i class="fa fa-check"></i><b>39.4</b> Rstudio-server</a></li>
+<li class="chapter" data-level="39.5" data-path="ubuntu.html"><a href="ubuntu.html#additional-packages-1"><i class="fa fa-check"></i><b>39.5</b> Additional packages</a></li>
+<li class="chapter" data-level="39.6" data-path="ubuntu.html"><a href="ubuntu.html#download-and-install-models"><i class="fa fa-check"></i><b>39.6</b> Download and Install Models</a></li>
+<li class="chapter" data-level="39.7" data-path="ubuntu.html"><a href="ubuntu.html#install-instructions"><i class="fa fa-check"></i><b>39.7</b> Install instructions</a><ul>
+<li class="chapter" data-level="39.7.1" data-path="ubuntu.html"><a href="ubuntu.html#ed2-1"><i class="fa fa-check"></i><b>39.7.1</b> ED2</a></li>
+<li class="chapter" data-level="39.7.2" data-path="ubuntu.html"><a href="ubuntu.html#sipnet-2"><i class="fa fa-check"></i><b>39.7.2</b> SIPNET</a></li>
+<li class="chapter" data-level="39.7.3" data-path="ubuntu.html"><a href="ubuntu.html#biocro-2"><i class="fa fa-check"></i><b>39.7.3</b> BioCro</a></li>
+<li class="chapter" data-level="39.7.4" data-path="ubuntu.html"><a href="ubuntu.html#linkages-3"><i class="fa fa-check"></i><b>39.7.4</b> Linkages</a></li>
+<li class="chapter" data-level="39.7.5" data-path="ubuntu.html"><a href="ubuntu.html#dalec-2"><i class="fa fa-check"></i><b>39.7.5</b> DALEC</a></li>
+<li class="chapter" data-level="39.7.6" data-path="ubuntu.html"><a href="ubuntu.html#linkages-4"><i class="fa fa-check"></i><b>39.7.6</b> LINKAGES</a></li>
+<li class="chapter" data-level="39.7.7" data-path="ubuntu.html"><a href="ubuntu.html#clm-4.5-1"><i class="fa fa-check"></i><b>39.7.7</b> CLM 4.5</a></li>
+<li class="chapter" data-level="39.7.8" data-path="ubuntu.html"><a href="ubuntu.html#jules"><i class="fa fa-check"></i><b>39.7.8</b> JULES</a></li>
+<li class="chapter" data-level="39.7.9" data-path="ubuntu.html"><a href="ubuntu.html#maespa-1"><i class="fa fa-check"></i><b>39.7.9</b> MAESPA</a></li>
+<li class="chapter" data-level="39.7.10" data-path="ubuntu.html"><a href="ubuntu.html#gday-1"><i class="fa fa-check"></i><b>39.7.10</b> GDAY</a></li>
+<li class="chapter" data-level="39.7.11" data-path="ubuntu.html"><a href="ubuntu.html#lpj-guess-1"><i class="fa fa-check"></i><b>39.7.11</b> LPJ-GUESS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="40" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html"><i class="fa fa-check"></i><b>40</b> Porting VM to AWS</a><ul>
+<li class="chapter" data-level="40.0.1" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#convert-pecan-vm"><i class="fa fa-check"></i><b>40.0.1</b> Convert PEcAn VM</a></li>
+<li class="chapter" data-level="40.0.2" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#set-up-an-account-on-aws"><i class="fa fa-check"></i><b>40.0.2</b> Set up an account on <a href="http://aws.amazon.com/">AWS</a></a></li>
+<li class="chapter" data-level="40.0.3" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#install-ec2-command-line-tools"><i class="fa fa-check"></i><b>40.0.3</b> Install <a href="http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/set-up-ec2-cli-linux.html">EC2 command line tools</a></a></li>
+<li class="chapter" data-level="40.0.4" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#create-an-aws-s3-bucket-to-upload-vm-to"><i class="fa fa-check"></i><b>40.0.4</b> Create an AWS S3 ‘bucket’ to upload VM to</a></li>
+<li class="chapter" data-level="40.0.5" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#upload"><i class="fa fa-check"></i><b>40.0.5</b> Upload</a></li>
+<li class="chapter" data-level="40.0.6" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#configuring-the-vm"><i class="fa fa-check"></i><b>40.0.6</b> Configuring the VM</a></li>
+<li class="chapter" data-level="40.0.7" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#set-up-multiple-instances-optional"><i class="fa fa-check"></i><b>40.0.7</b> Set up multiple instances (optional)</a></li>
+<li class="chapter" data-level="40.0.8" data-path="porting-vm-to-aws.html"><a href="porting-vm-to-aws.html#booting-the-vm"><i class="fa fa-check"></i><b>40.0.8</b> Booting the VM</a></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html"><i class="fa fa-check"></i><b>41</b> Installing and configuring Shiny for PEcAn</a><ul>
+<li class="chapter" data-level="41.1" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#install-the-shiny-r-package-and-shiny-server"><i class="fa fa-check"></i><b>41.1</b> Install the Shiny R package and Shiny server</a></li>
+<li class="chapter" data-level="41.2" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#centos"><i class="fa fa-check"></i><b>41.2</b> CentOS</a></li>
+<li class="chapter" data-level="41.3" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#ubuntu-1"><i class="fa fa-check"></i><b>41.3</b> Ubuntu</a></li>
+<li class="chapter" data-level="41.4" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#modify-the-shiny-configuration-file"><i class="fa fa-check"></i><b>41.4</b> Modify the shiny configuration file</a></li>
+<li class="chapter" data-level="41.5" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#set-the-httpd-proxy"><i class="fa fa-check"></i><b>41.5</b> Set the httpd proxy</a></li>
+<li class="chapter" data-level="41.6" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#create-a-symbolic-link-to-the-shiny-server-service"><i class="fa fa-check"></i><b>41.6</b> Create a symbolic link to the shiny server service</a></li>
+<li class="chapter" data-level="41.7" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#start-the-shiny-server-and-restart-httpd"><i class="fa fa-check"></i><b>41.7</b> Start the shiny server and restart httpd</a></li>
+<li class="chapter" data-level="41.8" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#troubleshooting-1"><i class="fa fa-check"></i><b>41.8</b> Troubleshooting</a></li>
+<li class="chapter" data-level="41.9" data-path="installing-and-configuring-shiny-for-pecan.html"><a href="installing-and-configuring-shiny-for-pecan.html#further-reading"><i class="fa fa-check"></i><b>41.9</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="42" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>42</b> FAQ</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Predictive Ecosystem Analyzer</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="using-browndog" class="section level1">
+<h1><span class="header-section-number">7</span> Using Browndog</h1>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="advanced-web-interface-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pecan-xml-configuration.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
