@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="mac-osx.html">
-<link rel="next" href="porting-vm-to-aws.html">
+<link rel="prev" href="about-the-pecan-book.html">
+<link rel="next" href="getting-started.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -482,446 +482,134 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ubuntu" class="section level1">
-<h1><span class="header-section-number">41</span> Ubuntu</h1>
-<p>These are specific notes for installing PEcAn on Ubuntu (14.04) and will be referenced from the main <a href="Installing-PEcAn">installing PEcAn</a> page. You will at least need to install the build environment and Postgres sections. If you want to access the database/PEcAn using a web browser you will need to install Apache. To access the database using the BETY interface, you will need to have Ruby installed.</p>
-<p>This document also contains information on how to install the Rstudio server edition as well as any other packages that can be helpful.</p>
-<div id="install-build-environment-3" class="section level2">
-<h2><span class="header-section-number">41.1</span> Install build environment</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -s
-
-<span class="co"># point to latest R</span>
-<span class="kw">echo</span> <span class="st">&quot;deb http://cran.rstudio.com/bin/linux/ubuntu </span><span class="kw">`lsb_release</span> -s -c<span class="kw">`</span><span class="st">/&quot;</span> <span class="kw">&gt;</span> /etc/apt/sources.list.d/R.list
-<span class="kw">apt-key</span> adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-
-<span class="co"># update package list</span>
-<span class="kw">apt-get</span> -y update
-
-<span class="co"># install packages needed for PEcAn</span>
-<span class="kw">apt-get</span> -y install build-essential gfortran git r-base-core r-base-dev jags liblapack-dev libnetcdf-dev netcdf-bin bc libcurl4-gnutls-dev curl udunits-bin libudunits2-dev libgmp-dev python-dev libgdal1-dev libproj-dev expect
-
-<span class="co"># install packages needed for ED2</span>
-<span class="kw">apt-get</span> -y install openmpi-bin libopenmpi-dev
-
-<span class="co"># install requirements for DALEC</span>
-<span class="kw">apt-get</span> -y install libgsl0-dev
-
-<span class="co"># install packages for webserver</span>
-<span class="kw">apt-get</span> -y install apache2 libapache2-mod-php5 php5
-
-<span class="co"># install packages to compile docs</span>
-<span class="kw">apt-get</span> -y install texinfo texlive-latex-base texlive-latex-extra texlive-fonts-recommended
-
-<span class="co"># install devtools</span>
-<span class="kw">echo</span> <span class="st">&#39;install.packages(&quot;devtools&quot;, repos=&quot;http://cran.rstudio.com/&quot;)&#39;</span> <span class="kw">|</span> <span class="kw">R</span> --vanilla
-
-<span class="co"># done as root</span>
-<span class="kw">exit</span></code></pre></div>
-</div>
-<div id="install-postgres-4" class="section level2">
-<h2><span class="header-section-number">41.2</span> Install Postgres</h2>
-<p>Documentation: <a href="http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt" class="uri">http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt</a></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -s
-
-<span class="co"># point to latest PostgreSQL</span>
-<span class="kw">echo</span> <span class="st">&quot;deb http://apt.postgresql.org/pub/repos/apt </span><span class="kw">`lsb_release</span> -s -c<span class="kw">`</span><span class="st">-pgdg main&quot;</span> <span class="kw">&gt;</span> /etc/apt/sources.list.d/pgdg.list
-<span class="kw">wget</span> --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="kw">|</span> <span class="kw">apt-key</span> add -
-
-<span class="co"># update package list</span>
-<span class="kw">apt-get</span> -y update
-
-<span class="co"># install packages for postgresql (using a newer version than default)</span>
-<span class="kw">apt-get</span> -y install libdbd-pgsql postgresql postgresql-client libpq-dev postgresql-9.4-postgis-2.1 postgresql-9.4-postgis-2.1-scripts
-
-<span class="co"># install following if you want to run pecan through the web</span>
-<span class="kw">apt-get</span> -y install php5-pgsql
-
-<span class="co"># enable bety user to login with trust by adding the following lines after</span>
-<span class="co"># the ability of postgres user to login in /etc/postgresql/9.4/main/pg_hba.conf</span>
-<span class="kw">local</span>   <span class="ot">all</span>             <span class="ot">bety</span>                                    <span class="ot">trust</span>
-<span class="kw">host</span>    all             bety            127.0.0.1/32            trust
-<span class="kw">host</span>    all             bety            ::1/128                 trust
-
-<span class="co"># Once done restart postgresql</span>
-<span class="kw">/etc/init.d/postgresql</span> restart
-
-<span class="kw">exit</span></code></pre></div>
-<p>To install the BETYdb database .. ## Apache Configuration PEcAn</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># become root</span>
-<span class="kw">sudo</span> -s
-
-<span class="co"># get index page</span>
-<span class="kw">rm</span> /var/www/html/index.html
-<span class="kw">ln</span> -s <span class="ot">${HOME}</span>/pecan/documentation/index_vm.html /var/www/html/index.html
-
-<span class="co"># setup a redirect</span>
-<span class="kw">cat</span> <span class="kw">&gt;</span> /etc/apache2/conf-available/pecan.conf &lt;&lt; EOF
-Alias /pecan <span class="ot">${HOME}</span>/pecan/web
-&lt;Directory <span class="ot">${HOME}</span>/pecan/web&gt;
-  DirectoryIndex index.php
-  Options +ExecCGI
-  Require all granted
-&lt;/Directory&gt;
-EOF
-a2encon<span class="kw">f</span> <span class="kw">pecan</span>
-/etc/i<span class="kw">nit.d/apache2</span> restart
-
-# done as root
-exit</code></pre></div>
-</div>
-<div id="apache-configuration-bety-1" class="section level2">
-<h2><span class="header-section-number">41.3</span> Apache Configuration BETY</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -s
-
-<span class="co"># install all ruby related packages</span>
-<span class="kw">apt-get</span> -y install ruby2.0 ruby2.0-dev libapache2-mod-passenger 
-
-<span class="co"># link static content</span>
-<span class="kw">ln</span> -s <span class="ot">${HOME}</span>/bety/public /var/www/html/bety
-
-<span class="co"># setup a redirect</span>
-<span class="kw">cat</span> <span class="kw">&gt;</span> /etc/apache2/conf-available/bety.conf &lt;&lt; EOF
-RailsEnv production
-RailsBaseURI /bety
-PassengerRuby /usr/bin/ruby2.0
-&lt;Directory /var/www/html/bety&gt;
-  Options +FollowSymLinks
-  Require all granted
-&lt;/Directory&gt;
-EOF
-a2encon<span class="kw">f</span> <span class="kw">bety</span>
-/etc/init.d/apache2 restart</code></pre></div>
-</div>
-<div id="rstudio-server-2" class="section level2">
-<h2><span class="header-section-number">41.4</span> Rstudio-server</h2>
-<p><em>NOTE This will allow anybody to login to the machine through the rstudio interface and run any arbitrary code. The login used however is the same as the system login/password.</em></p>
-<p>Based on version of ubuntu 32/64 use either of the following</p>
-<p><em>32bit only</em></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-i386.deb</code></pre></div>
-<p><em>64bit only</em></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-amd64.deb</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># bceome root</span>
-<span class="kw">sudo</span> -s
-
-<span class="co"># install required packages</span>
-<span class="kw">apt-get</span> -y install libapparmor1 apparmor-utils libssl0.9.8
-
-<span class="co"># install rstudio</span>
-<span class="kw">dpkg</span> -i rstudio-server-*
-<span class="kw">rm</span> rstudio-server-*
-<span class="kw">echo</span> <span class="st">&quot;www-address=127.0.0.1&quot;</span> <span class="kw">&gt;&gt;</span> /etc/rstudio/rserver.conf
-<span class="kw">echo</span> <span class="st">&quot;r-libs-user=~/R/library&quot;</span> <span class="kw">&gt;&gt;</span> /etc/rstudio/rsession.conf
-<span class="kw">rstudio-server</span> restart
-
-<span class="co"># setup rstudio forwarding in apache</span>
-<span class="kw">a2enmod</span> proxy_http
-<span class="kw">cat</span> <span class="kw">&gt;</span> /etc/apache2/conf-available/rstudio.conf &lt;&lt; EOF
-ProxyPass        /rstudio/ http://localhost:8787/
-ProxyPassReverse /rstudio/ http://localhost:8787/
-RedirectMatch permanent ^/rstudio$ /rstudio/
-EOF
-a2encon<span class="kw">f</span> <span class="kw">rstudio</span>
-/etc/init.d/apache2 restart
-
-# all d<span class="kw">one</span>, exit root
-<span class="kw">exit</span></code></pre></div>
-</div>
-<div id="additional-packages-1" class="section level2">
-<h2><span class="header-section-number">41.5</span> Additional packages</h2>
-<p>HDF5 Tools, netcdf, GDB and emacs</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get -y install hdf5-tools cdo nco netcdf-bin ncview gdb emacs ess nedit</code></pre></div>
-
-</div>
-<div id="download-and-install-models" class="section level2">
-<h2><span class="header-section-number">41.6</span> Download and Install Models</h2>
-<p>This page contains instructions on how to download and install ecosystem models that have been or are being coupled to PEcAn. These instructions have been tested on the PEcAn unbuntu VM. Commands may vary on other operating systems. Also, some model downloads require permissions before downloading, making them unavailable to the general public. Please contact the PEcAn team if you would like access to a model that is not already installed on the default PEcAn VM.</p>
-<ul>
-<li><a href="Installing-PEcAn-models.md#biocro">BioCro</a></li>
-<li><a href="Installing-PEcAn-models.md#clm4.5">CLM 4.5</a></li>
-<li><a href="Installing-PEcAn-models.md#dalec">DALEC</a></li>
-<li><a href="Installing-PEcAn-models.md#ed2">ED2</a></li>
-<li><a href="Installing-PEcAn-models.md#gday">GDAY</a></li>
-<li><a href="Installing-PEcAn-models.md#jules">JULES</a></li>
-<li><a href="Installing-PEcAn-models.md#linkages">LINKAGES</a></li>
-<li><a href="Installing-PEcAn-models.md#lpjguess">LPJ-GUESS</a></li>
-<li><a href="Installing-PEcAn-models.md#maespa">MAESPA</a></li>
-<li><a href="Installing-PEcAn-models.mdsipnet#sipnet">SIPNET</a></li>
-</ul>
-</div>
-<div id="install-instructions" class="section level2">
-<h2><span class="header-section-number">41.7</span> Install instructions</h2>
-<div id="ed2-1" class="section level3">
-<h3><span class="header-section-number">41.7.1</span> ED2</h3>
-<div id="ed2.2-r46-used-in-pecan-manuscript-1" class="section level4">
-<h4><span class="header-section-number">41.7.1.1</span> ED2.2 r46 (used in PEcAn manuscript)</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># ----------------------------------------------------------------------</span>
-<span class="co"># Get version r46 with a few patches for ubuntu</span>
-<span class="kw">cd</span>
-<span class="kw">curl</span> -o ED.r46.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r46.tgz
-<span class="kw">tar</span> zxf ED.r46.tgz
-<span class="kw">rm</span> ED.r46.tgz
-<span class="co"># ----------------------------------------------------------------------</span>
-<span class="co"># configure and compile ed</span>
-<span class="kw">cd</span> ~/ED.r46/ED/build/bin
-<span class="kw">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`uname</span> -s<span class="kw">`</span>
-<span class="kw">make</span> OPT=VM
-<span class="kw">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r46</code></pre></div>
-<p>Perform a test run using pre configured ED settings for ED2.2 r46</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># ----------------------------------------------------------------------</span>
-<span class="co"># Create sample run</span>
-<span class="kw">cd</span>
-<span class="kw">mkdir</span> testrun.ed.r46
-<span class="kw">cd</span> testrun.ed.r46
-<span class="kw">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r46
-<span class="kw">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="ot">$HOME</span><span class="st">#&quot;</span> ED2IN
-<span class="kw">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r46.xml
-<span class="co"># execute test run</span>
-<span class="kw">time</span> ed2.r46</code></pre></div>
-</div>
-<div id="ed-2.2-r82-1" class="section level4">
-<h4><span class="header-section-number">41.7.1.2</span> ED 2.2 r82</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-
-<span class="kw">cd</span> ED.r82
-<span class="kw">curl</span> -o ED.r82.patch http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.patch
-<span class="kw">patch</span> -p1 <span class="kw">&lt;</span> ED.r82.patch
-<span class="kw">cd</span> ED/build/bin
-<span class="kw">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`uname</span> -s<span class="kw">`</span>
-<span class="kw">make</span> OPT=VM
-<span class="kw">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r82</code></pre></div>
-<p>Perform a test run using pre configured ED settings for ED2.2 r82</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
-<span class="kw">mkdir</span> testrun.ed.r82
-<span class="kw">cd</span> testrun.ed.r82
-<span class="kw">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r82
-<span class="kw">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="ot">$HOME</span><span class="st">#&quot;</span> ED2IN
-<span class="kw">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r82.xml
-<span class="co"># execute test run</span>
-<span class="kw">time</span> ed2.r82</code></pre></div>
-</div>
-<div id="ed-2.2-bleeding-edge-1" class="section level4">
-<h4><span class="header-section-number">41.7.1.3</span> ED 2.2 bleeding edge</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
-<span class="kw">git</span> clone https://github.com/EDmodel/ED2.git
-
-<span class="kw">cd</span> ED2/ED/build/bin
-<span class="kw">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`uname</span> -s<span class="kw">`</span>
-<span class="kw">./generate_deps.sh</span>
-<span class="kw">make</span> OPT=VM
-<span class="kw">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.git</code></pre></div>
-</div>
-</div>
-<div id="sipnet-2" class="section level3">
-<h3><span class="header-section-number">41.7.2</span> SIPNET</h3>
-<div id="sipnet-installation-1" class="section level4">
-<h4><span class="header-section-number">41.7.2.1</span> Sipnet Installation</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
-<span class="kw">curl</span> -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_unk.tar.gz
-<span class="kw">tar</span> zxf sipnet_unk.tar.gz
-<span class="kw">rm</span> sipnet_unk.tar.gz
-
-<span class="kw">cd</span> sipnet_unk
-<span class="kw">make</span>
-<span class="kw">sudo</span> cp sipnet /usr/local/bin/sipnet.runk</code></pre></div>
-</div>
-<div id="sipnet-testrun-1" class="section level4">
-<h4><span class="header-section-number">41.7.2.2</span> SIPNET testrun</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
-<span class="kw">curl</span> -o testrun.sipnet.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.sipnet.tar.gz
-<span class="kw">tar</span> zxf testrun.sipnet.tar.gz
-<span class="kw">rm</span> testrun.sipnet.tar.gz
-<span class="kw">cd</span> testrun.sipnet
-<span class="kw">sipnet.runk</span></code></pre></div>
-</div>
-</div>
-<div id="biocro-2" class="section level3">
-<h3><span class="header-section-number">41.7.3</span> BioCro</h3>
-<div id="installation-4" class="section level4">
-<h4><span class="header-section-number">41.7.3.1</span> Installation</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Public</span>
-echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro&quot;)&#39;</span> |<span class="st"> </span>R --vanilla
-<span class="co"># Development:</span>
-echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro-dev&quot;)&#39;</span> |<span class="st"> </span>R --vanilla</code></pre></div>
-<p><em>BioCro Developers:</em> request from <span class="citation">[@dlebauer on GitHub]</span>(<a href="https://github.com/dlebauer" class="uri">https://github.com/dlebauer</a>)</p>
-</div>
-</div>
-<div id="linkages-3" class="section level3">
-<h3><span class="header-section-number">41.7.4</span> Linkages</h3>
-<div id="installation-5" class="section level4">
-<h4><span class="header-section-number">41.7.4.1</span> Installation</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Public</span>
-echo <span class="st">&#39;devtools::install_github(&quot;araiho/linkages_package&quot;)&#39;</span> |<span class="st"> </span>R --vanilla</code></pre></div>
-</div>
-</div>
-<div id="dalec-2" class="section level3">
-<h3><span class="header-section-number">41.7.5</span> DALEC</h3>
-<div id="installation-6" class="section level4">
-<h4><span class="header-section-number">41.7.5.1</span> Installation</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>
-<span class="kw">curl</span> -o dalec_EnKF_pub.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/dalec_EnKF_pub.tgz
-<span class="kw">tar</span> zxf dalec_EnKF_pub.tgz
-<span class="kw">rm</span> dalec_EnKF_pub.tgz
-
-<span class="kw">cd</span> dalec_EnKF_pub
-<span class="kw">make</span> dalec_EnKF
-<span class="kw">make</span> dalec_seqMH
-<span class="kw">sudo</span> cp dalec_EnKF dalec_seqMH /usr/local/bin</code></pre></div>
-</div>
-</div>
-<div id="linkages-4" class="section level3">
-<h3><span class="header-section-number">41.7.6</span> LINKAGES</h3>
-<div id="installation-7" class="section level4">
-<h4><span class="header-section-number">41.7.6.1</span> Installation</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#FORTRAN VERSION</span>
-cd
-git clone https:<span class="er">//</span>github.com/araiho/Linkages.git
-cd Linkages
-gfortran -o linkages linkages.f
-sudo cp linkages /usr/local/bin/linkages.git
-
-<span class="co">#R Version</span>
-git clone https:<span class="er">//</span>github.com/araiho/linkages_package.git
-R CMD INSTALL --no-multiarch --with-keep.source linkages_package</code></pre></div>
-</div>
-</div>
-<div id="clm-4.5-1" class="section level3">
-<h3><span class="header-section-number">41.7.7</span> CLM 4.5</h3>
-<p>The version of CLM installed on PEcAn is the ORNL branch provided by Dan Ricciuto. This version includes Dan’s point-level CLM processing scripts</p>
-<p>Download the code (~300M compressed), input data (1.7GB compressed and expands to 14 GB), and a few misc inputs.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mkdir</span> models
-<span class="kw">cd</span> models
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm4_5_1_r085.tar.gz
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/ccsm_inputdata.tar.gz
-<span class="kw">tar</span> -xvzf clm4_5*
-<span class="kw">tar</span> -xvzf ccsm_inputdata.tar.gz
-
-<span class="co">#Parameter file:</span>
-<span class="kw">mkdir</span> /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata
-<span class="kw">cd</span>  /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c130821.nc
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c140423.nc
-
-<span class="co">#Domain file:</span>
-<span class="kw">cd</span> /home/carya/models/ccsm_inputdata/share/domains/domain.clm/
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/domain.lnd.1x1pt_US-UMB_navy.nc
-
-<span class="co">#Aggregated met data file:</span>
-<span class="kw">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/CLM1PT_data/1x1pt_US-UMB
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/all_hourly.nc 
-
-<span class="co">## lightning database</span>
-<span class="kw">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/NASA_LIS/
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clmforc.Li_2012_climo1995-2011.T62.lnfm_Total_c140423.nc
-
-<span class="co">## surface data</span>
-<span class="kw">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_360x720cru_simyr1850_c130927.nc
-<span class="kw">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata_map
-<span class="kw">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new
-<span class="kw">mv</span> surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc</code></pre></div>
-<p>Required libraries</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install mercurial csh tcsh subversion cmake
-
-<span class="kw">sudo</span> ln -s /usr/bin/make /usr/bin/gmake</code></pre></div>
-<p>Compile and build default inputs</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> ~/carya/models/clm4_5_1_r085/scripts
-<span class="kw">python</span> runCLM.py --site US-UMB ––compset I1850CLM45CN --mach ubuntu --ccsm_input /home/carya/models/ccsm_inputdata --tstep 1 --nopointdata --coldstart --cpl_bypass --clean_build</code></pre></div>
-<div id="clm-test-run-1" class="section level4">
-<h4><span class="header-section-number">41.7.7.1</span> CLM Test Run</h4>
-<p>You will see a new directory in scripts: US-UMB_I1850CLM45CN Enter this directory and run (you shouldn’t have to do this normally, but there is a bug with the python script and doing this ensures all files get to the right place):</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">./US-UMB_I1850CLM45CN.build</span></code></pre></div>
-<p>Next you are ready to go to the run directory:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">/home/carya/models/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/run</span></code></pre></div>
-<p>Open to edit file: datm.streams.txt.CLM1PT.CLM_USRDAT and check file paths such that all paths start with /home/carya/models/ccsm_inputdata</p>
-<p>From this directory, launch the executable that resides in the bld directory:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">/home/carya/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/bld/cesm.exe</span></code></pre></div>
-<p>not sure this was the right location, but wherever the executable is</p>
-<p>You should begin to see output files that look like this: US-UMB_I1850CLM45CN.clm2.h0.yyyy-mm.nc (yyyy is year, mm is month) These are netcdf files containing monthly averages of lots of variables.</p>
-<p>The lnd_in file in the run directory can be modified to change the output file frequency and variables.</p>
-</div>
-</div>
-<div id="jules" class="section level3">
-<h3><span class="header-section-number">41.7.8</span> JULES</h3>
-<p>INSTALL STEPS: 1) Download JULES and FCM JULES: Model requires registration to download. Not to be put on PEcAn VM Registration: <a href="https://jules.jchmr.org/software-and-documentation" class="uri">https://jules.jchmr.org/software-and-documentation</a> Documentation: <a href="http://jules-lsm.github.io/vn4.2/index.html" class="uri">http://jules-lsm.github.io/vn4.2/index.html</a></p>
-<p>FCM:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">    <span class="kw">https</span>://github.com/metomi/fcm/
-    <span class="kw">wget</span> https://github.com/metomi/fcm/archive/2015.05.0.tar.gz</code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li>edit makefile ```bash open etc/fcm-make/make.cfg</li>
-</ol>
-<p>set JULES_NETCDF = actual instead of dummy set path (e.g. /usr/) and lib_path /lib64 to netCDF libraries ```</p>
-<ol start="3" style="list-style-type: decimal">
-<li>compile JULES</li>
-</ol>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> etc/fcm-make/
-<span class="dt">{path.to.fcm}</span><span class="kw">/fcm</span> make -f etc/fcm-make/make.cfg --new</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">UBUNTU</span> VERSION: installed without having to add any perl libraries
-<span class="co">#perl stuff that I had to install on pecan2 not PEcAN VM</span>
-<span class="kw">sudo</span> yum install perl-Digest-SHA
-<span class="kw">sudo</span> yum install perl-Time-modules
-<span class="kw">sudo</span> yum install cpan
-<span class="kw">curl</span> -L http://cpanmin.us <span class="kw">|</span> <span class="kw">perl</span> - --sudo App::cpanminus
-<span class="kw">sudo</span> cpanm Time/Piece.pm
-<span class="kw">sudo</span> cpanm IO/Uncompress/Gunzip.pm</code></pre></div>
-<p>Executable is under build/bin/jules.exe</p>
-<p>Example rundir: examples/point_loobos</p>
-</div>
-<div id="maespa-1" class="section level3">
-<h3><span class="header-section-number">41.7.9</span> MAESPA</h3>
-<p>Navigate to a directory you would like store MAESPA and run the following:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> clone https://bitbucket.org/remkoduursma/maespa.git
-
-<span class="kw">cd</span> maespa
-
-<span class="kw">make</span></code></pre></div>
-<p><code>maespa.out</code> is your executable. Example input files can be found in the <code>inpufiles</code> directory. Executing measpa.out from within one of the example directories will produce output.</p>
-<p>MAESPA developers have also developed a wrapper package called Maeswrap. The usual R package installation method <code>install.packages</code> may present issues with downloading an unpacking a dependency package called <code>rgl</code>. Here are a couple of solutions:</p>
-<div id="solution-1" class="section level4">
-<h4><span class="header-section-number">41.7.9.1</span> Solution 1</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">### From the Command Line</span>
-<span class="kw">sudo</span> apt-get install r-cran-rgl</code></pre></div>
-<p>then from within R</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</code></pre></div>
-</div>
-<div id="solution-2" class="section level4">
-<h4><span class="header-section-number">41.7.9.2</span> Solution 2</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">### From the Command line </span>
-<span class="kw">sudo</span> apt-get install libglu1-mesa-dev</code></pre></div>
-<p>then from within R</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</code></pre></div>
-</div>
-</div>
-<div id="gday-1" class="section level3">
-<h3><span class="header-section-number">41.7.10</span> GDAY</h3>
-<p>Navigate to a directory you would like to store GDAY and run the following:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> clone https://github.com/mdekauwe/GDAY.git
-
-<span class="kw">cd</span> GDAY
-
-<span class="kw">cd</span> src
-
-<span class="kw">make</span></code></pre></div>
-<p><code>gday</code> is your executable.</p>
-</div>
-<div id="lpj-guess-1" class="section level3">
-<h3><span class="header-section-number">41.7.11</span> LPJ-GUESS</h3>
-<p>Instructions to download source code</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://stormbringerii.nateko.lu.se/public/guess_download/guess_3.1.tar.gz
-<span class="kw">tar</span> -xvzf guess_3.1.tar.gz</code></pre></div>
+<div id="main-topics" class="section level1">
+<h1><span class="header-section-number">2</span> Main Topics</h1>
+<p>This book is organized around these main topics:</p>
+<p><strong>Basic User Guide</strong> - Explains a simple setup of PEcAn and how to execute a basic run</p>
+<p><strong>Advanced User Guide- Web</strong> - Explains the advanced features offered on our web interface</p>
+<p><strong>Advanced User Guide - Cmd Line</strong> - Explains more advanced customization of PEcAn that can be run from the command line.</p>
+<p><strong>User Appendix</strong> - Supplementary materials for the user section.</p>
+<p><strong>PEcAn Workflow</strong> - High Level explanation of the PEcAn workflow.</p>
+<p><strong>Development Guide</strong> - Explains what you need to know in order to contibute code to PEcAn.</p>
+<p><strong>Appendix</strong> - Supplementary materials for the developer section.</p>
+<div id="using-pecan" class="section level3">
+<h3><span class="header-section-number">2.0.1</span> Using PEcAn</h3>
+<p>We have developed a number of demos and vignettes to guide your use of PEcAn’s many capabilities:</p>
+<table style="width:44%;">
+<colgroup>
+<col width="6%" />
+<col width="8%" />
+<col width="12%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Type</th>
+<th align="center">Title</th>
+<th align="center">Web Link</th>
+<th align="center">Source Rmd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Basic Run</td>
+<td align="center"><a href="https://pecanproject.github.io/pecan-documentation/tutorials/Demo01.html">html</a></td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/develop/documentation/tutorials/01_Demo_Basic_Run/Demo01.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">Uncertainty Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/master/documentation/tutorials/02_Demo_Uncertainty_Analysis">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Output Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/AnalyzeOutput">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">MCMC</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/MCMC">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Parameter Assimilation</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/ParameterAssimilation">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">State Assimilation</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/StateAssimilation">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Sensitivity</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/sensitivity">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Allometries</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/allometry/vignettes/AllomVignette.Rmd">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">MCMC</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/assim.batch/vignettes/AssimBatchVignette.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Meteorological Data</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/master/modules/data.atmosphere/vignettes">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">Meta-Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/meta.analysis/vignettes/single.MA_demo.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Photosynthetic Response Curves</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/photosynthesis/vignettes/ResponseCurves.Rmd">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">Priors</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/priors/vignettes/priors_demo.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Leaf Spectra:PROSPECT inversion</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/rtm/vignettes/pecanrtm.vignette.Rmd">Rmd</a></td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
-</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="mac-osx.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="porting-vm-to-aws.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="about-the-pecan-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="getting-started.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
