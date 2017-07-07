@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="contributor-covenant-code-of-conduct.html">
+<link rel="prev" href="about-the-pecan-book.html">
+<link rel="next" href="getting-started.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -482,41 +482,134 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="project-overview" class="section level1 unnumbered">
-<h1>Project Overview</h1>
-<p>The Predictive Ecosystem Analyzer (PEcAn) is an integrated informatics toolbox for ecosystem modeling (Dietze et al. 2013, LeBauer et al. 2013). PEcAn consists of:</p>
-<ol style="list-style-type: decimal">
-<li><p>An application program interface (API) that encapsulates an ecosystem model, providing a common interface, inputs, and output.</p></li>
-<li><p>Core utilities for handling and tracking model runs and the flows of information and uncertainties into and out of models and analyses</p></li>
-<li><p>An accessible web-based user interface and visualization tools</p></li>
-<li><p>An extensible collection of modules to handle specific types of analyses (sensitivity, uncertainty, ensemble), model-data syntheses (benchmarking, parameter data assimilation, state data assimilation), and data processing (model inputs and data constraints)</p></li>
-</ol>
-<p><img src="figures/PEcAn_Components.jpeg" width="335" style="display: block; margin: auto;" /></p>
-<p>This project is motivated by the fact that many of the most pressing questions about global change are limited by our ability to synthesize existing data and strategically prioritize the collection of new data. This project seeks to improve this ability by developing a framework for integrating multiple data sources in a sensible manner.</p>
-<p>The workflow system allows ecosystem modeling to be more reproducible, automated, and transparent in terms of operations applied to data, and thus ultimately more comprehensible to both peers and the public. It reduces the redundancy of effort among modeling groups, facilitate collaboration, and make models more accessible the rest of the research community.</p>
-<p>PEcAn is not itself an ecosystem model, and it can be used to with a variety of different ecosystem models; integrating a model involves writing a wrapper to convert inputs and outputs to and from the standards used by PEcAn. Currently, PEcAn supports multiple models listed <a href="pecan-models.html#pecan-models">PEcAn Models</a>.</p>
-<p><strong>Acknowledgements</strong></p>
-<p>This material is based upon work supported by the National Science Foundation under Grant No. 1062547, 1062204, 1241894, 1261582, 1318164, 1346748, 1458021, 1638577, the National Aeronautics and Space Administration (NASA) Grant No. 13-TE13-0060, and the Energy Biosciences Institute. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation or NASA. PEcAn is a collaboration among research groups at the Department of Earth And Environment at Boston University, the Energy Biosciences Institute at the University of Illinois, the Image Spatial Data Analysis group at NCSA, the Department of Atmospheric &amp; Oceanic Sciences at the University Wisconsin-Madison, and the Terrestrial Ecosystem Science &amp; Technology (TEST) Group at Brookhaven National Lab.</p>
-<p>BETY-db is a product of the Energy Biosciences Institute at the University of Illinois at Urbana-Champaign. We gratefully acknowledge the great effort of other researchers who generously made their own data available for further study.</p>
-<p><strong>PEcAn Publications</strong></p>
-<ul>
-<li>Shiklomanov. A, MC Dietze, T Viskari, PA Townsend, SP Serbin. 2016 “Quantifying the influences of spectral resolution on uncertainty in leaf trait estimates through a Bayesian approach to RTM inversion” Remote Sensing of the Environment 183: 226-238</li>
-<li>Viskari et al. 2015 Model-data assimilation of multiple phenological observations to constrain and forecast leaf area index. Ecological Applications 25(2): 546-558</li>
-<li>Dietze, M. C., S. P. Serbin, C. Davidson, A. R. Desai, X. Feng, R. Kelly, R. Kooper, D. LeBauer, J. Mantooth, K. McHenry, and D. Wang (2014) A quantitative assessment of a terrestrial biosphere model’s data needs across North American biomes. Journal of Geophysical Research-Biogeosciences <a href="http://dx.doi.org/10.1002/2013jg002392">doi:10.1002/2013jg002392</a></li>
-<li>LeBauer, D.S., D. Wang, K. Richter, C. Davidson, &amp; M.C. Dietze. (2013). Facilitating feedbacks between field measurements and ecosystem models. Ecological Monographs. <a href="http://dx.doi.org/10.1890/12-0137.1">doi:10.1890/12-0137.1</a></li>
-<li>Wang, D, D.S. LeBauer, and M.C. Dietze(2013) Predicting yields of short-rotation hybrid poplar (Populus spp.) for the contiguous US through model-data synthesis. Ecological Applications <a href="http://dx.doi.org/10.1890/12-0854.1">doi:10.1890/12-0854.1</a></li>
-<li>Dietze, M.C., D.S LeBauer, R. Kooper (2013) On improving the communication between models and data. Plant, Cell, &amp; Environment <a href="http://dx.doi.org/10.1111/pce.12043">doi:10.1111/pce.12043</a></li>
-</ul>
-<p><a href="https://scholar.google.com/scholar?start=0&amp;q=%22predictive+ecosystem+analyzer+PEcAn%22">Longer / auto-updated list of publications that mention PEcAn’s full name in Google Scholar</a></p>
+<div id="main-topics" class="section level1">
+<h1><span class="header-section-number">2</span> Main Topics</h1>
+<p>This book is organized around these main topics:</p>
+<p><strong>Basic User Guide</strong> - Explains a simple setup of PEcAn and how to execute a basic run</p>
+<p><strong>Advanced User Guide- Web</strong> - Explains the advanced features offered on our web interface</p>
+<p><strong>Advanced User Guide - Cmd Line</strong> - Explains more advanced customization of PEcAn that can be run from the command line.</p>
+<p><strong>User Appendix</strong> - Supplementary materials for the user section.</p>
+<p><strong>PEcAn Workflow</strong> - High Level explanation of the PEcAn workflow.</p>
+<p><strong>Development Guide</strong> - Explains what you need to know in order to contibute code to PEcAn.</p>
+<p><strong>Appendix</strong> - Supplementary materials for the developer section.</p>
+<div id="using-pecan" class="section level3">
+<h3><span class="header-section-number">2.0.1</span> Using PEcAn</h3>
+<p>We have developed a number of demos and vignettes to guide your use of PEcAn’s many capabilities:</p>
+<table style="width:44%;">
+<colgroup>
+<col width="6%" />
+<col width="8%" />
+<col width="12%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Type</th>
+<th align="center">Title</th>
+<th align="center">Web Link</th>
+<th align="center">Source Rmd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Basic Run</td>
+<td align="center"><a href="https://pecanproject.github.io/pecan-documentation/tutorials/Demo01.html">html</a></td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/develop/documentation/tutorials/01_Demo_Basic_Run/Demo01.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">Uncertainty Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/master/documentation/tutorials/02_Demo_Uncertainty_Analysis">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Output Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/AnalyzeOutput">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">MCMC</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/MCMC">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Parameter Assimilation</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/ParameterAssimilation">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">State Assimilation</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/StateAssimilation">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Sensitivity</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/sensitivity">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Allometries</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/allometry/vignettes/AllomVignette.Rmd">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">MCMC</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/assim.batch/vignettes/AssimBatchVignette.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Meteorological Data</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/master/modules/data.atmosphere/vignettes">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">Meta-Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/meta.analysis/vignettes/single.MA_demo.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Photosynthetic Response Curves</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/photosynthesis/vignettes/ResponseCurves.Rmd">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">Priors</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/priors/vignettes/priors_demo.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Leaf Spectra:PROSPECT inversion</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/rtm/vignettes/pecanrtm.vignette.Rmd">Rmd</a></td>
+</tr>
+</tbody>
+</table>
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="contributor-covenant-code-of-conduct.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="about-the-pecan-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="getting-started.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
