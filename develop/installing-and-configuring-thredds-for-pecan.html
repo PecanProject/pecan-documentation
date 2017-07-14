@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="specific-model-configurations.html">
-<link rel="next" href="advanced-command-line-guide.html">
+<link rel="prev" href="installing-and-configuring-shiny-for-pecan.html">
+<link rel="next" href="faq.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -490,21 +490,337 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="advanced-setup" class="section level1">
-<h1><span class="header-section-number">13</span> Advanced Setup</h1>
-<p>** Under construction **</p>
+<div id="installing-and-configuring-thredds-for-pecan" class="section level1">
+<h1><span class="header-section-number">44</span> Installing and configuring Thredds for PEcAn</h1>
+<p>authors - Rob Kooper</p>
+<p><strong>NOTE: Instructions are only tested for Ubuntu 16.04 on the VM, if you have instructions for CENTOS/RedHat please update this documentation</strong> <strong>NOTE: Pretty much every step here requires root access.</strong></p>
+<div id="install-the-tomcat-8-and-thredds-webapp" class="section level2">
+<h2><span class="header-section-number">44.1</span> Install the Tomcat 8 and Thredds webapp</h2>
+<p>The Tomcat 8 server can be installed from the default Ubuntu repositories. The thredds webapp will be downloaded and installed from unidata.</p>
+</div>
+<div id="ubuntu-2" class="section level2">
+<h2><span class="header-section-number">44.2</span> Ubuntu</h2>
+<p>First step is to install Tomcat 8 and configure it. The flag <code>-Dtds.content.root.path</code> should point to the location of where the thredds folder is located. This needs to be writeable by the user for tomcat. <code>-Djava.security.egd</code> is a special flag to use a different random number generator for tomcat. The default would take to long to generate a random number.</p>
+<pre><code>apt-get -y install tomcat8 openjdk-8-jdk
+echo JAVA_OPTS=\&quot;-Dtds.content.root.path=/home/carya \${JAVA_OPTS}\&quot; &gt;&gt; /etc/default/tomcat8
+echo JAVA_OPTS=\&quot;-Djava.security.egd=file:/dev/./urandom \${JAVA_OPTS}\&quot; &gt;&gt; /etc/default/tomcat8
+service tomcat8 restart</code></pre>
+<p>Next is to install the webapp.</p>
+<pre><code>mkdir /home/carya/thredds
+chmod 777 /home/carya/thredds
+
+wget -O /var/lib/tomcat8/webapps/thredds.war ftp://ftp.unidata.ucar.edu/pub/thredds/4.6/current/thredds.war</code></pre>
+<p>Finally we configure Apache to prox the thredds server</p>
+<pre><code>cat &gt; /etc/apache2/conf-available/thredds.conf &lt;&lt; EOF
+ProxyPass        /thredds/ http://localhost:8080/thredds/
+ProxyPassReverse /thredds/ http://localhost:8080/thredds/
+RedirectMatch permanent ^/thredds$ /thredds/
+EOF
+a2enmod proxy_http
+a2enconf thredds
+service apache2 reload</code></pre>
+</div>
+<div id="customize-the-thredds-server" class="section level2">
+<h2><span class="header-section-number">44.3</span> Customize the Thredds server</h2>
+<p>To customize the thredds server for your installation edit the file in /home/carya/thredds/threddsConfig.xml. For example the following file is included in the VM.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;threddsConfig&gt;
+
+  &lt;!-- all options are commented out in standard install - meaning use default values --&gt;
+  &lt;!-- see http://www.unidata.ucar.edu/software/thredds/current/tds/reference/ThreddsConfigXMLFile.html --&gt;
+  &lt;serverInformation&gt;
+    &lt;name&gt;PEcAn&lt;/name&gt;
+    &lt;logoUrl&gt;/pecan/images/pecan_small.jpg&lt;/logoUrl&gt;
+    &lt;logoAltText&gt;PEcAn&lt;/logoAltText&gt;
+
+    &lt;abstract&gt;Scientific Data&lt;/abstract&gt;
+    &lt;keywords&gt;meteorology, atmosphere, climate, ocean, earth science&lt;/keywords&gt;
+    
+    &lt;contact&gt;
+      &lt;name&gt;Rob Kooper&lt;/name&gt;
+      &lt;organization&gt;NCSA&lt;/organization&gt;
+      &lt;email&gt;kooper@illinois.edu&lt;/email&gt;
+      &lt;!--phone&gt;&lt;/phone--&gt;
+    &lt;/contact&gt;
+    &lt;hostInstitution&gt;
+      &lt;name&gt;PEcAn&lt;/name&gt;
+      &lt;webSite&gt;http://www.pecanproject.org/&lt;/webSite&gt;
+      &lt;logoUrl&gt;/pecan/images/pecan_small.jpg&lt;/logoUrl&gt;
+      &lt;logoAltText&gt;PEcAn Project&lt;/logoAltText&gt;
+    &lt;/hostInstitution&gt;
+  &lt;/serverInformation&gt;
+
+  &lt;!--
+  The &lt;catalogRoot&gt; element:
+  For catalogs you don&#39;t want visible from the /thredds/catalog.xml chain
+  of catalogs, you can use catalogRoot elements. Each catalog root config
+  catalog is crawled and used in configuring the TDS.
+
+  &lt;catalogRoot&gt;myExtraCatalog.xml&lt;/catalogRoot&gt;
+  &lt;catalogRoot&gt;myOtherExtraCatalog.xml&lt;/catalogRoot&gt;
+  --&gt;
+
+  &lt;!--
+   * Setup for generated HTML pages.
+   *
+   * NOTE: URLs may be absolute or relative, relative URLs must be relative
+   * to the webapp URL, i.e., http://server:port/thredds/.
+    --&gt;
+  &lt;htmlSetup&gt;
+    &lt;!--
+     * CSS documents used in generated HTML pages.
+     * The CSS document given in the &quot;catalogCssUrl&quot; element is used for all pages
+     * that are HTML catalog views. The CSS document given in the &quot;standardCssUrl&quot;
+     * element is used in all other generated HTML pages.
+     * --&gt;
+    &lt;standardCssUrl&gt;tds.css&lt;/standardCssUrl&gt;
+    &lt;catalogCssUrl&gt;tdsCat.css&lt;/catalogCssUrl&gt;
+    &lt;openDapCssUrl&gt;tdsDap.css&lt;/openDapCssUrl&gt;
+
+    &lt;!--
+     * The Google Analytics Tracking code you would like to use for the
+     * webpages associated with THREDDS. This will not track WMS or DAP
+     * requests for data, only browsing the catalog.
+    --&gt;
+    &lt;googleTrackingCode&gt;&lt;/googleTrackingCode&gt;
+
+  &lt;/htmlSetup&gt;
+  
+  &lt;!-- 
+    The &lt;TdsUpdateConfig&gt; element controls if and how the TDS checks
+    for updates. The default is for the TDS to check for the current
+    stable and development release versions, and to log that information
+    in the TDS serverStartup.log file as INFO entries.
+
+  &lt;TdsUpdateConfig&gt;
+     &lt;logVersionInfo&gt;true&lt;/logVersionInfo&gt;
+  &lt;/TdsUpdateConfig&gt;
+  --&gt;
+   
+  &lt;!--
+   The &lt;CORS&gt; element controls Cross-Origin Resource Sharing (CORS).
+   CORS is a way to allow a website (such as THREDDS) to open up access
+   to resources to web pages and applications running on a different domain.
+   One example would be allowing a web-application to use fonts from
+   a separate host. For TDS, this can allow a javascript app running on a
+   different site to access data on a THREDDS server.
+   For more information see: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+   The elements below represent defaults. Only the &lt;enabled&gt; tag is required
+   to enable CORS. The default allowed origin is &#39;*&#39;, which allows sharing
+   to any domain.
+  &lt;CORS&gt;
+    &lt;enabled&gt;false&lt;/enabled&gt;
+    &lt;maxAge&gt;1728000&lt;/maxAge&gt;
+    &lt;allowedMethods&gt;GET&lt;/allowedMethods&gt;
+    &lt;allowedHeaders&gt;Authorization&lt;/allowedHeaders&gt;
+    &lt;allowedOrigin&gt;*&lt;/allowedOrigin&gt;
+  &lt;/CORS&gt;
+  --&gt;
+
+  &lt;!--
+   The &lt;CatalogServices&gt; element:
+   - Services on local TDS served catalogs are always on.
+   - Services on remote catalogs are set with the allowRemote element
+   below. They are off by default (recommended).
+   --&gt;
+  &lt;CatalogServices&gt;
+    &lt;allowRemote&gt;false&lt;/allowRemote&gt;
+  &lt;/CatalogServices&gt;
+
+  &lt;!--
+  Configuring the CDM (netcdf-java library)
+  see http://www.unidata.ucar.edu/software/netcdf-java/reference/RuntimeLoading.html
+
+  &lt;nj22Config&gt;
+    &lt;ioServiceProvider class=&quot;edu.univ.ny.stuff.FooFiles&quot;/&gt;
+    &lt;coordSysBuilder convention=&quot;foo&quot; class=&quot;test.Foo&quot;/&gt;
+    &lt;coordTransBuilder name=&quot;atmos_ln_sigma_coordinates&quot; type=&quot;vertical&quot; class=&quot;my.stuff.atmosSigmaLog&quot;/&gt;
+    &lt;typedDatasetFactory datatype=&quot;Point&quot; class=&quot;gov.noaa.obscure.file.Flabulate&quot;/&gt;
+  &lt;/nj22Config&gt;
+  --&gt;
+
+  &lt;!--
+  CDM uses the DiskCache directory to store temporary files, like uncompressed files.
+  &lt;DiskCache&gt;
+    &lt;alwaysUse&gt;false&lt;/alwaysUse&gt;
+    &lt;scour&gt;1 hour&lt;/scour&gt;
+    &lt;maxSize&gt;1 Gb&lt;/maxSize&gt;
+  &lt;/DiskCache&gt;
+  --&gt;
+
+  &lt;!--
+  Caching open NetcdfFile objects.
+  default is to allow 50 - 100 open files, cleanup every 11 minutes
+  &lt;NetcdfFileCache&gt;
+    &lt;minFiles&gt;50&lt;/minFiles&gt;
+    &lt;maxFiles&gt;100&lt;/maxFiles&gt;
+    &lt;scour&gt;11 min&lt;/scour&gt;
+  &lt;/NetcdfFileCache&gt;
+  --&gt;
+
+  &lt;!--
+  The &lt;HTTPFileCache&gt; element:
+  allow 10 - 20 open datasets, cleanup every 17 minutes
+  used by HTTP Range requests.
+  &lt;HTTPFileCache&gt;
+    &lt;minFiles&gt;10&lt;/minFiles&gt;
+    &lt;maxFiles&gt;20&lt;/maxFiles&gt;
+    &lt;scour&gt;17 min&lt;/scour&gt;
+  &lt;/HTTPFileCache&gt;
+  --&gt;
+
+  &lt;!--
+  Writing GRIB indexes.
+  &lt;GribIndexing&gt;
+    &lt;setExtendIndex&gt;false&lt;/setExtendIndex&gt;
+    &lt;alwaysUseCache&gt;false&lt;/alwaysUseCache&gt;
+  &lt;/GribIndexing&gt;
+  --&gt;
+
+  &lt;!--
+  Persist joinNew aggregations to named directory. scour every 24 hours, delete stuff older than 90 days
+  &lt;AggregationCache&gt;
+    &lt;scour&gt;24 hours&lt;/scour&gt;
+    &lt;maxAge&gt;90 days&lt;/maxAge&gt;
+    &lt;cachePathPolicy&gt;NestedDirectory&lt;/cachePathPolicy&gt;
+  &lt;/AggregationCache&gt;
+  --&gt;
+
+  &lt;!--
+  How to choose the template dataset for an aggregation. latest, random, or penultimate
+  &lt;Aggregation&gt;
+    &lt;typicalDataset&gt;penultimate&lt;/typicalDataset&gt;
+  &lt;/Aggregation&gt;
+  --&gt;
+
+  &lt;!--
+  The Netcdf Subset Service is off by default.
+  &lt;NetcdfSubsetService&gt;
+    &lt;allow&gt;false&lt;/allow&gt;
+    &lt;scour&gt;10 min&lt;/scour&gt;
+    &lt;maxAge&gt;-1 min&lt;/maxAge&gt;
+  &lt;/NetcdfSubsetService&gt;
+  --&gt;
+
+  &lt;!--
+  &lt;Opendap&gt;
+    &lt;ascLimit&gt;50&lt;/ascLimit&gt;
+    &lt;binLimit&gt;500&lt;/binLimit&gt;
+    &lt;serverVersion&gt;opendap/3.7&lt;/serverVersion&gt;
+  &lt;/Opendap&gt;
+    --&gt;
+  
+  &lt;!--
+  The WCS Service is off by default.
+  Also, off by default (and encouraged) is operating on a remote dataset.
+  &lt;WCS&gt;
+    &lt;allow&gt;false&lt;/allow&gt;
+    &lt;allowRemote&gt;false&lt;/allowRemote&gt;
+    &lt;scour&gt;15 min&lt;/scour&gt;
+    &lt;maxAge&gt;30 min&lt;/maxAge&gt;
+  &lt;/WCS&gt;
+  --&gt;
+
+  &lt;!--
+  &lt;WMS&gt;
+    &lt;allow&gt;false&lt;/allow&gt;
+    &lt;allowRemote&gt;false&lt;/allowRemote&gt;
+    &lt;maxImageWidth&gt;2048&lt;/maxImageWidth&gt;
+    &lt;maxImageHeight&gt;2048&lt;/maxImageHeight&gt;
+  &lt;/WMS&gt;
+  --&gt;
+
+  &lt;!--
+  &lt;NCISO&gt;
+    &lt;ncmlAllow&gt;false&lt;/ncmlAllow&gt;
+    &lt;uddcAllow&gt;false&lt;/uddcAllow&gt;
+    &lt;isoAllow&gt;false&lt;/isoAllow&gt;
+  &lt;/NCISO&gt;
+  --&gt;
+
+  &lt;!-- CatalogGen service is off by default.
+  &lt;CatalogGen&gt;
+    &lt;allow&gt;false&lt;/allow&gt;
+  &lt;/CatalogGen&gt;
+   --&gt;
+
+  &lt;!-- DLwriter service is off by default.
+       As is support for operating on remote catalogs.
+  &lt;DLwriter&gt;
+    &lt;allow&gt;false&lt;/allow&gt;
+    &lt;allowRemote&gt;false&lt;/allowRemote&gt;
+  &lt;/DLwriter&gt;
+   --&gt;
+
+  &lt;!-- DqcService is off by default.
+  &lt;DqcService&gt;
+    &lt;allow&gt;false&lt;/allow&gt;
+  &lt;/DqcService&gt;
+   --&gt;
+
+  &lt;!--
+   Link to a Viewer application on the HTML page:
+   &lt;Viewer&gt;my.package.MyViewer&lt;/Viewer&gt;
+   --&gt;
+
+   &lt;!--
+   Add a DataSource - essentially an IOSP with access to Servlet request parameters
+   &lt;datasetSource&gt;my.package.DatsetSourceImpl&lt;/datasetSource&gt;
+   --&gt;
+
+  &lt;!--
+   set FeatureCollection logging
+  &lt;FeatureCollection&gt;
+     &lt;RollingFileAppender&gt;
+       &lt;MaxFileSize&gt;1 MB&lt;/MaxFileSize&gt;
+       &lt;MaxBackups&gt;5&lt;/MaxBackups&gt;
+       &lt;Level&gt;INFO&lt;/Level&gt;
+     &lt;/RollingFileAppender&gt;
+  &lt;/FeatureCollection&gt;
+  --&gt;
+
+  &lt;!--
+    Configure how the NetCDF-4 C library is discovered and used.
+    libraryPath: The directory in which the native library is installed.
+    libraryName: The name of the native library. This will be used to locate the proper .DLL, .SO, or .DYLIB file
+      within the libraryPath directory.
+    useForReading: By default, the native library is only used for writing NetCDF-4 files; a pure-Java layer is
+      responsible for reading them. However, if this property is set to true, then it will be used for reading
+      NetCDF-4 (and HDF5) files as well.
+  --&gt;
+  &lt;!--
+  &lt;Netcdf4Clibrary&gt;
+    &lt;libraryPath&gt;/usr/local/lib&lt;/libraryPath&gt;
+    &lt;libraryName&gt;netcdf&lt;/libraryName&gt;
+    &lt;useForReading&gt;false&lt;/useForReading&gt;
+  &lt;/Netcdf4Clibrary&gt;
+  --&gt;
+&lt;/threddsConfig&gt;</code></pre>
+</div>
+<div id="update-the-catalog" class="section level2">
+<h2><span class="header-section-number">44.4</span> Update the catalog</h2>
+<p>For example to update the catalog with the latest data, run the following command from the root crontab. This cronjob will also synchronize the database with remote servers and dump your database (by default in /home/carya/dump)</p>
+<pre><code>0 * * * * /home/carya/pecan/scripts/cron.sh -o /home/carya/dump</code></pre>
+</div>
+<div id="troubleshooting-2" class="section level2">
+<h2><span class="header-section-number">44.5</span> Troubleshooting</h2>
+<p>Refer to the log files for Tomcat (<code>/var/log/tomcat8/*</code>) and Thredds (<code>/home/carya/thredds/logs</code>).</p>
+</div>
+<div id="further-reading-1" class="section level2">
+<h2><span class="header-section-number">44.6</span> Further reading</h2>
+<ul>
+<li><a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">Thredds reference</a></li>
+</ul>
 
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="specific-model-configurations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="advanced-command-line-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="installing-and-configuring-shiny-for-pecan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="faq.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
