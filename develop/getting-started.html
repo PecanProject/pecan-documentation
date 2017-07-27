@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2017-07-26">
+<meta name="date" content="2017-07-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -116,6 +116,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.2" data-path="getting-started.html"><a href="getting-started.html#quick-start"><i class="fa fa-check"></i><b>3.2</b> Quick Start</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="getting-started.html"><a href="getting-started.html#working-with-the-pecan-vm"><i class="fa fa-check"></i><b>3.2.1</b> Working with the PEcAn VM</a></li>
 <li class="chapter" data-level="3.2.2" data-path="getting-started.html"><a href="getting-started.html#using-amazonweb-services-aws"><i class="fa fa-check"></i><b>3.2.2</b> Using AmazonWeb Services (AWS)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="getting-started.html"><a href="getting-started.html#working-with-the-pecan-containers-docker-experimental"><i class="fa fa-check"></i><b>3.2.3</b> Working with the PEcAn Containers (Docker) [Experimental]</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="getting-started.html"><a href="getting-started.html#pecan-demos"><i class="fa fa-check"></i><b>3.3</b> PEcAN Demos</a></li>
 </ul></li>
@@ -582,6 +583,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>To TERMINATE the instance (which will DELETE your PEcAn machine), select your instance and click Actions &gt; Instance state &gt; Terminate. Terminated instances will not incur costs. In most cases you will also want to go to the Volumes menu and delete the storage associated with your PEcAn VM.Remember, AWS is free for one year, but will automatically charge a fee in second year if account is not cancelled.</li>
 </ul></li>
 </ol>
+</div>
+<div id="working-with-the-pecan-containers-docker-experimental" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Working with the PEcAn Containers (Docker) [Experimental]</h3>
+<p>Following are the steps to setup a Docker instance of the PEcAn. This is experimental and can have a lot of bugs, If you find any bug please report it.</p>
+<ol style="list-style-type: decimal">
+<li><p>Make sure that the machine on which have docker and docker-compose installed. For instruction on how to install docker and docker-compose please visit the <a href="https://docs.docker.com/engine/installation/">official documentations</a>.</p></li>
+<li><p>Visit the PEcAn Project on <a href="https://github.com/PecanProject/pecan/tree/develop">github</a> and clone the repository to your machine.</p></li>
+<li><p>cd to root of the repository and run <code>docker-compose up -d</code> here -d makes it run in detached mode so it won’t show the log on the terminal The above command pull the respective docker images and also create the required images.</p>
+<p>To access the web interface can visit <machine-ip>:8080 If using localmachine then can use localhost:8080</p></li>
+</ol>
+<p>Only SIPNET model is included as the default model in it.</p>
 </div>
 </div>
 <div id="pecan-demos" class="section level2">
