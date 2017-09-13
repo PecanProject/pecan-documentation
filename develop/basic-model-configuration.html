@@ -137,7 +137,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.2.1" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#spin-up"><i class="fa fa-check"></i><b>5.2.1</b> Spin up</a></li>
 <li class="chapter" data-level="5.2.2" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#veg-workflow"><i class="fa fa-check"></i><b>5.2.2</b> Veg workflow</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#selecting-a-soils-product"><i class="fa fa-check"></i><b>5.3</b> Selecting a soils product</a></li>
+<li class="chapter" data-level="5.3" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#selecting-a-soils-product"><i class="fa fa-check"></i><b>5.3</b> Selecting a soils product</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#soil-texture-depth-and-physical-parameters"><i class="fa fa-check"></i><b>5.3.1</b> Soil texture, depth, and physical parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="basic-model-configuration.html"><a href="basic-model-configuration.html#other-model-inputs"><i class="fa fa-check"></i><b>5.4</b> Other model inputs</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html"><i class="fa fa-check"></i><b>6</b> VM Desktop Conversion</a><ul>
 <li class="chapter" data-level="6.0.1" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html#install-rstudio-desktop"><i class="fa fa-check"></i><b>6.0.1</b> Install RStudio Desktop</a></li>
@@ -570,6 +573,136 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">5.3</span> Selecting a soils product</h2>
 <p>Many models have requirements for soils information, which may include: site-specific soil texture and depth information; soil biogeochemical initial conditions (e.g. soil carbon and nitrogen pools); soil moisture initial conditions; and soil thermal initial conditions.</p>
 <p>As with [<a href="basic-model-configuration.html#choosing-initial-vegetation">Choosing initial vegetation</a>], we eventually hope to develop data standards, soils workflows, and spin-up tools, but at the moment model requirements need to be met by <a href="../developers_guide/How-to-insert-new-Input-data.html">inserting Input data</a> into the database or using files that have already been uploaded.</p>
+<div id="soil-texture-depth-and-physical-parameters" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Soil texture, depth, and physical parameters</h3>
+<p>A PEcAn-standard netCDF file format exists for soil texture, depth, and physical parameters, using PEcAn standard names that are largely a direct extention of the CF standard. A table of standard names and units can be listed using <code>PEcAn.data.land::soil.units()</code> with no arguements.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(PEcAn.data.land::<span class="kw">soil.units</span>())</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">var</th>
+<th align="left">unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">soil_depth</td>
+<td align="left">m</td>
+</tr>
+<tr class="even">
+<td align="left">soil_cec</td>
+<td align="left">meq/100g</td>
+</tr>
+<tr class="odd">
+<td align="left">volume_fraction_of_clay_in_soil</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="even">
+<td align="left">volume_fraction_of_sand_in_soil</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="odd">
+<td align="left">volume_fraction_of_silt_in_soil</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="even">
+<td align="left">volume_fraction_of_gravel_in_soil</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="odd">
+<td align="left">volume_fraction_of_water_in_soil_at_saturation</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="even">
+<td align="left">volume_fraction_of_water_in_soil_at_field_capacity</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="odd">
+<td align="left">volume_fraction_of_condensed_water_in_dry_soil</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="even">
+<td align="left">volume_fraction_of_condensed_water_in_soil_at_wilting_point</td>
+<td align="left">m3 m-3</td>
+</tr>
+<tr class="odd">
+<td align="left">soilC</td>
+<td align="left">percent</td>
+</tr>
+<tr class="even">
+<td align="left">soil_ph</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">soil_bulk_density</td>
+<td align="left">kg m-3</td>
+</tr>
+<tr class="even">
+<td align="left">soil_type</td>
+<td align="left">string</td>
+</tr>
+<tr class="odd">
+<td align="left">soil_hydraulic_b</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">soil_water_potential_at_saturation</td>
+<td align="left">m</td>
+</tr>
+<tr class="odd">
+<td align="left">soil_hydraulic_conductivity_at_saturation</td>
+<td align="left">m s-1</td>
+</tr>
+<tr class="even">
+<td align="left">thcond0</td>
+<td align="left">W m-1 K-1</td>
+</tr>
+<tr class="odd">
+<td align="left">thcond1</td>
+<td align="left">W m-1 K-1</td>
+</tr>
+<tr class="even">
+<td align="left">thcond2</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">thcond3</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">soil_thermal_conductivity</td>
+<td align="left">W m-1 K-1</td>
+</tr>
+<tr class="odd">
+<td align="left">soil_thermal_conductivity_at_saturation</td>
+<td align="left">W m-1 K-1</td>
+</tr>
+<tr class="even">
+<td align="left">soil_thermal_capacity</td>
+<td align="left">J kg-1 K-1</td>
+</tr>
+<tr class="odd">
+<td align="left">soil_albedo</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table>
+<p>Local data that has the correct names and units can easily be written out in PEcAn standard using the function soil2netcdf.</p>
+<pre><code>soil.data &lt;- list(volume_fraction_of_sand_in_soil = c(0.3,0.4,0.5),
+                  volume_fraction_of_clay_in_soil = c(0.3,0.3,0.3),
+                  soil_depth = c(0.2,0.5,1.0))
+                         
+soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
+<p>At the moment this file would need to be inserted into Inputs manually. By default, this function also calls soil_params, which will estimate a number of hydraulic and thermal parameters from texture. Be aware that at the moment not all model couplers are yet set up to read this file and/or convert it to model-specific formats.</p>
+<p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
+<pre><code>   &lt;soil&gt;
+     &lt;id&gt;1000012896&lt;/id&gt;
+   &lt;/soil&gt;</code></pre>
+<p>In the future we aim to extend this extraction to a wider range of soil products.</p>
+</div>
+</div>
+<div id="other-model-inputs" class="section level2">
+<h2><span class="header-section-number">5.4</span> Other model inputs</h2>
 <p>Finally, any other model-specific inputs (e.g. N deposition, land use history, etc), should be met by <a href="../developers_guide/How-to-insert-new-Input-data.html">inserting Input data</a> into the database or using files that have already been uploaded.</p>
 
 </div>
