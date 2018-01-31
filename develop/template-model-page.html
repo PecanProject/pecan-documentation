@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="pecan-models.html">
+<link rel="next" href="debugging.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,65 +439,1411 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
+<div id="template-model-page" class="section level1">
+<h1><span class="header-section-number">25</span> Template MODEL page</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Model Information</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Home Page</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Source Code</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">License</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Authors</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">PEcAn Integration</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Introduction</strong></p>
+<p>Introduction about model</p>
+<p><strong>PEcAn configuration file additions</strong></p>
+<p>Should list the model specific additions to the PEcAn file here</p>
+<p><strong>Model specific input files</strong></p>
+<p>List of inputs required by model, such as met, etc.</p>
+<p><strong>Model configuration files</strong></p>
+<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
+<ul>
+<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
+</li>
+<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
+</li>
+<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
+</ul>
+<p><strong>Installation notes</strong></p>
+<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
+<p><strong>VM</strong></p>
 
-$bitmapType
-[1] &quot;cairo&quot;
+<div id="model-output-variables" class="section level2">
+<h2><span class="header-section-number">25.1</span> Model Output Variables</h2>
+<p>Note: initial table derived from <a href="http://nacp.ornl.gov/MsTMIP_variables.shtml">MsTMIP</a></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Num</th>
+<th align="center">Group</th>
+<th align="center">order</th>
+<th align="center">Saveit</th>
+<th align="center">Variable.Name</th>
+<th align="center">standard_name</th>
+<th align="center">Units</th>
+<th align="center">Long.name</th>
+<th align="center">Priority</th>
+<th align="center">Category</th>
+<th align="center">Hourly</th>
+<th align="center">Monthly</th>
+<th align="center">var_type</th>
+<th align="center">ndim</th>
+<th align="center">dim1</th>
+<th align="center">dim2</th>
+<th align="center">dim3</th>
+<th align="center">dim4</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">Yes</td>
+<td align="center">lon</td>
+<td align="center">longitude</td>
+<td align="center">degrees_east</td>
+<td align="center">Longitude</td>
+<td align="center">0</td>
+<td align="center">Grid</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">1</td>
+<td align="center">lon</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">longitude at center of each grid cell</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">Yes</td>
+<td align="center">lat</td>
+<td align="center">latitude</td>
+<td align="center">degrees_north</td>
+<td align="center">Latitude</td>
+<td align="center">0</td>
+<td align="center">Grid</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">1</td>
+<td align="center">lat</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">latitude at center of each grid cell</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">Yes</td>
+<td align="center">lon_bnds</td>
+<td align="center"></td>
+<td align="center">degrees_east</td>
+<td align="center">Longitude west-east bounds</td>
+<td align="center">0</td>
+<td align="center">Grid</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">2</td>
+<td align="center">nbnds</td>
+<td align="center">lon</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">(west boundary of grid cell, east boundary of grid cell)</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">Yes</td>
+<td align="center">lat_bnds</td>
+<td align="center"></td>
+<td align="center">degrees_north</td>
+<td align="center">Latitude south-north bounds</td>
+<td align="center">0</td>
+<td align="center">Grid</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">2</td>
+<td align="center">nbnds</td>
+<td align="center">lat</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">(south boundary of grid cell, north boundary of grid cell)</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">Yes</td>
+<td align="center">time</td>
+<td align="center">time</td>
+<td align="center">days since 1700-01-01 00:00:00 UTC</td>
+<td align="center">Time middle averaging period</td>
+<td align="center">0</td>
+<td align="center">Time</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">double</td>
+<td align="center">1</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">julian days days since 1700-01-01 00:00:00 UTC for middle of time averaging period Proleptic_Gregorianc calendar</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">Yes</td>
+<td align="center">time_bnds</td>
+<td align="center"></td>
+<td align="center">days since 1700-01-01 00:00:00 UTC</td>
+<td align="center">Time beginning-end bounds</td>
+<td align="center">0</td>
+<td align="center">Time</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">double</td>
+<td align="center">2</td>
+<td align="center">nbnds</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">(julian days days since 1700-01-01 beginning time ave period, julian days days since 1700-01-01 end time ave period)</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">Yes</td>
+<td align="center">dec_date</td>
+<td align="center"></td>
+<td align="center">yr</td>
+<td align="center">Decimal date middle averaging period</td>
+<td align="center">0</td>
+<td align="center">Time</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">double</td>
+<td align="center">1</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">decimal date in fractional years for middle of time averaging period</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">Yes</td>
+<td align="center">dec_date_bnds</td>
+<td align="center"></td>
+<td align="center">yr</td>
+<td align="center">Decimal date beginning-end bounds</td>
+<td align="center">0</td>
+<td align="center">Time</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">double</td>
+<td align="center">2</td>
+<td align="center">nbnds</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">(decimal date beginning time ave period, decimal date end time ave period)</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">2</td>
+<td align="center">5</td>
+<td align="center">Yes</td>
+<td align="center">cal_date_mid</td>
+<td align="center"></td>
+<td align="center">yr, mon, day, hr, min, sec</td>
+<td align="center">Calender date middle averaging period</td>
+<td align="center">0</td>
+<td align="center">Time</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">integer</td>
+<td align="center">2</td>
+<td align="center">ncal</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">calender date middle of time ave period: year, month, day, hour, minute, second for UTC time zone</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">2</td>
+<td align="center">6</td>
+<td align="center">Yes</td>
+<td align="center">cal_date_beg</td>
+<td align="center"></td>
+<td align="center">yr, mon, day, hr, min, sec</td>
+<td align="center">Calender date beginning averaging period</td>
+<td align="center">0</td>
+<td align="center">Time</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">integer</td>
+<td align="center">2</td>
+<td align="center">ncal</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">calender date beginning of time ave period: year, month, day, hour, minute, second for UTC time zone</td>
+</tr>
+<tr class="odd">
+<td align="center">11</td>
+<td align="center">2</td>
+<td align="center">7</td>
+<td align="center">Yes</td>
+<td align="center">cal_date_end</td>
+<td align="center"></td>
+<td align="center">yr, mon, day, hr, min, sec</td>
+<td align="center">Calender date end averaging period</td>
+<td align="center">0</td>
+<td align="center">Time</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">integer</td>
+<td align="center">2</td>
+<td align="center">ncal</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">calender date end of time ave period: year, month, day, hour, minute, second for UTC time zone</td>
+</tr>
+<tr class="even">
+<td align="center">12</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">Yes</td>
+<td align="center">GPP</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Gross Primary Productivity</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Rate of photosynthesis (always positive)</td>
+</tr>
+<tr class="odd">
+<td align="center">13</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">Yes</td>
+<td align="center">NPP</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Net Primary Productivity</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Net Primary Productivity (NPP=GPP-AutoResp, positive into plants)</td>
+</tr>
+<tr class="even">
+<td align="center">14</td>
+<td align="center">3</td>
+<td align="center">3</td>
+<td align="center">Yes</td>
+<td align="center">TotalResp</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Total Respiration</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Total respiration (TotalResp=AutoResp+heteroResp, always positive)</td>
+</tr>
+<tr class="odd">
+<td align="center">15</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">Yes</td>
+<td align="center">AutoResp</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Autotrophic Respiration</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Autotrophic respiration rate (always positive)</td>
+</tr>
+<tr class="even">
+<td align="center">16</td>
+<td align="center">3</td>
+<td align="center">5</td>
+<td align="center">Yes</td>
+<td align="center">HeteroResp</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Heterotrophic Respiration</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Heterotrophic respiration rate (always positive)</td>
+</tr>
+<tr class="odd">
+<td align="center">17</td>
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">Yes</td>
+<td align="center">DOC_flux</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Dissolved Organic Carbon flux</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Loss of organic carbon dissolved in ground water or rivers (positive out of grid cell)</td>
+</tr>
+<tr class="even">
+<td align="center">18</td>
+<td align="center">3</td>
+<td align="center">7</td>
+<td align="center">Yes</td>
+<td align="center">Fire_flux</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Fire emissions</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Flux of carbon due to fires (always positive)</td>
+</tr>
+<tr class="odd">
+<td align="center">19</td>
+<td align="center">3</td>
+<td align="center">8</td>
+<td align="center">Yes</td>
+<td align="center">NEE</td>
+<td align="center"></td>
+<td align="center">kg C m-2 s-1</td>
+<td align="center">Net Ecosystem Exchange</td>
+<td align="center">1</td>
+<td align="center">Carbon Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Net Ecosystem Exchange (NEE=HeteroResp+AutoResp-GPP, positive into atmosphere)</td>
+</tr>
+<tr class="even">
+<td align="center">21</td>
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">Yes</td>
+<td align="center">poolname</td>
+<td align="center"></td>
+<td align="center">(-)</td>
+<td align="center">Name of each Carbon Pool</td>
+<td align="center">1</td>
+<td align="center">Carbon Pools</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">character</td>
+<td align="center">2</td>
+<td align="center">nchar</td>
+<td align="center">npool</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">Name of each carbon pool (i.e., &quot;wood,&quot; or &quot;Coarse Woody Debris&quot;)</td>
+</tr>
+<tr class="odd">
+<td align="center">22</td>
+<td align="center">4</td>
+<td align="center">3</td>
+<td align="center">Yes</td>
+<td align="center">CarbPools</td>
+<td align="center"></td>
+<td align="center">kg C m-2</td>
+<td align="center">Size of each carbon pool</td>
+<td align="center">1</td>
+<td align="center">Carbon Pools</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">4</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">npool</td>
+<td align="center">time</td>
+<td align="center">Total size of each carbon pool vertically integrated over the entire soil column</td>
+</tr>
+<tr class="even">
+<td align="center">23</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">Yes</td>
+<td align="center">AbvGrndWood</td>
+<td align="center"></td>
+<td align="center">kg C m-2</td>
+<td align="center">Above ground woody biomass</td>
+<td align="center">1</td>
+<td align="center">Carbon Pools</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Total above ground wood biomass</td>
+</tr>
+<tr class="odd">
+<td align="center">24</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">Yes</td>
+<td align="center">TotLivBiom</td>
+<td align="center"></td>
+<td align="center">kg C m-2</td>
+<td align="center">Total living biomass</td>
+<td align="center">1</td>
+<td align="center">Carbon Pools</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Total carbon content of the living biomass (leaves+roots+wood)</td>
+</tr>
+<tr class="even">
+<td align="center">25</td>
+<td align="center">4</td>
+<td align="center">6</td>
+<td align="center">Yes</td>
+<td align="center">TotSoilCarb</td>
+<td align="center"></td>
+<td align="center">kg C m-2</td>
+<td align="center">Total Soil Carbon</td>
+<td align="center">1</td>
+<td align="center">Carbon Pools</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Total soil and litter carbon content vertically integrated over the enire soil column</td>
+</tr>
+<tr class="odd">
+<td align="center">26</td>
+<td align="center">4</td>
+<td align="center">7</td>
+<td align="center">Yes</td>
+<td align="center">LAI</td>
+<td align="center"></td>
+<td align="center">m2 m-2</td>
+<td align="center">Leaf Area Index</td>
+<td align="center">1</td>
+<td align="center">Carbon Pools</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Area of leaves per area ground</td>
+</tr>
+<tr class="even">
+<td align="center">27</td>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="center">Yes</td>
+<td align="center">Qh</td>
+<td align="center"></td>
+<td align="center">W m-2</td>
+<td align="center">Sensible heat</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Sensible heat flux into the boundary layer (positive into atmosphere)</td>
+</tr>
+<tr class="odd">
+<td align="center">28</td>
+<td align="center">5</td>
+<td align="center">2</td>
+<td align="center">Yes</td>
+<td align="center">Qle</td>
+<td align="center"></td>
+<td align="center">W m-2</td>
+<td align="center">Latent heat</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Latent heat flux into the boundary layer (positive into atmosphere)</td>
+</tr>
+<tr class="even">
+<td align="center">29</td>
+<td align="center">5</td>
+<td align="center">3</td>
+<td align="center">Yes</td>
+<td align="center">Evap</td>
+<td align="center"></td>
+<td align="center">kg m-2 s-1</td>
+<td align="center">Total Evaporation</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Sum of all evaporation sources (positive into atmosphere)</td>
+</tr>
+<tr class="odd">
+<td align="center">30</td>
+<td align="center">5</td>
+<td align="center">4</td>
+<td align="center">Yes</td>
+<td align="center">TVeg</td>
+<td align="center"></td>
+<td align="center">kg m-2 s-1</td>
+<td align="center">Transpiration</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Total Plant transpiration (always positive)</td>
+</tr>
+<tr class="even">
+<td align="center">31</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">Yes</td>
+<td align="center">LW_albedo</td>
+<td align="center"></td>
+<td align="center">(-)</td>
+<td align="center">Longwave Albedo</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Longwave Albedo</td>
+</tr>
+<tr class="odd">
+<td align="center">32</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">Yes</td>
+<td align="center">SW_albedo</td>
+<td align="center"></td>
+<td align="center">(-)</td>
+<td align="center">Shortwave Albedo</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Shortwave albedo</td>
+</tr>
+<tr class="even">
+<td align="center">33</td>
+<td align="center">5</td>
+<td align="center">7</td>
+<td align="center">Yes</td>
+<td align="center">Lwnet</td>
+<td align="center"></td>
+<td align="center">W m-2</td>
+<td align="center">Net Longwave Radiation</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Incident longwave radiation minus simulated outgoing longwave radiation (positive into grnd)</td>
+</tr>
+<tr class="odd">
+<td align="center">34</td>
+<td align="center">5</td>
+<td align="center">8</td>
+<td align="center">Yes</td>
+<td align="center">SWnet</td>
+<td align="center"></td>
+<td align="center">W m-2</td>
+<td align="center">Net shortwave radiation</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Incident shortwave radiation minus simulated outgoing shortwave radiation (positive into grnd)</td>
+</tr>
+<tr class="even">
+<td align="center">35</td>
+<td align="center">5</td>
+<td align="center">9</td>
+<td align="center">Yes</td>
+<td align="center">fPAR</td>
+<td align="center"></td>
+<td align="center">(-)</td>
+<td align="center">Absorbed fraction incoming PAR</td>
+<td align="center">1</td>
+<td align="center">Energy Fluxes</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">absorbed fraction incoming photosyntetically active radiation</td>
+</tr>
+<tr class="odd">
+<td align="center">37</td>
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">Yes</td>
+<td align="center">z_top</td>
+<td align="center"></td>
+<td align="center">m</td>
+<td align="center">Soil Layer Top Depth</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">1</td>
+<td align="center">nsoil</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">Depth from soil surface to top of soil layer</td>
+</tr>
+<tr class="even">
+<td align="center">38</td>
+<td align="center">6</td>
+<td align="center">3</td>
+<td align="center">Yes</td>
+<td align="center">z_node</td>
+<td align="center"></td>
+<td align="center">m</td>
+<td align="center">Soil Layer Node Depth</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">1</td>
+<td align="center">nsoil</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">Depth from soil surface to layer prognostic variables; typically center of soil layer</td>
+</tr>
+<tr class="odd">
+<td align="center">39</td>
+<td align="center">6</td>
+<td align="center">4</td>
+<td align="center">Yes</td>
+<td align="center">z_bottom</td>
+<td align="center"></td>
+<td align="center">m</td>
+<td align="center">Soil Layer Bottom Depth</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">1</td>
+<td align="center">nsoil</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">na</td>
+<td align="center">Depth from soil surface to bottom of soil layer</td>
+</tr>
+<tr class="even">
+<td align="center">40</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">Yes</td>
+<td align="center">SoilMoist</td>
+<td align="center"></td>
+<td align="center">kg m-2</td>
+<td align="center">Average Layer Soil Moisture</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">4</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">nsoil</td>
+<td align="center">time</td>
+<td align="center">Soil water content in each soil layer, including liquid, vapor and ice</td>
+</tr>
+<tr class="odd">
+<td align="center">41</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">Yes</td>
+<td align="center">SoilMoistFrac</td>
+<td align="center"></td>
+<td align="center">(-)</td>
+<td align="center">Average Layer Fraction of Saturation</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">4</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">nsoil</td>
+<td align="center">time</td>
+<td align="center">Fraction of saturation of soil water in each soil layer, including liquid and ice</td>
+</tr>
+<tr class="even">
+<td align="center">42</td>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="center">Yes</td>
+<td align="center">SoilWet</td>
+<td align="center"></td>
+<td align="center">(-)</td>
+<td align="center">Total Soil Wetness</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Vertically integrated soil moisture divided by maximum allowable soil moisture above wilting point</td>
+</tr>
+<tr class="odd">
+<td align="center">43</td>
+<td align="center">6</td>
+<td align="center">7</td>
+<td align="center">Yes</td>
+<td align="center">Qs</td>
+<td align="center"></td>
+<td align="center">kg m-2 s-1</td>
+<td align="center">Surface runoff</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Runoff from the landsurface and/or subsurface stormflow</td>
+</tr>
+<tr class="even">
+<td align="center">44</td>
+<td align="center">6</td>
+<td align="center">8</td>
+<td align="center">Yes</td>
+<td align="center">Qsb</td>
+<td align="center"></td>
+<td align="center">kg m-2 s-1</td>
+<td align="center">Subsurface runoff</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Gravity soil water drainage and/or soil water lateral flow</td>
+</tr>
+<tr class="odd">
+<td align="center">45</td>
+<td align="center">6</td>
+<td align="center">9</td>
+<td align="center">Yes</td>
+<td align="center">SoilTemp</td>
+<td align="center"></td>
+<td align="center">K</td>
+<td align="center">Average Layer Soil Temperature</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">4</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">nsoil</td>
+<td align="center">time</td>
+<td align="center">Average soil temperature in each soil layer</td>
+</tr>
+<tr class="even">
+<td align="center">46</td>
+<td align="center">6</td>
+<td align="center">10</td>
+<td align="center">Yes</td>
+<td align="center">Tdepth</td>
+<td align="center"></td>
+<td align="center">m</td>
+<td align="center">Active Layer Thickness</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Thaw depth; depth to zero centigrade isotherm in permafrost</td>
+</tr>
+<tr class="odd">
+<td align="center">47</td>
+<td align="center">6</td>
+<td align="center">11</td>
+<td align="center">Yes</td>
+<td align="center">Fdepth</td>
+<td align="center"></td>
+<td align="center">m</td>
+<td align="center">Frozen Layer Thickness</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Freeze depth; depth to zero centigrade isotherm in non-permafrost</td>
+</tr>
+<tr class="even">
+<td align="center">48</td>
+<td align="center">6</td>
+<td align="center">12</td>
+<td align="center">Yes</td>
+<td align="center">Tcan</td>
+<td align="center"></td>
+<td align="center">K</td>
+<td align="center">Canopy Temperature</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Canopy or vegetation temperature (or temperature used in photosynthesis calculations)</td>
+</tr>
+<tr class="odd">
+<td align="center">49</td>
+<td align="center">6</td>
+<td align="center">13</td>
+<td align="center">Yes</td>
+<td align="center">SWE</td>
+<td align="center"></td>
+<td align="center">kg m-2</td>
+<td align="center">Snow Water Equivalent</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Total water mass of snow pack, including ice and liquid water</td>
+</tr>
+<tr class="even">
+<td align="center">50</td>
+<td align="center">6</td>
+<td align="center">14</td>
+<td align="center">Yes</td>
+<td align="center">SnowDen</td>
+<td align="center"></td>
+<td align="center">kg m-3</td>
+<td align="center">Bulk Snow Density</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Overall bulk density of the snow pack, including ice and liquid water</td>
+</tr>
+<tr class="odd">
+<td align="center">51</td>
+<td align="center">6</td>
+<td align="center">15</td>
+<td align="center">Yes</td>
+<td align="center">SnowDepth</td>
+<td align="center"></td>
+<td align="center">m</td>
+<td align="center">Total snow depth</td>
+<td align="center">1</td>
+<td align="center">Physical Variables</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Total snow depth</td>
+</tr>
+<tr class="even">
+<td align="center">52</td>
+<td align="center">7</td>
+<td align="center">1</td>
+<td align="center">Yes</td>
+<td align="center">CO2air</td>
+<td align="center"></td>
+<td align="center">micromol mol-1</td>
+<td align="center">Near surface CO2 concentration</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Near surface dry air CO2 mole fraction</td>
+</tr>
+<tr class="odd">
+<td align="center">53</td>
+<td align="center">7</td>
+<td align="center">2</td>
+<td align="center">Yes</td>
+<td align="center">LWdown</td>
+<td align="center">surface_downwelling_longwave_flux_in_air</td>
+<td align="center">W/m2</td>
+<td align="center">Surface incident longwave radiation</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Surface incident longwave radiation</td>
+</tr>
+<tr class="even">
+<td align="center">54</td>
+<td align="center">7</td>
+<td align="center">3</td>
+<td align="center">Yes</td>
+<td align="center">Psurf</td>
+<td align="center">air_pressure</td>
+<td align="center">Pa</td>
+<td align="center">Surface pressure</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Surface pressure</td>
+</tr>
+<tr class="odd">
+<td align="center">55</td>
+<td align="center">7</td>
+<td align="center">4</td>
+<td align="center">Yes</td>
+<td align="center">Qair</td>
+<td align="center">specific_humidity</td>
+<td align="center">kg kg-1</td>
+<td align="center">Near surface specific humidity</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Near surface specific humidity</td>
+</tr>
+<tr class="even">
+<td align="center">56</td>
+<td align="center">7</td>
+<td align="center">5</td>
+<td align="center">Yes</td>
+<td align="center">Rainf</td>
+<td align="center">precipitation_flux</td>
+<td align="center">kg m-2 s-1</td>
+<td align="center">Rainfall rate</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Rainfall rate</td>
+</tr>
+<tr class="odd">
+<td align="center">57</td>
+<td align="center">7</td>
+<td align="center">6</td>
+<td align="center">Yes</td>
+<td align="center">SWdown</td>
+<td align="center">surface_downwelling_shortwave_flux_in_air</td>
+<td align="center">W m-2</td>
+<td align="center">Surface incident shortwave radiation</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Surface incident shortwave radiation</td>
+</tr>
+<tr class="even">
+<td align="center">58</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">Yes</td>
+<td align="center">Tair</td>
+<td align="center">air_temperature</td>
+<td align="center">K</td>
+<td align="center">Near surface air temperature</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Near surface air temperature</td>
+</tr>
+<tr class="odd">
+<td align="center">59</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">Yes</td>
+<td align="center">Wind</td>
+<td align="center">wind_speed</td>
+<td align="center">m s-1</td>
+<td align="center">Near surface module of the wind</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Near surface wind magnitude</td>
+</tr>
+<tr class="even">
+<td align="center">60</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">Tmin</td>
+<td align="center">air_temperature_max</td>
+<td align="center">K</td>
+<td align="center">Daily Maximum Temperature</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Daily Maximum Temperature</td>
+</tr>
+<tr class="odd">
+<td align="center">61</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">Tmax</td>
+<td align="center">air_temperature_min</td>
+<td align="center">K</td>
+<td align="center">Daily Minimum Temperature</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Daily Minimum Temperature</td>
+</tr>
+<tr class="even">
+<td align="center">62</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">Uwind</td>
+<td align="center">northward_wind</td>
+<td align="center">m s-1</td>
+<td align="center">Northward Component of Wind</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Northward Component of Wind</td>
+</tr>
+<tr class="odd">
+<td align="center">63</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">Vwind</td>
+<td align="center">eastward_wind</td>
+<td align="center">m s-1</td>
+<td align="center">Eastward Component of Wind</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Eastward Component of Wind</td>
+</tr>
+<tr class="even">
+<td align="center">64</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">RH</td>
+<td align="center">relative_humidity</td>
+<td align="center">%</td>
+<td align="center">Relative Humidity</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Relative Humidity</td>
+</tr>
+<tr class="odd">
+<td align="center">65</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">PAR</td>
+<td align="center">surface_downwelling_photosynthetic_photon_flux_in_air</td>
+<td align="center">mol m-2 s-1</td>
+<td align="center">Photosynthetically Active Radiation</td>
+<td align="center">1</td>
+<td align="center">Driver</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">real</td>
+<td align="center">3</td>
+<td align="center">lon</td>
+<td align="center">lat</td>
+<td align="center">time</td>
+<td align="center">na</td>
+<td align="center">Photosynthetically Active Radiation</td>
+</tr>
+</tbody>
+</table>
 
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
-
-$browserNLdisabled
-[1] FALSE
-
-$CBoundsCheck
-[1] FALSE
-
-$check.bounds
-[1] FALSE
-
-$citation.bibtex.max
-[1] 1
-
-$continue
-[1] &quot;+ &quot;
-
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
-
-</div>
 </div>
 </div>
             </section>
@@ -505,8 +1851,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="pecan-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="debugging.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

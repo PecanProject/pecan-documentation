@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="pecan-setup.html">
+<link rel="next" href="git-and-github-workflow.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,63 +439,140 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
+<div id="maintaining-pecan" class="section level1">
+<h1><span class="header-section-number">19</span> Maintaining PEcAn</h1>
+<p>This section will cover topics to keep your PEcAn instance up to date with the latest code and database. It will hopefully answer the question: How to do I keep my PEcAN up to date?</p>
+<ul>
+<li><a href="update_pecan_code.md">Updating your code</a></li>
+<li><a href="users_guide/maintaining_pecan/Updating-BETY.md">Updating BETY database</a></li>
+<li><a href="users_guide/advanced_users_guide/Database-Synchronization.md">Database-Synchronization</a></li>
+<li><a href="users_guide/advanced_users_guide/Troubleshooting-pecan.md">Troubleshooting PEcAn</a></li>
+</ul>
 
-$bitmapType
-[1] &quot;cairo&quot;
+<div id="updating-pecan-code-and-bety-database" class="section level2">
+<h2><span class="header-section-number">19.1</span> Updating PEcAn Code and Bety Database</h2>
+<p>Release notes for all releases can be found <a href="https://github.com/PecanProject/pecan/releases">here</a>.</p>
+<p>This page will only list any steps you have to do to upgrade an existing system. When updating PEcAn it is highly encouraged to update BETY. You can find instructions on how to do this, as well on how to update the database in the <a href="https://pecan.gitbooks.io/betydb-documentation/content/updating_betydb_when_new_versions_are_released.html">Updating BETYdb</a> gitbook page.</p>
+<div id="updating-pecan" class="section level3">
+<h3><span class="header-section-number">19.1.1</span> Updating PEcAn</h3>
+<p>The latest version of PEcAn code can be obtained from the PEcAn repository on GitHub:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> pecan        <span class="co"># If you are not already in the PEcAn directory</span>
+<span class="kw">git</span> pull</code></pre></div>
+<p>The PEcAn build system is based on GNU Make. The simplest way to install is to run <code>make</code> from inside the PEcAn directory. This will update the documentation for all packages and install them, as well as all required dependencies.</p>
+<p>For more control, the following <code>make</code> commands are available:</p>
+<ul>
+<li><p><code>make document</code> – Use <code>devtools::document</code> to update the documentation for all package. Under the hood, this uses the <code>roxygen2</code> documentation system.</p></li>
+<li><p><code>make install</code> – Install all packages and their dependnencies using <code>devtools::install</code>. By default, this only installs packages that have had their code changed and any dependent packages.</p></li>
+<li><p><code>make check</code> – Perform a rigorous check of packages using <code>devtools::check</code></p></li>
+<li><p><code>make test</code> – Run all unit tests (based on <code>testthat</code> package) for all packages, using <code>devtools::test</code></p></li>
+<li><p><code>make clean</code> – Remove the make build cache, which is used to track which packages have changed. Cache files are stored in the <code>.doc</code>, <code>.install</code>, <code>.check</code>, and <code>.test</code> subdirectories in the PEcAn main directory. Running <code>make clean</code> will force the next invocation of <code>make</code> commands to operate on all PEcAn packages, regardless of changes.</p></li>
+</ul>
+<p>The following are some additional <code>make</code> tricks that may be useful:</p>
+<ul>
+<li><p>Install, check, document, or test a specific package – <code>make .&lt;cmd&gt;/&lt;pkg-dir&gt;</code>; e.g. <code>make .install/utils</code> or <code>make .check/modules/rtm</code></p></li>
+<li><p>Force <code>make</code> to run, even if package has not changed – <code>make -B &lt;command&gt;</code></p></li>
+<li><p>Run <code>make</code> commands in parallel – <code>make -j&lt;ncores&gt;</code>; e.g. <code>make -j4 install</code> to install packages using four parallel processes.</p></li>
+</ul>
+<p>All instructions for the <code>make</code> build system are contained in the <code>Makefile</code> in the PEcAn root directory. For full documentation on <code>make</code>, see the man pages by running <code>man make</code> from a terminal.</p>
+<p><em>Point of contact: Alexey Shiklomanov GitHub/Gitter: <span class="citation">@ashiklom</span> email: <a href="mailto:ashiklom@bu.edu">ashiklom@bu.edu</a></em></p>
 
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
+</div>
+</div>
+<div id="updating-bety" class="section level2">
+<h2><span class="header-section-number">19.2</span> Updating BETY</h2>
+<p>Moved to: <a href="https://pecan.gitbooks.io/betydb-documentation/content/updating_betydb_when_new_versions_are_released.html" class="uri">https://pecan.gitbooks.io/betydb-documentation/content/updating_betydb_when_new_versions_are_released.html</a></p>
 
-$browserNLdisabled
-[1] FALSE
+</div>
+<div id="database-synchronization" class="section level2">
+<h2><span class="header-section-number">19.3</span> Database synchronization</h2>
+<p>The database synchronization consists of 2 parts: - Getting the data from the remote servers to your server - Sharing your data with everybody else</p>
+<div id="how-does-it-work" class="section level3">
+<h3><span class="header-section-number">19.3.1</span> How does it work?</h3>
+<p>Each server that runs the BETY database will have a unique machine_id and a sequence of ID’s associated. Whenever the user creates a new row in BETY it will receive an ID in the sequence. This allows us to uniquely identify where a row came from. This is information is crucial for the code that works with the synchronization since we can now copy those rows that have an ID in the sequence specified. If you have not asked for a unique ID your ID will be 99.</p>
+<p>The synchronization code itself is split into two parts, loading data with the <code>load.bety.sh</code> script and exporting data using <code>dump.bety.sh</code>. If you do not plan to share data, you only need to use <code>load.bety.sh</code> to update your database.</p>
+</div>
+<div id="set-up" class="section level3">
+<h3><span class="header-section-number">19.3.2</span> Set up</h3>
+<p>Requests for new machine ID’s is currently handled manually. To request a machine ID contact Rob Kooper <a href="mailto:kooper@illinois.edu">kooper@illinois.edu</a>. In the examples below this ID is referred to as MYSITE.</p>
+<p>To setup the database to use this ID you need to call load.bety in ‘CREATE’ mode</p>
+<pre><code>sudo -u postgres {$PECAN}/scripts/load.bety.sh -c -u -m X </code></pre>
+<p>WARNING: At the momment running CREATE deletes all current records in the database. If you are running from the VM this includes both all runs you have done and all information that the database is prepopulated with (e.g. input and model records). Remote records can be fetched (see below), but local records will be lost (we’re working on improving this!)</p>
+</div>
+<div id="fetch-latest-data" class="section level3">
+<h3><span class="header-section-number">19.3.3</span> Fetch latest data</h3>
+<p>When logged into the machine you can fetch the latest data using the load.bety.sh script. The script will check what site you want to get the data for and will remove all data in the database associated with that id. It will then reinsert all the data from the remote database.</p>
+<p>The script is configured using environment variables. The following variables are recognized: - DATABASE: the database where the script should write the results. The default is <code>bety</code>. - OWNER: the owner of the database (if it is to be created). The default is <code>bety</code>. - PG_OPT: additional options to be added to psql (default is nothing). - MYSITE: the (numerical) ID of your site. If you have not requested an ID, use 99; this is used for all sites that do not want to share their data (i.e. VM). 99 is in fact the default. - REMOTESITE: the ID of the site you want to fetch the data from. The default is 0 (EBI). - CREATE: If ‘YES’, this indicates that the existing database (<code>bety</code>, or the one specified by DATABASE) should be removed. Set to YES (in caps) to remove the database. <strong>THIS WILL REMOVE ALL DATA</strong> in DATABASE. The default is NO. - KEEPTMP: indicates whether the downloaded file should be preserved. Set to YES (in caps) to keep downloaded files; the default is NO. - USERS: determines if default users should be created. Set to YES (in caps) to create default users with default passwords. The default is NO.</p>
+<p>All of these variables can be specified as command line arguments, to see the options use -h.</p>
+<pre><code>load.bety.sh -h
+./scripts/load.bety.sh [-c YES|NO] [-d database] [-h] [-m my siteid] [-o owner] [-p psql options] [-r remote siteid] [-t YES|NO] [-u YES|NO]
+ -c create database, THIS WILL ERASE THE CURRENT DATABASE, default is NO
+ -d database, default is bety
+ -h this help page
+ -m site id, default is 99 (VM)
+ -o owner of the database, default is bety
+ -p additional psql command line options, default is empty
+ -r remote site id, default is 0 (EBI)
+ -t keep temp folder, default is NO
+ -u create carya users, this will create some default users
 
-$CBoundsCheck
-[1] FALSE
-
-$check.bounds
-[1] FALSE
-
-$citation.bibtex.max
-[1] 1
-
-$continue
-[1] &quot;+ &quot;
-
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
+dump.bety.sh -h
+./scripts/dump.bety.sh [-a YES|NO] [-d database] [-h] [-l 0,1,2,3,4] [-m my siteid] [-o folder] [-p psql options] [-u YES|NO]
+ -a use anonymous user, default is YES
+ -d database, default is bety
+ -h this help page
+ -l level of data that can be dumped, default is 3
+ -m site id, default is 99 (VM)
+ -o output folder where dumped data is written, default is dump
+ -p additional psql command line options, default is -U bety
+ -u should unchecked data be dumped, default is NO</code></pre>
+</div>
+<div id="sharing-data" class="section level3">
+<h3><span class="header-section-number">19.3.4</span> Sharing data</h3>
+<p>Sharing your data requires a few steps. First, before entering any data, you will need to request an ID from the PEcAn developers. Simply open an issue at github and we will generate an ID for you. If possible, add the URL of your data host.</p>
+<p>You will now need to synchronize the database again and use your ID. For example if you are given ID=42 you can use the following command: <code>MYID=42 REMOTEID=0 ./scripts/load.bety.sh</code>. This will load the EBI database and set the ID’s such that any data you insert will have the right ID.</p>
+<p>To share your data you can now run the dump.bey.sh. The script is configured using environment variables, the following variables are recognized: - DATABASE: the database where the script should write the results. The default is <code>bety</code>. - PG_OPT: additional options to be added to psql (default is nothing). - MYSITE: the ID of your site. If you have not requested an ID, use 99, which is used for all sites that do not want to share their data (i.e. VM). 99 is the default. - LEVEL: the minimum access-protection level of the data to be dumped (0=private, 1=restricted, 2=internal collaborators, 3=external collaborators, 4=public). The default level for exported data is level 3. - note that currently only the traits and yields tables have restrictions on sharing. If you share data, records from other (meta-data) tables will be shared. If you wish to extend the access_level to other tables please <a href="https://github.com/pecanproject/bety/issues/new">submit a feature request</a>. - UNCHECKED: specifies whether unchecked traits and yields be dumped. Set to YES (all caps) to dump unchecked data. The default is NO. - ANONYMOUS: specifies whether all users be anonymized. Set to YES (all caps) to keep the original users (<strong>INCLUDING PASSWORD</strong>) in the dump file. The default is NO. - OUTPUT: the location of where on disk to write the result file. The default is <code>${PWD}/dump</code>.</p>
+<p>NOTE: If you want your dumps to be accessible to other PEcAn servers you need to perform the following additional steps</p>
+<ol style="list-style-type: decimal">
+<li>Open pecan/scripts/load.bety.sh</li>
+<li><p>In the DUMPURL section of the code add a new record indicating where you are dumping your data. Below is the example for SITE number 1 (Boston University)</p>
+<pre><code> elif [ &quot;${REMOTESITE}&quot; == &quot;1&quot; ]; then
+ DUMPURL=&quot;http://psql-pecan.bu.edu/sync/dump/bety.tar.gz&quot;</code></pre></li>
+<li>Check your Apache settings to make sure this location is public</li>
+<li>Commit this code and submit a Pull Request</li>
+<li><p>From the URL in the Pull Request, PEcAn administrators will update the machines table, the status map, and notify other users to update their cron jobs (see Automation below)</p></li>
+</ol>
+<p>Plans to simplify this process are in the works</p>
+</div>
+<div id="automation" class="section level3">
+<h3><span class="header-section-number">19.3.5</span> Automation</h3>
+<p>Below is an example of a script to synchronize PEcAn database instances across the network.</p>
+<p>db.sync.sh</p>
+<pre><code>#!/bin/bash 
+## make sure psql is in PATH
+export PATH=/usr/pgsql-9.3/bin/:$PATH 
+## move to export directory
+cd /fs/data3/sync 
+## Dump Data
+MYSITE=1 /home/dietze/pecan/scripts/dump.bety.sh 
+## Load Data from other sites
+MYSITE=1 REMOTESITE=2 /home/dietze/pecan/scripts/load.bety.sh 
+MYSITE=1 REMOTESITE=5 /home/dietze/pecan/scripts/load.bety.sh 
+MYSITE=1 REMOTESITE=0 /home/dietze/pecan/scripts/load.bety.sh 
+## Timestamp sync log
+echo $(date +%c) &gt;&gt; /home/dietze/db.sync.log</code></pre>
+<p>Typically such a script is set up to run as a cron job. Make sure to schedule this job (<code>crontab -e</code>) as the user that has database privledges (typically postgres). The example below is a cron table that runs the sync every hour at 12 min after the hour.</p>
+<pre><code>MAILTO=user@yourUniversity.edu
+12 * * * * /home/dietze/db.sync.sh</code></pre>
+</div>
+<div id="network-status-map" class="section level3">
+<h3><span class="header-section-number">19.3.6</span> Network Status Map</h3>
+<p><a href="https://pecan2.bu.edu/pecan/status.php" class="uri">https://pecan2.bu.edu/pecan/status.php</a></p>
+<p>Nodes: red = down, yellow = out-of-date schema, green = good</p>
+<p>Edges: red = fail, yellow = out-of-date sync, green = good</p>
+</div>
+<div id="tasks" class="section level3">
+<h3><span class="header-section-number">19.3.7</span> Tasks</h3>
+<p>Following is a list of tasks we plan on working on to improve these scripts: - <a href="https://github.com/PecanProject/bety/issues/368">pecanproject/bety#368</a> allow site-specific customization of information and UI elements including title, contacts, logo, color scheme.</p>
 
 </div>
 </div>
@@ -505,8 +582,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="pecan-setup.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="git-and-github-workflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

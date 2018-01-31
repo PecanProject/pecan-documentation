@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="remote-execution-with-pecan.html">
+<link rel="next" href="pecan-workflow-webworkflow-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,74 +439,54 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
+<div id="introduction-1" class="section level1">
+<h1><span class="header-section-number">12</span> Introduction</h1>
+<p>For those wanting to take full advantage of PEcAn and its tools, this section will provide you with the necessary information to do so. In this section we hope to answer the question: How can I use PEcAn to its fullest?</p>
+<ul>
+<li>PEcAn workflow (web/workflow.R)</li>
+<li>How the workflow works</li>
+<li>How each module is called</li>
+<li>How to do outside of web interface</li>
+<li>Link to “folder structure” section below for detailed descriptions</li>
+<li>Adding to PEcAn</li>
+<li>Case studies
+<ul>
+<li>Adding a model</li>
+<li>Adding new species, PFTs, and traits from a new site</li>
+<li>Add a site</li>
+<li>Add some species</li>
+<li>Add PFT</li>
+<li>Add trait data</li>
+<li>Adding a benchmark</li>
+<li>Adding a met driver</li>
+</ul></li>
+<li>Reference (How to change tables)
+<ul>
+<li>Models</li>
+<li>Species</li>
+<li>PFTs</li>
+<li>Traits</li>
+<li>Inputs</li>
+<li>DB files</li>
+<li>Variables</li>
+<li>Formats</li>
+<li>(Link each section to relevant Bety tables)</li>
+</ul></li>
+<li>Modules – additional tools</li>
+<li>RTM</li>
+<li>Photosynthesis</li>
+<li>Allometry</li>
+<li><code>benchmark::load_data</code></li>
+</ul>
 
-$bitmapType
-[1] &quot;cairo&quot;
-
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
-
-$browserNLdisabled
-[1] FALSE
-
-$CBoundsCheck
-[1] FALSE
-
-$check.bounds
-[1] FALSE
-
-$citation.bibtex.max
-[1] 1
-
-$continue
-[1] &quot;+ &quot;
-
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
-
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="remote-execution-with-pecan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pecan-workflow-webworkflow-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

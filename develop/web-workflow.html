@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="getting-started.html">
+<link rel="next" href="vm-desktop-conversion.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,63 +439,239 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
+<div id="web-workflow" class="section level1">
+<h1><span class="header-section-number">5</span> Web workflow</h1>
+<ul>
+<li>Model and site selection</li>
+<li>Run configuration</li>
+<li>Run execution</li>
+<li>Results</li>
+<li>Interactive visualizations</li>
+</ul>
 
-$bitmapType
-[1] &quot;cairo&quot;
+<div id="site-and-model-selection" class="section level2">
+<h2><span class="header-section-number">5.1</span> Site and model selection</h2>
+<p>This page is used to select the model to run and the site at which you would like to run that model.</p>
+<p><strong>NOTE:</strong> If this page does not load for you, it may be related to a known Google Maps API key issue. See <a href="https://github.com/PecanProject/pecan/issues/1269">issue #1269</a> for a possible solution.</p>
+<div id="selecting-a-model" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Selecting a model</h3>
+<ol style="list-style-type: decimal">
+<li><p>On the <strong>Select Host</strong> webpage use the Host pull-down menu to select the server you want to run on. Note that at the moment only the LOCAL server will run through the web-based workflow.</p></li>
+<li><p>Next, select the model you want to run under the Model pull-down menu</p></li>
+<li><p>If the model you want to run is not listed login to BETY and navigate to Runs &gt; Models.</p></li>
+<li><p>If there are already entries for the model you want to run then most likely the PEcAn modules for that model have been implemented but PEcAn is unaware that the model has been installed on your server. Information on adding a model executable to the PEcAn database can be found <a href="../../developers_guide/Adding-an-Ecosystem-Model.md#model">here</a>. After this is done, your model should appear on the PEcAn <strong>Select Host</strong> page after your refresh the page.</p></li>
+<li><p>If there a no entries for the model you want to run then most likely the PEcAn modules need to be implemented. See the instructions at Adding an Ecosystem Model</p></li>
+<li><p>If selecting your model causes your site to disappear from the Google Map then the site exists but there are no drivers for that site registered in the database. See the instruction <a href="Choose-a-site.md#my-site-shows-up-when-i-dont-have-any-model-selected-but-disappears-once-i-select-the-model-i-want-to-run">here</a> for more info on diagnosing what drivers are missing.</p></li>
+</ol>
+</div>
+<div id="selecting-a-site" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Selecting a site</h3>
+<div id="using-existing-sites" class="section level4">
+<h4><span class="header-section-number">5.1.2.1</span> Using existing sites</h4>
+<ol style="list-style-type: decimal">
+<li><p><strong>Find the site on the map</strong> The simplest way of determining if a site exists in PEcAn is through the Google Map interface of the web-based workflow. You’ll want to make sure that the Host is set to All Sites and the Model is set to All Models.</p></li>
+<li><p><strong>Find the site in BETY</strong> If the site is not on the map there’s a chance that it still in PEcAn but just lacking geographic information. To begin you’ll want to login to your local version of the BETY database. If you’re on the PEcAn VM this will be at localhost:3280/bety or localhost:6480/bety depending on whether you downloaded the 32 or 64 bit version. Within BETY navigate to Data &gt; Sites and use the Search window on the page to try and locate your site. If you <strong>DO</strong> find your site you will want to click Edit and add geographic information so that the site will show up on the map. It is also worth noting that the site ID number shows up in the URL for the Show or Edit pages. This ID is frequently useful to know, for example if you have to set up a PEcAn settings file by hand. If you did not find you site you will want to follow the instructions below for adding a site</p></li>
+</ol>
+</div>
+<div id="adding-a-new-site" class="section level4">
+<h4><span class="header-section-number">5.1.2.2</span> Adding a new site</h4>
+<p>(TODO: Move most of this out)</p>
+<ol style="list-style-type: decimal">
+<li><p>To add a new site to PEcAn you currently have to begin by logging in to BETY</p></li>
+<li><p>Navigate to Data &gt; Citations. Before you add a Site you will need to establish a Citation to associate with the site. If you went to Data &gt; Sites and just clicked on <strong>Add Site</strong> it will take you to an error page reminding you of this.</p></li>
+<li><p>Before adding a new citation, you should Search the system to make sure the Citation you are about to add doesn’t already exist. If it does you should be able to just click on the check-box icon to select that citation and then skip the next step</p></li>
+<li><p>To create a new citation click on the <strong>New Citation</strong> button, fill in the fields, and then click Create. The field URL should contain the web address that takes you to this publication on the publisher’s website. The Pdf field should similarly be the web address for the pdf for this citation. If there are no publications associated with the site you are interested in you can leave most of the fields blank, but you could add a descriptive title, such as “EBI Farm Field Data”, and a relevant contact person as the Author so that future users can associate any site-specific data with this citation.</p></li>
+<li><p>Once the Citation is created or selected this should automatically take you to the Sites page and list any Sites already associated with this citation. To create a new site click the <strong>New Site</strong> button.</p></li>
+<li><p>When creating a new cite the most critical information is the <strong>Site name</strong> and the Lat/Lon. The Lat/Lon can be entered by hand or by clicking on the site location on the Google Map interface. It is also helpful to fill in the other location information (Cite, State, Country) and the Notes to make it easier for other users to search for the site. The topographic, climate, and soils information is optional.</p></li>
+<li><p>When you are done click <strong>Create</strong>. At this point if you refresh the PEcAn site-level run webpage the site should automatically show up.</p></li>
+</ol>
+</div>
+<div id="troubleshooting" class="section level4">
+<h4><span class="header-section-number">5.1.2.3</span> Troubleshooting</h4>
+<div id="my-site-shows-up-when-i-dont-have-any-model-selected-but-disappears-once-i-select-the-model-i-want-to-run" class="section level5">
+<h5><span class="header-section-number">5.1.2.3.1</span> My site shows up when I don’t have any model selected, but disappears once I select the model I want to run</h5>
+<p>Selecting a model will cause PEcAn to filter the available sites based on whether they possess the required Inputs for a given model (e.g. meteorology). To check what Inputs are missing for a site point your browser to the pecan/checksite.php webpage (e.g. localhost:3280/pecan/checksite.php). This page looks virtually identical to the site selection page, except that it has a <em>Check</em> button instead of <em>Prev</em> and <em>Next</em>. If you select a Machine, Model, and Site and then click <em>Check</em> the page should return a list of what Inputs are missing (listing both the name and the Format ID number). Don’t forget that its possible for PEcAn to have required Inputs in its database, but just not have them for the Machine where you want to run.</p>
+<p>To see more about what Inputs a given model can accept, and which of those are required, take a look at the MODEL_TYPE table entry in the database (e.g. go to localhost:3280/bety; Select Runs &gt; Model Type; and then click on the model you want to run).</p>
+<p>For information about loading missing Inputs into the database visit <a href="/../../How-to-insert-new-Input-data.md">How to insert new Input data</a>, and also read the rest of the pages under this section, which will provide important information about the specific classes of Inputs (e.g. meteorology, vegetation, etc).</p>
+<p>Finally, we are in the process of developing workflows and standards for processing Input data in a model-agnostic way, starting with meteorology. So hopefully much of the work of building model driver files and uploading them into PEcAn will become automatic soon.</p>
 
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
+</div>
+</div>
+</div>
+</div>
+<div id="model-configuration" class="section level2">
+<h2><span class="header-section-number">5.2</span> Model configuration</h2>
+<p>This page is used for basic model configuration, including when your model will run and what input data it will use.</p>
 
-$browserNLdisabled
-[1] FALSE
+<div id="selecting-pfts" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Selecting PFTs</h3>
+<div id="using-existing-pfts" class="section level4">
+<h4><span class="header-section-number">5.2.1.1</span> Using existing PFTs</h4>
+<p>PEcAn does not automatically know what vegetations types are present at your study site so you need to select the PFT.</p>
+<p>Some models, such as ED2 and LINKAGES, support competition among multiple PFTs and thus you are encouraged to highlight multiple choices. Other models, such as SIPNET and DALEC, only support one PFT at a site.</p>
+</div>
+<div id="creating-new-pfts" class="section level4">
+<h4><span class="header-section-number">5.2.1.2</span> Creating new PFTs</h4>
+<p>To modify or add a new Plant Functional Type (PFT), or to change a PFT’s priors, navigate on the grey menu bar to Data &gt; PFTs</p>
+<ol style="list-style-type: decimal">
+<li><p>To add a new pft, click “new PFT” at the top and enter a name and description. (hint: we’re trying to name PFTs based on model.biome.pft, ED2 is the default model if one isn’t specified)</p></li>
+<li><p>To add new species to a PFT click on [+] View Related Species and type the species, genus, or family you are looking for into the Search box. Click on the + to add.</p></li>
+<li><p>To remove a species from a PFT, click on [+] View Related Species and click on the X of the species you want to remove from the PFT.</p></li>
+<li><p>To remove a prior, click [-] View Related Prior and click on the X of the variable who’s prior you want to remove. This will cause the parameter to be excluded from all analyses (meta-analysis, sensitivity analysis, etc) and revert to its default value.</p></li>
+<li><p>To add a prior, choose one from the white box of priors on the right to choose.</p></li>
+<li><p>To view the specification of a prior, or to add a new prior, click BETY-DB &gt; Priors and enter the information on the variable, distribution name, distribution parameters, etc. N is the sample size underlying the prior specification (0 is ok for uninformative priors).</p></li>
+<li><p>You can also got to Data &gt; Variables in order to use the search function to find an existing variable (or create a new one). Please try not to create new variables unnecessarily (e.g. changes of variable name or units to what your model uses is handled internally, so you want to find the trait with the correct MEANING).</p></li>
+</ol>
+<p>Additional information on adding PFTs, Species, and Priors can be found <a href="../../developers_guide/Adding-an-Ecosystem-Model.md#pfts-plant-functional-types">here</a></p>
 
-$CBoundsCheck
-[1] FALSE
+</div>
+</div>
+<div id="choosing-meteorology" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Choosing meteorology</h3>
+<p>Once a Machine, Model, and Site have been selected, PEcAn will take you to the Input selection page. From this page you will select what Plant Functional Type (PFT) you want to run at a site, the start and end dates of the run, and various Input selections. The most common of these across all models is the need to specify meteorological forcing data. The exact name of the menu item for meteorology will vary by model because all of the Input requirements are generated individually for each model based on the MODEL_TYPE table. In general there are 3 possible cases for meteorology</p>
+<ul>
+<li>PEcAn already has driver files in its database</li>
+<li>PEcAn does not have drivers, but can generate them from publicly available data</li>
+<li>You need (or want) to upload your own drivers</li>
+</ul>
+<p>The first two cases will appear automatically in the the pull down menu. For meteorological files that already exist you will see the date range that’s available. By contrast, met that can be generated will appear as “Use <source>”, where <source> is the origin of the data (e.g. “Use Ameriflux” will use the micromet from an Ameriflux eddy covariance tower, if one is present at the site).</p>
+<p>If you want to upload your own met data this can be done in three ways. The standard way is to upload data in PEcAn’s standard meteorological format (netCDF files, CF metadata). See <a href="../../developers_guide/Adding-an-Input-Converter.md#met-data">here</a> for details about variables and units. From this standard, PEcAn can then convert the file to the model-specific format required by the model you have chosen. This approach is preferred because PEcAn will also be able to convert the file into the format required by any other model as well. The second option for adding met data is to add it in a model-specific format, which is often easiest if you’ve already been running your model at a site and are just switching to using PEcAn. The final way to add met data is to incorporate it into the overall meteorological processing workflow. This is preferred if you are working with a common meteorological data product that is not yet in PEcAn’s workflow. Details are <a href="../../developers_guide/Adding-an-Input-Converter.md#met-data">here</a>, though at this stage you would also be strongly encouraged to contact the PEcAn development team.</p>
+<div id="met-workflow" class="section level4">
+<h4><span class="header-section-number">5.2.2.1</span> Met workflow</h4>
+<p>In a nutshell, the PEcAn met workflow is designed to reduce the problem of converting <em>n</em> possible met inputs into <em>m</em> possible model formats, which requires <em>n x m</em> conversion functions as well as numerous custom functions for downscaling, gap filling, etc. Instead, PEcAn works with a single met standard, and thus requires <em>n</em> conversion functions, one for converting each data source into the PEcAn standard, and then <em>m</em> conversion functions for converting from that standard to what an individual model requires. For a new model joining the PEcAn system the burden in particularly low – writing one conversion function provides access to <em>n</em> inputs. Similarly, PEcAn performs all other operations/manipulations (extracting a site, downscaling, gap filling, etc) within the PEcAn standard, which means these operations only need be implemented once.</p>
+<p>Consider a generic met data product named MET for simplicity. PEcAn will use a function, download.MET, to pull data for the selected year from a public data source (e.g. Ameriflux, North American Regional Reanalysis, etc). Next, PEcAn will use a function, met2CF.MET, to convert the data into the PEcAn standard. If the data is already at the site scale it will then gapfill the data. If the data is a regional or global data product, PEcAn will then permute the data to allow easier site-level extraction, then it will extract data for the requested site and data range. Modules to address the temporal and spatial downscaling of meteorological data products, as well as their uncertainties, are in development but not yet part of the operational workflow. All of these functions are located within the data.atmosphere module.</p>
+<p>Once data is in the standard format and processed, it will be converted to the model-specific format using a met2model.MODEL function (located in that MODEL’s module).</p>
+<p>More detailed information on how PEcAn processes inputs can be found on our <a href="adding-to-pecan.html#input-conversion">Input Conversion</a> page.</p>
+</div>
+<div id="troubleshooting-meteorological-conversions" class="section level4">
+<h4><span class="header-section-number">5.2.2.2</span> Troubleshooting meteorological conversions</h4>
+<p>At the current moment (PEcAn 1.4.0), most of the issues below address possible errors that the Ameriflux meteorology workflow might report</p>
+<div id="could-not-do-gapfill-the-following-variables-have-nas" class="section level5">
+<h5><span class="header-section-number">5.2.2.2.1</span> Could not do gapfill … The following variables have NA’s</h5>
+<p>This error message means that there were gaps in the downloaded data, for whatever variables that were listed, which were larger than the current algorithm could fill. Particularly common is missing radiation or PAR data, as Ameriflux frequently converts nighttime data to NULL, and work is in progress to detect this based on solar geometry. Also common are incomplete years (first or last year of tower operations).</p>
+</div>
+<div id="could-not-get-information-about-.-is-this-an-ameriflux-site" class="section level5">
+<h5><span class="header-section-number">5.2.2.2.2</span> Could not get information about <site> . Is this an Ameriflux site?</h5>
+<p>This message occurs when PEcAn believes that a site is part of Ameriflux (because it was listed on the Ameriflux or FLUXNET webpage and has a US-* site code), but no data is present on the Ameriflux server. The most common reasons for this is that you have selected a site that has not submitted data to Ameriflux yet (or that data hasn’t been processed yet), or you have selected a year that’s outside the tower’s operational period. Visit <a href="http://ameriflux.lbl.gov/sites/site-list-and-pages/">Ameriflux</a> and <a href="http://fluxnet.ornl.gov/site_status">FLUXNET</a> for lists of available site years.</p>
+</div>
+<div id="could-not-download-data-for-for-the-year" class="section level5">
+<h5><span class="header-section-number">5.2.2.2.3</span> Could not download data for <site> for the year <YEAR></h5>
+<p>This is similar to the previous error, but in this case PEcAn did find data for the site listed, but just not for the year requested. This can usually be fixed by just altering the years of the run to match those with available data.</p>
+</div>
+<div id="i-could-not-find-the-requested-var-or-dimvar-in-the-file" class="section level5">
+<h5><span class="header-section-number">5.2.2.2.4</span> I could not find the requested var (or dimvar) in the file!</h5>
+<p>PEcAn could not find a required variable within the downloaded file. Most likely this is due to that variable not being measured at this site. The most common cause of failure is the absence of atmospheric pressure data (PRESS), but since most models have a low sensitivity to this variable we are working on methods to estimate this from other sources.</p>
 
-$check.bounds
-[1] FALSE
+</div>
+</div>
+</div>
+</div>
+<div id="choosing-initial-vegetation" class="section level2">
+<h2><span class="header-section-number">5.3</span> Choosing initial vegetation</h2>
+<p>On the Input Selection webpage, in addition to selecting PFTs, start &amp; end dates, and meteorology, many models also require some way of specifying the initial conditions for the vegetation, which may range from setting the aboveground biomass and LAI up to detailed inventory-like data on species composition and stand structure.</p>
+<p>At the moment, PEcAn has two cases for initial conditions and they only exist as required Inputs for the ED2 model:</p>
+<p>If files already exist in the database, they can simply be selected from the menu. For ED2, there are 3 different veg files (site, pss, css) and it is important that you select a complete set, not mix and match.</p>
+<p>If files don’t exist they can be uploaded following the instructions on <a href="../developers_guide/How-to-insert-new-Input-data.html">How to insert new Input data</a>.</p>
+<p>Two additional options are in development:</p>
+<ul>
+<li>Model spin-up</li>
+<li>Automated workflows</li>
+</ul>
+<div id="spin-up" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Spin up</h3>
+<p>A number of ecosystem models are typically initialized by spinning up to steady state. At the moment PEcAn doesn’t handle spin up automatically (e.g. looping met, checking for stability), but there are various ways to achieve a spin-up within the system.</p>
+<p><strong>Option 1:</strong> If there are model-specific settings in a model’s settings/config file, then that file can be accessed by clicking on the <strong>Edit model config</strong> check box. If this box is selected then PEcAn will pause the site run workflow after it has generated your model config file, but before it runs the model, and give you an opportunity to edit the file by hand, allowing you to change any model-specific spin up settings (e.g met recycling, spin up length)</p>
+<p><strong>Option 2:</strong> Set start_year very early and set the met drivers to be a long time series (e.g. PalEON, something custom uploaded to Inputs)</p>
+<p><strong>Option 3:</strong> In the MODEL_TYPE table, add your model’s restart format as an optional input, modify the model specific write.config function to use that restart, and then load a previous spin-up to the Inputs table</p>
+<p>Beyond these options, we hope to eventually develop more general, model-agnostic tools for spin up. In particular, we have started to explore the accelerated spin-up and semi-analytical techniques being developed by Yiqi Luo’s lab</p>
+</div>
+<div id="veg-workflow" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Veg workflow</h3>
+<p>As with meteorology, PEcAn is working to develop a model-agnostic workflow for converting various sources of vegetation data to common standards, developing common processing tools, and then writing out to model-specific formats. This process is in a much early stage than the meteorology workflow, as we are still researching what the options are for standard formats, but ultimately aims to be much more broad in scope, considering not just plot inventory data but also historical documentation, paleoecological proxies, satellite remote sensing (e.g. LANDSAT), airborne hyperspectral imagery, and active remote sensing (Lidar, Radar).</p>
+<p>At the moment, what is functional is a model-specific workflow for the ED2 model that can query the USFS Forest Inventory and Analysis and then construct initial condition files for ED2. This tool works with an internal copy of the FIA that is uploaded to a postGRES database along side BETY, however for space reasons this database does not ship with the PEcAn VM. To turn this feature on:</p>
+<ol style="list-style-type: decimal">
+<li><a href="../../developers_guide/Installing-PEcAn-Data.Rmd">Download and Install the FIA database</a></li>
+<li>For web-base runs, specify the database settings in the <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">config.php</a></li>
+<li>For R-based runs, specify the database settings in the <a href="../advanced_users_guide/PEcAn-Configuration.md#database-access">pecan.xml</a></li>
+</ol>
+<p>More detailed information on how PEcAn processes inputs can be found on our <a href="adding-to-pecan.html#input-conversion">Input Conversion</a> page.</p>
 
-$citation.bibtex.max
-[1] 1
+</div>
+<div id="selecting-a-soils-product" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Selecting a soils product</h3>
+<p>Many models have requirements for soils information, which may include: site-specific soil texture and depth information; soil biogeochemical initial conditions (e.g. soil carbon and nitrogen pools); soil moisture initial conditions; and soil thermal initial conditions.</p>
+<p>As with <a href="web-workflow.html#choosing-initial-vegetation">Choosing initial vegetation</a>, we eventually hope to develop data standards, soils workflows, and spin-up tools, but at the moment model requirements need to be met by <a href="../developers_guide/How-to-insert-new-Input-data.html">inserting Input data</a> into the database or using files that have already been uploaded.</p>
+<div id="soil-texture-depth-and-physical-parameters" class="section level4">
+<h4><span class="header-section-number">5.3.3.1</span> Soil texture, depth, and physical parameters</h4>
+<p>A PEcAn-standard netCDF file format exists for soil texture, depth, and physical parameters, using PEcAn standard names that are largely a direct extention of the CF standard. A table of standard names and units can be listed using <code>PEcAn.data.land::soil.units()</code> with no arguments.</p>
+<p>More detailed information on how PEcAn processes inputs can be found on our <a href="adding-to-pecan.html#input-conversion">Input Conversion</a> page.</p>
 
-$continue
-[1] &quot;+ &quot;
+</div>
+</div>
+<div id="other-model-inputs" class="section level3">
+<h3><span class="header-section-number">5.3.4</span> Other model inputs</h3>
+<p>Finally, any other model-specific inputs (e.g. N deposition, land use history, etc), should be met by <a href="../developers_guide/How-to-insert-new-Input-data.html">inserting Input data</a> into the database or using files that have already been uploaded.</p>
 
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
+
+</div>
+</div>
+<div id="basic-setups" class="section level2">
+<h2><span class="header-section-number">5.4</span> Basic Setups</h2>
+<p>There are few options which you can change via web interface.</p>
+<p>To visit the configuration page either you can just click on the setups link on the introduction page alternatively can type <code>&lt;host&gt;/setups/</code>.</p>
+<p>The list of configuration available</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Database configuration</strong> : BETYdb(Biofuel Ecophysiological Traits and Yields database) configuration details, can be edited according to need.</p></li>
+<li><p><strong>Browndog configuration</strong> : Browndog configuration details, Used to connect browndog. Its included by default in VM.</p></li>
+<li><p><strong>FIA Database</strong> : FIA(Forest Inventory and Analysis) Database configuration details, Can be used to add additional data to models.</p></li>
+<li><p><strong>Google MapKey</strong> : Google Map key, used to access the google map by PEcAn.</p></li>
+<li><p><strong>Change Password</strong> : A small infomation to change the VM user password. (if using Docker image it won’t work)</p></li>
+<li><p><strong>Automatic Sync</strong> : If ON then it will sync the database between local machine and the remote servers. <strong>Still unders testing part might be buggy</strong>.</p></li>
+</ol>
+<p>Still work on the adding other editing feature going on, this page will be updated as new configuration will be available.</p>
+
+<div id="download-gfdl" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Download GFDL</h3>
+<p>The Downlad.GFDL function assimilates 3 hour frequency CMIP5 outputs generated by multiple GFDL models. GFDL developed several distinct modeling streams on the timescale of CMIP5 and AR5. These models include CM3, ESM2M and ESM2G with a spatial resolution of 2 degrees latitude by 2.5 degrees longitude. Each model has future outputs for the AR5 Representative Concentration Pathways ranging from 2006-2100.</p>
+</div>
+<div id="cm3" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> CM3</h3>
+<p>GFDL’s CMIP5 experiments with CM3 included many of the integrations found in the long-term CMIP5 experimental design. The focus of this physical climate model is on the role of aerosols, aerosol-cloud interactions, and atmospheric chemistry in climate variability and climate change.</p>
+</div>
+<div id="esm2m-esm2g" class="section level3">
+<h3><span class="header-section-number">5.4.3</span> ESM2M &amp; ESM2G</h3>
+<p>Two new models representing ocean physics with alternative numerical frameworks to explore the implications of some of the fundamental assumptions embedded in these models. Both ESM2M and ESM2G utilize a more advanced land model, LM3, than was available in ESM2.1 including a variety of enhancements (Milly et al., in prep). GFDL’s CMIP5 experiments with Earth System Models included many of the integrations found in the long-term CMIP5 experimental design. The ESMs, by design, close the carbon cycle and are used to study the impact of climate change on ecosystems, ecosystem changes on climate and human activities on ecosystems.</p>
+<p>For more information please navigate <a href="https://gfdl.noaa.gov/cmip">here</a></p>
+<table width=100%>
+<pre><code>&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;CM#&lt;/th&gt;
+&lt;th&gt;ESM2M&lt;/th&gt;
+&lt;th&gt;ESM2G&lt;/th&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;rcp26&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;      
+  &lt;td&gt;r1i1p1&lt;/td&gt;
+  &lt;td&gt;r1i1p1&lt;/td&gt;      
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;rcp45&lt;/td&gt;
+  &lt;td&gt;r1i1p1, r3i1p1,r5i1p1&lt;/td&gt;      
+  &lt;td&gt;r1i1p1&lt;/td&gt;
+  &lt;td&gt;r1i1p1&lt;/td&gt;      
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;rcp60&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;      
+  &lt;td&gt;r1i1p1&lt;/td&gt;
+  &lt;td&gt;r1i1p1&lt;/td&gt;      
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;rcp85&lt;/td&gt;
+  &lt;td&gt;r1i1p1&lt;/td&gt;      
+  &lt;td&gt;r1i1p1&lt;/td&gt;
+  &lt;td&gt;r1i1p1&lt;/td&gt;      
+&lt;/tr&gt;</code></pre>
 
 </div>
 </div>
@@ -505,8 +681,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vm-desktop-conversion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="workflow-modules.html">
+<link rel="next" href="available-meteorological-drivers.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,65 +439,171 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
-
-$bitmapType
-[1] &quot;cairo&quot;
-
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
-
-$browserNLdisabled
-[1] FALSE
-
-$CBoundsCheck
-[1] FALSE
-
-$check.bounds
-[1] FALSE
-
-$citation.bibtex.max
-[1] 1
-
-$continue
-[1] &quot;+ &quot;
-
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
-
+<div id="loading-data-in-pecan" class="section level1">
+<h1><span class="header-section-number">29</span> Loading Data in PEcAn</h1>
+<p>If you are loading data in to PEcAn for benchmarking, using the Benchmarking shiny app [provide link?] is recommended.</p>
+<p>Data can be loaded manually using the <code>load_data</code> function which in turn requires providing data format information using <code>query.format.vars</code> and the path to the data using <code>query.file.path</code>.</p>
+<p>Below is a description of the <code>load_data</code> function an a simple example of loading data manually.</p>
+<div id="function-load_data" class="section level2">
+<h2><span class="header-section-number">29.1</span> Function <code>load_data</code></h2>
+<div id="inputs-1" class="section level3">
+<h3><span class="header-section-number">29.1.1</span> Inputs</h3>
+<p>Required</p>
+<ul>
+<li><code>data.path</code>: path to the data that is the output of the function <code>query.file.path</code> (see example below)</li>
+<li><code>format</code>: R list object that is the output of the function <code>query.format.vars</code> (see function description [here] and example below)</li>
+</ul>
+<p>Optional</p>
+<ul>
+<li><code>start_year = NA</code>:</li>
+<li><code>end_year = NA</code>:</li>
+<li><code>site = NA</code></li>
+<li><code>vars.used.index=NULL</code></li>
+</ul>
 </div>
+<div id="output" class="section level3">
+<h3><span class="header-section-number">29.1.2</span> Output</h3>
+<ul>
+<li>R data frame containing the requested variables converted in to PEcAn standard name and units and time steps in <code>POSIX</code> format.</li>
+</ul>
+</div>
+</div>
+<div id="example-1" class="section level2">
+<h2><span class="header-section-number">29.2</span> Example</h2>
+<p>The data for this example has already been entered in to the database. To add new data go to [this useful site].</p>
+<p>To load the Ameriflux data for the Harvard Forest (US-Ha1) site.</p>
+<ol style="list-style-type: decimal">
+<li>Create a connection to the BETY database. This can be done using R function</li>
+</ol>
+<p><code>R    bety = PEcAn.DB::betyConnect(php.config = &quot;pecan/web/config.php&quot;)</code></p>
+<p>where the complete path to the <code>config.php</code> is specified. See [here] for creating the <code>config.php</code> file.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Look up the inputs record for the data in BETY.</li>
+</ol>
+<div class="figure">
+<img src="images/Input_ID_name.png" alt="Input_ID_name" />
+<p class="caption">Input_ID_name</p>
+</div>
+<p>To find the input ID, either look at</p>
+<ul>
+<li><p>The url of the record (see image above)</p></li>
+<li><p>In R run</p>
+<p><code>R  library(dplyr)  input_name = &quot;AmerifluxLBL_site_0-758&quot; #copied directly from online  input.id = tbl(bety,&quot;inputs&quot;) %&gt;% filter(name == input_name) %&gt;% pull(id)</code></p></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Additional arguments to <code>query.format.vars</code> are optional</p></li>
+<li>If you only want to load a subset of dates in the data, specify start and end year, otherwise all data will be loaded.</li>
+<li><p>If you only want to load a select list of variables from the data, look up their IDs in BETY, otherwise all variables will be loaded.</p></li>
+<li><p>In R run</p></li>
+</ol>
+<p><code>R    format = PEcAn.DB::query.format.vars(bety, input.id)</code></p>
+<p>Examine the resulting R list object to make sure it returned the correct information.</p>
+<p>The example format contains the following objects:</p>
+<p>```R $file_name [1] “AMERIFLUX_BASE_HH”</p>
+<p>$mimetype [1] “csv”</p>
+<p>$skip [1] 2</p>
+<p>$header [1] 1</p>
+<p>$na.strings [1] “-9999” “-6999” “9999” “NA”</p>
+<p>$time.row [1] 4</p>
+<p>$site [1] 758</p>
+<p>$lat [1] 42.5378</p>
+<p>$lon [1] -72.1715</p>
+<p>$time_zone [1] “America/New_York” ```</p>
+<p>The first 4 rows of the table <code>format$vars</code> looks like this:</p>
+<table style="width:200%;">
+<colgroup>
+<col width="18%" />
+<col width="16%" />
+<col width="22%" />
+<col width="16%" />
+<col width="18%" />
+<col width="19%" />
+<col width="15%" />
+<col width="16%" />
+<col width="20%" />
+<col width="15%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">bety_name</th>
+<th align="left">variable_id</th>
+<th align="left">input_name</th>
+<th align="left">input_units</th>
+<th align="left">storage_type</th>
+<th align="left">column_number</th>
+<th align="left">bety_units</th>
+<th align="left">mstmip_name</th>
+<th align="left">mstmip_units</th>
+<th align="left">pecan_name</th>
+<th align="left">pecan_units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">air_pressure</td>
+<td align="left">554</td>
+<td align="left">PA</td>
+<td align="left">kPa</td>
+<td align="left"></td>
+<td align="left">19</td>
+<td align="left">Pa</td>
+<td align="left">Psurf</td>
+<td align="left">Pa</td>
+<td align="left">Psurf</td>
+<td align="left">Pa</td>
+</tr>
+<tr class="even">
+<td align="left">airT</td>
+<td align="left">86</td>
+<td align="left">TA</td>
+<td align="left">celsius</td>
+<td align="left"></td>
+<td align="left">4</td>
+<td align="left">degrees C</td>
+<td align="left">Tair</td>
+<td align="left">K</td>
+<td align="left">Tair</td>
+<td align="left">K</td>
+</tr>
+<tr class="odd">
+<td align="left">co2atm</td>
+<td align="left">135</td>
+<td align="left">CO2_1</td>
+<td align="left">umol mol-1</td>
+<td align="left"></td>
+<td align="left">20</td>
+<td align="left">umol mol-1</td>
+<td align="left">CO2air</td>
+<td align="left">micromol mol-1</td>
+<td align="left">CO2air</td>
+<td align="left">micromol mol-1</td>
+</tr>
+<tr class="even">
+<td align="left">datetime</td>
+<td align="left">5000000001</td>
+<td align="left">TIMESTAMP_START</td>
+<td align="left">ymd_hms</td>
+<td align="left">%Y%m%d%H%M</td>
+<td align="left">1</td>
+<td align="left">ymd_hms</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">datetime</td>
+<td align="left">ymd_hms</td>
+</tr>
+</tbody>
+</table>
+<ol start="5" style="list-style-type: decimal">
+<li>Get the path to the data</li>
+</ol>
+<p><code>R    data.path = PEcAn.DB::query.file.path(      input.id = input.id,       host_name = PEcAn.remote::fqdn(),       con = bety$con)</code></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Load the data</li>
+</ol>
+<p><code>R    data = PEcAn.benchmark::load_data(data.path = data.path, format = format)</code></p>
+<p>​</p>
+
 </div>
 </div>
             </section>
@@ -505,8 +611,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="workflow-modules.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="available-meteorological-drivers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

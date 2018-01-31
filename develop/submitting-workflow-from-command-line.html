@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="debugging.html">
+<link rel="next" href="workflow-modules.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,63 +439,145 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
+<div id="submitting-workflow-from-command-line" class="section level1">
+<h1><span class="header-section-number">27</span> Submitting Workflow from Command Line</h1>
+<p>This is how you can submit a workflow from the command line through the pecan web interface. This will use curl to submit all the requireed parameters to the web interface and trigger a run.</p>
+<pre><code># the host where the model should run
+# never use remote sites since you will need to pass your username/password and that WILL be stored
+hostname=pecan.vm
+# the site id where to run the model (NIWOT in this case)
+siteid=772
+# start date and end date, / need to be replaced with %2F or use - (NOT TESTED)
+start=2004-01-01
+end=2004-12-31
 
-$bitmapType
-[1] &quot;cairo&quot;
+# if of model you want to run, rest of section parameters depend on the model selected (SIPNET 136)
+modelid=5000000002
+# PFT selected (we should just use a number here)
+# NOTE: the square brackets are needed and will need be escaped with a \ if you call this from command line
+pft[]=temperate.coniferous
+# initial pool condition (-1 means nothing is selected)
+input_poolinitcond=-1
+# met data
+input_met=99000000006
 
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
+# variables to collect
+variables=NPP,GPP
+# ensemble size
+runs=10
+# use sensitivity analysis
+sensitivity=-1,1
 
-$browserNLdisabled
-[1] FALSE
+# redirect to the edit pecan.xml file
+pecan_edit=on
+# redirect to edit the model configuration files
+model_edit=on
+# use browndog
+browndog=on</code></pre>
+<p>For example the following will run the above workflow. Using -v in curl will show verbose output (needed) and the grep will make sure it only shows the redirect. This will show the actual workflowid:</p>
+<pre><code>curl -s -v &#39;http://localhost:6480/pecan/04-runpecan.php?hostname=pecan.vm&amp;siteid=772&amp;start=2004-01-01&amp;end=2004-12-31&amp;modelid=5000000002&amp;pft\[\]=temperate.coniferous&amp;input_poolinitcond=-1&amp;input_met=99000000006&#39; 2&gt;&amp;1 | grep &#39;Location:&#39;
+&lt; Location: 05-running.php?workflowid=99000000004</code></pre>
+<p>In this case you can use the browser to see progress, or use the following to see the status:</p>
+<pre><code>curl -s &#39;http://localhost:6480/pecan/dataset.php?workflowid=99000000004&amp;type=file&amp;name=STATUS&#39;
+TRAIT   2017-12-13 08:56:56 2017-12-13 08:56:57 DONE
+META    2017-12-13 08:56:57 2017-12-13 08:57:13 DONE
+CONFIG  2017-12-13 08:57:13 2017-12-13 08:57:14 DONE
+MODEL   2017-12-13 08:57:14 2017-12-13 08:57:15 DONE
+OUTPUT  2017-12-13 08:57:15 2017-12-13 08:57:15 DONE
+ENSEMBLE    2017-12-13 08:57:15 2017-12-13 08:57:16 DONE
+FINISHED    2017-12-13 08:57:16 2017-12-13 08:57:16 DONE</code></pre>
+<p>Or to show the output log:</p>
+<pre><code>curl -s &#39;http://localhost:6480/pecan/dataset.php?workflowid=99000000004&amp;type=file&amp;name=workflow.Rout&#39;
 
-$CBoundsCheck
-[1] FALSE
+R version 3.4.3 (2017-11-30) -- &quot;Kite-Eating Tree&quot;
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
-$check.bounds
-[1] FALSE
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type &#39;license()&#39; or &#39;licence()&#39; for distribution details.
 
-$citation.bibtex.max
-[1] 1
+R is a collaborative project with many contributors.
+....</code></pre>
 
-$continue
-[1] &quot;+ &quot;
+<div id="data-assimilation-with-dart" class="section level2">
+<h2><span class="header-section-number">27.1</span> Data assimilation with DART</h2>
+<p>In addition to the state assimilation routines found in the assim.sequential module, another approach for state data assimilation in PEcAn is through the DART workflow created by the DARES group in NCAR.</p>
+<p>This section gives a straight-forward explanation how to implement DART, focused on the technical aspects of the implementation. If there are any questions, feel free to send @Viskari an email (<code>tt.viskari@gmail.com</code>) or contacting DART support as they are quite awesome in helping people with problems. Also, if there are any suggestions on how to improve the wiki, please let me know.</p>
+<p><strong>Running with current folders in PEcAn</strong></p>
+<p>Currently the DART folders in PEcAn are that you can simply copy the structure there over a downloaded DART workflow and it should replace/add relevant files and folders. The most important step after that is to check and change the run paths in the following files: Path_name files in the work folders T_ED2IN file, as it indicates where the run results be written. advance_model.csh, as it indicates where to copy files from/to.</p>
+<p>Second thing is setting the state vector size. This is explained in more detail below, but essentially this is governed by the variable model_size in model_mod.f90. In addition to this, it should be changed in utils/F2R.f90 and R2F.f90 programs, which are responsible for reading and writing state variable information for the different ensembles. This also will be expanded below. Finally, the new state vector size should be updated for any other executable that runs it.</p>
+<p>Third thing needed are the initial condition and observation sequence files. They will always follow the same format and are explained in more detail below.</p>
+<p>Finally the ensemble size, which is the easiest to change. In the work subfolder, there is a file named input.nml. Simply changing the ensemble size there will set it for the run itself. Also remember that initial conditions file should have the equal amount of state vectors as there are ensemble members.</p>
+<p><strong>Adjusting the workflow</strong></p>
+<p>The central file for the actual workflow is advance_model.csh. It is a script DART calls to determine how the state vector changes between the two observation times and is essentially the only file one needs to change when changing state models or observations operators. The file itself should be commented to give a good idea of the flow, but beneath is a crude order of events. 1. Create a temporary folder to run the model in and copy/link required files in to it. 2. Read in the state vector values and times from DART. Here it is important to note that the values will be in binary format, which need to be read in by a Fortran program. In my system, there is a program called F2R which reads in the binary values and writes out in ascii form the state vector values as well as which ED2 history files it needs to copy based on the time stamps. 3. Run the observation operator, which writes the state vector state in to the history files and adjusts them if necessary. 4. Run the program. 5. Read the new state vector values from output files. 6. Convert the state vector values to the binary. In my system, this is done by the program R2F.</p>
+<p><strong>Initial conditions file</strong></p>
+<p>The initial conditions file, commonly named filter_ics although you can set it to something else in input.nml, is relatively simple in structure. It has one sequence repeating over the number of ensemble members. First line contains two times: Seconds and days. Just use one of them in this situation, but it has to match the starting time given in input.nml. After that each line should contain a value from the state vector in the order you want to treat them. R functions filter_ics.R and B_filter_ics.R in the R folder give good examples of how to create these.</p>
+<p><strong>Observations files</strong></p>
+<p>The file which contains the observations is commonly known as obs_seq.out, although again the name of the file can be changed in input.nml. The structure of the file is relatively straight-forward and the R function ObsSeq.R in the R subfolder has the write structure for this. Instead of writing it out here, I want to focus on a few really important details in this file. Each observations will have a time, a value, an uncertainty, a location and a kind. The first four are self-explanatory, but the kind is really important, but also unfortunately really easy to misunderstand. In this file, the kind does not refer to a unit or a type of observation, but which member of the state vector is this observation of. So if the kind was, for example, 5, it would mean that it was of the fifth member of the state vector. However, if the kind value is positive, the system assumes that there is some sort of an operator change in comparing the observation and state vector value which is specified in a subprogram in model_mod.f90.</p>
+<p>So for an direct identity comparison between the observation and the state vector value, the kind needs to be negative number of the state vector component. Thus, again if the observation is of the fifth state vector value, the kind should be set as -5. Thus it is recommendable that the state vector values have already been altered to be comparable with the observations.</p>
+<p>As for location, there are many ways to set in DART and the method needs to be chosen when compiling the code by giving the program which of the location mods it is to use. In our examples we used a 1-dimensional location vector with scaled values between 0 and 1. For future it makes sense to switch to a 2 dimensional long- and lat-scale, but for the time being the location does not impact the system a lot. The main impact will be if the covariances will be localized, as that will be decided on their locations.</p>
+<p><strong>State variable vector in DART</strong></p>
+<p>Creating/adjusting a state variable vector in DART is relatively straight-forward. Below are listed the steps to specify a state variable vector in DART.</p>
+<p>I. For each specific model, there should be an own folder within the DART root models folder. In this folder there is a model_mod.f90, which contains the model specific subroutines necessary for a DART run.</p>
+<p>At the beginning of this file there should be the following line:</p>
+<p>integer, parameter :: model_size = [number]</p>
+<p>The number here should be the number of variables in the vector. So for example if there were three state variables, then the line should look like this:</p>
+<p>integer, parameter :: model_size = 3</p>
+<p>This number should also be changed to match with any of the other executables called during the run as indicated by the list above.</p>
+<ol start="2" style="list-style-type: upper-roman">
+<li>In the DART root, there should be a folder named obs_kind, which contains a file called DEFAULT_obs_kind_mod.F90. It is important to note that all changes should be done to this file instead of obs_kind_mod.f90, as during compilation DART creates obs_kind_mod.f90 from DEFAULT_obs_kind_mod.F90. This program file contains all the defined observation types used by DART and numbers them for easier reference later. Different types are classified according to observation instrument or relevant observation phenomenon. Adding a new type only requires finding an unused number and starting a new identifying line with the following:</li>
+</ol>
+<p>integer, parameter, public :: &amp; KIND_…</p>
+<p>Note that the observation kind should always be easy to understand, so avoid using unnecessary acronyms. For example, when adding an observation type for Leaf Area Index, it would look like below:</p>
+<p>integer, parameter, public :: &amp; KIND_LEAF_AREA_INDEX = [number]</p>
+<ol start="3" style="list-style-type: upper-roman">
+<li>In the DART root, there should be a folder named obs_def, which contains several files starting with obs_def_. There files contain the different available observation kinds classified either according to observation instrument or observable system. Each file starts with the line</li>
+</ol>
+<p>! BEGIN DART PREPROCESS KIND LIST</p>
+<p>And end with line</p>
+<p>! END DART PREPROCESS KIND LIST</p>
+<p>The lines between these two should contain</p>
+<p>! The desired observation reference, the observation type, COMMON_CODE.</p>
+<p>For example, for observations relating to phenology, I have created a file called obs_def_phen_mod.f90. In this file I define the Leaf Area Index observations in the following way.</p>
+<p>! BEGIN DART PREPROCESS KIND LIST ! LAI, TYPE_LEAF_AREA_INDEX, COMMON_CODE ! END DART PREPROCESS KIND LIST</p>
+<p>Note that the exclamation marks are necessary for the file.</p>
+<ol start="4" style="list-style-type: upper-roman">
+<li>In the model specific folder, in the work subfolder there is a namelist file input.nml. This contains all the run specific information for DART. In it, there is a subtitle &amp;preprocess, under which there is a line</li>
+</ol>
+<p>input_files = ‘….’</p>
+<p>This input_files sections must be set to refer to the obs_def file created in step III. The input files can contain references to multiple obs_def files if necessary.</p>
+<p>As an example, the reference to the obs_def_phen_mod.f90 would look like input_files = ‘../../../obs_def/obs_def_phen_mod.f90’</p>
+<p>V. Finally, as an optional step, the different values in state vector can be typed. In model_mod, referred to in step I, there is a subroutine get_state_meta_data. In it, there is an input variable index_in, which refers to the vector component. So for instance for the second component of the vector index_in would be 2. If this is done, the variable kind has to be also included at the beginning of the model_mod.f90 file, at the section which begins</p>
+<p>use obs_kind_mod, only ::</p>
+<p>The location of the variable can be set, but for a 0-dimensional model we are discussing here, this is not necessary.</p>
+<p>Here, though, it is possible to set the variable types by including the following line</p>
+<p>if(index_in .eq. [number]) var_type = [One of the variable kinds set in step II]</p>
+<ol start="6" style="list-style-type: upper-roman">
+<li>If the length of the state vector is changed, it is important that the script ran with DART produces a vector of that length. Change appropriately if necessary.</li>
+</ol>
+<p>After these steps, DART should be able to run with the state vector of interest.</p>
 
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
+</div>
+<div id="troubleshooting-pecan" class="section level2">
+<h2><span class="header-section-number">27.2</span> Troubleshooting PEcAn</h2>
+<div id="cookies-and-pecan-web-pages" class="section level3">
+<h3><span class="header-section-number">27.2.1</span> Cookies and pecan web pages</h3>
+<p>You may need to disable cookies specifically for the pecan webserver in your browser. This shouldn’t be a problem running from the virtual machine, but your installation of php can include a ‘PHPSESSID’ that is quite long, and this can overflow the params field of the workflows table, depending on how long your hostname, model name, site name, etc are.</p>
+</div>
+<div id="warning-mkdir-function.mkdir-no-such-file-or-directory" class="section level3">
+<h3><span class="header-section-number">27.2.2</span> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></h3>
+<p>If you are seeing: <code>Warning: mkdir() [function.mkdir]: No such file or directory in /path/to/pecan/web/runpecan.php at line 169</code> it is because you have used a relative path for $output_folder in system.php.</p>
+</div>
+<div id="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed" class="section level3">
+<h3><span class="header-section-number">27.2.3</span> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</h3>
+<p>This is a result of the rather clunky way we currently have adding PFTs to PEcAn. This is happening because you need to edit the ./pecan/models/ed/data/pftmapping.csv file to include your new PFTs.</p>
+<p>This is what the file looks like:</p>
+<pre><code>PEcAn;ED
+ebifarm.acru;11
+ebifarm.acsa3;11
+...</code></pre>
+<p>You just need to edit this file (in a text editor, no Excel) and add your PFT names and associated number to the end of the file. Once you do this, recompile PEcAn and it should then work for you. We currently need to reference this file in order to properly set the PFT number and maintain internal consistency between PEcAn and ED2.</p>
 
 </div>
 </div>
@@ -505,8 +587,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="debugging.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="workflow-modules.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

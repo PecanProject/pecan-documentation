@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="template-model-page.html">
+<link rel="next" href="submitting-workflow-from-command-line.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,65 +439,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
-
-$bitmapType
-[1] &quot;cairo&quot;
-
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
-
-$browserNLdisabled
-[1] FALSE
-
-$CBoundsCheck
-[1] FALSE
-
-$check.bounds
-[1] FALSE
-
-$citation.bibtex.max
-[1] 1
-
-$continue
-[1] &quot;+ &quot;
-
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
-
+<div id="debugging" class="section level1">
+<h1><span class="header-section-number">26</span> Debugging</h1>
+<p>How to identify the source of a problem.</p>
+<div id="using-testsworkflow.r" class="section level3">
+<h3><span class="header-section-number">26.0.1</span> Using <code>tests/workflow.R</code></h3>
+<p>This script, along with model-specific settings files in the <code>tests</code> folder, provide a working example. From inside the tests folder, <code>R CMD --vanilla -- --settings pecan.&lt;model&gt;.xml &lt; workflow.R</code> should work.</p>
+<p>The next step is to add <code>debugonce(&lt;broken.function.name&gt;)</code> before running the test workflow.</p>
+<p>This allows you can step through the function and evaluate the different objects as they are created and/or transformed.</p>
+<p>See <a href="https://github.com/PecanProject/pecan/blob/master/tests/README.md">tests README</a> for more information.</p>
 </div>
+<div id="useful-scripts" class="section level3">
+<h3><span class="header-section-number">26.0.2</span> Useful scripts</h3>
+<p>The following scripts (in <code>qaqc/vignettes</code> identify, respectively:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://github.com/PecanProject/pecan/blob/master/qaqc/vignettes/function_relationships.Rmd">relationships among functions across packages</a></li>
+<li><a href="https://github.com/PecanProject/pecan/blob/master/qaqc/vignettes/module_output.Rmd">function inputs and outputs</a> (e.g. that will identify which functions and outputs are used in a workflow).</li>
+</ol>
+</div>
+<div id="debugging-shiny-apps" class="section level3">
+<h3><span class="header-section-number">26.0.3</span> Debugging Shiny Apps</h3>
+<p>When developing shiny apps you can run the application from rstudio and place breakpoints int he code. To do this you will need to do the following steps first (already done on the VM) before starting rstudio: - echo “options(shiny.port = 6438)” &gt;&gt; ${HOME}/.Rprofile - echo “options(shiny.launch.browser = ‘FALSE’)” &gt;&gt; ${HOME}/.Rprofile</p>
+<p>Next you will need to create a tunnel for port 6438 to the VM, which will be used to open the shiny app, the following command will creat this tunnel: <code>ssh -l carya -p 6422 -L 6438:localhost:6438 localhost</code>.</p>
+<p>Now you can from rstudio run your application using <code>shiny::runApp()</code> and it will show the output from the application in your console. You can now place breakpoints and evaluate the output.</p>
+
 </div>
 </div>
             </section>
@@ -505,8 +470,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="template-model-page.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="submitting-workflow-from-command-line.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

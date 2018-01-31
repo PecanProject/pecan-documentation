@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="faq.html">
-
+<link rel="prev" href="pecan-workflow-webworkflow-r.html">
+<link rel="next" href="standalone-tools-modules.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -439,65 +439,641 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="user-appendix" class="section level1">
-<h1><span class="header-section-number">35</span> User Appendix</h1>
-<p><br></p>
-<div id="file-download-alternative-options-when-behind-a-firewall" class="section level3">
-<h3><span class="header-section-number">35.0.1</span> File download: Alternative options when behind a firewall</h3>
-<div id="using-the-pecan-download.file-function" class="section level4">
-<h4><span class="header-section-number">35.0.1.1</span> Using the PEcAn download.file() function</h4>
-<p>download.file(url, destination_file, method) <br> <br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
+<div id="adding-to-pecan" class="section level1">
+<h1><span class="header-section-number">14</span> Adding to PEcAn</h1>
+<ul>
+<li>Case studies
+<ul>
+<li>Adding a model</li>
+<li>Adding new species, PFTs, and traits from a new site
+<ul>
+<li>Add a site</li>
+<li>Add some species</li>
+<li>Add PFT</li>
+<li>Add trait data</li>
+</ul></li>
+<li>Adding a benchmark</li>
+<li>Adding a met driver</li>
+</ul></li>
+<li>Reference (How to change tables)
+<ul>
+<li>Models</li>
+<li>Species</li>
+<li>PFTs</li>
+<li>Traits</li>
+<li>Inputs</li>
+<li>DB files</li>
+<li>Variables</li>
+<li>Formats</li>
+<li>(Link each section to relevant Bety tables)</li>
+</ul></li>
+</ul>
 
-$bitmapType
-[1] &quot;cairo&quot;
+<div id="case-studies" class="section level2">
+<h2><span class="header-section-number">14.1</span> Case studies</h2>
+<ul>
+<li>Adding a model</li>
+<li>Adding new species, PFTs, and traits from a new site
+<ul>
+<li>Add a site</li>
+<li>Add some species</li>
+<li>Add PFT</li>
+<li>Add trait data</li>
+</ul></li>
+<li>Adding a benchmark</li>
+<li>Adding a met driver</li>
+</ul>
 
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
-
-$browserNLdisabled
-[1] FALSE
-
-$CBoundsCheck
-[1] FALSE
-
-$check.bounds
-[1] FALSE
-
-$citation.bibtex.max
-[1] 1
-
-$continue
-[1] &quot;+ &quot;
-
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
+<div id="adding-an-ecosystem-model" class="section level3">
+<h3><span class="header-section-number">14.1.1</span> Adding An Ecosystem Model</h3>
+<p><strong>Adding a model to PEcAn involves two activities:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Updating the PEcAn database to register the model</li>
+<li>Writing the interface modules between the model and PEcAn</li>
+</ol>
+<p><strong>Note that coupling a model to PEcAn should not require any changes to the model code itself</strong>. A key aspect of our design philosophy is that we want it to be easy to add models to the system and we want to using the working version of the code that is used by all other model users, not a special branch (which would rapidly end up out-of-date).</p>
+<div id="pecan-database" class="section level4">
+<h4><span class="header-section-number">14.1.1.1</span> PEcAn Database</h4>
+<p>To run a model within PEcAn requires that the PEcAn database know about the model – this includes a MODEL_TYPE designation, the types of inputs the model requires, the location of the model executable, and the plant functional types used by the model. The instructions below assume that you will be specifying this information using the BETYdb web-based interface. This can be done either on your local VM (localhost:3280/bety or localhost:6480/bety) or on a server installation of BETYdb, though in either case we’d encourage you to set up your PEcAn instance to support <a href="https://github.com/PecanProject/bety/wiki/Distributed-BETYdb">database syncs</a> so that these changes can be shared and backed-up across the PEcAn network.</p>
+<p>The figure below summarizes the relevant database tables that need to be updated to add a new model and the primary variables that define each table.</p>
+<div class="figure">
+<img src="https://www.lucidchart.com/publicSegments/view/54a8aea8-9360-4628-af9e-392a0a00c27b/image.png" alt="" />
 
 </div>
+</div>
+<div id="define-model_type" class="section level4">
+<h4><span class="header-section-number">14.1.1.2</span> Define MODEL_TYPE</h4>
+<p>The first step to adding a model is to create a new MODEL_TYPE, which defines the abstract model class which we will then use to specify input requirements, define plant functional types, and keep track of different model versions. A MODEL_TYPE is created by selecting Runs &gt; Model Type and then clicking on <em>New Model Type</em>. The MODEL_TYPE name should be identical to the MODEL package name (see Interface Module below) and is case sensitive.</p>
+</div>
+<div id="machine" class="section level4">
+<h4><span class="header-section-number">14.1.1.3</span> MACHINE</h4>
+<p>The PEcAn design acknowledges that the same model executables and input files may exist on multiple computers. Therefore, we need to define the machine that that we are using. If you are running on the VM then the local machine is already defined as <em>pecan32</em> or <em>pecan64</em> for the 32-bit and 64-bit versions respectively. Otherwise, you will need to select Runs &gt; Machines, click <em>New Machine</em>, and enter the URL of your server (e.g. pecan2.bu.edu).</p>
+</div>
+<div id="model" class="section level4">
+<h4><span class="header-section-number">14.1.1.4</span> MODEL</h4>
+<p>Next we are going to tell PEcAn where the model executable is. Select Runs &gt; Files, and click ADD. Use the pull down menu to specify the machine you just defined above and fill in the path and name for the executable. For example, if SIPNET is installed at /usr/local/bin/sipnet then the path is /usr/local/bin/ and the file (executable) is sipnet.</p>
+<p>Now we will create the model record and associate this with the File we just registered. The first time you do this select Runs &gt; Models and click <em>New Model</em>. Specify a descriptive name of the model (which doesn’t have to be the same as MODEL_TYPE), select the MODEL_TYPE from the pull down, and provide a revision identifier for the model (e.g. v3.2.1). Once the record is created select it from the Models table and click EDIT RECORD. Click on “View Related Files” and when the search window appears search for the model executable you just added (if you are unsure which file to choose you can go back to the Files menu and look up the unique ID number). You can then associate this Model record with the File by clicking on the +/- symbol. By contrast, clicking on the name itself will take you to the File record.</p>
+<p>In the future, if you set up the SAME MODEL VERSION on a different computer you can add that Machine and File to PEcAn and then associate this new File with this same Model record. A single version of a model should only be entered into PEcAn <strong>once</strong>.</p>
+<p>If a new version of the model is developed that is derived from the current version you should add this as a new Model record but with the same MODEL_TYPE as the original. Furthermore, you should set the previous version of the model as Parent of this new version.</p>
+</div>
+<div id="formats" class="section level4">
+<h4><span class="header-section-number">14.1.1.5</span> FORMATS</h4>
+<p>The PEcAn database keep track of all the input files passed to models, as well as any data used in model validation or data assimilation. Before we start to register these files with PEcAn we need to define the format these files will be in. To create a new format click on Runs &gt; Formats and click <em>New Format</em>. Lets start with the input meteorology used by your model. The first thing you need to do is specify the mime type of your met file (e.g. CSV, netCDF, etc) and then give a unique, descriptive name to your file format (e.g. SIPNET clim). If your met file is text-based you can also specify whether the file has a header or not (TRUE / FALSE) and if any lines need to be skipped before the header or start of file (skip = INTEGER). You can also enter a more descriptive Note that explains the format in more detail.</p>
+<div id="formats---variables" class="section level5">
+<h5><span class="header-section-number">14.1.1.5.1</span> Formats -&gt; Variables</h5>
+<p>After a Format entry has been created, you are encouraged to edit the entry to add relationships between the file’s variables and the Variables table in PEcAn. Not only do these relationships provide meta-data describing the file format, but they also allow PEcAn to search and (for some mime types) read files. To enter this data Edit the existing record and click on “View related variables”. For each variable in the file you will want at a minimum to specify the NAME of the variable within your file and match that to the equivalent Variable in the pulldown. If there is no equivalent, new Variables can be searched and added under Data &gt; Variables. If your input file and PEcAn already have the variable in the same units then the <em>Unit</em> column can be left blank, otherwise units should be specified in a format that can be parsed by the UDUNITS library. <em>Storage Type</em> only needs to be specified if the variable is stored in a format other than what would be expected (e.g. if numeric values are stored as quoted character strings). Finally, if your data is in text format with variables in a standard order then you can specify the Column Number for the variable. This is particularly important for text files that lack headers.</p>
+</div>
+<div id="model_type---formats" class="section level5">
+<h5><span class="header-section-number">14.1.1.5.2</span> MODEL_TYPE -&gt; Formats</h5>
+<p>For each of the input formats you specify for your model, you will need to edit your MODEL_TYPE record to add an association between the format and the MODEL_TYPE. Go to Runs &gt; Model Type, select your record and click on the Edit button. Next, click on “Edit Associated Formats” and choose the Format you just defined from the pull down menu. If the <em>Input</em> box is checked then all matching Input records will be displayed in the PEcAn site run selection page when you are defining a model run. In other words, the set of model inputs available through the PEcAn web interface is model-specific and dynamically generated from the associations between MODEL_TYPEs and Formats. If you also check the <em>Required</em> box, then the Input will be treated as required and PEcAn will not run the model if that input is not available. Furthermore, on the site selection webpage, PEcAn will filter the available sites and only display pins on the Google Map for sites that have a full set of required inputs (or where those inputs could be generated using PEcAn’s workflows). Similarly, to make a site appear on the Google Map, all you need to do is specify Inputs, as described in the next section, and the point should automatically appear on the map.</p>
+</div>
+</div>
+<div id="inputs" class="section level4">
+<h4><span class="header-section-number">14.1.1.6</span> INPUTS</h4>
+<p>After a file Format has been created then input files can be registered with the database. The first step for this is to create a new File entry for the file (Runs &gt; Files; New File) same as you did when you added the model executable. Next an Input record is created (Runs &gt; Inputs; New Input) by selecting the Site the data are from, the data Format, the date range, and specifying a Name for the Input. If you are adding an input for a Site that doesn’t exist in the database you will want to create a new site (Data &gt; Sites; New Site) and give it a name, latitude, and longitude. After the Input record is created you Edit the record and use “View related files” to associate the File with the Input. As with Models, if the exact same Input file exists in multiple place or over multiple machines then you can create multiple File entries for each of those files but associate each with the same Input. Doing so makes it simple for PEcAn to move between machines since the Input record stays the same for a give model run and the system just looks up where the local copy of the file is stored.</p>
+<p>Additional detail for creating Inputs can be found under <a href="../developers_guide/How-to-insert-new-Input-data.html">How to insert new Input data</a>.</p>
+</div>
+<div id="pfts-plant-functional-types" class="section level4">
+<h4><span class="header-section-number">14.1.1.7</span> PFTS (Plant Functional Types)</h4>
+<p>Since many of the PEcAn tools are designed to keep track of parameter uncertainties and assimilate data into models, to use PEcAn with a model it is important to define Plant Functional Types for the sites or regions that you will be running the model. PFTs are MODEL_TYPE specific, so when you create a new PFT entry (Data &gt; PFTs; New PFT) you will want to choose your MODEL_TYPE from the pull down and then give the PFT a descriptive name (e.g. temperate deciduous).</p>
+<div id="species" class="section level5">
+<h5><span class="header-section-number">14.1.1.7.1</span> Species</h5>
+<p>Within PEcAn there are no predefined PFTs and user can create new PFTs very easily at whatever taxonomic level is most appropriate, from PFTs for individual species up to one PFT for all plants globally. To allow PEcAn to query its trait database for information about a PFT, you will want to associate species with the PFT record by choosing Edit and then “View Related Species”. Species can be searched for by common or scientific name and then added to a PFT using the +/- button.</p>
+</div>
+</div>
+<div id="priors" class="section level4">
+<h4><span class="header-section-number">14.1.1.8</span> PRIORS</h4>
+<p>In addition to adding species, a PFT is defined in PEcAn by the list of variables associated with the PFT. PEcAn takes a fundamentally Bayesian approach to representing model parameters, so variables are not entered as fixed constants but as Prior probability distributions (see below). Once Priors are defined for each model variable then you Edit the PFT and use “View Related Priors” to search for and add Prior distributions for each model parameter. It is important to note that the priors are defined for the variable name and units as specified in the Variables table. <strong>If the variable name or units is different within the model it is the responsibility of write.configs.MODEL function to handle name and unit conversions</strong> (see Interface Modules below). This can also include common but nonlinear transformations, such as converting SLA to LMA or changing the reference temperature for respiration rates.</p>
+<p>There are a wide variety of priors already defined in the PEcAn database that often range from very diffuse and generic to very informative priors for specific PFTs. If the current set of Priors for a variable are inadequate, or if a prior needs to be specified for a new variable, this can be done under Data &gt; Priors then “New Prior”. After using the pull-down menu to select the Variable you want to generate a prior for, the prior is defined by choosing a probability distribution and specifying values for that distribution’s parameters. These are labeled Parameter a &amp; b but their exact meaning depends upon the distribution chosen. For example, for the Normal distribution a and b are the mean and standard deviation while for the Uniform they are the minimum and maximum. All parameters are defined based on their standard parameterization in the R language. If the prior is based on observed data (independent of data in the PEcAn database) then you can also specify the prior sample size, <em>N</em>. The <em>Phylogeny</em> variable allows one to specify what taxonomic grouping the prior is defined for, at it is important to note that this is just for reference and doesn’t have to be specified in any standard way nor does it have to be monophyletic (i.e. it can be a functional grouping). Finally, the <em>Citation</em> is a required variable that provides a reference for how the prior was defined. That said, there are a number of unpublished Citations in current use that simply state the expert opinion of an individual.</p>
+<p>Additional information on adding PFTs, Species, and Priors can be found under [[Choosing PFTs]]</p>
+</div>
+<div id="interface-modules" class="section level4">
+<h4><span class="header-section-number">14.1.1.9</span> Interface Modules</h4>
+<div id="setting-up-the-module-directory-required" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.1</span> Setting up the module directory (required)</h5>
+<p>PEcAn assumes that the interface modules are available as an R package in the models directory named after the model in question. The simplest way to get started on that R package is to make a copy the <a href="https://github.com/PecanProject/pecan/tree/master/models/template"><em>template</em></a> directory in the pecan/models folder and re-name it to the name of your model. In the code, filenames, and examples below you will want to substitute the word <strong>MODEL</strong> for the name of your model (note: R is case-sensitive).</p>
+<p>If you do not want to write the interface modules in R then it is fairly simple to set up the R functions describe below to just call the script you want to run using R’s <em>system</em> command. Scripts that are not R functions should be placed in the <em>inst</em> folder and R can look up the location of these files using the function <em>system.file</em> which takes as arguments the <em>local</em> path of the file within the package folder and the name of the package (typically PEcAn.MODEL). For example</p>
+<pre><code>## Example met conversion wrapper function
+met2model.MODEL &lt;- function(in.path, in.prefix, outfolder, start_date, end_date){
+   myMetScript &lt;- system.file(&quot;inst/met2model.MODEL.sh&quot;, &quot;PEcAn.MODEL&quot;)
+   system(paste(myMetScript, file.path(in.path, in.prefix), outfolder, start_date, end_date))
+}</code></pre>
+<p>would execute the following at the Linux command line</p>
+<pre><code>inst/met2model.MODEL.sh in.path/in.prefix outfolder start_date end_date    `</code></pre>
+</div>
+<div id="description" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.2</span> DESCRIPTION</h5>
+<p>Within the module folder open the <em>DESCRIPTION</em> file and change the package name to PEcAn.MODEL. Fill out other fields such as Title, Author, Maintainer, and Date.</p>
+</div>
+<div id="namespace" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.3</span> NAMESPACE</h5>
+<p>Open the <em>NAMESPACE</em> file and change all instances of MODEL to the name of your model. If you are not going to implement one of the optional modules (described below) at this time then you will want to comment those out using the pound sign <code>#</code>. For a complete description of R NAMESPACE files <a href="http://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-namespaces">see here</a>. If you create additional functions in your R package that you want to be used make sure you include them in the NAMESPACE as well (internal functions don’t need to be declared)</p>
+</div>
+<div id="building-the-package" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.4</span> Building the package</h5>
+<p>Once the package is defined you will then need to add it to the PEcAn build scripts. From the root of the pecan directory, go into the <em>scripts</em> folder and open the file <em>build.sh</em>. Within the section of code that includes PACKAGES= add model/MODEL to the list of packages to compile. If, in writing your module, you add any other R packages to the system you will want to make sure those are listed in the DESCRIPTION and in the script <strong>scripts/install.dependencies.R</strong>. Next, from the root pecan directory open all/DESCRIPTION and add your model package to the <em>Suggests:</em> list.</p>
+<p>At any point, if you want to check if PEcAn can build your MODEL package successfully, just go to the linux command prompt and run <strong>scripts/build.sh</strong>. You will need to do this before the system can use these packages.</p>
+</div>
+<div id="write.config.model-required" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.5</span> write.config.MODEL (required)</h5>
+<p>This module performs two primary tasks. The first is to take the list of parameter values and model input files that it receives as inputs and write those out in whatever format(s) the MODEL reads (e.g. a settings file). The second is to write out a shell script, jobs.sh, which, when run, will start your model run and convert its output to the PEcAn standard (netCDF with metadata currently equivalent to the <a href="http://nacp.ornl.gov/MsTMIP_variables.shtml">MsTMIP standard</a>). Within the MODEL directory take a close look at inst/template.job and the example write.config.MODEL to see an example of how this is done. It is important that this script writes or moves outputs to the correct location so that PEcAn can find them. The example function also shows an example of writing a model-specific settings/config file, also by using a template.</p>
+<p>You are encouraged to read the section above on defining PFTs before writing write.config.MODEL so that you understand what model parameters PEcAn will be passing you, how they will be named, and what units they will be in. Also note that the (optional) PEcAn input/driver processing scripts are called by separate workflows, so the paths to any required inputs (e.g. meteorology) will already be in the model-specific format by the time write.config.MODEL receives that info.</p>
+</div>
+<div id="output-conversions" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.6</span> Output Conversions</h5>
+<p>The module model2netcdf.MODEL converts model output into the PEcAn standard (netCDF with metadata currently equivalent to the <a href="http://nacp.ornl.gov/MsTMIP_variables.shtml">MsTMIP standard</a>). This function was previously required, but now that the conversion is called within jobs.sh it may be easier for you to convert outputs using other approaches (or to just directly write outputs in the standard).</p>
+<p>Whether you implement this function or convert outputs some other way, please note that PEcAn expects all outputs to be broken up into ANNUAL files with the year number as the file name (i.e. YEAR.nc), though these files may contain any number of scalars, vectors, matrices, or arrays of model outputs, such as time-series of each output variable at the model’s native timestep.</p>
+<p>Note: PEcAn reads all variable names from the files themselves so it is possible to add additional variables that are not part of the MsTMIP standard. Similarly, there are no REQUIRED output variables, though <em>time</em> is highly encouraged. We are shortly going establish a canonical list of PEcAn variables so that if users add additional output variables they become part of the standard. <strong>We don’t want two different models to call the same output with two different names or different units</strong> as this would prohibit the multi-model syntheses and comparisons that PEcAn is designed to facilitate.</p>
+</div>
+<div id="met2model.model" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.7</span> met2model.MODEL</h5>
+<p><code>met2model.MODEL(in.path, in.prefix, outfolder, start_date, end_date)</code></p>
+<p>Converts meteorology input files from the PEcAn standard (netCDF, CF metadata) to the format required by the model. This file is optional if you want to load all of your met files into the Inputs table as described in <a href="../developers_guide/How-to-insert-new-Input-data.html">How to insert new Input data</a>, which is often the easiest way to get up and running quickly. However, this function is required if you want to benefit from PEcAn’s meteorology workflows and model run cloning. You’ll want to take a close look at [Adding-an-Input-Converter] to see the exact variable names and units that PEcAn will be providing. Also note that PEcAn splits all meteorology up into ANNUAL files, with the year number explicitly included in the file name, and thus what PEcAn will actually be providing is <strong>in.path</strong>, the input path to the folder where multiple met files may stored, and <strong>in.prefix</strong>, the start of the filename that precedes the year (i.e. an individual file will be named <code>&lt;in.prefix&gt;.YEAR.nc</code>). It is valid for in.prefix to be blank. The additional REQUIRED arguments to met2model.MODEL are <strong>outfolder</strong>, the output folder where PEcAn wants you to write your meteorology, and <strong>start_date</strong> and <strong>end_date</strong>, the time range the user has asked the meteorology to be processed for.</p>
+</div>
+<div id="commit-changes" class="section level5">
+<h5><span class="header-section-number">14.1.1.9.8</span> Commit changes</h5>
+<p>Once the MODEL modules are written, you should follow the <a href="Using-Git.md">Using-Git</a> instructions on how to commit your changes to your local git repository, verify that PEcAn compiles using <em>scripts/build.sh</em>, push these changes to Github, and submit a pull request so that your model module is added to the PEcAn system. It is important to note that while we encourage users to make their models open, adding the PEcAn interface module to the Github repository in no way requires that the model code itself be made public. It does, however, allow anyone who already has a copy of the model code to use PEcAn so we strongly encourage that any new model modules be committed to Github.</p>
+
+</div>
+</div>
+</div>
+<div id="input-conversion" class="section level3">
+<h3><span class="header-section-number">14.1.2</span> Input Conversion</h3>
+<p>Three Types of data conversions are discussed below: Meteorological data, Vegetation data, and Soil data. Each section provides instructions on how to convert data from their raw formats into a PEcAn standard format, whether it be from a database or if you have raw data in hand.</p>
+<p>Also, see [PEcAn standard formats].</p>
+<div id="meterological-data-conversion" class="section level4">
+<h4><span class="header-section-number">14.1.2.1</span> Meterological Data conversion</h4>
+<div id="adding-a-function-to-pecan-to-convert-a-met-data-source" class="section level5">
+<h5><span class="header-section-number">14.1.2.1.1</span> Adding a function to PEcAn to convert a met data source</h5>
+<p>In general, you will need to write a function to download the raw met data and one to convert it to the PEcAn standard.</p>
+<p>Downloading raw data function are named <code>download.&lt;source&gt;.R</code>. These functions are stored within the PEcAn directory: <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.atmosphere/R"><code>/modules/data.atmosphere/R</code></a>.</p>
+<p>Conversion function from raw to standard are named <code>met2CF.&lt;source&gt;.R</code>. These functions are stored within the PEcAn directory: <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.atmosphere/R"><code>/modules/data.atmosphere/R</code></a>.</p>
+<p>Current Meteorological products that are coupled to PEcAn can be found in our <a href="available-meteorological-drivers.html#available-meteorological-drivers">Available Meteorological Drivers</a> page.</p>
+<p>Note: Unless you are also adding a new model, you will not need to write a script to convert from PEcAn standard to PEcAn models. Those conversion scripts are written when a model is added and can be found within each model’s PEcAn directory.</p>
+</div>
+<div id="dimensions" class="section level5">
+<h5><span class="header-section-number">14.1.2.1.2</span> Dimensions:</h5>
+<table>
+<thead>
+<tr class="header">
+<th align="left">CF standard-name</th>
+<th align="left">units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">time</td>
+<td align="left">days since 1700-01-01 00:00:00 UTC</td>
+</tr>
+<tr class="even">
+<td align="left">longitude</td>
+<td align="left">degrees_east</td>
+</tr>
+<tr class="odd">
+<td align="left">latitude</td>
+<td align="left">degrees_north</td>
+</tr>
+</tbody>
+</table>
+<p>General Note: dates in the database should be date-time (preferably with timezone), and datetime passed around in PEcAn should be of type POSIXct.</p>
+</div>
+<div id="the-variable-names-should-be-standard_name" class="section level5">
+<h5><span class="header-section-number">14.1.2.1.3</span> The variable names should be <code>standard_name</code></h5>
+<table style="width:156%;">
+<colgroup>
+<col width="61%" />
+<col width="11%" />
+<col width="20%" />
+<col width="20%" />
+<col width="13%" />
+<col width="11%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">CF standard-name</th>
+<th align="left">units</th>
+<th align="left">bety</th>
+<th align="left">isimip</th>
+<th align="left">cruncep</th>
+<th align="left">narr</th>
+<th align="left">ameriflux</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>air_temperature</strong></td>
+<td align="left">K</td>
+<td align="left">airT</td>
+<td align="left">tasAdjust</td>
+<td align="left">tair</td>
+<td align="left">air</td>
+<td align="left">TA (C)</td>
+</tr>
+<tr class="even">
+<td align="left">air_temperature_max</td>
+<td align="left">K</td>
+<td align="left"></td>
+<td align="left">tasmaxAdjust</td>
+<td align="left">NA</td>
+<td align="left">tmax</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">air_temperature_min</td>
+<td align="left">K</td>
+<td align="left"></td>
+<td align="left">tasminAdjust</td>
+<td align="left">NA</td>
+<td align="left">tmin</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>air_pressure</strong></td>
+<td align="left">Pa</td>
+<td align="left">air_pressure</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">PRESS (KPa)</td>
+</tr>
+<tr class="odd">
+<td align="left">mole_fraction_of_carbon_dioxide_in_air</td>
+<td align="left">mol/mol</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">CO2</td>
+</tr>
+<tr class="even">
+<td align="left">moisture_content_of_soil_layer</td>
+<td align="left">kg m-2</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">soil_temperature</td>
+<td align="left">K</td>
+<td align="left">soilT</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">TS1 <em>(NOT DONE)</em></td>
+</tr>
+<tr class="even">
+<td align="left">relative_humidity</td>
+<td align="left">%</td>
+<td align="left">relative_humidity</td>
+<td align="left">rhurs</td>
+<td align="left">NA</td>
+<td align="left">rhum</td>
+<td align="left">RH</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>specific_humidity</strong></td>
+<td align="left">1</td>
+<td align="left">specific_humidity</td>
+<td align="left">NA</td>
+<td align="left">qair</td>
+<td align="left">shum</td>
+<td align="left">CALC(RH)</td>
+</tr>
+<tr class="even">
+<td align="left">water_vapor_saturation_deficit</td>
+<td align="left">Pa</td>
+<td align="left">VPD</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">VPD <em>(NOT DONE)</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>surface_downwelling_longwave_flux_in_air</strong></td>
+<td align="left">W m-2</td>
+<td align="left">same</td>
+<td align="left">rldsAdjust</td>
+<td align="left">lwdown</td>
+<td align="left">dlwrf</td>
+<td align="left">Rgl</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>surface_downwelling_shortwave_flux_in_air</strong></td>
+<td align="left">W m-2</td>
+<td align="left">solar_radiation</td>
+<td align="left">rsdsAdjust</td>
+<td align="left">swdown</td>
+<td align="left">dswrf</td>
+<td align="left">Rg</td>
+</tr>
+<tr class="odd">
+<td align="left">surface_downwelling_photosynthetic_photon_flux_in_air</td>
+<td align="left">mol m-2 s-1</td>
+<td align="left">PAR</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">PAR <em>(NOT DONE)</em></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>precipitation_flux</strong></td>
+<td align="left">kg m-2 s-1</td>
+<td align="left">cccc</td>
+<td align="left">prAdjust</td>
+<td align="left">rain</td>
+<td align="left">acpc</td>
+<td align="left">PREC (mm/s)</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">degrees</td>
+<td align="left">wind_direction</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">WD</td>
+</tr>
+<tr class="even">
+<td align="left">wind_speed</td>
+<td align="left">m/s</td>
+<td align="left">Wspd</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">WS</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>eastward_wind</strong></td>
+<td align="left">m/s</td>
+<td align="left">eastward_wind</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">CALC(WS+WD)</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>northward_wind</strong></td>
+<td align="left">m/s</td>
+<td align="left">northward_wind</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">CALC(WS+WD)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>preferred variables indicated in bold</li>
+<li>wind_direction has no CF equivalent and should not be converted, instead the met2CF functions should convert wind_direction and wind_speed to eastward_wind and northward_wind</li>
+<li>standard_name is CF-convention standard names</li>
+<li>units can be converted by udunits, so these can vary (e.g. the time denominator may change with time frequency of inputs)</li>
+<li>soil moisture for the full column, rather than a layer, is soil_moisture_content</li>
+<li>A full list of PEcAn standard variable names, units and dimensions can be found here: <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv" class="uri">https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv</a></li>
+</ul>
+<p>For example, in the <a href="https://www.betydb.org/inputs/280">MsTMIP-CRUNCEP</a> data, the variable <code>rain</code> should be <code>precipitation_rate</code>. We want to standardize the units as well as part of the <code>met2CF.&lt;product&gt;</code> step. I believe we want to use the CF “canonical” units but retain the MsTMIP units any time CF is ambiguous about the units.</p>
+<p>The key is to process each type of met data (site, reanalysis, forecast, climate scenario, etc) to the exact same standard. This way every operation after that (extract, gap fill, downscale, convert to a model, etc) will always have the exact same inputs. This will make everything else much simpler to code and allow us to avoid a lot of unnecessary data checking, tests, etc being repeated in every downstream function.</p>
+</div>
+<div id="adding-single-site-specific-meteorological-data" class="section level5">
+<h5><span class="header-section-number">14.1.2.1.4</span> Adding Single-Site Specific Meteorological Data</h5>
+<p>Perhaps you have meteorological data specific to one site, with a unique format that you would like to add to PEcAn. Your steps would be to: 1. write a script or function to convert your files into the netcdf PEcAn standard 2. insert that file as an input record for your site following these <a href="How%20to%20Insert%20new%20Input%20Data">instructions</a></p>
+</div>
+<div id="processing-met-data-outside-of-the-workflow-using-pecan-functions" class="section level5">
+<h5><span class="header-section-number">14.1.2.1.5</span> Processing Met data outside of the workflow using PEcAn functions</h5>
+<p>Perhaps you would like to obtain data from one of the sources coupled to PEcAn on its own. To do so you can run PEcAn functions on their own.</p>
+<div id="example-1-processing-data-from-a-database" class="section level6">
+<h6><span class="header-section-number">14.1.2.1.5.1</span> Example 1: Processing data from a database</h6>
+<p>Download Amerifluxlbl from Niwot Ridge for the year 2004:</p>
+<pre><code>raw.file &lt;-PEcAn.data.atmosphere::download.AmerifluxLBL(sitename = &quot;US-NR1&quot;, 
+                                             outfolder = &quot;.&quot;, 
+                                             start_date = &quot;2004-01-01&quot;, 
+                                             end_date = &quot;2004-12-31&quot;)</code></pre>
+<p>Using the information returned as the object <code>raw.file</code> you will then convert the raw files into a standard file.</p>
+<p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
+<pre><code>
+bety &lt;- dplyr::src_postgres(dbname   = &#39;bety&#39;, 
+                            host =&#39;localhost&#39;, 
+                            user     = &quot;bety&quot;, 
+                            password = &quot;bety&quot;)
+                            
+con &lt;- bety$con</code></pre>
+<p>Next you will set up the arguments for the function</p>
+<pre><code>in.path &lt;- &#39;.&#39;
+in.prefix &lt;- raw.file$dbfile.name
+outfolder &lt;- &#39;.&#39;
+format.id &lt;- 5000000002
+format &lt;- PEcAn.DB::query.format.vars(format.id=format.id,bety = bety)
+lon &lt;- -105.54
+lat &lt;- 40.03
+format$time_zone &lt;- &quot;America/Chicago&quot;</code></pre>
+<p>Note: The format.id can be pulled from the BETY database if you know the format of the raw data.</p>
+<p>Once these arguments are defined you can execute the <code>met2CF.csv</code> function</p>
+<pre><code>PEcAn.data.atmosphere::met2CF.csv(in.path = in.path, 
+                                  in.prefix =in.prefix,
+                                  outfolder = &quot;.&quot;, 
+                                  start_date =&quot;2004-01-01&quot;,
+                                  end_date = &quot;2004-12-01&quot;,
+                                  lat= lat,
+                                  lon = lon,
+                                  format = format) </code></pre>
+</div>
+<div id="example-2-processing-data-from-data-already-in-hand" class="section level6">
+<h6><span class="header-section-number">14.1.2.1.5.2</span> Example 2: Processing data from data already in hand</h6>
+<p>If you have Met data already in hand and you would like to convert into the PEcAn standard follow these instructions.</p>
+<p>Update BETY with file record, format record and input record according to this page <a href="adding-to-pecan.html#how-to-insert-new-input-data">How to Insert new Input Data</a></p>
+<p>If your data is in a csv format you can use the <code>met2CF.csv</code>function to convert your data into a PEcAn standard file.</p>
+<p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
+<pre><code>bety &lt;- dplyr::src_postgres(dbname   = &#39;bety&#39;, 
+                            host =&#39;localhost&#39;, 
+                            user     = &quot;bety&quot;, 
+                            password = &quot;bety&quot;)
+                            
+con &lt;- bety$con</code></pre>
+<p>Prepare the arguments you need to execute the met2CF.csv function</p>
+<pre><code>in.path &lt;- &#39;path/where/the/raw/file/lives&#39;
+in.prefix &lt;- &#39;prefix_of_the_raw_file&#39;
+outfolder &lt;- &#39;path/to/where/you/want/to/output/thecsv/&#39;
+format.id &lt;- formatid of the format your created
+format &lt;- PEcAn.DB::query.format.vars(format.id=format.id,bety = bety)
+lon &lt;- longitude of your site
+lat &lt;- latitude of your site
+format$time_zone &lt;- time zone of your site
+start_date &lt;- Start date of your data in &quot;y-m-d&quot;
+end_date &lt;- End date of your data in &quot;y-m-d&quot;</code></pre>
+<p>Next you can execute the function:</p>
+<pre><code>PEcAn.data.atmosphere::met2CF.csv(in.path = in.path, 
+                                  in.prefix =in.prefix, 
+                                  outfolder = &quot;.&quot;, 
+                                  start_date = start_date,
+                                  end_date = end_date,
+                                  lat= lat,
+                                  lon = lon,
+                                  format = format)</code></pre>
+</div>
+</div>
+</div>
+<div id="vegetation-data" class="section level4">
+<h4><span class="header-section-number">14.1.2.2</span> Vegetation Data</h4>
+<p>Vegetation data will be required to parameterize your model. In these examples we will go over how to produce a standard initial condition file.</p>
+<p>The main function to process cohort data is the <code>ic.process.R</code> function. As of now however, if you require pool data you will run a separate function, <code>pool_ic_list2netcdf.R</code>.</p>
+<div id="example-1-processing-veg-data-from-data-in-hand." class="section level6">
+<h6><span class="header-section-number">14.1.2.2.0.1</span> Example 1: Processing Veg data from data in hand.</h6>
+<p>In the following example we will process vegetation data that you have in hand using PEcAn.</p>
+<p>First, you’ll need to create a input record in BETY that will have a file record and format record reflecting the location and format of your file. Instructions can be found in our <a href="adding-to-pecan.html#how-to-insert-new-input-data">How to Insert new Input Data</a> page.</p>
+<p>Once you have created an input record you must take note of the input id of your record. An easy way to take note of this is in the URL of the BETY webpage that shows your input record. In this example we use an input record with the id <code>1000013064</code> which can be found at this url: <a href="https://psql-pecan.bu.edu/bety/inputs/1000013064#" class="uri">https://psql-pecan.bu.edu/bety/inputs/1000013064#</a> . Note that this is the Boston University BETY database. If you are on a different machine, your url will be different.</p>
+<p>With the input id in hand you can now edit a pecan XML so that the PEcAn function <code>ic.process</code> will know where to look in order to process your data. The <code>inputs</code> section of your pecan XML will look like this. As of now ic.process is set up to work with the ED2 model so we will use ED2 settings and then grab the intermediary Rds data file that is created as the standard PEcAn file. For your Inputs section you will need to input your input id wherever you see the <code>source.ic</code> flag.</p>
+<pre><code>&lt;inputs&gt;
+      &lt;css&gt;
+        &lt;source&gt;FFT&lt;/source&gt;
+        &lt;output&gt;css&lt;/output&gt;
+        &lt;username&gt;pecan&lt;/username&gt;
+        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;useic&gt;TRUE&lt;/useic&gt;
+        &lt;meta&gt;
+          &lt;trk&gt;1&lt;/trk&gt;
+          &lt;age&gt;70&lt;/age&gt;
+        &lt;/meta&gt;
+      &lt;/css&gt;
+      &lt;pss&gt;
+        &lt;source&gt;FFT&lt;/source&gt;
+        &lt;output&gt;pss&lt;/output&gt;
+        &lt;username&gt;pecan&lt;/username&gt;
+        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;useic&gt;TRUE&lt;/useic&gt;
+      &lt;/pss&gt;
+      &lt;site&gt;
+        &lt;source&gt;FFT&lt;/source&gt;
+        &lt;output&gt;site&lt;/output&gt;
+        &lt;username&gt;pecan&lt;/username&gt;
+        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;useic&gt;TRUE&lt;/useic&gt;
+      &lt;/site&gt;
+      &lt;met&gt;
+        &lt;source&gt;CRUNCEP&lt;/source&gt;
+        &lt;output&gt;ED2&lt;/output&gt;
+      &lt;/met&gt;
+      &lt;lu&gt;
+        &lt;id&gt;294&lt;/id&gt;
+      &lt;/lu&gt;
+      &lt;soil&gt;
+        &lt;id&gt;297&lt;/id&gt;
+      &lt;/soil&gt;
+      &lt;thsum&gt;
+        &lt;id&gt;295&lt;/id&gt;
+      &lt;/thsum&gt;
+      &lt;veg&gt;
+        &lt;id&gt;296&lt;/id&gt;
+      &lt;/veg&gt;
+    &lt;/inputs&gt;</code></pre>
+<p>Once you edit your PEcAn.xml you can than create a settings object using PEcAn functions. Your <code>pecan.xml</code> must be in your working directory.</p>
+<pre><code>settings &lt;- PEcAn.settings::read.settings(&quot;pecan.xml&quot;)
+settings &lt;- PEcAn.settings::prepare.settings(settings, force=FALSE)</code></pre>
+<p>You can then execute the <code>ic.process</code> function to convert data into a standard Rds file:</p>
+<pre><code>input &lt;- settings$run$inputs
+dir &lt;- &quot;.&quot;
+ic.process(settings, input, dir, overwrite = FALSE)</code></pre>
+<p>Note that the argument <code>dir</code> is set to the current directory. You will find the final ED2 file there. More importantly though you will find the <code>.Rds</code> file within the same directory.</p>
+</div>
+<div id="example-3-pool-initial-condition-files" class="section level6">
+<h6><span class="header-section-number">14.1.2.2.0.2</span> Example 3 Pool Initial Condition files</h6>
+<p>If you have pool vegetation data, you’ll need the <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.land/R/pool_ic_list2netcdf.R"><code>pool_ic_list2netcdf.R</code></a> function to convert the pool data into PEcAn standard.</p>
+<p>The function stands alone and requires that you provide a named list of netcdf dimensions and values, and a named list of variables and values. Names and units need to match the standard_vars.csv table found <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv">here</a>.</p>
+<pre><code>#Create a list object with necessary dimensions for your site
+input&lt;-list()
+dims&lt;- list(lat=-115,lon=45, time= 1)
+variables&lt;- list(SoilResp=8,TotLivBiom=295)
+input$dims &lt;- dims
+input$vals &lt;- variables</code></pre>
+<p>Once this is done, set <code>outdir</code> to where you’d like the file to write out to and a siteid. Siteid in this can be used as an file name identifier. Once part of the automated workflow siteid will reflect the site id within the BET db.</p>
+<pre><code>outdir  &lt;- &quot;.&quot;
+siteid &lt;- 772
+pool_ic_list2netcdf(input = input, outdir = outdir, siteid = siteid)</code></pre>
+<p>You should now have a netcdf file with initial conditions.</p>
+</div>
+</div>
+<div id="soil-data" class="section level4">
+<h4><span class="header-section-number">14.1.2.3</span> Soil Data</h4>
+<div id="example-1-converting-data-in-hand" class="section level6">
+<h6><span class="header-section-number">14.1.2.3.0.1</span> Example 1: Converting Data in hand</h6>
+<p>Local data that has the correct names and units can easily be written out in PEcAn standard using the function soil2netcdf.</p>
+<pre><code>soil.data &lt;- list(volume_fraction_of_sand_in_soil = c(0.3,0.4,0.5),
+                  volume_fraction_of_clay_in_soil = c(0.3,0.3,0.3),
+                  soil_depth = c(0.2,0.5,1.0))
+                         
+soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
+<p>At the moment this file would need to be inserted into Inputs manually. By default, this function also calls soil_params, which will estimate a number of hydraulic and thermal parameters from texture. Be aware that at the moment not all model couplers are yet set up to read this file and/or convert it to model-specific formats.</p>
+</div>
+<div id="example-2-converting-paleon-data" class="section level6">
+<h6><span class="header-section-number">14.1.2.3.0.2</span> Example 2: Converting PalEON data</h6>
+<p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
+<pre><code>   &lt;soil&gt;
+     &lt;id&gt;1000012896&lt;/id&gt;
+   &lt;/soil&gt;</code></pre>
+<p>In the future we aim to extend this extraction to a wider range of soil products.</p>
+
+</div>
+</div>
+</div>
+<div id="how-to-insert-new-input-data" class="section level3">
+<h3><span class="header-section-number">14.1.3</span> How to Insert new Input Data</h3>
+<p>To upload model input data or data used for model calibration/validation…</p>
+<p>From your BETY interface:</p>
+<ul>
+<li>Create a DBFILES entry for the path to the file
+<ul>
+<li>From the menu click RUNS then FILES</li>
+<li>Click “New File”</li>
+<li>Select the machine your file is located at</li>
+<li>Fill in the File Path where your file is located (aka folder or directory) NOT including the name of the file itself</li>
+<li>Fill in the File Name with the name of the file itself. Note that some types of input records will refer to be ALL the files in a directory and thus File Name can be blank</li>
+<li>Click Update</li>
+</ul></li>
+<li>Create an INPUT entry for your data
+<ul>
+<li>From the menu click RUNS then INPUTS</li>
+<li>Click “New Input”</li>
+<li>Select the SITE that this data is associated with the input data set</li>
+<li>Other required fields are a unique name for the input, the start and end dates of the data set, and the format of the data. If the data is not in a currently known format you will need to create a NEW FORMAT and possibly a new input converter. Instructions on how to do add a converter can be found here <a href="adding-to-pecan.html#input-conversion">Input conversion</a>. Instructions on how to add a format record can be found below.</li>
+<li>Parent ID is an optional variable to indicated that one dataset was derived from another.</li>
+<li>Click “Create”</li>
+</ul></li>
+<li>Associate the DBFILE with the INPUT
+<ul>
+<li>In the RUNS -&gt; INPUTS table, search and find the input record you just created</li>
+<li>Click on the EDIT icon</li>
+<li>Select “View related Files”</li>
+<li>In the Search window, search for the DBFILE you just created</li>
+</ul></li>
+<li>Once you have found the DBFILE, click on the “+” icon to add the file</li>
+<li>Click on “Update” at the bottom when you are done.</li>
+</ul>
+<div id="create-a-format-record" class="section level4">
+<h4><span class="header-section-number">14.1.3.1</span> Create a Format Record</h4>
+<p>Creating a Format Record allows PEcAn to levereage Meta-data about your data in order to properly handle it. It allows you to define what type of file it is by defining it’s mimetype (i.e. text, netcdf,rds, etc.), define what information is hel in the header of your file, and how many lines need to be skipped within the file to get to ge to the header. To create a format record</p>
+<pre><code>* Navigate to the Formats table in BETY under the RUNS tab.
+* Click &quot;New Format&quot;
+* Fill in the appropriate information to define your files format
+* Click &quot;Create&quot;</code></pre>
+
+</div>
+</div>
+</div>
+<div id="editing-records" class="section level2">
+<h2><span class="header-section-number">14.2</span> Editing records</h2>
+<ul>
+<li>Models</li>
+<li>Species</li>
+<li>PFTs</li>
+<li>Traits</li>
+<li>Inputs</li>
+<li>DB files</li>
+<li>Variables</li>
+<li>Formats</li>
+<li>(Link each section to relevant Bety tables)</li>
+</ul>
+
 </div>
 </div>
             </section>
@@ -505,8 +1081,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="pecan-workflow-webworkflow-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standalone-tools-modules.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
