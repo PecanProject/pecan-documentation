@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-02-01">
+<meta name="date" content="2018-02-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -234,6 +234,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="15" data-path="standalone-tools-modules.html"><a href="standalone-tools-modules.html"><i class="fa fa-check"></i><b>15</b> Standalone tools (modules)</a></li>
 <li class="chapter" data-level="16" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html"><i class="fa fa-check"></i><b>16</b> Working with the VM</a><ul>
 <li class="chapter" data-level="16.1" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html#connecting-to-the-vm-via-ssh"><i class="fa fa-check"></i><b>16.1</b> Connecting to the VM via SSH</a></li>
+<li class="chapter" data-level="16.2" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html#connecting-to-bety-on-the-vm-via-ssh"><i class="fa fa-check"></i><b>16.2</b> Connecting to bety on the VM via SSh</a></li>
 </ul></li>
 <li class="part"><span><b>V Developer user guide</b></span></li>
 <li class="chapter" data-level="17" data-path="introduction-developer-guide.html"><a href="introduction-developer-guide.html"><i class="fa fa-check"></i><b>17</b> Introduction: Developer Guide</a></li>
@@ -453,6 +454,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     user carya
     ForwardX11Trusted yes</code></pre>
 <p>This will allow you to SSH into the VM with the simplified command, <code>ssh pecan-vm</code>.</p>
+</div>
+<div id="connecting-to-bety-on-the-vm-via-ssh" class="section level2">
+<h2><span class="header-section-number">16.2</span> Connecting to bety on the VM via SSh</h2>
+<p>Sometimes, you may want to develop code locally but connect to an instance of Bety on the VM. To do this, first open a new terminal and connect to the VM while enabling port forwarding (with the <code>-L</code> flag) and setting XXXX to any available port (more or less any 4 digit number – a reasonable choice is 3333).</p>
+<pre><code>ssh -L XXXX:localhost:5432 carya@localhost:6422</code></pre>
+<p>This makes port XXXX on the local machine match port 5432 on the VM. This means that connecting to <code>localhost:XXXX</code> will give you access to Bety on the VM.</p>
+<p>To test this on the command line, try the following command, which, if successful, will drop you into the <code>psql</code> console.</p>
+<pre><code>psql -d bety -U bety -h localhost -p XXXX</code></pre>
+<p>To test this in R, open a Postgres using the analogous parameters:</p>
+<pre><code>library(RPostgres)
+con &lt;- dbConnect(
+  Postgres(),
+  user = &quot;bety&quot;,
+  password = &quot;bety&quot;,
+  dbname = &quot;bety&quot;,
+  host = &quot;localhost&quot;,
+  port = XXXX
+  )
+dbListTables(con)   # This should return a vector of bety tables</code></pre>
+<p>Note that the same general approach will work on any Bety server where port forwarding is enabled.</p>
 
 </div>
 </div>
