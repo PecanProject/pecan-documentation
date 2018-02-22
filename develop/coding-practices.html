@@ -872,7 +872,7 @@ myfun &lt;- function(a, b, c){
 </div>
 <div id="testing" class="section level2">
 <h2><span class="header-section-number">21.6</span> Testing</h2>
-<p>PEcAn uses the testthat package developed by Hadley Wickham. Hadley has written instructions for using this pakcage in his <a href="http://adv-r.had.co.nz/Testing.html">Testing</a> chapter.</p>
+<p>PEcAn uses the testthat package developed by Hadley Wickham. Hadley has written instructions for using this package in his <a href="http://adv-r.had.co.nz/Testing.html">Testing</a> chapter.</p>
 <div id="rationale" class="section level3">
 <h3><span class="header-section-number">21.6.1</span> Rationale</h3>
 <ul>
@@ -890,7 +890,7 @@ myfun &lt;- function(a, b, c){
 <li>what was I doing yesterday?</li>
 <li>what do I want to do today?</li>
 <li>what existing functions do I need to edit?</li>
-<li>what are the arguements to these functions (and what are examples of valid arguments)</li>
+<li>what are the arguments to these functions (and what are examples of valid arguments)</li>
 <li>what packages are affected</li>
 <li>where is a logical place to put files used in testing</li>
 </ul>
@@ -899,40 +899,18 @@ myfun &lt;- function(a, b, c){
 <h3><span class="header-section-number">21.6.3</span> Quick Start:</h3>
 <ul>
 <li>decide what you want to do today</li>
-<li>identify the issue in redmine or github (if none exists, create one)</li>
-<li>to work on issue 99, create a new branch called “redmine99”, “github99” or some descriptive name… Today we will add enable an existing function, <code>make.cheas</code> to make <code>goat.cheddar</code>. We will know that we are done by the color and taste.</li>
+<li>identify the issue in github (if none exists, create one)</li>
+<li>to work on issue 99, create a new branch called “github99” or some descriptive name… Today we will enable an existing function, <code>make.cheas</code> to make <code>goat.cheddar</code>. We will know that we are done by the color and taste. <code>git branch goat-cheddar   git checkout goat-cheddar</code></li>
+<li>open existing (or create new) file in <code>inst/tests/</code>. If working on code in “myfunction” or a set of functions in “R/myfile.R”, the file should be named accordingly, e.g. “inst/tests/test.myfile.R”</li>
+<li>if you are lucky, the function has already been tested and has some examples.</li>
+<li>if not, you may need to create a minimal example, often requiring a settings file. The default settings file can be obtained in this way: <code>r   settings &lt;- read.settings(system.file(&quot;extdata/test.settings.xml&quot;, package = &quot;PEcAn.utils&quot;))</code></li>
+<li>write what you want to do <code>test_that(&quot;make.cheas can make cheese&quot;,{ goat.cheddar &lt;- make.cheas(source = 'goat', style = 'cheddar') expect_equal(color(goat.cheddar), &quot;orange&quot;) expect_is(object = goat.cheddar, class = &quot;cheese&quot;) expect_true(all(c(&quot;sharp&quot;, &quot;creamy&quot;) %in% taste(goat.cheddar)))   }</code></li>
+<li>now edit the goat.cheddar function until it makes savory, creamy, orange cheese.</li>
+<li>commit often</li>
+<li>update documentation and test</li>
 </ul>
-<pre><code>    git branch goat-cheddar
-    git checkout goat-cheddar</code></pre>
-<pre><code>* open existing (or create new) file in `inst/tests/`. If working on code in &quot;myfunction&quot; or a set of functions in &quot;R/myfile.R&quot;, the file should be named accordingly, e.g. &quot;inst/tests/test.myfile.R&quot;
-* if you are lucky, the function has already been tested and has some examples.
-* if not, you may need to create a minimal example, often requiring a settings file. The default settings file can be obtained in this way:</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata/test.settings.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.utils&quot;</span>))</code></pre></div>
-<pre><code>* write what you want to do</code></pre>
-<pre><code>      test_that(&quot;make.cheas can make cheese&quot;,{
-        goat.cheddar &lt;- make.cheas(source = &#39;goat&#39;, style = &#39;cheddar&#39;)
-        expect_equal(color(goat.cheddar), &quot;orange&quot;)
-        expect_is(object = goat.cheddar, class = &quot;cheese&quot;)
-        expect_true(all(c(&quot;sharp&quot;, &quot;creamy&quot;) %in% taste(goat.cheddar)))
-      } </code></pre>
-<pre><code>* now edit the goat.cheddar function until it makes savory, creamy, orange cheese.
-* commit often
-* update documentation and test
-  
-  ```r
-  library(devtools)
-  document(&quot;mypkg&quot;)
-  test(&quot;mypkg&quot;)  
-  ```
-* commit again
-* when complete, merge, and push
-  
-  ```bash
-  git commit -m &quot;make.cheas makes goat.cheddar now&quot;
-  git checkout master
-  git merge goat-cheddar
-  git push
-  ```</code></pre>
+<p><code>r   library(devtools)   document(&quot;mypkg&quot;)   test(&quot;mypkg&quot;)</code> * commit again * when complete, merge, and push</p>
+<p><code>bash   git commit -m &quot;make.cheas makes goat.cheddar now&quot;   git checkout master   git merge goat-cheddar   git push</code></p>
 </div>
 <div id="test-files" class="section level3">
 <h3><span class="header-section-number">21.6.4</span> Test files</h3>
@@ -946,44 +924,43 @@ myfun &lt;- function(a, b, c){
 settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</code></pre></div></li>
 <li><p>database settings can be specified, and tests run only if a connection is available</p></li>
 </ul>
-<p>We currently use the following database to run tests against; tests that require access to a database should be enclosed by <code>if(db.exists())</code> to avoid failed tests on systems that do not have the database installed.</p>
+<p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">settings$database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, 
                           <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, 
                           <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span>
                           <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span>
-if(<span class="kw">db.exists</span>()){
-  <span class="kw">test_that</span>(... ## write tests here
-<span class="er">}</span></code></pre></div>
+<span class="kw">test_that</span>(..., {
+  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings$database))
+  ## write tests here
+})</code></pre></div>
 <ul>
 <li>instructions for installing this are available on the <a href="VM-Creation.md">VM creation wiki</a></li>
-<li><p>examples can be found in the PEcAn.DB package (<code>db/inst/tests/</code>).</p></li>
+<li><p>examples can be found in the PEcAn.DB package (<code>base/db/tests/testthat/</code>).</p></li>
 <li><p>Model specific settings can go in the model-specific module, for example:</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)
 settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</code></pre></div>
 <ul>
 <li>test-specific settings:</li>
-<li>settings text can be specified inline:</li>
-</ul>
-<pre><code>  settings.text &lt;- &quot;
+<li><p>settings text can be specified inline:</p>
+<pre><code>settings.text &lt;- &quot;
   &lt;pecan&gt;
-  &lt;nocheck&gt;nope&lt;/nocheck&gt; ## allows bypass of checks in the read.settings functions 
-  &lt;pfts&gt;
-    &lt;pft&gt;
-      &lt;name&gt;ebifarm.pavi&lt;/name&gt;
-      &lt;outdir&gt;test/&lt;/outdir&gt;
-    &lt;/pft&gt;
-  &lt;/pfts&gt;
-  &lt;outdir&gt;test/&lt;/outdir&gt;
-  &lt;database&gt;
-    &lt;userid&gt;bety&lt;/userid&gt;
-    &lt;passwd&gt;bety&lt;/passwd&gt;
-    &lt;location&gt;localhost&lt;/location&gt;
-    &lt;name&gt;bety&lt;/name&gt;
-  &lt;/database&gt;
-&lt;/pecan&gt;&quot;
-settings &lt;- read.settings(settings.text)</code></pre>
-<ul>
+    &lt;nocheck&gt;nope&lt;/nocheck&gt; ## allows bypass of checks in the read.settings functions
+    &lt;pfts&gt;
+      &lt;pft&gt;
+        &lt;name&gt;ebifarm.pavi&lt;/name&gt;
+        &lt;outdir&gt;test/&lt;/outdir&gt;
+      &lt;/pft&gt;
+    &lt;/pfts&gt;
+    &lt;outdir&gt;test/&lt;/outdir&gt;
+    &lt;database&gt;
+      &lt;userid&gt;bety&lt;/userid&gt;
+      &lt;passwd&gt;bety&lt;/passwd&gt;
+      &lt;location&gt;localhost&lt;/location&gt;
+      &lt;name&gt;bety&lt;/name&gt;
+    &lt;/database&gt;
+  &lt;/pecan&gt;&quot;
+settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)
 settings$outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</code></pre></div></li>
@@ -1019,7 +996,7 @@ settings$outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other s
 <li>example: <code>expect_equal(sum(1,1), 2)</code> indicates that the sum function should take the sum of its arguments</li>
 </ul></li>
 <li>Write tests for cases under which the function should throw an error</li>
-<li>example: <code>expect_error(sum(&quot;foo&quot;)</code></li>
+<li>example: <code>expect_error(sum(&quot;foo&quot;))</code></li>
 <li>better : <code>expect_error(sum(&quot;foo&quot;), &quot;invalid 'type' (character)&quot;)</code></li>
 </ul>
 </div>
@@ -1046,7 +1023,7 @@ settings$outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other s
 <div id="how-should-i-test-in-r-the-testthat-package." class="section level4">
 <h4><span class="header-section-number">21.6.4.7</span> How should I test in R? The testthat package.</h4>
 <p>tests are found in <code>~/pecan/&lt;packagename&gt;/inst/tests</code>, for example <code>utils/inst/tests/</code></p>
-<p>See attached file and <a href="https://github.com/hadley/devtools/wiki/Testing" class="uri">https://github.com/hadley/devtools/wiki/Testing</a> for details on how to use the testthat package.</p>
+<p>See attached file and <a href="http://r-pkgs.had.co.nz/tests.html" class="uri">http://r-pkgs.had.co.nz/tests.html</a> for details on how to use the testthat package.</p>
 <div id="list-of-expectations" class="section level5">
 <h5><span class="header-section-number">21.6.4.7.1</span> List of Expectations</h5>
 <table>
@@ -1106,16 +1083,16 @@ settings$outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other s
 </div>
 <div id="how-to-run-tests" class="section level5">
 <h5><span class="header-section-number">21.6.4.7.2</span> How to run tests</h5>
-<p>add the following to “pecan/tests/run.all.R”</p>
+<p>add the following to “pecan/tests/testthat.R”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(testthat)
 <span class="kw">library</span>(mypackage)
 
-<span class="kw">test_package</span>(<span class="st">&quot;mypackage&quot;</span>)</code></pre></div>
+<span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="basic-use-of-the-testthat-package" class="section level4">
 <h4><span class="header-section-number">21.6.4.8</span> basic use of the testthat package</h4>
-<p>Here is an example of tests (these should be placed in <code>&lt;packagename&gt;/inst/tests/test_&lt;sourcefilename&gt;.R</code>:</p>
+<p>Here is an example of tests (these should be placed in <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{
   <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)
   <span class="kw">expect_equal</span>(<span class="kw">sum</span>(-<span class="dv">1</span>,-<span class="dv">1</span>), -<span class="dv">2</span>)
