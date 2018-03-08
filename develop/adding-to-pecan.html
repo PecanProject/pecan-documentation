@@ -626,6 +626,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h5><span class="header-section-number">13.1.1.7.1</span> Species</h5>
 <p>Within PEcAn there are no predefined PFTs and user can create new PFTs very easily at whatever taxonomic level is most appropriate, from PFTs for individual species up to one PFT for all plants globally. To allow PEcAn to query its trait database for information about a PFT, you will want to associate species with the PFT record by choosing Edit and then “View Related Species”. Species can be searched for by common or scientific name and then added to a PFT using the +/- button.</p>
 </div>
+<div id="cultivars" class="section level5">
+<h5><span class="header-section-number">13.1.1.7.2</span> Cultivars</h5>
+<p>You can also define PFTs whose members are <em>cultivars</em> instead of species. This is designed for analyses where you want to want to perform meta-analysis on within-species comparisons (e.g. cultivar evaluation in an agricultural model) but may be useful for other cases when you want to specify different priors for some member of a species. You cannot associate both species and cultivars with the same PFT, but the cultivars in a cultivar PFT may come from different species, potentially including all known cultivars from some of the species, if you wish to and have thought about how to interpret the results.</p>
+<p>It is not yet possible to add a cultivar PFT through the BETYdb web interface. See <a href="https://github.com/PecanProject/pecan/pull/1826#issuecomment-360665864">this GithHub comment</a> for an example of how to define one manually in PostgreSQL.</p>
+</div>
 </div>
 <div id="priors" class="section level4">
 <h4><span class="header-section-number">13.1.1.8</span> PRIORS</h4>
