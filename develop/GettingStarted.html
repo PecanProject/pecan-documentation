@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pecan-hands-on-demo-01-basic-run.html">
-<link rel="next" href="pecan-testing-the-sensitivity-analysis-against-observations.html">
+<link rel="prev" href="about-the-pecan-book.html">
+<link rel="next" href="web-workflow.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -542,132 +542,214 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="demo-02-sensitivity-and-uncertainty-analysis" class="section level1">
-<h1><span class="header-section-number">30</span> Demo 02: Sensitivity and Uncertainty Analysis</h1>
-<p>In Demo 2 we will be looking at how PEcAn can use information about parameter uncertainty to perform three automated analyses:</p>
-<ul>
-<li><strong>Ensemble Analysis</strong>: Repeat numerous model runs, each sampling from the parameter uncertainty, to generate a probability distribution of model projections. <strong>Allows us to put a confidence interval on the model</strong></li>
-<li><strong>Sensitivity Analysis</strong>: Repeats numerous model runs to assess how changes in model parameters will affect model outputs. <strong>Allows us to identify which parameters the model is most sensitive to.</strong></li>
-<li><strong>Uncertainty Analysis</strong>: Combines information about model sensitivity with information about parameter uncertainty to determine the contribution of each model parameter to the uncertainty in model outputs. <strong>Allow us to identify which parameters are driving model uncertainty.</strong></li>
-</ul>
-<div id="run-specification-1" class="section level2">
-<h2><span class="header-section-number">30.1</span> Run Specification</h2>
+<div id="GettingStarted" class="section level1">
+<h1><span class="header-section-number">4</span> Getting Started</h1>
+<div id="how-pecan-works-in-a-nutshell" class="section level2">
+<h2><span class="header-section-number">4.1</span> How PEcAn Works in a nutshell</h2>
+<p>PEcAn provides an interface to a variety of ecosystem models and attempts to standardize and automate the processes of model parameterization, execution, and analysis. First, you choose an ecosystem model, then the time and location of interest (a site), the plant community (or crop) that you are interested in simulating, and a source of atmospheric data from the BETY database (LeBauer et al, 2010). These are set in a “settings” file, commonly named <code>pecan.xml</code> which can be edited manually if desired. From here, PEcAn will take over and set up and execute the selected model using your settings. The key is that PEcAn uses models as-is, and all of the translation steps are done within PEcAn so no modifications are required of the model itself. Once the model is finished it will allow you to create graphs with the results of the simulation as well as download the results. It is also possible to see all past experiments and simulations.</p>
+<p>There are two ways of using PEcAn, via the web interface and directly within R. Even for users familiar with R, using the web interface is a good place to start because it provides a high level overview of the PEcAn workflow.The quickest way to get started is to download the virtual machine or use an AWS instance.</p>
+</div>
+<div id="download-the-pecan-vm" class="section level2">
+<h2><span class="header-section-number">4.2</span> Download the PEcAn VM</h2>
 <ol style="list-style-type: decimal">
-<li><p>Return to the main menu for the PEcAn web interface: <strong>URL &gt; Run Models</strong></p></li>
-<li><p>Repeat the steps for site selection and run specification from Demo 01, but also <strong>click on “Advanced setup”</strong>, then click Next.</p></li>
-<li><p>By clicking Advanced setup, PEcAn will first show an Analysis Menu, where we are going to specify new settings.</p></li>
+<li><p>PEcAn consists of a set of scripts and code that is compiled within a Linux operating system and saved in a “virtual machine (VM)”. Virtual machines allow for running consistent set-ups without worrying about differences between operating systems, library dependencies, compiling the code, etc.</p></li>
+<li><p>To run the PEcAn VM you will need to install VirtualBox, the program that runs the virtual machine <a href="http://www.virtualbox.org" class="uri">http://www.virtualbox.org</a>. On Windows you may see a warning about Logo testing, it is okay to ignore the warning.</p></li>
+<li><p>After you have Virtual Box installed you’ll need to download the PEcAn virtual machine: <a href="http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN" class="uri">http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN</a>. The virtual machine is available under the “<strong>Files</strong>” header. Click the 32 or 64 bit “.ova” file and note that the download is ~5 GB so will take from several minutes to hours depending on the connection speed.</p></li>
+<li><p>To open up the virtual machine you’ll first want to open up VirtualBox.</p></li>
+<li><p>The first time you use the VM you’ll want to use File → Import Appliance in VirtualBox in order to import the VM. This will create a virtual machine from the disk image. When asked about the Appliance Import Settings make sure you select “Reinitialize the MAC address of all network cards”. This is not selected by default and can result in networking issues since multiple machines might claim to have the same network MAC Address. That said, users who have experienced network connection difficulties within the VM have sometimes had better luck after reinstalling without reinitializing.</p></li>
 </ol>
+<p><img src="figures/pic1.jpg" width="259" style="display: block; margin: auto;" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Next, click “Import”. You only have to do this Import step once, in the future you can just skip to the next step.</p></li>
+<li><p>Start Pecan by double clicking on the icon for the VM. A terminal window will pop up showing the machine booting up which may take a minute. It is done booting when you get to the “pecan32 login:” prompt. You do not need to login as the VM behaves like a server that we will be accessing through you web browser. Feel free to minimize the VM window.</p>
 <ul>
-<li><p>For an ensemble analysis, increase the number of runs in the ensemble, in this case set <strong>Runs to 50</strong>. In practice you would want to use a larger ensemble size (100-5000) than we are using in the demo. The ensemble analysis samples parameters from their posterior distributions to propagate this uncertainty into the model output.</p></li>
-<li><p>PEcAn’s sensitivity analysis holds all parameters at their median value and then varies each parameter one-at-a-time based on the quantiles of the posterior distribution. PEcAn also includes a handy shortcut, which is the default behavior for the web interface, that converts a specified standard deviation into its Normal quantile equivalent (e.g. 1 and -1 are converted to 0.157 and 0.841). In this example <strong>set Sensitivity to -2,-1,1,2</strong> (the median value, 0, occurs by default).</p></li>
-<li><p>We also can tell PEcAn which variable to run the sensitivity on. Here, <strong>set Variables to NEE</strong>, so we can compare against flux tower NEE observations.</p></li>
-</ul>
-<p><strong>Click Next</strong></p>
-<div id="additional-outputs" class="section level3">
-<h3><span class="header-section-number">30.1.1</span> Additional Outputs:</h3>
-<p>The PEcAn workflow will take considerably longer to complete since we have just asked for over a hundred model runs. Once the runs are complete you will return to the output visualization page were there will be a few new outputs to explore, as well as outputs that were present earlier that we’ll explore in greater details:</p>
-</div>
-<div id="run-id" class="section level3">
-<h3><span class="header-section-number">30.1.2</span> 1. Run ID:</h3>
-<p>While the sensitivity and ensemble analyses synthesize across runs, you can also select individual runs from the Run ID menu. You can use the Graphs menu to visualize each individual run, or open individual runs in Shiny</p>
-</div>
-<div id="inputs-3" class="section level3">
-<h3><span class="header-section-number">30.1.3</span> 2. Inputs:</h3>
-<p>This menu shows the contents of /run which lets you look at and download:</p>
-<ol style="list-style-type: decimal">
-<li>A summary file (README.txt) describing each run: location, run ID, model, dates, whether it was in the sensitivity or ensemble analysis, variables modifed, etc.</li>
-<li>The model-specific input files fed into the model</li>
-<li>The jobs.sh file used to submit the model run</li>
+<li>If you <em>do</em> want to login to the VM, the credentials are as follows: <code>username: carya</code>, <code>password: illinois</code> (after the pecan tree, <a href="https://en.wikipedia.org/wiki/Pecan">Carya illinoinensis</a>).</li>
+</ul></li>
+<li><p>To launch the PEcAn web interface, make sure that the VM is running somewhere in the background on your machine. Then, open any web browser on the same machine and navigate to <code>localhost:6480/pecan</code> to start the PEcAn workflow.</p></li>
 </ol>
 </div>
-<div id="outputs" class="section level3">
-<h3><span class="header-section-number">30.1.4</span> 3. Outputs:</h3>
-<p>This menu shows the contents of /out. A number of files generated by the underlying ecosystem model are archived and available for download. These include:</p>
+<div id="awsvm" class="section level2">
+<h2><span class="header-section-number">4.3</span> Using AmazonWeb Services (AWS)</h2>
+<p>Login to <a href="http://console.aws.amazon.com/">Amazon Web Services (AWS)</a> and select the EC2 Dashboard. If this is your first time using AWS you will need to set up an account before you are able to access the EC2 Dashboard. Important: You will need a credit card number and access to a phone to be able to verify AWS account registration. AWS is free for one year.</p>
 <ol style="list-style-type: decimal">
-<li>Output files in the standardized netCDF ([year].nc) that can be downloaded for visualization and analysis (R, Matlab, ncview, panoply, etc)</li>
-<li>Raw model output in model-specific format (e.g. sipnet.out).</li>
-<li>Logfile.txt contains job.sh &amp; model error, warning, and informational messages</li>
-</ol>
-</div>
-<div id="pfts" class="section level3">
-<h3><span class="header-section-number">30.1.5</span> 4. PFTs:</h3>
-<p>This menu shows the contents of /pft. There is a wide array of outputs available that are related to the process of estimating the model parameters and running sensitivity/uncertainty analyses for a specific Plant Functional Type.</p>
-<ol style="list-style-type: decimal">
-<li><strong>TRAITS</strong>: The Rdata files <strong>trait.data.Rdata</strong> and <strong>madata.Rdata</strong> are, respectively, the available trait data extracted from the database that was used to estimate the model parameters and that same data cleaned and formatted for the statistical code. The <strong>list of variables that are queried is determined by what variables have priors associated with them in the definition of the PFTs</strong>. Priors are output into <strong>prior.distns.Rdata</strong>. Likewise, the <strong>list of species that are associated with a PFT determines what subset of data is extracted</strong> out of all data matching a given variable name. Demo 3 will demonstrate how a PFT can be created or modified. To look at these files in RStudio <strong>click on these files to load them into your workspace</strong>. You can further examine them in the <em>Environment</em> window or accessing them at the command line. For example, try typing <code>names(trait.data)</code> as this will tell you what variables were extracted, <code>names(trait.data$Amax)</code> will tell you the names of the columns in the Amax table, and <code>summary(trait.data$Amax)</code> will give you summary data about the Amax values.</li>
-<li><strong>META-ANALYSIS</strong>:</li>
-</ol>
+<li>Choose AMI
 <ul>
-<li><code>*.bug</code>: The evaluation of the meta-analysis is done using a Bayesian statistical software package called JAGS that is called by the R code. For each trait, the R code will generate a [trait].model.bug file that is the JAGS code for the meta-analysis itself. This code is generated on the fly, with PEcAn adding or subtracting the site, treatment, and greenhouse terms depending upon the presence of these effects in the data itself. If the <random.effects> tag is set to FALSE then all random effects will be turned off even if there are multiple sites.</li>
-<li><code>meta-analysis.log</code> contains a number of diagnostics, including the summary statistics of the model, an assessment of whether the posterior is consistent with the prior, and the status of the Gelman-Brooks-Rubin convergence statistic (which is ideally 1.0 but should be less than 1.1).</li>
-<li><code>ma.summaryplots.*.pdf</code> are collections of diagnostic plots produced in R after the above JAGS code is run that are useful in assessing the statistical model. <em>Open up one of these pdfs</em> to evaluate the shape of the posterior distributions (they should generally be unimodal), the convergence of the MCMC chains (all chains should be mixing well from the same distribution), and the autocorrelation of the samples (should be low).</li>
-<li><code>traits.mcmc.Rdata</code> contains the raw output from the statistical code. This includes samples from all of the parameters in the meta-analysis model, not just those that feed forward to the ecosystem, but also the variances, fixed effects, and random effects.</li>
-<li><code>post.distns.Rdata</code> stores a simple tables of the posterior distributions for all model parameters in terms of the name of the distribution and its parameters.</li>
-<li><code>posteriors.pdf</code> provides graphics showing, for each model parameter, the prior distribution, the data, the smoothed histogram of the posterior distribution (labeled post), and the best-fit analytical approximation to that smoothed histogram (labeled approx). <em>Open posteriors.pdf and compare the posteriors to the priors and data</em></li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>SENSITIVITY ANALYSIS</strong></li>
-</ol>
+<li>On the top right next to your name, make sure the location setting is on U.S. East (N. Virginia), not U.S. West (Oregon)</li>
+<li>On the left click, click on EC2 (Virtual servers), then click on “AMIs”, also on the left</li>
+<li>In the search window toggle to change “Owned by me” to “Public images”</li>
+<li>Type “pecan” into the search window</li>
+<li>Click on the toggle button on the left next to PEcAn1.4.6</li>
+<li>Click on the “Launch” button at the top</li>
+</ul></li>
+<li>Choose an Instance Type
 <ul>
-<li><code>sensitivity.analysis.[RunID].[Variable].[StartYear].[EndYear].pdf</code> shows the raw data points from univariate one-at-a-time analyses and spline fits through the points. <em>Open this file</em> to determine which parameters are most and least sensitive</li>
-</ul>
-<ol start="4" style="list-style-type: decimal">
-<li><strong>UNCERTAINTY ANALYSIS</strong></li>
-</ol>
-<ul>
-<li><code>variance.decomposition.[RunID].[Variable].[StartYear].[EndYear].pdf</code>, contains three columns, the coefficient of variation (normalized posterior variance), the elasticity (normalized sensitivity), and the partial standard deviation of each model parameter. <strong>Open this file for BOTH the soil and conifer PFTS and answer the following questions:</strong></li>
-<li>The Variance Decomposition graph is sorted by the variable explaining the largest amount of variability in the model output (right hand column). <strong>From this graph identify the top-tier parameters that you would target for future constraint.</strong><br />
+<li>Select what type of machine you want to run. For this demo the default, t2.micro, will be adequate. Be aware that different machine types incur very different costs, from 1.3 cents/hour to over $5/hr <a href="https://aws.amazon.com/ec2/pricing/" class="uri">https://aws.amazon.com/ec2/pricing/</a><br />
 </li>
-<li>A parameter can be important because it is highly sensitive, because it is highly uncertain, or both. <strong>Identify parameters in your output that meet each of these criteria.</strong> Additionally, <strong>identify parameters that are highly uncertain but unimportant (due to low sensitivity) and those that are highly sensitive but unimportant (due to low uncertainty)</strong>.</li>
-<li>Parameter constraints could come from further literature synthesis, from direct measurement of the trait, or from data assimilation. <strong>Choose the parameter that you think provides the most efficient means of reducing model uncertainty and propose how you might best reduce uncertainty in this process</strong>. In making this choice remember that not all processes in models can be directly observed, and that the cost-per-sample for different measurements can vary tremendously (and thus the parameter you measure next is not always the one contributing the most to model variability). Also consider the role of parameter uncertainty versus model sensitivity in justifying your choice of what parameters to constrain.</li>
-</ul>
-</div>
-<div id="pecan-files" class="section level3">
-<h3><span class="header-section-number">30.1.6</span> PEcAn Files:</h3>
-<p>This menu shows the contents of the root workflow folder that are not in one of the folders indicated above. It mostly contains log files from the PEcAn workflow that are useful if the workflow generates an error, and as metadata &amp; provenance (a detailed record of how data was generated).</p>
-<ol style="list-style-type: decimal">
-<li><code>STATUS</code> gives a summary of the steps of the workflow, the time they took, and whether they were successful</li>
-<li><code>pecan.*.xml</code> are PEcAn settings files</li>
-<li><code>workflow.R</code> is the workflow script</li>
-<li><code>workflow.Rout</code> is the corresponding log file</li>
-<li><code>samples.Rdata</code> contains the parameter values used in the runs. This file contains two data objects, sa.samples and ensemble.samples, that are the parameter values for the sensitivity analysis and ensemble runs respectively</li>
-<li><code>sensitivity.output.[RunID].[Variable].[StartYear].[EndYear].Rdata</code> contains the object sensitivity.output which is the model outputs corresponding to the parameter values in sa.samples.</li>
-<li>ENSEMBLE ANALYSIS</li>
-</ol>
+<li>Select t2.micro, then click “Next: Configure Instance Details”</li>
+</ul></li>
+<li>Configure Instance Details
 <ul>
-<li><code>ensemble.Rdata</code> contains contains the object ensemble.output, which is the model predictions at the parameter values given in ensemble.samples.</li>
-<li><code>ensemble.analysis.[RunID].[Variable].[StarYear].[EndYear].pdf</code> contains the ensemble prediction as both a histogram and a boxplot.</li>
-<li><code>ensemble.ts.[RunID].[Variable].[StartYear].[EndYear].pdf</code> contains a time-series plot of the ensemble mean, median, and 95% CI</li>
-</ul>
-</div>
-</div>
-<div id="global-sensitivity-shiny" class="section level2">
-<h2><span class="header-section-number">30.2</span> Global Sensitivity: Shiny</h2>
-<p><strong>Navigate to URL/shiny/global-sensitivity.</strong></p>
-<p>This app uses the output from the ENSEMBLE runs to perform a global Monte Carlo sensitivity analysis. There are three modes controlled by Output type:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Pairwise</strong> looks at the relationship between a specific parameter (X) and output (Y)</li>
-<li><strong>All parameters</strong> looks at how all parameters affect a specific output (Y)</li>
-<li><strong>All variables</strong> looks at how all outputs are affected by a specific parameter(X)</li>
+<li>The defaults are OK. Click “Next: Add Storage”</li>
+</ul></li>
+<li>Add Storage
+<ul>
+<li>The defaults are OK. Click “Next: Tag Instance”</li>
+</ul></li>
+<li>Tag Instance
+<ul>
+<li>You can name your instance if you want. Click “Next: Configure Security Group”</li>
+</ul></li>
+<li>Configure Security Group
+<ul>
+<li>You will need to add two new rules:</li>
+<li>Click “Add Rule” then select “HTTP” from the pull down menu. This rule allows you to access the webserver on PEcAn.</li>
+<li>Click “Add Rule”, leave the pull down on “Custom TCP Rule”, and then change the Port Range from 0 to 8787. Set “Source” to Anywhere. This rule allows you to access RStudio Server on PEcAn.</li>
+<li>Click “Review and Launch” . You will then see this pop-up:</li>
+</ul></li>
 </ol>
-<p>In all of these analyses, the app also fits a linear regression to these scatterplots and reports a number of summary statistics. Among these, the slope is an indicator of <strong>global sensitivity</strong> and the R2 is an indicator of the contribution to <strong>global uncertainty</strong></p>
-<div id="next-steps-1" class="section level3">
-<h3><span class="header-section-number">30.2.1</span> Next Steps</h3>
-<p>The next set of tutorials will focus on the process of data assimilation and parameter estimation. The next two steps are in “.Rmd” files which can be viewed online.</p>
+<p><img src="figures/pic2.jpg" width="343" style="display: block; margin: auto;" /></p>
+<p>Select the default drive volume type and click Next</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Review and Launch
+<ul>
+<li>Review the settings and then click “Launch”, which will pop up a select/create Key Pair window.</li>
+</ul></li>
+<li>Key Pair
+<ul>
+<li>Select “Create a new key pair” and give it a name. You won’t actually need this key unless you need to SSH into your PEcAn server, but AWS requires you to create one. Click on “Download Key Pair” then on “Launch Instances”. Next click on “View Instances” at the bottom of the following page.</li>
+</ul></li>
+</ol>
+<p><img src="../figures/pic3.jpg" style="display: block; margin: auto;" /></p>
+<ol start="9" style="list-style-type: decimal">
+<li>Instances
+<ul>
+<li>You will see the status of your PEcAn VM, which will take a minute to boot up. Wait until the Instance State reads “running”. The most important piece of information here is the Public IP, which is the URL you will need in order to access your PEcAn instance from within your web browser (see Demo 1 below).</li>
+<li>Be aware that it often takes ~1 hr for AWS instances to become fully operational, so if you get an error when you put the Public IP in you web browser, most of the time you just need to wait a bit longer. Congratulations! You just started a PEcAn server in the “cloud”!</li>
+</ul></li>
+<li>When you are done using PEcAn, you will want to return to the “Instances” menu to turn off your VM.
+<ul>
+<li>To STOP the instance (which will turn the machine off but keep your work), select your PEcAn instance and click Actions &gt; Instance state &gt; Stop. Be aware that a stopped instance will still accrue a small storage cost on AWS. To restart this instance at any point in the future you do not want to repeat all the steps above, but instead you just need to select your instance and then click Actions &gt; Instance state &gt; Start</li>
+<li>To TERMINATE the instance (which will DELETE your PEcAn machine), select your instance and click Actions &gt; Instance state &gt; Terminate. Terminated instances will not incur costs. In most cases you will also want to go to the Volumes menu and delete the storage associated with your PEcAn VM.Remember, AWS is free for one year, but will automatically charge a fee in second year if account is not cancelled.</li>
+</ul></li>
+</ol>
 </div>
-<div id="assimilation-by-hand" class="section level3">
-<h3><span class="header-section-number">30.2.2</span> Assimilation ‘by hand’</h3>
-<p><a href="https://github.com/PecanProject/pecan/blob/master/documentation/tutorials/sensitivity/PEcAn_sensitivity_tutorial_v1.0.Rmd">Explore</a> how model error changes as a function of parameter value (i.e. data assimilation ‘by hand’)</p>
+<div id="dockervm" class="section level2">
+<h2><span class="header-section-number">4.4</span> Working with the PEcAn Containers (Docker) [Experimental]</h2>
+<p>Following are the steps to setup a Docker instance of the PEcAn. This is experimental and can have a lot of bugs, If you find any bug please report it.</p>
+<ol style="list-style-type: decimal">
+<li><p>Make sure that the machine on which have docker and docker-compose installed. For instruction on how to install docker and docker-compose please visit the <a href="https://docs.docker.com/engine/installation/">official documentations</a>.</p></li>
+<li><p>Visit the PEcAn Project on <a href="https://github.com/PecanProject/pecan/tree/develop">github</a> and clone the repository to your machine.</p></li>
+<li><p>cd to root of the repository and run <code>docker-compose up -d</code> here -d makes it run in detached mode so it won’t show the log on the terminal The above command pull the respective docker images and also create the required images.</p>
+<p>To access the web interface can visit <machine-ip>:8080 If using localmachine then can use localhost:8080</p></li>
+</ol>
+<p>Only SIPNET model is included as the default model in it.</p>
 </div>
-<div id="mcmc-concepts" class="section level3">
-<h3><span class="header-section-number">30.2.3</span> MCMC Concepts</h3>
-<p><a href="https://github.com/PecanProject/pecan/blob/master/documentation/tutorials/MCMC/MCMC_Concepts.Rmd">Explore</a> Bayesian MCMC concepts using the photosynthesis module</p>
-</div>
-<div id="more-info-about-tools-analyses-and-specific-tasks" class="section level3">
-<h3><span class="header-section-number">30.2.4</span> More info about tools, analyses, and specific tasks…</h3>
-<p>Additional information about specific tasks (adding sites, models, data; software updates; etc.) and analyses (e.g. data assimilation) can be found in the PEcAn <a href="https://pecanproject.github.io/pecan-documentation/">documentation</a></p>
-<p>If you encounter a problem with PEcAn that’s not covered in the documentation, or if PEcAn is missing functionality you need, please search <a href="https://github.com/PecanProject/pecan/issues?q=">known bugs and issues</a>, submit a <a href="https://github.com/PecanProject/pecan/issues/new">bug report</a>, or ask a question in our <a href="https://gitter.im/PecanProject/pecan">chat room</a>. Additional questions can be directed to the <a href="mailto:tonygard@bu.edu?subject=PEcAn%20Demo::">project manager</a></p>
+<div id="pecan-demos" class="section level2">
+<h2><span class="header-section-number">4.5</span> PEcAn Demos</h2>
+<p>Once you have installed A VM or have a version of PEcAn, we have developed a number of demos and vignettes to guide your use of PEcAn’s many capabilities:</p>
+<table style="width:44%;">
+<colgroup>
+<col width="6%" />
+<col width="8%" />
+<col width="12%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Type</th>
+<th align="center">Title</th>
+<th align="center">Web Link</th>
+<th align="center">Source Rmd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Basic Run</td>
+<td align="center"><a href="https://pecanproject.github.io/pecan-documentation/tutorials/Demo01.html">html</a></td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/develop/documentation/tutorials/01_Demo_Basic_Run/Demo01.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">Uncertainty Analysis</td>
+<td align="center"><a href="https://pecanproject.github.io/pecan-documentation/tutorials/Demo02.html">html</a></td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/master/documentation/tutorials/02_Demo_Uncertainty_Analysis">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Output Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/AnalyzeOutput">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">MCMC</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/MCMC">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Parameter Assimilation</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/ParameterAssimilation">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Demo</td>
+<td align="center">State Assimilation</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/StateAssimilation">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Demo</td>
+<td align="center">Sensitivity</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/develop/documentation/tutorials/sensitivity">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Allometries</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/allometry/vignettes/AllomVignette.Rmd">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">MCMC</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/assim.batch/vignettes/AssimBatchVignette.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Meteorological Data</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/tree/master/modules/data.atmosphere/vignettes">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">Meta-Analysis</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/meta.analysis/vignettes/single.MA_demo.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Photosynthetic Response Curves</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/photosynthesis/vignettes/ResponseCurves.Rmd">Rmd</a></td>
+</tr>
+<tr class="odd">
+<td align="center">Vignette</td>
+<td align="center">Priors</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/priors/vignettes/priors_demo.Rmd">Rmd</a></td>
+</tr>
+<tr class="even">
+<td align="center">Vignette</td>
+<td align="center">Leaf Spectra:PROSPECT inversion</td>
+<td align="center">html</td>
+<td align="center"><a href="https://github.com/PecanProject/pecan/blob/master/modules/rtm/vignettes/pecanrtm.vignette.Rmd">Rmd</a></td>
+</tr>
+</tbody>
+</table>
 
-</div>
 </div>
 </div>
             </section>
@@ -675,8 +757,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="pecan-hands-on-demo-01-basic-run.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pecan-testing-the-sensitivity-analysis-against-observations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="about-the-pecan-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="web-workflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
