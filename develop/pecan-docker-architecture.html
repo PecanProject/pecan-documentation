@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-06">
+<meta name="date" content="2018-05-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -556,6 +556,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="pecan-docker-architecture" class="section level1">
 <h1><span class="header-section-number">32</span> PEcAn Docker Architecture</h1>
+<p><strong>THIS IS EXPERIMENTAL DO NOT USE THIS IN PRODUCTION SUBJECT TO CHANGE</strong></p>
 <p>The PEcAn docker architecture consists of many containers (see figure below) that will communicate with each other. The goal of this architecture is to easily expand the PEcAn system by deploying new model containers and registering them with PEcAn. Once this is done the user can now use these new models in their work. The PEcAn framework will setup the configurations for the models, and send a message to the model containers to start execution. Once the execution is finished the PEcAn framework will continue. This is exactly as if the model is running on a HPC machine. Models can be executed in paralel by launching multiple model containers.</p>
 <div class="figure">
 <img src="pecan-docker.png" alt="PEcAn docker containers" />
@@ -572,7 +573,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>The model containers contain the actual models that are executed as well as small wrappers to make them work in the PEcAn framework. The containers will run the model based on the parameters received from the message bus and convert the outputs back to the standard PEcAn output format. Once the container is finished processing a message it will immediatly get the next message and start processing it.</p>
 
-<p><strong>THIS IS EXPERIMENTAL DO NOT USE THIS IN PRODUCTION SUBJECT TO CHANGE</strong></p>
 </div>
             </section>
 
