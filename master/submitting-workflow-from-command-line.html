@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="pecan-workflow-webworkflow-r.html">
+<link rel="next" href="workflow-modules.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,75 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
-<ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
-</ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+<div id="submitting-workflow-from-command-line" class="section level1">
+<h1><span class="header-section-number">13</span> Submitting Workflow from Command Line</h1>
+<p>This is how you can submit a workflow from the command line through the pecan web interface. This will use curl to submit all the requireed parameters to the web interface and trigger a run.</p>
+<pre><code># the host where the model should run
+# never use remote sites since you will need to pass your username/password and that WILL be stored
+hostname=pecan.vm
+# the site id where to run the model (NIWOT in this case)
+siteid=772
+# start date and end date, / need to be replaced with %2F or use - (NOT TESTED)
+start=2004-01-01
+end=2004-12-31
+
+# if of model you want to run, rest of section parameters depend on the model selected (SIPNET 136)
+modelid=5000000002
+# PFT selected (we should just use a number here)
+# NOTE: the square brackets are needed and will need be escaped with a \ if you call this from command line
+pft[]=temperate.coniferous
+# initial pool condition (-1 means nothing is selected)
+input_poolinitcond=-1
+# met data
+input_met=99000000006
+
+# variables to collect
+variables=NPP,GPP
+# ensemble size
+runs=10
+# use sensitivity analysis
+sensitivity=-1,1
+
+# redirect to the edit pecan.xml file
+pecan_edit=on
+# redirect to edit the model configuration files
+model_edit=on
+# use browndog
+browndog=on</code></pre>
+<p>For example the following will run the above workflow. Using -v in curl will show verbose output (needed) and the grep will make sure it only shows the redirect. This will show the actual workflowid:</p>
+<pre><code>curl -s -v &#39;http://localhost:6480/pecan/04-runpecan.php?hostname=pecan.vm&amp;siteid=772&amp;start=2004-01-01&amp;end=2004-12-31&amp;modelid=5000000002&amp;pft\[\]=temperate.coniferous&amp;input_poolinitcond=-1&amp;input_met=99000000006&#39; 2&gt;&amp;1 | grep &#39;Location:&#39;
+&lt; Location: 05-running.php?workflowid=99000000004</code></pre>
+<p>In this case you can use the browser to see progress, or use the following to see the status:</p>
+<pre><code>curl -s &#39;http://localhost:6480/pecan/dataset.php?workflowid=99000000004&amp;type=file&amp;name=STATUS&#39;
+TRAIT   2017-12-13 08:56:56 2017-12-13 08:56:57 DONE
+META    2017-12-13 08:56:57 2017-12-13 08:57:13 DONE
+CONFIG  2017-12-13 08:57:13 2017-12-13 08:57:14 DONE
+MODEL   2017-12-13 08:57:14 2017-12-13 08:57:15 DONE
+OUTPUT  2017-12-13 08:57:15 2017-12-13 08:57:15 DONE
+ENSEMBLE    2017-12-13 08:57:15 2017-12-13 08:57:16 DONE
+FINISHED    2017-12-13 08:57:16 2017-12-13 08:57:16 DONE</code></pre>
+<p>Or to show the output log:</p>
+<pre><code>curl -s &#39;http://localhost:6480/pecan/dataset.php?workflowid=99000000004&amp;type=file&amp;name=workflow.Rout&#39;
+
+R version 3.4.3 (2017-11-30) -- &quot;Kite-Eating Tree&quot;
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type &#39;license()&#39; or &#39;licence()&#39; for distribution details.
+
+R is a collaborative project with many contributors.
+....</code></pre>
 
 </div>
-</div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pecan-workflow-webworkflow-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="workflow-modules.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

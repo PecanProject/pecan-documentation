@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="submitting-workflow-from-command-line.html">
+<link rel="next" href="adding-to-pecan.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,98 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="workflow-modules" class="section level1">
+<h1><span class="header-section-number">14</span> Workflow modules</h1>
+<p>NOTE: As of PEcAn 1.2.6 – needs to be updated significantly</p>
+<!--NEEDS TO BE UPDATED SIGNIFICANTLY-->
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">14.1</span> Overview</h2>
+<p>Workflow inputs and outputs (click to open in new page, then zoom). Code used to generate this image is provided in <a href="https://github.com/PecanProject/pecan/blob/master/qaqc/vignettes/module_output.Rmd">qaqc/vignettes/module_output.Rmd</a></p>
+<p><a href="http://isda.ncsa.illinois.edu/~kooper/EBI/workflow.svg"><img src="http://isda.ncsa.illinois.edu/~kooper/EBI/workflow.svg" alt="PEcAn Workflow" /></a></p>
+<div id="load-settings" class="section level3">
+<h3><span class="header-section-number">14.1.1</span> Load Settings:</h3>
+<div id="read.settingshomepecanpecan.xml" class="section level4">
+<h4><span class="header-section-number">14.1.1.1</span> <code>read.settings(&quot;/home/pecan/pecan.xml&quot;)</code></h4>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li>loads settings</li>
+<li>create directories</li>
+<li>generates new xml, put in output folder</li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+</div>
+</div>
+<div id="query-database" class="section level3">
+<h3><span class="header-section-number">14.1.2</span> Query Database:</h3>
+<div id="get.trait.data" class="section level4">
+<h4><span class="header-section-number">14.1.2.1</span> <code>get.trait.data()</code></h4>
+<p>Queries the database for both the trait data and prior distributions associated with the PFTs specified in the settings file. The list of variables that are queried is determined by what variables have priors associated with them in the definition of the pft. Likewise, the list of species that are associated with a PFT determines what subset of data is extracted out of all data matching a given variable name.</p>
+</div>
+</div>
+<div id="meta-analysis-2" class="section level3">
+<h3><span class="header-section-number">14.1.3</span> Meta Analysis:</h3>
+<div id="run.meta.analysis" class="section level4">
+<h4><span class="header-section-number">14.1.3.1</span> <code>run.meta.analysis()</code></h4>
+<p>The meta-analysis code begins by distilling the trait.data to just the values needed for the meta-analysis statistical model, with this being stored in <code>madata.Rdata</code>. This reduced form includes the conversion of all error statistics into precision (1/variance), and the indexing of sites, treatments, and greenhouse. In reality, the core meta-analysis code can be run independent of the trait database as long as input data is correctly formatted into the form shown in <code>madata</code>.</p>
+<p>The evaluation of the meta-analysis is done using a Bayesian statistical software package called JAGS that is called by the R code. For each trait, the R code will generate a [trait].model.bug file that is the JAGS code for the meta-analysis itself. This code is generated on the fly, with PEcAn adding or subtracting the site, treatment, and greenhouse terms depending upon the presence of these effects in the data itself.</p>
+<p>Meta-analyses are run, and summary plots are produced.</p>
+</div>
+</div>
+<div id="write-configuration-files" class="section level3">
+<h3><span class="header-section-number">14.1.4</span> Write Configuration Files</h3>
+<div id="write.configsmodel" class="section level4">
+<h4><span class="header-section-number">14.1.4.1</span> <code>write.configs(model)</code></h4>
+<ul>
+<li>writes out a configuration file for each model run ** writes 500 configuration files for a 500 member ensemble ** for <em>n</em> traits, writes <code>6 * n + 1</code> files for running default Sensitivity Analysis (number can be changed in the pecan settings file)</li>
+</ul>
+</div>
+</div>
+<div id="start-runs" class="section level3">
+<h3><span class="header-section-number">14.1.5</span> Start Runs:</h3>
+<div id="start.runsmodel" class="section level4">
+<h4><span class="header-section-number">14.1.5.1</span> <code>start.runs(model)</code></h4>
+<p>This code starts the model runs using a model specific run function named start.runs.<a href="adding-to-pecan.html#model">model</a>. If the ecosystem model is running on a remote server, this module also takes care of all of the communication with the remote server and its run queue. Each of your subdirectories should now have a [run.id].out file in it. One instance of the model is run for each configuration file generated by the previous write configs module.</p>
+</div>
+</div>
+<div id="get-model-output" class="section level3">
+<h3><span class="header-section-number">14.1.6</span> Get Model Output</h3>
+<div id="get.model.outputmodel" class="section level4">
+<h4><span class="header-section-number">14.1.6.1</span> <code>get.model.output(model)</code></h4>
+<p>This code first uses a model-specific model2netcdf.<a href="adding-to-pecan.html#model">model</a> function to convert the model output into a standard output format (<a href="http://nacp.ornl.gov/MsTMIP_variables.shtml">MsTMIP</a>). Then it extracts the data for requested variables specified in the settings file as <code>settings$ensemble$variable</code>, averages over the time-period specified as <code>start.date</code> and <code>end.date</code>, and stores the output in a file <code>output.Rdata</code>. The <code>output.Rdata</code> file contains two objects, <code>sensitivity.output</code> and <code>ensemble.output</code>, that is the model prediction for the parameter sets specified in <code>sa.samples</code> and <code>ensemble.samples</code>. In order to save bandwidth, if the model output is stored on a remote system PEcAn will perform these operations on the remote host and only return the <code>output.Rdata</code> object.</p>
+</div>
+</div>
+<div id="ensemble-analysis" class="section level3">
+<h3><span class="header-section-number">14.1.7</span> Ensemble Analysis</h3>
+<div id="run.ensemble.analysis" class="section level4">
+<h4><span class="header-section-number">14.1.7.1</span> <code>run.ensemble.analysis()</code></h4>
+<p>This module makes some simple graphs of the ensemble output. Open ensemble.analysis.pdf to view the ensemble prediction as both a histogram and a boxplot. ensemble.ts.pdf provides a timeseries plot of the ensemble mean, meadian, and 95% CI</p>
+</div>
+</div>
+<div id="sensitivity-analysis-variance-decomposition" class="section level3">
+<h3><span class="header-section-number">14.1.8</span> Sensitivity Analysis, Variance Decomposition</h3>
+<div id="run.sensitivity.analysis" class="section level4">
+<h4><span class="header-section-number">14.1.8.1</span> <code>run.sensitivity.analysis()</code></h4>
+<p>This function processes the output of the previous module into sensitivity analysis plots, <code>sensitivityanalysis.pdf</code>, and a variance decomposition plot, <code>variancedecomposition.pdf</code> . In the sensitivity plots you will see the parameter values on the x-axis, the model output on the Y, with the dots being the model evaluations and the line being the spline fit.</p>
+<p>The variance decomposition plot is discussed more below. For your reference, the R list object, sensitivity.results, stored in sensitivity.results.Rdata, contains all the components of the variance decomposition table, as well as the the input parameter space and splines from the sensitivity analysis (reminder: the output parameter space from the sensitivity analysis was in outputs.R).</p>
+<p>The variance decomposition plot contains three columns, the coefficient of variation (normalized posterior variance), the elasticity (normalized sensitivity), and the partial standard deviation of each model parameter. This graph is sorted by the variable explaining the largest amount of variability in the model output (right hand column). From this graph identify the top-tier parameters that you would target for future constraint.</p>
+</div>
+</div>
+</div>
+<div id="glossary" class="section level2">
+<h2><span class="header-section-number">14.2</span> Glossary</h2>
+<ul>
+<li>Inputs: data sets that are used, and file paths leading to them</li>
+<li>Parameters: e.g. info set in settings file</li>
+<li>Outputs: data sets that are dropped, and the file paths leading to them</li>
+</ul>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="submitting-workflow-from-command-line.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="adding-to-pecan.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

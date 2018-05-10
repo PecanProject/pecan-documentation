@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="creating-a-new-format-record-in-bety.html">
+<link rel="next" href="working-with-the-vm.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,213 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="reference-runs" class="section level1">
+<h1><span class="header-section-number">18</span> Reference Runs</h1>
+<p>The purpose of the reference run record in BETY is to store all the settings from a run that are necessary in exactly recreating it.</p>
+<p>The pecan.xml file is the home of absolutely all the settings for a particular run in pecan. However, much of the information in the pecan.xml file is server and user specific and more importantly, the pecan.xml files are stored on individual servers and may not be available to the public.</p>
+<p>When a run that is performed using pecan is registered as a reference run, the settings that were used to make that run are made available to all users through the database.</p>
+<p>All completed runs are not automatically registered as reference runs. To register a run, navigate to the benchmarking section of the workflow visualizations Shiny app.</p>
+
+<div id="editing-records" class="section level2">
+<h2><span class="header-section-number">18.1</span> Editing records</h2>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li>Models</li>
+<li>Species</li>
+<li>PFTs</li>
+<li>Traits</li>
+<li>Inputs</li>
+<li>DB files</li>
+<li>Variables</li>
+<li>Formats</li>
+<li>(Link each section to relevant Bety tables)</li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+
+</div>
+<div id="standalone-tools-modules" class="section level2">
+<h2><span class="header-section-number">18.2</span> Standalone tools (modules)</h2>
+<ul>
+<li>RTM</li>
+<li>Photosynthesis</li>
+<li>Allometry</li>
+<li><code>benchmark::load_data</code></li>
+</ul>
+<p>(Link to vignettes)</p>
+
+</div>
+<div id="LoadData" class="section level2">
+<h2><span class="header-section-number">18.3</span> Loading Data in PEcAn</h2>
+<p>If you are loading data in to PEcAn for benchmarking, using the Benchmarking shiny app [provide link?] is recommended.</p>
+<p>Data can be loaded manually using the <code>load_data</code> function which in turn requires providing data format information using <code>query.format.vars</code> and the path to the data using <code>query.file.path</code>.</p>
+<p>Below is a description of the <code>load_data</code> function an a simple example of loading data manually.</p>
+<div id="function-load_data" class="section level3">
+<h3><span class="header-section-number">18.3.1</span> Function <code>load_data</code></h3>
+<div id="inputs-2" class="section level4">
+<h4><span class="header-section-number">18.3.1.1</span> Inputs</h4>
+<p>Required</p>
+<ul>
+<li><code>data.path</code>: path to the data that is the output of the function <code>query.file.path</code> (see example below)</li>
+<li><code>format</code>: R list object that is the output of the function <code>query.format.vars</code> (see example below)</li>
+</ul>
+<p>Optional</p>
+<ul>
+<li><code>start_year = NA</code>:</li>
+<li><code>end_year = NA</code>:</li>
+<li><code>site = NA</code></li>
+<li><code>vars.used.index=NULL</code></li>
+</ul>
+</div>
+<div id="output-1" class="section level4">
+<h4><span class="header-section-number">18.3.1.2</span> Output</h4>
+<ul>
+<li>R data frame containing the requested variables converted in to PEcAn standard name and units and time steps in <code>POSIX</code> format.</li>
+</ul>
+</div>
+</div>
+<div id="example" class="section level3">
+<h3><span class="header-section-number">18.3.2</span> Example</h3>
+<p>The data for this example has already been entered in to the database. To add new data go to <a href="creating-a-new-format-record-in-bety.html#NewInput">new data documentation</a>.</p>
+<p>To load the Ameriflux data for the Harvard Forest (US-Ha1) site.</p>
+<ol style="list-style-type: decimal">
+<li>Create a connection to the BETY database. This can be done using R function</li>
+</ol>
+<p><code>R    bety = PEcAn.DB::betyConnect(php.config = &quot;pecan/web/config.php&quot;)</code></p>
+<p>where the complete path to the <code>config.php</code> is specified. See <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">here</a> for an example <code>config.php</code> file.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Look up the inputs record for the data in BETY.</li>
+</ol>
+<div class="figure">
+<img src="images/Input_ID_name.png" alt="Input_ID_name" />
+<p class="caption">Input_ID_name</p>
+</div>
+<p>To find the input ID, either look at</p>
+<ul>
+<li><p>The url of the record (see image above)</p></li>
+<li><p>In R run</p>
+<p><code>R  library(dplyr)  input_name = &quot;AmerifluxLBL_site_0-758&quot; #copied directly from online  input.id = tbl(bety,&quot;inputs&quot;) %&gt;% filter(name == input_name) %&gt;% pull(id)</code></p></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Additional arguments to <code>query.format.vars</code> are optional</p></li>
+<li>If you only want to load a subset of dates in the data, specify start and end year, otherwise all data will be loaded.</li>
+<li><p>If you only want to load a select list of variables from the data, look up their IDs in BETY, otherwise all variables will be loaded.</p></li>
+<li><p>In R run</p></li>
+</ol>
+<p><code>R    format = PEcAn.DB::query.format.vars(bety, input.id)</code></p>
+<p>Examine the resulting R list object to make sure it returned the correct information.</p>
+<p>The example format contains the following objects:</p>
+<p>```R $file_name [1] “AMERIFLUX_BASE_HH”</p>
+<p>$mimetype [1] “csv”</p>
+<p>$skip [1] 2</p>
+<p>$header [1] 1</p>
+<p>$na.strings [1] “-9999” “-6999” “9999” “NA”</p>
+<p>$time.row [1] 4</p>
+<p>$site [1] 758</p>
+<p>$lat [1] 42.5378</p>
+<p>$lon [1] -72.1715</p>
+<p>$time_zone [1] “America/New_York” ```</p>
+<p>The first 4 rows of the table <code>format$vars</code> looks like this:</p>
+<table style="width:200%;">
+<colgroup>
+<col width="18%" />
+<col width="16%" />
+<col width="22%" />
+<col width="16%" />
+<col width="18%" />
+<col width="19%" />
+<col width="15%" />
+<col width="16%" />
+<col width="20%" />
+<col width="15%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">bety_name</th>
+<th align="left">variable_id</th>
+<th align="left">input_name</th>
+<th align="left">input_units</th>
+<th align="left">storage_type</th>
+<th align="left">column_number</th>
+<th align="left">bety_units</th>
+<th align="left">mstmip_name</th>
+<th align="left">mstmip_units</th>
+<th align="left">pecan_name</th>
+<th align="left">pecan_units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">air_pressure</td>
+<td align="left">554</td>
+<td align="left">PA</td>
+<td align="left">kPa</td>
+<td align="left"></td>
+<td align="left">19</td>
+<td align="left">Pa</td>
+<td align="left">Psurf</td>
+<td align="left">Pa</td>
+<td align="left">Psurf</td>
+<td align="left">Pa</td>
+</tr>
+<tr class="even">
+<td align="left">airT</td>
+<td align="left">86</td>
+<td align="left">TA</td>
+<td align="left">celsius</td>
+<td align="left"></td>
+<td align="left">4</td>
+<td align="left">degrees C</td>
+<td align="left">Tair</td>
+<td align="left">K</td>
+<td align="left">Tair</td>
+<td align="left">K</td>
+</tr>
+<tr class="odd">
+<td align="left">co2atm</td>
+<td align="left">135</td>
+<td align="left">CO2_1</td>
+<td align="left">umol mol-1</td>
+<td align="left"></td>
+<td align="left">20</td>
+<td align="left">umol mol-1</td>
+<td align="left">CO2air</td>
+<td align="left">micromol mol-1</td>
+<td align="left">CO2air</td>
+<td align="left">micromol mol-1</td>
+</tr>
+<tr class="even">
+<td align="left">datetime</td>
+<td align="left">5000000001</td>
+<td align="left">TIMESTAMP_START</td>
+<td align="left">ymd_hms</td>
+<td align="left">%Y%m%d%H%M</td>
+<td align="left">1</td>
+<td align="left">ymd_hms</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">datetime</td>
+<td align="left">ymd_hms</td>
+</tr>
+</tbody>
+</table>
+<ol start="5" style="list-style-type: decimal">
+<li>Get the path to the data</li>
+</ol>
+<p><code>R    data.path = PEcAn.DB::query.file.path(      input.id = input.id,       host_name = PEcAn.remote::fqdn(),       con = bety$con)</code></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Load the data</li>
+</ol>
+<p><code>R    data = PEcAn.benchmark::load_data(data.path = data.path, format = format)</code></p>
 
 </div>
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="creating-a-new-format-record-in-bety.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-the-vm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

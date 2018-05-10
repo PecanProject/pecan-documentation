@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="additional-web-configuration.html">
+<link rel="next" href="remote-execution-with-pecan.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,380 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="settings-configured-analyses" class="section level1">
+<h1><span class="header-section-number">9</span> Settings-configured analyses</h1>
+<p>These analyses can be run through the web interface, but lack graphical interfaces and currently can only be configured throughthe XML settings. To run these analyses use the <strong>Edit pecan.xml</strong> checkbox on the Input configuration page. Eventually, these modules will be integrated into the web user interface.</p>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li>Parameter Data Assimilation (PDA)</li>
+<li>State Data Assimilation (SDA)</li>
+<li>MultiSettings</li>
+<li>Benchmarking</li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+<p>(TODO: Add links)</p>
+
+<div id="parameter-data-assimilation-pda" class="section level2">
+<h2><span class="header-section-number">9.1</span> Parameter data assimilation (PDA)</h2>
+<p>All functions pertaining to Parameter Data Assimilation are housed within: <strong>pecan/modules/assim.batch</strong></p>
+<div id="pda.mcmc.r" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> <strong>pda.mcmc.R</strong></h3>
+<p>This is the main PDA code. It performs Bayesian MCMC on model parameters by proposing parameter values, running the model, calculating a likelihood (between model output and supplied observations), and accepting or rejecting the proposed parameters (Metropolis algorithm). Additional notes:</p>
+<ul>
+<li><p>The first argument is <em>settings</em>, followed by others that all default to <em>NULL.settings</em> is a list used throughout Pecan, which contains all the user options for whatever analyses are being done. The easiest thing to do is just pass that whole object all around the Pecan code and let different functions access whichever settings they need. That’s what a lot of the rest of the Pecan code does. But the flexibility to override most of the relevant settings in <em>settings</em> is there by providing them directly as arguments to the function.</p></li>
+<li><p>The <em>if(FALSE)…</em> : If you’re trying to step through the function you probably will have the <em>settings</em> object around, but those other variables will be undefined. If you set them all to NULL then they’ll be ignored without causing errors. It is there for debugging purposes.</p></li>
+<li><p>The next step calls pda.settings(), which is in the file pda.utils.R (see below). It checks whether any settings are being overridden by arguments, and in most cases supplies default values if it can’t find either.</p></li>
+<li>In the MCMC setup section
+<ul>
+<li>The code is set up to allow you to start a new MCMC chain, or to continue a previous chain as specified in settings.</li>
+<li>The code writes a simple text file of parameter samples at every iteration, which lets you get some results and even re-start an MCMC that fails for some reason.</li>
+<li>The code has adaptive jump distributions. So you can see some initialization of the jump distributions and associated variables here.</li>
+<li>Finally, note that after all this setup a new XML settings file is saved. The idea is that the original pecan.xml you create is preserved for provenance, and then periodically throughout the workflow the settings (likely containing new information) are re-saved with descriptive filenames.</li>
+</ul></li>
+<li>MCMC loop
+<ul>
+<li>Periodically adjust jump distribution to make acceptance rate closer to target</li>
+<li>Propose new parameters one at a time. For each:
+<ul>
+<li>First, note that Pecan may be handling many more parameters than are actually being targeted by PDA. Pecan puts priors on any variables it has information for (in the BETY database), and then these get passed around throughout the analysis and every step (meta-, sensitivity, ensemble analyses, etc.). But for PDA, you specify a separate list of probably far fewer parameters to constrain with data. These are the ones that get looped over and varied here. The distinction between all parameters and only those dealt with in PDA is dealt with in the setup code above.</li>
+<li>First a new value is proposed for the parameter of interest.</li>
+<li>Then, a new model run is set up, identical to the previous except with the new proposed value for the one parameter being updated on this run.</li>
+<li>The model run is started, and outputs collected after waiting for it to finish.</li>
+<li>A new likelihood is calculated based on the model outputs and the observed dataset provided.</li>
+<li>Standard Metropolis acceptance criteria is used to decide whether to keep the proposed parameter.</li>
+<li>Periodically (at interval specified in settings), a diagnostic figure is saved to disk so you can check on progress.</li>
+</ul></li>
+<li>This works only for NEE currently</li>
+</ul></li>
+</ul>
+</div>
+<div id="pda.mcmc.bs.r" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> <strong>pda.mcmc.bs.R</strong></h3>
+<p>This file is basically identical to pda.mcm.R, but rather than propose parameters one at a time, it proposes new values for all parameters at once (“bs” stands for “block sampling”). You choose which option to use by specifying settings<span class="math inline">\(assim.batch\)</span>method: * “bruteforce” means sample parameters one at a time * “bruteforce.bs” means use this version, sampling all parameters at once * “emulator” means use the emulated-likelihood version</p>
+</div>
+<div id="pda.emulator" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> <strong>pda.emulator</strong></h3>
+<p>This version of the PDA code again looks quite similar to the basic “bruteforce” one, but its mechanics are very different. The basic idea is, rather than running thousands of model iterations to explore parameter space via MCMC, run a relatively smaller number of runs that have been carefully chosen to give good coverage of parameter space. Then, basically interpolate the likelihood calculated for each of those runs (actually, fit a Gaussian process to it), to get a surface that “emulates” the true likelihood. Now, perform regular MCMC (just like the “bruteforce” approach), except instead of actually running the model on every iteration to get a likelihood, just get an approximation from the likelihood emulator. Since the latter step takes virtually no time, you can run as long of an MCMC as you need at little computational cost, once you have done the initial model runs to create the likelihood emulator.</p>
+</div>
+<div id="pda.mcmc.recover.r" class="section level3">
+<h3><span class="header-section-number">9.1.4</span> <strong>pda.mcmc.recover.R</strong></h3>
+<p>This function is for recovering a failed PDA MCMC run.</p>
+</div>
+<div id="pda.utils.r" class="section level3">
+<h3><span class="header-section-number">9.1.5</span> <strong>pda.utils.R</strong></h3>
+<p>This file contains most of the individual functions used by the main PDA functions (pda.mcmc.*.R).</p>
+<ul>
+<li><em>assim.batch</em> is the main function Pecan calls to do PDA. It checks which method is requested (bruteforce, bruteforce.bs, or emulator) and call the appropriate function described above.</li>
+<li><em>pda.setting</em> handles settings. If a setting isn’t found, the code can usually supply a reasonable default.</li>
+<li><em>pda.load.priors</em> is fairly self explanatory, except that it handles a lot of cases and gives different options priority over others. Basically, the priors to use for PDA parameters can come from either a Pecan prior.distns or post.distns object (the latter would be, e.g., the posteriors of a meta-analysis or previous PDA), or specified either by file path or BETY ID. If not told otherwise, the code tries to just find the most recent posterior in BETY, and use that as prior for PDA.</li>
+<li><em>pda.create.ensemble</em> gets an ensemble ID for the PDA. All model runs associated with an individual PDA (any of the three methods) are considered part of a single ensemble. This function does is register a new ensemble in BETY, and return the ID that BETY gives it.</li>
+<li><em>pda.define.prior.fn</em> creates R functions for all of the priors the PDA will use.</li>
+<li><em>pda.init.params</em> sets up the parameter matrix for the run, which has one row per iteration, and one column per parameter. Columns include all Pecan parameters, not just the (probably small) subset that are being updated by PDA. This is for compatibility with other Pecan components. If starting a fresh run, the returned matrix is just a big empty matrix to fill in as the PDA runs. If continuing an existing MCMC, then it will be the previous params matrix, with a bunch of blank rows added on for filling in during this round of PDA.</li>
+<li><em>pda.init.run</em> This is basically a big wrapper for Pecan’s write.config function (actually functions [plural], since every model in Pecan has its own version). For the bruteforce and bruteforce.bs methods this will be run once per iteration, whereas the emulator method knows about all its runs ahead of time and this will be a big batch of all runs at once.</li>
+<li><em>pda.adjust.jumps</em> tweaks the jump distributions for the standard MCMC method, and <em>pda.adjust.jumps.bs</em> does the same for the block-sampled version.</li>
+<li><em>pda.calc.llik</em> calculates the log-likelihood of the model given all datasets provided to compare it to.</li>
+<li><em>pda.generate.knots</em> is for the emulator version of PDA. It uses a Latin hypercube design to sample a specified number of locations in parameter space. These locations are where the model will actually be run, and then the GP interpolates the likelihood surface in between.</li>
+<li><em>pda.plot.params</em> provides basic MCMC diagnostics (trace and density) for parameters being sampled.</li>
+<li><em>pda.postprocess</em> prepares the posteriors of the PDA, stores them to files and the database, and performs some other cleanup functions.</li>
+<li><em>pda.load.data.r</em> This is the function that loads in data that will be used to constrain the PDA. It’s supposed to be eventually more integrated with Pecan, which will know how to load all kinds of data from all kinds of sources. For now, it can do NEE from Ameriflux.</li>
+<li><em>pda.define.llik.r</em> A simple helper function that defines likelihood functions for different datasets. Probably in the future this should be queried from the database or something. For now, it is extremely limited. The original test case of NEE assimilation uses a heteroskedastic Laplacian distribution.</li>
+<li><em>pda.get.model.output.R</em> Another function that will eventually grow to handle many more cases, or perhaps be replaced by a better system altogether. For now though, it again just handles Ameriflux NEE.</li>
+</ul>
+</div>
+<div id="get.da.data..r-plot.da.r" class="section level3">
+<h3><span class="header-section-number">9.1.6</span> <strong>get.da.data.*.R, plot.da.R</strong></h3>
+<p>Old codes written by Carl Davidson. Defunct now, but may contain good ideas so currently left in.</p>
+</div>
+</div>
+<div id="for-a-detailed-usage-of-the-module-please-see-the-vignette-under-modulesassim.batchvignettes" class="section level2">
+<h2><span class="header-section-number">9.2</span> For a detailed usage of the module, please see the vignette under <strong>/modules/assim.batch/vignettes</strong></h2>
+
+</div>
+<div id="state-data-assimilation-sda" class="section level2">
+<h2><span class="header-section-number">9.3</span> State data assimilation (SDA)</h2>
+<p><code>sda.enkf.R</code> is housed within: <strong>/pecan/modules/assim.sequential/R</strong> The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></p>
+<div id="sda.enkf.r-description" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> <strong>sda.enkf.R Description</strong></h3>
+<p>This is the main ensemble Kalman filter and generalized filter code. Originally, this was just ensemble Kalman filter code. Mike Dietze and Ann Raiho added a generalized ensemble filter to avoid filter divergence. The output of this function will be all the of run outputs, a PDF of diagnostics, and an Rdata object that includes three lists:</p>
+<ul>
+<li>FORECAST will be the ensemble forecasts for each year</li>
+<li>ANALYSIS will be the updated ensemble sample given the NPP observations</li>
+<li>enkf.params contains the prior and posterior mean vector and covariance matrix for each time step.</li>
+</ul>
+</div>
+<div id="sda.enkf.r-arguments" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> <strong>sda.enkf.R Arguments</strong></h3>
+<ul>
+<li><p>settings - (required) <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>obs.mean - (required) a list of observation means named with dates in YYYY/MM/DD format</p></li>
+<li><p>obs.cov - (required) a list of observation covariances names with dates in YYYY/MM/DD format</p></li>
+<li><p>IC - (optional) initial condition matrix (dimensions: ensemble memeber # by state variables). Default is NULL.</p></li>
+<li><p>Q - (optional) process covariance matrix (dimensions: state variable by state variables). Defualt is NULL.</p></li>
+</ul>
+</div>
+<div id="state-data-assimilation-workflow" class="section level3">
+<h3><span class="header-section-number">9.3.3</span> State Data Assimilation Workflow</h3>
+<p>Before running sda.enkf, these tasks must be completed (in no particular order),</p>
+<ul>
+<li><p>Read in a <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings file with tags listed below. i.e. read.settings(‘pecan.SDA.xml’)</p></li>
+<li><p>Load data means (obs.mean) and covariances (obs.cov) as lists with PEcAn naming and unit conventions. Each observation must have a date in YYYY/MM/DD format (optional time) associated with it. If there are missing data, the date must still be represented in the list with an NA as the list object.</p></li>
+<li><p>Create initial conditions matrix (IC) that is state variables columns by ensemble members rows in dimension. <a href="settings-configured-analyses.html#sample.ic.model.r">sample.IC.MODEL</a> can be used to create the IC matrix, but it is not required. This IC matrix is fed into write.configs for the initial model runs.</p></li>
+</ul>
+<p>The main parts of the SDA function are:</p>
+<p>Setting up for initial runs:</p>
+<ul>
+<li><p>Set parameters</p></li>
+<li><p>Load initial run inputs via <a href="settings-configured-analyses.html#split.inputs.model.r">split.inputs.MODEL</a></p></li>
+<li><p>Open database connection</p></li>
+<li><p>Get new workflow ids</p></li>
+<li><p>Create ensemble ids</p></li>
+</ul>
+<p>Performing the initial set of runs</p>
+<p>Set up for data assimilation</p>
+<p>Loop over time</p>
+<ul>
+<li><p><a href="settings-configured-analyses.html#read.restart.model.r">read.restart.MODEL</a> - read model restart files corresponding to start.time and stop.time that you want to assimilate data into</p></li>
+<li><p>Analysis - There are four choices based on if process variance is TRUE or FALSE and if there is data or not. <a href="settings-configured-analyses.html#analysis-options">See explaination below.</a></p></li>
+<li><p><a href="settings-configured-analyses.html#write.restart.model.r">write.restart.MODEL</a> - This function has two jobs. First, to insert adjusted state back into model restart file. Second, to update start.time, stop.time, and job.sh.</p></li>
+<li><p>run model</p></li>
+</ul>
+<p>Save outputs</p>
+<p>Create diagnostics</p>
+</div>
+<div id="state-data-assimilation-tags-example" class="section level3">
+<h3><span class="header-section-number">9.3.4</span> State Data Assimilation Tags Example</h3>
+<pre><code>&lt;state.data.assimilation&gt;
+  &lt;n.ensemble&gt;25&lt;/n.ensemble&gt;
+  &lt;process.variance&gt;FALSE&lt;/process.variance&gt;
+  &lt;sample.parameters&gt;FALSE&lt;/sample.parameters&gt;
+   &lt;state.variables&gt;
+    &lt;variable&gt;
+      &lt;variable.name&gt;AGB.pft&lt;/variable.name&gt;
+      &lt;unit&gt;MgC/ha/yr&lt;/unit&gt;
+      &lt;min_value&gt;0&lt;/min_value&gt;
+      &lt;max_value&gt;100000000&lt;/max_value&gt;
+    &lt;/variable&gt;
+    &lt;variable&gt;
+      &lt;variable.name&gt;TotSoilCarb&lt;/variable.name&gt;
+      &lt;unit&gt;KgC/m^2&lt;/unit&gt;
+      &lt;min_value&gt;0&lt;/min_value&gt;
+      &lt;max_value&gt;100000000&lt;/max_value&gt;
+    &lt;/variable&gt;
+  &lt;/state.variables&gt;
+  &lt;spin.up&gt;
+    &lt;start.date&gt;1950/01/01&lt;/start.date&gt;
+    &lt;end.date&gt;1960/12/31&lt;/end.date&gt;
+  &lt;/spin.up&gt;
+  &lt;forecast.time.step&gt;1&lt;/forecast.time.step&gt;
+  &lt;start.date&gt;1961/01/01&lt;/start.date&gt;
+  &lt;end.date&gt;2010/12/31&lt;/end.date&gt;
+ &lt;/state.data.assimilation&gt;</code></pre>
+</div>
+<div id="state-data-assimilation-tags-descriptions" class="section level3">
+<h3><span class="header-section-number">9.3.5</span> State Data Assimilation Tags Descriptions</h3>
+<ul>
+<li><strong>n.ensemble</strong> : [required] Number of ensemble members. Should be much larger than number of state variables you are assimilating.</li>
+<li><strong>process.variance</strong> : [optional] TRUE/FLASE flag for if process variance should be estimated (TRUE) or not (FALSE). If TRUE, a generalized ensemble filter will be used. If FALSE, an ensemble Kalman filter will be used. Default is FALSE.</li>
+<li><strong>sample.parameters</strong> : [optional] TRUE/FLASE flag for if parameters should be sampled for each ensemble member or not. This allows for more spread in the initial conditions of the forecast.</li>
+<li><strong>state.variable</strong> : [required] State variable that is to be assimilated (in PEcAn standard format).</li>
+<li><strong>spin.up</strong> : [required] start.date and end.date for initial model runs.</li>
+<li><strong><em>NOTE:</em></strong> start.date and end.date are distinct from values set in the run tag because initial runs can be done over a subset of the full run.</li>
+<li><strong>forecast.time.step</strong> : [optional] In the future, this will be used to allow the forecast time step to vary from the data time step.</li>
+<li><strong>start.date</strong> : [optional] start date of the state data assimilation (in YYYY/MM/DD format)</li>
+<li><strong>end.date</strong> : [optional] end date of the state data assimilation (in YYYY/MM/DD format)</li>
+<li><strong><em>NOTE:</em></strong> start.date and end.date are distinct from values set in the run tag because this analysis can be done over a subset of the run.</li>
+</ul>
+</div>
+<div id="model-specific-functions-for-sda-workflow" class="section level3">
+<h3><span class="header-section-number">9.3.6</span> Model Specific Functions for SDA Workflow</h3>
+<div id="read.restart.model.r" class="section level4">
+<h4><span class="header-section-number">9.3.6.1</span> read.restart.MODEL.R</h4>
+<p>The purpose of read.restart is to read model restart files and return a matrix that is site rows by state variable columns. The state variables must be in PEcAn names and units. The arguments are:</p>
+<ul>
+<li><p>outdir - output directory</p></li>
+<li><p>runid - ensemble member run ID</p></li>
+<li><p>stop.time - used to determine which restart file to read (in POSIX format)</p></li>
+<li><p>settings - <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>var.names - vector with state variable names with PEcAn standard naming. Example: c(‘AGB.pft’, ‘TotSoilCarb’)</p></li>
+<li><p>params - parameters used by ensemble member (same format as write.configs)</p></li>
+</ul>
+</div>
+<div id="write.restart.model.r" class="section level4">
+<h4><span class="header-section-number">9.3.6.2</span> write.restart.MODEL.R</h4>
+<p>This model specific function takes in new state and new parameter matrices from sda.enkf.R after the analysis step and translates new variables back to the model variables. Then, updates start.time, stop.time, and job.sh so that start.model.runs() does the correct runs with the new states. In write.restart.LINKAGES and write.restart.SIPNET, job.sh is updated by using write.configs.MODEL.</p>
+<ul>
+<li><p>outdir - output directory</p></li>
+<li><p>runid - run ID for ensemble member</p></li>
+<li><p>start.time - beginning of model run (in POSIX format)</p></li>
+<li><p>stop.time - end of model run (in POSIX format)</p></li>
+<li><p>settings - <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>new.state - matrix from analysis of updated state variables with PEcAn names (dimensions: site rows by state variables columns)</p></li>
+<li><p>new.params - In the future, this will allow us to update parameters based on states (same format as write.configs)</p></li>
+<li><p>inputs - model specific inputs from <a href="settings-configured-analyses.html#split.inputs.model.r">split.inputs.MODEL</a> used to run the model from start.time to stop.time</p></li>
+<li><p>RENAME - [optional] Flag used in write.restart.LINKAGES.R for development.</p></li>
+</ul>
+</div>
+<div id="split.inputs.model.r" class="section level4">
+<h4><span class="header-section-number">9.3.6.3</span> split.inputs.MODEL.R</h4>
+<p>This model specific function gives the correct met and/or other model inputs to settings<span class="math inline">\(run\)</span>inputs. This function returns settings<span class="math inline">\(run\)</span>inputs to an inputs argument in sda.enkf.R. But, the inputs will not need to change for all models and should return settings<span class="math inline">\(run\)</span>inputs unchanged if that is the case.</p>
+<ul>
+<li><p>settings - <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>start.time - start time for model run (in POSIX format)</p></li>
+<li><p>stop.time - stop time for model run (in POSIX format)</p></li>
+</ul>
+</div>
+<div id="sample.ic.model.r" class="section level4">
+<h4><span class="header-section-number">9.3.6.4</span> sample.IC.MODEL.R</h4>
+<p>This model specific function is optional. But, it can be used to create initial condition matrix (IC) with # state variables columns by # ensemble rows. This IC matrix is used for the initial runs in sda.enkf.R in the write.configs.MODEL function.</p>
+<ul>
+<li><p>ne - number of ensemble members</p></li>
+<li><p>state - matrix of state variables to get initial conditions from</p></li>
+<li><p>year - used to determine which year to sample initial conditions from</p></li>
+</ul>
+</div>
+</div>
+<div id="analysis-options" class="section level3">
+<h3><span class="header-section-number">9.3.7</span> Analysis Options</h3>
+<p>There are four options depending on whether process variance is TRUE/FALSE and whether or not there is data or not.</p>
+<ul>
+<li><p>If there is no data and process variance = FALSE, there is no analysis step.</p></li>
+<li><p>If there is no data and process variance = TRUE, process variance is added to the forecast.</p></li>
+<li><p>If there is data and process variance = TRUE, <a href="settings-configured-analyses.html#the-generalized-ensemble-filter">the generalized ensemble filter</a> is implemented with MCMC.</p></li>
+<li><p>If there is data and process variance = FALSE, the Kalman filter is used and solved analytically.</p></li>
+</ul>
+</div>
+<div id="the-generalized-ensemble-filter" class="section level3">
+<h3><span class="header-section-number">9.3.8</span> The Generalized Ensemble Filter</h3>
+<p>An ensemble filter is a sequential data assimilation algorithm with two procedures at every time step: a forecast followed by an analysis. The forecast ensembles arise from a model while the analysis makes an adjustment of the forecasts ensembles from the model towards the data. An ensemble Kalman filter is typically suggested for this type of analysis because of its computationally efficient analytical solution and its ability to update states based on an estimate of covariance structure. But, in some cases, the ensemble Kalman filter fails because of filter divergence. Filter divergence occurs when forecast variability is too small, which causes the analysis to favor the forecast and diverge from the data. Models often produce low forecast variability because there is little internal stochasticity. Our ensemble filter overcomes this problem in a Bayesian framework by including an estimation of model process variance. This methodology also maintains the benefits of the ensemble Kalman filter by updating the state vector based on the estimated covariance structure.</p>
+<p>This process begins after the model is spun up to equilibrium.</p>
+<p>The likelihood function uses the data vector <span class="math inline">\(\left(\boldsymbol{y_{t}}\right)\)</span> conditional on the estimated state vector <span class="math inline">\(\left(\boldsymbol{x_{t}}\right)\)</span> such that</p>
+<p><span class="math inline">\(\boldsymbol{y}_{t}\sim\mathrm{multivariate\:normal}(\boldsymbol{x}_{t},\boldsymbol{R}_{t})\)</span></p>
+<p>where <span class="math inline">\(\boldsymbol{R}_{t}=\boldsymbol{\sigma}_{t}^{2}\boldsymbol{I}\)</span> and <span class="math inline">\(\boldsymbol{\sigma}_{t}^{2}\)</span> is a vector of data variances. To obtain an estimate of the state vector <span class="math inline">\(\left(\boldsymbol{x}_{t}\right)\)</span>, we use a process model that incorporates a process covariance matrix <span class="math inline">\(\left(\boldsymbol{Q}_{t}\right)\)</span>. This process covariance matrix differentiates our methods from past ensemble filters. Our process model contains the following equations</p>
+<p><span class="math inline">\(\boldsymbol{x}_{t} \sim \mathrm{multivariate\: normal}(\boldsymbol{x}_{model_{t}},\boldsymbol{Q}_{t})\)</span></p>
+<p><span class="math inline">\(\boldsymbol{x}_{model_{t}} \sim \mathrm{multivariate\: normal}(\boldsymbol{\mu}_{forecast_{t}},\boldsymbol{P}_{forecast_{t}})\)</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\mu}_{forecast_{t}}\)</span> is a vector of means from the ensemble forecasts and <span class="math inline">\(\boldsymbol{P}_{forecast_{t}}\)</span> is a covariance matrix calculated from the ensemble forecasts. The prior for our process covariance matrix is <span class="math inline">\(\boldsymbol{Q}_{t}\sim\mathrm{Wishart}(\boldsymbol{V}_{t},n_{t})\)</span> where <span class="math inline">\(\boldsymbol{V}_{t}\)</span> is a scale matrix and <span class="math inline">\(n_{t}\)</span> is the degrees of freedom. The prior shape parameters are updated at each time step through moment matching such that</p>
+<p><span class="math inline">\(\boldsymbol{V}_{t+1} = n_{t}\bar{\boldsymbol{Q}}_{t}\)</span></p>
+<p><span class="math inline">\(n_{t+1} = \frac{\sum_{i=1}^{I}\sum_{j=1}^{J}\frac{v_{ijt}^{2}+v_{iit}v_{jjt}}{Var(\boldsymbol{\bar{Q}}_{t})}}{I\times J}\)</span></p>
+<p>where we calculate the mean of the process covariance matrix <span class="math inline">\(\left(\bar{\boldsymbol{Q}_{t}}\right)\)</span> from the posterior samples at time t. Degrees of freedom for the Wishart are typically calculated element by element where <span class="math inline">\(v_{ij}\)</span> are the elements of <span class="math inline">\(\boldsymbol{V}_{t}\)</span>. <span class="math inline">\(I\)</span> and <span class="math inline">\(J\)</span> index rows and columns of <span class="math inline">\(\boldsymbol{V}\)</span>. Here, we calculate a mean number of degrees of freedom for <span class="math inline">\(t+1\)</span> by summing over all the elements of the scale matrix <span class="math inline">\(\left(\boldsymbol{V}\right)\)</span> and dividing by the count of those elements <span class="math inline">\(\left(I\times J\right)\)</span>. We fit this model sequentially through time in the R computing environment using R package ‘rjags.’</p>
 
 </div>
 </div>
+<div id="multisettings" class="section level2">
+<h2><span class="header-section-number">9.4</span> MultiSettings</h2>
+<p>(TODO: Under construction…)</p>
 
+</div>
+<div id="Benchmarking" class="section level2">
+<h2><span class="header-section-number">9.5</span> Benchmarking</h2>
+<p>Benchmarking is the process of comparing model outputs against either experimental data or against other model outputs as a way to validate model performance. We have a suit of statistical comparisons that provide benchmarking scores as well as visual comparisons that help in diagnosing data-model and/or model-model differences.</p>
+<div id="data-preparation" class="section level3">
+<h3><span class="header-section-number">9.5.1</span> Data Preparation</h3>
+<p>All data that you want to compare with model runs must be registered in the database. This is currently a step that must be done by hand either from the command line or through the online BETY interface. The data must have three records:</p>
+<ol style="list-style-type: decimal">
+<li><p>An input record (Instructions <a href="creating-a-new-format-record-in-bety.html#NewInput">here</a>)</p></li>
+<li><p>A database file record (Instructions <a href="creating-a-new-format-record-in-bety.html#NewInput">here</a>)</p></li>
+<li><p>A format record (Instructions <a href="NewFormat.html#NewFormat">here</a>)</p></li>
+</ol>
+</div>
+<div id="model-runs" class="section level3">
+<h3><span class="header-section-number">9.5.2</span> Model Runs</h3>
+<p>Model runs can be setup and executed - Using the PEcAn web interface online or with a VM (<a href="GettingStarted.html#GettingStarted">see setup</a>) - By hand using the <a href="pecanXML.html#pecanXML">pecan.xml</a></p>
+</div>
+<div id="the-benchmarking-shiny-app" class="section level3">
+<h3><span class="header-section-number">9.5.3</span> The Benchmarking Shiny App</h3>
+<p>The entire benchmarking process can be done through the Benchmarking R Shiny app.</p>
+<p>When the model run has completed, navigate to the workflow visualization Shiny app.</p>
+<ul>
+<li>Load model data
+<ul>
+<li>Select the workflow and run id</li>
+<li>Make sure that your model output is loading properly (i.e. you can see plots of your data)</li>
+</ul></li>
+<li>Load benchmarking data
+<ul>
+<li>Again make sure that you can see the uploaded data plotted alongside the model output. In the future there will be more tools for double checking that your uploaded data is appropriate for benchmarking, but for now you may need to do the sanity checks by hand.</li>
+</ul></li>
+</ul>
+<div id="create-a-reference-run-record" class="section level4">
+<h4><span class="header-section-number">9.5.3.1</span> Create a reference run record</h4>
+<ul>
+<li>Navigate to the Benchmarking tab</li>
+<li>The first step is to register the new model run as a reference run in the database. Benchmarking cannot be done before this step is completed. When the reference run record has been created, additional menus for benchmarking will appear.</li>
+</ul>
+</div>
+<div id="setup-benchmarks-and-metrics" class="section level4">
+<h4><span class="header-section-number">9.5.3.2</span> Setup Benchmarks and metrics</h4>
+<ul>
+<li>From the menus select
+<ul>
+<li>The variables in the uploaded data that you wish to compare with model output.</li>
+<li>The numerical metrics you would like to use in your comparison.</li>
+<li>Additional comparison plots that you would like to see.</li>
+</ul></li>
+<li>Note: All these selections populate the benchmarking section of the <code>pecan.BENCH.xml</code> which is then saved in the same location as the original run output. This xml is purely for reference.</li>
+</ul>
+<div id="benchmarking-output" class="section level5">
+<h5><span class="header-section-number">9.5.3.2.1</span> Benchmarking Output</h5>
+<ul>
+<li>All benchmarking results are stored in the benchmarking directory which is created in the same folder as the original model run.</li>
+<li>The benchmaking directory contains subdirectories for each of the datasets compared with the model output. The names of these directories are the same as the corresponding data set’s input id in BETY.</li>
+<li>Each input directory contains <code>benchmarking.output.Rdata</code>, an Rdata file contianing all the results of the benchmarking workflow. <code>load(benchmarking.output.Rdata)</code> loads a list called <code>result.out</code> which contains the following:</li>
+<li><code>bench.results</code>: a data frame of all numeric benchmarking scores</li>
+<li><code>format</code>: a data frame that can be used to see how the input data was transformed to make it comparable to the model output. This involves converting from the original variable names and units to the internal pecan standard.</li>
+<li><code>aligned.dat</code>: a data frame of the final aligned model and input values.</li>
+<li><p>All plots are saved as pdf files with names with “benchmark_plot-type_variable_input-id.pdf”</p></li>
+<li><p>To view interactive results, naviage to the Benchmarking Plots tab in the shiny app.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="benchmarking-in-pecan.xml" class="section level3">
+<h3><span class="header-section-number">9.5.4</span> Benchmarking in pecan.xml</h3>
+<p>Before reading this section, it is recommended that you <a href="pecanXML.html#pecanXML">familiarize yourself with basics of the pecan.xml file.</a></p>
+<p>The <code>pecan.xml</code> has an <em>optional</em> benchmarking section. Below are all the tags in the benchmarking section explained. Many of these field are filled in automatically during the benchmarking process when using the benchmarking shiny app.</p>
+<p>The only time one should edit the benchmarking section by hand is for performing clone runs. See <a href="#CloneRun">clone run documentation.</a></p>
+<p><code>&lt;benchmarking&gt;</code> settings:</p>
+<ul>
+<li><code>ensemble_id</code>: the id of the ensemble that you will be using - the settings from this ensemble will be saved in a reference run record and then <code>ensemble_id</code> will be replaced with <code>reference_run_id</code></li>
+<li><code>new_run</code>: TRUE = create new run, FALSE = use existing run (required, default FALSE)</li>
+</ul>
+<p>It is possible to look at more than one benchmark with a particular run. The specific settings related to each benchmark are in a sub section called <code>benchmark</code></p>
+<ul>
+<li><code>input_id</code>: the id of the benchmarking data (required)</li>
+<li><code>variable_id</code>: the id of the variable of interest within the data. If you leave this blank, all variables that are shared between the input and model output will be used.</li>
+<li><code>metric_id</code>: the id(s) of the metric(s) to be calculated. If you leave this blank, all metrics will be used.</li>
+</ul>
+<p>Example: In this example, - we are using a pre-existing run from <code>ensemble_id = 1000010983</code> (<code>new_run = FALSE</code>) - the output will be compared to data from <code>input_id = 1000013743</code>, specifically two variables of interest: <code>variable_id = 411, variable_id = 18</code> - for <code>variable_id = 411</code> we will perform only one metric of comparison <code>metric_id = 1000000001</code> - for for <code>variable_id = 18</code> we will perform two metrics of comparison <code>metric_id = 1000000001, metric_id = 1000000002</code></p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;benchmarking&gt;</span>
+  <span class="kw">&lt;ensemble_id&gt;</span>1000010983<span class="kw">&lt;/ensemble_id&gt;</span>
+  <span class="kw">&lt;new_run&gt;</span>FALSE<span class="kw">&lt;/new_run&gt;</span>
+  <span class="kw">&lt;benchmark&gt;</span>
+   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span>
+   <span class="kw">&lt;variable_id&gt;</span>411<span class="kw">&lt;/variable_id&gt;</span>
+   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span>
+   <span class="kw">&lt;metrics&gt;</span>
+    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span>
+   <span class="kw">&lt;/metrics&gt;</span>
+  <span class="kw">&lt;/benchmark&gt;</span>
+  <span class="kw">&lt;benchmark&gt;</span>
+   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span>
+   <span class="kw">&lt;variable_id&gt;</span>18<span class="kw">&lt;/variable_id&gt;</span>
+   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span>
+   <span class="kw">&lt;metrics&gt;</span>
+    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span>
+    <span class="kw">&lt;metric_id&gt;</span>1000000002<span class="kw">&lt;/metric_id&gt;</span>
+   <span class="kw">&lt;/metrics&gt;</span>
+  <span class="kw">&lt;/benchmark&gt;</span>
+<span class="kw">&lt;/benchmarking&gt;</span></code></pre></div>
 
-
+</div>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="additional-web-configuration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="remote-execution-with-pecan.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

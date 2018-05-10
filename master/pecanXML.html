@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="introduction.html">
+<link rel="next" href="additional-web-configuration.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,412 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="pecanXML" class="section level1">
+<h1><span class="header-section-number">7</span> The PEcAn XML</h1>
+<p>The PEcAn system is configured using a xml file, often called settings.xml. The configuration file contains the following sections:</p>
+<ol style="list-style-type: decimal">
+<li><a href="pecanXML.html#pecan-folders">PEcAn Folders</a></li>
+<li><a href="pecanXML.html#database-access">Database Access</a></li>
+<li><a href="pecanXML.html#bety-database-configuration">BETY Configuration</a></li>
+<li><a href="pecanXML.html#brown-dog-configuration">Brown Dog</a></li>
+<li><a href="pecanXML.html#pft-selection">PFT Selection</a></li>
+<li><a href="pecanXML.html#meta-analysis">Meta Analysis</a></li>
+<li><a href="pecanXML.html#ensemble-runs">Ensemble Runs</a></li>
+<li><a href="pecanXML.html#sensitivity-runs">Sensitivity Runs</a></li>
+<li><a href="pecanXML.html#model-setup">Model Setup</a></li>
+<li><a href="pecanXML.html#run-setup">Run Setup</a></li>
+<li><a href="pecanXML.html#state-data-assimilation-tags">State Data Assimilation</a></li>
+<li><a href="parameter-data-assimilation-1.html#parameter-data-assimilation-1">Parameter Data Assimilation</a></li>
+<li><a href="settings-configured-analyses.html#Benchmarking">Benchmarking</a></li>
+</ol>
+<div id="pecan-folders" class="section level2">
+<h2><span class="header-section-number">7.1</span> PEcAn folders</h2>
+<p>The following are the tags that can be used to configure the folders used by PEcAn. All of these are optional.</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;outdir&gt;</span>/home/carya/testrun.pecan<span class="kw">&lt;/outdir&gt;</span></code></pre></div>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li><strong>outdir</strong> : [optional] specifies where PEcAn will write all outputs and create folders. If this is not specified the folder pecan in the current folder will be used.</li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+</div>
+<div id="database-access" class="section level2">
+<h2><span class="header-section-number">7.2</span> Database Access</h2>
+<p>The connection to the BETY database is configured using this section. In this section you will specify what driver to use to connect to the database (PostgreSQL by default) and the connection parameters to connect to the database. This section is very picky and will only accept parameters that are passed into the connection function for each database driver, any other entries will result in an error by the database driver.</p>
+<div id="functions" class="section level4">
+<h4><span class="header-section-number">7.2.0.1</span> functions:</h4>
+<p><code>db.open()</code>, and thus by <code>db.query()</code> and <code>db.check()</code>.</p>
+<p>New format (starting with PEcAn 1.3.6)</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;database&gt;</span>
+    <span class="kw">&lt;bety&gt;</span>
+        <span class="kw">&lt;dbname&gt;</span>bety<span class="kw">&lt;/dbname&gt;</span>
+        <span class="kw">&lt;username&gt;</span>bety<span class="kw">&lt;/username&gt;</span>
+        <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span>
+        <span class="kw">&lt;host&gt;</span>localhost<span class="kw">&lt;/host&gt;</span>
+        <span class="kw">&lt;write&gt;</span>true<span class="kw">&lt;/write&gt;</span>
+    <span class="kw">&lt;/bety&gt;</span>
+    <span class="kw">&lt;fia&gt;</span>
+        <span class="kw">&lt;dbname&gt;</span>fia5data<span class="kw">&lt;/dbname&gt;</span>
+        <span class="kw">&lt;username&gt;</span>bety<span class="kw">&lt;/username&gt;</span>
+        <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span>
+        <span class="kw">&lt;host&gt;</span>localhost<span class="kw">&lt;/host&gt;</span>
+    <span class="kw">&lt;/fia&gt;</span>
+<span class="kw">&lt;/database&gt;</span></code></pre></div>
+<p>The connection information under bety will be used by most of the PEcAn system, only the extraction of pss/css/site information from the FIA database will use the connection information in the fia section.</p>
+<ul>
+<li><strong>driver</strong> : [optional] the driver to use to connect to the database. Default value is PostgreSQL<br />
+</li>
+<li><strong>dbname</strong> : [optional] the name of the database (was name), default value is the username of the current user logged in.<br />
+</li>
+<li><strong>user</strong> : [optional] the username to connect to the database (was userid), default value is the username of the current user logged in (PostgreSQL uses user for this field).</li>
+<li><strong>password</strong> : [optional] the password to connect to the database (was passwd), if not specified no password is used.<br />
+</li>
+<li><strong>host</strong> : [optional] the name of the host to connect to, default value is localhost.<br />
+</li>
+<li><strong>write</strong> : [optional] should any results be written back to the database, setting this to TRUE (the default) will write any results back into the database. (since PEcAn 1.3.6)</li>
+</ul>
+<p>For other database drivers these parameters will change. See the driver documentation in R for the right parameters.</p>
+</div>
+</div>
+<div id="bety-database-configuration" class="section level2">
+<h2><span class="header-section-number">7.3</span> BETY Database Configuration</h2>
+<p>This section describes how to connect to the BETY Database. This section is used for versions of PEcAn prior to version 1.3.6, starting at 1.3.6 this parameter is part of &lt;database&gt;&lt;bety&gt; and defaults to TRUE.</p>
+<div id="functions-1" class="section level4">
+<h4><span class="header-section-number">7.3.0.1</span> functions:</h4>
+<p><code>db.check()</code>, <code>write.configs()</code>, <code>run.models()</code></p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;bety&gt;</span>
+    <span class="kw">&lt;write&gt;</span>TRUE<span class="kw">&lt;/write&gt;</span>
+<span class="kw">&lt;/bety&gt;</span></code></pre></div>
+<ul>
+<li><strong>write</strong> : [optional] this can be TRUE/FALSE (the default is TRUE). If set to TRUE, runs, ensembles and workflows are written to the database.</li>
+</ul>
+</div>
+</div>
+<div id="brown-dog-configuration" class="section level2">
+<h2><span class="header-section-number">7.4</span> Brown Dog Configuration</h2>
+<p>This section describes how to connect to <a href="http://browndog.ncsa.illinois.edu">Brown Dog</a>. This will allow for conversions of data (currently only met data).</p>
+<div id="functions-2" class="section level4">
+<h4><span class="header-section-number">7.4.0.1</span> functions:</h4>
+<p><code>met.process()</code></p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;browndog&gt;</span>
+    <span class="kw">&lt;url&gt;</span>...<span class="kw">&lt;/url&gt;</span>
+    <span class="kw">&lt;username&gt;</span>...<span class="kw">&lt;/username&gt;</span>
+    <span class="kw">&lt;password&gt;</span>...<span class="kw">&lt;/password&gt;</span>
+<span class="kw">&lt;/browndog&gt;</span></code></pre></div>
+<ul>
+<li><strong>url</strong> : [required] endpoint for Brown Dog to be used.</li>
+<li><strong>username</strong> : [optional] username to be used with the endpoint for Brown Dog.</li>
+<li><strong>password</strong> : [optional] password to be used with the endpoint for Brown Dog.</li>
+</ul>
+</div>
+</div>
+<div id="pft-selection" class="section level2">
+<h2><span class="header-section-number">7.5</span> PFT Selection</h2>
+<p>The PEcAn system requires at least 1 PFT (Plant Functional Type) to be specified inside the <code>&lt;pfts&gt;</code> section.</p>
+<div id="functions-3" class="section level4">
+<h4><span class="header-section-number">7.5.0.1</span> functions:</h4>
+<p><code>get.traits()</code></p>
+</div>
+<div id="tags" class="section level4">
+<h4><span class="header-section-number">7.5.0.2</span> tags</h4>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;pfts&gt;</span>
+    <span class="kw">&lt;pft&gt;</span>
+        <span class="kw">&lt;name&gt;</span>sipnet.temperate.coniferous<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;outdir&gt;</span>/home/carya/testrun.pecan/pft/1/<span class="kw">&lt;/outdir&gt;</span>
+        <span class="kw">&lt;constants&gt;</span>
+            <span class="kw">&lt;num&gt;</span>1<span class="kw">&lt;/num&gt;</span>
+        <span class="kw">&lt;/constants&gt;</span>
+    <span class="kw">&lt;/pft&gt;</span>
+<span class="kw">&lt;/pfts&gt;</span></code></pre></div>
+<ul>
+<li><strong>name</strong> : [required] the pft as is found inside the BETY database, this needs to be an exact match.<br />
+</li>
+<li><strong>outdir</strong>: [optional] path in which pft-specific output will be placed during meta-analysis and sensitivity analysis. If not specified it will be written into <code>&lt;outdir&gt;/&lt;pftname&gt;</code>.<br />
+</li>
+<li><strong>contants</strong>: [optional] this section contains information that will be written directly into the model specific configuration files. PEcAn does not look at the information in this section.</li>
+</ul>
+</div>
+</div>
+<div id="meta-analysis" class="section level2">
+<h2><span class="header-section-number">7.6</span> Meta Analysis</h2>
+<div id="functions-4" class="section level4">
+<h4><span class="header-section-number">7.6.0.1</span> functions:</h4>
+<p><code>run.meta.analysis()</code></p>
+</div>
+<div id="tags-1" class="section level4">
+<h4><span class="header-section-number">7.6.0.2</span> tags</h4>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;meta.analysis&gt;</span>
+    <span class="kw">&lt;iter&gt;</span>1000<span class="kw">&lt;/iter&gt;</span>
+    <span class="kw">&lt;random.effects&gt;</span>FALSE<span class="kw">&lt;/random.effects&gt;</span>
+    <span class="kw">&lt;update&gt;</span>FALSE<span class="kw">&lt;/update&gt;</span>
+    <span class="kw">&lt;threshold&gt;</span>1.2<span class="kw">&lt;/threshold&gt;</span>
+<span class="kw">&lt;/meta.analysis&gt;</span></code></pre></div>
+<p>The section meta.analysis needs to exists for a meta.analysis to be executed, even though all tags inside are optional.</p>
+<ul>
+<li><strong>iter</strong> : [optional] [MCMC](<a href="http:/en.wikipedia.org/wiki/Markov_chain_Monte_Carlo" class="uri">http:/en.wikipedia.org/wiki/Markov_chain_Monte_Carlo</a>) (Markov Chain Monte Carlo) chain length, i.e. the total number of posterior samples in the meta-analysis, default is 3000. Smaller numbers will run faster but produce larger errors.<br />
+</li>
+<li><strong>random.effects</strong> : [optional] Whether to include random effects (site, treatment) in meta-analysis model. Can be set to FALSE to work around convergence problems caused by an over parameterized model (e.g. too many sites, not enough data). The default value is TRUE.</li>
+<li><strong>update</strong> : [optional] Should previous results of meta.analysis and get.traits be re-used. If set to TRUE the meta-analysis and get.trait.data will always be executed. Setting this to FALSE will try and reuse existing results. Future versions will allow for AUTO as well which will try and reuse if the PFT/traits have not changed. The default value is FALSE.</li>
+<li><strong>threshold</strong> threshold for Gelman-Rubin convergence diagnostic (MGPRF); default is 1.2</li>
+</ul>
+</div>
+</div>
+<div id="ensemble-runs" class="section level2">
+<h2><span class="header-section-number">7.7</span> Ensemble Runs</h2>
+<p>Only if this section is defined an ensemble analysis is done.</p>
+<div id="functions-5" class="section level4">
+<h4><span class="header-section-number">7.7.0.1</span> functions:</h4>
+<p><code>write.configs()</code>, <code>run.ensemble.analysis()</code></p>
+</div>
+<div id="tags-2" class="section level4">
+<h4><span class="header-section-number">7.7.0.2</span> tags</h4>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;ensemble&gt;</span>
+    <span class="kw">&lt;size&gt;</span>5<span class="kw">&lt;/size&gt;</span>
+  <span class="kw">&lt;variable&gt;</span>GPP<span class="kw">&lt;/variable&gt;</span>
+  <span class="kw">&lt;variable&gt;</span>NPP<span class="kw">&lt;/variable&gt;</span>
+<span class="kw">&lt;/ensemble&gt;</span></code></pre></div>
+<ul>
+<li><strong>size</strong> : [required] the number of runs in the ensemble.</li>
+<li><strong>variable</strong>: [optional] name of one (or more) variables the analysis should be run for. If not specified, sensitivity.analysis variable is used, otherwise default is GPP.</li>
+</ul>
+<p>Note: if the ensemble size is set to 1, PEcAn will select the <strong>posterior median</strong> parameter values rather than taking a single random draw from the posterior</p>
+</div>
+</div>
+<div id="sensitivity-runs" class="section level2">
+<h2><span class="header-section-number">7.8</span> Sensitivity Runs</h2>
+<p>Only if this section is defined a sensitivity analysis is done. This section will have <code>&lt;quantile&gt;</code> or <code>&lt;sigma&gt;</code> nodes. If neither are given, the default is to use the median +/- [1 2 3] x sigma (e.g. the 0.00135 0.0228 0.159 0.5 0.841 0.977 0.999 quantiles); If the 0.5 (median) quantile is omitted, it will be added in the code.</p>
+<div id="functions-6" class="section level4">
+<h4><span class="header-section-number">7.8.0.1</span> functions:</h4>
+<p><code>write.configs()</code>, <code>run.sensitivity.analysis()</code></p>
+</div>
+<div id="tags-3" class="section level4">
+<h4><span class="header-section-number">7.8.0.2</span> tags</h4>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;sensitivity.analysis&gt;</span>
+    <span class="kw">&lt;quantiles&gt;</span>
+        <span class="kw">&lt;quantile&gt;&lt;/quantile&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>-3<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>-2<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>-1<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>1<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>2<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>3<span class="kw">&lt;/sigma&gt;</span>
+    <span class="kw">&lt;/quantiles&gt;</span>
+  <span class="kw">&lt;variable&gt;</span>GPP<span class="kw">&lt;/variable&gt;</span>
+  <span class="kw">&lt;perpft&gt;</span>TRUE<span class="kw">&lt;/perpft&gt;</span>
+    <span class="kw">&lt;start.year&gt;</span>2004<span class="kw">&lt;/start.year&gt;</span>
+    <span class="kw">&lt;end.year&gt;</span>2006<span class="kw">&lt;/end.year&gt;</span>
+<span class="kw">&lt;/sensitivity.analysis&gt;</span></code></pre></div>
+<ul>
+<li><strong>quantiles</strong> : [optional] Quantiles of parameter distributions at which the model should be evaluated when running sensitivity analysis. Values greater than 0 and less than 1 can be used.<br />
+</li>
+<li><strong>sigma</strong> : [optional] Any real number can be used to indicate the quantiles to be used in units of normal probability.<br />
+</li>
+<li><strong>quantile</strong> : [optional] Which quantile should be used.<br />
+</li>
+<li><strong>start.date</strong> : [required?] start date of the sensitivity analysis (in YYYY/MM/DD format)</li>
+<li><strong>end.date</strong> : [required?] end date of the sensitivity analysis (in YYYY/MM/DD format)</li>
+<li><strong><em>NOTE:</em></strong> start.date and end.date are distinct from values set in the run tag because this analysis can be done over a subset of the run.</li>
+<li>** variable** : [optional] name of one (or more) variables the analysis should be run for. If not specified, sensitivity.analysis variable is used, otherwise default is GPP.</li>
+<li>** perpft** : [optional] if <code>TRUE</code> a sensitivity analysis on PFT-specific outputs will be run. This is only possible if your model provides PFT-specific outputs for the <code>variable</code> requested. This tag only affects the output processing, not the number of samples proposed for the analysis nor the model execution.</li>
+</ul>
+</div>
+</div>
+<div id="model-setup" class="section level2">
+<h2><span class="header-section-number">7.9</span> Model Setup</h2>
+<p>This section is required and tells PEcAn what model to run. This section should either specify <code>&lt;id&gt;</code> or both <code>&lt;name&gt;</code> and <code>&lt;binary&gt;</code> of the model. If both id and name and/or binary are specified the id is used to check the specified name and/or binary.</p>
+<p>As of version 1.3.7 the <code>&lt;name&gt;</code> tag has been renamed <code>&lt;type&gt;</code>. The <code>&lt;type&gt;</code> tag refers to the “type” of model and is used for a) identifying appropriate pfts and b) identifying whether appropriate inputs (i.e. met data) are available for the given site and model (or if they can be created).</p>
+<p>To ensure compatability, the code will automatically convert from <code>&lt;name&gt;</code> to <code>&lt;type&gt;</code>.</p>
+<div id="functions-7" class="section level4">
+<h4><span class="header-section-number">7.9.0.1</span> functions:</h4>
+<p><code>write.configs()</code>, <code>run.models()</code></p>
+</div>
+<div id="tags-4" class="section level4">
+<h4><span class="header-section-number">7.9.0.2</span> tags</h4>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;model&gt;</span>
+    <span class="kw">&lt;id&gt;</span>7<span class="kw">&lt;/id&gt;</span>
+    <span class="kw">&lt;type&gt;</span>ED2<span class="kw">&lt;/type&gt;</span>
+    <span class="kw">&lt;binary&gt;</span>/usr/local/bin/ed2.r82<span class="kw">&lt;/binary&gt;</span>
+    <span class="kw">&lt;job.sh&gt;</span>module load hdf5<span class="kw">&lt;/job.sh&gt;</span>
+    <span class="kw">&lt;config.header&gt;</span>
+        <span class="co">&lt;!--...xml code passed directly to config file...--&gt;</span>
+    <span class="kw">&lt;/config.header&gt;</span>
+<span class="kw">&lt;/model&gt;</span></code></pre></div>
+<ul>
+<li><strong>id</strong> : [optional/required] id in the models database table, see above.<br />
+</li>
+<li><strong>name</strong> : <strong>OBSOLETE</strong> name of the model, use type from version 1.3.7</li>
+<li><strong>type</strong> : [optional/required] type of model, see above.</li>
+<li><strong>binary</strong> : [optional/required] path to the model executable, see above.<br />
+</li>
+<li><strong>job.sh</strong> : [optional] additional options to add to the job.sh at the top<br />
+</li>
+<li><strong>config.headers</strong> : [optional] XML that will appear at the start of generated config files.</li>
+</ul>
+</div>
+<div id="ed2-specific-tags" class="section level4">
+<h4><span class="header-section-number">7.9.0.3</span> ED2 specific tags</h4>
+<p>Following variables are ED specific and are used in the <a href="ED2-Configuration">ED2 Configuration</a>.</p>
+<p>Starting at 1.3.7 the tags for inputs have moved to <code>&lt;run&gt;&lt;inputs&gt;</code>. This includes, veg, soil, psscss, inputs.</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;edin&gt;</span>/home/carya/runs/PEcAn_4/ED2IN.template<span class="kw">&lt;/edin&gt;</span>
+    <span class="kw">&lt;config.header&gt;</span>
+        <span class="kw">&lt;radiation&gt;</span>
+            <span class="kw">&lt;lai_min&gt;</span>0.01<span class="kw">&lt;/lai_min&gt;</span>
+        <span class="kw">&lt;/radiation&gt;</span>
+        <span class="kw">&lt;ed_misc&gt;</span>
+            <span class="kw">&lt;output_month&gt;</span>12<span class="kw">&lt;/output_month&gt;</span>      
+        <span class="kw">&lt;/ed_misc&gt;</span> 
+    <span class="kw">&lt;/config.header&gt;</span>
+    <span class="kw">&lt;phenol.scheme&gt;</span>0<span class="kw">&lt;/phenol.scheme&gt;</span></code></pre></div>
+<ul>
+<li><strong>edin</strong> : [required] template used to write ED2IN file</li>
+<li><strong>veg</strong> : <strong>OBSOLETE</strong> [required] location of VEG database, now part of `<run><inputs></li>
+<li><strong>soil</strong> : <strong>OBSOLETE</strong> [required] location of soild database, now part of `<run><inputs></li>
+<li><strong>psscss</strong> : <strong>OBSOLETE</strong> [required] location of site inforation, now part of <code>&lt;run&gt;&lt;inputs&gt;</code>. Should be specified as <code>&lt;pss&gt;</code>, <code>&lt;css&gt;</code> and <code>&lt;site&gt;</code>.</li>
+<li><strong>inputs</strong> : <strong>OBSOLETE</strong> [required] location of additional input files (e.g. data assimilation data), now part of <code>&lt;run&gt;&lt;inputs&gt;</code>. Should be specified as <code>&lt;lu&gt;</code> and <code>&lt;thsums&gt;</code>.</li>
+</ul>
+</div>
+</div>
+<div id="run-setup" class="section level2">
+<h2><span class="header-section-number">7.10</span> Run Setup</h2>
+<div id="tags-5" class="section level4">
+<h4><span class="header-section-number">7.10.0.1</span> tags</h4>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;run&gt;</span>
+    <span class="kw">&lt;jobtemplate&gt;</span>/home/carya/path/to/template<span class="kw">&lt;/jobtemplate&gt;</span>
+    <span class="kw">&lt;start.date&gt;</span>2002-01-01 00:00:00<span class="kw">&lt;/start.date&gt;</span>
+    <span class="kw">&lt;end.date&gt;</span>2005-12-31 00:00:00<span class="kw">&lt;/end.date&gt;</span>
+    <span class="kw">&lt;/dbfiles&gt;</span>/home/carya/.pecan/dbfiles<span class="er">&lt;</span>/dbfiles&gt;
+    <span class="kw">&lt;site&gt;</span>
+        <span class="kw">&lt;id&gt;</span>772<span class="kw">&lt;/id&gt;</span>
+        <span class="kw">&lt;name&gt;</span>Niwot Ridge Forest/LTER NWT1 (US-NR1)<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;lat&gt;</span>40.032900<span class="kw">&lt;/lat&gt;</span>
+        <span class="kw">&lt;lon&gt;</span>-105.546000<span class="kw">&lt;/lon&gt;</span>
+        <span class="kw">&lt;met.start&gt;</span>2002/01/01<span class="kw">&lt;/met.start&gt;</span>
+        <span class="kw">&lt;met.end&gt;</span>2005/12/31<span class="kw">&lt;/met.end&gt;</span>
+    <span class="kw">&lt;/site&gt;</span>
+    <span class="kw">&lt;inputs&gt;</span>
+          <span class="kw">&lt;met&gt;</span>
+             <span class="kw">&lt;id&gt;</span>10000000001<span class="kw">&lt;/id&gt;</span>
+             <span class="kw">&lt;path&gt;</span>/fs/data1/pecan.data/input/<span class="kw">&lt;/path&gt;</span>
+             <span class="kw">&lt;source&gt;</span>Ameriflux<span class="kw">&lt;/source&gt;</span>
+             <span class="kw">&lt;username&gt;</span>carya<span class="kw">&lt;/username&gt;</span>
+          <span class="kw">&lt;/met&gt;</span>
+    <span class="kw">&lt;/inputs&gt;</span>
+<span class="er">&lt;</span>/run&gt;
+<span class="kw">&lt;host&gt;</span>
+        <span class="kw">&lt;name&gt;</span>localhost<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;rundir&gt;</span>/home/carya/testrun.pecan/run/<span class="kw">&lt;/rundir&gt;</span>
+        <span class="kw">&lt;outdir&gt;</span>/home/carya/testrun.pecan/out/<span class="kw">&lt;/outdir&gt;</span>
+        <span class="kw">&lt;scratchdir&gt;</span>/tmp/carya<span class="kw">&lt;/scratchdir&gt;</span>
+        <span class="kw">&lt;clearscratch&gt;</span>TRUE<span class="kw">&lt;/clearscratch&gt;</span>
+        <span class="kw">&lt;qsub&gt;</span>qsub -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash<span class="kw">&lt;/qsub&gt;</span>
+        <span class="kw">&lt;qsub.jobid&gt;</span>Your job ([0-9]+) .*<span class="kw">&lt;/qsub.jobid&gt;</span>
+        <span class="kw">&lt;qstat&gt;</span>qstat -j @JOBID@ <span class="er">&amp;</span>&gt; /dev/null || echo DONE<span class="kw">&lt;/qstat&gt;</span>
+        <span class="kw">&lt;job.sh&gt;</span>module load udunits R/R-3.0.0_gnu-4.4.6<span class="kw">&lt;/job.sh&gt;</span>
+<span class="kw">&lt;/host&gt;</span></code></pre></div>
+<ul>
+<li><strong>jobtemplate</strong> : [optional] the template used when creating a job.sh file which is used to launch the actual model. Each model has it’s own <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/template.job">template</a> in the inst folder of the module. The following variables can e used: <span class="citation">@SITE_LAT</span>@, <span class="citation">@SITE_LON</span>@, <span class="citation">@SITE_MET</span>@, <span class="citation">@START_DATE</span>@, <span class="citation">@END_DATE</span>@, <span class="citation">@OUTDIR</span>@, <span class="citation">@RUNDIR</span>@ which all come variables in the pecan.xml file. The following two command can be used to copy and clean the results from a scratch folder (specified as scratch in the run section below, for example local disk vs network disk) : <span class="citation">@SCRATCH_COPY</span>@, <span class="citation">@SCRATCH_CLEAR</span>@ .</li>
+<li><strong>start.date</strong> : [required] the first day of the simulation<br />
+</li>
+<li><strong>end.date</strong> : [required] the last day of the simulation</li>
+<li><strong>dbfiles</strong> : [optional] location where pecan should write files that will be stored in the database. The default is store them in <code>${HOME}/.pecan/dbfiles</code></li>
+</ul>
+<p>Site specific information is specified in the <code>&lt;site&gt;</code> subsection. Either <code>&lt;id&gt;</code> or <code>&lt;name&gt;</code>, <code>&lt;lat&gt;</code> and <code>&lt;lon&gt;</code> should be specified. If id and any of the others are specified the values will be compared with those from BETYdb.</p>
+<ul>
+<li><strong>id</strong> : [optional/required] id of the site in the BETY database, see above.<br />
+</li>
+<li><strong>name</strong> : [optional/required] site name, see above.<br />
+</li>
+<li><strong>lat</strong> : [optional/required] site latitude, see above.<br />
+</li>
+<li><strong>lon</strong> : [optional/required] site longitude, see above.</li>
+</ul>
+<p>Inputs specific information for each model type is specified in the <code>&lt;inputs&gt;</code> subsection. Each input will have three tags: * <strong>id</strong> : [optional/required] An id that points to the input if already in the database. * <strong>path</strong> : [optional/required] The path to the dataset if already downloaded. * <strong>source</strong> : [optional/required] The input data type. This tag name needs to match the names in the conversion functions. In general, the path should be filled in by PEcAn and not by the user. If PEcAn is processing all the input, id is not required. Alternatively, if you’re using data processed by hand, source is not required.</p>
+<p>One common input will be the weather data, often specified in <code>&lt;met&gt;</code>.</p>
+<p>Other model types will have different model specific inputs. PEcAn will find the location of the file on the host you run PEcAn on.</p>
+<ul>
+<li><strong>met</strong> : [model type specific] most models will have a met tag to specify location of the weather data.</li>
+<li><strong>pss</strong> : [ED2, required] location of patch file</li>
+<li><strong>css</strong> : [ED2, required] location of cohort file</li>
+<li><strong>site</strong> : [ED2, optional] location of site file</li>
+<li><strong>lu</strong> : [ED2, required] location of land use file</li>
+<li><strong>thsums</strong> : [ED2, required] location of thermal sums file</li>
+<li><strong>veg</strong> : [ED2, required] location of vegetation data</li>
+<li><strong>soil</strong> : [ED2, required] location of soil data</li>
+</ul>
+<p>Host on which the simulation will run is specified in the <code>&lt;host&gt;</code> subsection. If this section is not specified it is assumed the simulation will run on localhost. If qsub is specified (can be empty in which case the defaults will be used) the models will be executed using qsub.</p>
+<ul>
+<li><strong>name</strong> : [optional] name of host server where model is located and executed, if not specified localhost is assumed.<br />
+</li>
+<li><strong>rundir</strong> : [optional/required] location where all the configuration files are written. For localhost this is optional (<code>&lt;outdir&gt;/run</code> is the default), for any other host this is required.<br />
+</li>
+<li><strong>outdir</strong> : [optional/required] location where all the outputs of the model are written. For localhost this is optional (<code>&lt;outdir&gt;/out</code> is the default), for any other host this is required.</li>
+<li><strong>scratchdir</strong> : [optional] location where output is written. If specified the output from the model is written to this folder and copied to the outdir when the model is finished, this could significantly speed up the model execution (by using local or ram disk).</li>
+<li><strong>clearscratch</strong> : [optional] if set to TRUE the scratchfolder is cleaned up after copying the results to the outdir, otherwise the folder will be left. The default is to clean up after copying.</li>
+<li><strong>qsub</strong> : [optional] the command to submit a job to the queuing system. There are 3 parameters you can use when specifying the qsub command, you can add additional values for your specific setup (for example -l walltime to specify the walltime, etc). You can specify <span class="citation">@NAME</span>@ the pretty name, <span class="citation">@STDOUT</span>@ where to write stdout and <span class="citation">@STDERR</span>@, where to write stderr. You can specify an empty element (<qsub/>) in which case it will use the default value is “qsub -V -N <span class="citation">@NAME</span>@ -o <span class="citation">@STDOUT</span>@ -e <span class="citation">@STDERR</span>@ -s /bin/bash”.</li>
+<li><strong>qsub.jobid</strong> : [optional] the regular expression used to find the jobid returned from qsub. If not specified (and qsub is) it will use the default value is “Your job ([0-9]+) .*&quot;</li>
+<li><strong>qstat</strong> : [optional] the command to execute to check if a job is finished, this should return DONE if the job is finished. There is one parameter this command should take <span class="citation">@JOBID</span>@ which is the id of the job as returned by qsub.jobid. If not specified (and qsub is) it will use the default value is “qstat -j <span class="citation">@JOBID</span>@ || echo DONE”</li>
+<li><strong>job.sh</strong> : [optional] additional options to add to the job.sh at the top</li>
+</ul>
+</div>
+</div>
+<div id="state-data-assimilation-tags" class="section level2">
+<h2><span class="header-section-number">7.11</span> State Data Assimilation Tags</h2>
+<p>The following tags can be used for state data assimilation. More detailed information can be found here: <a href="sda.documentation.md">State Data Assimilation Documentation</a></p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;state.data.assimilation&gt;</span>
+    <span class="kw">&lt;process.variance&gt;</span>FALSE<span class="kw">&lt;/process.variance&gt;</span>
+  <span class="kw">&lt;sample.parameters&gt;</span>FALSE<span class="kw">&lt;/sample.parameters&gt;</span>
+  <span class="kw">&lt;state.variables&gt;</span>
+   <span class="kw">&lt;variable&gt;</span>AGB.pft<span class="kw">&lt;/variable&gt;</span>
+   <span class="kw">&lt;variable&gt;</span>TotSoilCarb<span class="kw">&lt;/variable&gt;</span>
+  <span class="kw">&lt;/state.variables&gt;</span>
+  <span class="kw">&lt;spin.up&gt;</span>
+    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span>
+      <span class="kw">&lt;end.date&gt;</span>2006/12/31<span class="kw">&lt;/end.date&gt;</span>
+  <span class="kw">&lt;/spin.up&gt;</span>
+  <span class="kw">&lt;forecast.time.step&gt;</span>1<span class="kw">&lt;/forecast.time.step&gt;</span>
+    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span>
+    <span class="kw">&lt;end.date&gt;</span>2006/12/31<span class="kw">&lt;/end.date&gt;</span>
+<span class="kw">&lt;/state.data.assimilation&gt;</span></code></pre></div>
+<ul>
+<li><strong>process.variance</strong> : [optional] TRUE/FLASE flag for if process variance should be estimated (TRUE) or not (FALSE). If TRUE, a generalized ensemble filter will be used. If FALSE, an ensemble Kalman filter will be used. Default is FALSE.</li>
+<li><strong>sample.parameters</strong> : [optional] TRUE/FLASE flag for if parameters should be sampled for each ensemble member or not. This allows for more spread in the intial conditions of the forecast.</li>
+<li><strong><em>NOTE:</em></strong> If TRUE, you must also assign a vector of trait names to pick.trait.params within the sda.enkf function.</li>
+<li><strong>state.variable</strong> : [required] State variable that is to be assimilated (in PEcAn standard format). Default is “AGB” - Above Ground Biomass.</li>
+<li><strong>spin.up</strong> : [required] start.date and end.date for model spin up.</li>
+<li><strong><em>NOTE:</em></strong> start.date and end.date are distinct from values set in the run tag because spin up can be done over a subset of the run.</li>
+<li><strong>forecast.time.step</strong> : [optional] start.date and end.date for model spin up.</li>
+<li><strong>start.date</strong> : [required?] start date of the state data assimilation (in YYYY/MM/DD format)</li>
+<li><strong>end.date</strong> : [required?] end date of the state data assimilation (in YYYY/MM/DD format)</li>
+<li><strong><em>NOTE:</em></strong> start.date and end.date are distinct from values set in the run tag because this analysis can be done over a subset of the run.</li>
+</ul>
+</div>
+<div id="parameter-data-assimilation" class="section level2">
+<h2><span class="header-section-number">7.12</span> Parameter Data Assimilation</h2>
+<p>The following tags can be used for state data assimilation. More detailed information can be found here: <a href="pda.documentation.md">Parameter Data Assimilation Documentation</a></p>
+<div id="tags-6" class="section level4">
+<h4><span class="header-section-number">7.12.0.1</span> tags</h4>
+<p>Coming soon…</p>
+</div>
+</div>
+<div id="benchmarking" class="section level2">
+<h2><span class="header-section-number">7.13</span> Benchmarking</h2>
+<p>Coming soon…</p>
+</div>
+<div id="model-specific-configuration" class="section level2">
+<h2><span class="header-section-number">7.14</span> Model-specific configuration</h2>
+<p>See the following:</p>
+<ul>
+<li><a href="models-in-pecan.html#ed2-configuration">ED2</a></li>
+<li><a href="pecan-models.html#sipnet-configuration">SIPNET</a></li>
+<li><a href="models-in-pecan.html#biocro-configuration">BIOCRO</a></li>
+</ul>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-web-configuration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="remote-execution-with-pecan.html">
+<link rel="next" href="pecan-workflow-webworkflow-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,54 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="introduction-1" class="section level1">
+<h1><span class="header-section-number">11</span> Introduction</h1>
+<p>For those wanting to take full advantage of PEcAn and its tools, this section will provide you with the necessary information to do so. In this section we hope to answer the question: How can I use PEcAn to its fullest?</p>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li>PEcAn workflow (web/workflow.R)</li>
+<li>How the workflow works</li>
+<li>How each module is called</li>
+<li>How to do outside of web interface</li>
+<li>Link to “folder structure” section below for detailed descriptions</li>
+<li>Adding to PEcAn</li>
+<li>Case studies
+<ul>
+<li>Adding a model</li>
+<li>Adding new species, PFTs, and traits from a new site</li>
+<li>Add a site</li>
+<li>Add some species</li>
+<li>Add PFT</li>
+<li>Add trait data</li>
+<li>Adding a benchmark</li>
+<li>Adding a met driver</li>
+</ul></li>
+<li>Reference (How to change tables)
+<ul>
+<li>Models</li>
+<li>Species</li>
+<li>PFTs</li>
+<li>Traits</li>
+<li>Inputs</li>
+<li>DB files</li>
+<li>Variables</li>
+<li>Formats</li>
+<li>(Link each section to relevant Bety tables)</li>
+</ul></li>
+<li>Modules – additional tools</li>
+<li>RTM</li>
+<li>Photosynthesis</li>
+<li>Allometry</li>
+<li><code>benchmark::load_data</code></li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
 
 </div>
-</div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="remote-execution-with-pecan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pecan-workflow-webworkflow-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

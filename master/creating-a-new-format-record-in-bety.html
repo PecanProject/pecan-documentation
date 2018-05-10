@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="NewFormat.html">
+<link rel="next" href="reference-runs.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,625 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="creating-a-new-format-record-in-bety" class="section level1">
+<h1><span class="header-section-number">17</span> Creating a new Format record in BETY</h1>
+<p>If the Format you are looking for is not available, you will need to create a new record. Before entering information into the database, you need to be able to answer the following questions about your data:</p>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li>What is the file MIME type?
+<ul>
+<li>We have a suit of functions for loading in data in open formats such as CSV, txt, netCDF, etc.</li>
+<li>PEcAn has partnered with the <a href="http://browndog.ncsa.illinois.edu/">NCSA BrownDog project</a> to create a service that can read and convert as many data formats as possible. If your file type is less common or a proprietary type, you can use the <a href="http://dap.ncsa.illinois.edu/">BrownDog DAP</a> to convert it to a format that can be used with PEcAn.</li>
+<li>If BrownDog cannot convert your data, you will need to contact us about writing a data specific load function.</li>
+</ul></li>
+<li>What variables does the file contain?
+<ul>
+<li>What are the variables named?</li>
+<li>What are the variable units?</li>
+<li>How do the variable names and units in the data map to PEcAn variables in the BETY database? See <a href="###%20Name%20and%20Unit">below</a> for an example. It is most likely that you will NOT need to add variables to BETY. However, identifying the appropriate variables matches in the database may require some work. We are always available to help answer your questions.</li>
+</ul></li>
+<li>Is there a timestamp on the data?
+<ul>
+<li>What are the units of time?</li>
+</ul></li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+<p>Here is an example using a fake dataset:</p>
+<div class="figure">
+<img src="images/example_data.png" alt="example_data" />
+<p class="caption">example_data</p>
+</div>
+<p>This data started out as an excel document, but was saved as a CSV file.</p>
+<p>To create a Formats record for this data, in the web interface of BETY, select Runs &gt; Formats and click <em>New Format</em>.</p>
+<p>You will need to fill out the following fields:</p>
+<ul>
+<li>MIME type: File type (you can search for other formats in the text field)</li>
+<li>Name: The name of your format (this can be whatever you want)</li>
+<li>Header: Boolean that denotes whether or not your data contains a header as the first line of the data. (1 = TRUE, 0 = FALSE)</li>
+<li>Skip: The number of lines above the data that should be skipped. For example, metadata that should not be included when reading in the data or blank spaces.</li>
+<li>Notes: Any additional information about the data such as sources and citations.</li>
+</ul>
+<p>Here is the Formats record for the example data:</p>
+<p><img src="images/format_record_1.png" alt="format_record_1" /> When you have finished this section, hit Create. The final record will be displayed on the screen.</p>
+<div id="formats---variables" class="section level2">
+<h2><span class="header-section-number">17.1</span> Formats -&gt; Variables</h2>
+<p>After a Format entry has been created, you are encouraged to edit the entry to add relationships between the file’s variables and the Variables table in PEcAn. Not only do these relationships provide meta-data describing the file format, but they also allow PEcAn to search and (for some MIME types) read files.</p>
+<p>To enter this data, select Edit Record and on the edit screen select View Related Variable.</p>
+<p>Here is the record for the example data after adding related variables:</p>
+<div class="figure">
+<img src="images/format_record_2.png" alt="format_record_2" />
+<p class="caption">format_record_2</p>
+</div>
+<div id="name-and-unit" class="section level3">
+<h3><span class="header-section-number">17.1.1</span> Name and Unit</h3>
+<p>For each variable in the file you will want at a minimum to specify the NAME of the variable within your file and match that to the equivalent Variable in the pulldown.</p>
+<p>Make sure to search for your variables under Data &gt; Variables before suggesting that we create a new variable record. This may not always be a straightforward process.</p>
+<p>For example bety contains a record for Net Primary Productivity:</p>
+<div class="figure">
+<img src="images/var_record.png" alt="var_record" />
+<p class="caption">var_record</p>
+</div>
+<p>This record does not have the same variable name or the same units as NPP in the example data. You may have to do some reading to confirm that they are the same variable. In this case - Both the data and the record are for Net Primary Productivity (the notes section provides additional resources for interpreting the variable.) - The units of the data can be converted to those of the vairiable record (this can be checked by running <code>udunits2::ud.are.convertible(&quot;g C m-2 yr-1&quot;, &quot;Mg C ha-1 yr-1&quot;)</code>)</p>
+<p>Differences between the data and the variable record can be accounted for in the data Formats record.</p>
+<ul>
+<li>Under Variable, select the variable as it is recorded in bety.</li>
+<li>Under Name, write the name the variable has in your data file.</li>
+<li>Under Unit, write the units the variable has in your data file.</li>
+</ul>
+<p>NOTE: All units must be written in a udunits compliant format. To check that your units can be read by udunits, in R, load the udunits2 package and run <code>udunits2::is.parseable(&quot;g C m-2 yr-1&quot;)</code></p>
+<p><strong>If the name or the units are the same</strong>, you can leave the Name and Unit fields blank. This is can be seen with the variable LAI.</p>
+</div>
+<div id="storage-type" class="section level3">
+<h3><span class="header-section-number">17.1.2</span> Storage Type</h3>
+<p><em>Storage Type</em> only needs to be specified if the variable is stored in a format other than what would be expected (e.g. if numeric values are stored as quoted character strings).</p>
+<p>One such example is <em>time variables</em>.</p>
+<p>PEcAn converts all dates into POSIX format using R functions such as <code>strptime</code>. These functions require that the user specify the format in which the date is written.</p>
+<p>The default is <code>&quot;%Y-%m-%d %H:%M:%S&quot;</code> which would look like <code>&quot;2017-01-01 00:00:00&quot;</code></p>
+<p>A list of date formats can be found in the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html">R documentation for the function <code>strptime</code></a></p>
+<p>Below are some commonly used codes:</p>
+<table style="width:64%;">
+<colgroup>
+<col width="6%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">%d</th>
+<th align="left">Day of the month as decimal number (01–31).</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">%D</td>
+<td align="left">Date format such as %m/%d/%y.</td>
+</tr>
+<tr class="even">
+<td align="left">%H</td>
+<td align="left">Hours as decimal number (00–23).</td>
+</tr>
+<tr class="odd">
+<td align="left">%m</td>
+<td align="left">Month as decimal number (01–12).</td>
+</tr>
+<tr class="even">
+<td align="left">%M</td>
+<td align="left">Minute as decimal number (00–59).</td>
+</tr>
+<tr class="odd">
+<td align="left">%S</td>
+<td align="left">Second as integer (00–61), allowing for up to two leap-seconds (but POSIX-compliant implementations will ignore leap seconds).</td>
+</tr>
+<tr class="even">
+<td align="left">%T</td>
+<td align="left">Equivalent to %H:%M:%S.</td>
+</tr>
+<tr class="odd">
+<td align="left">%y</td>
+<td align="left">Year without century (00–99). On input, values 00 to 68 are prefixed by 20 and 69 to 99 by 19 – that is the behaviour specified by the 2004 and 2008 POSIX standards, but they do also say ‘it is expected that in a future version the default century inferred from a 2-digit year will change’.</td>
+</tr>
+<tr class="even">
+<td align="left">%Y</td>
+<td align="left">Year with century.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="column-number" class="section level3">
+<h3><span class="header-section-number">17.1.3</span> Column Number</h3>
+<p>If your data is in text format with variables in a standard order then you can specify the Column Number for the variable. This is required for text files that lack headers.</p>
+</div>
+</div>
+<div id="retrieving-format-information" class="section level2">
+<h2><span class="header-section-number">17.2</span> Retrieving Format Information</h2>
+<p>To acquire Format information from a Format record, use the R function <code>query.format.vars</code></p>
+<div id="inputs-1" class="section level3">
+<h3><span class="header-section-number">17.2.1</span> Inputs</h3>
+<ul>
+<li><code>bety</code>: connection to BETY</li>
+<li><code>input.id=NA</code> and/or <code>format.id=NA</code>: Input or Format record ID from BETY</li>
+<li>At least one must be specified. Defaults to <code>format.id</code> if both provided.</li>
+<li><code>var.ids=NA</code>: optional vector of variable IDs. If provided, limits results to these variables.</li>
+</ul>
+</div>
+<div id="output" class="section level3">
+<h3><span class="header-section-number">17.2.2</span> Output</h3>
+<ul>
+<li>R list object containing many things. Fill this in.</li>
+</ul>
 
 </div>
 </div>
+<div id="NewInput" class="section level2">
+<h2><span class="header-section-number">17.3</span> Input records in BETY</h2>
+<p>All model input data or data used for model calibration/validation must be registered in the BETY database.</p>
+<p>Before creating a new Input record, you must make sure that the format type of your data is registered in the database. If you need to make a new format record, see <a href="NewFormat.html#NewFormat">Creating a new format record in BETY</a>.</p>
+</div>
+<div id="create-a-database-file-record-for-the-input-data" class="section level2">
+<h2><span class="header-section-number">17.4</span> Create a database file record for the input data</h2>
+<p>An input record contains all the metadata required to identify the data, however, this record does not include the location of the data file. Since the same data may be stored in multiple places, every file has its own dbfile record.</p>
+<p>From your BETY interface:</p>
+<ul>
+<li>Create a DBFILES entry for the path to the file
+<ul>
+<li>From the menu click RUNS then FILES</li>
+<li>Click “New File”</li>
+<li>Select the machine your file is located at</li>
+<li>Fill in the File Path where your file is located (aka folder or directory) NOT including the name of the file itself</li>
+<li>Fill in the File Name with the name of the file itself. Note that some types of input records will refer to be ALL the files in a directory and thus File Name can be blank</li>
+<li>Click Update</li>
+</ul></li>
+</ul>
+</div>
+<div id="creating-a-new-input-record-in-bety" class="section level2">
+<h2><span class="header-section-number">17.5</span> Creating a new Input record in BETY</h2>
+<p>From your BETY interface:</p>
+<ul>
+<li>Create an INPUT entry for your data
+<ul>
+<li>From the menu click RUNS then INPUTS</li>
+<li>Click “New Input”</li>
+<li>Select the SITE that this data is associated with the input data set</li>
+<li>Other required fields are a unique name for the input, the start and end dates of the data set, and the format of the data. If the data is not in a currently known format you will need to create a NEW FORMAT and possibly a new input converter. Instructions on how to do add a converter can be found here <a href="creating-a-new-format-record-in-bety.html#InputConversions">Input conversion</a>. Instructions on how to add a format record can be found <a href="NewFormat.html#NewFormat">here</a></li>
+<li>Parent ID is an optional variable to indicated that one dataset was derived from another.</li>
+<li>Click “Create”</li>
+</ul></li>
+<li>Associate the DBFILE with the INPUT
+<ul>
+<li>In the RUNS -&gt; INPUTS table, search and find the input record you just created</li>
+<li>Click on the EDIT icon</li>
+<li>Select “View related Files”</li>
+<li>In the Search window, search for the DBFILE you just created</li>
+</ul></li>
+<li>Once you have found the DBFILE, click on the “+” icon to add the file</li>
+<li>Click on “Update” at the bottom when you are done.</li>
+</ul>
 
+<div id="InputConversions" class="section level3">
+<h3><span class="header-section-number">17.5.1</span> Input Conversion</h3>
+<p>Three Types of data conversions are discussed below: Meteorological data, Vegetation data, and Soil data. Each section provides instructions on how to convert data from their raw formats into a PEcAn standard format, whether it be from a database or if you have raw data in hand.</p>
+<p>Also, see <a href="pecan-standard-formats.html#pecan-standard-formats">PEcAn standard formats</a>.</p>
+<div id="meterological-data-conversion" class="section level4">
+<h4><span class="header-section-number">17.5.1.1</span> Meterological Data conversion</h4>
+<div id="adding-a-function-to-pecan-to-convert-a-met-data-source" class="section level5">
+<h5><span class="header-section-number">17.5.1.1.1</span> Adding a function to PEcAn to convert a met data source</h5>
+<p>In general, you will need to write a function to download the raw met data and one to convert it to the PEcAn standard.</p>
+<p>Downloading raw data function are named <code>download.&lt;source&gt;.R</code>. These functions are stored within the PEcAn directory: <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.atmosphere/R"><code>/modules/data.atmosphere/R</code></a>.</p>
+<p>Conversion function from raw to standard are named <code>met2CF.&lt;source&gt;.R</code>. These functions are stored within the PEcAn directory: <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.atmosphere/R"><code>/modules/data.atmosphere/R</code></a>.</p>
+<p>Current Meteorological products that are coupled to PEcAn can be found in our <a href="available-meteorological-drivers.html#available-meteorological-drivers">Available Meteorological Drivers</a> page.</p>
+<p>Note: Unless you are also adding a new model, you will not need to write a script to convert from PEcAn standard to PEcAn models. Those conversion scripts are written when a model is added and can be found within each model’s PEcAn directory.</p>
+</div>
+<div id="dimensions" class="section level5">
+<h5><span class="header-section-number">17.5.1.1.2</span> Dimensions:</h5>
+<table>
+<thead>
+<tr class="header">
+<th align="left">CF standard-name</th>
+<th align="left">units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">time</td>
+<td align="left">days since 1700-01-01 00:00:00 UTC</td>
+</tr>
+<tr class="even">
+<td align="left">longitude</td>
+<td align="left">degrees_east</td>
+</tr>
+<tr class="odd">
+<td align="left">latitude</td>
+<td align="left">degrees_north</td>
+</tr>
+</tbody>
+</table>
+<p>General Note: dates in the database should be date-time (preferably with timezone), and datetime passed around in PEcAn should be of type POSIXct.</p>
+</div>
+<div id="the-variable-names-should-be-standard_name" class="section level5">
+<h5><span class="header-section-number">17.5.1.1.3</span> The variable names should be <code>standard_name</code></h5>
+<table style="width:156%;">
+<colgroup>
+<col width="61%" />
+<col width="11%" />
+<col width="20%" />
+<col width="20%" />
+<col width="13%" />
+<col width="11%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">CF standard-name</th>
+<th align="left">units</th>
+<th align="left">bety</th>
+<th align="left">isimip</th>
+<th align="left">cruncep</th>
+<th align="left">narr</th>
+<th align="left">ameriflux</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>air_temperature</strong></td>
+<td align="left">K</td>
+<td align="left">airT</td>
+<td align="left">tasAdjust</td>
+<td align="left">tair</td>
+<td align="left">air</td>
+<td align="left">TA (C)</td>
+</tr>
+<tr class="even">
+<td align="left">air_temperature_max</td>
+<td align="left">K</td>
+<td align="left"></td>
+<td align="left">tasmaxAdjust</td>
+<td align="left">NA</td>
+<td align="left">tmax</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">air_temperature_min</td>
+<td align="left">K</td>
+<td align="left"></td>
+<td align="left">tasminAdjust</td>
+<td align="left">NA</td>
+<td align="left">tmin</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>air_pressure</strong></td>
+<td align="left">Pa</td>
+<td align="left">air_pressure</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">PRESS (KPa)</td>
+</tr>
+<tr class="odd">
+<td align="left">mole_fraction_of_carbon_dioxide_in_air</td>
+<td align="left">mol/mol</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">CO2</td>
+</tr>
+<tr class="even">
+<td align="left">moisture_content_of_soil_layer</td>
+<td align="left">kg m-2</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">soil_temperature</td>
+<td align="left">K</td>
+<td align="left">soilT</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">TS1 <em>(NOT DONE)</em></td>
+</tr>
+<tr class="even">
+<td align="left">relative_humidity</td>
+<td align="left">%</td>
+<td align="left">relative_humidity</td>
+<td align="left">rhurs</td>
+<td align="left">NA</td>
+<td align="left">rhum</td>
+<td align="left">RH</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>specific_humidity</strong></td>
+<td align="left">1</td>
+<td align="left">specific_humidity</td>
+<td align="left">NA</td>
+<td align="left">qair</td>
+<td align="left">shum</td>
+<td align="left">CALC(RH)</td>
+</tr>
+<tr class="even">
+<td align="left">water_vapor_saturation_deficit</td>
+<td align="left">Pa</td>
+<td align="left">VPD</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">VPD <em>(NOT DONE)</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>surface_downwelling_longwave_flux_in_air</strong></td>
+<td align="left">W m-2</td>
+<td align="left">same</td>
+<td align="left">rldsAdjust</td>
+<td align="left">lwdown</td>
+<td align="left">dlwrf</td>
+<td align="left">Rgl</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>surface_downwelling_shortwave_flux_in_air</strong></td>
+<td align="left">W m-2</td>
+<td align="left">solar_radiation</td>
+<td align="left">rsdsAdjust</td>
+<td align="left">swdown</td>
+<td align="left">dswrf</td>
+<td align="left">Rg</td>
+</tr>
+<tr class="odd">
+<td align="left">surface_downwelling_photosynthetic_photon_flux_in_air</td>
+<td align="left">mol m-2 s-1</td>
+<td align="left">PAR</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">PAR <em>(NOT DONE)</em></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>precipitation_flux</strong></td>
+<td align="left">kg m-2 s-1</td>
+<td align="left">cccc</td>
+<td align="left">prAdjust</td>
+<td align="left">rain</td>
+<td align="left">acpc</td>
+<td align="left">PREC (mm/s)</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">degrees</td>
+<td align="left">wind_direction</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">WD</td>
+</tr>
+<tr class="even">
+<td align="left">wind_speed</td>
+<td align="left">m/s</td>
+<td align="left">Wspd</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">WS</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>eastward_wind</strong></td>
+<td align="left">m/s</td>
+<td align="left">eastward_wind</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">CALC(WS+WD)</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>northward_wind</strong></td>
+<td align="left">m/s</td>
+<td align="left">northward_wind</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">CALC(WS+WD)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>preferred variables indicated in bold</li>
+<li>wind_direction has no CF equivalent and should not be converted, instead the met2CF functions should convert wind_direction and wind_speed to eastward_wind and northward_wind</li>
+<li>standard_name is CF-convention standard names</li>
+<li>units can be converted by udunits, so these can vary (e.g. the time denominator may change with time frequency of inputs)</li>
+<li>soil moisture for the full column, rather than a layer, is soil_moisture_content</li>
+<li>A full list of PEcAn standard variable names, units and dimensions can be found here: <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv" class="uri">https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv</a></li>
+</ul>
+<p>For example, in the <a href="https://www.betydb.org/inputs/280">MsTMIP-CRUNCEP</a> data, the variable <code>rain</code> should be <code>precipitation_rate</code>. We want to standardize the units as well as part of the <code>met2CF.&lt;product&gt;</code> step. I believe we want to use the CF “canonical” units but retain the MsTMIP units any time CF is ambiguous about the units.</p>
+<p>The key is to process each type of met data (site, reanalysis, forecast, climate scenario, etc) to the exact same standard. This way every operation after that (extract, gap fill, downscale, convert to a model, etc) will always have the exact same inputs. This will make everything else much simpler to code and allow us to avoid a lot of unnecessary data checking, tests, etc being repeated in every downstream function.</p>
+</div>
+<div id="adding-single-site-specific-meteorological-data" class="section level5">
+<h5><span class="header-section-number">17.5.1.1.4</span> Adding Single-Site Specific Meteorological Data</h5>
+<p>Perhaps you have meteorological data specific to one site, with a unique format that you would like to add to PEcAn. Your steps would be to: 1. write a script or function to convert your files into the netcdf PEcAn standard 2. insert that file as an input record for your site following these <a href="creating-a-new-format-record-in-bety.html#NewInput">instructions</a></p>
+</div>
+<div id="processing-met-data-outside-of-the-workflow-using-pecan-functions" class="section level5">
+<h5><span class="header-section-number">17.5.1.1.5</span> Processing Met data outside of the workflow using PEcAn functions</h5>
+<p>Perhaps you would like to obtain data from one of the sources coupled to PEcAn on its own. To do so you can run PEcAn functions on their own.</p>
+<div id="example-1-processing-data-from-a-database" class="section level6">
+<h6><span class="header-section-number">17.5.1.1.5.1</span> Example 1: Processing data from a database</h6>
+<p>Download Amerifluxlbl from Niwot Ridge for the year 2004:</p>
+<pre><code>raw.file &lt;-PEcAn.data.atmosphere::download.AmerifluxLBL(sitename = &quot;US-NR1&quot;, 
+                                             outfolder = &quot;.&quot;, 
+                                             start_date = &quot;2004-01-01&quot;, 
+                                             end_date = &quot;2004-12-31&quot;)</code></pre>
+<p>Using the information returned as the object <code>raw.file</code> you will then convert the raw files into a standard file.</p>
+<p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
+<pre><code>
+bety &lt;- dplyr::src_postgres(dbname   = &#39;bety&#39;, 
+                            host =&#39;localhost&#39;, 
+                            user     = &quot;bety&quot;, 
+                            password = &quot;bety&quot;)
+                            
+con &lt;- bety$con</code></pre>
+<p>Next you will set up the arguments for the function</p>
+<pre><code>in.path &lt;- &#39;.&#39;
+in.prefix &lt;- raw.file$dbfile.name
+outfolder &lt;- &#39;.&#39;
+format.id &lt;- 5000000002
+format &lt;- PEcAn.DB::query.format.vars(format.id=format.id,bety = bety)
+lon &lt;- -105.54
+lat &lt;- 40.03
+format$time_zone &lt;- &quot;America/Chicago&quot;</code></pre>
+<p>Note: The format.id can be pulled from the BETY database if you know the format of the raw data.</p>
+<p>Once these arguments are defined you can execute the <code>met2CF.csv</code> function</p>
+<pre><code>PEcAn.data.atmosphere::met2CF.csv(in.path = in.path, 
+                                  in.prefix =in.prefix,
+                                  outfolder = &quot;.&quot;, 
+                                  start_date =&quot;2004-01-01&quot;,
+                                  end_date = &quot;2004-12-01&quot;,
+                                  lat= lat,
+                                  lon = lon,
+                                  format = format) </code></pre>
+</div>
+<div id="example-2-processing-data-from-data-already-in-hand" class="section level6">
+<h6><span class="header-section-number">17.5.1.1.5.2</span> Example 2: Processing data from data already in hand</h6>
+<p>If you have Met data already in hand and you would like to convert into the PEcAn standard follow these instructions.</p>
+<p>Update BETY with file record, format record and input record according to this page <a href="creating-a-new-format-record-in-bety.html#NewInput">How to Insert new Input Data</a></p>
+<p>If your data is in a csv format you can use the <code>met2CF.csv</code>function to convert your data into a PEcAn standard file.</p>
+<p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
+<pre><code>bety &lt;- dplyr::src_postgres(dbname   = &#39;bety&#39;, 
+                            host =&#39;localhost&#39;, 
+                            user     = &quot;bety&quot;, 
+                            password = &quot;bety&quot;)
+                            
+con &lt;- bety$con</code></pre>
+<p>Prepare the arguments you need to execute the met2CF.csv function</p>
+<pre><code>in.path &lt;- &#39;path/where/the/raw/file/lives&#39;
+in.prefix &lt;- &#39;prefix_of_the_raw_file&#39;
+outfolder &lt;- &#39;path/to/where/you/want/to/output/thecsv/&#39;
+format.id &lt;- formatid of the format your created
+format &lt;- PEcAn.DB::query.format.vars(format.id=format.id,bety = bety)
+lon &lt;- longitude of your site
+lat &lt;- latitude of your site
+format$time_zone &lt;- time zone of your site
+start_date &lt;- Start date of your data in &quot;y-m-d&quot;
+end_date &lt;- End date of your data in &quot;y-m-d&quot;</code></pre>
+<p>Next you can execute the function:</p>
+<pre><code>PEcAn.data.atmosphere::met2CF.csv(in.path = in.path, 
+                                  in.prefix =in.prefix, 
+                                  outfolder = &quot;.&quot;, 
+                                  start_date = start_date,
+                                  end_date = end_date,
+                                  lat= lat,
+                                  lon = lon,
+                                  format = format)</code></pre>
+</div>
+</div>
+</div>
+<div id="vegetation-data" class="section level4">
+<h4><span class="header-section-number">17.5.1.2</span> Vegetation Data</h4>
+<p>Vegetation data will be required to parameterize your model. In these examples we will go over how to produce a standard initial condition file.</p>
+<p>The main function to process cohort data is the <code>ic.process.R</code> function. As of now however, if you require pool data you will run a separate function, <code>pool_ic_list2netcdf.R</code>.</p>
+<div id="example-1-processing-veg-data-from-data-in-hand." class="section level6">
+<h6><span class="header-section-number">17.5.1.2.0.1</span> Example 1: Processing Veg data from data in hand.</h6>
+<p>In the following example we will process vegetation data that you have in hand using PEcAn.</p>
+<p>First, you’ll need to create a input record in BETY that will have a file record and format record reflecting the location and format of your file. Instructions can be found in our <a href="creating-a-new-format-record-in-bety.html#NewInput">How to Insert new Input Data</a> page.</p>
+<p>Once you have created an input record you must take note of the input id of your record. An easy way to take note of this is in the URL of the BETY webpage that shows your input record. In this example we use an input record with the id <code>1000013064</code> which can be found at this url: <a href="https://psql-pecan.bu.edu/bety/inputs/1000013064#" class="uri">https://psql-pecan.bu.edu/bety/inputs/1000013064#</a> . Note that this is the Boston University BETY database. If you are on a different machine, your url will be different.</p>
+<p>With the input id in hand you can now edit a pecan XML so that the PEcAn function <code>ic.process</code> will know where to look in order to process your data. The <code>inputs</code> section of your pecan XML will look like this. As of now ic.process is set up to work with the ED2 model so we will use ED2 settings and then grab the intermediary Rds data file that is created as the standard PEcAn file. For your Inputs section you will need to input your input id wherever you see the <code>source.ic</code> flag.</p>
+<pre><code>&lt;inputs&gt;
+      &lt;css&gt;
+        &lt;source&gt;FFT&lt;/source&gt;
+        &lt;output&gt;css&lt;/output&gt;
+        &lt;username&gt;pecan&lt;/username&gt;
+        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;useic&gt;TRUE&lt;/useic&gt;
+        &lt;meta&gt;
+          &lt;trk&gt;1&lt;/trk&gt;
+          &lt;age&gt;70&lt;/age&gt;
+        &lt;/meta&gt;
+      &lt;/css&gt;
+      &lt;pss&gt;
+        &lt;source&gt;FFT&lt;/source&gt;
+        &lt;output&gt;pss&lt;/output&gt;
+        &lt;username&gt;pecan&lt;/username&gt;
+        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;useic&gt;TRUE&lt;/useic&gt;
+      &lt;/pss&gt;
+      &lt;site&gt;
+        &lt;source&gt;FFT&lt;/source&gt;
+        &lt;output&gt;site&lt;/output&gt;
+        &lt;username&gt;pecan&lt;/username&gt;
+        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;useic&gt;TRUE&lt;/useic&gt;
+      &lt;/site&gt;
+      &lt;met&gt;
+        &lt;source&gt;CRUNCEP&lt;/source&gt;
+        &lt;output&gt;ED2&lt;/output&gt;
+      &lt;/met&gt;
+      &lt;lu&gt;
+        &lt;id&gt;294&lt;/id&gt;
+      &lt;/lu&gt;
+      &lt;soil&gt;
+        &lt;id&gt;297&lt;/id&gt;
+      &lt;/soil&gt;
+      &lt;thsum&gt;
+        &lt;id&gt;295&lt;/id&gt;
+      &lt;/thsum&gt;
+      &lt;veg&gt;
+        &lt;id&gt;296&lt;/id&gt;
+      &lt;/veg&gt;
+    &lt;/inputs&gt;</code></pre>
+<p>Once you edit your PEcAn.xml you can than create a settings object using PEcAn functions. Your <code>pecan.xml</code> must be in your working directory.</p>
+<pre><code>settings &lt;- PEcAn.settings::read.settings(&quot;pecan.xml&quot;)
+settings &lt;- PEcAn.settings::prepare.settings(settings, force=FALSE)</code></pre>
+<p>You can then execute the <code>ic.process</code> function to convert data into a standard Rds file:</p>
+<pre><code>input &lt;- settings$run$inputs
+dir &lt;- &quot;.&quot;
+ic.process(settings, input, dir, overwrite = FALSE)</code></pre>
+<p>Note that the argument <code>dir</code> is set to the current directory. You will find the final ED2 file there. More importantly though you will find the <code>.Rds</code> file within the same directory.</p>
+</div>
+<div id="example-3-pool-initial-condition-files" class="section level6">
+<h6><span class="header-section-number">17.5.1.2.0.2</span> Example 3 Pool Initial Condition files</h6>
+<p>If you have pool vegetation data, you’ll need the <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.land/R/pool_ic_list2netcdf.R"><code>pool_ic_list2netcdf.R</code></a> function to convert the pool data into PEcAn standard.</p>
+<p>The function stands alone and requires that you provide a named list of netcdf dimensions and values, and a named list of variables and values. Names and units need to match the standard_vars.csv table found <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv">here</a>.</p>
+<pre><code>#Create a list object with necessary dimensions for your site
+input&lt;-list()
+dims&lt;- list(lat=-115,lon=45, time= 1)
+variables&lt;- list(SoilResp=8,TotLivBiom=295)
+input$dims &lt;- dims
+input$vals &lt;- variables</code></pre>
+<p>Once this is done, set <code>outdir</code> to where you’d like the file to write out to and a siteid. Siteid in this can be used as an file name identifier. Once part of the automated workflow siteid will reflect the site id within the BET db.</p>
+<pre><code>outdir  &lt;- &quot;.&quot;
+siteid &lt;- 772
+pool_ic_list2netcdf(input = input, outdir = outdir, siteid = siteid)</code></pre>
+<p>You should now have a netcdf file with initial conditions.</p>
+</div>
+</div>
+<div id="soil-data" class="section level4">
+<h4><span class="header-section-number">17.5.1.3</span> Soil Data</h4>
+<div id="example-1-converting-data-in-hand" class="section level6">
+<h6><span class="header-section-number">17.5.1.3.0.1</span> Example 1: Converting Data in hand</h6>
+<p>Local data that has the correct names and units can easily be written out in PEcAn standard using the function soil2netcdf.</p>
+<pre><code>soil.data &lt;- list(volume_fraction_of_sand_in_soil = c(0.3,0.4,0.5),
+                  volume_fraction_of_clay_in_soil = c(0.3,0.3,0.3),
+                  soil_depth = c(0.2,0.5,1.0))
+                         
+soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
+<p>At the moment this file would need to be inserted into Inputs manually. By default, this function also calls soil_params, which will estimate a number of hydraulic and thermal parameters from texture. Be aware that at the moment not all model couplers are yet set up to read this file and/or convert it to model-specific formats.</p>
+</div>
+<div id="example-2-converting-paleon-data" class="section level6">
+<h6><span class="header-section-number">17.5.1.3.0.2</span> Example 2: Converting PalEON data</h6>
+<p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
+<pre><code>   &lt;soil&gt;
+     &lt;id&gt;1000012896&lt;/id&gt;
+   &lt;/soil&gt;</code></pre>
+<p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 
-
+</div>
+</div>
+</div>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="NewFormat.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reference-runs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

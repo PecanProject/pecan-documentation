@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="demo-02-sensitivity-and-uncertainty-analysis.html">
+<link rel="next" href="simple-model-data-comparisons.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,69 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="pecan-testing-the-sensitivity-analysis-against-observations" class="section level1">
+<h1><span class="header-section-number">38</span> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</h1>
+<div id="author-ankur-desai" class="section level3">
+<h3><span class="header-section-number">38.0.1</span> Author: “Ankur Desai”</h3>
+</div>
+<div id="flux-measurements-and-modeling-course-tutorial-part-2" class="section level2">
+<h2><span class="header-section-number">38.1</span> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></h2>
+<p>This tutorial assumes you have successfully completed the Demo01, Demo02 and the modelVSdata tutorial.</p>
+</div>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">38.2</span> Introduction</h2>
+<p>Now that you have successfully run PEcAn through the web interface and have learned how to do a simple comparison of flux tower observations to model output, let’s start looking at how data assimilation and parameter estimation would work with an ecosystem model.</p>
+<p>Before we start a full data assimilation exercise, let’s try something simple – single parameter selection by hand.</p>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li>Open <a href="http://localhost:3280/rstudio" class="uri">http://localhost:3280/rstudio</a> or <a href="http://localhost:6480/rstudio" class="uri">http://localhost:6480/rstudio</a> or the Amazon URL/rstudio if running on the cloud.</li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+<p>In Demo02, you have ran a sensitivity analysis of SIPNET model runs at Niwot Ridge sampling across quantiles of a parameter prior, while holding all others to the median value. The pecan.xml file told PEcAn to run an sensitivity analysis, which simply meant SIPNET was run multiple times with the same driver, but varying parameter values one at a time (while holding all others to their median), and the parameter range also specified in the pecan.xml file (as quantiles, which were then sampled against the BETY database of observed variation in the parameter for species within the specific plant functional type).</p>
+<p>Let’s try to compare Ameriflux NEE to SIPNET NEE across all these runs to make a plot of parameter vs. goodness-of-fit. We’ll start with root mean square error (<strong>RMSE</strong>), but then discuss some other tests, too.</p>
+<div id="a.-read-in-settings-object-from-a-run-xml" class="section level4">
+<h4><span class="header-section-number">38.2.0.1</span> A. Read in settings object from a run xml</h4>
+<p>Open up a connection to the bety database and create a settings object from your xml, just like in the modelVSdata tutorial.</p>
+<p>We read in the pecan.CONFIG.xml instead of the pecan.xml because the pecan.CONFIG.xml has already incorperated some of the information from the database we would have to query again if we used the pecan.xml.</p>
+<p>Back to the files pane, within the <em>run/</em> folder, find a folder called <em>pft/</em> and within that a folder with the pft name (such as <em>temprature.coniferous</em>). Within that is a PDF file that starts <em>sensitivity.analysis</em>. In Rstudio, just click on the PDF to view it. You discussed this PDF last tutorial, through the web interface. Here, we see how the model NEE in SIPNET changes with each parameter.</p>
+<p>Let’s read that sensitivity output. Navigate back up (<em>..</em>) to the <em>~/output/<strong>RUNDIR</strong>/</em> folder. Find a series of files that end in “<em>.RData</em>”. These files contain the R variables used to make these plots. In particular, there is <strong>sensitivity.output.<em>.RData<strong> which contains the annual NEE as a function of each parameter quantile. Click on it to load a variable into your environment. There is </strong>sensitivity.results.</em>.RData</strong> which contains plotting functions and variance decomposition output, which we don’t need in this tutorial. And finally, there is **sensitivity.samples.*.RData** which contains the actual parameter values and the RunIDs associated with each sensitivity run.</p>
+<p>Click on <em>sensitivity.samples.</em>.RData* to load it into your environment, or run the <code>{r}load()</code> script below. You should see a set of five new variables (pft.names, trait.names, sa.ensemble.id, sa.run.ids, sa.samples).</p>
+<p>Let’s extract a parameter and it’s sensitivity NEE output from the list sa.samples, which is organized by PFT, and then by parameter. First, let’s look at a list of PFTs and parameters available:</p>
+<p>Now to see the actual parameter values used by the runs, just pick a parameter and type:</p>
+<p>Let’s store that value for future use:</p>
+<p>Now, to see the annual NEE output from the model for a particular PFT and parameter range, try</p>
+<p>You could even plot the two:</p>
+<p>What do you notice?</p>
+<p>Let’s try to read the output from a single run id as you did in the earlier tutorial.</p>
+</div>
+<div id="b.-now-lets-bring-in-the-actual-observations" class="section level4">
+<h4><span class="header-section-number">38.2.0.2</span> B. Now let’s bring in the actual observations</h4>
+<p>Recall reading Ameriflux NEE in the modelVSdata tutorial.</p>
+</div>
+<div id="c.-finally-we-can-finally-compare-model-to-data" class="section level4">
+<h4><span class="header-section-number">38.2.0.3</span> C. Finally, we can finally compare model to data</h4>
+<p>In the modelVSdata, you also compared NEE to the ensemble model run. Here we will do the same except we include each sensitivity run.</p>
+<p>And remember the formula for RMSE:</p>
+<p>All we need to do to go beyond this is to make a loop that reads in each sensitivity run NEE based on runids, calculates RMSE against the observations, and stores it in an array, by combining the steps above in a for loop. Make sure you change the directory names and year to your specific run.</p>
+<p>Let’s plot that array</p>
+<p>Can you identify a minimum (if there is one)? If so, is there any reason to believe this is the “best” parameter? Why or why not? Think about all the other parameters.</p>
+<p>Now that you have the hang of it, here are a few more things to try:</p>
+<ol style="list-style-type: decimal">
+<li>Try a different error functions, given actual NEE uncertainty. You learned earlier that uncertainty in half-hourly observed NEE is not Gaussian. This makes RMSE not the correct measure for goodness-of-fit. Go to <em>~/pecan/modules/uncertainty/R</em>, open <em>flux_uncertainty.R</em>, and click on the <em>source</em> button in the program editing pane.</li>
+</ol>
+<p>Alternatively, you can source the function from the console using:</p>
+<p>Then you can run:</p>
+<p>The figure shows you uncertainty (err) as a function of NEE magnitude (mag). How might you use this information to change the RMSE calculation?</p>
+<p>Try a few other parameters. Repeat the above steps but with a different parameter. You might want to select one from the sensitivity PDF that has a large sensitivity or from the variance decomposition that is also poorly constrained.</p>
 
 </div>
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="demo-02-sensitivity-and-uncertainty-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simple-model-data-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="pecan-testing-the-sensitivity-analysis-against-observations.html">
+<link rel="next" href="parameter-data-assimilation-1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="simple-model-data-comparisons" class="section level1">
+<h1><span class="header-section-number">39</span> Simple Model-Data Comparisons</h1>
+<div id="author-istem-fer-tess-mccabe" class="section level3">
+<h3><span class="header-section-number">39.0.1</span> Author: Istem Fer, Tess McCabe</h3>
+<p>In this tutorial we will compare model outputs to data outside of the PEcAn web interface. The goal of this is to demonstrate how to perform additional analyses using PEcAn’s outputs. To do this you can download each of the Output files, and then perform the analyses using whatever software you prefer, or you can perform analyses directly on the PEcAn server itself. Here we’ll be analyzing model outputs in R using a browser-based version of RStudio that’s installed on the server</p>
+</div>
+<div id="starting-rstudio-server" class="section level2">
+<h2><span class="header-section-number">39.1</span> Starting RStudio Server</h2>
+<ol style="list-style-type: decimal">
+<li><p>Open RStudio Server in a new window at <strong>URL/rstudio</strong></p></li>
+<li><p>The username is carya and the password is illinois.</p></li>
+<li><p>To open a new R script click File &gt; New File &gt; R Script</p></li>
+<li><p>Use the Files browser on the lower right pane to find where your run(s) are located</p></li>
+</ol>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li><p>All PEcAn outputs are stored in the output folder. Click on this to open it up.</p></li>
+<li><p>Within the outputs folder, there will be one folder for each workflow execution. For example, click to open the folder PEcAn_99000000001 if that’s your workflow ID</p></li>
+<li><p>A workflow folder will have a few log and settings files (e.g. pecan.xml) and the following subfolders</p></li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+<pre><code>run     contains all the inputs for each run
+out     contains all the outputs from each run
+pft     contains the parameter information for each PFT</code></pre>
+<p>Within both the run and out folders there will be one folder for each unique model run, where the folder name is the run ID. Click to open the out folder. For our simple case we only did one run so there should be only one folder (e.g. 99000000001). Click to open this folder.</p>
+<ul>
+<li>Within this folder you will find, among other things, files of the format <year>.nc. Each of these files contains one year of model output in the standard PEcAn netCDF format. This is the model output that we will use to compare to data.</li>
+</ul>
+</div>
+<div id="read-in-settings-from-an-xml-file" class="section level2">
+<h2><span class="header-section-number">39.2</span> Read in settings From an XML file</h2>
+</div>
+<div id="read-in-model-output-from-specific-variables" class="section level2">
+<h2><span class="header-section-number">39.3</span> Read in model output from specific variables</h2>
+<p>The arguments to read.output are the run ID, the folder where the run is located, the start year, the end year, and the variables being read. The README file in the Input file dropdown menu of any successful run lists the run ID, the output folder, and the start and end year.</p>
+</div>
+<div id="compare-model-to-flux-observations" class="section level2">
+<h2><span class="header-section-number">39.4</span> Compare model to flux observations</h2>
+<p><strong>First</strong> <em>load up the observations</em> and take a look at the contents of the file</p>
+<p>File_Path refers to where you stored your observational data. In this example the default file path is an Ameriflux dataset from Niwot Ridge.</p>
+<p>File_format queries the database for the format your file is in. The defualt format ID “5000000002” is for csv files downloaded from the Ameriflux website. You could query for diffent kinds of formats that exist in bety or <a href="https://pecanproject.github.io/pecan-documentation/adding-an-ecosystem-model.html#formats">make your own</a>.</p>
+<p>Here 772 is the database site ID for Niwot Ridge Forest, which tells pecan where the data is from and what time zone to assign any time data read in.</p>
+<p><strong>Second</strong> <em>apply a conservative u* filter to observations</em></p>
+<p><strong>Third</strong> <em>align model output and observations</em></p>
+<p>When we aligned the data, we got a dataframe with the variables we requested in a <span class="math inline">\(NEE.m\)</span> and a <span class="math inline">\(NEE.o\)</span> format. The <span class="math inline">\(.o\)</span> is for observations, and the <span class="math inline">\(.m\)</span> is for model. The posix column allows for easy plotting along a timeseries.</p>
+<p><strong>Fourth</strong>, <em>plot model predictions vs. observations</em> and compare this to a 1:1 line</p>
+<p><strong>Fifth</strong>, <em>calculate the Root Mean Square Error (RMSE)</em> between the model and the data</p>
+<p><em>na.rm</em> makes sure we don’t include missing or screened values in either time series.</p>
+<p><strong>Finally</strong>, <em>plot time-series</em> of both the model and data together</p>
+<p><strong>Bonus</strong> <em>How would you compare aggregated data?</em></p>
+<p>Try RMSE against monthly NEE instead of half-hourly. In this case, first average the values up to monthly in the observations. Then, use align_data to match the monthly timestep in model output.</p>
+<p><strong>NOTE</strong>: Align_data uses two seperate alignment function, match_timestep and mean_over_larger_timestep. Match_timestep will use only that data that is present in both the model and the observation. This is helpful for sparse observations. Mean_over_larger_timestep aggregates the values over the largest timestep present. If you were to look at averaged monthly data, you would use mean_over_larger_timestep.</p>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pecan-testing-the-sensitivity-analysis-against-observations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parameter-data-assimilation-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

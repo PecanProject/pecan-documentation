@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-the-vm.html">
-<link rel="next" href="introduction-developer-guide.html">
+<link rel="prev" href="what-is-docker.html">
+<link rel="next" href="debugging.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -551,39 +551,106 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vm-desktop-conversion" class="section level1">
-<h1><span class="header-section-number">20</span> VM Desktop Conversion</h1>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
-<span class="kw">sudo</span> apt-get install xfce4 xorg</code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </code></pre></div>
+<div id="dockerfiles-for-models" class="section level1">
+<h1><span class="header-section-number">34</span> Dockerfiles for Models</h1>
+<p>Each model will be disitrbuted as a docker container. These docker containers will contain the model, as well as some additional code to convert the output from the model to the standard PEcAn output, and code to connect to the message bus and receive messages.</p>
+<p>Most of these dockerfiles will be the same and will compile the model in one container, copy the resulting binary and any additional files needed to a second container and add all PEcAn pieces needed. This process will reduce the size of the final image.</p>
+<p>Each of these docker images will be ready to run the model given an input file and produce outputs that conform to PEcAn. Each container will contain a small script that will execute the binary, check the model exit code, convert the model output to PEcAn output and quit. The conversion from the model specific output to the PEcAn output is done by calling the model2netcdf. This code will assume the site is located at lat=0, lon=0. To set this you can start the docker process with <code>-e &quot;SITE_LAT=35.9782&quot; -e &quot;SITE_LON=-79.0942&quot;</code>. The following variables can be set:</p>
 <ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
+<li><code>SITE_LAT</code> : Latitutude of the site, written in output files, default is 0</li>
+<li><code>SITE_LON</code> : Longitude of the site, written in output files, default is 0</li>
+<li><code>START_DATE</code> : Start date of the model to be executed.</li>
+<li><code>END_DATE</code> : End date of the model to be executed.</li>
+<li><code>DELETE_RAW</code> : Should the model output be deleted, default is no.</li>
+<li><code>OVERWRITE</code> : Should any results be overwritten</li>
 </ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> mount /dev/cdrom /mnt
-<span class="kw">sudo</span> /mnt/VBoxLinuxAdditions.run
-<span class="kw">sudo</span> umount /mnt</code></pre></div>
-<div id="install-rstudio-desktop" class="section level3">
-<h3><span class="header-section-number">20.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb
-<span class="kw">apt-get</span> install libjpeg621
-<span class="kw">dpkg</span> -i rstudio-*
-<span class="kw">rm</span> rstudio-*</code></pre></div>
+<p>Following environment variables are only for information purpose and should not be changed: - <code>MODEL</code> : The name of the model, used in the script to run the model - <code>BINARY</code> : Location of the acutual binary, used in the script to run the model - <code>OUTDIR</code> : Location where data is, in this case /work - <code>PECAN_VERSION</code> : Version of PEcAn used to compile, default is develop</p>
+<div id="sipnet-2" class="section level2">
+<h2><span class="header-section-number">34.1</span> SIPNET</h2>
+<p>The folllowing command will build sipnet v136 for PEcAn using the branch that is currently checked out.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> build \
+    --build-arg MODEL_VERSION=136 \
+    --build-arg PECAN_VERSION=<span class="ot">$(</span><span class="kw">git</span> rev-parse --abbrev-ref HEAD<span class="ot">)</span> \
+    --tag pecan/pecan-sipnet:136 \
+    --file docker/Dockerfile.sipnet \
+    .</code></pre></div>
+<p>Once the process is finished you can push (upload) the created image to docker hub. It will use the tag to place the image. In this case the image will be placed in the pecan project as the pecan-sipnet repository and tagged with 136. To do this you can use:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># do this only once</span>
+<span class="kw">docker</span> login
+<span class="co"># push image</span>
+<span class="kw">docker</span> push pecan/pecan-sipnet:136</code></pre></div>
+<p>Once the image is pushed to dockerhub anybody can run the model. If you have not already downloaded the docker container the run command will download the image. Next it will run the image and will execute either the default command or the comman line given to the container. In the following example the default command is executed which will run the model and generate the PEcAn output files.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># get test data (only need to do this once)</span>
+<span class="kw">curl</span> -o sipnet.data.zip http://isda.ncsa.illinois.edu/~kooper/PEcAn/sipnet/sipnet.data.zip
+<span class="kw">unzip</span> sipnet.data.zip
+<span class="co"># cleanup if you rerun</span>
+<span class="kw">rm</span> -f sipnet.data/<span class="dt">{*.nc*,DONE,ERROR,sipnet.out,std*.log}</span>
+<span class="co"># run the actual model</span>
+<span class="kw">docker</span> run -t -i --rm -v <span class="ot">${PWD}</span>/sipnet.data:/work pecan/pecan-sipnet:136</code></pre></div>
+
+<div id="using-the-pecan-download.file-function" class="section level3">
+<h3><span class="header-section-number">34.1.1</span> Using the PEcAn download.file() function</h3>
+<p>download.file(url, destination_file, method) <br> <br></p>
+<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
+<p><br></p>
+<p>Examples: <br> <em>HTTP</em> <br></p>
+<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
+<p><em>FTP</em></p>
+<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
+<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
+<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
+<p><br></p>
+<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
+<p>which then allows for direct connection through the firewall using a command like:</p>
+<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
+<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
+<pre><code>&gt; options()
+$add.smooth
+[1] TRUE
+
+$bitmapType
+[1] &quot;cairo&quot;
+
+$browser
+[1] &quot;/usr/bin/xdg-open&quot;
+
+$browserNLdisabled
+[1] FALSE
+
+$CBoundsCheck
+[1] FALSE
+
+$check.bounds
+[1] FALSE
+
+$citation.bibtex.max
+[1] 1
+
+$continue
+[1] &quot;+ &quot;
+
+$contrasts
+        unordered           ordered
+&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
+<p>In order to set your download.ftp.method option you need to add a line such as</p>
+<pre><code># set default FTP
+options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
+<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
+<p>Once this is done you should be able to see the option set using this command in R:</p>
+<pre><code>&gt; options(&quot;download.ftp.method&quot;)
+$download.ftp.method
+[1] &quot;ncftpget&quot;</code></pre>
 
 </div>
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-the-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-developer-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-is-docker.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="debugging.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
