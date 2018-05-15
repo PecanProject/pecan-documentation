@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,41 +57,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -482,8 +510,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#flux-measurements-and-modeling-course-tutorial-part-2"><i class="fa fa-check"></i><b>38.1</b> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></a></li>
-<li class="chapter" data-level="38.2" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-3"><i class="fa fa-check"></i><b>38.2</b> Introduction</a></li>
+<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-3"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
 <li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
@@ -568,19 +595,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>If you want to submit changes that you’ve made to be part of PEcAn you’ll want to follow <a href="Using-Git.md#committing-changes-using-pull-requests">Committing Changes Using Pull Requests</a></li>
 <li><strong>To update your local branch</strong></li>
 </ul>
-<p><code>cd pecan git pull upstream master ./scripts/build.sh</code></p>
+<pre><code>cd pecan
+git pull upstream master
+./scripts/build.sh</code></pre>
 <div id="git" class="section level3">
 <h3><span class="header-section-number">24.1.1</span> Git</h3>
 <p>Git is a version control software; GitHub is a project-hosting website that is similar to <a href="https://ebi-forecast.igb.illinois.edu/redmine/">Redmine</a> but easier to use for open and collaborative development.</p>
-<p>Git is a free &amp; open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Every Git clone is a full-fledged repository with complete history and full revision tracking capabilities, not dependent on network access or a central server. Branching and merging are fast and easy to do.</p>
-<p>A good place to start is the <a href="https://guides.github.com/introduction/flow/">GitHub 5 minute illustrated tutorial</a>. In addition, there are three fun tutorials for learning git:</p>
+<p>Git is a free &amp; open source, distributed version control system designed
+to handle everything from small to very large projects with speed and
+efficiency. Every Git clone is a full-fledged repository with complete
+history and full revision tracking capabilities, not dependent on
+network access or a central server. Branching and merging are fast and
+easy to do.</p>
+<p>A good place to start is the <a href="https://guides.github.com/introduction/flow/">GitHub 5 minute illustrated tutorial</a>.
+In addition, there are three fun tutorials for learning git:</p>
 <ul>
 <li><a href="https://www.codecademy.com/learn/learn-git">Learn Git</a> is a great web-based interactive tutorial.</li>
 <li><a href="http://pcottle.github.com/learnGitBranching/">LearnGitBranching</a></li>
 <li><a href="http://try.github.com">TryGit</a>.</li>
 </ul>
 <p>For additional tutorials and background see <a href="Using-Git.md#references">References</a></p>
-<p><strong>URLs</strong> In the rest of the document will use specific URL’s to clone the code. There a few URL’s you can use to clone a project, using https, ssh and git. You can use either https or git to clone a repository and write to it. The git protocol is read-only.</p>
+<p><strong>URLs</strong> In the rest of the document will use specific URL’s to clone the code.
+There a few URL’s you can use to clone a project, using https, ssh and
+git. You can use either https or git to clone a repository and write to
+it. The git protocol is read-only.</p>
 <div id="pecanproject-on-github-httpsgithub.comorganizationspecanproject" class="section level4">
 <h4><span class="header-section-number">24.1.1.1</span> PEcAnProject on GitHub: <a href="https://github.com/organizations/PecanProject" class="uri">https://github.com/organizations/PecanProject</a></h4>
 <ul>
@@ -599,11 +637,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>milestones (Big picture, “Epic”): contains many issues</li>
 <li>issues (Specific features / bugs, “Story”): may contain a list of tasks; represent</li>
-<li>task list (to do list, “Tasks”): list of steps required to close an issue, e.g.: ```</li>
-<li>[ ] first do this</li>
-<li>[ ] then this</li>
-<li>[ ] completed when x and y ```</li>
+<li>task list (to do list, “Tasks”): list of steps required to close an issue, e.g.:</li>
 </ul>
+<pre><code> * [ ] first do this
+ * [ ] then this
+ * [ ] completed when x and y</code></pre>
 </div>
 <div id="quick-and-easy" class="section level4">
 <h4><span class="header-section-number">24.1.1.3</span> Quick and Easy</h4>
@@ -612,7 +650,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="recommended-git-workflow" class="section level3">
 <h3><span class="header-section-number">24.1.2</span> Recommended Git Workflow</h3>
-<p><strong>Each feature should be in it’s own branch</strong> (for example each redmine issue is a branch, names of branches are often the issue in a bug tracking system).</p>
+<p><strong>Each feature should be in it’s own branch</strong> (for example each redmine
+issue is a branch, names of branches are often the issue in a bug
+tracking system).</p>
 <p><strong>Commit and Push Frequency</strong> On your branch, commit <strong><em>at minimum once a day before you push changes:</em></strong> even better: every time you reach a stopping point and move to a new issue. best: any time that you have done work that you do not want to re-do. Remember, pushing changes to your branch is like saving a draft. Submit a pull request when you are done.</p>
 <div id="before-any-work-is-done" class="section level4">
 <h4><span class="header-section-number">24.1.2.1</span> Before any work is done:</h4>
@@ -622,14 +662,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>You can setup SSH keys to make it easier to commit cod back to GitHub. This might especially be true if you are working from a cluster, see <a href="https://help.github.com/articles/generating-ssh-keys">set up ssh keys</a></p>
 <ol style="list-style-type: decimal">
 <li><p>Introduce yourself to GIT</p>
-<pre><code>git config --global user.name &quot;FULLNAME&quot;
-git config --global user.email you@yourdomain.example.com</code></pre></li>
+<pre><code> git config --global user.name &quot;FULLNAME&quot;
+ git config --global user.email you@yourdomain.example.com</code></pre></li>
 <li><p>Fork PEcAn on GitHub. Goto the PEcAn source code and click on the Fork button in the upper right. This will create a copy of PEcAn in your personal space.</p></li>
 <li><p>Clone to your local machine</p>
-<pre><code>git clone git@github.com:&lt;username&gt;/pecan.git</code></pre></li>
+<pre><code> git clone git@github.com:&lt;username&gt;/pecan.git</code></pre></li>
 <li><p>Define upstream repository</p>
-<pre><code>cd pecan
-git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
+<pre><code> cd pecan
+ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
 </ol>
 </div>
 </div>
@@ -645,61 +685,62 @@ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
 <p>PLEASE DO NOT USE THIS, SEE ADVANCED WORKFLOW!</p>
 <ol style="list-style-type: decimal">
 <li><p>Get the latest code from the main repository</p>
-<pre><code>git pull upstream master</code></pre></li>
+<pre><code> git pull upstream master</code></pre></li>
 <li><p>Do some coding</p></li>
 <li><p>Commit after each chunk of code (multiple times a day)</p>
-<pre><code>git commit -m &quot;&lt;some descriptive information about what was done; references/fixes gh-X&gt;&quot;</code></pre></li>
+<pre><code> git commit -m &quot;&lt;some descriptive information about what was done; references/fixes gh-X&gt;&quot;</code></pre></li>
 <li><p>Push to YOUR Github (when a feature is working, a set of bugs are fixed, or you need to share progress with others)</p>
-<pre><code>git push origin &lt;branchname&gt;</code></pre></li>
+<pre><code> git push origin &lt;branchname&gt;</code></pre></li>
 <li><p>Before submitting code back to the main repository, make sure that code compiles</p>
-<pre><code>./scripts/build.sh -c</code></pre></li>
-<li>submit pull request with a reference to related issue (see [[Link commits to issue|Using-Git#link-commits-to-issues]]);</li>
-</ol>
+<pre><code> ./scripts/build.sh -c</code></pre></li>
+<li>submit pull request with a reference to related issue (see [[Link commits to issue|Using-Git#link-commits-to-issues]]);
 <ul>
 <li>also see <a href="https://help.github.com/articles/using-pull-requests">github documentation</a></li>
-</ul>
+</ul></li>
+</ol>
 </div>
 <div id="advanced-workflow-a-new-branch-for-each-change" class="section level4">
 <h4><span class="header-section-number">24.1.3.2</span> Advanced Workflow: A new branch for each change</h4>
 <ol style="list-style-type: decimal">
 <li><p>Make sure you start in master</p>
-<pre><code>git checkout master</code></pre></li>
+<pre><code> git checkout master</code></pre></li>
 <li><p>Make sure master is up to date</p>
-<pre><code>git pull upstream master</code></pre></li>
+<pre><code> git pull upstream master</code></pre></li>
 <li><p>Run any tests / make sure that code compiles</p></li>
 </ol>
 <ul>
 <li><p>For PEcAn: Build most recent versions of R packages (<a href="Installing-PEcAn#update-build-and-check-pecan"><code>./scripts/build.sh -h</code> for help)</a>)</p>
-<pre><code>./scripts/build.sh</code></pre></li>
+<pre><code>  ./scripts/build.sh</code></pre></li>
 <li><p>For BETYdb (<a href="https://github.com/PecanProject/bety/wiki/Testing#running-the-tests">see BETY wiki</a>)</p>
-<pre><code>rspec</code></pre></li>
+<pre><code>  rspec</code></pre></li>
 </ul>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Create a branch and switch to it</p>
-<pre><code>git checkout -b &lt;branchname&gt;</code></pre></li>
+<pre><code> git checkout -b &lt;branchname&gt;</code></pre></li>
 <li><p>work/commit/etc</p>
-<pre><code>git commit -m &quot;&lt;some descriptive information about what was done&gt;&quot;</code></pre></li>
+<pre><code> git commit -m &quot;&lt;some descriptive information about what was done&gt;&quot;</code></pre></li>
 <li><p>Run any tests / make sure that code compiles</p></li>
 </ol>
-<p>For PEcAn: ./scripts/build.sh -c</p>
+<p>For PEcAn:
+./scripts/build.sh -c</p>
 <ol start="5" style="list-style-type: decimal">
 <li><p>Push this branch to your github space</p>
-<pre><code>git push origin &lt;branchname&gt;</code></pre></li>
-<li>submit pull request with [[link commits to issues|Using-Git#link-commits-to-issuess]];</li>
-</ol>
+<pre><code> git push origin &lt;branchname&gt;</code></pre></li>
+<li>submit pull request with [[link commits to issues|Using-Git#link-commits-to-issuess]];
 <ul>
 <li>also see <a href="https://github.com/PecanProject/bety/issues/57">explanation in this PecanProject/bety issue</a> and <a href="https://help.github.com/articles/using-pull-requests">github documentation</a></li>
-</ul>
+</ul></li>
+</ol>
 </div>
 <div id="after-pull-request-is-merged" class="section level4">
 <h4><span class="header-section-number">24.1.3.3</span> After pull request is merged</h4>
 <ol style="list-style-type: decimal">
 <li><p>Make sure you start in master</p>
-<pre><code>git checkout master</code></pre></li>
+<pre><code> git checkout master</code></pre></li>
 <li><p>delete branch remotely</p>
-<pre><code>git push origin --delete &lt;branchname&gt;</code></pre></li>
+<pre><code> git push origin --delete &lt;branchname&gt;</code></pre></li>
 <li><p>delete branch locally</p>
-<pre><code>git branch -D &lt;branchname&gt;</code></pre></li>
+<pre><code> git branch -D &lt;branchname&gt;</code></pre></li>
 </ol>
 </div>
 <div id="link-commits-to-issues" class="section level4">
@@ -746,34 +787,37 @@ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
 <li>One branch per feature</li>
 <li>You can switch easily between branches</li>
 <li><p>Merge feature into main line when branch done</p>
-<pre><code>    git branch &lt;name of branch&gt;
-    git checkout &lt;name of branch&gt;
-    repeat 
-      write some code
-      commit
-    until done
+<pre><code>     git branch &lt;name of branch&gt;
+     git checkout &lt;name of branch&gt;
+     repeat 
+       write some code
+       commit
+     until done
 
-    git checkout master
-    git merge &lt;name of brach&gt;
-    git push</code></pre></li>
+     git checkout master
+     git merge &lt;name of brach&gt;
+     git push</code></pre></li>
 </ul>
-<p>If during above process you want to work on something else, commit all your code, create a new branch, and work on new branch.</p>
+<p>If during above process you want to work on something else, commit all
+your code, create a new branch, and work on new branch.</p>
 <ul>
 <li>Delete a branch: <code>git branch -d &lt;name of branch&gt;</code></li>
 <li>To push a branch git: <code>push -u origin</code><name of branch>`</li>
-<li><p>To check out a branch: <code>git fetch origin   git checkout --track origin/&lt;name of branch&gt;</code></p></li>
+<li><p>To check out a branch:</p>
+<pre><code>git fetch origin
+git checkout --track origin/&lt;name of branch&gt;</code></pre></li>
 <li><p>Get the remote repository locally:</p>
-<pre><code>git clone URL</code></pre></li>
+<pre><code>  git clone URL</code></pre></li>
 <li><p>To update local repository to latest:</p>
-<pre><code>git pull</code></pre></li>
+<pre><code>  git pull</code></pre></li>
 <li><p>To add new files to the local repository:</p>
-<pre><code>git add &lt;file&gt;</code></pre></li>
+<pre><code>  git add &lt;file&gt;</code></pre></li>
 <li><p>To commit changes</p>
-<pre><code>git commit &lt;file|folder&gt;</code></pre></li>
+<pre><code>  git commit &lt;file|folder&gt;</code></pre></li>
 <li><p>To update remote repository:</p>
-<pre><code>git push</code></pre></li>
+<pre><code>  git push</code></pre></li>
 <li><p>Show graph of commits:</p>
-<pre><code>git log --graph --oneline --all</code></pre></li>
+<pre><code>  git log --graph --oneline --all</code></pre></li>
 </ul>
 </div>
 <div id="tags-7" class="section level4">
@@ -788,12 +832,19 @@ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
 <pre><code>git checkout v0.6</code></pre>
 <p>To tag an earlier commit, just append the commit SHA to the command, e.g.</p>
 <pre><code>git tag -a v0.99 -m &quot;last version before 1.0&quot; 9fceb02</code></pre>
-<p><strong>Using GitHub</strong> The easiest way to get working with GitHub is by installing the GitHub client. For instructions for your specific OS and download of the GitHub client, see <a href="https://help.github.com/articles/set-up-git" class="uri">https://help.github.com/articles/set-up-git</a>. This will help you set up an SSH key to push code back to GitHub. To check out a project you do not need to have an ssh key and you can use the https or git url to check out the code.</p>
+<p><strong>Using GitHub</strong> The easiest way to get working with GitHub is by installing the GitHub
+client. For instructions for your specific OS and download of the
+GitHub client, see <a href="https://help.github.com/articles/set-up-git" class="uri">https://help.github.com/articles/set-up-git</a>.
+This will help you set up an SSH key to push code back to GitHub. To
+check out a project you do not need to have an ssh key and you can use
+the https or git url to check out the code.</p>
 </div>
 </div>
 <div id="git-rstudio" class="section level3">
 <h3><span class="header-section-number">24.1.5</span> Git + Rstudio</h3>
-<p>Rstudio is nicely integrated with many development tools, including git and GitHub. It is quite easy to check out source code from within the Rstudio program or browser. The Rstudio documentation includes useful overviews of <a href="http://www.rstudio.com/ide/docs/version_control/overview">version control</a> and <a href="http://www.rstudio.com/ide/docs/packages/overview">R package development</a>.</p>
+<p>Rstudio is nicely integrated with many development tools, including git and GitHub.
+It is quite easy to check out source code from within the Rstudio program or browser.
+The Rstudio documentation includes useful overviews of <a href="http://www.rstudio.com/ide/docs/version_control/overview">version control</a> and <a href="http://www.rstudio.com/ide/docs/packages/overview">R package development</a>.</p>
 <p>Once you have git installed on your computer (see the <a href="http://www.rstudio.com/ide/docs/version_control/overview">Rstudio version control</a> documentation for instructions), you can use the following steps to install the PEcAn source code in Rstudio.</p>
 <div id="creating-a-read-only-version" class="section level4">
 <h4><span class="header-section-number">24.1.5.1</span> Creating a Read-only version:</h4>
@@ -842,11 +893,16 @@ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
 <div id="git-documentation" class="section level5">
 <h5><span class="header-section-number">24.2.0.0.1</span> Git Documentation</h5>
 <ul>
-<li>Scott Chacon, ‘Pro Git book’, <a href="http://git-scm.com/book" class="uri">http://git-scm.com/book</a></li>
-<li>GitHub help pages, <a href="https://help.github.com" class="uri">https://help.github.com</a>/</li>
-<li>Main GIT page, <a href="http://git-scm.com/documentation" class="uri">http://git-scm.com/documentation</a></li>
-<li>Information about branches, <a href="http://nvie.com/posts/a-successful-git-branching-model" class="uri">http://nvie.com/posts/a-successful-git-branching-model</a>/</li>
-<li>Another set of pages about branching, <a href="http://sandofsky.com/blog/git-workflow.html" class="uri">http://sandofsky.com/blog/git-workflow.html</a></li>
+<li>Scott Chacon, ‘Pro Git book’,
+<a href="http://git-scm.com/book" class="uri">http://git-scm.com/book</a></li>
+<li>GitHub help pages,
+<a href="https://help.github.com" class="uri">https://help.github.com</a>/</li>
+<li>Main GIT page,
+<a href="http://git-scm.com/documentation" class="uri">http://git-scm.com/documentation</a></li>
+<li>Information about branches,
+<a href="http://nvie.com/posts/a-successful-git-branching-model" class="uri">http://nvie.com/posts/a-successful-git-branching-model</a>/</li>
+<li>Another set of pages about branching,
+<a href="http://sandofsky.com/blog/git-workflow.html" class="uri">http://sandofsky.com/blog/git-workflow.html</a></li>
 <li><a href="http://stackoverflow.com/questions/tagged/git?sort=votes&amp;pagesize=50">Stackoverflow highest voted questions tagged “git”</a></li>
 </ul>
 </div>
@@ -854,7 +910,8 @@ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
 <h5><span class="header-section-number">24.2.0.0.2</span> GitHub Documentation</h5>
 <p>When in doubt, the first step is to click the “Help” button at the top of the page.</p>
 <ul>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub Flow</a> by Scott Chacon (Git evangelist and Ruby developer working on GitHub.com)</li>
+<li><a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub Flow</a> by
+Scott Chacon (Git evangelist and Ruby developer working on GitHub.com)</li>
 <li><a href="https://help.github.com/">GitHub FAQ</a></li>
 <li><a href="https://help.github.com/articles/using-pull-requests">Using Pull Requests</a></li>
 <li><a href="https://help.github.com/articles/generating-ssh-keys">SSH Keys</a></li>
@@ -913,24 +970,29 @@ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre></li>
 </div>
 <div id="requesting-a-feature" class="section level3">
 <h3><span class="header-section-number">24.3.2</span> Requesting a feature</h3>
-<p>(from The Pragmatic Programmer, available as <a href="http://proquestcombo.safaribooksonline.com/0-201-61622-X/223">ebook</a> through UI libraries, hardcopy on David’s bookshelf)<br />
- * focus on “user stories”, e.g. specific use cases * Be as specific as possible,</p>
+<p>(from The Pragmatic Programmer, available as
+<a href="http://proquestcombo.safaribooksonline.com/0-201-61622-X/223">ebook</a>
+through UI libraries, hardcopy on David’s bookshelf)<br />
+</p>
 <ul>
-<li>Here is an example:</li>
+<li>focus on “user stories”, e.g. specific use cases</li>
+<li><p>Be as specific as possible,</p></li>
+<li><p>Here is an example:</p></li>
 </ul>
 <ol style="list-style-type: decimal">
 <li>Bob is at www.mysite.edu/maps</li>
 <li>map of the the region (based on user location, e.g. US, Asia, etc)</li>
 <li>option to “use current location” is provided, if clicked, map zooms in to, e.g. state or county level
-<ol start="4" style="list-style-type: decimal">
-<li>for site run:
+4. for site run:
 <ol style="list-style-type: decimal">
 <li>option to select existing site or specify point by lat/lon</li>
-<li>option to specify a bounding box and grid resolution in either lat/lon or polar stereographic.</li>
-</ol></li>
-<li>asked to specify start and end times in terms of year, month, day, hour, minute. Time is recorded in UTC not local time, this should be indicated</li>
+<li>option to specify a bounding box and grid resolution in
+either lat/lon or polar stereographic.</li>
 </ol></li>
 </ol>
+<pre><code>5.  asked to specify start and end times in terms of year, month,
+    day, hour, minute. Time is recorded in UTC not local time, this
+    should be indicated</code></pre>
 </div>
 <div id="closing-an-issue" class="section level3">
 <h3><span class="header-section-number">24.3.3</span> Closing an issue</h3>
@@ -1021,7 +1083,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
