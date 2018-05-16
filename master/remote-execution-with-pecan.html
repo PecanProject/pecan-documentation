@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,41 +57,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -479,8 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#flux-measurements-and-modeling-course-tutorial-part-2"><i class="fa fa-check"></i><b>38.1</b> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></a></li>
-<li class="chapter" data-level="38.2" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.2</b> Introduction</a></li>
+<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
 <li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
@@ -553,7 +580,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="remote-execution-with-pecan" class="section level1">
 <h1><span class="header-section-number">10</span> Remote execution with PEcAn</h1>
-<p>Remote execution allows the user to leverage the power and storage of high performance computing clusters, AWS instances, or specially configured virtual machines, but without leaving their local working environment. PEcAn uses remote execution primarily to run ecosystem models.</p>
+<p>Remote execution allows the user to leverage the power and storage of high performance computing clusters, AWS instances, or specially configured virtual machines, but without leaving their local working environment.
+PEcAn uses remote execution primarily to run ecosystem models.</p>
 <p>The infrastructure for remote execution lives in the <code>PEcAn.remote</code> package (<code>base/remote</code> in the PEcAn repository).</p>
 <p>This section describes the following:</p>
 <ul>
@@ -568,47 +596,65 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">10.1</span> Basics of SSH</h2>
 <p>All of the PEcAn remote infrastructure depends on the system <code>ssh</code> utility, so it’s important to make sure this works before attempting the advanced remote execution functionality in PEcAn.</p>
 <p>To connect to a remote server interactively, the command is simply:</p>
-<pre class="sh"><code>ssh &lt;username&gt;@&lt;hostname&gt;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
 <p>For instance, my connection to the BU shared computing cluster looks like:</p>
-<pre class="sh"><code>ssh ashiklom@geo.bu.edu</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu</a></code></pre></div>
 <p>…which will prompt me for my BU password, and, if successful, will drop me into a login shell on the remote machine.</p>
-<p>Alternatively to the login shell, <code>ssh</code> can be used to execute arbitrary code, whose output will be returned exactly as it would if you ran the command locally. For example, the following:</p>
-<pre class="sh"><code>ssh ashiklom@geo.bu.edu pwd</code></pre>
-<p>…will run the <code>pwd</code> command, and return the path to my home directory on the BU SCC. The more advanced example below will run some simple R code on the BU SCC and return the output as if it was run locally.</p>
-<pre class="sh"><code>ssh ashiklom@geo.bu.edu Rscript -e &quot;seq(1, 10)&quot;</code></pre>
+<p>Alternatively to the login shell, <code>ssh</code> can be used to execute arbitrary code, whose output will be returned exactly as it would if you ran the command locally.
+For example, the following:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</a></code></pre></div>
+<p>…will run the <code>pwd</code> command, and return the path to my home directory on the BU SCC.
+The more advanced example below will run some simple R code on the BU SCC and return the output as if it was run locally.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript -e <span class="st">&quot;seq(1, 10)&quot;</span></a></code></pre></div>
 </div>
 <div id="ssh-authentication-password-vs.ssh-key" class="section level2">
 <h2><span class="header-section-number">10.2</span> SSH authentication – password vs. SSH key</h2>
 <p>Because this server uses passwords for authentication, this command will then prompt me for my password.</p>
-<p>An alternative to password authentication is using SSH keys. Under this system, the host machine (say, your laptop, or the PEcAn VM) has to generate a public and private key pair (using the <code>ssh-keygen</code> command). The private key (by default, a file in <code>~/.ssh/id_rsa</code>) lives on the host machine, and should <strong>never</strong> be shared with anyone. The public key will be distributed to any remote machines to which you want the host to be able to connect. On each remote machine, the public key should be added to a list of authorized keys located in the <code>~/.ssh/authorized_keys</code> file (on the remote machine). The authorized keys list indicates which machines (technically, which keys – a single machine, and even a single user, can have many keys) are allowed to connect to it. This is the system used by all of the PEcAn servers (<code>pecan1</code>, <code>pecan2</code>, <code>test-pecan</code>).</p>
+<p>An alternative to password authentication is using SSH keys.
+Under this system, the host machine (say, your laptop, or the PEcAn VM) has to generate a public and private key pair (using the <code>ssh-keygen</code> command).
+The private key (by default, a file in <code>~/.ssh/id_rsa</code>) lives on the host machine, and should <strong>never</strong> be shared with anyone.
+The public key will be distributed to any remote machines to which you want the host to be able to connect.
+On each remote machine, the public key should be added to a list of authorized keys located in the <code>~/.ssh/authorized_keys</code> file (on the remote machine).
+The authorized keys list indicates which machines (technically, which keys – a single machine, and even a single user, can have many keys) are allowed to connect to it.
+This is the system used by all of the PEcAn servers (<code>pecan1</code>, <code>pecan2</code>, <code>test-pecan</code>).</p>
 <div id="ssh-tunneling" class="section level3">
 <h3><span class="header-section-number">10.2.1</span> SSH tunneling</h3>
-<p>SSH authentication can be more advanced than indicated above, especially on systems that require dual authentication. Even simple password-protection can be tricky in scripts, since (by design) it is fairly difficult to get SSH to accept a password from anything other than the raw keyboard input (i.e. SSH doesn’t let you pass passwords as input or arguments, because this exposes your password as plain text).</p>
-<p>A convenient and secure way to follow SSH security protocol, but prevent having to go through the full authentication process every time, is to use SSH tunnels (or “sockets”, which are effectively synonymous). Essentially, an SSH socket is a read- and write-protectected file that contains all of the information about an SSH connection.</p>
+<p>SSH authentication can be more advanced than indicated above, especially on systems that require dual authentication.
+Even simple password-protection can be tricky in scripts, since (by design) it is fairly difficult to get SSH to accept a password from anything other than the raw keyboard input (i.e. SSH doesn’t let you pass passwords as input or arguments, because this exposes your password as plain text).</p>
+<p>A convenient and secure way to follow SSH security protocol, but prevent having to go through the full authentication process every time, is to use SSH tunnels (or “sockets”, which are effectively synonymous).
+Essentially, an SSH socket is a read- and write-protectected file that contains all of the information about an SSH connection.</p>
 <p>To create an SSH tunnel, use a command like the following:</p>
-<pre class="sh"><code>ssh -n -N -f -o ControlMaster=yes -S /path/to/socket/file &lt;username&gt;@&lt;hostname&gt;</code></pre>
-<p>If appropriate, this will prompt you for your password (if using password authentication), and then will drop you back to the command line (thanks to the <code>-N</code> flag, which runs SSH without executing a command, the <code>-f</code> flag, which pushes SSH into the background, and the <code>-n</code> flag, which prevents ssh from reading any input). It will also create the file <code>/path/to/socket/file</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="fu">ssh</span> -n -N -f -o ControlMaster=yes -S /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
+<p>If appropriate, this will prompt you for your password (if using password authentication), and then will drop you back to the command line (thanks to the <code>-N</code> flag, which runs SSH without executing a command, the <code>-f</code> flag, which pushes SSH into the background, and the <code>-n</code> flag, which prevents ssh from reading any input).
+It will also create the file <code>/path/to/socket/file</code>.</p>
 <p>To use this socket with another command, use the <code>-S /path/to/file</code> flag, pointing to the same tunnel file you just created.</p>
-<pre class="sh"><code>ssh -S /path/to/socket/file &lt;hostname&gt; &lt;optional command&gt;</code></pre>
-<p>This will let you access the server without any sort of authentication step. As before, if <code>&lt;optional command&gt;</code> is blank, you will be dropped into an interactive shell on the remote, or if it’s a command, that command will be executed and the output returned.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></a></code></pre></div>
+<p>This will let you access the server without any sort of authentication step.
+As before, if <code>&lt;optional command&gt;</code> is blank, you will be dropped into an interactive shell on the remote, or if it’s a command, that command will be executed and the output returned.</p>
 <p>To close a socket, use the following:</p>
-<pre class="sh"><code>ssh -S /path/to/socket/file &lt;hostname&gt; -O exit</code></pre>
-<p>This will delete the socket file and close the connection. Alternatively, a scorched earth approach to closing the SSH tunnel if you don’t remember where you put the socket file is something like the following:</p>
-<pre class="sh"><code>pgrep ssh   # See which processes will be killed
-pkill ssh   # Kill those processes</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</a></code></pre></div>
+<p>This will delete the socket file and close the connection.
+Alternatively, a scorched earth approach to closing the SSH tunnel if you don’t remember where you put the socket file is something like the following:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="ex">pgrep</span> ssh   # See which processes will be killed</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="ex">pkill</span> ssh   # Kill those processes</a></code></pre></div>
 <p>…which will kill all user processes called <code>ssh</code>.</p>
-<p>To automatically create tunnels following a specific pattern, you can add the following to your <code>~/.ssh/config</code></p>
-<pre class="sh"><code>Host &lt;hostname goes here&gt;
- ControlMaster auto
- ControlPath /tmp/%r@%h:%p</code></pre>
+<p>To automatically create tunnels following a specific pattern, you can add the following to your
+<code>~/.ssh/config</code></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"> <span class="ex">ControlMaster</span> auto</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"> <span class="ex">ControlPath</span> /tmp/%r@%h:%p</a></code></pre></div>
 <p>For more information, see <code>man ssh</code>.</p>
 </div>
 <div id="ssh-tunnels-and-pecan" class="section level3">
 <h3><span class="header-section-number">10.2.2</span> SSH tunnels and PEcAn</h3>
-<p>Many of the <code>PEcAn.remote</code> functions assume that a tunnel is already open. If working from the web interface, the tunnel will be opened for you by some under-the-hood PHP and Bash code, but if debugging or working locally, you will have to create the tunnel yourself. The best way to do this is to create the tunnel first, outside of R, as described above. (In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>. To follow along, replace these with your own username and designated server, respectively).</p>
-<pre class="sh"><code>ssh -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</code></pre>
+<p>Many of the <code>PEcAn.remote</code> functions assume that a tunnel is already open.
+If working from the web interface, the tunnel will be opened for you by some under-the-hood PHP and Bash code, but if debugging or working locally, you will have to create the tunnel yourself.
+The best way to do this is to create the tunnel first, outside of R, as described above.
+(In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>.
+To follow along, replace these with your own username and designated server, respectively).</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</a></code></pre></div>
 <p>Then, in R, create a <code>host</code> object, which is just a list containing the elements <code>name</code> (hostname) and <code>tunnel</code> (path to tunnel file).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</a></code></pre></div>
 <p>This host object can then be used in any of the remote execution functions.</p>
 </div>
 </div>
@@ -617,7 +663,8 @@ pkill ssh   # Kill those processes</code></pre>
 <p>The <code>PEcAn.remote::remote.execute.cmd</code> function runs a system command on a remote server (or on the local server, if <code>host$name == &quot;localhost&quot;</code>).</p>
 <pre><code>x &lt;- PEcAn.remote::remote.execute.cmd(host = my_host, cmd = &quot;echo&quot;, args = &quot;Hello world&quot;)
 x</code></pre>
-<p>Note that <code>remote.execute.cmd</code> is similar to base R’s <code>system2</code>, in that the base command (in this case, <code>echo</code>) is passed separately from its arguments (<code>&quot;Hello world&quot;</code>). Note also that the output of the remote command is returned as a character.</p>
+<p>Note that <code>remote.execute.cmd</code> is similar to base R’s <code>system2</code>, in that the base command (in this case, <code>echo</code>) is passed separately from its arguments (<code>&quot;Hello world&quot;</code>).
+Note also that the output of the remote command is returned as a character.</p>
 <p>For R code, there is a special wrapper around <code>remote.execute.cmd</code> – <code>PEcAn.remote::remote.execute.R</code>, which runs R code (passed as a string) on a remote and returns the output.</p>
 <pre><code>code &lt;- &quot;
     x &lt;- 2:4
@@ -633,12 +680,14 @@ out &lt;- PEcAn.remote::remote.execute.R(code = code, host = my_host)</code></pr
 <p>Broadly, there are three major types of model execution:</p>
 <ul>
 <li>Serialized (<code>PEcAn.remote::start_serial</code>) – This runs models one at a time, directly on the local machine or remote (i.e. same as calling the executables one at a time for each run).</li>
-<li>Via a queue system, (<code>PEcAn.remote::start_qsub</code>) – This uses a queue management system, such as SGE (e.g. <code>qsub</code>, <code>qstat</code>) found on the BU SCC machines, to submit jobs. For computationally intensive tasks, this is the recommended way to go.</li>
+<li>Via a queue system, (<code>PEcAn.remote::start_qsub</code>) – This uses a queue management system, such as SGE (e.g. <code>qsub</code>, <code>qstat</code>) found on the BU SCC machines, to submit jobs.
+For computationally intensive tasks, this is the recommended way to go.</li>
 <li>Via a model launcher script (<code>PEcAn.remote::setup_modellauncher</code>) – This is a highly customizable approach where task submission is controlled by a user-provided script (<code>launcher.sh</code>).</li>
 </ul>
 <div id="xml-configuration" class="section level3">
 <h3><span class="header-section-number">10.4.1</span> XML configuration</h3>
-<p>The relevant section of the PEcAn XML file is the <code>&lt;host&gt;</code> block. Here is a minimal example from one of my recent runs:</p>
+<p>The relevant section of the PEcAn XML file is the <code>&lt;host&gt;</code> block.
+Here is a minimal example from one of my recent runs:</p>
 <pre><code>&lt;host&gt;
     &lt;name&gt;geo.bu.edu&lt;/name&gt;
     &lt;user&gt;ashiklom&lt;/user&gt;
@@ -646,11 +695,14 @@ out &lt;- PEcAn.remote::remote.execute.R(code = code, host = my_host)</code></pr
 &lt;/host&gt;</code></pre>
 <p>Breaking this down:</p>
 <ul>
-<li><code>name</code> – The hostname of the machine where the runs will be performed. Set it to <code>localhost</code> to run on the local machine.</li>
+<li><code>name</code> – The hostname of the machine where the runs will be performed.
+Set it to <code>localhost</code> to run on the local machine.</li>
 <li><code>user</code> – Your username on the remote machine (note that this may be different from the username on your local machine).</li>
-<li><code>tunnel</code> – This is the tunnel file for the connection used by all remote execution files. The tunnel is created automatically by the web interface, but must be created by the user for command line execution.</li>
+<li><code>tunnel</code> – This is the tunnel file for the connection used by all remote execution files.
+The tunnel is created automatically by the web interface, but must be created by the user for command line execution.</li>
 </ul>
-<p>This configuration will run in serialized mode. To use <code>qsub</code>, the configuration is slightly more involved:</p>
+<p>This configuration will run in serialized mode.
+To use <code>qsub</code>, the configuration is slightly more involved:</p>
 <pre><code>&lt;host&gt;
   &lt;name&gt;geo.bu.edu&lt;/name&gt;
   &lt;user&gt;ashiklom&lt;/user&gt;
@@ -661,43 +713,80 @@ out &lt;- PEcAn.remote::remote.execute.R(code = code, host = my_host)</code></pr
 &lt;/host&gt;</code></pre>
 <p>The additional fields are as follows:</p>
 <ul>
-<li><code>qsub</code> – The command used to submit jobs to the queue system. Despite the name, this can be any command used for any queue system. The following variables are available to be set here:</li>
+<li><code>qsub</code> – The command used to submit jobs to the queue system.
+Despite the name, this can be any command used for any queue system.
+The following variables are available to be set here:
+<ul>
 <li><code>@NAME@</code> – Job name to display</li>
 <li><code>@STDOUT@</code> – File to which <code>stdout</code> will be redirected</li>
 <li><code>@STDERR@</code> – File to which <code>stderr</code> will be redirected</li>
-<li><code>qsub.jobid</code> – A regular expression, from which the job ID will be determined. This string will be parsed by R as <code>jobid &lt;- gsub(qsub.jobid, &quot;\\1&quot;, output)</code> – note that the first pattern match is taken as the job ID.</li>
-<li><code>qstat</code> – The command used to check the status of a job. Internally, PEcAn will look for the <code>DONE</code> string at the end, so a structure like <code>&lt;some command indicating if any jobs are still running&gt; || echo DONE</code> is required. The <code>@JOBID@</code> here is the job ID determined from the <code>qsub.jobid</code> parsing.</li>
+</ul></li>
+<li><code>qsub.jobid</code> – A regular expression, from which the job ID will be determined.
+This string will be parsed by R as <code>jobid &lt;- gsub(qsub.jobid, &quot;\\1&quot;, output)</code> – note that the first pattern match is taken as the job ID.</li>
+<li><code>qstat</code> – The command used to check the status of a job.
+Internally, PEcAn will look for the <code>DONE</code> string at the end, so a structure like <code>&lt;some command indicating if any jobs are still running&gt; || echo DONE</code> is required.
+The <code>@JOBID@</code> here is the job ID determined from the <code>qsub.jobid</code> parsing.</li>
 </ul>
 <p>Documentation for using the model launcher is currently unavailable.</p>
 </div>
 <div id="configuration-for-pecan-web-interface" class="section level3">
 <h3><span class="header-section-number">10.4.2</span> Configuration for PEcAn web interface</h3>
-<p>The <code>config.php</code> has a few variables that will control where the web interface can run jobs, and how to run those jobs. These variables are <code>$hostlist</code>, <code>$qsublist</code>, <code>$qsuboptions</code>, and <code>$SSHtunnel</code>. In the near future <code>$hostlist</code>, <code>$qsublist</code>, <code>$qsuboptions</code> will be combined into a single list.</p>
-<p><code>$SSHtunnel</code> : points to the script that creates an SSH tunnel. The script is located in the web folder and the default value of <code>dirname(__FILE__) . DIRECTORY_SEPARATOR . &quot;sshtunnel.sh&quot;;</code> most likely will work.</p>
-<p><code>$hostlist</code> : is an array with by default a single value, only allowing jobs to run on the local server. Adding any other servers to this list will show them in the pull down menu when selecting machines, and will trigger the web page to be show to ask for a username and password for the remote execution (make sure to use HTTPS setup when asking for password to prevent it from being send in the clear).</p>
-<p><code>$qsublist</code> : is an array of hosts that require qsub to be used when running the models. This list can include <code>$fqdn</code> to indicate that jobs on the local machine should use qsub to run the models.</p>
-<p><code>$qsuboptions</code> : is an array that lists options for each machine. Currently it support the following options (see also <a href="PEcAn-Configuration.md#run_setup">PEcAn-Configuration</a>)</p>
+<p>The <code>config.php</code> has a few variables that will control where the web
+interface can run jobs, and how to run those jobs. These variables
+are <code>$hostlist</code>, <code>$qsublist</code>, <code>$qsuboptions</code>, and <code>$SSHtunnel</code>. In
+the near future <code>$hostlist</code>, <code>$qsublist</code>, <code>$qsuboptions</code> will be
+combined into a single list.</p>
+<p><code>$SSHtunnel</code> : points to the script that creates an SSH tunnel.
+The script is located in the web folder and the default value of
+<code>dirname(__FILE__) . DIRECTORY_SEPARATOR . &quot;sshtunnel.sh&quot;;</code> most
+likely will work.</p>
+<p><code>$hostlist</code> : is an array with by default a single value, only
+allowing jobs to run on the local server. Adding any other servers
+to this list will show them in the pull down menu when selecting
+machines, and will trigger the web page to be show to ask for a
+username and password for the remote execution (make sure to use
+HTTPS setup when asking for password to prevent it from being send
+in the clear).</p>
+<p><code>$qsublist</code> : is an array of hosts that require qsub to be used
+when running the models. This list can include <code>$fqdn</code> to indicate
+that jobs on the local machine should use qsub to run the models.</p>
+<p><code>$qsuboptions</code> : is an array that lists options for each machine.
+Currently it support the following options (see also
+<a href="PEcAn-Configuration.md#run_setup">PEcAn-Configuration</a>)</p>
 <pre><code>array(&quot;geo.bu.edu&quot; =&gt;
     array(&quot;qsub&quot;   =&gt; &quot;qsub -V -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash&quot;,
           &quot;jobid&quot;  =&gt; &quot;Your job ([0-9]+) .*&quot;,
           &quot;qstat&quot;  =&gt; &quot;qstat -j @JOBID@ || echo DONE&quot;,
           &quot;job.sh&quot; =&gt; &quot;module load udunits R/R-3.0.0_gnu-4.4.6&quot;,
           &quot;models&quot; =&gt; array(&quot;ED2&quot;    =&gt; &quot;module load hdf5&quot;))</code></pre>
-<p>In this list <code>qsub</code> is the actual command line for qsub, <code>jobid</code> is the text returned from qsub, <code>qstat</code> is the command to check to see if the job is finished. <code>job.sh</code> and the value in models are additional entries to add to the job.sh file generated to run the model. This can be used to make sure modules are loaded on the HPC cluster before running the actual model.</p>
+<p>In this list <code>qsub</code> is the actual command line for qsub, <code>jobid</code>
+is the text returned from qsub, <code>qstat</code> is the command to check
+to see if the job is finished. <code>job.sh</code> and the value in models
+are additional entries to add to the job.sh file generated to
+run the model. This can be used to make sure modules are loaded
+on the HPC cluster before running the actual model.</p>
 </div>
 </div>
 <div id="running-pecan-code-for-modules-remotely" class="section level2">
 <h2><span class="header-section-number">10.5</span> Running PEcAn code for modules remotely</h2>
-<p>You can compile and install the model specific code pieces of PEcAn on the cluster easily without having to install the full code base of PEcAn (and all OS dependencies). All of the code pieces depend on PEcAn.utils to install this you can run the following on the cluster:</p>
+<p>You can compile and install the model specific code pieces of
+PEcAn on the cluster easily without having to install the
+full code base of PEcAn (and all OS dependencies). All of the
+code pieces depend on PEcAn.utils to install this you can
+run the following on the cluster:</p>
 <pre><code>devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;utils&#39;)</code></pre>
-<p>Next we need to install the model specific pieces, this is done almost the same:</p>
+<p>Next we need to install the model specific pieces, this is done
+almost the same:</p>
 <pre><code>devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;models/ed&#39;)</code></pre>
-<p>This should install dependencies required. Following are some notes on how to install the model specifics on different HPC clusters.</p>
+<p>This should install dependencies required. Following are some
+notes on how to install the model specifics on different HPC
+clusters.</p>
 <div id="geo.bu.edu" class="section level3">
 <h3><span class="header-section-number">10.5.1</span> geo.bu.edu</h3>
 <p>Following modules need to be loaded:</p>
 <pre><code>module load hdf5 udunits R/R-3.0.0_gnu-4.4.6</code></pre>
-<p>Next the following packages need to be installed, otherwise it will fall back on the older versions install site-library</p>
+<p>Next the following packages need to be installed, otherwise it
+will fall back on the older versions install site-library</p>
 <pre><code>install.packages(c(&#39;udunits2&#39;, &#39;lubridate&#39;), 
    configure.args=c(udunits2=&#39;--with-udunits2-lib=/project/earth/packages/udunits-2.1.24/lib --with-udunits2-include=/project/earth/packages/udunits-2.1.24/include&#39;),
    repos=&#39;http://cran.us.r-project.org&#39;)</code></pre>
@@ -764,7 +853,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

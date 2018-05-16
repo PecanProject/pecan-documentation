@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,41 +57,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -479,8 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#flux-measurements-and-modeling-course-tutorial-part-2"><i class="fa fa-check"></i><b>38.1</b> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></a></li>
-<li class="chapter" data-level="38.2" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.2</b> Introduction</a></li>
+<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
 <li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
@@ -564,30 +591,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
+<td>Home Page</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
+<td>Source Code</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
+<td>Authors</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
+<td>PEcAn Integration</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -609,30 +636,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
+<td>Home Page</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
+<td>Source Code</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
+<td>Authors</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
+<td>PEcAn Integration</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -640,7 +667,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Introduction about model</p>
 <p><strong>PEcAn configuration file additions</strong></p>
 <p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong> List of inputs required by model, such as met, etc.</p>
+<p><strong>Model specific input files</strong>
+List of inputs required by model, such as met, etc.</p>
 <p><strong>Model configuration files</strong></p>
 <p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
 <ul>
@@ -660,30 +688,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
+<td>Home Page</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
+<td>Source Code</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
+<td>Authors</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
+<td>PEcAn Integration</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -712,30 +740,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"><a href="http://moorcroftlab.oeb.harvard.edu/" class="uri">http://moorcroftlab.oeb.harvard.edu/</a></td>
+<td>Home Page</td>
+<td><a href="http://moorcroftlab.oeb.harvard.edu/" class="uri">http://moorcroftlab.oeb.harvard.edu/</a></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"><a href="https://github.com/EDmodel/ED2" class="uri">https://github.com/EDmodel/ED2</a></td>
+<td>Source Code</td>
+<td><a href="https://github.com/EDmodel/ED2" class="uri">https://github.com/EDmodel/ED2</a></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left">Paul Moorcroft, …</td>
+<td>Authors</td>
+<td>Paul Moorcroft, …</td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left">Michael Dietze, Rob Kooper</td>
+<td>PEcAn Integration</td>
+<td>Michael Dietze, Rob Kooper</td>
 </tr>
 </tbody>
 </table>
@@ -754,67 +782,67 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>An example of the template can be found in <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/ED2IN.r82">ED2IN.r82</a></p>
 <p>The ED2IN template can contain the following variables. These will be replaced with actual values when the model configuration is written.</p>
 <ul>
-<li><p><a href="mailto:**@ENSNAME@*">**@ENSNAME@*</a>* : run id of the simulation, used in template for NL%EXPNME</p></li>
-<li><a href="mailto:**@START_MONTH@*">**@START_MONTH@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IMONTHA<br />
+<li><p>**<span class="citation">@ENSNAME</span><span class="citation">@*</span>* : run id of the simulation, used in template for NL%EXPNME</p></li>
+<li>**<span class="citation">@START_MONTH</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IMONTHA<br />
 </li>
-<li><a href="mailto:**@START_DAY@*">**@START_DAY@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IDATEA<br />
+<li>**<span class="citation">@START_DAY</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IDATEA<br />
 </li>
-<li><a href="mailto:**@START_YEAR@*">**@START_YEAR@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IYEARA<br />
+<li>**<span class="citation">@START_YEAR</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IYEARA<br />
 </li>
-<li><a href="mailto:**@END_MONTH@*">**@END_MONTH@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IMONTHZ<br />
+<li>**<span class="citation">@END_MONTH</span><span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IMONTHZ<br />
 </li>
-<li><a href="mailto:**@END_DAY@*">**@END_DAY@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IDATEZ<br />
+<li>**<span class="citation">@END_DAY</span><span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IDATEZ<br />
 </li>
-<li><p><a href="mailto:**@END_YEAR@*">**@END_YEAR@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IYEARZ</p></li>
-<li><a href="mailto:**@SITE_LAT@*">**@SITE_LAT@*</a>* : site latitude location, from &lt;run&gt;&lt;site&gt;&lt;lat&gt;, used in template for NL%POI_LAT<br />
+<li><p>**<span class="citation">@END_YEAR</span><span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IYEARZ</p></li>
+<li>**<span class="citation">@SITE_LAT</span><span class="citation">@*</span>* : site latitude location, from &lt;run&gt;&lt;site&gt;&lt;lat&gt;, used in template for NL%POI_LAT<br />
 </li>
-<li><p><a href="mailto:**@SITE_LON@*">**@SITE_LON@*</a>* : site longitude location, from &lt;run&gt;&lt;site&gt;&lt;lon&gt;, used in template for NL%POI_LON</p></li>
-<li><a href="mailto:**@SITE_MET@*">**@SITE_MET@*</a>* : met header location, from &lt;run&gt;&lt;site&gt;&lt;met&gt;, used in template for NL%ED_MET_DRIVER_DB<br />
+<li><p>**<span class="citation">@SITE_LON</span><span class="citation">@*</span>* : site longitude location, from &lt;run&gt;&lt;site&gt;&lt;lon&gt;, used in template for NL%POI_LON</p></li>
+<li>**<span class="citation">@SITE_MET</span><span class="citation">@*</span>* : met header location, from &lt;run&gt;&lt;site&gt;&lt;met&gt;, used in template for NL%ED_MET_DRIVER_DB<br />
 </li>
-<li><a href="mailto:**@MET_START@*">**@MET_START@*</a>* : first year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.start&gt;, used in template for NL%METCYC1<br />
+<li>**<span class="citation">@MET_START</span><span class="citation">@*</span>* : first year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.start&gt;, used in template for NL%METCYC1<br />
 </li>
-<li><p><a href="mailto:**@MET_END@*">**@MET_END@*</a>* : last year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.end&gt;, used in template for NL%METCYCF</p></li>
-<li><a href="mailto:**@PHENOL_SCHEME@*">**@PHENOL_SCHEME@*</a>* : phenology scheme, if this variabe is 1 the following 3 fields will be used, otherwise they will be set to empty strings, from &lt;model&gt;&lt;phenol.scheme&gt;, used in template for NL%IPHEN_SCHEME<br />
+<li><p>**<span class="citation">@MET_END</span><span class="citation">@*</span>* : last year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.end&gt;, used in template for NL%METCYCF</p></li>
+<li>**<span class="citation">@PHENOL_SCHEME</span><span class="citation">@*</span>* : phenology scheme, if this variabe is 1 the following 3 fields will be used, otherwise they will be set to empty strings, from &lt;model&gt;&lt;phenol.scheme&gt;, used in template for NL%IPHEN_SCHEME<br />
 </li>
-<li><a href="mailto:**@PHENOL_START@*">**@PHENOL_START@*</a>* : first year for phenology, from &lt;model&gt;&lt;phenol.start&gt;, used in template for NL%IPHENYS1 and NL%IPHENYF1<br />
+<li>**<span class="citation">@PHENOL_START</span><span class="citation">@*</span>* : first year for phenology, from &lt;model&gt;&lt;phenol.start&gt;, used in template for NL%IPHENYS1 and NL%IPHENYF1<br />
 </li>
-<li><p><a href="mailto:**@PHENOL_END@*">**@PHENOL_END@*</a>* : last year for phenology, from &lt;model&gt;&lt;phenol.end&gt;, used in template for NL%IPHENYSF and NL%IPHENYFF<br />
-<a href="mailto:**@PHENOL@*">**@PHENOL@*</a>* : path and prefix of the prescribed phenology data, from * <model\>&lt;phenol&gt;, used in template for NL%PHENPATH</p></li>
-<li><a href="mailto:**@SITE_PSSCSS@*">**@SITE_PSSCSS@*</a>* : path and prefix of the previous ecosystem state, from &lt;model&gt;&lt;psscss&gt;, used in template for NL%SFILIN<br />
+<li><p><strong><span class="citation">@PHENOL_END</span><span class="citation">@*</span>* : last year for phenology, from &lt;model&gt;&lt;phenol.end&gt;, used in template for NL%IPHENYSF and NL%IPHENYFF<br />
+</strong>@PHENOL<span class="citation">@*</span>* : path and prefix of the prescribed phenology data, from * &lt;model&gt;&lt;phenol&gt;, used in template for NL%PHENPATH</p></li>
+<li>**<span class="citation">@SITE_PSSCSS</span><span class="citation">@*</span>* : path and prefix of the previous ecosystem state, from &lt;model&gt;&lt;psscss&gt;, used in template for NL%SFILIN<br />
 </li>
-<li><a href="mailto:**@ED_VEG@*">**@ED_VEG@*</a>* : path and prefix of the vegetation database, used only to determine the land/water mask, from &lt;model&gt;&lt;veg&gt;, used in template for NL%VEG_DATABASE<br />
+<li>**<span class="citation">@ED_VEG</span><span class="citation">@*</span>* : path and prefix of the vegetation database, used only to determine the land/water mask, from &lt;model&gt;&lt;veg&gt;, used in template for NL%VEG_DATABASE<br />
 </li>
-<li><a href="mailto:**@ED_SOIL@*">**@ED_SOIL@*</a>* : path and prefix of the soil database, used to determine the soil type, from &lt;model&gt;&lt;soil&gt;, used in template for NL%SOIL_DATABASE<br />
+<li>**<span class="citation">@ED_SOIL</span><span class="citation">@*</span>* : path and prefix of the soil database, used to determine the soil type, from &lt;model&gt;&lt;soil&gt;, used in template for NL%SOIL_DATABASE<br />
 </li>
-<li><p><a href="mailto:**@ED_INPUTS@*">**@ED_INPUTS@*</a>* : input directory with dataset to initialise chilling degrees and growing degree days, which is used to drive the cold-deciduous phenology, from &lt;model&gt;&lt;inputs&gt;, used in template for NL%THSUMS_DATABASE</p></li>
-<li><a href="mailto:**@FFILOUT@*">**@FFILOUT@*</a>* : path and prefix for analysis files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/analysis, used in template for NL%FFILOUT<br />
+<li><p>**<span class="citation">@ED_INPUTS</span><span class="citation">@*</span>* : input directory with dataset to initialise chilling degrees and growing degree days, which is used to drive the cold-deciduous phenology, from &lt;model&gt;&lt;inputs&gt;, used in template for NL%THSUMS_DATABASE</p></li>
+<li>**<span class="citation">@FFILOUT</span><span class="citation">@*</span>* : path and prefix for analysis files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/analysis, used in template for NL%FFILOUT<br />
 </li>
-<li><p><a href="mailto:**@SFILOUT@*">**@SFILOUT@*</a>* : path and prefix for history files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/history, used in template for NL%SFILOUT</p></li>
-<li><p><a href="mailto:**@CONFIGFILE@*">**@CONFIGFILE@*</a>* : XML file containing additional parameter settings, this is always “config.xml”, used in template for NL%IEDCNFGF</p></li>
-<li><a href="mailto:**@OUTDIR@*">**@OUTDIR@*</a>* : location where output files are written (<strong>without the runid</strong>), from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;, should not be used.<br />
+<li><p>**<span class="citation">@SFILOUT</span><span class="citation">@*</span>* : path and prefix for history files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/history, used in template for NL%SFILOUT</p></li>
+<li><p>**<span class="citation">@CONFIGFILE</span><span class="citation">@*</span>* : XML file containing additional parameter settings, this is always “config.xml”, used in template for NL%IEDCNFGF</p></li>
+<li><strong><span class="citation">@OUTDIR</span><span class="citation">@*</span>* : location where output files are written (</strong>without the runid**), from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;, should not be used.<br />
 </li>
-<li><p><a href="mailto:**@SCRATCH@*">**@SCRATCH@*</a>* : local scratch space for outputs, generated /scratch/&lt;username&gt;/run$scratch, should not be used right now since it only works on ebi-cluster</p></li>
+<li><p>**<span class="citation">@SCRATCH</span><span class="citation">@*</span>* : local scratch space for outputs, generated /scratch/&lt;username&gt;/run$scratch, should not be used right now since it only works on ebi-cluster</p></li>
 </ul>
 <p><strong>Installation notes</strong></p>
 <p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
 <p><strong>VM</strong></p>
 <p>** BU geo**</p>
 <p><strong>TACC lonestar</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar
-<span class="kw">make</span> OPT=lonestar</code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb249-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb249-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb249-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb249-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb249-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</a>
+<a class="sourceLine" id="cb249-7" data-line-number="7"><span class="fu">make</span> OPT=lonestar</a></code></pre></div>
 <p><strong>TACC stampede</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede
-<span class="kw">make</span> OPT=stampede</code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb250-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb250-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb250-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb250-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb250-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</a>
+<a class="sourceLine" id="cb250-7" data-line-number="7"><span class="fu">make</span> OPT=stampede</a></code></pre></div>
 
 </div>
 <div id="ed2-configuration" class="section level2">
@@ -827,48 +855,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>An example of the template can be found in <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/ED2IN.r82">ED2IN.r82</a></p>
 <div id="ed2in-configuration-variables" class="section level3">
 <h3><span class="header-section-number">28.6.1</span> ED2IN configuration variables</h3>
-<p><a href="mailto:**@ENSNAME@*">**@ENSNAME@*</a>* : run id of the simulation, used in template for NL%EXPNME</p>
-<p><a href="mailto:**@START_MONTH@*">**@START_MONTH@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IMONTHA<br />
-<a href="mailto:**@START_DAY@*">**@START_DAY@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IDATEA<br />
-<a href="mailto:**@START_YEAR@*">**@START_YEAR@*</a>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IYEARA<br />
-<a href="mailto:**@END_MONTH@*">**@END_MONTH@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IMONTHZ<br />
-<a href="mailto:**@END_DAY@*">**@END_DAY@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IDATEZ<br />
-<a href="mailto:**@END_YEAR@*">**@END_YEAR@*</a>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IYEARZ</p>
-<p><a href="mailto:**@SITE_LAT@*">**@SITE_LAT@*</a>* : site latitude location, from &lt;run&gt;&lt;site&gt;&lt;lat&gt;, used in template for NL%POI_LAT<br />
-<a href="mailto:**@SITE_LON@*">**@SITE_LON@*</a>* : site longitude location, from &lt;run&gt;&lt;site&gt;&lt;lon&gt;, used in template for NL%POI_LON</p>
-<p><a href="mailto:**@SITE_MET@*">**@SITE_MET@*</a>* : met header location, from &lt;run&gt;&lt;site&gt;&lt;met&gt;, used in template for NL%ED_MET_DRIVER_DB<br />
-<a href="mailto:**@MET_START@*">**@MET_START@*</a>* : first year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.start&gt;, used in template for NL%METCYC1<br />
-<a href="mailto:**@MET_END@*">**@MET_END@*</a>* : last year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.end&gt;, used in template for NL%METCYCF</p>
-<p><a href="mailto:**@PHENOL_SCHEME@*">**@PHENOL_SCHEME@*</a>* : phenology scheme, if this variabe is 1 the following 3 fields will be used, otherwise they will be set to empty strings, from &lt;model&gt;&lt;phenol.scheme&gt;, used in template for NL%IPHEN_SCHEME<br />
-<a href="mailto:**@PHENOL_START@*">**@PHENOL_START@*</a>* : first year for phenology, from &lt;model&gt;&lt;phenol.start&gt;, used in template for NL%IPHENYS1 and NL%IPHENYF1<br />
-<a href="mailto:**@PHENOL_END@*">**@PHENOL_END@*</a>* : last year for phenology, from &lt;model&gt;&lt;phenol.end&gt;, used in template for NL%IPHENYSF and NL%IPHENYFF<br />
-<a href="mailto:**@PHENOL@*">**@PHENOL@*</a>* : path and prefix of the prescribed phenology data, from &lt;model&gt;&lt;phenol&gt;, used in template for NL%PHENPATH</p>
-<p><a href="mailto:**@SITE_PSSCSS@*">**@SITE_PSSCSS@*</a>* : path and prefix of the previous ecosystem state, from &lt;model&gt;&lt;psscss&gt;, used in template for NL%SFILIN<br />
-<a href="mailto:**@ED_VEG@*">**@ED_VEG@*</a>* : path and prefix of the vegetation database, used only to determine the land/water mask, from &lt;model&gt;&lt;veg&gt;, used in template for NL%VEG_DATABASE<br />
-<a href="mailto:**@ED_SOIL@*">**@ED_SOIL@*</a>* : path and prefix of the soil database, used to determine the soil type, from &lt;model&gt;&lt;soil&gt;, used in template for NL%SOIL_DATABASE<br />
-<a href="mailto:**@ED_INPUTS@*">**@ED_INPUTS@*</a>* : input directory with dataset to initialise chilling degrees and growing degree days, which is used to drive the cold-deciduous phenology, from &lt;model&gt;&lt;inputs&gt;, used in template for NL%THSUMS_DATABASE</p>
-<p><a href="mailto:**@FFILOUT@*">**@FFILOUT@*</a>* : path and prefix for analysis files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/analysis, used in template for NL%FFILOUT<br />
-<a href="mailto:**@SFILOUT@*">**@SFILOUT@*</a>* : path and prefix for history files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/history, used in template for NL%SFILOUT</p>
-<p><a href="mailto:**@CONFIGFILE@*">**@CONFIGFILE@*</a>* : XML file containing additional parameter settings, this is always “config.xml”, used in template for NL%IEDCNFGF</p>
-<p><a href="mailto:**@OUTDIR@*">**@OUTDIR@*</a>* : location where output files are written (<strong>without the runid</strong>), from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;, should not be used.<br />
-<a href="mailto:**@SCRATCH@*">**@SCRATCH@*</a>* : local scratch space for outputs, generated <code>/scratch/\&lt;username\&gt;/run$scratch</code>, should not be used right now since it only works on ebi-cluster</p>
+<p>**<span class="citation">@ENSNAME</span><span class="citation">@*</span>* : run id of the simulation, used in template for NL%EXPNME</p>
+<p><strong><span class="citation">@START_MONTH</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IMONTHA<br />
+</strong>@START_DAY<span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IDATEA<br />
+<strong><span class="citation">@START_YEAR</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IYEARA<br />
+</strong>@END_MONTH<span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IMONTHZ<br />
+<strong><span class="citation">@END_DAY</span><span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IDATEZ<br />
+</strong>@END_YEAR<span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IYEARZ</p>
+<p><strong><span class="citation">@SITE_LAT</span><span class="citation">@*</span>* : site latitude location, from &lt;run&gt;&lt;site&gt;&lt;lat&gt;, used in template for NL%POI_LAT<br />
+</strong>@SITE_LON<span class="citation">@*</span>* : site longitude location, from &lt;run&gt;&lt;site&gt;&lt;lon&gt;, used in template for NL%POI_LON</p>
+<p><strong><span class="citation">@SITE_MET</span><span class="citation">@*</span>* : met header location, from &lt;run&gt;&lt;site&gt;&lt;met&gt;, used in template for NL%ED_MET_DRIVER_DB<br />
+</strong>@MET_START<span class="citation">@*</span>* : first year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.start&gt;, used in template for NL%METCYC1<br />
+**<span class="citation">@MET_END</span><span class="citation">@*</span>* : last year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.end&gt;, used in template for NL%METCYCF</p>
+<p><strong><span class="citation">@PHENOL_SCHEME</span><span class="citation">@*</span>* : phenology scheme, if this variabe is 1 the following 3 fields will be used, otherwise they will be set to empty strings, from &lt;model&gt;&lt;phenol.scheme&gt;, used in template for NL%IPHEN_SCHEME<br />
+</strong>@PHENOL_START<span class="citation">@*</span>* : first year for phenology, from &lt;model&gt;&lt;phenol.start&gt;, used in template for NL%IPHENYS1 and NL%IPHENYF1<br />
+<strong><span class="citation">@PHENOL_END</span><span class="citation">@*</span>* : last year for phenology, from &lt;model&gt;&lt;phenol.end&gt;, used in template for NL%IPHENYSF and NL%IPHENYFF<br />
+</strong>@PHENOL<span class="citation">@*</span>* : path and prefix of the prescribed phenology data, from &lt;model&gt;&lt;phenol&gt;, used in template for NL%PHENPATH</p>
+<p><strong><span class="citation">@SITE_PSSCSS</span><span class="citation">@*</span>* : path and prefix of the previous ecosystem state, from &lt;model&gt;&lt;psscss&gt;, used in template for NL%SFILIN<br />
+</strong>@ED_VEG<span class="citation">@*</span>* : path and prefix of the vegetation database, used only to determine the land/water mask, from &lt;model&gt;&lt;veg&gt;, used in template for NL%VEG_DATABASE<br />
+<strong><span class="citation">@ED_SOIL</span><span class="citation">@*</span>* : path and prefix of the soil database, used to determine the soil type, from &lt;model&gt;&lt;soil&gt;, used in template for NL%SOIL_DATABASE<br />
+</strong>@ED_INPUTS<span class="citation">@*</span>* : input directory with dataset to initialise chilling degrees and growing degree days, which is used to drive the cold-deciduous phenology, from &lt;model&gt;&lt;inputs&gt;, used in template for NL%THSUMS_DATABASE</p>
+<p><strong><span class="citation">@FFILOUT</span><span class="citation">@*</span>* : path and prefix for analysis files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/analysis, used in template for NL%FFILOUT<br />
+</strong>@SFILOUT<span class="citation">@*</span>* : path and prefix for history files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/history, used in template for NL%SFILOUT</p>
+<p>**<span class="citation">@CONFIGFILE</span><span class="citation">@*</span>* : XML file containing additional parameter settings, this is always “config.xml”, used in template for NL%IEDCNFGF</p>
+<p><strong><span class="citation">@OUTDIR</span><span class="citation">@*</span>* : location where output files are written (</strong>without the runid<strong>), from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;, should not be used.<br />
+</strong>@SCRATCH<span class="citation">@*</span>* : local scratch space for outputs, generated <code>/scratch/\&lt;username\&gt;/run$scratch</code>, should not be used right now since it only works on ebi-cluster</p>
 <p><strong>ED Computation HPC</strong></p>
 <p><strong>TACC lonestar</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar
-<span class="kw">make</span> OPT=lonestar</code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb251-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb251-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb251-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb251-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb251-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</a>
+<a class="sourceLine" id="cb251-7" data-line-number="7"><span class="fu">make</span> OPT=lonestar</a></code></pre></div>
 <p><strong>TACC stampede</strong></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">module</span> load hdf5
-<span class="kw">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="kw">tar</span> zxf ED.r82.tgz
-<span class="kw">rm</span> ED.r82.tgz
-<span class="kw">cd</span> ED.r82/ED/build/bin
-<span class="kw">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede
-<span class="kw">make</span> OPT=stampede</code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb252-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb252-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb252-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb252-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb252-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</a>
+<a class="sourceLine" id="cb252-7" data-line-number="7"><span class="fu">make</span> OPT=stampede</a></code></pre></div>
 
 </div>
 </div>
@@ -877,30 +905,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
+<td>Home Page</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
+<td>Source Code</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
+<td>Authors</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
+<td>PEcAn Integration</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -929,30 +957,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
+<td>Home Page</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
+<td>Source Code</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
+<td>Authors</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
+<td>PEcAn Integration</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -981,30 +1009,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"></td>
+<td>Home Page</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"></td>
+<td>Source Code</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left"></td>
+<td>Authors</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left"></td>
+<td>PEcAn Integration</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1033,30 +1061,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">Model Information</th>
-<th align="left"></th>
+<th>Model Information</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Home Page</td>
-<td align="left"><a href="http://maespa.github.io/" class="uri">http://maespa.github.io/</a></td>
+<td>Home Page</td>
+<td><a href="http://maespa.github.io/" class="uri">http://maespa.github.io/</a></td>
 </tr>
 <tr class="even">
-<td align="left">Source Code</td>
-<td align="left"><a href="http://maespa.github.io/download.html" class="uri">http://maespa.github.io/download.html</a></td>
+<td>Source Code</td>
+<td><a href="http://maespa.github.io/download.html" class="uri">http://maespa.github.io/download.html</a></td>
 </tr>
 <tr class="odd">
-<td align="left">License</td>
-<td align="left"></td>
+<td>License</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left">Authors</td>
-<td align="left">Belinda Medlyn and Remko Duursma</td>
+<td>Authors</td>
+<td>Belinda Medlyn and Remko Duursma</td>
 </tr>
 <tr class="odd">
-<td align="left">PEcAn Integration</td>
-<td align="left">Tony Gardella, Martim DeKauwe, Remki Duursma</td>
+<td>PEcAn Integration</td>
+<td>Tony Gardella, Martim DeKauwe, Remki Duursma</td>
 </tr>
 </tbody>
 </table>
@@ -1157,7 +1185,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,41 +57,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -479,8 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#flux-measurements-and-modeling-course-tutorial-part-2"><i class="fa fa-check"></i><b>38.1</b> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></a></li>
-<li class="chapter" data-level="38.2" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.2</b> Introduction</a></li>
+<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
 <li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
@@ -598,7 +625,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="pda.mcmc.bs.r" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> <strong>pda.mcmc.bs.R</strong></h3>
-<p>This file is basically identical to pda.mcm.R, but rather than propose parameters one at a time, it proposes new values for all parameters at once (“bs” stands for “block sampling”). You choose which option to use by specifying settings<span class="math inline">\(assim.batch\)</span>method: * “bruteforce” means sample parameters one at a time * “bruteforce.bs” means use this version, sampling all parameters at once * “emulator” means use the emulated-likelihood version</p>
+<p>This file is basically identical to pda.mcm.R, but rather than propose parameters one at a time, it proposes new values for all parameters at once (“bs” stands for “block sampling”). You choose which option to use by specifying settings<span class="math inline">\(assim.batch\)</span>method:
+* “bruteforce” means sample parameters one at a time
+* “bruteforce.bs” means use this version, sampling all parameters at once
+* “emulator” means use the emulated-likelihood version</p>
 </div>
 <div id="pda.emulator" class="section level3">
 <h3><span class="header-section-number">9.1.3</span> <strong>pda.emulator</strong></h3>
@@ -640,7 +670,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="state-data-assimilation-sda" class="section level2">
 <h2><span class="header-section-number">9.3</span> State data assimilation (SDA)</h2>
-<p><code>sda.enkf.R</code> is housed within: <strong>/pecan/modules/assim.sequential/R</strong> The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></p>
+<p><code>sda.enkf.R</code> is housed within: <strong>/pecan/modules/assim.sequential/R</strong>
+The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></p>
 <div id="sda.enkf.r-description" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> <strong>sda.enkf.R Description</strong></h3>
 <p>This is the main ensemble Kalman filter and generalized filter code. Originally, this was just ensemble Kalman filter code. Mike Dietze and Ann Raiho added a generalized ensemble filter to avoid filter divergence. The output of this function will be all the of run outputs, a PDF of diagnostics, and an Rdata object that includes three lists:</p>
@@ -814,10 +845,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="Benchmarking" class="section level2">
 <h2><span class="header-section-number">9.5</span> Benchmarking</h2>
-<p>Benchmarking is the process of comparing model outputs against either experimental data or against other model outputs as a way to validate model performance. We have a suit of statistical comparisons that provide benchmarking scores as well as visual comparisons that help in diagnosing data-model and/or model-model differences.</p>
+<p>Benchmarking is the process of comparing model outputs against either experimental data or against other model outputs as a way to validate model performance.
+We have a suit of statistical comparisons that provide benchmarking scores as well as visual comparisons that help in diagnosing data-model and/or model-model differences.</p>
 <div id="data-preparation" class="section level3">
 <h3><span class="header-section-number">9.5.1</span> Data Preparation</h3>
-<p>All data that you want to compare with model runs must be registered in the database. This is currently a step that must be done by hand either from the command line or through the online BETY interface. The data must have three records:</p>
+<p>All data that you want to compare with model runs must be registered in the database.
+This is currently a step that must be done by hand either from the command line or through the online BETY interface.
+The data must have three records:</p>
 <ol style="list-style-type: decimal">
 <li><p>An input record (Instructions <a href="creating-a-new-format-record-in-bety.html#NewInput">here</a>)</p></li>
 <li><p>A database file record (Instructions <a href="creating-a-new-format-record-in-bety.html#NewInput">here</a>)</p></li>
@@ -826,7 +860,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="model-runs" class="section level3">
 <h3><span class="header-section-number">9.5.2</span> Model Runs</h3>
-<p>Model runs can be setup and executed - Using the PEcAn web interface online or with a VM (<a href="GettingStarted.html#GettingStarted">see setup</a>) - By hand using the <a href="pecanXML.html#pecanXML">pecan.xml</a></p>
+<p>Model runs can be setup and executed
+- Using the PEcAn web interface online or with a VM (<a href="GettingStarted.html#GettingStarted">see setup</a>)
+- By hand using the <a href="pecanXML.html#pecanXML">pecan.xml</a></p>
 </div>
 <div id="the-benchmarking-shiny-app" class="section level3">
 <h3><span class="header-section-number">9.5.3</span> The Benchmarking Shiny App</h3>
@@ -846,8 +882,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="create-a-reference-run-record" class="section level4">
 <h4><span class="header-section-number">9.5.3.1</span> Create a reference run record</h4>
 <ul>
-<li>Navigate to the Benchmarking tab</li>
+<li>Navigate to the Benchmarking tab
+<ul>
 <li>The first step is to register the new model run as a reference run in the database. Benchmarking cannot be done before this step is completed. When the reference run record has been created, additional menus for benchmarking will appear.</li>
+</ul></li>
 </ul>
 </div>
 <div id="setup-benchmarks-and-metrics" class="section level4">
@@ -866,10 +904,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>All benchmarking results are stored in the benchmarking directory which is created in the same folder as the original model run.</li>
 <li>The benchmaking directory contains subdirectories for each of the datasets compared with the model output. The names of these directories are the same as the corresponding data set’s input id in BETY.</li>
-<li>Each input directory contains <code>benchmarking.output.Rdata</code>, an Rdata file contianing all the results of the benchmarking workflow. <code>load(benchmarking.output.Rdata)</code> loads a list called <code>result.out</code> which contains the following:</li>
+<li>Each input directory contains <code>benchmarking.output.Rdata</code>, an Rdata file contianing all the results of the benchmarking workflow. <code>load(benchmarking.output.Rdata)</code> loads a list called <code>result.out</code> which contains the following:
+<ul>
 <li><code>bench.results</code>: a data frame of all numeric benchmarking scores</li>
 <li><code>format</code>: a data frame that can be used to see how the input data was transformed to make it comparable to the model output. This involves converting from the original variable names and units to the internal pecan standard.</li>
 <li><code>aligned.dat</code>: a data frame of the final aligned model and input values.</li>
+</ul></li>
 <li><p>All plots are saved as pdf files with names with “benchmark_plot-type_variable_input-id.pdf”</p></li>
 <li><p>To view interactive results, naviage to the Benchmarking Plots tab in the shiny app.</p></li>
 </ul>
@@ -886,34 +926,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>ensemble_id</code>: the id of the ensemble that you will be using - the settings from this ensemble will be saved in a reference run record and then <code>ensemble_id</code> will be replaced with <code>reference_run_id</code></li>
 <li><code>new_run</code>: TRUE = create new run, FALSE = use existing run (required, default FALSE)</li>
 </ul>
-<p>It is possible to look at more than one benchmark with a particular run. The specific settings related to each benchmark are in a sub section called <code>benchmark</code></p>
+<p>It is possible to look at more than one benchmark with a particular run.
+The specific settings related to each benchmark are in a sub section called <code>benchmark</code></p>
 <ul>
 <li><code>input_id</code>: the id of the benchmarking data (required)</li>
 <li><code>variable_id</code>: the id of the variable of interest within the data. If you leave this blank, all variables that are shared between the input and model output will be used.</li>
 <li><code>metric_id</code>: the id(s) of the metric(s) to be calculated. If you leave this blank, all metrics will be used.</li>
 </ul>
-<p>Example: In this example, - we are using a pre-existing run from <code>ensemble_id = 1000010983</code> (<code>new_run = FALSE</code>) - the output will be compared to data from <code>input_id = 1000013743</code>, specifically two variables of interest: <code>variable_id = 411, variable_id = 18</code> - for <code>variable_id = 411</code> we will perform only one metric of comparison <code>metric_id = 1000000001</code> - for for <code>variable_id = 18</code> we will perform two metrics of comparison <code>metric_id = 1000000001, metric_id = 1000000002</code></p>
-<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;benchmarking&gt;</span>
-  <span class="kw">&lt;ensemble_id&gt;</span>1000010983<span class="kw">&lt;/ensemble_id&gt;</span>
-  <span class="kw">&lt;new_run&gt;</span>FALSE<span class="kw">&lt;/new_run&gt;</span>
-  <span class="kw">&lt;benchmark&gt;</span>
-   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span>
-   <span class="kw">&lt;variable_id&gt;</span>411<span class="kw">&lt;/variable_id&gt;</span>
-   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span>
-   <span class="kw">&lt;metrics&gt;</span>
-    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span>
-   <span class="kw">&lt;/metrics&gt;</span>
-  <span class="kw">&lt;/benchmark&gt;</span>
-  <span class="kw">&lt;benchmark&gt;</span>
-   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span>
-   <span class="kw">&lt;variable_id&gt;</span>18<span class="kw">&lt;/variable_id&gt;</span>
-   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span>
-   <span class="kw">&lt;metrics&gt;</span>
-    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span>
-    <span class="kw">&lt;metric_id&gt;</span>1000000002<span class="kw">&lt;/metric_id&gt;</span>
-   <span class="kw">&lt;/metrics&gt;</span>
-  <span class="kw">&lt;/benchmark&gt;</span>
-<span class="kw">&lt;/benchmarking&gt;</span></code></pre></div>
+<p>Example:
+In this example,
+- we are using a pre-existing run from <code>ensemble_id = 1000010983</code> (<code>new_run = FALSE</code>)
+- the output will be compared to data from <code>input_id = 1000013743</code>, specifically two variables of interest: <code>variable_id = 411, variable_id = 18</code>
+- for <code>variable_id = 411</code> we will perform only one metric of comparison <code>metric_id = 1000000001</code>
+- for for <code>variable_id = 18</code> we will perform two metrics of comparison <code>metric_id = 1000000001, metric_id = 1000000002</code></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">&lt;benchmarking&gt;</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="kw">&lt;ensemble_id&gt;</span>1000010983<span class="kw">&lt;/ensemble_id&gt;</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="kw">&lt;new_run&gt;</span>FALSE<span class="kw">&lt;/new_run&gt;</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="kw">&lt;benchmark&gt;</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">   <span class="kw">&lt;variable_id&gt;</span>411<span class="kw">&lt;/variable_id&gt;</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">   <span class="kw">&lt;metrics&gt;</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">   <span class="kw">&lt;/metrics&gt;</span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">  <span class="kw">&lt;/benchmark&gt;</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">  <span class="kw">&lt;benchmark&gt;</span></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">   <span class="kw">&lt;variable_id&gt;</span>18<span class="kw">&lt;/variable_id&gt;</span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">   <span class="kw">&lt;metrics&gt;</span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">    <span class="kw">&lt;metric_id&gt;</span>1000000002<span class="kw">&lt;/metric_id&gt;</span></a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">   <span class="kw">&lt;/metrics&gt;</span></a>
+<a class="sourceLine" id="cb14-20" data-line-number="20">  <span class="kw">&lt;/benchmark&gt;</span></a>
+<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="kw">&lt;/benchmarking&gt;</span></a></code></pre></div>
 
 </div>
 </div>
@@ -970,7 +1016,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

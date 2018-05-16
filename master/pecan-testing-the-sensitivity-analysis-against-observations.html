@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,41 +57,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -479,8 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#flux-measurements-and-modeling-course-tutorial-part-2"><i class="fa fa-check"></i><b>38.1</b> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></a></li>
-<li class="chapter" data-level="38.2" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.2</b> Introduction</a></li>
+<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
 <li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
@@ -555,13 +582,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">38</span> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</h1>
 <div id="author-ankur-desai" class="section level3">
 <h3><span class="header-section-number">38.0.1</span> Author: “Ankur Desai”</h3>
-</div>
-<div id="flux-measurements-and-modeling-course-tutorial-part-2" class="section level2">
-<h2><span class="header-section-number">38.1</span> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></h2>
-<p>This tutorial assumes you have successfully completed the Demo01, Demo02 and the modelVSdata tutorial.</p>
+<p>##Flux Measurements and Modeling Course, <em>Tutorial Part 2</em>
+This tutorial assumes you have successfully completed the Demo01, Demo02 and the modelVSdata tutorial.</p>
 </div>
 <div id="introduction-2" class="section level2">
-<h2><span class="header-section-number">38.2</span> Introduction</h2>
+<h2><span class="header-section-number">38.1</span> Introduction</h2>
 <p>Now that you have successfully run PEcAn through the web interface and have learned how to do a simple comparison of flux tower observations to model output, let’s start looking at how data assimilation and parameter estimation would work with an ecosystem model.</p>
 <p>Before we start a full data assimilation exercise, let’s try something simple – single parameter selection by hand.</p>
 <ul>
@@ -570,7 +595,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In Demo02, you have ran a sensitivity analysis of SIPNET model runs at Niwot Ridge sampling across quantiles of a parameter prior, while holding all others to the median value. The pecan.xml file told PEcAn to run an sensitivity analysis, which simply meant SIPNET was run multiple times with the same driver, but varying parameter values one at a time (while holding all others to their median), and the parameter range also specified in the pecan.xml file (as quantiles, which were then sampled against the BETY database of observed variation in the parameter for species within the specific plant functional type).</p>
 <p>Let’s try to compare Ameriflux NEE to SIPNET NEE across all these runs to make a plot of parameter vs. goodness-of-fit. We’ll start with root mean square error (<strong>RMSE</strong>), but then discuss some other tests, too.</p>
 <div id="a.-read-in-settings-object-from-a-run-xml" class="section level4">
-<h4><span class="header-section-number">38.2.0.1</span> A. Read in settings object from a run xml</h4>
+<h4><span class="header-section-number">38.1.0.1</span> A. Read in settings object from a run xml</h4>
 <p>Open up a connection to the bety database and create a settings object from your xml, just like in the modelVSdata tutorial.</p>
 <p>We read in the pecan.CONFIG.xml instead of the pecan.xml because the pecan.CONFIG.xml has already incorperated some of the information from the database we would have to query again if we used the pecan.xml.</p>
 <p>Back to the files pane, within the <em>run/</em> folder, find a folder called <em>pft/</em> and within that a folder with the pft name (such as <em>temprature.coniferous</em>). Within that is a PDF file that starts <em>sensitivity.analysis</em>. In Rstudio, just click on the PDF to view it. You discussed this PDF last tutorial, through the web interface. Here, we see how the model NEE in SIPNET changes with each parameter.</p>
@@ -583,13 +608,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>You could even plot the two:</p>
 <p>What do you notice?</p>
 <p>Let’s try to read the output from a single run id as you did in the earlier tutorial.</p>
-</div>
-<div id="b.-now-lets-bring-in-the-actual-observations" class="section level4">
-<h4><span class="header-section-number">38.2.0.2</span> B. Now let’s bring in the actual observations</h4>
+<p>####B. Now let’s bring in the actual observations</p>
 <p>Recall reading Ameriflux NEE in the modelVSdata tutorial.</p>
-</div>
-<div id="c.-finally-we-can-finally-compare-model-to-data" class="section level4">
-<h4><span class="header-section-number">38.2.0.3</span> C. Finally, we can finally compare model to data</h4>
+<p>####C. Finally, we can finally compare model to data</p>
 <p>In the modelVSdata, you also compared NEE to the ensemble model run. Here we will do the same except we include each sensitivity run.</p>
 <p>And remember the formula for RMSE:</p>
 <p>All we need to do to go beyond this is to make a loop that reads in each sensitivity run NEE based on runids, calculates RMSE against the observations, and stores it in an array, by combining the steps above in a for loop. Make sure you change the directory names and year to your specific run.</p>
@@ -659,7 +680,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

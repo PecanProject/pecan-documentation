@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,41 +57,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -479,8 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#flux-measurements-and-modeling-course-tutorial-part-2"><i class="fa fa-check"></i><b>38.1</b> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></a></li>
-<li class="chapter" data-level="38.2" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.2</b> Introduction</a></li>
+<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
 <li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
@@ -568,16 +595,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="updating-pecan" class="section level3">
 <h3><span class="header-section-number">23.1.1</span> Updating PEcAn</h3>
 <p>The latest version of PEcAn code can be obtained from the PEcAn repository on GitHub:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> pecan        <span class="co"># If you are not already in the PEcAn directory</span>
-<span class="kw">git</span> pull</code></pre></div>
-<p>The PEcAn build system is based on GNU Make. The simplest way to install is to run <code>make</code> from inside the PEcAn directory. This will update the documentation for all packages and install them, as well as all required dependencies.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="bu">cd</span> pecan        # If you are not already in the PEcAn directory</a>
+<a class="sourceLine" id="cb178-2" data-line-number="2"><span class="fu">git</span> pull</a></code></pre></div>
+<p>The PEcAn build system is based on GNU Make.
+The simplest way to install is to run <code>make</code> from inside the PEcAn directory.
+This will update the documentation for all packages and install them, as well as all required dependencies.</p>
 <p>For more control, the following <code>make</code> commands are available:</p>
 <ul>
-<li><p><code>make document</code> – Use <code>devtools::document</code> to update the documentation for all package. Under the hood, this uses the <code>roxygen2</code> documentation system.</p></li>
-<li><p><code>make install</code> – Install all packages and their dependnencies using <code>devtools::install</code>. By default, this only installs packages that have had their code changed and any dependent packages.</p></li>
+<li><p><code>make document</code> – Use <code>devtools::document</code> to update the documentation for all package.
+Under the hood, this uses the <code>roxygen2</code> documentation system.</p></li>
+<li><p><code>make install</code> – Install all packages and their dependnencies using <code>devtools::install</code>.
+By default, this only installs packages that have had their code changed and any dependent packages.</p></li>
 <li><p><code>make check</code> – Perform a rigorous check of packages using <code>devtools::check</code></p></li>
 <li><p><code>make test</code> – Run all unit tests (based on <code>testthat</code> package) for all packages, using <code>devtools::test</code></p></li>
-<li><p><code>make clean</code> – Remove the make build cache, which is used to track which packages have changed. Cache files are stored in the <code>.doc</code>, <code>.install</code>, <code>.check</code>, and <code>.test</code> subdirectories in the PEcAn main directory. Running <code>make clean</code> will force the next invocation of <code>make</code> commands to operate on all PEcAn packages, regardless of changes.</p></li>
+<li><p><code>make clean</code> – Remove the make build cache, which is used to track which packages have changed.
+Cache files are stored in the <code>.doc</code>, <code>.install</code>, <code>.check</code>, and <code>.test</code> subdirectories in the PEcAn main directory.
+Running <code>make clean</code> will force the next invocation of <code>make</code> commands to operate on all PEcAn packages, regardless of changes.</p></li>
 </ul>
 <p>The following are some additional <code>make</code> tricks that may be useful:</p>
 <ul>
@@ -585,8 +618,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Force <code>make</code> to run, even if package has not changed – <code>make -B &lt;command&gt;</code></p></li>
 <li><p>Run <code>make</code> commands in parallel – <code>make -j&lt;ncores&gt;</code>; e.g. <code>make -j4 install</code> to install packages using four parallel processes.</p></li>
 </ul>
-<p>All instructions for the <code>make</code> build system are contained in the <code>Makefile</code> in the PEcAn root directory. For full documentation on <code>make</code>, see the man pages by running <code>man make</code> from a terminal.</p>
-<p><em>Point of contact: Alexey Shiklomanov GitHub/Gitter: <span class="citation">@ashiklom</span> email: <a href="mailto:ashiklom@bu.edu">ashiklom@bu.edu</a></em></p>
+<p>All instructions for the <code>make</code> build system are contained in the <code>Makefile</code> in the PEcAn root directory.
+For full documentation on <code>make</code>, see the man pages by running <code>man make</code> from a terminal.</p>
+<p><em>Point of contact:
+Alexey Shiklomanov
+GitHub/Gitter: <span class="citation">@ashiklom</span>
+email: <a href="mailto:ashiklom@bu.edu">ashiklom@bu.edu</a></em></p>
 
 </div>
 </div>
@@ -597,7 +634,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="database-synchronization" class="section level2">
 <h2><span class="header-section-number">23.3</span> Database synchronization</h2>
-<p>The database synchronization consists of 2 parts: - Getting the data from the remote servers to your server - Sharing your data with everybody else</p>
+<p>The database synchronization consists of 2 parts:
+- Getting the data from the remote servers to your server
+- Sharing your data with everybody else</p>
 <div id="how-does-it-work" class="section level3">
 <h3><span class="header-section-number">23.3.1</span> How does it work?</h3>
 <p>Each server that runs the BETY database will have a unique machine_id and a sequence of ID’s associated. Whenever the user creates a new row in BETY it will receive an ID in the sequence. This allows us to uniquely identify where a row came from. This is information is crucial for the code that works with the synchronization since we can now copy those rows that have an ID in the sequence specified. If you have not asked for a unique ID your ID will be 99.</p>
@@ -613,7 +652,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="fetch-latest-data" class="section level3">
 <h3><span class="header-section-number">23.3.3</span> Fetch latest data</h3>
 <p>When logged into the machine you can fetch the latest data using the load.bety.sh script. The script will check what site you want to get the data for and will remove all data in the database associated with that id. It will then reinsert all the data from the remote database.</p>
-<p>The script is configured using environment variables. The following variables are recognized: - DATABASE: the database where the script should write the results. The default is <code>bety</code>. - OWNER: the owner of the database (if it is to be created). The default is <code>bety</code>. - PG_OPT: additional options to be added to psql (default is nothing). - MYSITE: the (numerical) ID of your site. If you have not requested an ID, use 99; this is used for all sites that do not want to share their data (i.e. VM). 99 is in fact the default. - REMOTESITE: the ID of the site you want to fetch the data from. The default is 0 (EBI). - CREATE: If ‘YES’, this indicates that the existing database (<code>bety</code>, or the one specified by DATABASE) should be removed. Set to YES (in caps) to remove the database. <strong>THIS WILL REMOVE ALL DATA</strong> in DATABASE. The default is NO. - KEEPTMP: indicates whether the downloaded file should be preserved. Set to YES (in caps) to keep downloaded files; the default is NO. - USERS: determines if default users should be created. Set to YES (in caps) to create default users with default passwords. The default is NO.</p>
+<p>The script is configured using environment variables. The following variables are recognized:
+- DATABASE: the database where the script should write the results. The default is <code>bety</code>.
+- OWNER: the owner of the database (if it is to be created). The default is <code>bety</code>.
+- PG_OPT: additional options to be added to psql (default is nothing).
+- MYSITE: the (numerical) ID of your site. If you have not requested an ID, use 99; this is used for all sites that do not want to share their data (i.e. VM). 99 is in fact the default.
+- REMOTESITE: the ID of the site you want to fetch the data from. The default is 0 (EBI).
+- CREATE: If ‘YES’, this indicates that the existing database (<code>bety</code>, or the one specified by DATABASE) should be removed. Set to YES (in caps) to remove the database. <strong>THIS WILL REMOVE ALL DATA</strong> in DATABASE. The default is NO.
+- KEEPTMP: indicates whether the downloaded file should be preserved. Set to YES (in caps) to keep downloaded files; the default is NO.
+- USERS: determines if default users should be created. Set to YES (in caps) to create default users with default passwords. The default is NO.</p>
 <p>All of these variables can be specified as command line arguments, to see the options use -h.</p>
 <pre><code>load.bety.sh -h
 ./scripts/load.bety.sh [-c YES|NO] [-d database] [-h] [-m my siteid] [-o owner] [-p psql options] [-r remote siteid] [-t YES|NO] [-u YES|NO]
@@ -642,16 +689,26 @@ dump.bety.sh -h
 <h3><span class="header-section-number">23.3.4</span> Sharing data</h3>
 <p>Sharing your data requires a few steps. First, before entering any data, you will need to request an ID from the PEcAn developers. Simply open an issue at github and we will generate an ID for you. If possible, add the URL of your data host.</p>
 <p>You will now need to synchronize the database again and use your ID. For example if you are given ID=42 you can use the following command: <code>MYID=42 REMOTEID=0 ./scripts/load.bety.sh</code>. This will load the EBI database and set the ID’s such that any data you insert will have the right ID.</p>
-<p>To share your data you can now run the dump.bey.sh. The script is configured using environment variables, the following variables are recognized: - DATABASE: the database where the script should write the results. The default is <code>bety</code>. - PG_OPT: additional options to be added to psql (default is nothing). - MYSITE: the ID of your site. If you have not requested an ID, use 99, which is used for all sites that do not want to share their data (i.e. VM). 99 is the default. - LEVEL: the minimum access-protection level of the data to be dumped (0=private, 1=restricted, 2=internal collaborators, 3=external collaborators, 4=public). The default level for exported data is level 3. - note that currently only the traits and yields tables have restrictions on sharing. If you share data, records from other (meta-data) tables will be shared. If you wish to extend the access_level to other tables please <a href="https://github.com/pecanproject/bety/issues/new">submit a feature request</a>. - UNCHECKED: specifies whether unchecked traits and yields be dumped. Set to YES (all caps) to dump unchecked data. The default is NO. - ANONYMOUS: specifies whether all users be anonymized. Set to YES (all caps) to keep the original users (<strong>INCLUDING PASSWORD</strong>) in the dump file. The default is NO. - OUTPUT: the location of where on disk to write the result file. The default is <code>${PWD}/dump</code>.</p>
+<p>To share your data you can now run the dump.bey.sh. The script is configured using environment variables, the following variables are recognized:
+- DATABASE: the database where the script should write the results. The default is <code>bety</code>.
+- PG_OPT: additional options to be added to psql (default is nothing).
+- MYSITE: the ID of your site. If you have not requested an ID, use 99, which is used for all sites that do not want to share their data (i.e. VM). 99 is the default.
+- LEVEL: the minimum access-protection level of the data to be dumped (0=private, 1=restricted, 2=internal collaborators, 3=external collaborators, 4=public). The default level for exported data is level 3.
+- note that currently only the traits and yields tables have restrictions on sharing. If you share data, records from other (meta-data) tables will be shared. If you wish to extend the access_level to other tables please <a href="https://github.com/pecanproject/bety/issues/new">submit a feature request</a>.
+- UNCHECKED: specifies whether unchecked traits and yields be dumped. Set to YES (all caps) to dump unchecked data. The default is NO.
+- ANONYMOUS: specifies whether all users be anonymized. Set to YES (all caps) to keep the original users (<strong>INCLUDING PASSWORD</strong>) in the dump file. The default is NO.
+- OUTPUT: the location of where on disk to write the result file. The default is <code>${PWD}/dump</code>.</p>
 <p>NOTE: If you want your dumps to be accessible to other PEcAn servers you need to perform the following additional steps</p>
 <ol style="list-style-type: decimal">
 <li>Open pecan/scripts/load.bety.sh</li>
-<li><p>In the DUMPURL section of the code add a new record indicating where you are dumping your data. Below is the example for SITE number 1 (Boston University)</p>
+<li>In the DUMPURL section of the code add a new record indicating where you are dumping your data. Below is the example for SITE number 1 (Boston University)</li>
+</ol>
 <pre><code> elif [ &quot;${REMOTESITE}&quot; == &quot;1&quot; ]; then
- DUMPURL=&quot;http://psql-pecan.bu.edu/sync/dump/bety.tar.gz&quot;</code></pre></li>
+ DUMPURL=&quot;http://psql-pecan.bu.edu/sync/dump/bety.tar.gz&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
 <li>Check your Apache settings to make sure this location is public</li>
 <li>Commit this code and submit a Pull Request</li>
-<li><p>From the URL in the Pull Request, PEcAn administrators will update the machines table, the status map, and notify other users to update their cron jobs (see Automation below)</p></li>
+<li>From the URL in the Pull Request, PEcAn administrators will update the machines table, the status map, and notify other users to update their cron jobs (see Automation below)</li>
 </ol>
 <p>Plans to simplify this process are in the works</p>
 </div>
@@ -684,7 +741,8 @@ echo $(date +%c) &gt;&gt; /home/dietze/db.sync.log</code></pre>
 </div>
 <div id="tasks" class="section level3">
 <h3><span class="header-section-number">23.3.7</span> Tasks</h3>
-<p>Following is a list of tasks we plan on working on to improve these scripts: - <a href="https://github.com/PecanProject/bety/issues/368">pecanproject/bety#368</a> allow site-specific customization of information and UI elements including title, contacts, logo, color scheme.</p>
+<p>Following is a list of tasks we plan on working on to improve these scripts:
+- <a href="https://github.com/PecanProject/bety/issues/368">pecanproject/bety#368</a> allow site-specific customization of information and UI elements including title, contacts, logo, color scheme.</p>
 
 </div>
 </div>
@@ -741,7 +799,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

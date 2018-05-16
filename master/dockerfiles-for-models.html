@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-10">
+<meta name="date" content="2018-05-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -57,41 +57,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -479,8 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#flux-measurements-and-modeling-course-tutorial-part-2"><i class="fa fa-check"></i><b>38.1</b> Flux Measurements and Modeling Course, <em>Tutorial Part 2</em></a></li>
-<li class="chapter" data-level="38.2" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.2</b> Introduction</a></li>
+<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
 </ul></li>
 <li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
 <li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
@@ -564,43 +591,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>DELETE_RAW</code> : Should the model output be deleted, default is no.</li>
 <li><code>OVERWRITE</code> : Should any results be overwritten</li>
 </ul>
-<p>Following environment variables are only for information purpose and should not be changed: - <code>MODEL</code> : The name of the model, used in the script to run the model - <code>BINARY</code> : Location of the acutual binary, used in the script to run the model - <code>OUTDIR</code> : Location where data is, in this case /work - <code>PECAN_VERSION</code> : Version of PEcAn used to compile, default is develop</p>
+<p>Following environment variables are only for information purpose and should not be changed:
+- <code>MODEL</code> : The name of the model, used in the script to run the model
+- <code>BINARY</code> : Location of the acutual binary, used in the script to run the model
+- <code>OUTDIR</code> : Location where data is, in this case /work
+- <code>PECAN_VERSION</code> : Version of PEcAn used to compile, default is develop</p>
 <div id="sipnet-2" class="section level2">
 <h2><span class="header-section-number">34.1</span> SIPNET</h2>
 <p>The folllowing command will build sipnet v136 for PEcAn using the branch that is currently checked out.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">docker</span> build \
-    --build-arg MODEL_VERSION=136 \
-    --build-arg PECAN_VERSION=<span class="ot">$(</span><span class="kw">git</span> rev-parse --abbrev-ref HEAD<span class="ot">)</span> \
-    --tag pecan/pecan-sipnet:136 \
-    --file docker/Dockerfile.sipnet \
-    .</code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb259-1" data-line-number="1"><span class="ex">docker</span> build \</a>
+<a class="sourceLine" id="cb259-2" data-line-number="2">    --build-arg MODEL_VERSION=136 \</a>
+<a class="sourceLine" id="cb259-3" data-line-number="3">    --build-arg PECAN_VERSION=<span class="va">$(</span><span class="fu">git</span> rev-parse --abbrev-ref HEAD<span class="va">)</span> \</a>
+<a class="sourceLine" id="cb259-4" data-line-number="4">    --tag pecan/pecan-sipnet:136 \</a>
+<a class="sourceLine" id="cb259-5" data-line-number="5">    --file docker/Dockerfile.sipnet \</a>
+<a class="sourceLine" id="cb259-6" data-line-number="6">    .</a></code></pre></div>
 <p>Once the process is finished you can push (upload) the created image to docker hub. It will use the tag to place the image. In this case the image will be placed in the pecan project as the pecan-sipnet repository and tagged with 136. To do this you can use:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># do this only once</span>
-<span class="kw">docker</span> login
-<span class="co"># push image</span>
-<span class="kw">docker</span> push pecan/pecan-sipnet:136</code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb260-1" data-line-number="1"><span class="co"># do this only once</span></a>
+<a class="sourceLine" id="cb260-2" data-line-number="2"><span class="ex">docker</span> login</a>
+<a class="sourceLine" id="cb260-3" data-line-number="3"><span class="co"># push image</span></a>
+<a class="sourceLine" id="cb260-4" data-line-number="4"><span class="ex">docker</span> push pecan/pecan-sipnet:136</a></code></pre></div>
 <p>Once the image is pushed to dockerhub anybody can run the model. If you have not already downloaded the docker container the run command will download the image. Next it will run the image and will execute either the default command or the comman line given to the container. In the following example the default command is executed which will run the model and generate the PEcAn output files.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># get test data (only need to do this once)</span>
-<span class="kw">curl</span> -o sipnet.data.zip http://isda.ncsa.illinois.edu/~kooper/PEcAn/sipnet/sipnet.data.zip
-<span class="kw">unzip</span> sipnet.data.zip
-<span class="co"># cleanup if you rerun</span>
-<span class="kw">rm</span> -f sipnet.data/<span class="dt">{*.nc*,DONE,ERROR,sipnet.out,std*.log}</span>
-<span class="co"># run the actual model</span>
-<span class="kw">docker</span> run -t -i --rm -v <span class="ot">${PWD}</span>/sipnet.data:/work pecan/pecan-sipnet:136</code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="co"># get test data (only need to do this once)</span></a>
+<a class="sourceLine" id="cb261-2" data-line-number="2"><span class="ex">curl</span> -o sipnet.data.zip http://isda.ncsa.illinois.edu/~kooper/PEcAn/sipnet/sipnet.data.zip</a>
+<a class="sourceLine" id="cb261-3" data-line-number="3"><span class="fu">unzip</span> sipnet.data.zip</a>
+<a class="sourceLine" id="cb261-4" data-line-number="4"><span class="co"># cleanup if you rerun</span></a>
+<a class="sourceLine" id="cb261-5" data-line-number="5"><span class="fu">rm</span> -f sipnet.data/<span class="dt">{*.nc*,DONE,ERROR,sipnet.out,std*.log}</span></a>
+<a class="sourceLine" id="cb261-6" data-line-number="6"><span class="co"># run the actual model</span></a>
+<a class="sourceLine" id="cb261-7" data-line-number="7"><span class="ex">docker</span> run -t -i --rm -v <span class="va">${PWD}</span>/sipnet.data:/work pecan/pecan-sipnet:136</a></code></pre></div>
 
 <div id="using-the-pecan-download.file-function" class="section level3">
 <h3><span class="header-section-number">34.1.1</span> Using the PEcAn download.file() function</h3>
-<p>download.file(url, destination_file, method) <br> <br></p>
+<p>download.file(url, destination_file, method) <br>
+<br></p>
 <p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
 <p><br></p>
-<p>Examples: <br> <em>HTTP</em> <br></p>
+<p>Examples: <br>
+<em>HTTP</em> <br></p>
 <pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
 <p><em>FTP</em></p>
 <pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
 <p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
 <pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
 <p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as: firewall-type=1 firewall-host=ftpgateway.sec.bnl.local firewall-port=21</p>
+<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as:
+firewall-type=1
+firewall-host=ftpgateway.sec.bnl.local
+firewall-port=21</p>
 <p>which then allows for direct connection through the firewall using a command like:</p>
 <pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
 <p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
@@ -696,7 +732,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
