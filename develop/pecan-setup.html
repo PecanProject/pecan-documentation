@@ -25,7 +25,7 @@
 <meta name="author" content="Ann Raiho">
 
 
-<meta name="date" content="2018-07-24">
+<meta name="date" content="2018-07-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -655,59 +655,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 # - PACKAGE  = openssh
 # ----------------------------------------------------------------------</code></pre>
 <p>To enable tunnels run the following on the host machine:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;ssh,tcp,,6422,,22&quot;</span></a>
-<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;www,tcp,,6480,,80&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;ssh,tcp,,6422,,22&quot;</span></a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;www,tcp,,6480,,80&quot;</span></a></code></pre></div>
 <p>Make sure machine is up to date.</p>
 <p>UBUNTU</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="fu">sudo</span> apt-get -y dist-upgrade</a>
-<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="fu">sudo</span> reboot</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="fu">sudo</span> apt-get -y dist-upgrade</a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="fu">sudo</span> reboot</a></code></pre></div>
 <p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="fu">sudo</span> yum -y update</a>
-<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="fu">sudo</span> reboot</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="fu">sudo</span> yum -y update</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="fu">sudo</span> reboot</a></code></pre></div>
 <p>Install compiler and other packages needed and install the tools.</p>
 <p>UBUNTU</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install build-essential linux-headers-server dkms</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install build-essential linux-headers-server dkms</a></code></pre></div>
 <p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="fu">sudo</span> yum -y groupinstall <span class="st">&quot;Development Tools&quot;</span></a>
-<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="fu">sudo</span> yum -y install wget</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="fu">sudo</span> yum -y groupinstall <span class="st">&quot;Development Tools&quot;</span></a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="fu">sudo</span> yum -y install wget</a></code></pre></div>
 <p>Install Virtual Box additions for better integration</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
-<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
-<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a>
-<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="fu">sudo</span> usermod -a -G vboxsf carya</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a>
+<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="fu">sudo</span> usermod -a -G vboxsf carya</a></code></pre></div>
 <p><strong>Finishing up the machine</strong></p>
 <p><strong>Add a message to the login:</strong></p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="bu">export</span> <span class="va">PORT=$(</span> <span class="fu">hostname</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/pecan//&#39;</span> <span class="va">)</span></a>
-<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/motd <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb84-4" data-line-number="4">PEcAn version 1.4.3</a>
-<a class="sourceLine" id="cb84-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb84-6" data-line-number="6">For more information about:</a>
-<a class="sourceLine" id="cb84-7" data-line-number="7">Pecan    - http://pecanproject.org</a>
-<a class="sourceLine" id="cb84-8" data-line-number="8">BETY     - http://www.betydb.org</a>
-<a class="sourceLine" id="cb84-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb84-10" data-line-number="10">For a list of all models currently navigate [here](../users_guide/basic_users_guide/models_table.md)</a>
-<a class="sourceLine" id="cb84-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb84-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb84-13" data-line-number="13">You can access this system using a webbrowser at</a>
-<a class="sourceLine" id="cb84-14" data-line-number="14"> http://&lt;hosting machine&gt;:<span class="va">${PORT}</span>80/</a>
-<a class="sourceLine" id="cb84-15" data-line-number="15">or using SSH at</a>
-<a class="sourceLine" id="cb84-16" data-line-number="16"> ssh -l carya -p <span class="va">${PORT}</span>22 &lt;hosting machine&gt;</a>
-<a class="sourceLine" id="cb84-17" data-line-number="17">where &lt;hosting machine&gt; is the machine where the VM runs on.</a>
-<a class="sourceLine" id="cb84-18" data-line-number="18"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb84-19" data-line-number="19"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="bu">export</span> <span class="va">PORT=$(</span> <span class="fu">hostname</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/pecan//&#39;</span> <span class="va">)</span></a>
+<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/motd <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb85-4" data-line-number="4">PEcAn version 1.4.3</a>
+<a class="sourceLine" id="cb85-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb85-6" data-line-number="6">For more information about:</a>
+<a class="sourceLine" id="cb85-7" data-line-number="7">Pecan    - http://pecanproject.org</a>
+<a class="sourceLine" id="cb85-8" data-line-number="8">BETY     - http://www.betydb.org</a>
+<a class="sourceLine" id="cb85-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb85-10" data-line-number="10">For a list of all models currently navigate [here](../users_guide/basic_users_guide/models_table.md)</a>
+<a class="sourceLine" id="cb85-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb85-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb85-13" data-line-number="13">You can access this system using a webbrowser at</a>
+<a class="sourceLine" id="cb85-14" data-line-number="14"> http://&lt;hosting machine&gt;:<span class="va">${PORT}</span>80/</a>
+<a class="sourceLine" id="cb85-15" data-line-number="15">or using SSH at</a>
+<a class="sourceLine" id="cb85-16" data-line-number="16"> ssh -l carya -p <span class="va">${PORT}</span>22 &lt;hosting machine&gt;</a>
+<a class="sourceLine" id="cb85-17" data-line-number="17">where &lt;hosting machine&gt; is the machine where the VM runs on.</a>
+<a class="sourceLine" id="cb85-18" data-line-number="18"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb85-19" data-line-number="19"><span class="bu">exit</span></a></code></pre></div>
 <p><strong>Finishing up</strong></p>
 <p>Script to clean the VM and remove as much as possible history <a href="http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh">cleanvm.sh</a></p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="fu">wget</span> -O ~/cleanvm.sh http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="fu">chmod</span> 755 ~/cleanvm.sh</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="fu">wget</span> -O ~/cleanvm.sh http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="fu">chmod</span> 755 ~/cleanvm.sh</a></code></pre></div>
 <p>Make sure machine has SSH keys <a href="http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local">rc.local</a></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="fu">sudo</span> wget -O /etc/rc.local http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="fu">sudo</span> wget -O /etc/rc.local http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local</a></code></pre></div>
 <p>Change the resolution of the console</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="fu">sudo</span> sed -i -e <span class="st">&#39;s/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1024x768/&#39;</span> /etc/default/grub</a>
-<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="fu">sudo</span> update-grub</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="fu">sudo</span> sed -i -e <span class="st">&#39;s/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1024x768/&#39;</span> /etc/default/grub</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="fu">sudo</span> update-grub</a></code></pre></div>
 <p>Once all done, stop the virtual machine</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="bu">history</span> -c <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="bu">history</span> -c <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></a></code></pre></div>
 
 </div>
 <div id="installing-data-for-pecan" class="section level4">
@@ -716,64 +716,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="site-information" class="section level5">
 <h5><span class="header-section-number">22.2.1.2.1</span> Site Information</h5>
 <p>These are large-ish files that contain data used with ED2 and SIPNET</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="fu">rm</span> -rf sites</a>
-<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="ex">curl</span> -o sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</a>
-<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="fu">tar</span> zxf sites.tgz</a>
-<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/kooper/Projects/EBI#</span><span class="va">${PWD}</span><span class="st">#&quot;</span> sites/*/ED_MET_DRIVER_HEADER</a>
-<a class="sourceLine" id="cb89-5" data-line-number="5"><span class="fu">rm</span> sites.tgz</a>
-<a class="sourceLine" id="cb89-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb89-7" data-line-number="7"><span class="fu">rm</span> -rf inputs</a>
-<a class="sourceLine" id="cb89-8" data-line-number="8"><span class="ex">curl</span> -o inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</a>
-<a class="sourceLine" id="cb89-9" data-line-number="9"><span class="fu">tar</span> zxf inputs.tgz</a>
-<a class="sourceLine" id="cb89-10" data-line-number="10"><span class="fu">rm</span> inputs.tgz</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="fu">rm</span> -rf sites</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2"><span class="ex">curl</span> -o sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3"><span class="fu">tar</span> zxf sites.tgz</a>
+<a class="sourceLine" id="cb90-4" data-line-number="4"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/kooper/Projects/EBI#</span><span class="va">${PWD}</span><span class="st">#&quot;</span> sites/*/ED_MET_DRIVER_HEADER</a>
+<a class="sourceLine" id="cb90-5" data-line-number="5"><span class="fu">rm</span> sites.tgz</a>
+<a class="sourceLine" id="cb90-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb90-7" data-line-number="7"><span class="fu">rm</span> -rf inputs</a>
+<a class="sourceLine" id="cb90-8" data-line-number="8"><span class="ex">curl</span> -o inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</a>
+<a class="sourceLine" id="cb90-9" data-line-number="9"><span class="fu">tar</span> zxf inputs.tgz</a>
+<a class="sourceLine" id="cb90-10" data-line-number="10"><span class="fu">rm</span> inputs.tgz</a></code></pre></div>
 </div>
 <div id="fia-database" class="section level5">
 <h5><span class="header-section-number">22.2.1.2.2</span> FIA database</h5>
 <p>FIA database is large and will add an extra 10GB to the installation.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="co"># download and install database</span></a>
-<a class="sourceLine" id="cb90-2" data-line-number="2"><span class="ex">curl</span> -o fia5data.psql.gz http://isda.ncsa.illinois.edu/~kooper/EBI/fia5data.psql.gz</a>
-<a class="sourceLine" id="cb90-3" data-line-number="3"><span class="ex">dropdb</span> --if-exists fia5data</a>
-<a class="sourceLine" id="cb90-4" data-line-number="4"><span class="ex">createdb</span> -O bety fia5data</a>
-<a class="sourceLine" id="cb90-5" data-line-number="5"><span class="fu">gunzip</span> fia5data.psql.gz</a>
-<a class="sourceLine" id="cb90-6" data-line-number="6"><span class="ex">psql</span> -U bety -d fia5data <span class="op">&lt;</span> fia5data.psql</a>
-<a class="sourceLine" id="cb90-7" data-line-number="7"><span class="fu">rm</span> fia5data.psql</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="co"># download and install database</span></a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="ex">curl</span> -o fia5data.psql.gz http://isda.ncsa.illinois.edu/~kooper/EBI/fia5data.psql.gz</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3"><span class="ex">dropdb</span> --if-exists fia5data</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4"><span class="ex">createdb</span> -O bety fia5data</a>
+<a class="sourceLine" id="cb91-5" data-line-number="5"><span class="fu">gunzip</span> fia5data.psql.gz</a>
+<a class="sourceLine" id="cb91-6" data-line-number="6"><span class="ex">psql</span> -U bety -d fia5data <span class="op">&lt;</span> fia5data.psql</a>
+<a class="sourceLine" id="cb91-7" data-line-number="7"><span class="fu">rm</span> fia5data.psql</a></code></pre></div>
 </div>
 <div id="flux-camp" class="section level5">
 <h5><span class="header-section-number">22.2.1.2.3</span> Flux Camp</h5>
 <p>Following will install the data for flux camp (as well as the demo script for PEcAn).</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="ex">curl</span> -o plot.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/plot.tgz</a>
-<a class="sourceLine" id="cb91-3" data-line-number="3"><span class="fu">tar</span> zxf plot.tgz</a>
-<a class="sourceLine" id="cb91-4" data-line-number="4"><span class="fu">rm</span> plot.tgz</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="ex">curl</span> -o plot.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/plot.tgz</a>
+<a class="sourceLine" id="cb92-3" data-line-number="3"><span class="fu">tar</span> zxf plot.tgz</a>
+<a class="sourceLine" id="cb92-4" data-line-number="4"><span class="fu">rm</span> plot.tgz</a></code></pre></div>
 </div>
 <div id="harvard-for-ed-tutorial" class="section level5">
 <h5><span class="header-section-number">22.2.1.2.4</span> Harvard for ED tutorial</h5>
 <p>Add datasets and runs</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="ex">curl</span> -o Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="fu">unzip</span> -d sites Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb92-3" data-line-number="3"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</a>
-<a class="sourceLine" id="cb92-4" data-line-number="4"><span class="fu">rm</span> Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb92-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb92-6" data-line-number="6"><span class="ex">curl</span> -o testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</a>
-<a class="sourceLine" id="cb92-7" data-line-number="7"><span class="fu">unzip</span> testrun.s83.zip</a>
-<a class="sourceLine" id="cb92-8" data-line-number="8"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.s83/ED2IN</a>
-<a class="sourceLine" id="cb92-9" data-line-number="9"><span class="fu">rm</span> testrun.s83.zip</a>
-<a class="sourceLine" id="cb92-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb92-11" data-line-number="11"><span class="ex">curl</span> -o ed2ws.harvard.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ed2ws.harvard.tgz</a>
-<a class="sourceLine" id="cb92-12" data-line-number="12"><span class="fu">tar</span> zxf ed2ws.harvard.tgz</a>
-<a class="sourceLine" id="cb92-13" data-line-number="13"><span class="fu">mkdir</span> ed2ws.harvard/analy ed2ws.harvard/histo</a>
-<a class="sourceLine" id="cb92-14" data-line-number="14"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#g&quot;</span> ed2ws.harvard/input_harvard/met_driver/HF_MET_HEADER ed2ws.harvard/ED2IN ed2ws.harvard/*.r</a>
-<a class="sourceLine" id="cb92-15" data-line-number="15"><span class="fu">rm</span> ed2ws.harvard.tgz</a>
-<a class="sourceLine" id="cb92-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb92-17" data-line-number="17"><span class="ex">curl</span> -o testrun.PDG.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.PDG.zip</a>
-<a class="sourceLine" id="cb92-18" data-line-number="18"><span class="fu">unzip</span> testrun.PDG.zip</a>
-<a class="sourceLine" id="cb92-19" data-line-number="19"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.PDG/Met/PDG_MET_DRIVER testrun.PDG/Template/ED2IN</a>
-<a class="sourceLine" id="cb92-20" data-line-number="20"><span class="fu">sed</span> -i -e <span class="st">&#39;s#/n/scratch2/moorcroft_lab/kzhang/PDG/WFire_Pecan/##&#39;</span> testrun.PDG/Template/ED2IN</a>
-<a class="sourceLine" id="cb92-21" data-line-number="21"><span class="fu">rm</span> testrun.PDG.zip</a>
-<a class="sourceLine" id="cb92-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb92-23" data-line-number="23"><span class="ex">curl</span> -o create_met_driver.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/create_met_driver.tar.gz</a>
-<a class="sourceLine" id="cb92-24" data-line-number="24"><span class="fu">tar</span> zxf create_met_driver.tar.gz</a>
-<a class="sourceLine" id="cb92-25" data-line-number="25"><span class="fu">rm</span> create_met_driver.tar.gz</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="ex">curl</span> -o Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2"><span class="fu">unzip</span> -d sites Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb93-3" data-line-number="3"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</a>
+<a class="sourceLine" id="cb93-4" data-line-number="4"><span class="fu">rm</span> Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb93-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb93-6" data-line-number="6"><span class="ex">curl</span> -o testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</a>
+<a class="sourceLine" id="cb93-7" data-line-number="7"><span class="fu">unzip</span> testrun.s83.zip</a>
+<a class="sourceLine" id="cb93-8" data-line-number="8"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.s83/ED2IN</a>
+<a class="sourceLine" id="cb93-9" data-line-number="9"><span class="fu">rm</span> testrun.s83.zip</a>
+<a class="sourceLine" id="cb93-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb93-11" data-line-number="11"><span class="ex">curl</span> -o ed2ws.harvard.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ed2ws.harvard.tgz</a>
+<a class="sourceLine" id="cb93-12" data-line-number="12"><span class="fu">tar</span> zxf ed2ws.harvard.tgz</a>
+<a class="sourceLine" id="cb93-13" data-line-number="13"><span class="fu">mkdir</span> ed2ws.harvard/analy ed2ws.harvard/histo</a>
+<a class="sourceLine" id="cb93-14" data-line-number="14"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#g&quot;</span> ed2ws.harvard/input_harvard/met_driver/HF_MET_HEADER ed2ws.harvard/ED2IN ed2ws.harvard/*.r</a>
+<a class="sourceLine" id="cb93-15" data-line-number="15"><span class="fu">rm</span> ed2ws.harvard.tgz</a>
+<a class="sourceLine" id="cb93-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb93-17" data-line-number="17"><span class="ex">curl</span> -o testrun.PDG.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.PDG.zip</a>
+<a class="sourceLine" id="cb93-18" data-line-number="18"><span class="fu">unzip</span> testrun.PDG.zip</a>
+<a class="sourceLine" id="cb93-19" data-line-number="19"><span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.PDG/Met/PDG_MET_DRIVER testrun.PDG/Template/ED2IN</a>
+<a class="sourceLine" id="cb93-20" data-line-number="20"><span class="fu">sed</span> -i -e <span class="st">&#39;s#/n/scratch2/moorcroft_lab/kzhang/PDG/WFire_Pecan/##&#39;</span> testrun.PDG/Template/ED2IN</a>
+<a class="sourceLine" id="cb93-21" data-line-number="21"><span class="fu">rm</span> testrun.PDG.zip</a>
+<a class="sourceLine" id="cb93-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb93-23" data-line-number="23"><span class="ex">curl</span> -o create_met_driver.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/create_met_driver.tar.gz</a>
+<a class="sourceLine" id="cb93-24" data-line-number="24"><span class="fu">tar</span> zxf create_met_driver.tar.gz</a>
+<a class="sourceLine" id="cb93-25" data-line-number="25"><span class="fu">rm</span> create_met_driver.tar.gz</a></code></pre></div>
 
 </div>
 </div>
@@ -793,149 +793,149 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This document also contains information on how to install the Rstudio server edition as well as any other packages that can be helpful.</p>
 <div id="install-build-environment" class="section level5">
 <h5><span class="header-section-number">22.2.2.1.1</span> Install build environment</h5>
-<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb93-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb93-3" data-line-number="3"><span class="co"># point to latest R</span></a>
-<a class="sourceLine" id="cb93-4" data-line-number="4"><span class="bu">echo</span> <span class="st">&quot;deb http://cran.rstudio.com/bin/linux/ubuntu </span><span class="kw">`</span><span class="ex">lsb_release</span> -s -c<span class="kw">`</span><span class="st">/&quot;</span> <span class="op">&gt;</span> /etc/apt/sources.list.d/R.list</a>
-<a class="sourceLine" id="cb93-5" data-line-number="5"><span class="ex">apt-key</span> adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9</a>
-<a class="sourceLine" id="cb93-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb93-7" data-line-number="7"><span class="co"># update package list</span></a>
-<a class="sourceLine" id="cb93-8" data-line-number="8"><span class="ex">apt-get</span> -y update</a>
-<a class="sourceLine" id="cb93-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb93-10" data-line-number="10"><span class="co"># install packages needed for PEcAn</span></a>
-<a class="sourceLine" id="cb93-11" data-line-number="11"><span class="ex">apt-get</span> -y install build-essential gfortran git r-base-core r-base-dev jags liblapack-dev libnetcdf-dev netcdf-bin bc libcurl4-gnutls-dev curl udunits-bin libudunits2-dev libgmp-dev python-dev libgdal1-dev libproj-dev expect</a>
-<a class="sourceLine" id="cb93-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb93-13" data-line-number="13"><span class="co"># install packages needed for ED2</span></a>
-<a class="sourceLine" id="cb93-14" data-line-number="14"><span class="ex">apt-get</span> -y install openmpi-bin libopenmpi-dev</a>
-<a class="sourceLine" id="cb93-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb93-16" data-line-number="16"><span class="co"># install requirements for DALEC</span></a>
-<a class="sourceLine" id="cb93-17" data-line-number="17"><span class="ex">apt-get</span> -y install libgsl0-dev</a>
-<a class="sourceLine" id="cb93-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb93-19" data-line-number="19"><span class="co"># install packages for webserver</span></a>
-<a class="sourceLine" id="cb93-20" data-line-number="20"><span class="ex">apt-get</span> -y install apache2 libapache2-mod-php5 php5</a>
-<a class="sourceLine" id="cb93-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb93-22" data-line-number="22"><span class="co"># install packages to compile docs</span></a>
-<a class="sourceLine" id="cb93-23" data-line-number="23"><span class="ex">apt-get</span> -y install texinfo texlive-latex-base texlive-latex-extra texlive-fonts-recommended</a>
-<a class="sourceLine" id="cb93-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb93-25" data-line-number="25"><span class="co"># install devtools</span></a>
-<a class="sourceLine" id="cb93-26" data-line-number="26"><span class="bu">echo</span> <span class="st">&#39;install.packages(&quot;devtools&quot;, repos=&quot;http://cran.rstudio.com/&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">R</span> --vanilla</a>
-<a class="sourceLine" id="cb93-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb93-28" data-line-number="28"><span class="co"># done as root</span></a>
-<a class="sourceLine" id="cb93-29" data-line-number="29"><span class="bu">exit</span></a></code></pre></div>
-</div>
-<div id="install-postgres" class="section level5">
-<h5><span class="header-section-number">22.2.2.1.2</span> Install Postgres</h5>
-<p>Documentation: <a href="http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt" class="uri">http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt</a></p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
 <a class="sourceLine" id="cb94-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb94-3" data-line-number="3"><span class="co"># point to latest PostgreSQL</span></a>
-<a class="sourceLine" id="cb94-4" data-line-number="4"><span class="bu">echo</span> <span class="st">&quot;deb http://apt.postgresql.org/pub/repos/apt </span><span class="kw">`</span><span class="ex">lsb_release</span> -s -c<span class="kw">`</span><span class="st">-pgdg main&quot;</span> <span class="op">&gt;</span> /etc/apt/sources.list.d/pgdg.list</a>
-<a class="sourceLine" id="cb94-5" data-line-number="5"><span class="fu">wget</span> --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="kw">|</span> <span class="ex">apt-key</span> add -</a>
+<a class="sourceLine" id="cb94-3" data-line-number="3"><span class="co"># point to latest R</span></a>
+<a class="sourceLine" id="cb94-4" data-line-number="4"><span class="bu">echo</span> <span class="st">&quot;deb http://cran.rstudio.com/bin/linux/ubuntu </span><span class="kw">`</span><span class="ex">lsb_release</span> -s -c<span class="kw">`</span><span class="st">/&quot;</span> <span class="op">&gt;</span> /etc/apt/sources.list.d/R.list</a>
+<a class="sourceLine" id="cb94-5" data-line-number="5"><span class="ex">apt-key</span> adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9</a>
 <a class="sourceLine" id="cb94-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb94-7" data-line-number="7"><span class="co"># update package list</span></a>
 <a class="sourceLine" id="cb94-8" data-line-number="8"><span class="ex">apt-get</span> -y update</a>
 <a class="sourceLine" id="cb94-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb94-10" data-line-number="10"><span class="co"># install packages for postgresql (using a newer version than default)</span></a>
-<a class="sourceLine" id="cb94-11" data-line-number="11"><span class="ex">apt-get</span> -y install libdbd-pgsql postgresql postgresql-client libpq-dev postgresql-9.4-postgis-2.1 postgresql-9.4-postgis-2.1-scripts</a>
+<a class="sourceLine" id="cb94-10" data-line-number="10"><span class="co"># install packages needed for PEcAn</span></a>
+<a class="sourceLine" id="cb94-11" data-line-number="11"><span class="ex">apt-get</span> -y install build-essential gfortran git r-base-core r-base-dev jags liblapack-dev libnetcdf-dev netcdf-bin bc libcurl4-gnutls-dev curl udunits-bin libudunits2-dev libgmp-dev python-dev libgdal1-dev libproj-dev expect</a>
 <a class="sourceLine" id="cb94-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb94-13" data-line-number="13"><span class="co"># install following if you want to run pecan through the web</span></a>
-<a class="sourceLine" id="cb94-14" data-line-number="14"><span class="ex">apt-get</span> -y install php5-pgsql</a>
+<a class="sourceLine" id="cb94-13" data-line-number="13"><span class="co"># install packages needed for ED2</span></a>
+<a class="sourceLine" id="cb94-14" data-line-number="14"><span class="ex">apt-get</span> -y install openmpi-bin libopenmpi-dev</a>
 <a class="sourceLine" id="cb94-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb94-16" data-line-number="16"><span class="co"># enable bety user to login with trust by adding the following lines after</span></a>
-<a class="sourceLine" id="cb94-17" data-line-number="17"><span class="co"># the ability of postgres user to login in /etc/postgresql/9.4/main/pg_hba.conf</span></a>
-<a class="sourceLine" id="cb94-18" data-line-number="18"><span class="bu">local</span>   <span class="va">all</span>             <span class="va">bety</span>                                    <span class="va">trust</span></a>
-<a class="sourceLine" id="cb94-19" data-line-number="19"><span class="ex">host</span>    all             bety            127.0.0.1/32            trust</a>
-<a class="sourceLine" id="cb94-20" data-line-number="20"><span class="ex">host</span>    all             bety            ::1/128                 trust</a>
+<a class="sourceLine" id="cb94-16" data-line-number="16"><span class="co"># install requirements for DALEC</span></a>
+<a class="sourceLine" id="cb94-17" data-line-number="17"><span class="ex">apt-get</span> -y install libgsl0-dev</a>
+<a class="sourceLine" id="cb94-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb94-19" data-line-number="19"><span class="co"># install packages for webserver</span></a>
+<a class="sourceLine" id="cb94-20" data-line-number="20"><span class="ex">apt-get</span> -y install apache2 libapache2-mod-php5 php5</a>
 <a class="sourceLine" id="cb94-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb94-22" data-line-number="22"><span class="co"># Once done restart postgresql</span></a>
-<a class="sourceLine" id="cb94-23" data-line-number="23"><span class="ex">/etc/init.d/postgresql</span> restart</a>
+<a class="sourceLine" id="cb94-22" data-line-number="22"><span class="co"># install packages to compile docs</span></a>
+<a class="sourceLine" id="cb94-23" data-line-number="23"><span class="ex">apt-get</span> -y install texinfo texlive-latex-base texlive-latex-extra texlive-fonts-recommended</a>
 <a class="sourceLine" id="cb94-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb94-25" data-line-number="25"><span class="bu">exit</span></a></code></pre></div>
+<a class="sourceLine" id="cb94-25" data-line-number="25"><span class="co"># install devtools</span></a>
+<a class="sourceLine" id="cb94-26" data-line-number="26"><span class="bu">echo</span> <span class="st">&#39;install.packages(&quot;devtools&quot;, repos=&quot;http://cran.rstudio.com/&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">R</span> --vanilla</a>
+<a class="sourceLine" id="cb94-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb94-28" data-line-number="28"><span class="co"># done as root</span></a>
+<a class="sourceLine" id="cb94-29" data-line-number="29"><span class="bu">exit</span></a></code></pre></div>
+</div>
+<div id="install-postgres" class="section level5">
+<h5><span class="header-section-number">22.2.2.1.2</span> Install Postgres</h5>
+<p>Documentation: <a href="http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt" class="uri">http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt</a></p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="co"># point to latest PostgreSQL</span></a>
+<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="bu">echo</span> <span class="st">&quot;deb http://apt.postgresql.org/pub/repos/apt </span><span class="kw">`</span><span class="ex">lsb_release</span> -s -c<span class="kw">`</span><span class="st">-pgdg main&quot;</span> <span class="op">&gt;</span> /etc/apt/sources.list.d/pgdg.list</a>
+<a class="sourceLine" id="cb95-5" data-line-number="5"><span class="fu">wget</span> --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="kw">|</span> <span class="ex">apt-key</span> add -</a>
+<a class="sourceLine" id="cb95-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb95-7" data-line-number="7"><span class="co"># update package list</span></a>
+<a class="sourceLine" id="cb95-8" data-line-number="8"><span class="ex">apt-get</span> -y update</a>
+<a class="sourceLine" id="cb95-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb95-10" data-line-number="10"><span class="co"># install packages for postgresql (using a newer version than default)</span></a>
+<a class="sourceLine" id="cb95-11" data-line-number="11"><span class="ex">apt-get</span> -y install libdbd-pgsql postgresql postgresql-client libpq-dev postgresql-9.4-postgis-2.1 postgresql-9.4-postgis-2.1-scripts</a>
+<a class="sourceLine" id="cb95-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb95-13" data-line-number="13"><span class="co"># install following if you want to run pecan through the web</span></a>
+<a class="sourceLine" id="cb95-14" data-line-number="14"><span class="ex">apt-get</span> -y install php5-pgsql</a>
+<a class="sourceLine" id="cb95-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb95-16" data-line-number="16"><span class="co"># enable bety user to login with trust by adding the following lines after</span></a>
+<a class="sourceLine" id="cb95-17" data-line-number="17"><span class="co"># the ability of postgres user to login in /etc/postgresql/9.4/main/pg_hba.conf</span></a>
+<a class="sourceLine" id="cb95-18" data-line-number="18"><span class="bu">local</span>   <span class="va">all</span>             <span class="va">bety</span>                                    <span class="va">trust</span></a>
+<a class="sourceLine" id="cb95-19" data-line-number="19"><span class="ex">host</span>    all             bety            127.0.0.1/32            trust</a>
+<a class="sourceLine" id="cb95-20" data-line-number="20"><span class="ex">host</span>    all             bety            ::1/128                 trust</a>
+<a class="sourceLine" id="cb95-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb95-22" data-line-number="22"><span class="co"># Once done restart postgresql</span></a>
+<a class="sourceLine" id="cb95-23" data-line-number="23"><span class="ex">/etc/init.d/postgresql</span> restart</a>
+<a class="sourceLine" id="cb95-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb95-25" data-line-number="25"><span class="bu">exit</span></a></code></pre></div>
 <p>To install the BETYdb database ..
 ##### Apache Configuration PEcAn</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="co"># become root</span></a>
-<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb95-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="co"># get index page</span></a>
-<a class="sourceLine" id="cb95-5" data-line-number="5"><span class="fu">rm</span> /var/www/html/index.html</a>
-<a class="sourceLine" id="cb95-6" data-line-number="6"><span class="fu">ln</span> -s <span class="va">${HOME}</span>/pecan/documentation/index_vm.html /var/www/html/index.html</a>
-<a class="sourceLine" id="cb95-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb95-8" data-line-number="8"><span class="co"># setup a redirect</span></a>
-<a class="sourceLine" id="cb95-9" data-line-number="9"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/pecan.conf <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb95-10" data-line-number="10">Alias /pecan <span class="va">${HOME}</span>/pecan/web</a>
-<a class="sourceLine" id="cb95-11" data-line-number="11">&lt;Directory <span class="va">${HOME}</span>/pecan/web&gt;</a>
-<a class="sourceLine" id="cb95-12" data-line-number="12">  DirectoryIndex index.php</a>
-<a class="sourceLine" id="cb95-13" data-line-number="13">  Options +ExecCGI</a>
-<a class="sourceLine" id="cb95-14" data-line-number="14">  Require all granted</a>
-<a class="sourceLine" id="cb95-15" data-line-number="15">&lt;/Directory&gt;</a>
-<a class="sourceLine" id="cb95-16" data-line-number="16"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb95-17" data-line-number="17"><span class="ex">a2enconf</span> pecan</a>
-<a class="sourceLine" id="cb95-18" data-line-number="18"><span class="ex">/etc/init.d/apache2</span> restart</a>
-<a class="sourceLine" id="cb95-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb95-20" data-line-number="20"><span class="co"># done as root</span></a>
-<a class="sourceLine" id="cb95-21" data-line-number="21"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># become root</span></a>
+<a class="sourceLine" id="cb96-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb96-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb96-4" data-line-number="4"><span class="co"># get index page</span></a>
+<a class="sourceLine" id="cb96-5" data-line-number="5"><span class="fu">rm</span> /var/www/html/index.html</a>
+<a class="sourceLine" id="cb96-6" data-line-number="6"><span class="fu">ln</span> -s <span class="va">${HOME}</span>/pecan/documentation/index_vm.html /var/www/html/index.html</a>
+<a class="sourceLine" id="cb96-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb96-8" data-line-number="8"><span class="co"># setup a redirect</span></a>
+<a class="sourceLine" id="cb96-9" data-line-number="9"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/pecan.conf <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb96-10" data-line-number="10">Alias /pecan <span class="va">${HOME}</span>/pecan/web</a>
+<a class="sourceLine" id="cb96-11" data-line-number="11">&lt;Directory <span class="va">${HOME}</span>/pecan/web&gt;</a>
+<a class="sourceLine" id="cb96-12" data-line-number="12">  DirectoryIndex index.php</a>
+<a class="sourceLine" id="cb96-13" data-line-number="13">  Options +ExecCGI</a>
+<a class="sourceLine" id="cb96-14" data-line-number="14">  Require all granted</a>
+<a class="sourceLine" id="cb96-15" data-line-number="15">&lt;/Directory&gt;</a>
+<a class="sourceLine" id="cb96-16" data-line-number="16"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb96-17" data-line-number="17"><span class="ex">a2enconf</span> pecan</a>
+<a class="sourceLine" id="cb96-18" data-line-number="18"><span class="ex">/etc/init.d/apache2</span> restart</a>
+<a class="sourceLine" id="cb96-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb96-20" data-line-number="20"><span class="co"># done as root</span></a>
+<a class="sourceLine" id="cb96-21" data-line-number="21"><span class="bu">exit</span></a></code></pre></div>
 </div>
 <div id="apache-configuration-bety" class="section level5">
 <h5><span class="header-section-number">22.2.2.1.3</span> Apache Configuration BETY</h5>
-<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb96-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="co"># install all ruby related packages</span></a>
-<a class="sourceLine" id="cb96-4" data-line-number="4"><span class="ex">apt-get</span> -y install ruby2.0 ruby2.0-dev libapache2-mod-passenger </a>
-<a class="sourceLine" id="cb96-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb96-6" data-line-number="6"><span class="co"># link static content</span></a>
-<a class="sourceLine" id="cb96-7" data-line-number="7"><span class="fu">ln</span> -s <span class="va">${HOME}</span>/bety/public /var/www/html/bety</a>
-<a class="sourceLine" id="cb96-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb96-9" data-line-number="9"><span class="co"># setup a redirect</span></a>
-<a class="sourceLine" id="cb96-10" data-line-number="10"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/bety.conf <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb96-11" data-line-number="11">RailsEnv production</a>
-<a class="sourceLine" id="cb96-12" data-line-number="12">RailsBaseURI /bety</a>
-<a class="sourceLine" id="cb96-13" data-line-number="13">PassengerRuby /usr/bin/ruby2.0</a>
-<a class="sourceLine" id="cb96-14" data-line-number="14">&lt;Directory /var/www/html/bety&gt;</a>
-<a class="sourceLine" id="cb96-15" data-line-number="15">  Options +FollowSymLinks</a>
-<a class="sourceLine" id="cb96-16" data-line-number="16">  Require all granted</a>
-<a class="sourceLine" id="cb96-17" data-line-number="17">&lt;/Directory&gt;</a>
-<a class="sourceLine" id="cb96-18" data-line-number="18"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb96-19" data-line-number="19"><span class="ex">a2enconf</span> bety</a>
-<a class="sourceLine" id="cb96-20" data-line-number="20"><span class="ex">/etc/init.d/apache2</span> restart</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb97-3" data-line-number="3"><span class="co"># install all ruby related packages</span></a>
+<a class="sourceLine" id="cb97-4" data-line-number="4"><span class="ex">apt-get</span> -y install ruby2.0 ruby2.0-dev libapache2-mod-passenger </a>
+<a class="sourceLine" id="cb97-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb97-6" data-line-number="6"><span class="co"># link static content</span></a>
+<a class="sourceLine" id="cb97-7" data-line-number="7"><span class="fu">ln</span> -s <span class="va">${HOME}</span>/bety/public /var/www/html/bety</a>
+<a class="sourceLine" id="cb97-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb97-9" data-line-number="9"><span class="co"># setup a redirect</span></a>
+<a class="sourceLine" id="cb97-10" data-line-number="10"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/bety.conf <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb97-11" data-line-number="11">RailsEnv production</a>
+<a class="sourceLine" id="cb97-12" data-line-number="12">RailsBaseURI /bety</a>
+<a class="sourceLine" id="cb97-13" data-line-number="13">PassengerRuby /usr/bin/ruby2.0</a>
+<a class="sourceLine" id="cb97-14" data-line-number="14">&lt;Directory /var/www/html/bety&gt;</a>
+<a class="sourceLine" id="cb97-15" data-line-number="15">  Options +FollowSymLinks</a>
+<a class="sourceLine" id="cb97-16" data-line-number="16">  Require all granted</a>
+<a class="sourceLine" id="cb97-17" data-line-number="17">&lt;/Directory&gt;</a>
+<a class="sourceLine" id="cb97-18" data-line-number="18"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb97-19" data-line-number="19"><span class="ex">a2enconf</span> bety</a>
+<a class="sourceLine" id="cb97-20" data-line-number="20"><span class="ex">/etc/init.d/apache2</span> restart</a></code></pre></div>
 </div>
 <div id="rstudio-server" class="section level5">
 <h5><span class="header-section-number">22.2.2.1.4</span> Rstudio-server</h5>
 <p><em>NOTE This will allow anybody to login to the machine through the rstudio interface and run any arbitrary code. The login used however is the same as the system login/password.</em></p>
 <p>Based on version of ubuntu 32/64 use either of the following</p>
 <p><em>32bit only</em></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-i386.deb</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-i386.deb</a></code></pre></div>
 <p><em>64bit only</em></p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-amd64.deb</a></code></pre></div>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="co"># bceome root</span></a>
-<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb99-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb99-4" data-line-number="4"><span class="co"># install required packages</span></a>
-<a class="sourceLine" id="cb99-5" data-line-number="5"><span class="ex">apt-get</span> -y install libapparmor1 apparmor-utils libssl0.9.8</a>
-<a class="sourceLine" id="cb99-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb99-7" data-line-number="7"><span class="co"># install rstudio</span></a>
-<a class="sourceLine" id="cb99-8" data-line-number="8"><span class="ex">dpkg</span> -i rstudio-server-*</a>
-<a class="sourceLine" id="cb99-9" data-line-number="9"><span class="fu">rm</span> rstudio-server-*</a>
-<a class="sourceLine" id="cb99-10" data-line-number="10"><span class="bu">echo</span> <span class="st">&quot;www-address=127.0.0.1&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rserver.conf</a>
-<a class="sourceLine" id="cb99-11" data-line-number="11"><span class="bu">echo</span> <span class="st">&quot;r-libs-user=~/R/library&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rsession.conf</a>
-<a class="sourceLine" id="cb99-12" data-line-number="12"><span class="ex">rstudio-server</span> restart</a>
-<a class="sourceLine" id="cb99-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb99-14" data-line-number="14"><span class="co"># setup rstudio forwarding in apache</span></a>
-<a class="sourceLine" id="cb99-15" data-line-number="15"><span class="ex">a2enmod</span> proxy_http</a>
-<a class="sourceLine" id="cb99-16" data-line-number="16"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/rstudio.conf <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb99-17" data-line-number="17">ProxyPass        /rstudio/ http://localhost:8787/</a>
-<a class="sourceLine" id="cb99-18" data-line-number="18">ProxyPassReverse /rstudio/ http://localhost:8787/</a>
-<a class="sourceLine" id="cb99-19" data-line-number="19">RedirectMatch permanent ^/rstudio$ /rstudio/</a>
-<a class="sourceLine" id="cb99-20" data-line-number="20"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb99-21" data-line-number="21"><span class="ex">a2enconf</span> rstudio</a>
-<a class="sourceLine" id="cb99-22" data-line-number="22"><span class="ex">/etc/init.d/apache2</span> restart</a>
-<a class="sourceLine" id="cb99-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb99-24" data-line-number="24"><span class="co"># all done, exit root</span></a>
-<a class="sourceLine" id="cb99-25" data-line-number="25"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-amd64.deb</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="co"># bceome root</span></a>
+<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="co"># install required packages</span></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="ex">apt-get</span> -y install libapparmor1 apparmor-utils libssl0.9.8</a>
+<a class="sourceLine" id="cb100-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb100-7" data-line-number="7"><span class="co"># install rstudio</span></a>
+<a class="sourceLine" id="cb100-8" data-line-number="8"><span class="ex">dpkg</span> -i rstudio-server-*</a>
+<a class="sourceLine" id="cb100-9" data-line-number="9"><span class="fu">rm</span> rstudio-server-*</a>
+<a class="sourceLine" id="cb100-10" data-line-number="10"><span class="bu">echo</span> <span class="st">&quot;www-address=127.0.0.1&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rserver.conf</a>
+<a class="sourceLine" id="cb100-11" data-line-number="11"><span class="bu">echo</span> <span class="st">&quot;r-libs-user=~/R/library&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rsession.conf</a>
+<a class="sourceLine" id="cb100-12" data-line-number="12"><span class="ex">rstudio-server</span> restart</a>
+<a class="sourceLine" id="cb100-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb100-14" data-line-number="14"><span class="co"># setup rstudio forwarding in apache</span></a>
+<a class="sourceLine" id="cb100-15" data-line-number="15"><span class="ex">a2enmod</span> proxy_http</a>
+<a class="sourceLine" id="cb100-16" data-line-number="16"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/rstudio.conf <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb100-17" data-line-number="17">ProxyPass        /rstudio/ http://localhost:8787/</a>
+<a class="sourceLine" id="cb100-18" data-line-number="18">ProxyPassReverse /rstudio/ http://localhost:8787/</a>
+<a class="sourceLine" id="cb100-19" data-line-number="19">RedirectMatch permanent ^/rstudio$ /rstudio/</a>
+<a class="sourceLine" id="cb100-20" data-line-number="20"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb100-21" data-line-number="21"><span class="ex">a2enconf</span> rstudio</a>
+<a class="sourceLine" id="cb100-22" data-line-number="22"><span class="ex">/etc/init.d/apache2</span> restart</a>
+<a class="sourceLine" id="cb100-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb100-24" data-line-number="24"><span class="co"># all done, exit root</span></a>
+<a class="sourceLine" id="cb100-25" data-line-number="25"><span class="bu">exit</span></a></code></pre></div>
 </div>
 <div id="additional-packages" class="section level5">
 <h5><span class="header-section-number">22.2.2.1.5</span> Additional packages</h5>
 <p>HDF5 Tools, netcdf, GDB and emacs</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install hdf5-tools cdo nco netcdf-bin ncview gdb emacs ess nedit</a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install hdf5-tools cdo nco netcdf-bin ncview gdb emacs ess nedit</a></code></pre></div>
 
 </div>
 </div>
@@ -945,128 +945,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This document also contains information on how to install the Rstudio server edition as well as any other packages that can be helpful.</p>
 <div id="install-build-environment-1" class="section level5">
 <h5><span class="header-section-number">22.2.2.2.1</span> Install build environment</h5>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="co"># install packages needed for PEcAn</span></a>
-<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="ex">yum</span> -y groupinstall <span class="st">&#39;Development Tools&#39;</span> </a>
-<a class="sourceLine" id="cb101-5" data-line-number="5"><span class="ex">yum</span> -y install git netcdf-fortran-openmpi-devel R bc curl libxml2-devel openssl-devel ed  udunits2 udunits2-devel netcdf netcdf-devel gmp-devel python-devel gdal-devel proj-devel proj-epsg expect</a>
-<a class="sourceLine" id="cb101-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb101-7" data-line-number="7"><span class="co"># jags</span></a>
-<a class="sourceLine" id="cb101-8" data-line-number="8"><span class="ex">yum</span> -y install http://download.opensuse.org/repositories/home:/cornell_vrdc/CentOS_7/x86_64/jags3-3.4.0-54.1.x86_64.rpm</a>
-<a class="sourceLine" id="cb101-9" data-line-number="9"><span class="ex">yum</span> -y install http://download.opensuse.org/repositories/home:/cornell_vrdc/CentOS_7/x86_64/jags3-devel-3.4.0-54.1.x86_64.rpm</a>
-<a class="sourceLine" id="cb101-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb101-11" data-line-number="11"><span class="co"># fix include folder for udunits2</span></a>
-<a class="sourceLine" id="cb101-12" data-line-number="12"><span class="fu">ln</span> -s /usr/include/udunits2/* /usr/include/</a>
-<a class="sourceLine" id="cb101-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb101-14" data-line-number="14"><span class="co"># install packages needed for ED2</span></a>
-<a class="sourceLine" id="cb101-15" data-line-number="15"><span class="ex">yum</span> -y install environment-modules openmpi-bin libopenmpi-dev</a>
-<a class="sourceLine" id="cb101-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb101-17" data-line-number="17"><span class="co"># install requirements for DALEC</span></a>
-<a class="sourceLine" id="cb101-18" data-line-number="18"><span class="ex">yum</span> -y install gsl-devel</a>
-<a class="sourceLine" id="cb101-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb101-20" data-line-number="20"><span class="co"># install packages for webserver</span></a>
-<a class="sourceLine" id="cb101-21" data-line-number="21"><span class="ex">yum</span> -y install httpd php</a>
-<a class="sourceLine" id="cb101-22" data-line-number="22"><span class="ex">systemctl</span> enable httpd</a>
-<a class="sourceLine" id="cb101-23" data-line-number="23"><span class="ex">systemctl</span> start httpd</a>
-<a class="sourceLine" id="cb101-24" data-line-number="24"><span class="ex">firewall-cmd</span> --zone=public --add-port=80/tcp --permanent</a>
-<a class="sourceLine" id="cb101-25" data-line-number="25"><span class="ex">firewall-cmd</span> --reload</a>
-<a class="sourceLine" id="cb101-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb101-27" data-line-number="27"><span class="co"># install packages to compile docs</span></a>
-<a class="sourceLine" id="cb101-28" data-line-number="28"><span class="co">#apt-get -y install texinfo texlive-latex-base texlive-latex-extra texlive-fonts-recommended</span></a>
-<a class="sourceLine" id="cb101-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb101-30" data-line-number="30"><span class="co"># install devtools</span></a>
-<a class="sourceLine" id="cb101-31" data-line-number="31"><span class="bu">echo</span> <span class="st">&#39;install.packages(&quot;devtools&quot;, repos=&quot;http://cran.rstudio.com/&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">R</span> --vanilla</a>
-<a class="sourceLine" id="cb101-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb101-33" data-line-number="33"><span class="co"># done as root</span></a>
-<a class="sourceLine" id="cb101-34" data-line-number="34"><span class="bu">exit</span></a>
-<a class="sourceLine" id="cb101-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb101-36" data-line-number="36"><span class="bu">echo</span> <span class="st">&quot;module load mpi&quot;</span> <span class="op">&gt;&gt;</span> ~/.bashrc</a>
-<a class="sourceLine" id="cb101-37" data-line-number="37"><span class="ex">module</span> load mpi</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb102-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="co"># install packages needed for PEcAn</span></a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="ex">yum</span> -y groupinstall <span class="st">&#39;Development Tools&#39;</span> </a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"><span class="ex">yum</span> -y install git netcdf-fortran-openmpi-devel R bc curl libxml2-devel openssl-devel ed  udunits2 udunits2-devel netcdf netcdf-devel gmp-devel python-devel gdal-devel proj-devel proj-epsg expect</a>
+<a class="sourceLine" id="cb102-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb102-7" data-line-number="7"><span class="co"># jags</span></a>
+<a class="sourceLine" id="cb102-8" data-line-number="8"><span class="ex">yum</span> -y install http://download.opensuse.org/repositories/home:/cornell_vrdc/CentOS_7/x86_64/jags3-3.4.0-54.1.x86_64.rpm</a>
+<a class="sourceLine" id="cb102-9" data-line-number="9"><span class="ex">yum</span> -y install http://download.opensuse.org/repositories/home:/cornell_vrdc/CentOS_7/x86_64/jags3-devel-3.4.0-54.1.x86_64.rpm</a>
+<a class="sourceLine" id="cb102-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb102-11" data-line-number="11"><span class="co"># fix include folder for udunits2</span></a>
+<a class="sourceLine" id="cb102-12" data-line-number="12"><span class="fu">ln</span> -s /usr/include/udunits2/* /usr/include/</a>
+<a class="sourceLine" id="cb102-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb102-14" data-line-number="14"><span class="co"># install packages needed for ED2</span></a>
+<a class="sourceLine" id="cb102-15" data-line-number="15"><span class="ex">yum</span> -y install environment-modules openmpi-bin libopenmpi-dev</a>
+<a class="sourceLine" id="cb102-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb102-17" data-line-number="17"><span class="co"># install requirements for DALEC</span></a>
+<a class="sourceLine" id="cb102-18" data-line-number="18"><span class="ex">yum</span> -y install gsl-devel</a>
+<a class="sourceLine" id="cb102-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb102-20" data-line-number="20"><span class="co"># install packages for webserver</span></a>
+<a class="sourceLine" id="cb102-21" data-line-number="21"><span class="ex">yum</span> -y install httpd php</a>
+<a class="sourceLine" id="cb102-22" data-line-number="22"><span class="ex">systemctl</span> enable httpd</a>
+<a class="sourceLine" id="cb102-23" data-line-number="23"><span class="ex">systemctl</span> start httpd</a>
+<a class="sourceLine" id="cb102-24" data-line-number="24"><span class="ex">firewall-cmd</span> --zone=public --add-port=80/tcp --permanent</a>
+<a class="sourceLine" id="cb102-25" data-line-number="25"><span class="ex">firewall-cmd</span> --reload</a>
+<a class="sourceLine" id="cb102-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb102-27" data-line-number="27"><span class="co"># install packages to compile docs</span></a>
+<a class="sourceLine" id="cb102-28" data-line-number="28"><span class="co">#apt-get -y install texinfo texlive-latex-base texlive-latex-extra texlive-fonts-recommended</span></a>
+<a class="sourceLine" id="cb102-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb102-30" data-line-number="30"><span class="co"># install devtools</span></a>
+<a class="sourceLine" id="cb102-31" data-line-number="31"><span class="bu">echo</span> <span class="st">&#39;install.packages(&quot;devtools&quot;, repos=&quot;http://cran.rstudio.com/&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">R</span> --vanilla</a>
+<a class="sourceLine" id="cb102-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb102-33" data-line-number="33"><span class="co"># done as root</span></a>
+<a class="sourceLine" id="cb102-34" data-line-number="34"><span class="bu">exit</span></a>
+<a class="sourceLine" id="cb102-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb102-36" data-line-number="36"><span class="bu">echo</span> <span class="st">&quot;module load mpi&quot;</span> <span class="op">&gt;&gt;</span> ~/.bashrc</a>
+<a class="sourceLine" id="cb102-37" data-line-number="37"><span class="ex">module</span> load mpi</a></code></pre></div>
 </div>
 <div id="install-postgres-1" class="section level5">
 <h5><span class="header-section-number">22.2.2.2.2</span> Install Postgres</h5>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="co"># point to latest PostgreSQL</span></a>
-<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="ex">yum</span> install -y epel-release </a>
-<a class="sourceLine" id="cb102-5" data-line-number="5"><span class="ex">yum</span> -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm</a>
-<a class="sourceLine" id="cb102-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb102-7" data-line-number="7"><span class="co"># install packages for postgresql (using a newer version than default)</span></a>
-<a class="sourceLine" id="cb102-8" data-line-number="8"><span class="ex">yum</span> -y install postgresql94-server postgresql94-contrib postgis2_94 postgresql94-devel</a>
-<a class="sourceLine" id="cb102-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb102-10" data-line-number="10"><span class="co"># install following if you want to run pecan through the web</span></a>
-<a class="sourceLine" id="cb102-11" data-line-number="11"><span class="ex">yum</span> -y install php-pgsql</a>
-<a class="sourceLine" id="cb102-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb102-13" data-line-number="13"><span class="co"># enable bety user to login with trust by adding the following lines after</span></a>
-<a class="sourceLine" id="cb102-14" data-line-number="14"><span class="co"># the ability of postgres user to login in /var/lib/pgsql/9.4/data/pg_hba.conf</span></a>
-<a class="sourceLine" id="cb102-15" data-line-number="15"><span class="bu">local</span>   <span class="va">all</span>             <span class="va">bety</span>                                    <span class="va">trust</span></a>
-<a class="sourceLine" id="cb102-16" data-line-number="16"><span class="ex">host</span>    all             bety            127.0.0.1/32            trust</a>
-<a class="sourceLine" id="cb102-17" data-line-number="17"><span class="ex">host</span>    all             bety            ::1/128                 trust</a>
-<a class="sourceLine" id="cb102-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb102-19" data-line-number="19"><span class="co"># Create database</span></a>
-<a class="sourceLine" id="cb102-20" data-line-number="20"><span class="ex">/usr/pgsql-9.4/bin/postgresql94-setup</span> initdb</a>
-<a class="sourceLine" id="cb102-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb102-22" data-line-number="22"><span class="co"># Enable postgres</span></a>
-<a class="sourceLine" id="cb102-23" data-line-number="23"><span class="ex">systemctl</span> enable postgresql-9.4</a>
-<a class="sourceLine" id="cb102-24" data-line-number="24"><span class="ex">systemctl</span> start postgresql-9.4</a>
-<a class="sourceLine" id="cb102-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb102-26" data-line-number="26"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb103-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="co"># point to latest PostgreSQL</span></a>
+<a class="sourceLine" id="cb103-4" data-line-number="4"><span class="ex">yum</span> install -y epel-release </a>
+<a class="sourceLine" id="cb103-5" data-line-number="5"><span class="ex">yum</span> -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm</a>
+<a class="sourceLine" id="cb103-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb103-7" data-line-number="7"><span class="co"># install packages for postgresql (using a newer version than default)</span></a>
+<a class="sourceLine" id="cb103-8" data-line-number="8"><span class="ex">yum</span> -y install postgresql94-server postgresql94-contrib postgis2_94 postgresql94-devel</a>
+<a class="sourceLine" id="cb103-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb103-10" data-line-number="10"><span class="co"># install following if you want to run pecan through the web</span></a>
+<a class="sourceLine" id="cb103-11" data-line-number="11"><span class="ex">yum</span> -y install php-pgsql</a>
+<a class="sourceLine" id="cb103-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb103-13" data-line-number="13"><span class="co"># enable bety user to login with trust by adding the following lines after</span></a>
+<a class="sourceLine" id="cb103-14" data-line-number="14"><span class="co"># the ability of postgres user to login in /var/lib/pgsql/9.4/data/pg_hba.conf</span></a>
+<a class="sourceLine" id="cb103-15" data-line-number="15"><span class="bu">local</span>   <span class="va">all</span>             <span class="va">bety</span>                                    <span class="va">trust</span></a>
+<a class="sourceLine" id="cb103-16" data-line-number="16"><span class="ex">host</span>    all             bety            127.0.0.1/32            trust</a>
+<a class="sourceLine" id="cb103-17" data-line-number="17"><span class="ex">host</span>    all             bety            ::1/128                 trust</a>
+<a class="sourceLine" id="cb103-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb103-19" data-line-number="19"><span class="co"># Create database</span></a>
+<a class="sourceLine" id="cb103-20" data-line-number="20"><span class="ex">/usr/pgsql-9.4/bin/postgresql94-setup</span> initdb</a>
+<a class="sourceLine" id="cb103-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb103-22" data-line-number="22"><span class="co"># Enable postgres</span></a>
+<a class="sourceLine" id="cb103-23" data-line-number="23"><span class="ex">systemctl</span> enable postgresql-9.4</a>
+<a class="sourceLine" id="cb103-24" data-line-number="24"><span class="ex">systemctl</span> start postgresql-9.4</a>
+<a class="sourceLine" id="cb103-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb103-26" data-line-number="26"><span class="bu">exit</span></a></code></pre></div>
 </div>
 <div id="apache-configuration-pecan" class="section level5">
 <h5><span class="header-section-number">22.2.2.2.3</span> Apache Configuration PEcAn</h5>
-<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="co"># become root</span></a>
-<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb103-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb103-4" data-line-number="4"><span class="co"># get index page</span></a>
-<a class="sourceLine" id="cb103-5" data-line-number="5"><span class="fu">rm</span> /var/www/html/index.html</a>
-<a class="sourceLine" id="cb103-6" data-line-number="6"><span class="fu">ln</span> -s /home/carya/pecan/documentation/index_vm.html /var/www/html/index.html</a>
-<a class="sourceLine" id="cb103-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb103-8" data-line-number="8"><span class="co"># fix selinux context (does this need to be done after PEcAn is installed?)</span></a>
-<a class="sourceLine" id="cb103-9" data-line-number="9"><span class="ex">chcon</span> -R -t httpd_sys_content_t /home/carya/pecan /home/carya/output</a>
-<a class="sourceLine" id="cb103-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb103-11" data-line-number="11"><span class="co"># setup a redirect</span></a>
-<a class="sourceLine" id="cb103-12" data-line-number="12"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/httpd/conf.d/pecan.conf <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb103-13" data-line-number="13">Alias /pecan /home/carya/pecan/web</a>
-<a class="sourceLine" id="cb103-14" data-line-number="14">&lt;Directory /home/carya/pecan/web&gt;</a>
-<a class="sourceLine" id="cb103-15" data-line-number="15">  DirectoryIndex index.php</a>
-<a class="sourceLine" id="cb103-16" data-line-number="16">  Options +ExecCGI</a>
-<a class="sourceLine" id="cb103-17" data-line-number="17">  Require all granted</a>
-<a class="sourceLine" id="cb103-18" data-line-number="18">&lt;/Directory&gt;</a>
-<a class="sourceLine" id="cb103-19" data-line-number="19"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb103-20" data-line-number="20"><span class="ex">a2enconf</span> pecan</a>
-<a class="sourceLine" id="cb103-21" data-line-number="21"><span class="ex">/etc/init.d/apache2</span> restart</a>
-<a class="sourceLine" id="cb103-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb103-23" data-line-number="23"><span class="co"># done as root</span></a>
-<a class="sourceLine" id="cb103-24" data-line-number="24"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="co"># become root</span></a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb104-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="co"># get index page</span></a>
+<a class="sourceLine" id="cb104-5" data-line-number="5"><span class="fu">rm</span> /var/www/html/index.html</a>
+<a class="sourceLine" id="cb104-6" data-line-number="6"><span class="fu">ln</span> -s /home/carya/pecan/documentation/index_vm.html /var/www/html/index.html</a>
+<a class="sourceLine" id="cb104-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb104-8" data-line-number="8"><span class="co"># fix selinux context (does this need to be done after PEcAn is installed?)</span></a>
+<a class="sourceLine" id="cb104-9" data-line-number="9"><span class="ex">chcon</span> -R -t httpd_sys_content_t /home/carya/pecan /home/carya/output</a>
+<a class="sourceLine" id="cb104-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb104-11" data-line-number="11"><span class="co"># setup a redirect</span></a>
+<a class="sourceLine" id="cb104-12" data-line-number="12"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/httpd/conf.d/pecan.conf <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb104-13" data-line-number="13">Alias /pecan /home/carya/pecan/web</a>
+<a class="sourceLine" id="cb104-14" data-line-number="14">&lt;Directory /home/carya/pecan/web&gt;</a>
+<a class="sourceLine" id="cb104-15" data-line-number="15">  DirectoryIndex index.php</a>
+<a class="sourceLine" id="cb104-16" data-line-number="16">  Options +ExecCGI</a>
+<a class="sourceLine" id="cb104-17" data-line-number="17">  Require all granted</a>
+<a class="sourceLine" id="cb104-18" data-line-number="18">&lt;/Directory&gt;</a>
+<a class="sourceLine" id="cb104-19" data-line-number="19"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb104-20" data-line-number="20"><span class="ex">a2enconf</span> pecan</a>
+<a class="sourceLine" id="cb104-21" data-line-number="21"><span class="ex">/etc/init.d/apache2</span> restart</a>
+<a class="sourceLine" id="cb104-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb104-23" data-line-number="23"><span class="co"># done as root</span></a>
+<a class="sourceLine" id="cb104-24" data-line-number="24"><span class="bu">exit</span></a></code></pre></div>
 </div>
 <div id="apache-configuration-bety-1" class="section level5">
 <h5><span class="header-section-number">22.2.2.2.4</span> Apache Configuration BETY</h5>
-<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb104-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="co"># install all ruby related packages</span></a>
-<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="fu">sudo</span> curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo</a>
-<a class="sourceLine" id="cb104-5" data-line-number="5"><span class="ex">yum</span> -y install ruby ruby-devel mod_passenger</a>
-<a class="sourceLine" id="cb104-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb104-7" data-line-number="7"><span class="co"># link static content</span></a>
-<a class="sourceLine" id="cb104-8" data-line-number="8"><span class="fu">ln</span> -s /home/carya/bety/public /var/www/html/bety</a>
-<a class="sourceLine" id="cb104-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb104-10" data-line-number="10"><span class="co"># fix GemFile</span></a>
-<a class="sourceLine" id="cb104-11" data-line-number="11"><span class="bu">echo</span> <span class="st">&#39;gem &quot;test-unit&quot;&#39;</span> <span class="op">&gt;&gt;</span> bety/Gemlile</a>
-<a class="sourceLine" id="cb104-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb104-13" data-line-number="13"><span class="co"># fix selinux context (does this need to be done after bety is installed?)</span></a>
-<a class="sourceLine" id="cb104-14" data-line-number="14"><span class="ex">chcon</span> -R -t httpd_sys_content_t /home/carya/bety</a>
-<a class="sourceLine" id="cb104-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb104-16" data-line-number="16"><span class="co"># setup a redirect</span></a>
-<a class="sourceLine" id="cb104-17" data-line-number="17"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/httpd/conf.d/bety.conf <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb104-18" data-line-number="18">RailsEnv production</a>
-<a class="sourceLine" id="cb104-19" data-line-number="19">RailsBaseURI /bety</a>
-<a class="sourceLine" id="cb104-20" data-line-number="20">PassengerRuby /usr/bin/ruby</a>
-<a class="sourceLine" id="cb104-21" data-line-number="21">&lt;Directory /var/www/html/bety&gt;</a>
-<a class="sourceLine" id="cb104-22" data-line-number="22">  Options +FollowSymLinks</a>
-<a class="sourceLine" id="cb104-23" data-line-number="23">  Require all granted</a>
-<a class="sourceLine" id="cb104-24" data-line-number="24">&lt;/Directory&gt;</a>
-<a class="sourceLine" id="cb104-25" data-line-number="25"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb104-26" data-line-number="26"><span class="ex">systemctl</span> restart httpd</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb105-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb105-3" data-line-number="3"><span class="co"># install all ruby related packages</span></a>
+<a class="sourceLine" id="cb105-4" data-line-number="4"><span class="fu">sudo</span> curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo</a>
+<a class="sourceLine" id="cb105-5" data-line-number="5"><span class="ex">yum</span> -y install ruby ruby-devel mod_passenger</a>
+<a class="sourceLine" id="cb105-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb105-7" data-line-number="7"><span class="co"># link static content</span></a>
+<a class="sourceLine" id="cb105-8" data-line-number="8"><span class="fu">ln</span> -s /home/carya/bety/public /var/www/html/bety</a>
+<a class="sourceLine" id="cb105-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb105-10" data-line-number="10"><span class="co"># fix GemFile</span></a>
+<a class="sourceLine" id="cb105-11" data-line-number="11"><span class="bu">echo</span> <span class="st">&#39;gem &quot;test-unit&quot;&#39;</span> <span class="op">&gt;&gt;</span> bety/Gemlile</a>
+<a class="sourceLine" id="cb105-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb105-13" data-line-number="13"><span class="co"># fix selinux context (does this need to be done after bety is installed?)</span></a>
+<a class="sourceLine" id="cb105-14" data-line-number="14"><span class="ex">chcon</span> -R -t httpd_sys_content_t /home/carya/bety</a>
+<a class="sourceLine" id="cb105-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb105-16" data-line-number="16"><span class="co"># setup a redirect</span></a>
+<a class="sourceLine" id="cb105-17" data-line-number="17"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/httpd/conf.d/bety.conf <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb105-18" data-line-number="18">RailsEnv production</a>
+<a class="sourceLine" id="cb105-19" data-line-number="19">RailsBaseURI /bety</a>
+<a class="sourceLine" id="cb105-20" data-line-number="20">PassengerRuby /usr/bin/ruby</a>
+<a class="sourceLine" id="cb105-21" data-line-number="21">&lt;Directory /var/www/html/bety&gt;</a>
+<a class="sourceLine" id="cb105-22" data-line-number="22">  Options +FollowSymLinks</a>
+<a class="sourceLine" id="cb105-23" data-line-number="23">  Require all granted</a>
+<a class="sourceLine" id="cb105-24" data-line-number="24">&lt;/Directory&gt;</a>
+<a class="sourceLine" id="cb105-25" data-line-number="25"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb105-26" data-line-number="26"><span class="ex">systemctl</span> restart httpd</a></code></pre></div>
 </div>
 <div id="rstudio-server-1" class="section level5">
 <h5><span class="header-section-number">22.2.2.2.5</span> Rstudio-server</h5>
@@ -1074,40 +1074,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>NOTE This will allow anybody to login to the machine through the rstudio interface and run any arbitrary code. The login used however is the same as the system login/password.</em></p>
 <p>Based on version of ubuntu 32/64 use either of the following</p>
 <p><em>32bit only</em></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-i386.deb</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-i386.deb</a></code></pre></div>
 <p><em>64bit only</em></p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-amd64.deb</a></code></pre></div>
-<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="co"># bceome root</span></a>
-<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb107-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb107-4" data-line-number="4"><span class="co"># install required packages</span></a>
-<a class="sourceLine" id="cb107-5" data-line-number="5"><span class="ex">apt-get</span> -y install libapparmor1 apparmor-utils libssl0.9.8</a>
-<a class="sourceLine" id="cb107-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb107-7" data-line-number="7"><span class="co"># install rstudio</span></a>
-<a class="sourceLine" id="cb107-8" data-line-number="8"><span class="ex">dpkg</span> -i rstudio-server-*</a>
-<a class="sourceLine" id="cb107-9" data-line-number="9"><span class="fu">rm</span> rstudio-server-*</a>
-<a class="sourceLine" id="cb107-10" data-line-number="10"><span class="bu">echo</span> <span class="st">&quot;www-address=127.0.0.1&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rserver.conf</a>
-<a class="sourceLine" id="cb107-11" data-line-number="11"><span class="bu">echo</span> <span class="st">&quot;r-libs-user=~/R/library&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rsession.conf</a>
-<a class="sourceLine" id="cb107-12" data-line-number="12"><span class="ex">rstudio-server</span> restart</a>
-<a class="sourceLine" id="cb107-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb107-14" data-line-number="14"><span class="co"># setup rstudio forwarding in apache</span></a>
-<a class="sourceLine" id="cb107-15" data-line-number="15"><span class="ex">a2enmod</span> proxy_http</a>
-<a class="sourceLine" id="cb107-16" data-line-number="16"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/rstudio.conf <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb107-17" data-line-number="17">ProxyPass        /rstudio/ http://localhost:8787/</a>
-<a class="sourceLine" id="cb107-18" data-line-number="18">ProxyPassReverse /rstudio/ http://localhost:8787/</a>
-<a class="sourceLine" id="cb107-19" data-line-number="19">RedirectMatch permanent ^/rstudio$ /rstudio/</a>
-<a class="sourceLine" id="cb107-20" data-line-number="20"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb107-21" data-line-number="21"><span class="ex">a2enconf</span> rstudio</a>
-<a class="sourceLine" id="cb107-22" data-line-number="22"><span class="ex">/etc/init.d/apache2</span> restart</a>
-<a class="sourceLine" id="cb107-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb107-24" data-line-number="24"><span class="co"># all done, exit root</span></a>
-<a class="sourceLine" id="cb107-25" data-line-number="25"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.98.1103-amd64.deb</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co"># bceome root</span></a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb108-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb108-4" data-line-number="4"><span class="co"># install required packages</span></a>
+<a class="sourceLine" id="cb108-5" data-line-number="5"><span class="ex">apt-get</span> -y install libapparmor1 apparmor-utils libssl0.9.8</a>
+<a class="sourceLine" id="cb108-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb108-7" data-line-number="7"><span class="co"># install rstudio</span></a>
+<a class="sourceLine" id="cb108-8" data-line-number="8"><span class="ex">dpkg</span> -i rstudio-server-*</a>
+<a class="sourceLine" id="cb108-9" data-line-number="9"><span class="fu">rm</span> rstudio-server-*</a>
+<a class="sourceLine" id="cb108-10" data-line-number="10"><span class="bu">echo</span> <span class="st">&quot;www-address=127.0.0.1&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rserver.conf</a>
+<a class="sourceLine" id="cb108-11" data-line-number="11"><span class="bu">echo</span> <span class="st">&quot;r-libs-user=~/R/library&quot;</span> <span class="op">&gt;&gt;</span> /etc/rstudio/rsession.conf</a>
+<a class="sourceLine" id="cb108-12" data-line-number="12"><span class="ex">rstudio-server</span> restart</a>
+<a class="sourceLine" id="cb108-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb108-14" data-line-number="14"><span class="co"># setup rstudio forwarding in apache</span></a>
+<a class="sourceLine" id="cb108-15" data-line-number="15"><span class="ex">a2enmod</span> proxy_http</a>
+<a class="sourceLine" id="cb108-16" data-line-number="16"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/conf-available/rstudio.conf <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb108-17" data-line-number="17">ProxyPass        /rstudio/ http://localhost:8787/</a>
+<a class="sourceLine" id="cb108-18" data-line-number="18">ProxyPassReverse /rstudio/ http://localhost:8787/</a>
+<a class="sourceLine" id="cb108-19" data-line-number="19">RedirectMatch permanent ^/rstudio$ /rstudio/</a>
+<a class="sourceLine" id="cb108-20" data-line-number="20"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb108-21" data-line-number="21"><span class="ex">a2enconf</span> rstudio</a>
+<a class="sourceLine" id="cb108-22" data-line-number="22"><span class="ex">/etc/init.d/apache2</span> restart</a>
+<a class="sourceLine" id="cb108-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb108-24" data-line-number="24"><span class="co"># all done, exit root</span></a>
+<a class="sourceLine" id="cb108-25" data-line-number="25"><span class="bu">exit</span></a></code></pre></div>
 </div>
 <div id="additional-packages-1" class="section level5">
 <h5><span class="header-section-number">22.2.2.2.6</span> Additional packages</h5>
 <p>NEED FIXING</p>
 <p>HDF5 Tools, netcdf, GDB and emacs</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install hdf5-tools cdo nco netcdf-bin ncview gdb emacs ess nedit</a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install hdf5-tools cdo nco netcdf-bin ncview gdb emacs ess nedit</a></code></pre></div>
 
 </div>
 </div>
@@ -1117,52 +1117,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This document also contains information on how to install the Rstudio server edition as well as any other packages that can be helpful.</p>
 <div id="install-build-environment-2" class="section level5">
 <h5><span class="header-section-number">22.2.2.3.1</span> Install build environment</h5>
-<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="co"># install R</span></a>
-<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="co"># download from http://cran.r-project.org/bin/macosx/</span></a>
-<a class="sourceLine" id="cb109-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb109-4" data-line-number="4"><span class="co"># install gfortran </span></a>
-<a class="sourceLine" id="cb109-5" data-line-number="5"><span class="co"># download from http://cran.r-project.org/bin/macosx/tools/</span></a>
-<a class="sourceLine" id="cb109-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb109-7" data-line-number="7"><span class="co"># install OpenMPI</span></a>
-<a class="sourceLine" id="cb109-8" data-line-number="8"><span class="ex">curl</span> -o openmpi-1.6.3.tar.gz http://www.open-mpi.org/software/ompi/v1.6/downloads/openmpi-1.6.3.tar.gz</a>
-<a class="sourceLine" id="cb109-9" data-line-number="9"><span class="fu">tar</span> zxf openmpi-1.6.3.tar.gz</a>
-<a class="sourceLine" id="cb109-10" data-line-number="10"><span class="bu">cd</span> openmpi-1.6.3</a>
-<a class="sourceLine" id="cb109-11" data-line-number="11"><span class="ex">./configure</span> --prefix=/usr/local</a>
-<a class="sourceLine" id="cb109-12" data-line-number="12"><span class="fu">make</span> all</a>
-<a class="sourceLine" id="cb109-13" data-line-number="13"><span class="fu">sudo</span> make install</a>
-<a class="sourceLine" id="cb109-14" data-line-number="14"><span class="bu">cd</span> ..</a>
-<a class="sourceLine" id="cb109-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb109-16" data-line-number="16"><span class="co"># install szip</span></a>
-<a class="sourceLine" id="cb109-17" data-line-number="17"><span class="ex">curl</span> -o szip-2.1-MacOSX-intel.tar.gz ftp://ftp.hdfgroup.org/lib-external/szip/2.1/bin/szip-2.1-MacOSX-intel.tar.gz</a>
-<a class="sourceLine" id="cb109-18" data-line-number="18"><span class="fu">tar</span> zxf szip-2.1-MacOSX-intel.tar.gz</a>
-<a class="sourceLine" id="cb109-19" data-line-number="19"><span class="fu">sudo</span> mv szip-2.1-MacOSX-intel /usr/local/szip</a>
-<a class="sourceLine" id="cb109-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb109-21" data-line-number="21"><span class="co"># install HDF5</span></a>
-<a class="sourceLine" id="cb109-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb109-23" data-line-number="23"><span class="ex">curl</span> -o hdf5-1.8.11.tar.gz http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.11.tar.gz</a>
-<a class="sourceLine" id="cb109-24" data-line-number="24"><span class="fu">tar</span> zxf hdf5-1.8.11.tar.gz</a>
-<a class="sourceLine" id="cb109-25" data-line-number="25"><span class="bu">cd</span> hdf5-1.8.11</a>
-<a class="sourceLine" id="cb109-26" data-line-number="26"><span class="fu">sed</span> -i -e <span class="st">&#39;s/-O3/-O0/g&#39;</span> config/gnu-flags </a>
-<a class="sourceLine" id="cb109-27" data-line-number="27"><span class="ex">./configure</span> --prefix=/usr/local/hdf5 --enable-fortran --enable-cxx --with-szlib=/usr/local/szip</a>
-<a class="sourceLine" id="cb109-28" data-line-number="28"><span class="fu">make</span></a>
-<a class="sourceLine" id="cb109-29" data-line-number="29"><span class="co"># make check</span></a>
-<a class="sourceLine" id="cb109-30" data-line-number="30"><span class="fu">sudo</span> make install</a>
-<a class="sourceLine" id="cb109-31" data-line-number="31"><span class="co"># sudo make check-install</span></a>
-<a class="sourceLine" id="cb109-32" data-line-number="32"><span class="bu">cd</span> ..</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="co"># install R</span></a>
+<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="co"># download from http://cran.r-project.org/bin/macosx/</span></a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="co"># install gfortran </span></a>
+<a class="sourceLine" id="cb110-5" data-line-number="5"><span class="co"># download from http://cran.r-project.org/bin/macosx/tools/</span></a>
+<a class="sourceLine" id="cb110-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb110-7" data-line-number="7"><span class="co"># install OpenMPI</span></a>
+<a class="sourceLine" id="cb110-8" data-line-number="8"><span class="ex">curl</span> -o openmpi-1.6.3.tar.gz http://www.open-mpi.org/software/ompi/v1.6/downloads/openmpi-1.6.3.tar.gz</a>
+<a class="sourceLine" id="cb110-9" data-line-number="9"><span class="fu">tar</span> zxf openmpi-1.6.3.tar.gz</a>
+<a class="sourceLine" id="cb110-10" data-line-number="10"><span class="bu">cd</span> openmpi-1.6.3</a>
+<a class="sourceLine" id="cb110-11" data-line-number="11"><span class="ex">./configure</span> --prefix=/usr/local</a>
+<a class="sourceLine" id="cb110-12" data-line-number="12"><span class="fu">make</span> all</a>
+<a class="sourceLine" id="cb110-13" data-line-number="13"><span class="fu">sudo</span> make install</a>
+<a class="sourceLine" id="cb110-14" data-line-number="14"><span class="bu">cd</span> ..</a>
+<a class="sourceLine" id="cb110-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb110-16" data-line-number="16"><span class="co"># install szip</span></a>
+<a class="sourceLine" id="cb110-17" data-line-number="17"><span class="ex">curl</span> -o szip-2.1-MacOSX-intel.tar.gz ftp://ftp.hdfgroup.org/lib-external/szip/2.1/bin/szip-2.1-MacOSX-intel.tar.gz</a>
+<a class="sourceLine" id="cb110-18" data-line-number="18"><span class="fu">tar</span> zxf szip-2.1-MacOSX-intel.tar.gz</a>
+<a class="sourceLine" id="cb110-19" data-line-number="19"><span class="fu">sudo</span> mv szip-2.1-MacOSX-intel /usr/local/szip</a>
+<a class="sourceLine" id="cb110-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb110-21" data-line-number="21"><span class="co"># install HDF5</span></a>
+<a class="sourceLine" id="cb110-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb110-23" data-line-number="23"><span class="ex">curl</span> -o hdf5-1.8.11.tar.gz http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.11.tar.gz</a>
+<a class="sourceLine" id="cb110-24" data-line-number="24"><span class="fu">tar</span> zxf hdf5-1.8.11.tar.gz</a>
+<a class="sourceLine" id="cb110-25" data-line-number="25"><span class="bu">cd</span> hdf5-1.8.11</a>
+<a class="sourceLine" id="cb110-26" data-line-number="26"><span class="fu">sed</span> -i -e <span class="st">&#39;s/-O3/-O0/g&#39;</span> config/gnu-flags </a>
+<a class="sourceLine" id="cb110-27" data-line-number="27"><span class="ex">./configure</span> --prefix=/usr/local/hdf5 --enable-fortran --enable-cxx --with-szlib=/usr/local/szip</a>
+<a class="sourceLine" id="cb110-28" data-line-number="28"><span class="fu">make</span></a>
+<a class="sourceLine" id="cb110-29" data-line-number="29"><span class="co"># make check</span></a>
+<a class="sourceLine" id="cb110-30" data-line-number="30"><span class="fu">sudo</span> make install</a>
+<a class="sourceLine" id="cb110-31" data-line-number="31"><span class="co"># sudo make check-install</span></a>
+<a class="sourceLine" id="cb110-32" data-line-number="32"><span class="bu">cd</span> ..</a></code></pre></div>
 </div>
 <div id="install-postgres-2" class="section level5">
 <h5><span class="header-section-number">22.2.2.3.2</span> Install Postgres</h5>
 <p>For those on a Mac I use the following app for postgresql which has
 postgis already installed (<a href="http://postgresapp.com/" class="uri">http://postgresapp.com/</a>)</p>
 <p>To get postgis run the following commands in psql:</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="co">##### Enable PostGIS (includes raster)</span></a>
-<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="ex">CREATE</span> EXTENSION postgis<span class="kw">;</span></a>
-<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="co">##### Enable Topology</span></a>
-<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="ex">CREATE</span> EXTENSION postgis_topology<span class="kw">;</span></a>
-<a class="sourceLine" id="cb110-5" data-line-number="5"><span class="co">##### fuzzy matching needed for Tiger</span></a>
-<a class="sourceLine" id="cb110-6" data-line-number="6"><span class="ex">CREATE</span> EXTENSION fuzzystrmatch<span class="kw">;</span></a>
-<a class="sourceLine" id="cb110-7" data-line-number="7"><span class="co">##### Enable US Tiger Geocoder</span></a>
-<a class="sourceLine" id="cb110-8" data-line-number="8"><span class="ex">CREATE</span> EXTENSION postgis_tiger_geocoder<span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="co">##### Enable PostGIS (includes raster)</span></a>
+<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="ex">CREATE</span> EXTENSION postgis<span class="kw">;</span></a>
+<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="co">##### Enable Topology</span></a>
+<a class="sourceLine" id="cb111-4" data-line-number="4"><span class="ex">CREATE</span> EXTENSION postgis_topology<span class="kw">;</span></a>
+<a class="sourceLine" id="cb111-5" data-line-number="5"><span class="co">##### fuzzy matching needed for Tiger</span></a>
+<a class="sourceLine" id="cb111-6" data-line-number="6"><span class="ex">CREATE</span> EXTENSION fuzzystrmatch<span class="kw">;</span></a>
+<a class="sourceLine" id="cb111-7" data-line-number="7"><span class="co">##### Enable US Tiger Geocoder</span></a>
+<a class="sourceLine" id="cb111-8" data-line-number="8"><span class="ex">CREATE</span> EXTENSION postgis_tiger_geocoder<span class="kw">;</span></a></code></pre></div>
 <p>To check your postgis run the following command again in psql: <code>SELECT PostGIS_full_version();</code></p>
 </div>
 <div id="additional-installs" class="section level5">
@@ -1178,26 +1178,26 @@ postgis already installed (<a href="http://postgresapp.com/" class="uri">http://
 <li>download most recent <a href="http://www.unidata.ucar.edu/downloads/udunits/index.jsp">version of Udunits here</a></li>
 <li>instructions for <a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html#Obtain">compiling from source</a></li>
 </ul>
-<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="ex">curl</span> -o udunits-2.1.24.tar.gz ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.24.tar.gz</a>
-<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="fu">tar</span> zxf udunits-2.1.24.tar.gz</a>
-<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="bu">cd</span> udunits-2.1.24</a>
-<a class="sourceLine" id="cb111-4" data-line-number="4"><span class="ex">./configure</span></a>
-<a class="sourceLine" id="cb111-5" data-line-number="5"><span class="fu">make</span></a>
-<a class="sourceLine" id="cb111-6" data-line-number="6"><span class="fu">sudo</span> make install</a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="ex">curl</span> -o udunits-2.1.24.tar.gz ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.24.tar.gz</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="fu">tar</span> zxf udunits-2.1.24.tar.gz</a>
+<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="bu">cd</span> udunits-2.1.24</a>
+<a class="sourceLine" id="cb112-4" data-line-number="4"><span class="ex">./configure</span></a>
+<a class="sourceLine" id="cb112-5" data-line-number="5"><span class="fu">make</span></a>
+<a class="sourceLine" id="cb112-6" data-line-number="6"><span class="fu">sudo</span> make install</a></code></pre></div>
 </div>
 </div>
 <div id="apache-configuration" class="section level5">
 <h5><span class="header-section-number">22.2.2.3.4</span> Apache Configuration</h5>
 <p>Mac does not support pdo/postgresql by default. The easiest way to install is use: <a href="http://php-osx.liip.ch/" class="uri">http://php-osx.liip.ch/</a></p>
 <p>To enable pecan to run from your webserver.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/others/pecan.conf <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb112-2" data-line-number="2">Alias /pecan <span class="va">${PWD}</span>/pecan/web</a>
-<a class="sourceLine" id="cb112-3" data-line-number="3">&lt;Directory <span class="va">${PWD}</span>/pecan/web&gt;</a>
-<a class="sourceLine" id="cb112-4" data-line-number="4">  DirectoryIndex index.php</a>
-<a class="sourceLine" id="cb112-5" data-line-number="5">  Options +All</a>
-<a class="sourceLine" id="cb112-6" data-line-number="6">  Require all granted</a>
-<a class="sourceLine" id="cb112-7" data-line-number="7">&lt;/Directory&gt;</a>
-<a class="sourceLine" id="cb112-8" data-line-number="8"><span class="op">EOF</span></a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/others/pecan.conf <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb113-2" data-line-number="2">Alias /pecan <span class="va">${PWD}</span>/pecan/web</a>
+<a class="sourceLine" id="cb113-3" data-line-number="3">&lt;Directory <span class="va">${PWD}</span>/pecan/web&gt;</a>
+<a class="sourceLine" id="cb113-4" data-line-number="4">  DirectoryIndex index.php</a>
+<a class="sourceLine" id="cb113-5" data-line-number="5">  Options +All</a>
+<a class="sourceLine" id="cb113-6" data-line-number="6">  Require all granted</a>
+<a class="sourceLine" id="cb113-7" data-line-number="7">&lt;/Directory&gt;</a>
+<a class="sourceLine" id="cb113-8" data-line-number="8"><span class="op">EOF</span></a></code></pre></div>
 </div>
 <div id="ruby" class="section level5">
 <h5><span class="header-section-number">22.2.2.3.5</span> Ruby</h5>
@@ -1218,42 +1218,42 @@ postgis already installed (<a href="http://postgresapp.com/" class="uri">http://
 <div id="install-and-configure-postgresql-udunits2-netcdf" class="section level6">
 <h6><span class="header-section-number">22.2.2.4.1.1</span> Install and configure PostgreSQL, udunits2, NetCDF</h6>
 <p><a href="http://www.postgresql.org/download/linux/redhat/">Reference: centoshelp.org</a></p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="ex">yum</span> install -y epel-release </a>
-<a class="sourceLine" id="cb113-2" data-line-number="2"><span class="ex">yum</span> -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm</a>
-<a class="sourceLine" id="cb113-3" data-line-number="3"><span class="ex">yum</span> -y install git R postgresql94-server postgresql94-contrib postgis2_94 udunits2 netcdf</a>
-<a class="sourceLine" id="cb113-4" data-line-number="4"><span class="ex">/usr/pgsql-9.4/bin/postgresql94-setup</span> initdb</a>
-<a class="sourceLine" id="cb113-5" data-line-number="5"><span class="ex">systemctl</span> enable postgresql-9.4</a>
-<a class="sourceLine" id="cb113-6" data-line-number="6"><span class="ex">systemctl</span> start postgresql-9.4</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="ex">yum</span> install -y epel-release </a>
+<a class="sourceLine" id="cb114-2" data-line-number="2"><span class="ex">yum</span> -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm</a>
+<a class="sourceLine" id="cb114-3" data-line-number="3"><span class="ex">yum</span> -y install git R postgresql94-server postgresql94-contrib postgis2_94 udunits2 netcdf</a>
+<a class="sourceLine" id="cb114-4" data-line-number="4"><span class="ex">/usr/pgsql-9.4/bin/postgresql94-setup</span> initdb</a>
+<a class="sourceLine" id="cb114-5" data-line-number="5"><span class="ex">systemctl</span> enable postgresql-9.4</a>
+<a class="sourceLine" id="cb114-6" data-line-number="6"><span class="ex">systemctl</span> start postgresql-9.4</a></code></pre></div>
 </div>
 <div id="install-and-start-apache" class="section level6">
 <h6><span class="header-section-number">22.2.2.4.1.2</span> Install and start Apache</h6>
-<div class="sourceCode" id="cb114"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="ex">yum</span> -y install httpd</a>
-<a class="sourceLine" id="cb114-2" data-line-number="2"><span class="ex">systemctl</span> enable httpd</a>
-<a class="sourceLine" id="cb114-3" data-line-number="3"><span class="ex">systemctl</span> start httpd</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="ex">yum</span> -y install httpd</a>
+<a class="sourceLine" id="cb115-2" data-line-number="2"><span class="ex">systemctl</span> enable httpd</a>
+<a class="sourceLine" id="cb115-3" data-line-number="3"><span class="ex">systemctl</span> start httpd</a></code></pre></div>
 </div>
 <div id="install-php" class="section level6">
 <h6><span class="header-section-number">22.2.2.4.1.3</span> Install PHP</h6>
-<div class="sourceCode" id="cb115"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="fu">sudo</span> yum -y install php php-pgsql</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="fu">sudo</span> yum -y install php php-pgsql</a></code></pre></div>
 </div>
 <div id="install-ruby-netcdf-gem" class="section level6">
 <h6><span class="header-section-number">22.2.2.4.1.4</span> Install ruby-netcdf gem</h6>
-<div class="sourceCode" id="cb116"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="bu">cd</span> <span class="va">$RUBY_APPLICATION_HOME</span></a>
-<a class="sourceLine" id="cb116-2" data-line-number="2"><span class="bu">export</span> <span class="va">$NETCDF_URL=</span>http://www.gfd-dennou.org/arch/ruby/products/ruby-netcdf/release/ruby-netcdf-0.6.6.tar.gz</a>
-<a class="sourceLine" id="cb116-3" data-line-number="3"><span class="bu">export</span> <span class="va">$NETCDF_DIR=</span>/usr/local/netcdf</a>
-<a class="sourceLine" id="cb116-4" data-line-number="4"><span class="ex">gem</span> install narray</a>
-<a class="sourceLine" id="cb116-5" data-line-number="5"><span class="bu">export</span> <span class="va">NARRAY_DIR=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">ls</span> <span class="va">$GEM_HOME</span>/gems <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;narray-&#39;</span><span class="va">)</span><span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb116-6" data-line-number="6"><span class="bu">export</span> <span class="va">NARRAY_PATH=</span><span class="st">&quot;</span><span class="va">$GEM_HOME</span><span class="st">/gems/</span><span class="va">$NARRAY_DIR</span><span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb116-7" data-line-number="7"><span class="bu">cd</span> <span class="va">$MY_RUBY_HOME</span>/bin</a>
-<a class="sourceLine" id="cb116-8" data-line-number="8"><span class="fu">wget</span> <span class="va">$NETCDF_URL</span> -O ruby-netcdf.tgz</a>
-<a class="sourceLine" id="cb116-9" data-line-number="9"><span class="fu">tar</span> zxf ruby-netcdf.tgz <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> ruby-netcdf-0.6.6/</a>
-<a class="sourceLine" id="cb116-10" data-line-number="10"><span class="ex">ruby</span> -rubygems extconf.rb --with-narray-include=<span class="va">$NARRAY_PATH</span> --with-netcdf-dir=/usr/local/netcdf-4.3.0</a>
-<a class="sourceLine" id="cb116-11" data-line-number="11"><span class="fu">sed</span> -i <span class="st">&#39;s|rb/$|rb|&#39;</span> Makefile</a>
-<a class="sourceLine" id="cb116-12" data-line-number="12"><span class="fu">make</span></a>
-<a class="sourceLine" id="cb116-13" data-line-number="13"><span class="fu">make</span> install</a>
-<a class="sourceLine" id="cb116-14" data-line-number="14"><span class="bu">cd</span> ../ <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> rm -rf ruby-netcdf*</a>
-<a class="sourceLine" id="cb116-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb116-16" data-line-number="16"><span class="bu">cd</span> <span class="va">$RUBY_APPLICATION</span></a>
-<a class="sourceLine" id="cb116-17" data-line-number="17"><span class="ex">bundle</span> install --without development</a></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="bu">cd</span> <span class="va">$RUBY_APPLICATION_HOME</span></a>
+<a class="sourceLine" id="cb117-2" data-line-number="2"><span class="bu">export</span> <span class="va">$NETCDF_URL=</span>http://www.gfd-dennou.org/arch/ruby/products/ruby-netcdf/release/ruby-netcdf-0.6.6.tar.gz</a>
+<a class="sourceLine" id="cb117-3" data-line-number="3"><span class="bu">export</span> <span class="va">$NETCDF_DIR=</span>/usr/local/netcdf</a>
+<a class="sourceLine" id="cb117-4" data-line-number="4"><span class="ex">gem</span> install narray</a>
+<a class="sourceLine" id="cb117-5" data-line-number="5"><span class="bu">export</span> <span class="va">NARRAY_DIR=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">ls</span> <span class="va">$GEM_HOME</span>/gems <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;narray-&#39;</span><span class="va">)</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb117-6" data-line-number="6"><span class="bu">export</span> <span class="va">NARRAY_PATH=</span><span class="st">&quot;</span><span class="va">$GEM_HOME</span><span class="st">/gems/</span><span class="va">$NARRAY_DIR</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb117-7" data-line-number="7"><span class="bu">cd</span> <span class="va">$MY_RUBY_HOME</span>/bin</a>
+<a class="sourceLine" id="cb117-8" data-line-number="8"><span class="fu">wget</span> <span class="va">$NETCDF_URL</span> -O ruby-netcdf.tgz</a>
+<a class="sourceLine" id="cb117-9" data-line-number="9"><span class="fu">tar</span> zxf ruby-netcdf.tgz <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> ruby-netcdf-0.6.6/</a>
+<a class="sourceLine" id="cb117-10" data-line-number="10"><span class="ex">ruby</span> -rubygems extconf.rb --with-narray-include=<span class="va">$NARRAY_PATH</span> --with-netcdf-dir=/usr/local/netcdf-4.3.0</a>
+<a class="sourceLine" id="cb117-11" data-line-number="11"><span class="fu">sed</span> -i <span class="st">&#39;s|rb/$|rb|&#39;</span> Makefile</a>
+<a class="sourceLine" id="cb117-12" data-line-number="12"><span class="fu">make</span></a>
+<a class="sourceLine" id="cb117-13" data-line-number="13"><span class="fu">make</span> install</a>
+<a class="sourceLine" id="cb117-14" data-line-number="14"><span class="bu">cd</span> ../ <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> rm -rf ruby-netcdf*</a>
+<a class="sourceLine" id="cb117-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb117-16" data-line-number="16"><span class="bu">cd</span> <span class="va">$RUBY_APPLICATION</span></a>
+<a class="sourceLine" id="cb117-17" data-line-number="17"><span class="ex">bundle</span> install --without development</a></code></pre></div>
 </div>
 </div>
 <div id="apache-configuration-1" class="section level5">
@@ -1265,17 +1265,17 @@ postgis already installed (<a href="http://postgresapp.com/" class="uri">http://
 <ul>
 <li>add <code>PATH=$PATH:/usr/sbin:/sbin</code> to <code>/etc/profile</code></li>
 </ul>
-<div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb117-1" data-line-number="1">   <span class="fu">cat</span> <span class="st">&quot;PATH=</span><span class="va">$PATH</span><span class="st">:/usr/sbin:/sbin; export PATH&quot;</span> <span class="op">&gt;&gt;</span> /etc/profile</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb118-1" data-line-number="1">   <span class="fu">cat</span> <span class="st">&quot;PATH=</span><span class="va">$PATH</span><span class="st">:/usr/sbin:/sbin; export PATH&quot;</span> <span class="op">&gt;&gt;</span> /etc/profile</a></code></pre></div>
 <ul>
 <li>add <a href="https://gist.github.com/dlebauer/6921889">rstudio.conf</a> to /etc/httpd/conf.d/</li>
 </ul>
-<div class="sourceCode" id="cb118"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb118-1" data-line-number="1">   <span class="fu">wget</span> https://gist.github.com/dlebauer/6921889/raw/d1e0f945228e5519afa6223d6f49d6e0617262bd/rstudio.conf</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">   <span class="fu">sudo</span> mv rstudio.conf /httpd/conf.d/</a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb119-1" data-line-number="1">   <span class="fu">wget</span> https://gist.github.com/dlebauer/6921889/raw/d1e0f945228e5519afa6223d6f49d6e0617262bd/rstudio.conf</a>
+<a class="sourceLine" id="cb119-2" data-line-number="2">   <span class="fu">sudo</span> mv rstudio.conf /httpd/conf.d/</a></code></pre></div>
 <ul>
 <li>download and install server:</li>
 </ul>
-<div class="sourceCode" id="cb119"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb119-1" data-line-number="1">   <span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.97.551-i686.rpm</a>
-<a class="sourceLine" id="cb119-2" data-line-number="2">   <span class="fu">sudo</span> yum install --nogpgcheck rstudio-server-0.97.551-i686.rpm</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb120-1" data-line-number="1">   <span class="fu">wget</span> http://download2.rstudio.org/rstudio-server-0.97.551-i686.rpm</a>
+<a class="sourceLine" id="cb120-2" data-line-number="2">   <span class="fu">sudo</span> yum install --nogpgcheck rstudio-server-0.97.551-i686.rpm</a></code></pre></div>
 <ul>
 <li>restart server <code>sudo httpd restart</code></li>
 <li>now you should be able to access <code>http://&lt;server&gt;/rstudio</code></li>
@@ -1302,25 +1302,25 @@ postgis already installed (<a href="http://postgresapp.com/" class="uri">http://
 <ul>
 <li><em>note</em> To install BETYdb without PEcAn, first download the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/scripts/load.bety.sh"><code>load.bety.sh</code> script</a></li>
 </ul>
-<div class="sourceCode" id="cb120"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="co"># install database (code assumes password is bety)</span></a>
-<a class="sourceLine" id="cb120-2" data-line-number="2"><span class="fu">sudo</span> -u postgres createuser -d -l -P -R -S bety</a>
-<a class="sourceLine" id="cb120-3" data-line-number="3"><span class="fu">sudo</span> -u postgres createdb -O bety bety</a>
-<a class="sourceLine" id="cb120-4" data-line-number="4"><span class="fu">sudo</span> -u postgres ./scripts/load.bety.sh -c YES -u YES -r 0</a>
-<a class="sourceLine" id="cb120-5" data-line-number="5"><span class="fu">sudo</span> -u postgres ./scripts/load.bety.sh -r 1</a>
-<a class="sourceLine" id="cb120-6" data-line-number="6"><span class="fu">sudo</span> -u postgres ./scripts/load.bety.sh -r 2</a>
-<a class="sourceLine" id="cb120-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb120-8" data-line-number="8"><span class="co"># configure for PEcAn web app (change password if needed)</span></a>
-<a class="sourceLine" id="cb120-9" data-line-number="9"><span class="fu">cp</span> web/config.example.php web/config.php </a>
-<a class="sourceLine" id="cb120-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb120-11" data-line-number="11"><span class="co"># add models to database (VM only)</span></a>
-<a class="sourceLine" id="cb120-12" data-line-number="12"><span class="ex">./scripts/add.models.sh</span></a>
-<a class="sourceLine" id="cb120-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb120-14" data-line-number="14"><span class="co"># add data to database</span></a>
-<a class="sourceLine" id="cb120-15" data-line-number="15"><span class="ex">./scripts/add.data.sh</span></a>
-<a class="sourceLine" id="cb120-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb120-17" data-line-number="17"><span class="co"># create outputs folder</span></a>
-<a class="sourceLine" id="cb120-18" data-line-number="18"><span class="fu">mkdir</span> ~/output</a>
-<a class="sourceLine" id="cb120-19" data-line-number="19"><span class="fu">chmod</span> 777 ~/output</a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="co"># install database (code assumes password is bety)</span></a>
+<a class="sourceLine" id="cb121-2" data-line-number="2"><span class="fu">sudo</span> -u postgres createuser -d -l -P -R -S bety</a>
+<a class="sourceLine" id="cb121-3" data-line-number="3"><span class="fu">sudo</span> -u postgres createdb -O bety bety</a>
+<a class="sourceLine" id="cb121-4" data-line-number="4"><span class="fu">sudo</span> -u postgres ./scripts/load.bety.sh -c YES -u YES -r 0</a>
+<a class="sourceLine" id="cb121-5" data-line-number="5"><span class="fu">sudo</span> -u postgres ./scripts/load.bety.sh -r 1</a>
+<a class="sourceLine" id="cb121-6" data-line-number="6"><span class="fu">sudo</span> -u postgres ./scripts/load.bety.sh -r 2</a>
+<a class="sourceLine" id="cb121-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb121-8" data-line-number="8"><span class="co"># configure for PEcAn web app (change password if needed)</span></a>
+<a class="sourceLine" id="cb121-9" data-line-number="9"><span class="fu">cp</span> web/config.example.php web/config.php </a>
+<a class="sourceLine" id="cb121-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb121-11" data-line-number="11"><span class="co"># add models to database (VM only)</span></a>
+<a class="sourceLine" id="cb121-12" data-line-number="12"><span class="ex">./scripts/add.models.sh</span></a>
+<a class="sourceLine" id="cb121-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb121-14" data-line-number="14"><span class="co"># add data to database</span></a>
+<a class="sourceLine" id="cb121-15" data-line-number="15"><span class="ex">./scripts/add.data.sh</span></a>
+<a class="sourceLine" id="cb121-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb121-17" data-line-number="17"><span class="co"># create outputs folder</span></a>
+<a class="sourceLine" id="cb121-18" data-line-number="18"><span class="fu">mkdir</span> ~/output</a>
+<a class="sourceLine" id="cb121-19" data-line-number="19"><span class="fu">chmod</span> 777 ~/output</a></code></pre></div>
 </div>
 <div id="installing-betydb-web-application" class="section level4">
 <h4><span class="header-section-number">22.2.3.3</span> Installing BETYdb Web Application</h4>
@@ -1333,45 +1333,45 @@ postgis already installed (<a href="http://postgresapp.com/" class="uri">http://
 <h5><span class="header-section-number">22.2.3.3.2</span> RUBY version</h5>
 <p>The RUBY version requires a few extra packages to be installed first.</p>
 <p>Next we install the web app.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="co"># install bety</span></a>
-<a class="sourceLine" id="cb121-2" data-line-number="2"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb121-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/bety.git</a>
-<a class="sourceLine" id="cb121-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb121-5" data-line-number="5"><span class="co"># install gems</span></a>
-<a class="sourceLine" id="cb121-6" data-line-number="6"><span class="bu">cd</span> bety</a>
-<a class="sourceLine" id="cb121-7" data-line-number="7"><span class="fu">sudo</span> gem2.0 install bundler</a>
-<a class="sourceLine" id="cb121-8" data-line-number="8"><span class="ex">bundle</span> install --without development:test:javascript_testing:debug</a></code></pre></div>
-<p>and configure BETY</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="co"># create folders for upload folders</span></a>
-<a class="sourceLine" id="cb122-2" data-line-number="2"><span class="fu">mkdir</span> paperclip/files paperclip/file_names</a>
-<a class="sourceLine" id="cb122-3" data-line-number="3"><span class="fu">chmod</span> 777 paperclip/files paperclip/file_names</a>
+<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="co"># install bety</span></a>
+<a class="sourceLine" id="cb122-2" data-line-number="2"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb122-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/bety.git</a>
 <a class="sourceLine" id="cb122-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb122-5" data-line-number="5"><span class="co"># create folder for log files</span></a>
-<a class="sourceLine" id="cb122-6" data-line-number="6"><span class="fu">mkdir</span> log</a>
-<a class="sourceLine" id="cb122-7" data-line-number="7"><span class="fu">touch</span> log/production.log</a>
-<a class="sourceLine" id="cb122-8" data-line-number="8"><span class="fu">chmod</span> 0666 log/production.log</a>
-<a class="sourceLine" id="cb122-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb122-10" data-line-number="10"><span class="co"># fix configuration for vm</span></a>
-<a class="sourceLine" id="cb122-11" data-line-number="11"><span class="fu">cp</span> config/additional_environment_vm.rb config/additional_environment.rb</a>
-<a class="sourceLine" id="cb122-12" data-line-number="12"><span class="fu">chmod</span> go+w public/javascripts/cache/</a>
-<a class="sourceLine" id="cb122-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb122-14" data-line-number="14"><span class="co"># setup bety database configuration</span></a>
-<a class="sourceLine" id="cb122-15" data-line-number="15"><span class="fu">cat</span> <span class="op">&gt;</span> config/database.yml <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb122-16" data-line-number="16">production:</a>
-<a class="sourceLine" id="cb122-17" data-line-number="17">  adapter: postgis</a>
-<a class="sourceLine" id="cb122-18" data-line-number="18">  encoding: utf-8</a>
-<a class="sourceLine" id="cb122-19" data-line-number="19">  reconnect: false</a>
-<a class="sourceLine" id="cb122-20" data-line-number="20">  database: bety</a>
-<a class="sourceLine" id="cb122-21" data-line-number="21">  pool: 5</a>
-<a class="sourceLine" id="cb122-22" data-line-number="22">  username: bety</a>
-<a class="sourceLine" id="cb122-23" data-line-number="23">  password: bety</a>
-<a class="sourceLine" id="cb122-24" data-line-number="24"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb122-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb122-26" data-line-number="26"><span class="co"># setup login tokens</span></a>
-<a class="sourceLine" id="cb122-27" data-line-number="27"><span class="fu">cat</span> <span class="op">&gt;</span> config/initializers/site_keys.rb <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb122-28" data-line-number="28">REST_AUTH_SITE_KEY         = &#39;thisisnotasecret&#39;</a>
-<a class="sourceLine" id="cb122-29" data-line-number="29">REST_AUTH_DIGEST_STRETCHES = 10</a>
-<a class="sourceLine" id="cb122-30" data-line-number="30"><span class="op">EOF</span></a></code></pre></div>
+<a class="sourceLine" id="cb122-5" data-line-number="5"><span class="co"># install gems</span></a>
+<a class="sourceLine" id="cb122-6" data-line-number="6"><span class="bu">cd</span> bety</a>
+<a class="sourceLine" id="cb122-7" data-line-number="7"><span class="fu">sudo</span> gem2.0 install bundler</a>
+<a class="sourceLine" id="cb122-8" data-line-number="8"><span class="ex">bundle</span> install --without development:test:javascript_testing:debug</a></code></pre></div>
+<p>and configure BETY</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="co"># create folders for upload folders</span></a>
+<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="fu">mkdir</span> paperclip/files paperclip/file_names</a>
+<a class="sourceLine" id="cb123-3" data-line-number="3"><span class="fu">chmod</span> 777 paperclip/files paperclip/file_names</a>
+<a class="sourceLine" id="cb123-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb123-5" data-line-number="5"><span class="co"># create folder for log files</span></a>
+<a class="sourceLine" id="cb123-6" data-line-number="6"><span class="fu">mkdir</span> log</a>
+<a class="sourceLine" id="cb123-7" data-line-number="7"><span class="fu">touch</span> log/production.log</a>
+<a class="sourceLine" id="cb123-8" data-line-number="8"><span class="fu">chmod</span> 0666 log/production.log</a>
+<a class="sourceLine" id="cb123-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb123-10" data-line-number="10"><span class="co"># fix configuration for vm</span></a>
+<a class="sourceLine" id="cb123-11" data-line-number="11"><span class="fu">cp</span> config/additional_environment_vm.rb config/additional_environment.rb</a>
+<a class="sourceLine" id="cb123-12" data-line-number="12"><span class="fu">chmod</span> go+w public/javascripts/cache/</a>
+<a class="sourceLine" id="cb123-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb123-14" data-line-number="14"><span class="co"># setup bety database configuration</span></a>
+<a class="sourceLine" id="cb123-15" data-line-number="15"><span class="fu">cat</span> <span class="op">&gt;</span> config/database.yml <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb123-16" data-line-number="16">production:</a>
+<a class="sourceLine" id="cb123-17" data-line-number="17">  adapter: postgis</a>
+<a class="sourceLine" id="cb123-18" data-line-number="18">  encoding: utf-8</a>
+<a class="sourceLine" id="cb123-19" data-line-number="19">  reconnect: false</a>
+<a class="sourceLine" id="cb123-20" data-line-number="20">  database: bety</a>
+<a class="sourceLine" id="cb123-21" data-line-number="21">  pool: 5</a>
+<a class="sourceLine" id="cb123-22" data-line-number="22">  username: bety</a>
+<a class="sourceLine" id="cb123-23" data-line-number="23">  password: bety</a>
+<a class="sourceLine" id="cb123-24" data-line-number="24"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb123-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb123-26" data-line-number="26"><span class="co"># setup login tokens</span></a>
+<a class="sourceLine" id="cb123-27" data-line-number="27"><span class="fu">cat</span> <span class="op">&gt;</span> config/initializers/site_keys.rb <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb123-28" data-line-number="28">REST_AUTH_SITE_KEY         = &#39;thisisnotasecret&#39;</a>
+<a class="sourceLine" id="cb123-29" data-line-number="29">REST_AUTH_DIGEST_STRETCHES = 10</a>
+<a class="sourceLine" id="cb123-30" data-line-number="30"><span class="op">EOF</span></a></code></pre></div>
 
 </div>
 </div>
@@ -1397,10 +1397,10 @@ Also, some model downloads require permissions before downloading, making them u
 
 <div id="biocro" class="section level4">
 <h4><span class="header-section-number">22.2.4.1</span> BioCro</h4>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="co"># Public</span></a>
-<a class="sourceLine" id="cb123-2" data-line-number="2">echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro&quot;)&#39;</span> <span class="op">|</span><span class="st"> </span>R <span class="op">--</span>vanilla</a>
-<a class="sourceLine" id="cb123-3" data-line-number="3"><span class="co"># Development:</span></a>
-<a class="sourceLine" id="cb123-4" data-line-number="4">echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro-dev&quot;)&#39;</span> <span class="op">|</span><span class="st"> </span>R <span class="op">--</span>vanilla</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="co"># Public</span></a>
+<a class="sourceLine" id="cb124-2" data-line-number="2">echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro&quot;)&#39;</span> <span class="op">|</span><span class="st"> </span>R <span class="op">--</span>vanilla</a>
+<a class="sourceLine" id="cb124-3" data-line-number="3"><span class="co"># Development:</span></a>
+<a class="sourceLine" id="cb124-4" data-line-number="4">echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro-dev&quot;)&#39;</span> <span class="op">|</span><span class="st"> </span>R <span class="op">--</span>vanilla</a></code></pre></div>
 <p><em>BioCro Developers:</em> request from <span class="citation">[@dlebauer on GitHub]</span>(<a href="https://github.com/dlebauer" class="uri">https://github.com/dlebauer</a>)</p>
 
 </div>
@@ -1408,54 +1408,54 @@ Also, some model downloads require permissions before downloading, making them u
 <h4><span class="header-section-number">22.2.4.2</span> CLM 4.5</h4>
 <p>The version of CLM installed on PEcAn is the ORNL branch provided by Dan Ricciuto. This version includes Dan’s point-level CLM processing scripts</p>
 <p>Download the code (~300M compressed), input data (1.7GB compressed and expands to 14 GB), and a few misc inputs.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="fu">mkdir</span> models</a>
-<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="bu">cd</span> models</a>
-<a class="sourceLine" id="cb124-3" data-line-number="3"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm4_5_1_r085.tar.gz</a>
-<a class="sourceLine" id="cb124-4" data-line-number="4"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/ccsm_inputdata.tar.gz</a>
-<a class="sourceLine" id="cb124-5" data-line-number="5"><span class="fu">tar</span> -xvzf clm4_5*</a>
-<a class="sourceLine" id="cb124-6" data-line-number="6"><span class="fu">tar</span> -xvzf ccsm_inputdata.tar.gz</a>
-<a class="sourceLine" id="cb124-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb124-8" data-line-number="8"><span class="co">#Parameter file:</span></a>
-<a class="sourceLine" id="cb124-9" data-line-number="9"><span class="fu">mkdir</span> /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</a>
-<a class="sourceLine" id="cb124-10" data-line-number="10"><span class="bu">cd</span>  /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</a>
-<a class="sourceLine" id="cb124-11" data-line-number="11"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c130821.nc</a>
-<a class="sourceLine" id="cb124-12" data-line-number="12"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c140423.nc</a>
-<a class="sourceLine" id="cb124-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb124-14" data-line-number="14"><span class="co">#Domain file:</span></a>
-<a class="sourceLine" id="cb124-15" data-line-number="15"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/share/domains/domain.clm/</a>
-<a class="sourceLine" id="cb124-16" data-line-number="16"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/domain.lnd.1x1pt_US-UMB_navy.nc</a>
-<a class="sourceLine" id="cb124-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb124-18" data-line-number="18"><span class="co">#Aggregated met data file:</span></a>
-<a class="sourceLine" id="cb124-19" data-line-number="19"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/CLM1PT_data/1x1pt_US-UMB</a>
-<a class="sourceLine" id="cb124-20" data-line-number="20"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/all_hourly.nc </a>
-<a class="sourceLine" id="cb124-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb124-22" data-line-number="22"><span class="co">## lightning database</span></a>
-<a class="sourceLine" id="cb124-23" data-line-number="23"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/NASA_LIS/</a>
-<a class="sourceLine" id="cb124-24" data-line-number="24"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clmforc.Li_2012_climo1995-2011.T62.lnfm_Total_c140423.nc</a>
-<a class="sourceLine" id="cb124-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb124-26" data-line-number="26"><span class="co">## surface data</span></a>
-<a class="sourceLine" id="cb124-27" data-line-number="27"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata</a>
-<a class="sourceLine" id="cb124-28" data-line-number="28"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_360x720cru_simyr1850_c130927.nc</a>
-<a class="sourceLine" id="cb124-29" data-line-number="29"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata_map</a>
-<a class="sourceLine" id="cb124-30" data-line-number="30"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new</a>
-<a class="sourceLine" id="cb124-31" data-line-number="31"><span class="fu">mv</span> surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc</a></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="fu">mkdir</span> models</a>
+<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="bu">cd</span> models</a>
+<a class="sourceLine" id="cb125-3" data-line-number="3"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm4_5_1_r085.tar.gz</a>
+<a class="sourceLine" id="cb125-4" data-line-number="4"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/ccsm_inputdata.tar.gz</a>
+<a class="sourceLine" id="cb125-5" data-line-number="5"><span class="fu">tar</span> -xvzf clm4_5*</a>
+<a class="sourceLine" id="cb125-6" data-line-number="6"><span class="fu">tar</span> -xvzf ccsm_inputdata.tar.gz</a>
+<a class="sourceLine" id="cb125-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb125-8" data-line-number="8"><span class="co">#Parameter file:</span></a>
+<a class="sourceLine" id="cb125-9" data-line-number="9"><span class="fu">mkdir</span> /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</a>
+<a class="sourceLine" id="cb125-10" data-line-number="10"><span class="bu">cd</span>  /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</a>
+<a class="sourceLine" id="cb125-11" data-line-number="11"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c130821.nc</a>
+<a class="sourceLine" id="cb125-12" data-line-number="12"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c140423.nc</a>
+<a class="sourceLine" id="cb125-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb125-14" data-line-number="14"><span class="co">#Domain file:</span></a>
+<a class="sourceLine" id="cb125-15" data-line-number="15"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/share/domains/domain.clm/</a>
+<a class="sourceLine" id="cb125-16" data-line-number="16"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/domain.lnd.1x1pt_US-UMB_navy.nc</a>
+<a class="sourceLine" id="cb125-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb125-18" data-line-number="18"><span class="co">#Aggregated met data file:</span></a>
+<a class="sourceLine" id="cb125-19" data-line-number="19"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/CLM1PT_data/1x1pt_US-UMB</a>
+<a class="sourceLine" id="cb125-20" data-line-number="20"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/all_hourly.nc </a>
+<a class="sourceLine" id="cb125-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb125-22" data-line-number="22"><span class="co">## lightning database</span></a>
+<a class="sourceLine" id="cb125-23" data-line-number="23"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/NASA_LIS/</a>
+<a class="sourceLine" id="cb125-24" data-line-number="24"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clmforc.Li_2012_climo1995-2011.T62.lnfm_Total_c140423.nc</a>
+<a class="sourceLine" id="cb125-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb125-26" data-line-number="26"><span class="co">## surface data</span></a>
+<a class="sourceLine" id="cb125-27" data-line-number="27"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata</a>
+<a class="sourceLine" id="cb125-28" data-line-number="28"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_360x720cru_simyr1850_c130927.nc</a>
+<a class="sourceLine" id="cb125-29" data-line-number="29"><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata_map</a>
+<a class="sourceLine" id="cb125-30" data-line-number="30"><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new</a>
+<a class="sourceLine" id="cb125-31" data-line-number="31"><span class="fu">mv</span> surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc</a></code></pre></div>
 <p>Required libraries</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="fu">sudo</span> apt-get install mercurial csh tcsh subversion cmake</a>
-<a class="sourceLine" id="cb125-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb125-3" data-line-number="3"><span class="fu">sudo</span> ln -s /usr/bin/make /usr/bin/gmake</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="fu">sudo</span> apt-get install mercurial csh tcsh subversion cmake</a>
+<a class="sourceLine" id="cb126-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb126-3" data-line-number="3"><span class="fu">sudo</span> ln -s /usr/bin/make /usr/bin/gmake</a></code></pre></div>
 <p>Compile and build default inputs</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="bu">cd</span> ~/carya/models/clm4_5_1_r085/scripts</a>
-<a class="sourceLine" id="cb126-2" data-line-number="2"><span class="ex">python</span> runCLM.py --site US-UMB ––compset I1850CLM45CN --mach ubuntu --ccsm_input /home/carya/models/ccsm_inputdata --tstep 1 --nopointdata --coldstart --cpl_bypass --clean_build</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="bu">cd</span> ~/carya/models/clm4_5_1_r085/scripts</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="ex">python</span> runCLM.py --site US-UMB ––compset I1850CLM45CN --mach ubuntu --ccsm_input /home/carya/models/ccsm_inputdata --tstep 1 --nopointdata --coldstart --cpl_bypass --clean_build</a></code></pre></div>
 <div id="clm-test-run" class="section level5">
 <h5><span class="header-section-number">22.2.4.2.1</span> CLM Test Run</h5>
 <p>You will see a new directory in scripts: US-UMB_I1850CLM45CN
 Enter this directory and run (you shouldn’t have to do this normally, but there is a bug with the python script and doing this ensures all files get to the right place):</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="ex">./US-UMB_I1850CLM45CN.build</span></a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="ex">./US-UMB_I1850CLM45CN.build</span></a></code></pre></div>
 <p>Next you are ready to go to the run directory:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="ex">/home/carya/models/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/run</span></a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="ex">/home/carya/models/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/run</span></a></code></pre></div>
 <p>Open to edit file: datm.streams.txt.CLM1PT.CLM_USRDAT and check file paths such that all paths start with /home/carya/models/ccsm_inputdata</p>
 <p>From this directory, launch the executable that resides in the bld directory:</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="ex">/home/carya/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/bld/cesm.exe</span></a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="ex">/home/carya/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/bld/cesm.exe</span></a></code></pre></div>
 <p>not sure this was the right location, but wherever the executable is</p>
 <p>You should begin to see output files that look like this:
 US-UMB_I1850CLM45CN.clm2.h0.yyyy-mm.nc (yyyy is year, mm is month)
@@ -1466,79 +1466,79 @@ These are netcdf files containing monthly averages of lots of variables.</p>
 </div>
 <div id="dalec" class="section level4">
 <h4><span class="header-section-number">22.2.4.3</span> DALEC</h4>
-<div class="sourceCode" id="cb130"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="ex">curl</span> -o dalec_EnKF_pub.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/dalec_EnKF_pub.tgz</a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="fu">tar</span> zxf dalec_EnKF_pub.tgz</a>
-<a class="sourceLine" id="cb130-4" data-line-number="4"><span class="fu">rm</span> dalec_EnKF_pub.tgz</a>
-<a class="sourceLine" id="cb130-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb130-6" data-line-number="6"><span class="bu">cd</span> dalec_EnKF_pub</a>
-<a class="sourceLine" id="cb130-7" data-line-number="7"><span class="fu">make</span> dalec_EnKF</a>
-<a class="sourceLine" id="cb130-8" data-line-number="8"><span class="fu">make</span> dalec_seqMH</a>
-<a class="sourceLine" id="cb130-9" data-line-number="9"><span class="fu">sudo</span> cp dalec_EnKF dalec_seqMH /usr/local/bin</a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="ex">curl</span> -o dalec_EnKF_pub.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/dalec_EnKF_pub.tgz</a>
+<a class="sourceLine" id="cb131-3" data-line-number="3"><span class="fu">tar</span> zxf dalec_EnKF_pub.tgz</a>
+<a class="sourceLine" id="cb131-4" data-line-number="4"><span class="fu">rm</span> dalec_EnKF_pub.tgz</a>
+<a class="sourceLine" id="cb131-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb131-6" data-line-number="6"><span class="bu">cd</span> dalec_EnKF_pub</a>
+<a class="sourceLine" id="cb131-7" data-line-number="7"><span class="fu">make</span> dalec_EnKF</a>
+<a class="sourceLine" id="cb131-8" data-line-number="8"><span class="fu">make</span> dalec_seqMH</a>
+<a class="sourceLine" id="cb131-9" data-line-number="9"><span class="fu">sudo</span> cp dalec_EnKF dalec_seqMH /usr/local/bin</a></code></pre></div>
 
 </div>
 <div id="ed2" class="section level4">
 <h4><span class="header-section-number">22.2.4.4</span> ED2</h4>
 <div id="ed2.2-r46-used-in-pecan-manuscript" class="section level5">
 <h5><span class="header-section-number">22.2.4.4.1</span> ED2.2 r46 (used in PEcAn manuscript)</h5>
-<div class="sourceCode" id="cb131"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="co"># Get version r46 with a few patches for ubuntu</span></a>
-<a class="sourceLine" id="cb131-3" data-line-number="3"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb131-4" data-line-number="4"><span class="ex">curl</span> -o ED.r46.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r46.tgz</a>
-<a class="sourceLine" id="cb131-5" data-line-number="5"><span class="fu">tar</span> zxf ED.r46.tgz</a>
-<a class="sourceLine" id="cb131-6" data-line-number="6"><span class="fu">rm</span> ED.r46.tgz</a>
-<a class="sourceLine" id="cb131-7" data-line-number="7"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb131-8" data-line-number="8"><span class="co"># configure and compile ed</span></a>
-<a class="sourceLine" id="cb131-9" data-line-number="9"><span class="bu">cd</span> ~/ED.r46/ED/build/bin</a>
-<a class="sourceLine" id="cb131-10" data-line-number="10"><span class="ex">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> -s<span class="kw">`</span></a>
-<a class="sourceLine" id="cb131-11" data-line-number="11"><span class="fu">make</span> OPT=VM</a>
-<a class="sourceLine" id="cb131-12" data-line-number="12"><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r46</a></code></pre></div>
-<p>Perform a test run using pre configured ED settings for ED2.2 r46</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb132-2" data-line-number="2"><span class="co"># Create sample run</span></a>
+<a class="sourceLine" id="cb132-2" data-line-number="2"><span class="co"># Get version r46 with a few patches for ubuntu</span></a>
 <a class="sourceLine" id="cb132-3" data-line-number="3"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb132-4" data-line-number="4"><span class="fu">mkdir</span> testrun.ed.r46</a>
-<a class="sourceLine" id="cb132-5" data-line-number="5"><span class="bu">cd</span> testrun.ed.r46</a>
-<a class="sourceLine" id="cb132-6" data-line-number="6"><span class="ex">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r46</a>
-<a class="sourceLine" id="cb132-7" data-line-number="7"><span class="fu">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</a>
-<a class="sourceLine" id="cb132-8" data-line-number="8"><span class="ex">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r46.xml</a>
-<a class="sourceLine" id="cb132-9" data-line-number="9"><span class="co"># execute test run</span></a>
-<a class="sourceLine" id="cb132-10" data-line-number="10"><span class="bu">time</span> ed2.r46</a></code></pre></div>
+<a class="sourceLine" id="cb132-4" data-line-number="4"><span class="ex">curl</span> -o ED.r46.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r46.tgz</a>
+<a class="sourceLine" id="cb132-5" data-line-number="5"><span class="fu">tar</span> zxf ED.r46.tgz</a>
+<a class="sourceLine" id="cb132-6" data-line-number="6"><span class="fu">rm</span> ED.r46.tgz</a>
+<a class="sourceLine" id="cb132-7" data-line-number="7"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb132-8" data-line-number="8"><span class="co"># configure and compile ed</span></a>
+<a class="sourceLine" id="cb132-9" data-line-number="9"><span class="bu">cd</span> ~/ED.r46/ED/build/bin</a>
+<a class="sourceLine" id="cb132-10" data-line-number="10"><span class="ex">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> -s<span class="kw">`</span></a>
+<a class="sourceLine" id="cb132-11" data-line-number="11"><span class="fu">make</span> OPT=VM</a>
+<a class="sourceLine" id="cb132-12" data-line-number="12"><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r46</a></code></pre></div>
+<p>Perform a test run using pre configured ED settings for ED2.2 r46</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="co"># Create sample run</span></a>
+<a class="sourceLine" id="cb133-3" data-line-number="3"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb133-4" data-line-number="4"><span class="fu">mkdir</span> testrun.ed.r46</a>
+<a class="sourceLine" id="cb133-5" data-line-number="5"><span class="bu">cd</span> testrun.ed.r46</a>
+<a class="sourceLine" id="cb133-6" data-line-number="6"><span class="ex">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r46</a>
+<a class="sourceLine" id="cb133-7" data-line-number="7"><span class="fu">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</a>
+<a class="sourceLine" id="cb133-8" data-line-number="8"><span class="ex">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r46.xml</a>
+<a class="sourceLine" id="cb133-9" data-line-number="9"><span class="co"># execute test run</span></a>
+<a class="sourceLine" id="cb133-10" data-line-number="10"><span class="bu">time</span> ed2.r46</a></code></pre></div>
 </div>
 <div id="ed-2.2-r82" class="section level5">
 <h5><span class="header-section-number">22.2.4.4.2</span> ED 2.2 r82</h5>
-<div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
-<a class="sourceLine" id="cb133-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
-<a class="sourceLine" id="cb133-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
-<a class="sourceLine" id="cb133-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb133-6" data-line-number="6"><span class="bu">cd</span> ED.r82</a>
-<a class="sourceLine" id="cb133-7" data-line-number="7"><span class="ex">curl</span> -o ED.r82.patch http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.patch</a>
-<a class="sourceLine" id="cb133-8" data-line-number="8"><span class="fu">patch</span> -p1 <span class="op">&lt;</span> ED.r82.patch</a>
-<a class="sourceLine" id="cb133-9" data-line-number="9"><span class="bu">cd</span> ED/build/bin</a>
-<a class="sourceLine" id="cb133-10" data-line-number="10"><span class="ex">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> -s<span class="kw">`</span></a>
-<a class="sourceLine" id="cb133-11" data-line-number="11"><span class="fu">make</span> OPT=VM</a>
-<a class="sourceLine" id="cb133-12" data-line-number="12"><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r82</a></code></pre></div>
-<p>Perform a test run using pre configured ED settings for ED2.2 r82</p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="fu">mkdir</span> testrun.ed.r82</a>
-<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="bu">cd</span> testrun.ed.r82</a>
-<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="ex">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r82</a>
-<a class="sourceLine" id="cb134-5" data-line-number="5"><span class="fu">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</a>
-<a class="sourceLine" id="cb134-6" data-line-number="6"><span class="ex">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r82.xml</a>
-<a class="sourceLine" id="cb134-7" data-line-number="7"><span class="co"># execute test run</span></a>
-<a class="sourceLine" id="cb134-8" data-line-number="8"><span class="bu">time</span> ed2.r82</a></code></pre></div>
+<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb134-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb134-6" data-line-number="6"><span class="bu">cd</span> ED.r82</a>
+<a class="sourceLine" id="cb134-7" data-line-number="7"><span class="ex">curl</span> -o ED.r82.patch http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.patch</a>
+<a class="sourceLine" id="cb134-8" data-line-number="8"><span class="fu">patch</span> -p1 <span class="op">&lt;</span> ED.r82.patch</a>
+<a class="sourceLine" id="cb134-9" data-line-number="9"><span class="bu">cd</span> ED/build/bin</a>
+<a class="sourceLine" id="cb134-10" data-line-number="10"><span class="ex">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> -s<span class="kw">`</span></a>
+<a class="sourceLine" id="cb134-11" data-line-number="11"><span class="fu">make</span> OPT=VM</a>
+<a class="sourceLine" id="cb134-12" data-line-number="12"><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r82</a></code></pre></div>
+<p>Perform a test run using pre configured ED settings for ED2.2 r82</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb135-2" data-line-number="2"><span class="fu">mkdir</span> testrun.ed.r82</a>
+<a class="sourceLine" id="cb135-3" data-line-number="3"><span class="bu">cd</span> testrun.ed.r82</a>
+<a class="sourceLine" id="cb135-4" data-line-number="4"><span class="ex">curl</span> -o ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r82</a>
+<a class="sourceLine" id="cb135-5" data-line-number="5"><span class="fu">sed</span> -i -e <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</a>
+<a class="sourceLine" id="cb135-6" data-line-number="6"><span class="ex">curl</span> -o config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r82.xml</a>
+<a class="sourceLine" id="cb135-7" data-line-number="7"><span class="co"># execute test run</span></a>
+<a class="sourceLine" id="cb135-8" data-line-number="8"><span class="bu">time</span> ed2.r82</a></code></pre></div>
 </div>
 <div id="ed-2.2-bleeding-edge" class="section level5">
 <h5><span class="header-section-number">22.2.4.4.3</span> ED 2.2 bleeding edge</h5>
-<div class="sourceCode" id="cb135"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb135-2" data-line-number="2"><span class="fu">git</span> clone https://github.com/EDmodel/ED2.git</a>
-<a class="sourceLine" id="cb135-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb135-4" data-line-number="4"><span class="bu">cd</span> ED2/ED/build/bin</a>
-<a class="sourceLine" id="cb135-5" data-line-number="5"><span class="ex">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> -s<span class="kw">`</span></a>
-<a class="sourceLine" id="cb135-6" data-line-number="6"><span class="ex">./generate_deps.sh</span></a>
-<a class="sourceLine" id="cb135-7" data-line-number="7"><span class="fu">make</span> OPT=VM</a>
-<a class="sourceLine" id="cb135-8" data-line-number="8"><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.git</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb136-2" data-line-number="2"><span class="fu">git</span> clone https://github.com/EDmodel/ED2.git</a>
+<a class="sourceLine" id="cb136-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb136-4" data-line-number="4"><span class="bu">cd</span> ED2/ED/build/bin</a>
+<a class="sourceLine" id="cb136-5" data-line-number="5"><span class="ex">curl</span> -o include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> -s<span class="kw">`</span></a>
+<a class="sourceLine" id="cb136-6" data-line-number="6"><span class="ex">./generate_deps.sh</span></a>
+<a class="sourceLine" id="cb136-7" data-line-number="7"><span class="fu">make</span> OPT=VM</a>
+<a class="sourceLine" id="cb136-8" data-line-number="8"><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.git</a></code></pre></div>
 
 </div>
 </div>
@@ -1573,13 +1573,13 @@ cd ed-clm/cime/scripts/</code></pre>
 <div id="gday" class="section level4">
 <h4><span class="header-section-number">22.2.4.6</span> GDAY</h4>
 <p>Navigate to a directory you would like to store GDAY and run the following:</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="fu">git</span> clone https://github.com/mdekauwe/GDAY.git</a>
-<a class="sourceLine" id="cb140-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb140-3" data-line-number="3"><span class="bu">cd</span> GDAY</a>
-<a class="sourceLine" id="cb140-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb140-5" data-line-number="5"><span class="bu">cd</span> src</a>
-<a class="sourceLine" id="cb140-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb140-7" data-line-number="7"><span class="fu">make</span></a></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="fu">git</span> clone https://github.com/mdekauwe/GDAY.git</a>
+<a class="sourceLine" id="cb141-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb141-3" data-line-number="3"><span class="bu">cd</span> GDAY</a>
+<a class="sourceLine" id="cb141-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb141-5" data-line-number="5"><span class="bu">cd</span> src</a>
+<a class="sourceLine" id="cb141-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb141-7" data-line-number="7"><span class="fu">make</span></a></code></pre></div>
 <p><code>gday</code> is your executable.</p>
 
 </div>
@@ -1592,28 +1592,28 @@ Model requires registration to download. Not to be put on PEcAn VM
 Registration: <a href="https://jules.jchmr.org/software-and-documentation" class="uri">https://jules.jchmr.org/software-and-documentation</a>
 Documentation: <a href="http://jules-lsm.github.io/vn4.2/index.html" class="uri">http://jules-lsm.github.io/vn4.2/index.html</a></p>
 <p>FCM:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb141-1" data-line-number="1">    <span class="ex">https</span>://github.com/metomi/fcm/</a>
-<a class="sourceLine" id="cb141-2" data-line-number="2">    <span class="fu">wget</span> https://github.com/metomi/fcm/archive/2015.05.0.tar.gz</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb142-1" data-line-number="1">    <span class="ex">https</span>://github.com/metomi/fcm/</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">    <span class="fu">wget</span> https://github.com/metomi/fcm/archive/2015.05.0.tar.gz</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>edit makefile</li>
 </ol>
-<div class="sourceCode" id="cb142"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="ex">open</span> etc/fcm-make/make.cfg</a>
-<a class="sourceLine" id="cb142-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb142-3" data-line-number="3"><span class="kw">set</span> <span class="ex">JULES_NETCDF</span> = actual instead of dummy</a>
-<a class="sourceLine" id="cb142-4" data-line-number="4"><span class="kw">set</span> <span class="ex">path</span> (e.g. /usr/) <span class="ex">and</span> lib_path /lib64 to netCDF libraries</a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="ex">open</span> etc/fcm-make/make.cfg</a>
+<a class="sourceLine" id="cb143-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb143-3" data-line-number="3"><span class="kw">set</span> <span class="ex">JULES_NETCDF</span> = actual instead of dummy</a>
+<a class="sourceLine" id="cb143-4" data-line-number="4"><span class="kw">set</span> <span class="ex">path</span> (e.g. /usr/) <span class="ex">and</span> lib_path /lib64 to netCDF libraries</a></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>compile JULES</li>
 </ol>
-<div class="sourceCode" id="cb143"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="bu">cd</span> etc/fcm-make/</a>
-<a class="sourceLine" id="cb143-2" data-line-number="2"><span class="dt">{path.to.fcm}</span><span class="ex">/fcm</span> make -f etc/fcm-make/make.cfg --new</a></code></pre></div>
-<div class="sourceCode" id="cb144"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="ex">UBUNTU</span> VERSION: installed without having to add any perl libraries</a>
-<a class="sourceLine" id="cb144-2" data-line-number="2"><span class="co">#perl stuff that I had to install on pecan2 not PEcAN VM</span></a>
-<a class="sourceLine" id="cb144-3" data-line-number="3"><span class="fu">sudo</span> yum install perl-Digest-SHA</a>
-<a class="sourceLine" id="cb144-4" data-line-number="4"><span class="fu">sudo</span> yum install perl-Time-modules</a>
-<a class="sourceLine" id="cb144-5" data-line-number="5"><span class="fu">sudo</span> yum install cpan</a>
-<a class="sourceLine" id="cb144-6" data-line-number="6"><span class="ex">curl</span> -L http://cpanmin.us <span class="kw">|</span> <span class="fu">perl</span> - --sudo App::cpanminus</a>
-<a class="sourceLine" id="cb144-7" data-line-number="7"><span class="fu">sudo</span> cpanm Time/Piece.pm</a>
-<a class="sourceLine" id="cb144-8" data-line-number="8"><span class="fu">sudo</span> cpanm IO/Uncompress/Gunzip.pm</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="bu">cd</span> etc/fcm-make/</a>
+<a class="sourceLine" id="cb144-2" data-line-number="2"><span class="dt">{path.to.fcm}</span><span class="ex">/fcm</span> make -f etc/fcm-make/make.cfg --new</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="ex">UBUNTU</span> VERSION: installed without having to add any perl libraries</a>
+<a class="sourceLine" id="cb145-2" data-line-number="2"><span class="co">#perl stuff that I had to install on pecan2 not PEcAN VM</span></a>
+<a class="sourceLine" id="cb145-3" data-line-number="3"><span class="fu">sudo</span> yum install perl-Digest-SHA</a>
+<a class="sourceLine" id="cb145-4" data-line-number="4"><span class="fu">sudo</span> yum install perl-Time-modules</a>
+<a class="sourceLine" id="cb145-5" data-line-number="5"><span class="fu">sudo</span> yum install cpan</a>
+<a class="sourceLine" id="cb145-6" data-line-number="6"><span class="ex">curl</span> -L http://cpanmin.us <span class="kw">|</span> <span class="fu">perl</span> - --sudo App::cpanminus</a>
+<a class="sourceLine" id="cb145-7" data-line-number="7"><span class="fu">sudo</span> cpanm Time/Piece.pm</a>
+<a class="sourceLine" id="cb145-8" data-line-number="8"><span class="fu">sudo</span> cpanm IO/Uncompress/Gunzip.pm</a></code></pre></div>
 <p>Executable is under build/bin/jules.exe</p>
 <p>Example rundir: examples/point_loobos</p>
 
@@ -1622,17 +1622,17 @@ Documentation: <a href="http://jules-lsm.github.io/vn4.2/index.html" class="uri"
 <h4><span class="header-section-number">22.2.4.8</span> LINKAGES</h4>
 <div id="r-installation" class="section level5">
 <h5><span class="header-section-number">22.2.4.8.1</span> R Installation</h5>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="co"># Public</span></a>
-<a class="sourceLine" id="cb145-2" data-line-number="2">echo <span class="st">&#39;devtools::install_github(&quot;araiho/linkages_package&quot;)&#39;</span> <span class="op">|</span><span class="st"> </span>R <span class="op">--</span>vanilla</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="co"># Public</span></a>
+<a class="sourceLine" id="cb146-2" data-line-number="2">echo <span class="st">&#39;devtools::install_github(&quot;araiho/linkages_package&quot;)&#39;</span> <span class="op">|</span><span class="st"> </span>R <span class="op">--</span>vanilla</a></code></pre></div>
 </div>
 <div id="fortran-version" class="section level5">
 <h5><span class="header-section-number">22.2.4.8.2</span> FORTRAN VERSION</h5>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="co">#FORTRAN VERSION</span></a>
-<a class="sourceLine" id="cb146-2" data-line-number="2">cd</a>
-<a class="sourceLine" id="cb146-3" data-line-number="3">git clone https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>araiho<span class="op">/</span>Linkages.git</a>
-<a class="sourceLine" id="cb146-4" data-line-number="4">cd Linkages</a>
-<a class="sourceLine" id="cb146-5" data-line-number="5">gfortran <span class="op">-</span>o linkages linkages.f</a>
-<a class="sourceLine" id="cb146-6" data-line-number="6">sudo cp linkages <span class="op">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>linkages.git</a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="co">#FORTRAN VERSION</span></a>
+<a class="sourceLine" id="cb147-2" data-line-number="2">cd</a>
+<a class="sourceLine" id="cb147-3" data-line-number="3">git clone https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>araiho<span class="op">/</span>Linkages.git</a>
+<a class="sourceLine" id="cb147-4" data-line-number="4">cd Linkages</a>
+<a class="sourceLine" id="cb147-5" data-line-number="5">gfortran <span class="op">-</span>o linkages linkages.f</a>
+<a class="sourceLine" id="cb147-6" data-line-number="6">sudo cp linkages <span class="op">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>linkages.git</a></code></pre></div>
 
 </div>
 </div>
@@ -1645,47 +1645,47 @@ Documentation: <a href="http://jules-lsm.github.io/vn4.2/index.html" class="uri"
 <div id="maespa" class="section level4">
 <h4><span class="header-section-number">22.2.4.10</span> MAESPA</h4>
 <p>Navigate to a directory you would like store MAESPA and run the following:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="fu">git</span> clone https://bitbucket.org/remkoduursma/maespa.git</a>
-<a class="sourceLine" id="cb147-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb147-3" data-line-number="3"><span class="bu">cd</span> maespa</a>
-<a class="sourceLine" id="cb147-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb147-5" data-line-number="5"><span class="fu">make</span></a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="fu">git</span> clone https://bitbucket.org/remkoduursma/maespa.git</a>
+<a class="sourceLine" id="cb148-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb148-3" data-line-number="3"><span class="bu">cd</span> maespa</a>
+<a class="sourceLine" id="cb148-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb148-5" data-line-number="5"><span class="fu">make</span></a></code></pre></div>
 <p><code>maespa.out</code> is your executable. Example input files can be found in the <code>inpufiles</code> directory. Executing measpa.out from within one of the example directories will produce output.</p>
 <p>MAESPA developers have also developed a wrapper package called Maeswrap. The usual R package installation method <code>install.packages</code> may present issues with downloading an unpacking a dependency package called <code>rgl</code>. Here are a couple of solutions:</p>
 <div id="solution-1" class="section level5">
 <h5><span class="header-section-number">22.2.4.10.1</span> Solution 1</h5>
-<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="co">### From the Command Line</span></a>
-<a class="sourceLine" id="cb148-2" data-line-number="2"><span class="fu">sudo</span> apt-get install r-cran-rgl</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="co">### From the Command Line</span></a>
+<a class="sourceLine" id="cb149-2" data-line-number="2"><span class="fu">sudo</span> apt-get install r-cran-rgl</a></code></pre></div>
 <p>then from within R</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</a></code></pre></div>
 </div>
 <div id="solution-2" class="section level5">
 <h5><span class="header-section-number">22.2.4.10.2</span> Solution 2</h5>
-<div class="sourceCode" id="cb150"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="co">### From the Command line </span></a>
-<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="fu">sudo</span> apt-get install libglu1-mesa-dev</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="co">### From the Command line </span></a>
+<a class="sourceLine" id="cb151-2" data-line-number="2"><span class="fu">sudo</span> apt-get install libglu1-mesa-dev</a></code></pre></div>
 <p>then from within R</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
 <div id="sipnet" class="section level4">
 <h4><span class="header-section-number">22.2.4.11</span> SIPNET</h4>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb152-2" data-line-number="2"><span class="ex">curl</span> -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_unk.tar.gz</a>
-<a class="sourceLine" id="cb152-3" data-line-number="3"><span class="fu">tar</span> zxf sipnet_unk.tar.gz</a>
-<a class="sourceLine" id="cb152-4" data-line-number="4"><span class="fu">rm</span> sipnet_unk.tar.gz</a>
-<a class="sourceLine" id="cb152-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb152-6" data-line-number="6"><span class="bu">cd</span> sipnet_unk</a>
-<a class="sourceLine" id="cb152-7" data-line-number="7"><span class="fu">make</span></a>
-<a class="sourceLine" id="cb152-8" data-line-number="8"><span class="fu">sudo</span> cp sipnet /usr/local/bin/sipnet.runk</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb153-2" data-line-number="2"><span class="ex">curl</span> -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_unk.tar.gz</a>
+<a class="sourceLine" id="cb153-3" data-line-number="3"><span class="fu">tar</span> zxf sipnet_unk.tar.gz</a>
+<a class="sourceLine" id="cb153-4" data-line-number="4"><span class="fu">rm</span> sipnet_unk.tar.gz</a>
+<a class="sourceLine" id="cb153-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb153-6" data-line-number="6"><span class="bu">cd</span> sipnet_unk</a>
+<a class="sourceLine" id="cb153-7" data-line-number="7"><span class="fu">make</span></a>
+<a class="sourceLine" id="cb153-8" data-line-number="8"><span class="fu">sudo</span> cp sipnet /usr/local/bin/sipnet.runk</a></code></pre></div>
 <div id="sipnet-testrun" class="section level5">
 <h5><span class="header-section-number">22.2.4.11.1</span> SIPNET testrun</h5>
-<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb153-2" data-line-number="2"><span class="ex">curl</span> -o testrun.sipnet.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.sipnet.tar.gz</a>
-<a class="sourceLine" id="cb153-3" data-line-number="3"><span class="fu">tar</span> zxf testrun.sipnet.tar.gz</a>
-<a class="sourceLine" id="cb153-4" data-line-number="4"><span class="fu">rm</span> testrun.sipnet.tar.gz</a>
-<a class="sourceLine" id="cb153-5" data-line-number="5"><span class="bu">cd</span> testrun.sipnet</a>
-<a class="sourceLine" id="cb153-6" data-line-number="6"><span class="ex">sipnet.runk</span></a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="ex">curl</span> -o testrun.sipnet.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.sipnet.tar.gz</a>
+<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="fu">tar</span> zxf testrun.sipnet.tar.gz</a>
+<a class="sourceLine" id="cb154-4" data-line-number="4"><span class="fu">rm</span> testrun.sipnet.tar.gz</a>
+<a class="sourceLine" id="cb154-5" data-line-number="5"><span class="bu">cd</span> testrun.sipnet</a>
+<a class="sourceLine" id="cb154-6" data-line-number="6"><span class="ex">sipnet.runk</span></a></code></pre></div>
 
 </div>
 </div>
@@ -1694,39 +1694,39 @@ Documentation: <a href="http://jules-lsm.github.io/vn4.2/index.html" class="uri"
 <h3><span class="header-section-number">22.2.5</span> Download and Compile PEcAn</h3>
 <p>Set <code>R_LIBS_USER</code></p>
 <p><a href="http://cran.r-project.org/doc/manuals/r-devel/R-admin.html#Managing-libraries">CRAN Reference</a></p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="co"># point R to personal lib folder</span></a>
-<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</a>
-<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="bu">source</span> ~/.profile</a>
-<a class="sourceLine" id="cb154-4" data-line-number="4"><span class="fu">mkdir</span> -p <span class="va">${R_LIBS_USER}</span></a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="co"># point R to personal lib folder</span></a>
+<a class="sourceLine" id="cb155-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</a>
+<a class="sourceLine" id="cb155-3" data-line-number="3"><span class="bu">source</span> ~/.profile</a>
+<a class="sourceLine" id="cb155-4" data-line-number="4"><span class="fu">mkdir</span> -p <span class="va">${R_LIBS_USER}</span></a></code></pre></div>
 <div id="download-compile-and-install-pecan-from-github" class="section level4">
 <h4><span class="header-section-number">22.2.5.1</span> Download, compile and install PEcAn from GitHub</h4>
-<div class="sourceCode" id="cb155"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="co"># download pecan</span></a>
-<a class="sourceLine" id="cb155-2" data-line-number="2"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb155-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</a>
-<a class="sourceLine" id="cb155-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb155-5" data-line-number="5"><span class="co"># compile pecan</span></a>
-<a class="sourceLine" id="cb155-6" data-line-number="6"><span class="bu">cd</span> pecan</a>
-<a class="sourceLine" id="cb155-7" data-line-number="7"><span class="ex">./scripts/build.sh</span> --dependencies</a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="co"># download pecan</span></a>
+<a class="sourceLine" id="cb156-2" data-line-number="2"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb156-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</a>
+<a class="sourceLine" id="cb156-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb156-5" data-line-number="5"><span class="co"># compile pecan</span></a>
+<a class="sourceLine" id="cb156-6" data-line-number="6"><span class="bu">cd</span> pecan</a>
+<a class="sourceLine" id="cb156-7" data-line-number="7"><span class="ex">./scripts/build.sh</span> --dependencies</a></code></pre></div>
 <p>Following will run a small script to setup some hooks to prevent people from using the pecan demo user account to check in any code.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="co"># prevent pecan user from checking in code</span></a>
-<a class="sourceLine" id="cb156-2" data-line-number="2"><span class="ex">./scripts/create-hooks.sh</span></a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="co"># prevent pecan user from checking in code</span></a>
+<a class="sourceLine" id="cb157-2" data-line-number="2"><span class="ex">./scripts/create-hooks.sh</span></a></code></pre></div>
 </div>
 </div>
 <div id="pecan-testrun" class="section level3">
 <h3><span class="header-section-number">22.2.6</span> PEcAn Testrun</h3>
 <p>Do the run, this assumes you have <a href="pecan-setup.html#installing-bety">installed the BETY database</a>, <a href="pecan-setup.html#site-information">sites</a> tar file and <a href="dockerfiles-for-models.html#sipnet-2">SIPNET</a>.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="co"># create folder</span></a>
-<a class="sourceLine" id="cb157-2" data-line-number="2"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb157-3" data-line-number="3"><span class="fu">mkdir</span> testrun.pecan</a>
-<a class="sourceLine" id="cb157-4" data-line-number="4"><span class="bu">cd</span> testrun.pecan</a>
-<a class="sourceLine" id="cb157-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb157-6" data-line-number="6"><span class="co"># copy example of pecan workflow and configuration file</span></a>
-<a class="sourceLine" id="cb157-7" data-line-number="7"><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</a>
-<a class="sourceLine" id="cb157-8" data-line-number="8"><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</a>
-<a class="sourceLine" id="cb157-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb157-10" data-line-number="10"><span class="co"># exectute workflow</span></a>
-<a class="sourceLine" id="cb157-11" data-line-number="11"><span class="fu">rm</span> -rf pecan</a>
-<a class="sourceLine" id="cb157-12" data-line-number="12"><span class="ex">./workflow.R</span> pecan.xml</a></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="co"># create folder</span></a>
+<a class="sourceLine" id="cb158-2" data-line-number="2"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb158-3" data-line-number="3"><span class="fu">mkdir</span> testrun.pecan</a>
+<a class="sourceLine" id="cb158-4" data-line-number="4"><span class="bu">cd</span> testrun.pecan</a>
+<a class="sourceLine" id="cb158-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb158-6" data-line-number="6"><span class="co"># copy example of pecan workflow and configuration file</span></a>
+<a class="sourceLine" id="cb158-7" data-line-number="7"><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</a>
+<a class="sourceLine" id="cb158-8" data-line-number="8"><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</a>
+<a class="sourceLine" id="cb158-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb158-10" data-line-number="10"><span class="co"># exectute workflow</span></a>
+<a class="sourceLine" id="cb158-11" data-line-number="11"><span class="fu">rm</span> -rf pecan</a>
+<a class="sourceLine" id="cb158-12" data-line-number="12"><span class="ex">./workflow.R</span> pecan.xml</a></code></pre></div>
 <p>NB: pecan.xml is configured for the virtual machine, you will need to change the <met> field from ‘/home/carya/’ to wherever you installed your ‘sites’, usually $HOME</p>
 
 </div>

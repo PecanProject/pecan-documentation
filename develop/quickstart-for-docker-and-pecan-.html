@@ -25,7 +25,7 @@
 <meta name="author" content="Ann Raiho">
 
 
-<meta name="date" content="2018-07-24">
+<meta name="date" content="2018-07-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -616,16 +616,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>##Running PEcAn</p>
 <p>We will use a yaml file to describe the containers that we make up, This yaml file is called <a href="https://github.com/PecanProject/pecan/blob/master/docker-compose.yml">docker-compose.yml</a>. Before you get started you will need to download this file first. Place this file somewhere on your machine and cd to the folder that contains this file.</p>
 <p>Next we will start the docker containers to start Docker. Since both BETY and PEcAn depend on a populated database we will first start the database and populate it with some data. This only needs to be done once, if this is done already, you can skip this step and go to the next step</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb268-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d postgres</a>
-<a class="sourceLine" id="cb268-2" data-line-number="2"><span class="ex">docker</span> run -ti --rm \</a>
-<a class="sourceLine" id="cb268-3" data-line-number="3">    --network pecan_pecan \</a>
-<a class="sourceLine" id="cb268-4" data-line-number="4">    hub.ncsa.illinois.edu/pecan/bety:latest initialize</a>
-<a class="sourceLine" id="cb268-5" data-line-number="5"><span class="ex">docker</span> run -ti --rm \</a>
-<a class="sourceLine" id="cb268-6" data-line-number="6">    --network pecan_pecan \</a>
-<a class="sourceLine" id="cb268-7" data-line-number="7">    --volume pecan_pecan:/data \</a>
-<a class="sourceLine" id="cb268-8" data-line-number="8">    hub.ncsa.illinois.edu/pecan/data:develop</a></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d postgres</a>
+<a class="sourceLine" id="cb269-2" data-line-number="2"><span class="ex">docker</span> run -ti --rm \</a>
+<a class="sourceLine" id="cb269-3" data-line-number="3">    --network pecan_pecan \</a>
+<a class="sourceLine" id="cb269-4" data-line-number="4">    hub.ncsa.illinois.edu/pecan/bety:latest initialize</a>
+<a class="sourceLine" id="cb269-5" data-line-number="5"><span class="ex">docker</span> run -ti --rm \</a>
+<a class="sourceLine" id="cb269-6" data-line-number="6">    --network pecan_pecan \</a>
+<a class="sourceLine" id="cb269-7" data-line-number="7">    --volume pecan_pecan:/data \</a>
+<a class="sourceLine" id="cb269-8" data-line-number="8">    hub.ncsa.illinois.edu/pecan/data:develop</a></code></pre></div>
 <p>If this is finished (or you had done this in the past), we can start the full stack:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d</a></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb270-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d</a></code></pre></div>
 <p>This will start all the containers marked green in the architecture diagram. Once this is done you have a working instance of PEcAn. Following is a list of URL’s you can visit</p>
 <table>
 <colgroup>
@@ -665,19 +665,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="testing-pecan" class="section level2">
 <h2><span class="header-section-number">34.2</span> Testing PEcAn</h2>
 <p>To test PEcAn you can use the following curl statement, or use the webpage to submit a request:</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb270-1" data-line-number="1"><span class="ex">curl</span> -v -X POST \</a>
-<a class="sourceLine" id="cb270-2" data-line-number="2">    -F <span class="st">&#39;hostname=docker&#39;</span> \</a>
-<a class="sourceLine" id="cb270-3" data-line-number="3">    -F <span class="st">&#39;modelid=5000000002&#39;</span> \</a>
-<a class="sourceLine" id="cb270-4" data-line-number="4">    -F <span class="st">&#39;sitegroupid=1&#39;</span> \</a>
-<a class="sourceLine" id="cb270-5" data-line-number="5">    -F <span class="st">&#39;siteid=772&#39;</span> \</a>
-<a class="sourceLine" id="cb270-6" data-line-number="6">    -F <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> \</a>
-<a class="sourceLine" id="cb270-7" data-line-number="7">    -F <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> \</a>
-<a class="sourceLine" id="cb270-8" data-line-number="8">    -F <span class="st">&#39;start=2004/01/01&#39;</span> \</a>
-<a class="sourceLine" id="cb270-9" data-line-number="9">    -F <span class="st">&#39;end=2004/12/31&#39;</span> \</a>
-<a class="sourceLine" id="cb270-10" data-line-number="10">    -F <span class="st">&#39;input_met=5000000005&#39;</span> \</a>
-<a class="sourceLine" id="cb270-11" data-line-number="11">    -F <span class="st">&#39;email=&#39;</span> \</a>
-<a class="sourceLine" id="cb270-12" data-line-number="12">    -F <span class="st">&#39;notes=&#39;</span> \</a>
-<a class="sourceLine" id="cb270-13" data-line-number="13">    <span class="st">&#39;http://localhost:8000/pecan/04-runpecan.php&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="ex">curl</span> -v -X POST \</a>
+<a class="sourceLine" id="cb271-2" data-line-number="2">    -F <span class="st">&#39;hostname=docker&#39;</span> \</a>
+<a class="sourceLine" id="cb271-3" data-line-number="3">    -F <span class="st">&#39;modelid=5000000002&#39;</span> \</a>
+<a class="sourceLine" id="cb271-4" data-line-number="4">    -F <span class="st">&#39;sitegroupid=1&#39;</span> \</a>
+<a class="sourceLine" id="cb271-5" data-line-number="5">    -F <span class="st">&#39;siteid=772&#39;</span> \</a>
+<a class="sourceLine" id="cb271-6" data-line-number="6">    -F <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> \</a>
+<a class="sourceLine" id="cb271-7" data-line-number="7">    -F <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> \</a>
+<a class="sourceLine" id="cb271-8" data-line-number="8">    -F <span class="st">&#39;start=2004/01/01&#39;</span> \</a>
+<a class="sourceLine" id="cb271-9" data-line-number="9">    -F <span class="st">&#39;end=2004/12/31&#39;</span> \</a>
+<a class="sourceLine" id="cb271-10" data-line-number="10">    -F <span class="st">&#39;input_met=5000000005&#39;</span> \</a>
+<a class="sourceLine" id="cb271-11" data-line-number="11">    -F <span class="st">&#39;email=&#39;</span> \</a>
+<a class="sourceLine" id="cb271-12" data-line-number="12">    -F <span class="st">&#39;notes=&#39;</span> \</a>
+<a class="sourceLine" id="cb271-13" data-line-number="13">    <span class="st">&#39;http://localhost:8000/pecan/04-runpecan.php&#39;</span></a></code></pre></div>
 <p>This should return some text with in there <code>Location:</code> this is shows the workflow id, you can prepend <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> to the front of this, for example: <a href="http://localhost:8000/pecan/05-running.php?workflowid=99000000001" class="uri">http://localhost:8000/pecan/05-running.php?workflowid=99000000001</a>. Here you will be able to see the progress of the workflow.</p>
 <p>To see what is happening behind the scenes you can use look at the log file of the specific docker containers, once of interest are <code>pecan_executor_1</code> this is the container that will execute a single workflow and <code>pecan_sipnet_1</code> which executes the sipnet mode. To see the logs you use <code>docker logs pecan_executor_1</code> Following is an example output:</p>
 <pre><code>2018-06-13 15:50:37,903 [MainThread     ] INFO    : pika.adapters.base_connection - Connecting to 172.18.0.2:5672
