@@ -759,19 +759,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Only if this section is defined an ensemble analysis is done.</p>
 <div id="functions-5" class="section level4">
 <h4><span class="header-section-number">7.7.0.1</span> functions:</h4>
-<p><code>write.configs()</code>, <code>run.ensemble.analysis()</code></p>
+<p><code>write.configs()</code>,<code>write.ensemble.configs</code>, <code>run.ensemble.analysis()</code></p>
 </div>
 <div id="tags-2" class="section level4">
 <h4><span class="header-section-number">7.7.0.2</span> tags</h4>
 <div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">&lt;ensemble&gt;</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">    <span class="kw">&lt;size&gt;</span>5<span class="kw">&lt;/size&gt;</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="kw">&lt;size&gt;</span>5<span class="kw">&lt;/size&gt;</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw">&lt;variable&gt;</span>GPP<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="kw">&lt;variable&gt;</span>NPP<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">&lt;/ensemble&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="kw">&lt;start.year&gt;</span>1995<span class="kw">&lt;/start.year&gt;</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="kw">&lt;end.year&gt;</span>1999<span class="kw">&lt;/end.year&gt;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="kw">&lt;samplingspace&gt;</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">  <span class="kw">&lt;parameters&gt;</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">    <span class="kw">&lt;method&gt;</span>lhc<span class="kw">&lt;/method&gt;</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">  <span class="kw">&lt;/parameters&gt;</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">  <span class="kw">&lt;met&gt;</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="kw">&lt;method&gt;</span>sampling<span class="kw">&lt;/method&gt;</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">  <span class="kw">&lt;/met&gt;</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">  <span class="kw">&lt;/samplingspace&gt;</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="kw">&lt;/ensemble&gt;</span></a></code></pre></div>
 <ul>
 <li><strong>size</strong> : [required] the number of runs in the ensemble.</li>
 <li><strong>variable</strong>: [optional] name of one (or more) variables the analysis should be run for. If not specified, sensitivity.analysis variable is used, otherwise default is GPP.</li>
+<li><strong>samplingspace</strong>:[optional] Contains tags for defining how the ensembles will be generated.</li>
 </ul>
+<p>Each piece in the sampling space can potentially have a method tag and a parent tag. Method refers to the sampling method and parent refers to the cases where we need to link the samples of two components. When no tag is defined for one component, one sample will be generated and used for all the ensembles. This allows for partitioning/studying different sources of uncertainties. For example, if no met tag is defined then, one met path will be used for all the ensembles and as a result the outpus’s uncertainty will come from the variability in the parameters. At the moment no sampling method is implemented for soil and vegetation.
+Available sampling methods for <code>parameters</code> can be found in the documentation of the <code>get.ensemble.samples</code> function in <code>PEcAn.utils</code> package.
+For the cases where we need simulations with a predefined set of parameters, met and initial condition we can use the restart argument. Restart needs to be a list with name tags of runid, inputs, new.params (parameters), new.state (initial condition), ensemble.id (ensemble ids), start.time and stop.time.</p>
+<p>The restart functionality is developed using model specific functions by called write_restart.modelname. You need to make sure first that this function is already exist for your desired model.</p>
 <p>Note: if the ensemble size is set to 1, PEcAn will select the <strong>posterior median</strong> parameter values rather than taking a single random draw from the posterior</p>
 </div>
 </div>
