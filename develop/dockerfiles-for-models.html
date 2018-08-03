@@ -25,7 +25,7 @@
 <meta name="author" content="Ann Raiho">
 
 
-<meta name="date" content="2018-08-01">
+<meta name="date" content="2018-08-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -629,25 +629,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sipnet-2" class="section level2">
 <h2><span class="header-section-number">35.1</span> SIPNET</h2>
 <p>The folllowing command will build sipnet v136 for PEcAn using the branch that is currently checked out.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="ex">docker</span> build \</a>
-<a class="sourceLine" id="cb273-2" data-line-number="2">    --build-arg MODEL_VERSION=136 \</a>
-<a class="sourceLine" id="cb273-3" data-line-number="3">    --build-arg PECAN_VERSION=<span class="va">$(</span><span class="fu">git</span> rev-parse --abbrev-ref HEAD<span class="va">)</span> \</a>
-<a class="sourceLine" id="cb273-4" data-line-number="4">    --tag pecan/pecan-sipnet:136 \</a>
-<a class="sourceLine" id="cb273-5" data-line-number="5">    --file docker/Dockerfile.sipnet \</a>
-<a class="sourceLine" id="cb273-6" data-line-number="6">    .</a></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb275-1" data-line-number="1"><span class="ex">docker</span> build \</a>
+<a class="sourceLine" id="cb275-2" data-line-number="2">    --build-arg MODEL_VERSION=136 \</a>
+<a class="sourceLine" id="cb275-3" data-line-number="3">    --build-arg PECAN_VERSION=<span class="va">$(</span><span class="fu">git</span> rev-parse --abbrev-ref HEAD<span class="va">)</span> \</a>
+<a class="sourceLine" id="cb275-4" data-line-number="4">    --tag pecan/pecan-sipnet:136 \</a>
+<a class="sourceLine" id="cb275-5" data-line-number="5">    --file docker/Dockerfile.sipnet \</a>
+<a class="sourceLine" id="cb275-6" data-line-number="6">    .</a></code></pre></div>
 <p>Once the process is finished you can push (upload) the created image to docker hub. It will use the tag to place the image. In this case the image will be placed in the pecan project as the pecan-sipnet repository and tagged with 136. To do this you can use:</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb274-1" data-line-number="1"><span class="co"># do this only once</span></a>
-<a class="sourceLine" id="cb274-2" data-line-number="2"><span class="ex">docker</span> login</a>
-<a class="sourceLine" id="cb274-3" data-line-number="3"><span class="co"># push image</span></a>
-<a class="sourceLine" id="cb274-4" data-line-number="4"><span class="ex">docker</span> push pecan/pecan-sipnet:136</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb276-1" data-line-number="1"><span class="co"># do this only once</span></a>
+<a class="sourceLine" id="cb276-2" data-line-number="2"><span class="ex">docker</span> login</a>
+<a class="sourceLine" id="cb276-3" data-line-number="3"><span class="co"># push image</span></a>
+<a class="sourceLine" id="cb276-4" data-line-number="4"><span class="ex">docker</span> push pecan/pecan-sipnet:136</a></code></pre></div>
 <p>Once the image is pushed to dockerhub anybody can run the model. If you have not already downloaded the docker container the run command will download the image. Next it will run the image and will execute either the default command or the comman line given to the container. In the following example the default command is executed which will run the model and generate the PEcAn output files.</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb275-1" data-line-number="1"><span class="co"># get test data (only need to do this once)</span></a>
-<a class="sourceLine" id="cb275-2" data-line-number="2"><span class="ex">curl</span> -o sipnet.data.zip http://isda.ncsa.illinois.edu/~kooper/PEcAn/sipnet/sipnet.data.zip</a>
-<a class="sourceLine" id="cb275-3" data-line-number="3"><span class="fu">unzip</span> sipnet.data.zip</a>
-<a class="sourceLine" id="cb275-4" data-line-number="4"><span class="co"># cleanup if you rerun</span></a>
-<a class="sourceLine" id="cb275-5" data-line-number="5"><span class="fu">rm</span> -f sipnet.data/<span class="dt">{*.nc*,DONE,ERROR,sipnet.out,std*.log}</span></a>
-<a class="sourceLine" id="cb275-6" data-line-number="6"><span class="co"># run the actual model</span></a>
-<a class="sourceLine" id="cb275-7" data-line-number="7"><span class="ex">docker</span> run -t -i --rm -v <span class="va">${PWD}</span>/sipnet.data:/work pecan/pecan-sipnet:136</a></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb277-1" data-line-number="1"><span class="co"># get test data (only need to do this once)</span></a>
+<a class="sourceLine" id="cb277-2" data-line-number="2"><span class="ex">curl</span> -o sipnet.data.zip http://isda.ncsa.illinois.edu/~kooper/PEcAn/sipnet/sipnet.data.zip</a>
+<a class="sourceLine" id="cb277-3" data-line-number="3"><span class="fu">unzip</span> sipnet.data.zip</a>
+<a class="sourceLine" id="cb277-4" data-line-number="4"><span class="co"># cleanup if you rerun</span></a>
+<a class="sourceLine" id="cb277-5" data-line-number="5"><span class="fu">rm</span> -f sipnet.data/<span class="dt">{*.nc*,DONE,ERROR,sipnet.out,std*.log}</span></a>
+<a class="sourceLine" id="cb277-6" data-line-number="6"><span class="co"># run the actual model</span></a>
+<a class="sourceLine" id="cb277-7" data-line-number="7"><span class="ex">docker</span> run -t -i --rm -v <span class="va">${PWD}</span>/sipnet.data:/work pecan/pecan-sipnet:136</a></code></pre></div>
 
 <div id="using-the-pecan-download.file-function" class="section level3">
 <h3><span class="header-section-number">35.1.1</span> Using the PEcAn download.file() function</h3>

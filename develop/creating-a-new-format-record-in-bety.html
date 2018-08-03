@@ -25,7 +25,7 @@
 <meta name="author" content="Ann Raiho">
 
 
-<meta name="date" content="2018-08-01">
+<meta name="date" content="2018-08-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1134,31 +1134,32 @@ end_date &lt;- End date of your data in &quot;y-m-d&quot;</code></pre>
 <p>In the following example we will process vegetation data that you have in hand using PEcAn.</p>
 <p>First, you’ll need to create a input record in BETY that will have a file record and format record reflecting the location and format of your file. Instructions can be found in our <a href="creating-a-new-format-record-in-bety.html#NewInput">How to Insert new Input Data</a> page.</p>
 <p>Once you have created an input record you must take note of the input id of your record. An easy way to take note of this is in the URL of the BETY webpage that shows your input record. In this example we use an input record with the id <code>1000013064</code> which can be found at this url: <a href="https://psql-pecan.bu.edu/bety/inputs/1000013064#" class="uri">https://psql-pecan.bu.edu/bety/inputs/1000013064#</a> . Note that this is the Boston University BETY database. If you are on a different machine, your url will be different.</p>
-<p>With the input id in hand you can now edit a pecan XML so that the PEcAn function <code>ic.process</code> will know where to look in order to process your data. The <code>inputs</code> section of your pecan XML will look like this. As of now ic.process is set up to work with the ED2 model so we will use ED2 settings and then grab the intermediary Rds data file that is created as the standard PEcAn file. For your Inputs section you will need to input your input id wherever you see the <code>source.ic</code> flag.</p>
+<p>With the input id in hand you can now edit a pecan XML so that the PEcAn function <code>ic.process</code> will know where to look in order to process your data. The <code>inputs</code> section of your pecan XML will look like this. As of now ic.process is set up to work with the ED2 model so we will use ED2 settings and then grab the intermediary Rds data file that is created as the standard PEcAn file. For your Inputs section you will need to input your input id wherever you see the <code>useic</code> flag.</p>
 <pre><code>&lt;inputs&gt;
       &lt;css&gt;
         &lt;source&gt;FFT&lt;/source&gt;
         &lt;output&gt;css&lt;/output&gt;
         &lt;username&gt;pecan&lt;/username&gt;
-        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;id&gt;1000013064&lt;/id&gt;
         &lt;useic&gt;TRUE&lt;/useic&gt;
-        &lt;meta&gt;
+        &lt;metadata&gt;
           &lt;trk&gt;1&lt;/trk&gt;
           &lt;age&gt;70&lt;/age&gt;
-        &lt;/meta&gt;
+          &lt;area&gt;400&lt;/area&gt;
+        &lt;/metadata&gt;
       &lt;/css&gt;
       &lt;pss&gt;
         &lt;source&gt;FFT&lt;/source&gt;
         &lt;output&gt;pss&lt;/output&gt;
         &lt;username&gt;pecan&lt;/username&gt;
-        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;id&gt;1000013064&lt;/id&gt;
         &lt;useic&gt;TRUE&lt;/useic&gt;
       &lt;/pss&gt;
       &lt;site&gt;
         &lt;source&gt;FFT&lt;/source&gt;
         &lt;output&gt;site&lt;/output&gt;
         &lt;username&gt;pecan&lt;/username&gt;
-        &lt;source.id&gt;1000013064&lt;/source.id&gt;
+        &lt;id&gt;1000013064&lt;/id&gt;
         &lt;useic&gt;TRUE&lt;/useic&gt;
       &lt;/site&gt;
       &lt;met&gt;
@@ -1178,6 +1179,51 @@ end_date &lt;- End date of your data in &quot;y-m-d&quot;</code></pre>
         &lt;id&gt;296&lt;/id&gt;
       &lt;/veg&gt;
     &lt;/inputs&gt;</code></pre>
+<p>This IC workflow also supports generating ensembles of initial conditions from posterior estimates of DBH. To do this the tags below can be inserted to the pecan.xml:</p>
+<pre><code>       &lt;css&gt;
+        &lt;source&gt;PalEON&lt;/source&gt;
+        &lt;output&gt;css&lt;/output&gt;
+        &lt;id&gt;1000015682&lt;/id&gt;
+        &lt;useic&gt;TRUE&lt;/useic&gt;
+        &lt;ensemble&gt;20&lt;/ensemble&gt;
+        &lt;metadata&gt;
+          &lt;area&gt;1256.637&lt;/area&gt;
+          &lt;n.patch&gt;3&lt;/n.patch&gt;
+        &lt;/metadata&gt;
+      &lt;/css&gt;</code></pre>
+<p>Here the <code>id</code> should point to a file that has MCMC samples to generate the ensemble from. The number between the <code>&lt;ensemble&gt;</code> tag defines the number of ensembles requested. The workflow will populate the settings list <code>run$inputs</code> tag with ensemble member information. E.g.:</p>
+<pre><code>  &lt;inputs&gt;
+   &lt;css&gt;
+    &lt;path1&gt;...&lt;/path1&gt;
+    &lt;path2&gt;...&lt;/path2&gt;
+    &lt;path3&gt;...&lt;/path3&gt;
+    ...
+    &lt;pathN&gt;...&lt;/pathN&gt;
+   &lt;/css&gt;
+   &lt;pss&gt;
+    &lt;path&gt;
+     &lt;path1&gt;...&lt;/path1&gt;
+     &lt;path2&gt;...&lt;/path2&gt;
+     &lt;path3&gt;...&lt;/path3&gt;
+      ...
+     &lt;pathN&gt;...&lt;/pathN&gt;
+    &lt;/path&gt;
+   &lt;/pss&gt;
+   &lt;site&gt;
+    &lt;path&gt;
+     &lt;path1&gt;...&lt;/path1&gt;
+     &lt;path2&gt;...&lt;/path2&gt;
+     &lt;path3&gt;...&lt;/path3&gt;
+      ...
+     &lt;pathN&gt;...&lt;/pathN&gt;
+    &lt;/path&gt;
+   &lt;/site&gt;
+   &lt;met&gt;...&lt;/met&gt;
+   &lt;lu&gt;...&lt;/lu&gt;
+   &lt;soil&gt;...&lt;/soil&gt;
+   &lt;thsum&gt;...&lt;/thsum&gt;
+   &lt;veg&gt;...&lt;/veg&gt;
+  &lt;/inputs&gt;</code></pre>
 <p>Once you edit your PEcAn.xml you can than create a settings object using PEcAn functions. Your <code>pecan.xml</code> must be in your working directory.</p>
 <pre><code>settings &lt;- PEcAn.settings::read.settings(&quot;pecan.xml&quot;)
 settings &lt;- PEcAn.settings::prepare.settings(settings, force=FALSE)</code></pre>
