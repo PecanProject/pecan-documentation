@@ -22,10 +22,9 @@
   
   
 
-<meta name="author" content="Ann Raiho">
 
 
-<meta name="date" content="2018-08-05">
+<meta name="date" content="2018-08-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,6 +52,8 @@
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.10.16/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.10.16/js/dataTables.fixedColumns.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
@@ -215,27 +216,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#analysis-options"><i class="fa fa-check"></i><b>9.6.7</b> Analysis Options</a></li>
 <li class="chapter" data-level="9.6.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.6.8</b> The Generalized Ensemble Filter</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-products"><i class="fa fa-check"></i><b>9.7</b> Data Products</a><ul>
-<li class="chapter" data-level="9.7.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#tree-rings"><i class="fa fa-check"></i><b>9.7.1</b> Tree Rings</a></li>
-<li class="chapter" data-level="9.7.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#pollen"><i class="fa fa-check"></i><b>9.7.2</b> Pollen</a></li>
+<li class="chapter" data-level="9.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda_methods"><i class="fa fa-check"></i><b>9.7</b> SDA_Methods</a></li>
+<li class="chapter" data-level="9.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-products"><i class="fa fa-check"></i><b>9.8</b> Data Products</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#tree-rings"><i class="fa fa-check"></i><b>9.8.1</b> Tree Rings</a></li>
+<li class="chapter" data-level="9.8.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#pollen"><i class="fa fa-check"></i><b>9.8.2</b> Pollen</a></li>
 </ul></li>
-<li class="chapter" data-level="9.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#current-models"><i class="fa fa-check"></i><b>9.8</b> Current Models</a></li>
-<li class="chapter" data-level="9.9" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-calibration"><i class="fa fa-check"></i><b>9.9</b> Model Calibration</a></li>
-<li class="chapter" data-level="9.10" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#initial-conditions"><i class="fa fa-check"></i><b>9.10</b> Initial Conditions</a></li>
-<li class="chapter" data-level="9.11" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#drivers"><i class="fa fa-check"></i><b>9.11</b> Drivers</a></li>
-<li class="chapter" data-level="9.12" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sequential-state-data-assimilation"><i class="fa fa-check"></i><b>9.12</b> Sequential State Data Assimilation</a><ul>
-<li class="chapter" data-level="9.12.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#general-description"><i class="fa fa-check"></i><b>9.12.1</b> General Description</a></li>
-<li class="chapter" data-level="9.12.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#enkf"><i class="fa fa-check"></i><b>9.12.2</b> EnKF</a></li>
-<li class="chapter" data-level="9.12.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.12.3</b> Generalized Ensemble Filter</a></li>
-<li class="chapter" data-level="9.12.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#ensemble-adjustment"><i class="fa fa-check"></i><b>9.12.4</b> Ensemble Adjustment</a></li>
-<li class="chapter" data-level="9.12.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#diagnostics"><i class="fa fa-check"></i><b>9.12.5</b> Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#current-models"><i class="fa fa-check"></i><b>9.9</b> Current Models</a></li>
+<li class="chapter" data-level="9.10" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-calibration"><i class="fa fa-check"></i><b>9.10</b> Model Calibration</a></li>
+<li class="chapter" data-level="9.11" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#initial-conditions"><i class="fa fa-check"></i><b>9.11</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.12" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#drivers"><i class="fa fa-check"></i><b>9.12</b> Drivers</a></li>
+<li class="chapter" data-level="9.13" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sequential-state-data-assimilation"><i class="fa fa-check"></i><b>9.13</b> Sequential State Data Assimilation</a><ul>
+<li class="chapter" data-level="9.13.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#general-description"><i class="fa fa-check"></i><b>9.13.1</b> General Description</a></li>
+<li class="chapter" data-level="9.13.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#enkf"><i class="fa fa-check"></i><b>9.13.2</b> EnKF</a></li>
+<li class="chapter" data-level="9.13.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.13.3</b> Generalized Ensemble Filter</a></li>
+<li class="chapter" data-level="9.13.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#ensemble-adjustment"><i class="fa fa-check"></i><b>9.13.4</b> Ensemble Adjustment</a></li>
+<li class="chapter" data-level="9.13.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#diagnostics"><i class="fa fa-check"></i><b>9.13.5</b> Diagnostics</a></li>
 </ul></li>
-<li class="chapter" data-level="9.13" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#multisettings"><i class="fa fa-check"></i><b>9.13</b> MultiSettings</a></li>
-<li class="chapter" data-level="9.14" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#Benchmarking"><i class="fa fa-check"></i><b>9.14</b> Benchmarking</a><ul>
-<li class="chapter" data-level="9.14.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-preparation"><i class="fa fa-check"></i><b>9.14.1</b> Data Preparation</a></li>
-<li class="chapter" data-level="9.14.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-runs"><i class="fa fa-check"></i><b>9.14.2</b> Model Runs</a></li>
-<li class="chapter" data-level="9.14.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-benchmarking-shiny-app"><i class="fa fa-check"></i><b>9.14.3</b> The Benchmarking Shiny App</a></li>
-<li class="chapter" data-level="9.14.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#benchmarking-in-pecan.xml"><i class="fa fa-check"></i><b>9.14.4</b> Benchmarking in pecan.xml</a></li>
+<li class="chapter" data-level="9.14" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#multisettings"><i class="fa fa-check"></i><b>9.14</b> MultiSettings</a></li>
+<li class="chapter" data-level="9.15" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#Benchmarking"><i class="fa fa-check"></i><b>9.15</b> Benchmarking</a><ul>
+<li class="chapter" data-level="9.15.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-preparation"><i class="fa fa-check"></i><b>9.15.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="9.15.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-runs"><i class="fa fa-check"></i><b>9.15.2</b> Model Runs</a></li>
+<li class="chapter" data-level="9.15.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-benchmarking-shiny-app"><i class="fa fa-check"></i><b>9.15.3</b> The Benchmarking Shiny App</a></li>
+<li class="chapter" data-level="9.15.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#benchmarking-in-pecan.xml"><i class="fa fa-check"></i><b>9.15.4</b> Benchmarking in pecan.xml</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html"><i class="fa fa-check"></i><b>10</b> Remote execution with PEcAn</a><ul>
@@ -249,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.1" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#xml-configuration"><i class="fa fa-check"></i><b>10.4.1</b> XML configuration</a></li>
 <li class="chapter" data-level="10.4.2" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#configuration-for-pecan-web-interface"><i class="fa fa-check"></i><b>10.4.2</b> Configuration for PEcAn web interface</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#running-pecan-code-for-modules-remotely"><i class="fa fa-check"></i><b>10.5</b> Running PEcAn code for modules remotely</a><ul>
+<li class="chapter" data-level="10.5" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#running-pecan-code-for-remotely"><i class="fa fa-check"></i><b>10.5</b> Running PEcAn code for remotely</a><ul>
 <li class="chapter" data-level="10.5.1" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#geo.bu.edu"><i class="fa fa-check"></i><b>10.5.1</b> geo.bu.edu</a></li>
 </ul></li>
 </ul></li>
@@ -304,6 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.4" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#create-a-database-file-record-for-the-input-data"><i class="fa fa-check"></i><b>17.4</b> Create a database file record for the input data</a></li>
 <li class="chapter" data-level="17.5" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#creating-a-new-input-record-in-bety"><i class="fa fa-check"></i><b>17.5</b> Creating a new Input record in BETY</a><ul>
 <li class="chapter" data-level="17.5.1" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#InputConversions"><i class="fa fa-check"></i><b>17.5.1</b> Input Conversion</a></li>
+<li class="chapter" data-level="17.5.2" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#vegetation-data"><i class="fa fa-check"></i><b>17.5.2</b> Vegetation Data</a></li>
+<li class="chapter" data-level="17.5.3" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#soil-data"><i class="fa fa-check"></i><b>17.5.3</b> Soil Data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="reference-runs.html"><a href="reference-runs.html"><i class="fa fa-check"></i><b>18</b> Reference Runs</a></li>
@@ -382,18 +386,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="26" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html"><i class="fa fa-check"></i><b>26</b> Git and GitHub Workflow</a><ul>
 <li class="chapter" data-level="26.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#using-git"><i class="fa fa-check"></i><b>26.1</b> Using Git</a><ul>
 <li class="chapter" data-level="26.1.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git"><i class="fa fa-check"></i><b>26.1.1</b> Git</a></li>
-<li class="chapter" data-level="26.1.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#recommended-git-workflow"><i class="fa fa-check"></i><b>26.1.2</b> Recommended Git Workflow</a></li>
-<li class="chapter" data-level="26.1.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#during-development"><i class="fa fa-check"></i><b>26.1.3</b> During development:</a></li>
-<li class="chapter" data-level="26.1.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-pecan"><i class="fa fa-check"></i><b>26.1.4</b> For PEcAn</a></li>
-<li class="chapter" data-level="26.1.5" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git-rstudio"><i class="fa fa-check"></i><b>26.1.5</b> Git + Rstudio</a></li>
-<li class="chapter" data-level="26.1.6" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-development"><i class="fa fa-check"></i><b>26.1.6</b> For development:</a></li>
+<li class="chapter" data-level="26.1.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#pecan-project-and-github"><i class="fa fa-check"></i><b>26.1.2</b> PEcAn Project and Github</a></li>
+<li class="chapter" data-level="26.1.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#pecan-project-branches"><i class="fa fa-check"></i><b>26.1.3</b> PEcAn Project Branches</a></li>
+<li class="chapter" data-level="26.1.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git-rstudio"><i class="fa fa-check"></i><b>26.1.4</b> Git + Rstudio</a></li>
+<li class="chapter" data-level="26.1.5" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-development"><i class="fa fa-check"></i><b>26.1.5</b> For development:</a></li>
+<li class="chapter" data-level="26.1.6" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#references"><i class="fa fa-check"></i><b>26.1.6</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="26.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#references"><i class="fa fa-check"></i><b>26.2</b> References:</a></li>
-<li class="chapter" data-level="26.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#github-use-with-pecan"><i class="fa fa-check"></i><b>26.3</b> GitHub use with PEcAn</a><ul>
-<li class="chapter" data-level="26.3.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#bugs-issues-features-etc."><i class="fa fa-check"></i><b>26.3.1</b> Bugs, Issues, Features, etc.</a></li>
-<li class="chapter" data-level="26.3.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#requesting-a-feature"><i class="fa fa-check"></i><b>26.3.2</b> Requesting a feature</a></li>
-<li class="chapter" data-level="26.3.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#closing-an-issue"><i class="fa fa-check"></i><b>26.3.3</b> Closing an issue</a></li>
-<li class="chapter" data-level="26.3.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#when-to-submit-an-issue"><i class="fa fa-check"></i><b>26.3.4</b> When to submit an issue?</a></li>
+<li class="chapter" data-level="26.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#github-use-with-pecan"><i class="fa fa-check"></i><b>26.2</b> GitHub use with PEcAn</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#bugs-issues-features-etc."><i class="fa fa-check"></i><b>26.2.1</b> Bugs, Issues, Features, etc.</a></li>
+<li class="chapter" data-level="26.2.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#requesting-a-feature"><i class="fa fa-check"></i><b>26.2.2</b> Requesting a feature</a></li>
+<li class="chapter" data-level="26.2.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#closing-an-issue"><i class="fa fa-check"></i><b>26.2.3</b> Closing an issue</a></li>
+<li class="chapter" data-level="26.2.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#when-to-submit-an-issue"><i class="fa fa-check"></i><b>26.2.4</b> When to submit an issue?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="coding-practices.html"><a href="coding-practices.html"><i class="fa fa-check"></i><b>27</b> Coding Practices</a><ul>
@@ -435,36 +438,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI Reference Materials</b></span></li>
 <li class="chapter" data-level="29" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html"><i class="fa fa-check"></i><b>29</b> PEcAn standard formats</a><ul>
 <li class="chapter" data-level="29.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#defining-new-input-formats"><i class="fa fa-check"></i><b>29.1</b> Defining new input formats</a><ul>
-<li class="chapter" data-level="29.1.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#outputs"><i class="fa fa-check"></i><b>29.1.1</b> Outputs</a></li>
+<li class="chapter" data-level="29.1.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#input-standards"><i class="fa fa-check"></i><b>29.1.1</b> Input Standards</a></li>
+<li class="chapter" data-level="29.1.2" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#output-standards"><i class="fa fa-check"></i><b>29.1.2</b> Output Standards</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="30" data-path="models-in-pecan.html"><a href="models-in-pecan.html"><i class="fa fa-check"></i><b>30</b> Models in PEcAn</a><ul>
-<li class="chapter" data-level="30.1" data-path="models-in-pecan.html"><a href="models-in-pecan.html#biocro-configuration"><i class="fa fa-check"></i><b>30.1</b> BioCro Configuration</a></li>
-<li class="chapter" data-level="30.2" data-path="models-in-pecan.html"><a href="models-in-pecan.html#biocro-1"><i class="fa fa-check"></i><b>30.2</b> BioCro</a></li>
-<li class="chapter" data-level="30.3" data-path="models-in-pecan.html"><a href="models-in-pecan.html#clm"><i class="fa fa-check"></i><b>30.3</b> CLM</a></li>
-<li class="chapter" data-level="30.4" data-path="models-in-pecan.html"><a href="models-in-pecan.html#dalec-1"><i class="fa fa-check"></i><b>30.4</b> DALEC</a></li>
-<li class="chapter" data-level="30.5" data-path="models-in-pecan.html"><a href="models-in-pecan.html#ed"><i class="fa fa-check"></i><b>30.5</b> ED</a><ul>
-<li class="chapter" data-level="30.5.1" data-path="models-in-pecan.html"><a href="models-in-pecan.html#introduction-2"><i class="fa fa-check"></i><b>30.5.1</b> Introduction</a></li>
-<li class="chapter" data-level="30.5.2" data-path="models-in-pecan.html"><a href="models-in-pecan.html#pecan-configuration-file-additions"><i class="fa fa-check"></i><b>30.5.2</b> PEcAn configuration file additions</a></li>
-<li class="chapter" data-level="30.5.3" data-path="models-in-pecan.html"><a href="models-in-pecan.html#model-specific-input-files"><i class="fa fa-check"></i><b>30.5.3</b> Model specific input files</a></li>
-<li class="chapter" data-level="30.5.4" data-path="models-in-pecan.html"><a href="models-in-pecan.html#model-configuration-files"><i class="fa fa-check"></i><b>30.5.4</b> Model configuration files</a></li>
-<li class="chapter" data-level="30.5.5" data-path="models-in-pecan.html"><a href="models-in-pecan.html#installation-notes"><i class="fa fa-check"></i><b>30.5.5</b> Installation notes</a></li>
+<li class="chapter" data-level="30" data-path="models-in-pecan.html"><a href="models-in-pecan.html"><i class="fa fa-check"></i><b>30</b> Models in PEcAn</a></li>
+<li class="chapter" data-level="31" data-path="template-model-page.html"><a href="template-model-page.html"><i class="fa fa-check"></i><b>31</b> Template MODEL page</a><ul>
+<li class="chapter" data-level="31.1" data-path="template-model-page.html"><a href="template-model-page.html#biocro-configuration"><i class="fa fa-check"></i><b>31.1</b> BioCro Configuration</a></li>
+<li class="chapter" data-level="31.2" data-path="template-model-page.html"><a href="template-model-page.html#biocro-1"><i class="fa fa-check"></i><b>31.2</b> BioCro</a></li>
+<li class="chapter" data-level="31.3" data-path="template-model-page.html"><a href="template-model-page.html#clm"><i class="fa fa-check"></i><b>31.3</b> CLM</a></li>
+<li class="chapter" data-level="31.4" data-path="template-model-page.html"><a href="template-model-page.html#dalec-1"><i class="fa fa-check"></i><b>31.4</b> DALEC</a></li>
+<li class="chapter" data-level="31.5" data-path="template-model-page.html"><a href="template-model-page.html#ed"><i class="fa fa-check"></i><b>31.5</b> ED</a><ul>
+<li class="chapter" data-level="31.5.1" data-path="template-model-page.html"><a href="template-model-page.html#introduction-2"><i class="fa fa-check"></i><b>31.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="31.5.2" data-path="template-model-page.html"><a href="template-model-page.html#pecan-configuration-file-additions"><i class="fa fa-check"></i><b>31.5.2</b> PEcAn configuration file additions</a></li>
+<li class="chapter" data-level="31.5.3" data-path="template-model-page.html"><a href="template-model-page.html#model-specific-input-files"><i class="fa fa-check"></i><b>31.5.3</b> Model specific input files</a></li>
+<li class="chapter" data-level="31.5.4" data-path="template-model-page.html"><a href="template-model-page.html#model-configuration-files"><i class="fa fa-check"></i><b>31.5.4</b> Model configuration files</a></li>
+<li class="chapter" data-level="31.5.5" data-path="template-model-page.html"><a href="template-model-page.html#installation-notes"><i class="fa fa-check"></i><b>31.5.5</b> Installation notes</a></li>
 </ul></li>
-<li class="chapter" data-level="30.6" data-path="models-in-pecan.html"><a href="models-in-pecan.html#gday-1"><i class="fa fa-check"></i><b>30.6</b> GDAY</a></li>
-<li class="chapter" data-level="30.7" data-path="models-in-pecan.html"><a href="models-in-pecan.html#linkages-1"><i class="fa fa-check"></i><b>30.7</b> LINKAGES</a></li>
-<li class="chapter" data-level="30.8" data-path="models-in-pecan.html"><a href="models-in-pecan.html#lpj-guess-1"><i class="fa fa-check"></i><b>30.8</b> LPJ-GUESS</a></li>
-<li class="chapter" data-level="30.9" data-path="models-in-pecan.html"><a href="models-in-pecan.html#maespa-1"><i class="fa fa-check"></i><b>30.9</b> MAESPA</a></li>
+<li class="chapter" data-level="31.6" data-path="template-model-page.html"><a href="template-model-page.html#gday-1"><i class="fa fa-check"></i><b>31.6</b> GDAY</a></li>
+<li class="chapter" data-level="31.7" data-path="template-model-page.html"><a href="template-model-page.html#linkages-1"><i class="fa fa-check"></i><b>31.7</b> LINKAGES</a></li>
+<li class="chapter" data-level="31.8" data-path="template-model-page.html"><a href="template-model-page.html#lpj-guess-1"><i class="fa fa-check"></i><b>31.8</b> LPJ-GUESS</a></li>
+<li class="chapter" data-level="31.9" data-path="template-model-page.html"><a href="template-model-page.html#maespa-1"><i class="fa fa-check"></i><b>31.9</b> MAESPA</a></li>
 </ul></li>
-<li class="chapter" data-level="31" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>31</b> PEcAn Models</a><ul>
-<li class="chapter" data-level="31.1" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>31.1</b> PRELES</a></li>
-<li class="chapter" data-level="31.2" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-configuration"><i class="fa fa-check"></i><b>31.2</b> SIPNET configuration</a></li>
-<li class="chapter" data-level="31.3" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-1"><i class="fa fa-check"></i><b>31.3</b> Sipnet</a></li>
-</ul></li>
-<li class="chapter" data-level="32" data-path="template-model-page.html"><a href="template-model-page.html"><i class="fa fa-check"></i><b>32</b> Template MODEL page</a><ul>
-<li class="chapter" data-level="32.1" data-path="template-model-page.html"><a href="template-model-page.html#model-variables"><i class="fa fa-check"></i><b>32.1</b> Model Variables</a><ul>
-<li class="chapter" data-level="32.1.1" data-path="template-model-page.html"><a href="template-model-page.html#download-gfdl"><i class="fa fa-check"></i><b>32.1.1</b> Download GFDL</a></li>
-<li class="chapter" data-level="32.1.2" data-path="template-model-page.html"><a href="template-model-page.html#cm3"><i class="fa fa-check"></i><b>32.1.2</b> CM3</a></li>
-<li class="chapter" data-level="32.1.3" data-path="template-model-page.html"><a href="template-model-page.html#esm2m-esm2g"><i class="fa fa-check"></i><b>32.1.3</b> ESM2M &amp; ESM2G</a></li>
+<li class="chapter" data-level="32" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>32</b> PEcAn Models</a><ul>
+<li class="chapter" data-level="32.1" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>32.1</b> PRELES</a></li>
+<li class="chapter" data-level="32.2" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-configuration"><i class="fa fa-check"></i><b>32.2</b> SIPNET configuration</a></li>
+<li class="chapter" data-level="32.3" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-1"><i class="fa fa-check"></i><b>32.3</b> Sipnet</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="pecan-models.html"><a href="pecan-models.html#download-gfdl"><i class="fa fa-check"></i><b>32.3.1</b> Download GFDL</a></li>
+<li class="chapter" data-level="32.3.2" data-path="pecan-models.html"><a href="pecan-models.html#cm3"><i class="fa fa-check"></i><b>32.3.2</b> CM3</a></li>
+<li class="chapter" data-level="32.3.3" data-path="pecan-models.html"><a href="pecan-models.html#esm2m-esm2g"><i class="fa fa-check"></i><b>32.3.3</b> ESM2M &amp; ESM2G</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="33" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>33</b> Available Meteorological Drivers</a><ul>
@@ -532,7 +534,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="40.1.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#additional-outputs"><i class="fa fa-check"></i><b>40.1.1</b> Additional Outputs:</a></li>
 <li class="chapter" data-level="40.1.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#run-id"><i class="fa fa-check"></i><b>40.1.2</b> 1. Run ID:</a></li>
 <li class="chapter" data-level="40.1.3" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#inputs-3"><i class="fa fa-check"></i><b>40.1.3</b> 2. Inputs:</a></li>
-<li class="chapter" data-level="40.1.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#outputs-1"><i class="fa fa-check"></i><b>40.1.4</b> 3. Outputs:</a></li>
+<li class="chapter" data-level="40.1.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#outputs"><i class="fa fa-check"></i><b>40.1.4</b> 3. Outputs:</a></li>
 <li class="chapter" data-level="40.1.5" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pfts"><i class="fa fa-check"></i><b>40.1.5</b> 4. PFTs:</a></li>
 <li class="chapter" data-level="40.1.6" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pecan-files"><i class="fa fa-check"></i><b>40.1.6</b> PEcAn Files:</a></li>
 </ul></li>
@@ -827,244 +829,17 @@ In this case
 <p>Conversion function from raw to standard are named <code>met2CF.&lt;source&gt;.R</code>. These functions are stored within the PEcAn directory: <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.atmosphere/R"><code>/modules/data.atmosphere/R</code></a>.</p>
 <p>Current Meteorological products that are coupled to PEcAn can be found in our <a href="available-meteorological-drivers.html#available-meteorological-drivers">Available Meteorological Drivers</a> page.</p>
 <p>Note: Unless you are also adding a new model, you will not need to write a script to convert from PEcAn standard to PEcAn models. Those conversion scripts are written when a model is added and can be found within each model’s PEcAn directory.</p>
-</div>
-<div id="dimensions" class="section level5">
-<h5><span class="header-section-number">17.5.1.1.2</span> Dimensions:</h5>
-<table>
-<thead>
-<tr class="header">
-<th align="left">CF standard-name</th>
-<th align="left">units</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">time</td>
-<td align="left">days since 1700-01-01 00:00:00 UTC</td>
-</tr>
-<tr class="even">
-<td align="left">longitude</td>
-<td align="left">degrees_east</td>
-</tr>
-<tr class="odd">
-<td align="left">latitude</td>
-<td align="left">degrees_north</td>
-</tr>
-</tbody>
-</table>
-<p>General Note: dates in the database should be date-time (preferably with timezone), and datetime passed around in PEcAn should be of type POSIXct.</p>
-</div>
-<div id="the-variable-names-should-be-standard_name" class="section level5">
-<h5><span class="header-section-number">17.5.1.1.3</span> The variable names should be <code>standard_name</code></h5>
-<table style="width:100%;">
-<colgroup>
-<col width="40%" />
-<col width="6%" />
-<col width="13%" />
-<col width="13%" />
-<col width="8%" />
-<col width="6%" />
-<col width="10%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">CF standard-name</th>
-<th align="left">units</th>
-<th align="left">bety</th>
-<th align="left">isimip</th>
-<th align="left">cruncep</th>
-<th align="left">narr</th>
-<th align="left">ameriflux</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><strong>air_temperature</strong></td>
-<td align="left">K</td>
-<td align="left">airT</td>
-<td align="left">tasAdjust</td>
-<td align="left">tair</td>
-<td align="left">air</td>
-<td align="left">TA (C)</td>
-</tr>
-<tr class="even">
-<td align="left">air_temperature_max</td>
-<td align="left">K</td>
-<td align="left"></td>
-<td align="left">tasmaxAdjust</td>
-<td align="left">NA</td>
-<td align="left">tmax</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">air_temperature_min</td>
-<td align="left">K</td>
-<td align="left"></td>
-<td align="left">tasminAdjust</td>
-<td align="left">NA</td>
-<td align="left">tmin</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left"><strong>air_pressure</strong></td>
-<td align="left">Pa</td>
-<td align="left">air_pressure</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">PRESS (KPa)</td>
-</tr>
-<tr class="odd">
-<td align="left">mole_fraction_of_carbon_dioxide_in_air</td>
-<td align="left">mol/mol</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">CO2</td>
-</tr>
-<tr class="even">
-<td align="left">moisture_content_of_soil_layer</td>
-<td align="left">kg m-2</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">soil_temperature</td>
-<td align="left">K</td>
-<td align="left">soilT</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">TS1 <em>(NOT DONE)</em></td>
-</tr>
-<tr class="even">
-<td align="left">relative_humidity</td>
-<td align="left">%</td>
-<td align="left">relative_humidity</td>
-<td align="left">rhurs</td>
-<td align="left">NA</td>
-<td align="left">rhum</td>
-<td align="left">RH</td>
-</tr>
-<tr class="odd">
-<td align="left"><strong>specific_humidity</strong></td>
-<td align="left">1</td>
-<td align="left">specific_humidity</td>
-<td align="left">NA</td>
-<td align="left">qair</td>
-<td align="left">shum</td>
-<td align="left">CALC(RH)</td>
-</tr>
-<tr class="even">
-<td align="left">water_vapor_saturation_deficit</td>
-<td align="left">Pa</td>
-<td align="left">VPD</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">VPD <em>(NOT DONE)</em></td>
-</tr>
-<tr class="odd">
-<td align="left"><strong>surface_downwelling_longwave_flux_in_air</strong></td>
-<td align="left">W m-2</td>
-<td align="left">same</td>
-<td align="left">rldsAdjust</td>
-<td align="left">lwdown</td>
-<td align="left">dlwrf</td>
-<td align="left">Rgl</td>
-</tr>
-<tr class="even">
-<td align="left"><strong>surface_downwelling_shortwave_flux_in_air</strong></td>
-<td align="left">W m-2</td>
-<td align="left">solar_radiation</td>
-<td align="left">rsdsAdjust</td>
-<td align="left">swdown</td>
-<td align="left">dswrf</td>
-<td align="left">Rg</td>
-</tr>
-<tr class="odd">
-<td align="left">surface_downwelling_photosynthetic_photon_flux_in_air</td>
-<td align="left">mol m-2 s-1</td>
-<td align="left">PAR</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">PAR <em>(NOT DONE)</em></td>
-</tr>
-<tr class="even">
-<td align="left"><strong>precipitation_flux</strong></td>
-<td align="left">kg m-2 s-1</td>
-<td align="left">cccc</td>
-<td align="left">prAdjust</td>
-<td align="left">rain</td>
-<td align="left">acpc</td>
-<td align="left">PREC (mm/s)</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">degrees</td>
-<td align="left">wind_direction</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">WD</td>
-</tr>
-<tr class="even">
-<td align="left">wind_speed</td>
-<td align="left">m/s</td>
-<td align="left">Wspd</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">WS</td>
-</tr>
-<tr class="odd">
-<td align="left"><strong>eastward_wind</strong></td>
-<td align="left">m/s</td>
-<td align="left">eastward_wind</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">CALC(WS+WD)</td>
-</tr>
-<tr class="even">
-<td align="left"><strong>northward_wind</strong></td>
-<td align="left">m/s</td>
-<td align="left">northward_wind</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">CALC(WS+WD)</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>preferred variables indicated in bold</li>
-<li>wind_direction has no CF equivalent and should not be converted, instead the met2CF functions should convert wind_direction and wind_speed to eastward_wind and northward_wind</li>
-<li>standard_name is CF-convention standard names</li>
-<li>units can be converted by udunits, so these can vary (e.g. the time denominator may change with time frequency of inputs)</li>
-<li>soil moisture for the full column, rather than a layer, is soil_moisture_content</li>
-<li>A full list of PEcAn standard variable names, units and dimensions can be found here: <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv" class="uri">https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv</a></li>
-</ul>
-<p>For example, in the <a href="https://www.betydb.org/inputs/280">MsTMIP-CRUNCEP</a> data, the variable <code>rain</code> should be <code>precipitation_rate</code>.
-We want to standardize the units as well as part of the <code>met2CF.&lt;product&gt;</code> step. I believe we want to use the CF “canonical” units but retain the MsTMIP units any time CF is ambiguous about the units.</p>
-<p>The key is to process each type of met data (site, reanalysis, forecast, climate scenario, etc) to the exact same standard. This way every operation after that (extract, gap fill, downscale, convert to a model, etc) will always have the exact same inputs. This will make everything else much simpler to code and allow us to avoid a lot of unnecessary data checking, tests, etc being repeated in every downstream function.</p>
-</div>
-<div id="adding-single-site-specific-meteorological-data" class="section level5">
-<h5><span class="header-section-number">17.5.1.1.4</span> Adding Single-Site Specific Meteorological Data</h5>
+<p><em>Standards dimesion, names, nad units can be found here:</em> <a href="pecan-standard-formats.html#input-standards">Input Standards</a>
+##### Adding Single-Site Specific Meteorological Data</p>
 <p>Perhaps you have meteorological data specific to one site, with a unique format that you would like to add to PEcAn. Your steps would be to:
 1. write a script or function to convert your files into the netcdf PEcAn standard
 2. insert that file as an input record for your site following these <a href="creating-a-new-format-record-in-bety.html#NewInput">instructions</a></p>
 </div>
 <div id="processing-met-data-outside-of-the-workflow-using-pecan-functions" class="section level5">
-<h5><span class="header-section-number">17.5.1.1.5</span> Processing Met data outside of the workflow using PEcAn functions</h5>
+<h5><span class="header-section-number">17.5.1.1.2</span> Processing Met data outside of the workflow using PEcAn functions</h5>
 <p>Perhaps you would like to obtain data from one of the sources coupled to PEcAn on its own. To do so you can run PEcAn functions on their own.</p>
 <div id="example-1-processing-data-from-a-database" class="section level6">
-<h6><span class="header-section-number">17.5.1.1.5.1</span> Example 1: Processing data from a database</h6>
+<h6><span class="header-section-number">17.5.1.1.2.1</span> Example 1: Processing data from a database</h6>
 <p>Download Amerifluxlbl from Niwot Ridge for the year 2004:</p>
 <pre><code>raw.file &lt;-PEcAn.data.atmosphere::download.AmerifluxLBL(sitename = &quot;US-NR1&quot;, 
                                              outfolder = &quot;.&quot;, 
@@ -1100,7 +875,7 @@ format$time_zone &lt;- &quot;America/Chicago&quot;</code></pre>
                                   format = format) </code></pre>
 </div>
 <div id="example-2-processing-data-from-data-already-in-hand" class="section level6">
-<h6><span class="header-section-number">17.5.1.1.5.2</span> Example 2: Processing data from data already in hand</h6>
+<h6><span class="header-section-number">17.5.1.1.2.2</span> Example 2: Processing data from data already in hand</h6>
 <p>If you have Met data already in hand and you would like to convert into the PEcAn standard follow these instructions.</p>
 <p>Update BETY with file record, format record and input record according to this page <a href="creating-a-new-format-record-in-bety.html#NewInput">How to Insert new Input Data</a></p>
 <p>If your data is in a csv format you can use the <code>met2CF.csv</code>function to convert your data into a PEcAn standard file.</p>
@@ -1134,12 +909,13 @@ end_date &lt;- End date of your data in &quot;y-m-d&quot;</code></pre>
 </div>
 </div>
 </div>
-<div id="vegetation-data" class="section level4">
-<h4><span class="header-section-number">17.5.1.2</span> Vegetation Data</h4>
+</div>
+<div id="vegetation-data" class="section level3">
+<h3><span class="header-section-number">17.5.2</span> Vegetation Data</h3>
 <p>Vegetation data will be required to parameterize your model. In these examples we will go over how to produce a standard initial condition file.</p>
 <p>The main function to process cohort data is the <code>ic.process.R</code> function. As of now however, if you require pool data you will run a separate function, <code>pool_ic_list2netcdf.R</code>.</p>
 <div id="example-1-processing-veg-data-from-data-in-hand." class="section level6">
-<h6><span class="header-section-number">17.5.1.2.0.1</span> Example 1: Processing Veg data from data in hand.</h6>
+<h6><span class="header-section-number">17.5.2.0.0.1</span> Example 1: Processing Veg data from data in hand.</h6>
 <p>In the following example we will process vegetation data that you have in hand using PEcAn.</p>
 <p>First, you’ll need to create a input record in BETY that will have a file record and format record reflecting the location and format of your file. Instructions can be found in our <a href="creating-a-new-format-record-in-bety.html#NewInput">How to Insert new Input Data</a> page.</p>
 <p>Once you have created an input record you must take note of the input id of your record. An easy way to take note of this is in the URL of the BETY webpage that shows your input record. In this example we use an input record with the id <code>1000013064</code> which can be found at this url: <a href="https://psql-pecan.bu.edu/bety/inputs/1000013064#" class="uri">https://psql-pecan.bu.edu/bety/inputs/1000013064#</a> . Note that this is the Boston University BETY database. If you are on a different machine, your url will be different.</p>
@@ -1243,7 +1019,7 @@ ic.process(settings, input, dir, overwrite = FALSE)</code></pre>
 <p>Note that the argument <code>dir</code> is set to the current directory. You will find the final ED2 file there. More importantly though you will find the <code>.Rds</code> file within the same directory.</p>
 </div>
 <div id="example-3-pool-initial-condition-files" class="section level6">
-<h6><span class="header-section-number">17.5.1.2.0.2</span> Example 3 Pool Initial Condition files</h6>
+<h6><span class="header-section-number">17.5.2.0.0.2</span> Example 3 Pool Initial Condition files</h6>
 <p>If you have pool vegetation data, you’ll need the <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.land/R/pool_ic_list2netcdf.R"><code>pool_ic_list2netcdf.R</code></a> function to convert the pool data into PEcAn
 standard.</p>
 <p>The function stands alone and requires that you provide a named list of netcdf dimensions and values, and a named list of variables and values. Names and units need to match the standard_vars.csv table found <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv">here</a>.</p>
@@ -1260,10 +1036,10 @@ pool_ic_list2netcdf(input = input, outdir = outdir, siteid = siteid)</code></pre
 <p>You should now have a netcdf file with initial conditions.</p>
 </div>
 </div>
-<div id="soil-data" class="section level4">
-<h4><span class="header-section-number">17.5.1.3</span> Soil Data</h4>
+<div id="soil-data" class="section level3">
+<h3><span class="header-section-number">17.5.3</span> Soil Data</h3>
 <div id="example-1-converting-data-in-hand" class="section level6">
-<h6><span class="header-section-number">17.5.1.3.0.1</span> Example 1: Converting Data in hand</h6>
+<h6><span class="header-section-number">17.5.3.0.0.1</span> Example 1: Converting Data in hand</h6>
 <p>Local data that has the correct names and units can easily be written out in PEcAn standard using the function soil2netcdf.</p>
 <pre><code>soil.data &lt;- list(volume_fraction_of_sand_in_soil = c(0.3,0.4,0.5),
                   volume_fraction_of_clay_in_soil = c(0.3,0.3,0.3),
@@ -1273,7 +1049,7 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 <p>At the moment this file would need to be inserted into Inputs manually. By default, this function also calls soil_params, which will estimate a number of hydraulic and thermal parameters from texture. Be aware that at the moment not all model couplers are yet set up to read this file and/or convert it to model-specific formats.</p>
 </div>
 <div id="example-2-converting-paleon-data" class="section level6">
-<h6><span class="header-section-number">17.5.1.3.0.2</span> Example 2: Converting PalEON data</h6>
+<h6><span class="header-section-number">17.5.3.0.0.2</span> Example 2: Converting PalEON data</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
 <pre><code>   &lt;soil&gt;
      &lt;id&gt;1000012896&lt;/id&gt;
@@ -1281,7 +1057,7 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 <p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 </div>
 <div id="example-3-extracting-soil-properties-from-gssurgo-database" class="section level6">
-<h6><span class="header-section-number">17.5.1.3.0.3</span> Example 3: Extracting soil properties from gSSURGO database</h6>
+<h6><span class="header-section-number">17.5.3.0.0.3</span> Example 3: Extracting soil properties from gSSURGO database</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the gSSURGO data product. This product needs no installation and it extract soil proeprties for the lower 48 states in U.S. In order to let the pecan know that you’re planning to use gSSURGO, you can the following XML tag under input in your pecan xml file.</p>
 <pre class="&lt;inputs&gt;```"><code></code></pre>
 <p><soil>
@@ -1289,7 +1065,6 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 </soil>
 <code></code></inputs>```</p>
 
-</div>
 </div>
 </div>
 </div>

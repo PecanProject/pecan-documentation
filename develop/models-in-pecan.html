@@ -22,10 +22,9 @@
   
   
 
-<meta name="author" content="Ann Raiho">
 
 
-<meta name="date" content="2018-08-05">
+<meta name="date" content="2018-08-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +32,7 @@
   
   
 <link rel="prev" href="pecan-standard-formats.html">
-<link rel="next" href="pecan-models.html">
+<link rel="next" href="template-model-page.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -53,6 +52,8 @@
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.10.16/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.10.16/js/dataTables.fixedColumns.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
@@ -215,27 +216,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#analysis-options"><i class="fa fa-check"></i><b>9.6.7</b> Analysis Options</a></li>
 <li class="chapter" data-level="9.6.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.6.8</b> The Generalized Ensemble Filter</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-products"><i class="fa fa-check"></i><b>9.7</b> Data Products</a><ul>
-<li class="chapter" data-level="9.7.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#tree-rings"><i class="fa fa-check"></i><b>9.7.1</b> Tree Rings</a></li>
-<li class="chapter" data-level="9.7.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#pollen"><i class="fa fa-check"></i><b>9.7.2</b> Pollen</a></li>
+<li class="chapter" data-level="9.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda_methods"><i class="fa fa-check"></i><b>9.7</b> SDA_Methods</a></li>
+<li class="chapter" data-level="9.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-products"><i class="fa fa-check"></i><b>9.8</b> Data Products</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#tree-rings"><i class="fa fa-check"></i><b>9.8.1</b> Tree Rings</a></li>
+<li class="chapter" data-level="9.8.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#pollen"><i class="fa fa-check"></i><b>9.8.2</b> Pollen</a></li>
 </ul></li>
-<li class="chapter" data-level="9.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#current-models"><i class="fa fa-check"></i><b>9.8</b> Current Models</a></li>
-<li class="chapter" data-level="9.9" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-calibration"><i class="fa fa-check"></i><b>9.9</b> Model Calibration</a></li>
-<li class="chapter" data-level="9.10" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#initial-conditions"><i class="fa fa-check"></i><b>9.10</b> Initial Conditions</a></li>
-<li class="chapter" data-level="9.11" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#drivers"><i class="fa fa-check"></i><b>9.11</b> Drivers</a></li>
-<li class="chapter" data-level="9.12" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sequential-state-data-assimilation"><i class="fa fa-check"></i><b>9.12</b> Sequential State Data Assimilation</a><ul>
-<li class="chapter" data-level="9.12.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#general-description"><i class="fa fa-check"></i><b>9.12.1</b> General Description</a></li>
-<li class="chapter" data-level="9.12.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#enkf"><i class="fa fa-check"></i><b>9.12.2</b> EnKF</a></li>
-<li class="chapter" data-level="9.12.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.12.3</b> Generalized Ensemble Filter</a></li>
-<li class="chapter" data-level="9.12.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#ensemble-adjustment"><i class="fa fa-check"></i><b>9.12.4</b> Ensemble Adjustment</a></li>
-<li class="chapter" data-level="9.12.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#diagnostics"><i class="fa fa-check"></i><b>9.12.5</b> Diagnostics</a></li>
+<li class="chapter" data-level="9.9" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#current-models"><i class="fa fa-check"></i><b>9.9</b> Current Models</a></li>
+<li class="chapter" data-level="9.10" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-calibration"><i class="fa fa-check"></i><b>9.10</b> Model Calibration</a></li>
+<li class="chapter" data-level="9.11" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#initial-conditions"><i class="fa fa-check"></i><b>9.11</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.12" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#drivers"><i class="fa fa-check"></i><b>9.12</b> Drivers</a></li>
+<li class="chapter" data-level="9.13" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sequential-state-data-assimilation"><i class="fa fa-check"></i><b>9.13</b> Sequential State Data Assimilation</a><ul>
+<li class="chapter" data-level="9.13.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#general-description"><i class="fa fa-check"></i><b>9.13.1</b> General Description</a></li>
+<li class="chapter" data-level="9.13.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#enkf"><i class="fa fa-check"></i><b>9.13.2</b> EnKF</a></li>
+<li class="chapter" data-level="9.13.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.13.3</b> Generalized Ensemble Filter</a></li>
+<li class="chapter" data-level="9.13.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#ensemble-adjustment"><i class="fa fa-check"></i><b>9.13.4</b> Ensemble Adjustment</a></li>
+<li class="chapter" data-level="9.13.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#diagnostics"><i class="fa fa-check"></i><b>9.13.5</b> Diagnostics</a></li>
 </ul></li>
-<li class="chapter" data-level="9.13" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#multisettings"><i class="fa fa-check"></i><b>9.13</b> MultiSettings</a></li>
-<li class="chapter" data-level="9.14" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#Benchmarking"><i class="fa fa-check"></i><b>9.14</b> Benchmarking</a><ul>
-<li class="chapter" data-level="9.14.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-preparation"><i class="fa fa-check"></i><b>9.14.1</b> Data Preparation</a></li>
-<li class="chapter" data-level="9.14.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-runs"><i class="fa fa-check"></i><b>9.14.2</b> Model Runs</a></li>
-<li class="chapter" data-level="9.14.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-benchmarking-shiny-app"><i class="fa fa-check"></i><b>9.14.3</b> The Benchmarking Shiny App</a></li>
-<li class="chapter" data-level="9.14.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#benchmarking-in-pecan.xml"><i class="fa fa-check"></i><b>9.14.4</b> Benchmarking in pecan.xml</a></li>
+<li class="chapter" data-level="9.14" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#multisettings"><i class="fa fa-check"></i><b>9.14</b> MultiSettings</a></li>
+<li class="chapter" data-level="9.15" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#Benchmarking"><i class="fa fa-check"></i><b>9.15</b> Benchmarking</a><ul>
+<li class="chapter" data-level="9.15.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-preparation"><i class="fa fa-check"></i><b>9.15.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="9.15.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-runs"><i class="fa fa-check"></i><b>9.15.2</b> Model Runs</a></li>
+<li class="chapter" data-level="9.15.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-benchmarking-shiny-app"><i class="fa fa-check"></i><b>9.15.3</b> The Benchmarking Shiny App</a></li>
+<li class="chapter" data-level="9.15.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#benchmarking-in-pecan.xml"><i class="fa fa-check"></i><b>9.15.4</b> Benchmarking in pecan.xml</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html"><i class="fa fa-check"></i><b>10</b> Remote execution with PEcAn</a><ul>
@@ -249,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.1" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#xml-configuration"><i class="fa fa-check"></i><b>10.4.1</b> XML configuration</a></li>
 <li class="chapter" data-level="10.4.2" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#configuration-for-pecan-web-interface"><i class="fa fa-check"></i><b>10.4.2</b> Configuration for PEcAn web interface</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#running-pecan-code-for-modules-remotely"><i class="fa fa-check"></i><b>10.5</b> Running PEcAn code for modules remotely</a><ul>
+<li class="chapter" data-level="10.5" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#running-pecan-code-for-remotely"><i class="fa fa-check"></i><b>10.5</b> Running PEcAn code for remotely</a><ul>
 <li class="chapter" data-level="10.5.1" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#geo.bu.edu"><i class="fa fa-check"></i><b>10.5.1</b> geo.bu.edu</a></li>
 </ul></li>
 </ul></li>
@@ -304,6 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.4" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#create-a-database-file-record-for-the-input-data"><i class="fa fa-check"></i><b>17.4</b> Create a database file record for the input data</a></li>
 <li class="chapter" data-level="17.5" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#creating-a-new-input-record-in-bety"><i class="fa fa-check"></i><b>17.5</b> Creating a new Input record in BETY</a><ul>
 <li class="chapter" data-level="17.5.1" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#InputConversions"><i class="fa fa-check"></i><b>17.5.1</b> Input Conversion</a></li>
+<li class="chapter" data-level="17.5.2" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#vegetation-data"><i class="fa fa-check"></i><b>17.5.2</b> Vegetation Data</a></li>
+<li class="chapter" data-level="17.5.3" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#soil-data"><i class="fa fa-check"></i><b>17.5.3</b> Soil Data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="reference-runs.html"><a href="reference-runs.html"><i class="fa fa-check"></i><b>18</b> Reference Runs</a></li>
@@ -382,18 +386,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="26" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html"><i class="fa fa-check"></i><b>26</b> Git and GitHub Workflow</a><ul>
 <li class="chapter" data-level="26.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#using-git"><i class="fa fa-check"></i><b>26.1</b> Using Git</a><ul>
 <li class="chapter" data-level="26.1.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git"><i class="fa fa-check"></i><b>26.1.1</b> Git</a></li>
-<li class="chapter" data-level="26.1.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#recommended-git-workflow"><i class="fa fa-check"></i><b>26.1.2</b> Recommended Git Workflow</a></li>
-<li class="chapter" data-level="26.1.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#during-development"><i class="fa fa-check"></i><b>26.1.3</b> During development:</a></li>
-<li class="chapter" data-level="26.1.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-pecan"><i class="fa fa-check"></i><b>26.1.4</b> For PEcAn</a></li>
-<li class="chapter" data-level="26.1.5" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git-rstudio"><i class="fa fa-check"></i><b>26.1.5</b> Git + Rstudio</a></li>
-<li class="chapter" data-level="26.1.6" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-development"><i class="fa fa-check"></i><b>26.1.6</b> For development:</a></li>
+<li class="chapter" data-level="26.1.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#pecan-project-and-github"><i class="fa fa-check"></i><b>26.1.2</b> PEcAn Project and Github</a></li>
+<li class="chapter" data-level="26.1.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#pecan-project-branches"><i class="fa fa-check"></i><b>26.1.3</b> PEcAn Project Branches</a></li>
+<li class="chapter" data-level="26.1.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git-rstudio"><i class="fa fa-check"></i><b>26.1.4</b> Git + Rstudio</a></li>
+<li class="chapter" data-level="26.1.5" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-development"><i class="fa fa-check"></i><b>26.1.5</b> For development:</a></li>
+<li class="chapter" data-level="26.1.6" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#references"><i class="fa fa-check"></i><b>26.1.6</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="26.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#references"><i class="fa fa-check"></i><b>26.2</b> References:</a></li>
-<li class="chapter" data-level="26.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#github-use-with-pecan"><i class="fa fa-check"></i><b>26.3</b> GitHub use with PEcAn</a><ul>
-<li class="chapter" data-level="26.3.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#bugs-issues-features-etc."><i class="fa fa-check"></i><b>26.3.1</b> Bugs, Issues, Features, etc.</a></li>
-<li class="chapter" data-level="26.3.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#requesting-a-feature"><i class="fa fa-check"></i><b>26.3.2</b> Requesting a feature</a></li>
-<li class="chapter" data-level="26.3.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#closing-an-issue"><i class="fa fa-check"></i><b>26.3.3</b> Closing an issue</a></li>
-<li class="chapter" data-level="26.3.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#when-to-submit-an-issue"><i class="fa fa-check"></i><b>26.3.4</b> When to submit an issue?</a></li>
+<li class="chapter" data-level="26.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#github-use-with-pecan"><i class="fa fa-check"></i><b>26.2</b> GitHub use with PEcAn</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#bugs-issues-features-etc."><i class="fa fa-check"></i><b>26.2.1</b> Bugs, Issues, Features, etc.</a></li>
+<li class="chapter" data-level="26.2.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#requesting-a-feature"><i class="fa fa-check"></i><b>26.2.2</b> Requesting a feature</a></li>
+<li class="chapter" data-level="26.2.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#closing-an-issue"><i class="fa fa-check"></i><b>26.2.3</b> Closing an issue</a></li>
+<li class="chapter" data-level="26.2.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#when-to-submit-an-issue"><i class="fa fa-check"></i><b>26.2.4</b> When to submit an issue?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="coding-practices.html"><a href="coding-practices.html"><i class="fa fa-check"></i><b>27</b> Coding Practices</a><ul>
@@ -435,36 +438,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI Reference Materials</b></span></li>
 <li class="chapter" data-level="29" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html"><i class="fa fa-check"></i><b>29</b> PEcAn standard formats</a><ul>
 <li class="chapter" data-level="29.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#defining-new-input-formats"><i class="fa fa-check"></i><b>29.1</b> Defining new input formats</a><ul>
-<li class="chapter" data-level="29.1.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#outputs"><i class="fa fa-check"></i><b>29.1.1</b> Outputs</a></li>
+<li class="chapter" data-level="29.1.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#input-standards"><i class="fa fa-check"></i><b>29.1.1</b> Input Standards</a></li>
+<li class="chapter" data-level="29.1.2" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#output-standards"><i class="fa fa-check"></i><b>29.1.2</b> Output Standards</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="30" data-path="models-in-pecan.html"><a href="models-in-pecan.html"><i class="fa fa-check"></i><b>30</b> Models in PEcAn</a><ul>
-<li class="chapter" data-level="30.1" data-path="models-in-pecan.html"><a href="models-in-pecan.html#biocro-configuration"><i class="fa fa-check"></i><b>30.1</b> BioCro Configuration</a></li>
-<li class="chapter" data-level="30.2" data-path="models-in-pecan.html"><a href="models-in-pecan.html#biocro-1"><i class="fa fa-check"></i><b>30.2</b> BioCro</a></li>
-<li class="chapter" data-level="30.3" data-path="models-in-pecan.html"><a href="models-in-pecan.html#clm"><i class="fa fa-check"></i><b>30.3</b> CLM</a></li>
-<li class="chapter" data-level="30.4" data-path="models-in-pecan.html"><a href="models-in-pecan.html#dalec-1"><i class="fa fa-check"></i><b>30.4</b> DALEC</a></li>
-<li class="chapter" data-level="30.5" data-path="models-in-pecan.html"><a href="models-in-pecan.html#ed"><i class="fa fa-check"></i><b>30.5</b> ED</a><ul>
-<li class="chapter" data-level="30.5.1" data-path="models-in-pecan.html"><a href="models-in-pecan.html#introduction-2"><i class="fa fa-check"></i><b>30.5.1</b> Introduction</a></li>
-<li class="chapter" data-level="30.5.2" data-path="models-in-pecan.html"><a href="models-in-pecan.html#pecan-configuration-file-additions"><i class="fa fa-check"></i><b>30.5.2</b> PEcAn configuration file additions</a></li>
-<li class="chapter" data-level="30.5.3" data-path="models-in-pecan.html"><a href="models-in-pecan.html#model-specific-input-files"><i class="fa fa-check"></i><b>30.5.3</b> Model specific input files</a></li>
-<li class="chapter" data-level="30.5.4" data-path="models-in-pecan.html"><a href="models-in-pecan.html#model-configuration-files"><i class="fa fa-check"></i><b>30.5.4</b> Model configuration files</a></li>
-<li class="chapter" data-level="30.5.5" data-path="models-in-pecan.html"><a href="models-in-pecan.html#installation-notes"><i class="fa fa-check"></i><b>30.5.5</b> Installation notes</a></li>
+<li class="chapter" data-level="30" data-path="models-in-pecan.html"><a href="models-in-pecan.html"><i class="fa fa-check"></i><b>30</b> Models in PEcAn</a></li>
+<li class="chapter" data-level="31" data-path="template-model-page.html"><a href="template-model-page.html"><i class="fa fa-check"></i><b>31</b> Template MODEL page</a><ul>
+<li class="chapter" data-level="31.1" data-path="template-model-page.html"><a href="template-model-page.html#biocro-configuration"><i class="fa fa-check"></i><b>31.1</b> BioCro Configuration</a></li>
+<li class="chapter" data-level="31.2" data-path="template-model-page.html"><a href="template-model-page.html#biocro-1"><i class="fa fa-check"></i><b>31.2</b> BioCro</a></li>
+<li class="chapter" data-level="31.3" data-path="template-model-page.html"><a href="template-model-page.html#clm"><i class="fa fa-check"></i><b>31.3</b> CLM</a></li>
+<li class="chapter" data-level="31.4" data-path="template-model-page.html"><a href="template-model-page.html#dalec-1"><i class="fa fa-check"></i><b>31.4</b> DALEC</a></li>
+<li class="chapter" data-level="31.5" data-path="template-model-page.html"><a href="template-model-page.html#ed"><i class="fa fa-check"></i><b>31.5</b> ED</a><ul>
+<li class="chapter" data-level="31.5.1" data-path="template-model-page.html"><a href="template-model-page.html#introduction-2"><i class="fa fa-check"></i><b>31.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="31.5.2" data-path="template-model-page.html"><a href="template-model-page.html#pecan-configuration-file-additions"><i class="fa fa-check"></i><b>31.5.2</b> PEcAn configuration file additions</a></li>
+<li class="chapter" data-level="31.5.3" data-path="template-model-page.html"><a href="template-model-page.html#model-specific-input-files"><i class="fa fa-check"></i><b>31.5.3</b> Model specific input files</a></li>
+<li class="chapter" data-level="31.5.4" data-path="template-model-page.html"><a href="template-model-page.html#model-configuration-files"><i class="fa fa-check"></i><b>31.5.4</b> Model configuration files</a></li>
+<li class="chapter" data-level="31.5.5" data-path="template-model-page.html"><a href="template-model-page.html#installation-notes"><i class="fa fa-check"></i><b>31.5.5</b> Installation notes</a></li>
 </ul></li>
-<li class="chapter" data-level="30.6" data-path="models-in-pecan.html"><a href="models-in-pecan.html#gday-1"><i class="fa fa-check"></i><b>30.6</b> GDAY</a></li>
-<li class="chapter" data-level="30.7" data-path="models-in-pecan.html"><a href="models-in-pecan.html#linkages-1"><i class="fa fa-check"></i><b>30.7</b> LINKAGES</a></li>
-<li class="chapter" data-level="30.8" data-path="models-in-pecan.html"><a href="models-in-pecan.html#lpj-guess-1"><i class="fa fa-check"></i><b>30.8</b> LPJ-GUESS</a></li>
-<li class="chapter" data-level="30.9" data-path="models-in-pecan.html"><a href="models-in-pecan.html#maespa-1"><i class="fa fa-check"></i><b>30.9</b> MAESPA</a></li>
+<li class="chapter" data-level="31.6" data-path="template-model-page.html"><a href="template-model-page.html#gday-1"><i class="fa fa-check"></i><b>31.6</b> GDAY</a></li>
+<li class="chapter" data-level="31.7" data-path="template-model-page.html"><a href="template-model-page.html#linkages-1"><i class="fa fa-check"></i><b>31.7</b> LINKAGES</a></li>
+<li class="chapter" data-level="31.8" data-path="template-model-page.html"><a href="template-model-page.html#lpj-guess-1"><i class="fa fa-check"></i><b>31.8</b> LPJ-GUESS</a></li>
+<li class="chapter" data-level="31.9" data-path="template-model-page.html"><a href="template-model-page.html#maespa-1"><i class="fa fa-check"></i><b>31.9</b> MAESPA</a></li>
 </ul></li>
-<li class="chapter" data-level="31" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>31</b> PEcAn Models</a><ul>
-<li class="chapter" data-level="31.1" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>31.1</b> PRELES</a></li>
-<li class="chapter" data-level="31.2" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-configuration"><i class="fa fa-check"></i><b>31.2</b> SIPNET configuration</a></li>
-<li class="chapter" data-level="31.3" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-1"><i class="fa fa-check"></i><b>31.3</b> Sipnet</a></li>
-</ul></li>
-<li class="chapter" data-level="32" data-path="template-model-page.html"><a href="template-model-page.html"><i class="fa fa-check"></i><b>32</b> Template MODEL page</a><ul>
-<li class="chapter" data-level="32.1" data-path="template-model-page.html"><a href="template-model-page.html#model-variables"><i class="fa fa-check"></i><b>32.1</b> Model Variables</a><ul>
-<li class="chapter" data-level="32.1.1" data-path="template-model-page.html"><a href="template-model-page.html#download-gfdl"><i class="fa fa-check"></i><b>32.1.1</b> Download GFDL</a></li>
-<li class="chapter" data-level="32.1.2" data-path="template-model-page.html"><a href="template-model-page.html#cm3"><i class="fa fa-check"></i><b>32.1.2</b> CM3</a></li>
-<li class="chapter" data-level="32.1.3" data-path="template-model-page.html"><a href="template-model-page.html#esm2m-esm2g"><i class="fa fa-check"></i><b>32.1.3</b> ESM2M &amp; ESM2G</a></li>
+<li class="chapter" data-level="32" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>32</b> PEcAn Models</a><ul>
+<li class="chapter" data-level="32.1" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>32.1</b> PRELES</a></li>
+<li class="chapter" data-level="32.2" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-configuration"><i class="fa fa-check"></i><b>32.2</b> SIPNET configuration</a></li>
+<li class="chapter" data-level="32.3" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-1"><i class="fa fa-check"></i><b>32.3</b> Sipnet</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="pecan-models.html"><a href="pecan-models.html#download-gfdl"><i class="fa fa-check"></i><b>32.3.1</b> Download GFDL</a></li>
+<li class="chapter" data-level="32.3.2" data-path="pecan-models.html"><a href="pecan-models.html#cm3"><i class="fa fa-check"></i><b>32.3.2</b> CM3</a></li>
+<li class="chapter" data-level="32.3.3" data-path="pecan-models.html"><a href="pecan-models.html#esm2m-esm2g"><i class="fa fa-check"></i><b>32.3.3</b> ESM2M &amp; ESM2G</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="33" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>33</b> Available Meteorological Drivers</a><ul>
@@ -532,7 +534,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="40.1.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#additional-outputs"><i class="fa fa-check"></i><b>40.1.1</b> Additional Outputs:</a></li>
 <li class="chapter" data-level="40.1.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#run-id"><i class="fa fa-check"></i><b>40.1.2</b> 1. Run ID:</a></li>
 <li class="chapter" data-level="40.1.3" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#inputs-3"><i class="fa fa-check"></i><b>40.1.3</b> 2. Inputs:</a></li>
-<li class="chapter" data-level="40.1.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#outputs-1"><i class="fa fa-check"></i><b>40.1.4</b> 3. Outputs:</a></li>
+<li class="chapter" data-level="40.1.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#outputs"><i class="fa fa-check"></i><b>40.1.4</b> 3. Outputs:</a></li>
 <li class="chapter" data-level="40.1.5" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pfts"><i class="fa fa-check"></i><b>40.1.5</b> 4. PFTs:</a></li>
 <li class="chapter" data-level="40.1.6" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pecan-files"><i class="fa fa-check"></i><b>40.1.6</b> PEcAn Files:</a></li>
 </ul></li>
@@ -619,545 +621,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="models-in-pecan" class="section level1">
 <h1><span class="header-section-number">30</span> Models in PEcAn</h1>
 
-<div id="biocro-configuration" class="section level2">
-<h2><span class="header-section-number">30.1</span> BioCro Configuration</h2>
-<p>BioCro uses a config.xml file similar to ED2. At this time, no other template files are required.</p>
-
-</div>
-<div id="biocro-1" class="section level2">
-<h2><span class="header-section-number">30.2</span> BioCro</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>BioCro uses a config.xml file similar to ED2. At this time, no other template files are required.</p>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="clm" class="section level2">
-<h2><span class="header-section-number">30.3</span> CLM</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong>
-List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="dalec-1" class="section level2">
-<h2><span class="header-section-number">30.4</span> DALEC</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="ed" class="section level2">
-<h2><span class="header-section-number">30.5</span> ED</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td><a href="http://moorcroftlab.oeb.harvard.edu/" class="uri">http://moorcroftlab.oeb.harvard.edu/</a></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td><a href="https://github.com/EDmodel/ED2" class="uri">https://github.com/EDmodel/ED2</a></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td>Paul Moorcroft, …</td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td>Michael Dietze, Rob Kooper</td>
-</tr>
-</tbody>
-</table>
-<div id="introduction-2" class="section level3">
-<h3><span class="header-section-number">30.5.1</span> Introduction</h3>
-<p>Introduction about ED model</p>
-</div>
-<div id="pecan-configuration-file-additions" class="section level3">
-<h3><span class="header-section-number">30.5.2</span> PEcAn configuration file additions</h3>
-<p>The following sections of the PEcAn XML are relevant to the ED model:</p>
-<ul>
-<li><code>model</code>
-<ul>
-<li><code>id</code> – BETY model ID. Each ID corresponds to a different revision of ED (see below)</li>
-<li><code>revision</code> – The revision (a.k.a. release) number of ED (e.g. “r82”). “rgit” indicates the latest code on the ED repository</li>
-<li><code>ed2in</code> – Path and filename of the ED2IN configuration file</li>
-<li><code>start.date</code> – Run start date</li>
-<li><code>end.date</code> – Run end date</li>
-<li><code>phenol.scheme</code></li>
-<li><code>phenol</code></li>
-<li><code>phenol.start</code></li>
-<li><code>phenol.end</code></li>
-<li><code>ed2in_tags</code> – Named list of additional tags in the ED2IN to be modified. These modifications override any of those set by the standard PEcAn workflow.</li>
-<li><code>jobtemplate</code></li>
-<li><code>prerun</code></li>
-<li><code>postrun</code></li>
-<li><code>binary</code></li>
-</ul></li>
-<li><code>run/site</code>
-<ul>
-<li><code>lat</code> – Latitude coordinate of site</li>
-<li><code>lon</code> – Longitude coordinate of site</li>
-</ul></li>
-<li><code>inputs/met/path</code> – Path to ED_MET_DRIVER_HEADER file</li>
-</ul>
-</div>
-<div id="model-specific-input-files" class="section level3">
-<h3><span class="header-section-number">30.5.3</span> Model specific input files</h3>
-<p>List of inputs required by model, such as met, etc.</p>
-</div>
-<div id="model-configuration-files" class="section level3">
-<h3><span class="header-section-number">30.5.4</span> Model configuration files</h3>
-<p>ED2 is configured using 2 files which are placed in the run folder.</p>
-<ul>
-<li><strong>ED2IN</strong> : template for this file is located at models/ed/inst/ED2IN.&lt;revision&gt;. The values in this template that need to be modified are described below and are surrounded with @ symbols.</li>
-<li><strong>config.xml</strong> : this file is generated by PEcAn. Some values are stored in the pecan.xml in &lt;pfts&gt;&lt;pft&gt;&lt;constants&gt; section as well as in &lt;model&gt; section.</li>
-</ul>
-<p>An example of the template can be found in <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/ED2IN.r82">ED2IN.r82</a></p>
-<p>The ED2IN template can contain the following variables. These will be replaced with actual values when the model configuration is written.</p>
-<ul>
-<li><p>**<span class="citation">@ENSNAME</span><span class="citation">@*</span>* : run id of the simulation, used in template for NL%EXPNME</p></li>
-<li>**<span class="citation">@START_MONTH</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IMONTHA<br />
-</li>
-<li>**<span class="citation">@START_DAY</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IDATEA<br />
-</li>
-<li>**<span class="citation">@START_YEAR</span><span class="citation">@*</span>* : start of simulation UTC time, from &lt;run&gt;&lt;start.date&gt;, used in template for NL%IYEARA<br />
-</li>
-<li>**<span class="citation">@END_MONTH</span><span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IMONTHZ<br />
-</li>
-<li>**<span class="citation">@END_DAY</span><span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IDATEZ<br />
-</li>
-<li><p>**<span class="citation">@END_YEAR</span><span class="citation">@*</span>* : end of simulation UTC time, from &lt;run&gt;&lt;end.date&gt;, used in template for NL%IYEARZ</p></li>
-<li>**<span class="citation">@SITE_LAT</span><span class="citation">@*</span>* : site latitude location, from &lt;run&gt;&lt;site&gt;&lt;lat&gt;, used in template for NL%POI_LAT<br />
-</li>
-<li><p>**<span class="citation">@SITE_LON</span><span class="citation">@*</span>* : site longitude location, from &lt;run&gt;&lt;site&gt;&lt;lon&gt;, used in template for NL%POI_LON</p></li>
-<li>**<span class="citation">@SITE_MET</span><span class="citation">@*</span>* : met header location, from &lt;run&gt;&lt;site&gt;&lt;met&gt;, used in template for NL%ED_MET_DRIVER_DB<br />
-</li>
-<li>**<span class="citation">@MET_START</span><span class="citation">@*</span>* : first year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.start&gt;, used in template for NL%METCYC1<br />
-</li>
-<li><p>**<span class="citation">@MET_END</span><span class="citation">@*</span>* : last year of met data, from &lt;run&gt;&lt;site&gt;&lt;met.end&gt;, used in template for NL%METCYCF</p></li>
-<li>**<span class="citation">@PHENOL_SCHEME</span><span class="citation">@*</span>* : phenology scheme, if this variabe is 1 the following 3 fields will be used, otherwise they will be set to empty strings, from &lt;model&gt;&lt;phenol.scheme&gt;, used in template for NL%IPHEN_SCHEME<br />
-</li>
-<li>**<span class="citation">@PHENOL_START</span><span class="citation">@*</span>* : first year for phenology, from &lt;model&gt;&lt;phenol.start&gt;, used in template for NL%IPHENYS1 and NL%IPHENYF1<br />
-</li>
-<li><p><strong><span class="citation">@PHENOL_END</span><span class="citation">@*</span>* : last year for phenology, from &lt;model&gt;&lt;phenol.end&gt;, used in template for NL%IPHENYSF and NL%IPHENYFF<br />
-</strong>@PHENOL<span class="citation">@*</span>* : path and prefix of the prescribed phenology data, from * &lt;model&gt;&lt;phenol&gt;, used in template for NL%PHENPATH</p></li>
-<li>**<span class="citation">@SITE_PSSCSS</span><span class="citation">@*</span>* : path and prefix of the previous ecosystem state, from &lt;model&gt;&lt;psscss&gt;, used in template for NL%SFILIN<br />
-</li>
-<li>**<span class="citation">@ED_VEG</span><span class="citation">@*</span>* : path and prefix of the vegetation database, used only to determine the land/water mask, from &lt;model&gt;&lt;veg&gt;, used in template for NL%VEG_DATABASE<br />
-</li>
-<li>**<span class="citation">@ED_SOIL</span><span class="citation">@*</span>* : path and prefix of the soil database, used to determine the soil type, from &lt;model&gt;&lt;soil&gt;, used in template for NL%SOIL_DATABASE<br />
-</li>
-<li><p>**<span class="citation">@ED_INPUTS</span><span class="citation">@*</span>* : input directory with dataset to initialise chilling degrees and growing degree days, which is used to drive the cold-deciduous phenology, from &lt;model&gt;&lt;inputs&gt;, used in template for NL%THSUMS_DATABASE</p></li>
-<li>**<span class="citation">@FFILOUT</span><span class="citation">@*</span>* : path and prefix for analysis files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/analysis, used in template for NL%FFILOUT<br />
-</li>
-<li><p>**<span class="citation">@SFILOUT</span><span class="citation">@*</span>* : path and prefix for history files, generated from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;/run.id/history, used in template for NL%SFILOUT</p></li>
-<li><p>**<span class="citation">@CONFIGFILE</span><span class="citation">@*</span>* : XML file containing additional parameter settings, this is always “config.xml”, used in template for NL%IEDCNFGF</p></li>
-<li><strong><span class="citation">@OUTDIR</span><span class="citation">@*</span>* : location where output files are written (</strong>without the runid**), from &lt;run&gt;&lt;host&gt;&lt;outdir&gt;, should not be used.<br />
-</li>
-<li><p>**<span class="citation">@SCRATCH</span><span class="citation">@*</span>* : local scratch space for outputs, generated /scratch/&lt;username&gt;/run$scratch, should not be used right now since it only works on ebi-cluster</p></li>
-</ul>
-</div>
-<div id="installation-notes" class="section level3">
-<h3><span class="header-section-number">30.5.5</span> Installation notes</h3>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<div id="vm" class="section level4">
-<h4><span class="header-section-number">30.5.5.1</span> VM</h4>
-</div>
-<div id="bu-geo" class="section level4">
-<h4><span class="header-section-number">30.5.5.2</span> BU geo</h4>
-</div>
-<div id="tacc-lonestar" class="section level4">
-<h4><span class="header-section-number">30.5.5.3</span> TACC lonestar</h4>
-<div class="sourceCode" id="cb257"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
-<a class="sourceLine" id="cb257-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
-<a class="sourceLine" id="cb257-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
-<a class="sourceLine" id="cb257-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
-<a class="sourceLine" id="cb257-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
-<a class="sourceLine" id="cb257-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</a>
-<a class="sourceLine" id="cb257-7" data-line-number="7"><span class="fu">make</span> OPT=lonestar</a></code></pre></div>
-</div>
-<div id="tacc-stampede" class="section level4">
-<h4><span class="header-section-number">30.5.5.4</span> TACC stampede</h4>
-<div class="sourceCode" id="cb258"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
-<a class="sourceLine" id="cb258-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
-<a class="sourceLine" id="cb258-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
-<a class="sourceLine" id="cb258-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
-<a class="sourceLine" id="cb258-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
-<a class="sourceLine" id="cb258-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</a>
-<a class="sourceLine" id="cb258-7" data-line-number="7"><span class="fu">make</span> OPT=stampede</a></code></pre></div>
-
-</div>
-</div>
-</div>
-<div id="gday-1" class="section level2">
-<h2><span class="header-section-number">30.6</span> GDAY</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="linkages-1" class="section level2">
-<h2><span class="header-section-number">30.7</span> LINKAGES</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="lpj-guess-1" class="section level2">
-<h2><span class="header-section-number">30.8</span> LPJ-GUESS</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="maespa-1" class="section level2">
-<h2><span class="header-section-number">30.9</span> MAESPA</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td><a href="http://maespa.github.io/" class="uri">http://maespa.github.io/</a></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td><a href="http://maespa.github.io/download.html" class="uri">http://maespa.github.io/download.html</a></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td>Belinda Medlyn and Remko Duursma</td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td>Tony Gardella, Martim DeKauwe, Remki Duursma</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p><strong>Model specific input files</strong></p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>Installing the MAESPA model requires cloning the MAESPA Bitbucket Repository, executing the makefile, and ensuring that the Maeswarp R package is correctly installed.</p>
-<p>To clone and compile the model, execute this code at the command line</p>
-<pre><code>git clone https://bitbucket.org/remkoduursma/maespa.git
-
-cd maespa
-
-make clean
-
-make</code></pre>
-<p><code>maespa.out</code> is your executable. Example input files can be found in the inputfiles directory. Executing measpa.out from within one of the example directories will produce output.</p>
-<p>MAESPA developers have also developed a wrapper package called <code>Maeswrap</code>. The usual R package installation method <code>install.packages</code> may present issues with downloading an unpacking a dependency package called <code>rgl</code>. Here are a couple of solutions:</p>
-<p>Solution 1</p>
-<p><strong>From the Command Line</strong></p>
-<pre><code>sudo apt-get install r-cran-rgl
-
-then from within R
-
-install.packages(&quot;Maeswrap&quot;)</code></pre>
-<p>Solution 2</p>
-<p><strong>From the Command line</strong></p>
-<pre><code>sudo apt-get install libglu1-mesa-dev
-
-then from within R
-
-install.packages(&quot;Maeswrap&quot;)
-
-</code></pre>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
 </div>
             </section>
 
@@ -1165,7 +628,7 @@ install.packages(&quot;Maeswrap&quot;)
         </div>
       </div>
 <a href="pecan-standard-formats.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pecan-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="template-model-page.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
