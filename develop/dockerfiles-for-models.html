@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="quickstart-for-docker-and-pecan-.html">
-<link rel="next" href="debugging.html">
+<link rel="next" href="shiny.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -56,6 +56,15 @@
 <script src="libs/dt-ext-fixedcolumns-1.10.16/js/dataTables.fixedColumns.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/jszip-1.10.16/jszip.min.js"></script>
+<script src="libs/pdfmake-1.10.16/pdfmake.min.js"></script>
+<script src="libs/pdfmake-1.10.16/vfs_fonts.js"></script>
+<link href="libs/dt-ext-buttons-1.10.16/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-buttons-1.10.16/js/dataTables.buttons.min.js"></script>
+<script src="libs/dt-ext-buttons-1.10.16/js/buttons.flash.min.js"></script>
+<script src="libs/dt-ext-buttons-1.10.16/js/buttons.html5.min.js"></script>
+<script src="libs/dt-ext-buttons-1.10.16/js/buttons.colVis.min.js"></script>
+<script src="libs/dt-ext-buttons-1.10.16/js/buttons.print.min.js"></script>
 
 
 <style type="text/css">
@@ -442,66 +451,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="29.1.2" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#output-standards"><i class="fa fa-check"></i><b>29.1.2</b> Output Standards</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="30" data-path="models-in-pecan.html"><a href="models-in-pecan.html"><i class="fa fa-check"></i><b>30</b> Models in PEcAn</a></li>
+<li class="chapter" data-level="30" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>30</b> PEcAn Models</a></li>
 <li class="chapter" data-level="31" data-path="template-model-page.html"><a href="template-model-page.html"><i class="fa fa-check"></i><b>31</b> Template MODEL page</a><ul>
-<li class="chapter" data-level="31.1" data-path="template-model-page.html"><a href="template-model-page.html#biocro-configuration"><i class="fa fa-check"></i><b>31.1</b> BioCro Configuration</a></li>
-<li class="chapter" data-level="31.2" data-path="template-model-page.html"><a href="template-model-page.html#biocro-1"><i class="fa fa-check"></i><b>31.2</b> BioCro</a></li>
-<li class="chapter" data-level="31.3" data-path="template-model-page.html"><a href="template-model-page.html#clm"><i class="fa fa-check"></i><b>31.3</b> CLM</a></li>
-<li class="chapter" data-level="31.4" data-path="template-model-page.html"><a href="template-model-page.html#dalec-1"><i class="fa fa-check"></i><b>31.4</b> DALEC</a></li>
-<li class="chapter" data-level="31.5" data-path="template-model-page.html"><a href="template-model-page.html#ed"><i class="fa fa-check"></i><b>31.5</b> ED</a><ul>
-<li class="chapter" data-level="31.5.1" data-path="template-model-page.html"><a href="template-model-page.html#introduction-2"><i class="fa fa-check"></i><b>31.5.1</b> Introduction</a></li>
-<li class="chapter" data-level="31.5.2" data-path="template-model-page.html"><a href="template-model-page.html#pecan-configuration-file-additions"><i class="fa fa-check"></i><b>31.5.2</b> PEcAn configuration file additions</a></li>
-<li class="chapter" data-level="31.5.3" data-path="template-model-page.html"><a href="template-model-page.html#model-specific-input-files"><i class="fa fa-check"></i><b>31.5.3</b> Model specific input files</a></li>
-<li class="chapter" data-level="31.5.4" data-path="template-model-page.html"><a href="template-model-page.html#model-configuration-files"><i class="fa fa-check"></i><b>31.5.4</b> Model configuration files</a></li>
-<li class="chapter" data-level="31.5.5" data-path="template-model-page.html"><a href="template-model-page.html#installation-notes"><i class="fa fa-check"></i><b>31.5.5</b> Installation notes</a></li>
+<li class="chapter" data-level="31.1" data-path="template-model-page.html"><a href="template-model-page.html#template-model-page-1"><i class="fa fa-check"></i><b>31.1</b> Template MODEL page</a></li>
+<li class="chapter" data-level="31.2" data-path="template-model-page.html"><a href="template-model-page.html#biocro-configuration"><i class="fa fa-check"></i><b>31.2</b> BioCro Configuration</a></li>
+<li class="chapter" data-level="31.3" data-path="template-model-page.html"><a href="template-model-page.html#biocro-1"><i class="fa fa-check"></i><b>31.3</b> BioCro</a></li>
+<li class="chapter" data-level="31.4" data-path="template-model-page.html"><a href="template-model-page.html#clm"><i class="fa fa-check"></i><b>31.4</b> CLM</a></li>
+<li class="chapter" data-level="31.5" data-path="template-model-page.html"><a href="template-model-page.html#dalec-1"><i class="fa fa-check"></i><b>31.5</b> DALEC</a></li>
+<li class="chapter" data-level="31.6" data-path="template-model-page.html"><a href="template-model-page.html#ed"><i class="fa fa-check"></i><b>31.6</b> ED</a><ul>
+<li class="chapter" data-level="31.6.1" data-path="template-model-page.html"><a href="template-model-page.html#introduction-2"><i class="fa fa-check"></i><b>31.6.1</b> Introduction</a></li>
+<li class="chapter" data-level="31.6.2" data-path="template-model-page.html"><a href="template-model-page.html#pecan-configuration-file-additions"><i class="fa fa-check"></i><b>31.6.2</b> PEcAn configuration file additions</a></li>
+<li class="chapter" data-level="31.6.3" data-path="template-model-page.html"><a href="template-model-page.html#model-specific-input-files"><i class="fa fa-check"></i><b>31.6.3</b> Model specific input files</a></li>
+<li class="chapter" data-level="31.6.4" data-path="template-model-page.html"><a href="template-model-page.html#model-configuration-files"><i class="fa fa-check"></i><b>31.6.4</b> Model configuration files</a></li>
+<li class="chapter" data-level="31.6.5" data-path="template-model-page.html"><a href="template-model-page.html#installation-notes"><i class="fa fa-check"></i><b>31.6.5</b> Installation notes</a></li>
 </ul></li>
-<li class="chapter" data-level="31.6" data-path="template-model-page.html"><a href="template-model-page.html#gday-1"><i class="fa fa-check"></i><b>31.6</b> GDAY</a></li>
-<li class="chapter" data-level="31.7" data-path="template-model-page.html"><a href="template-model-page.html#linkages-1"><i class="fa fa-check"></i><b>31.7</b> LINKAGES</a></li>
-<li class="chapter" data-level="31.8" data-path="template-model-page.html"><a href="template-model-page.html#lpj-guess-1"><i class="fa fa-check"></i><b>31.8</b> LPJ-GUESS</a></li>
-<li class="chapter" data-level="31.9" data-path="template-model-page.html"><a href="template-model-page.html#maespa-1"><i class="fa fa-check"></i><b>31.9</b> MAESPA</a></li>
-</ul></li>
-<li class="chapter" data-level="32" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>32</b> PEcAn Models</a><ul>
-<li class="chapter" data-level="32.1" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>32.1</b> PRELES</a></li>
-<li class="chapter" data-level="32.2" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-configuration"><i class="fa fa-check"></i><b>32.2</b> SIPNET configuration</a></li>
-<li class="chapter" data-level="32.3" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-1"><i class="fa fa-check"></i><b>32.3</b> Sipnet</a><ul>
-<li class="chapter" data-level="32.3.1" data-path="pecan-models.html"><a href="pecan-models.html#download-gfdl"><i class="fa fa-check"></i><b>32.3.1</b> Download GFDL</a></li>
-<li class="chapter" data-level="32.3.2" data-path="pecan-models.html"><a href="pecan-models.html#cm3"><i class="fa fa-check"></i><b>32.3.2</b> CM3</a></li>
-<li class="chapter" data-level="32.3.3" data-path="pecan-models.html"><a href="pecan-models.html#esm2m-esm2g"><i class="fa fa-check"></i><b>32.3.3</b> ESM2M &amp; ESM2G</a></li>
+<li class="chapter" data-level="31.7" data-path="template-model-page.html"><a href="template-model-page.html#gday-1"><i class="fa fa-check"></i><b>31.7</b> GDAY</a></li>
+<li class="chapter" data-level="31.8" data-path="template-model-page.html"><a href="template-model-page.html#linkages-1"><i class="fa fa-check"></i><b>31.8</b> LINKAGES</a></li>
+<li class="chapter" data-level="31.9" data-path="template-model-page.html"><a href="template-model-page.html#lpj-guess-1"><i class="fa fa-check"></i><b>31.9</b> LPJ-GUESS</a></li>
+<li class="chapter" data-level="31.10" data-path="template-model-page.html"><a href="template-model-page.html#maespa-1"><i class="fa fa-check"></i><b>31.10</b> MAESPA</a></li>
+<li class="chapter" data-level="31.11" data-path="template-model-page.html"><a href="template-model-page.html#preles"><i class="fa fa-check"></i><b>31.11</b> PRELES</a></li>
+<li class="chapter" data-level="31.12" data-path="template-model-page.html"><a href="template-model-page.html#sipnet-configuration"><i class="fa fa-check"></i><b>31.12</b> SIPNET configuration</a></li>
+<li class="chapter" data-level="31.13" data-path="template-model-page.html"><a href="template-model-page.html#sipnet-1"><i class="fa fa-check"></i><b>31.13</b> Sipnet</a><ul>
+<li class="chapter" data-level="31.13.1" data-path="template-model-page.html"><a href="template-model-page.html#download-gfdl"><i class="fa fa-check"></i><b>31.13.1</b> Download GFDL</a></li>
+<li class="chapter" data-level="31.13.2" data-path="template-model-page.html"><a href="template-model-page.html#cm3"><i class="fa fa-check"></i><b>31.13.2</b> CM3</a></li>
+<li class="chapter" data-level="31.13.3" data-path="template-model-page.html"><a href="template-model-page.html#esm2m-esm2g"><i class="fa fa-check"></i><b>31.13.3</b> ESM2M &amp; ESM2G</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="33" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>33</b> Available Meteorological Drivers</a><ul>
-<li class="chapter" data-level="33.1" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#ameriflux"><i class="fa fa-check"></i><b>33.1</b> Ameriflux</a></li>
-<li class="chapter" data-level="33.2" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#amerifluxlbl"><i class="fa fa-check"></i><b>33.2</b> AmerifluxLBL</a></li>
-<li class="chapter" data-level="33.3" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnet2015"><i class="fa fa-check"></i><b>33.3</b> Fluxnet2015</a></li>
-<li class="chapter" data-level="33.4" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#narr"><i class="fa fa-check"></i><b>33.4</b> NARR</a></li>
-<li class="chapter" data-level="33.5" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cruncep"><i class="fa fa-check"></i><b>33.5</b> CRUNCEP</a></li>
-<li class="chapter" data-level="33.6" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cmip5"><i class="fa fa-check"></i><b>33.6</b> CMIP5</a></li>
-<li class="chapter" data-level="33.7" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#nldas"><i class="fa fa-check"></i><b>33.7</b> NLDAS</a></li>
-<li class="chapter" data-level="33.8" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#gldas"><i class="fa fa-check"></i><b>33.8</b> GLDAS</a></li>
-<li class="chapter" data-level="33.9" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#paleon"><i class="fa fa-check"></i><b>33.9</b> PalEON</a></li>
-<li class="chapter" data-level="33.10" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnetlathuile"><i class="fa fa-check"></i><b>33.10</b> FluxnetLaThuile</a></li>
-<li class="chapter" data-level="33.11" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#geostreams"><i class="fa fa-check"></i><b>33.11</b> Geostreams</a></li>
+<li class="chapter" data-level="32" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>32</b> Available Meteorological Drivers</a><ul>
+<li class="chapter" data-level="32.1" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#ameriflux"><i class="fa fa-check"></i><b>32.1</b> Ameriflux</a></li>
+<li class="chapter" data-level="32.2" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#amerifluxlbl"><i class="fa fa-check"></i><b>32.2</b> AmerifluxLBL</a></li>
+<li class="chapter" data-level="32.3" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnet2015"><i class="fa fa-check"></i><b>32.3</b> Fluxnet2015</a></li>
+<li class="chapter" data-level="32.4" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#narr"><i class="fa fa-check"></i><b>32.4</b> NARR</a></li>
+<li class="chapter" data-level="32.5" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cruncep"><i class="fa fa-check"></i><b>32.5</b> CRUNCEP</a></li>
+<li class="chapter" data-level="32.6" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cmip5"><i class="fa fa-check"></i><b>32.6</b> CMIP5</a></li>
+<li class="chapter" data-level="32.7" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#nldas"><i class="fa fa-check"></i><b>32.7</b> NLDAS</a></li>
+<li class="chapter" data-level="32.8" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#gldas"><i class="fa fa-check"></i><b>32.8</b> GLDAS</a></li>
+<li class="chapter" data-level="32.9" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#paleon"><i class="fa fa-check"></i><b>32.9</b> PalEON</a></li>
+<li class="chapter" data-level="32.10" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnetlathuile"><i class="fa fa-check"></i><b>32.10</b> FluxnetLaThuile</a></li>
+<li class="chapter" data-level="32.11" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#geostreams"><i class="fa fa-check"></i><b>32.11</b> Geostreams</a></li>
 </ul></li>
-<li class="chapter" data-level="34" data-path="what-is-docker.html"><a href="what-is-docker.html"><i class="fa fa-check"></i><b>34</b> What is Docker?</a><ul>
-<li class="chapter" data-level="34.1" data-path="what-is-docker.html"><a href="what-is-docker.html#working-with-docker"><i class="fa fa-check"></i><b>34.1</b> Working with Docker</a></li>
-<li class="chapter" data-level="34.2" data-path="what-is-docker.html"><a href="what-is-docker.html#working-with-docker-compose"><i class="fa fa-check"></i><b>34.2</b> Working with docker-compose</a></li>
+<li class="chapter" data-level="33" data-path="what-is-docker.html"><a href="what-is-docker.html"><i class="fa fa-check"></i><b>33</b> What is Docker?</a><ul>
+<li class="chapter" data-level="33.1" data-path="what-is-docker.html"><a href="what-is-docker.html#working-with-docker"><i class="fa fa-check"></i><b>33.1</b> Working with Docker</a></li>
+<li class="chapter" data-level="33.2" data-path="what-is-docker.html"><a href="what-is-docker.html#working-with-docker-compose"><i class="fa fa-check"></i><b>33.2</b> Working with docker-compose</a></li>
 </ul></li>
-<li class="chapter" data-level="35" data-path="pecan-docker-architecture.html"><a href="pecan-docker-architecture.html"><i class="fa fa-check"></i><b>35</b> PEcAn Docker Architecture</a></li>
-<li class="chapter" data-level="36" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html"><i class="fa fa-check"></i><b>36</b> Quickstart for Docker and PEcAn.</a><ul>
-<li class="chapter" data-level="36.1" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#install-docker"><i class="fa fa-check"></i><b>36.1</b> Install Docker</a></li>
-<li class="chapter" data-level="36.2" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#running-pecan"><i class="fa fa-check"></i><b>36.2</b> Running PEcAn</a></li>
-<li class="chapter" data-level="36.3" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#testing-pecan"><i class="fa fa-check"></i><b>36.3</b> Testing PEcAn</a></li>
+<li class="chapter" data-level="34" data-path="pecan-docker-architecture.html"><a href="pecan-docker-architecture.html"><i class="fa fa-check"></i><b>34</b> PEcAn Docker Architecture</a></li>
+<li class="chapter" data-level="35" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html"><i class="fa fa-check"></i><b>35</b> Quickstart for Docker and PEcAn.</a><ul>
+<li class="chapter" data-level="35.1" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#install-docker"><i class="fa fa-check"></i><b>35.1</b> Install Docker</a></li>
+<li class="chapter" data-level="35.2" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#running-pecan"><i class="fa fa-check"></i><b>35.2</b> Running PEcAn</a></li>
+<li class="chapter" data-level="35.3" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#testing-pecan"><i class="fa fa-check"></i><b>35.3</b> Testing PEcAn</a></li>
 </ul></li>
-<li class="chapter" data-level="37" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html"><i class="fa fa-check"></i><b>37</b> Dockerfiles for Models</a><ul>
-<li class="chapter" data-level="37.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#common-problems"><i class="fa fa-check"></i><b>37.1</b> Common problems</a><ul>
-<li class="chapter" data-level="37.1.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#debugging-missing-libraries"><i class="fa fa-check"></i><b>37.1.1</b> Debugging missing libraries</a></li>
-<li class="chapter" data-level="37.1.2" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#using-the-pecan-download.file-function"><i class="fa fa-check"></i><b>37.1.2</b> Using the PEcAn download.file() function</a></li>
+<li class="chapter" data-level="36" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html"><i class="fa fa-check"></i><b>36</b> Dockerfiles for Models</a><ul>
+<li class="chapter" data-level="36.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#common-problems"><i class="fa fa-check"></i><b>36.1</b> Common problems</a><ul>
+<li class="chapter" data-level="36.1.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#debugging-missing-libraries"><i class="fa fa-check"></i><b>36.1.1</b> Debugging missing libraries</a></li>
+<li class="chapter" data-level="36.1.2" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#using-the-pecan-download.file-function"><i class="fa fa-check"></i><b>36.1.2</b> Using the PEcAn download.file() function</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="shiny.html"><a href="shiny.html"><i class="fa fa-check"></i><b>37</b> SHINY</a><ul>
+<li class="chapter" data-level="37.0.1" data-path="shiny.html"><a href="shiny.html#debugging-shiny-apps"><i class="fa fa-check"></i><b>37.0.1</b> Debugging Shiny Apps</a></li>
 </ul></li>
 <li class="chapter" data-level="38" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>38</b> Debugging</a><ul>
 <li class="chapter" data-level="38.0.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>38.0.1</b> Using <code>tests/workflow.R</code></a></li>
 <li class="chapter" data-level="38.0.2" data-path="debugging.html"><a href="debugging.html#useful-scripts"><i class="fa fa-check"></i><b>38.0.2</b> Useful scripts</a></li>
-<li class="chapter" data-level="38.0.3" data-path="debugging.html"><a href="debugging.html#debugging-shiny-apps"><i class="fa fa-check"></i><b>38.0.3</b> Debugging Shiny Apps</a></li>
 <li class="chapter" data-level="38.1" data-path="debugging.html"><a href="debugging.html#troubleshooting-pecan"><i class="fa fa-check"></i><b>38.1</b> Troubleshooting PEcAn</a><ul>
 <li class="chapter" data-level="38.1.1" data-path="debugging.html"><a href="debugging.html#cookies-and-pecan-web-pages"><i class="fa fa-check"></i><b>38.1.1</b> Cookies and pecan web pages</a></li>
 <li class="chapter" data-level="38.1.2" data-path="debugging.html"><a href="debugging.html#warning-mkdir-function.mkdir-no-such-file-or-directory"><i class="fa fa-check"></i><b>38.1.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
@@ -621,7 +631,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="dockerfiles-for-models" class="section level1">
-<h1><span class="header-section-number">37</span> Dockerfiles for Models</h1>
+<h1><span class="header-section-number">36</span> Dockerfiles for Models</h1>
 <p>In general we try to minimize the size of the images. To be able to do this we split the process of creating the building of the model images into two pieces (or leverage of an image that exists from the original model developers). If you look at the example Dockerfile you will see that there are 2 sections, the first section will build the model binary, the second section will build the actual PEcAn model, which copies the binary from the first section.</p>
 <p>This is an example of how the ED2 model is build. This will install all the packages needed to build ED2 model, gets the latest version from GitHub and builds the model.</p>
 <p>The second section will create the actual model executor. This will leverage the PEcAn executor image that has PEcAn already installed as well as the python code to listen for messages and run the actual model code. This will install some additional packages needed by the model binary (more about that below) as well as set the <code>MODEL_TYPE</code> and <code>MODEL_VERSION</code> variables. These variables will be used to specify the queue that the model will listen on for any execution requests.</p>
@@ -710,10 +720,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb253-6" data-line-number="6">    --volume pecan_pecan:/data</a>
 <a class="sourceLine" id="cb253-7" data-line-number="7">    <span class="ex">pecan/model-ed2</span></a></code></pre></div>
 <div id="common-problems" class="section level2">
-<h2><span class="header-section-number">37.1</span> Common problems</h2>
+<h2><span class="header-section-number">36.1</span> Common problems</h2>
 <p>Following are some solutions for common problems that you might encounter when building the docker images for a model.</p>
 <div id="debugging-missing-libraries" class="section level3">
-<h3><span class="header-section-number">37.1.1</span> Debugging missing libraries</h3>
+<h3><span class="header-section-number">36.1.1</span> Debugging missing libraries</h3>
 <p>When building the model binary it might require specific libraries to be installed. In the second stage the model binary is copied into a new image, which could result in the binary missing specific libraries. In the case of the ED2 model the following was used to find the libraries that are needed to be installed (libgfortran5 and libopenmpi3).</p>
 <p>The first step is to build the model using the Dockerfile (in this case the ap-get install was missing in the second stage).</p>
 <pre><code>Step 5/9 : RUN git clone https://github.com/EDmodel/ED2.git     &amp;&amp; cd ED2/ED/build     &amp;&amp; curl -o make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.`uname -s`     &amp;&amp; if [ &quot;${MODEL_VERSION}&quot; != &quot;git&quot; ]; then git checkout ${MODEL_VERSION}; fi     &amp;&amp; ./install.sh -g -p VM
@@ -747,7 +757,7 @@ Successfully tagged pecan/pecan-ed2:latest</code></pre>
 
 </div>
 <div id="using-the-pecan-download.file-function" class="section level3">
-<h3><span class="header-section-number">37.1.2</span> Using the PEcAn download.file() function</h3>
+<h3><span class="header-section-number">36.1.2</span> Using the PEcAn download.file() function</h3>
 <p>download.file(url, destination_file, method) <br>
 <br></p>
 <p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
@@ -813,7 +823,7 @@ $download.ftp.method
         </div>
       </div>
 <a href="quickstart-for-docker-and-pecan-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="debugging.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="shiny.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
