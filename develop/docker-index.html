@@ -813,20 +813,54 @@ You will know you have encountered more serious errors if the command exits or h
 <pre><code>LINE 1: SELECT count(*) FROM formats WHERE ...
                              ^
 Error: Relation `formats` does not exist</code></pre>
-<p>Successful execution of this command should take some time because it involves downloading and copying reasonably large amounts of data and performing a number of database operations.
-Once the command has finished successfully, proceed with the next step:</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data pecan/data:develop</a></code></pre></div>
+<p><strong>If the above command fails</strong>, you can try to fix things interactively by first opening a shell inside the container…</p>
+<pre><code>docker run -ti --rm --network pecan_pecan pecan/bety:latest /bin/bash</code></pre>
+<p>…and then running the following commands, which emulate the functionality of the <code>entrypoint.sh</code> with the <code>initialize</code> argument.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="co"># Create the bety role in the postgresql database</span></a>
+<a class="sourceLine" id="cb252-2" data-line-number="2"><span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE ROLE bety WITH LOGIN CREATEDB NOSUPERUSER NOCREATEROLE PASSWORD &#39;bety&#39;&quot;</span></a>
+<a class="sourceLine" id="cb252-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb252-4" data-line-number="4"><span class="co"># Initialize the bety database itself, and set to be owned by role bety</span></a>
+<a class="sourceLine" id="cb252-5" data-line-number="5"><span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE DATABASE bety WITH OWNER bety&quot;</span></a>
+<a class="sourceLine" id="cb252-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb252-7" data-line-number="7"><span class="co"># If either of these fail with a &quot;role/database bety already exists&quot;,</span></a>
+<a class="sourceLine" id="cb252-8" data-line-number="8"><span class="co"># that&#39;s fine. You can safely proceed to the next command.</span></a>
+<a class="sourceLine" id="cb252-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb252-10" data-line-number="10"><span class="co"># Load the actual bety database tables and values</span></a>
+<a class="sourceLine" id="cb252-11" data-line-number="11"><span class="ex">./load.bety.sh</span> -a <span class="st">&quot;postgres&quot;</span> -d <span class="st">&quot;bety&quot;</span> -p <span class="st">&quot;-h postgres -p 5432&quot;</span> -o bety -c -u -g -m <span class="va">${LOCAL_SERVER}</span> -r 0 -w https://ebi-forecast.igb.illinois.edu/pecan/dump/all/bety.tar.gz</a></code></pre></div>
+<p>Note that this command may throw a bunch of errors related to functions and/or operators already existing.
+This is normal – it just means that the PostGIS extension to PostgreSQL is already installed.
+The important thing is that you see output near the end like:</p>
+<pre><code>CREATED SCHEMA
+Loading  schema_migrations         : ADDED 61
+Started psql (pid=507)
+Updated  formats                   :     35 (+35)
+Fixed    formats                   : 46
+Updated  machines                  :     23 (+23)
+Fixed    machines                  : 24
+Updated  mimetypes                 :    419 (+419)
+Fixed    mimetypes                 : 1095
+...
+...
+...
+Added carya41 with access_level=4 and page_access_level=1 with id=323
+Added carya42 with access_level=4 and page_access_level=2 with id=325
+Added carya43 with access_level=4 and page_access_level=3 with id=327
+Added carya44 with access_level=4 and page_access_level=4 with id=329
+Added guestuser with access_level=4 and page_access_level=4 with id=331</code></pre>
+<p>Once the command has finished successfully, proceed with the next step:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb254-1" data-line-number="1"><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data pecan/data:develop</a></code></pre></div>
 <p>The breakdown of this command is as follows:</p>
 <ul>
 <li><code>docker run -ti --rm --network pecan_pecan</code> – Same as <a href="#docker-run-init">above</a>.</li>
 <li><code>--volume pecan_pecan:/data</code> – This mounts the data from the subsequent container (<code>pecan/data:develop</code>) onto the current project volume, called <code>pecan_pecan</code> (as with the network, the project name <code>pecan</code> is the prefix, and the volume name also happens to be <code>pecan</code> as specified in the <code>docker-compose.yml</code> file).</li>
 <li><code>pecan/data:develop</code> – As above, this is the target image to run. Since there is no argument after the image name, this command will run the default command (<a href="https://docs.docker.com/engine/reference/builder/#cmd"><code>CMD</code></a>) specified for this docker container. In this case, it is the <a href="https://github.com/PecanProject/pecan/blob/develop/docker/add-data.sh"><code>docker/add_data.sh</code></a> script from the PEcAn repository.</li>
 </ul>
+<p>Successful execution of this command should take some time because it involves downloading and copying reasonably large amounts of data and performing a number of database operations.</p>
 </div>
 <div id="start-pecan" class="section level4">
 <h4><span class="header-section-number">33.2.2.2</span> Start PEcAn</h4>
 <p>If you already completed the above steps, you can start the full stack by just running the following:</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d</a></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d</a></code></pre></div>
 <p>This will build and start all containers required to run PEcAn.
 With the <code>-d</code> flag, this will run all of these containers quietly in the background, and show a nice architecture diagram with the name and status of each container while they are starting.
 Once this is done you have a working instance of PEcAn.</p>
@@ -842,19 +876,19 @@ Once this is done you have a working instance of PEcAn.</p>
 <div id="start-model-runs-using-curl" class="section level4">
 <h4><span class="header-section-number">33.2.2.3</span> Start model runs using curl</h4>
 <p>To test PEcAn you can use the following <code>curl</code> statement, or use the webpage to submit a request:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="ex">curl</span> -v -X POST \</a>
-<a class="sourceLine" id="cb253-2" data-line-number="2">    -F <span class="st">&#39;hostname=docker&#39;</span> \</a>
-<a class="sourceLine" id="cb253-3" data-line-number="3">    -F <span class="st">&#39;modelid=5000000002&#39;</span> \</a>
-<a class="sourceLine" id="cb253-4" data-line-number="4">    -F <span class="st">&#39;sitegroupid=1&#39;</span> \</a>
-<a class="sourceLine" id="cb253-5" data-line-number="5">    -F <span class="st">&#39;siteid=772&#39;</span> \</a>
-<a class="sourceLine" id="cb253-6" data-line-number="6">    -F <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> \</a>
-<a class="sourceLine" id="cb253-7" data-line-number="7">    -F <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> \</a>
-<a class="sourceLine" id="cb253-8" data-line-number="8">    -F <span class="st">&#39;start=2004/01/01&#39;</span> \</a>
-<a class="sourceLine" id="cb253-9" data-line-number="9">    -F <span class="st">&#39;end=2004/12/31&#39;</span> \</a>
-<a class="sourceLine" id="cb253-10" data-line-number="10">    -F <span class="st">&#39;input_met=5000000005&#39;</span> \</a>
-<a class="sourceLine" id="cb253-11" data-line-number="11">    -F <span class="st">&#39;email=&#39;</span> \</a>
-<a class="sourceLine" id="cb253-12" data-line-number="12">    -F <span class="st">&#39;notes=&#39;</span> \</a>
-<a class="sourceLine" id="cb253-13" data-line-number="13">    <span class="st">&#39;http://localhost:8000/pecan/04-runpecan.php&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb256-1" data-line-number="1"><span class="ex">curl</span> -v -X POST \</a>
+<a class="sourceLine" id="cb256-2" data-line-number="2">    -F <span class="st">&#39;hostname=docker&#39;</span> \</a>
+<a class="sourceLine" id="cb256-3" data-line-number="3">    -F <span class="st">&#39;modelid=5000000002&#39;</span> \</a>
+<a class="sourceLine" id="cb256-4" data-line-number="4">    -F <span class="st">&#39;sitegroupid=1&#39;</span> \</a>
+<a class="sourceLine" id="cb256-5" data-line-number="5">    -F <span class="st">&#39;siteid=772&#39;</span> \</a>
+<a class="sourceLine" id="cb256-6" data-line-number="6">    -F <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> \</a>
+<a class="sourceLine" id="cb256-7" data-line-number="7">    -F <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> \</a>
+<a class="sourceLine" id="cb256-8" data-line-number="8">    -F <span class="st">&#39;start=2004/01/01&#39;</span> \</a>
+<a class="sourceLine" id="cb256-9" data-line-number="9">    -F <span class="st">&#39;end=2004/12/31&#39;</span> \</a>
+<a class="sourceLine" id="cb256-10" data-line-number="10">    -F <span class="st">&#39;input_met=5000000005&#39;</span> \</a>
+<a class="sourceLine" id="cb256-11" data-line-number="11">    -F <span class="st">&#39;email=&#39;</span> \</a>
+<a class="sourceLine" id="cb256-12" data-line-number="12">    -F <span class="st">&#39;notes=&#39;</span> \</a>
+<a class="sourceLine" id="cb256-13" data-line-number="13">    <span class="st">&#39;http://localhost:8000/pecan/04-runpecan.php&#39;</span></a></code></pre></div>
 <p>This should return some text with in there <code>Location:</code> this is shows the workflow id, you can prepend <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> to the front of this, for example: <a href="http://localhost:8000/pecan/05-running.php?workflowid=99000000001" class="uri">http://localhost:8000/pecan/05-running.php?workflowid=99000000001</a>. Here you will be able to see the progress of the workflow.</p>
 <p>To see what is happening behind the scenes you can use look at the log file of the specific docker containers, once of interest are <code>pecan_executor_1</code> this is the container that will execute a single workflow and <code>pecan_sipnet_1</code> which executes the sipnet mode. To see the logs you use <code>docker logs pecan_executor_1</code> Following is an example output:</p>
 <pre><code>2018-06-13 15:50:37,903 [MainThread     ] INFO    : pika.adapters.base_connection - Connecting to 172.18.0.2:5672
@@ -975,7 +1009,7 @@ services:
     - traefik.backend=pecan
     restart: unless-stopped
   executor:
-    image: pecan/executor:${PECAN:-latest}
+    image: pecan/executor:${PECAN:-develop}
     networks: pecan
     hostname: docker
     volumes: pecan:/data
@@ -1010,6 +1044,7 @@ When communicating with each other internally, the hostnames of containers corre
 For instance, regardless of the “project” name passed to <code>docker-compose up</code>, the hostname for connecting to the PostgreSQL database of any given container is <em>always</em> going to be <code>postgres</code> (e.g. you should be able to access the PostgreSQL database by calling the following from inside the container: <code>psql -d bety -U bety -h postgres</code>).
 The services comprising the PEcAn application are described below.</p></li>
 <li><p><code>networks</code> – This is a list of networks used by the application.
+Containers can only communicate with each other (via ports and hostnames) if they are on the same Docker network, and containers on different networks can only communicate through ports exposed by the host machine.
 We just provide the network name (<code>pecan</code>) and resort to Docker’s default network configuration.
 Note that the services we want connected to this network include a <code>networks: ... - pecan</code> tag.
 For more details on Docker networks, see the <a href="https://docs.docker.com/network/">official documentation</a>.</p></li>
@@ -1017,6 +1052,9 @@ For more details on Docker networks, see the <a href="https://docs.docker.com/ne
 Briefly, in Docker, volumes are directories containing files that are meant to be shared across containers.
 Each volume corresponds to a directory, which can be mounted at a specific location by different containers.
 For example, syntax like <code>volumes: ... - pecan:/data</code> in a service definition means to mount the <code>pecan</code> “volume” (including its contents) in the <code>/data</code> directory of that container.
+Volumes also allow data to persist on containers between restarts, as normally, any data created by a container during its execution is lost when the container is re-launched.
+For example, using a volume for the database allows data to be saved between different runs of the database container.
+Without volumes, we would start with a blank database every time we restart the containers.
 For more details on Docker volumes, see the <a href="https://docs.docker.com/storage/volumes/">official documentation</a>.
 Here, we define three volumes:</p>
 <ul>
@@ -1057,7 +1095,8 @@ For instance, the following lines in the <code>web</code> service configure acce
 </div>
 <div id="pecan-dc-minio" class="section level4">
 <h4><span class="header-section-number">33.3.2.3</span> <code>minio</code></h4>
-<p><a href="https://github.com/minio/minio">Minio</a> is a browser-based file manager that facilitates exploration of PEcAn files without the need for CLI tools.</p>
+<p><a href="https://github.com/minio/minio">Minio</a> is a service that provides access to the a folder on disk through a variety of protocols, including S3 buckets and web-based access.
+We mainly use Minio to facilitate access to PEcAn data using a web browser without the need for CLI tools.</p>
 <p>Our current configuration is as follows:</p>
 <pre><code>minio:
   image: minio/minio
@@ -1110,7 +1149,8 @@ In PEcAn, RabbitMQ functions as a task manager and scheduler, coordinating the e
   - traefik.backend=rabbitmq
   restart: unless-stopped</code></pre>
 <p>Note that the <code>traefik.frontend.rule</code> indicates that browsing to <a href="http://localhost:8000" class="uri">http://localhost:8000</a> (with no further tags) leads to the RabbitMQ management console.</p>
-<p>(Further details in the works…)</p>
+<p>By default, the RabbitMQ management console has username/password <code>guest/guest</code>, which is highly insecure.
+For production instances of PEcAn, we highly recommend changing these credentials to something more secure, and removing access to the RabbitMQ management console via Traefik.</p>
 </div>
 <div id="pecan-dc-bety" class="section level4">
 <h4><span class="header-section-number">33.3.2.6</span> <code>bety</code></h4>
@@ -1161,7 +1201,7 @@ It is effectively a thin wrapper around a standard Apache web server container f
 However, it is <em>not</em> in charge of executing the models themselves – model binaries are located on their <a href="docker-index.html#pecan-dc-models">own dedicated Docker containers</a>, and model execution is coordinated by RabbitMQ.</p>
 <p>Our configuration is as follows:</p>
 <pre><code>executor:
-  image: pecan/executor:${PECAN:-latest}
+  image: pecan/executor:${PECAN:-develop}
   networks: pecan
   hostname: docker
   volumes: pecan:/data
@@ -1198,88 +1238,88 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
 <p>The second section will create the actual model executor. This will leverage the PEcAn executor image that has PEcAn already installed as well as the python code to listen for messages and run the actual model code. This will install some additional packages needed by the model binary (more about that below) as well as set the <code>MODEL_TYPE</code> and <code>MODEL_VERSION</code> variables. These variables will be used to specify the queue that the model will listen on for any execution requests.</p>
 <p>It is important that the <code>MODEL_TYPE</code> and <code>MODEL_VERSION</code> match what is in the BETY database. The PEcAn code will use what is in the BETY database to send out a message to a specfic worker queue, if you do not set these variables correctly your model executor will pick up messages for the wrong model.</p>
 <p>To build the docker image, we use a Dockerfile (see example below) and run the following command. This command will expect the Dockerfile.ed2 to live in the current folder. It will also copy the content of the current folder and make it available to the build process (in this example we do not need any additional files). The image will be named pecan/model-ed2, since we do not specify the exact version it will be atomically be named <code>pecan/model-ed2:latest</code>.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="ex">docker</span> build \</a>
-<a class="sourceLine" id="cb265-2" data-line-number="2">    --tag pecan/model-ed2 \</a>
-<a class="sourceLine" id="cb265-3" data-line-number="3">    --file Dockerfile.ed2 \</a>
-<a class="sourceLine" id="cb265-4" data-line-number="4">    .</a></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb268-1" data-line-number="1"><span class="ex">docker</span> build \</a>
+<a class="sourceLine" id="cb268-2" data-line-number="2">    --tag pecan/model-ed2 \</a>
+<a class="sourceLine" id="cb268-3" data-line-number="3">    --file Dockerfile.ed2 \</a>
+<a class="sourceLine" id="cb268-4" data-line-number="4">    .</a></code></pre></div>
 <p>Example of a Dockerfile, in this case to build the ED2 model.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb266-1" data-line-number="1"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-2" data-line-number="2"><span class="co"># FIRST STAGE : BUILD MODEL BINARY</span></a>
-<a class="sourceLine" id="cb266-3" data-line-number="3"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-4" data-line-number="4"><span class="kw">FROM</span> debian:testing as model-binary</a>
-<a class="sourceLine" id="cb266-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb266-6" data-line-number="6"><span class="co"># Some variables that can be used to set control the docker build</span></a>
-<a class="sourceLine" id="cb266-7" data-line-number="7"><span class="kw">ARG</span> MODEL_VERSION=git</a>
-<a class="sourceLine" id="cb266-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb266-9" data-line-number="9"><span class="co"># install dependencies</span></a>
-<a class="sourceLine" id="cb266-10" data-line-number="10"><span class="kw">RUN</span> apt-get update \</a>
-<a class="sourceLine" id="cb266-11" data-line-number="11">    &amp;&amp; apt-get install -y \</a>
-<a class="sourceLine" id="cb266-12" data-line-number="12">       build-essential \</a>
-<a class="sourceLine" id="cb266-13" data-line-number="13">       curl \</a>
-<a class="sourceLine" id="cb266-14" data-line-number="14">       gfortran \</a>
-<a class="sourceLine" id="cb266-15" data-line-number="15">       git \</a>
-<a class="sourceLine" id="cb266-16" data-line-number="16">       libhdf5-dev \</a>
-<a class="sourceLine" id="cb266-17" data-line-number="17">       libopenmpi-dev \</a>
-<a class="sourceLine" id="cb266-18" data-line-number="18">    &amp;&amp; rm -rf /var/lib/apt/lists/*</a>
-<a class="sourceLine" id="cb266-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb266-20" data-line-number="20"><span class="co"># download, unzip and build ed2</span></a>
-<a class="sourceLine" id="cb266-21" data-line-number="21"><span class="kw">WORKDIR</span> /src</a>
-<a class="sourceLine" id="cb266-22" data-line-number="22"><span class="kw">RUN</span> git clone https://github.com/EDmodel/ED2.git \</a>
-<a class="sourceLine" id="cb266-23" data-line-number="23">    &amp;&amp; cd ED2/ED/build \</a>
-<a class="sourceLine" id="cb266-24" data-line-number="24">    &amp;&amp; curl -o make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.Linux \</a>
-<a class="sourceLine" id="cb266-25" data-line-number="25">    &amp;&amp; if [ <span class="st">&quot;${MODEL_VERSION}&quot;</span> != <span class="st">&quot;git&quot;</span> ]; then git checkout ${MODEL_VERSION}; fi \</a>
-<a class="sourceLine" id="cb266-26" data-line-number="26">    &amp;&amp; ./install.sh -g -p VM</a>
-<a class="sourceLine" id="cb266-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb266-28" data-line-number="28"><span class="co">########################################################################</span></a>
-<a class="sourceLine" id="cb266-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb266-30" data-line-number="30"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-31" data-line-number="31"><span class="co"># SECOND STAGE : BUILD PECAN FOR MODEL</span></a>
-<a class="sourceLine" id="cb266-32" data-line-number="32"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-33" data-line-number="33"><span class="kw">FROM</span> pecan/executor:latest</a>
-<a class="sourceLine" id="cb266-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb266-35" data-line-number="35"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-36" data-line-number="36"><span class="co"># INSTALL MODEL SPECIFIC PIECES</span></a>
-<a class="sourceLine" id="cb266-37" data-line-number="37"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb266-39" data-line-number="39"><span class="kw">RUN</span> apt-get update \</a>
-<a class="sourceLine" id="cb266-40" data-line-number="40">    &amp;&amp; apt-get install -y --no-install-recommends \</a>
-<a class="sourceLine" id="cb266-41" data-line-number="41">       libgfortran5 \</a>
-<a class="sourceLine" id="cb266-42" data-line-number="42">       libopenmpi3 \</a>
-<a class="sourceLine" id="cb266-43" data-line-number="43">    &amp;&amp; rm -rf /var/lib/apt/lists/*</a>
-<a class="sourceLine" id="cb266-44" data-line-number="44"></a>
-<a class="sourceLine" id="cb266-45" data-line-number="45"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-46" data-line-number="46"><span class="co"># SETUP FOR SPECIFIC MODEL</span></a>
-<a class="sourceLine" id="cb266-47" data-line-number="47"><span class="co"># ----------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb266-48" data-line-number="48"></a>
-<a class="sourceLine" id="cb266-49" data-line-number="49"><span class="co"># Some variables that can be used to set control the docker build</span></a>
-<a class="sourceLine" id="cb266-50" data-line-number="50"><span class="kw">ARG</span> MODEL_VERSION=git</a>
-<a class="sourceLine" id="cb266-51" data-line-number="51"></a>
-<a class="sourceLine" id="cb266-52" data-line-number="52"><span class="co"># variables to store in docker image</span></a>
-<a class="sourceLine" id="cb266-53" data-line-number="53"><span class="kw">ENV</span> APPLICATION=<span class="st">&quot;./job.sh&quot;</span> \</a>
-<a class="sourceLine" id="cb266-54" data-line-number="54">    MODEL_TYPE=<span class="st">&quot;ED2&quot;</span> \</a>
-<a class="sourceLine" id="cb266-55" data-line-number="55">    MODEL_VERSION=<span class="st">&quot;${MODEL_VERSION}&quot;</span> \</a>
-<a class="sourceLine" id="cb266-56" data-line-number="56">    RABBITMQ_QUEUE=<span class="st">&quot;${MODEL_TYPE}_${MODEL_VERSION}&quot;</span></a>
-<a class="sourceLine" id="cb266-57" data-line-number="57"></a>
-<a class="sourceLine" id="cb266-58" data-line-number="58"><span class="co"># COPY model binary</span></a>
-<a class="sourceLine" id="cb266-59" data-line-number="59"><span class="kw">COPY</span> --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/ed2.${MODEL_VERSION}</a></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-2" data-line-number="2"><span class="co"># FIRST STAGE : BUILD MODEL BINARY</span></a>
+<a class="sourceLine" id="cb269-3" data-line-number="3"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-4" data-line-number="4"><span class="kw">FROM</span> debian:testing as model-binary</a>
+<a class="sourceLine" id="cb269-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb269-6" data-line-number="6"><span class="co"># Some variables that can be used to set control the docker build</span></a>
+<a class="sourceLine" id="cb269-7" data-line-number="7"><span class="kw">ARG</span> MODEL_VERSION=git</a>
+<a class="sourceLine" id="cb269-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb269-9" data-line-number="9"><span class="co"># install dependencies</span></a>
+<a class="sourceLine" id="cb269-10" data-line-number="10"><span class="kw">RUN</span> apt-get update \</a>
+<a class="sourceLine" id="cb269-11" data-line-number="11">    &amp;&amp; apt-get install -y \</a>
+<a class="sourceLine" id="cb269-12" data-line-number="12">       build-essential \</a>
+<a class="sourceLine" id="cb269-13" data-line-number="13">       curl \</a>
+<a class="sourceLine" id="cb269-14" data-line-number="14">       gfortran \</a>
+<a class="sourceLine" id="cb269-15" data-line-number="15">       git \</a>
+<a class="sourceLine" id="cb269-16" data-line-number="16">       libhdf5-dev \</a>
+<a class="sourceLine" id="cb269-17" data-line-number="17">       libopenmpi-dev \</a>
+<a class="sourceLine" id="cb269-18" data-line-number="18">    &amp;&amp; rm -rf /var/lib/apt/lists/*</a>
+<a class="sourceLine" id="cb269-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb269-20" data-line-number="20"><span class="co"># download, unzip and build ed2</span></a>
+<a class="sourceLine" id="cb269-21" data-line-number="21"><span class="kw">WORKDIR</span> /src</a>
+<a class="sourceLine" id="cb269-22" data-line-number="22"><span class="kw">RUN</span> git clone https://github.com/EDmodel/ED2.git \</a>
+<a class="sourceLine" id="cb269-23" data-line-number="23">    &amp;&amp; cd ED2/ED/build \</a>
+<a class="sourceLine" id="cb269-24" data-line-number="24">    &amp;&amp; curl -o make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.Linux \</a>
+<a class="sourceLine" id="cb269-25" data-line-number="25">    &amp;&amp; if [ <span class="st">&quot;${MODEL_VERSION}&quot;</span> != <span class="st">&quot;git&quot;</span> ]; then git checkout ${MODEL_VERSION}; fi \</a>
+<a class="sourceLine" id="cb269-26" data-line-number="26">    &amp;&amp; ./install.sh -g -p VM</a>
+<a class="sourceLine" id="cb269-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb269-28" data-line-number="28"><span class="co">########################################################################</span></a>
+<a class="sourceLine" id="cb269-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb269-30" data-line-number="30"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-31" data-line-number="31"><span class="co"># SECOND STAGE : BUILD PECAN FOR MODEL</span></a>
+<a class="sourceLine" id="cb269-32" data-line-number="32"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-33" data-line-number="33"><span class="kw">FROM</span> pecan/executor:latest</a>
+<a class="sourceLine" id="cb269-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb269-35" data-line-number="35"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-36" data-line-number="36"><span class="co"># INSTALL MODEL SPECIFIC PIECES</span></a>
+<a class="sourceLine" id="cb269-37" data-line-number="37"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb269-39" data-line-number="39"><span class="kw">RUN</span> apt-get update \</a>
+<a class="sourceLine" id="cb269-40" data-line-number="40">    &amp;&amp; apt-get install -y --no-install-recommends \</a>
+<a class="sourceLine" id="cb269-41" data-line-number="41">       libgfortran5 \</a>
+<a class="sourceLine" id="cb269-42" data-line-number="42">       libopenmpi3 \</a>
+<a class="sourceLine" id="cb269-43" data-line-number="43">    &amp;&amp; rm -rf /var/lib/apt/lists/*</a>
+<a class="sourceLine" id="cb269-44" data-line-number="44"></a>
+<a class="sourceLine" id="cb269-45" data-line-number="45"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-46" data-line-number="46"><span class="co"># SETUP FOR SPECIFIC MODEL</span></a>
+<a class="sourceLine" id="cb269-47" data-line-number="47"><span class="co"># ----------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb269-48" data-line-number="48"></a>
+<a class="sourceLine" id="cb269-49" data-line-number="49"><span class="co"># Some variables that can be used to set control the docker build</span></a>
+<a class="sourceLine" id="cb269-50" data-line-number="50"><span class="kw">ARG</span> MODEL_VERSION=git</a>
+<a class="sourceLine" id="cb269-51" data-line-number="51"></a>
+<a class="sourceLine" id="cb269-52" data-line-number="52"><span class="co"># variables to store in docker image</span></a>
+<a class="sourceLine" id="cb269-53" data-line-number="53"><span class="kw">ENV</span> APPLICATION=<span class="st">&quot;./job.sh&quot;</span> \</a>
+<a class="sourceLine" id="cb269-54" data-line-number="54">    MODEL_TYPE=<span class="st">&quot;ED2&quot;</span> \</a>
+<a class="sourceLine" id="cb269-55" data-line-number="55">    MODEL_VERSION=<span class="st">&quot;${MODEL_VERSION}&quot;</span> \</a>
+<a class="sourceLine" id="cb269-56" data-line-number="56">    RABBITMQ_QUEUE=<span class="st">&quot;${MODEL_TYPE}_${MODEL_VERSION}&quot;</span></a>
+<a class="sourceLine" id="cb269-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb269-58" data-line-number="58"><span class="co"># COPY model binary</span></a>
+<a class="sourceLine" id="cb269-59" data-line-number="59"><span class="kw">COPY</span> --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/ed2.${MODEL_VERSION}</a></code></pre></div>
 <p>Once the model has build and is working we can add it to the PEcAn stack and be able to use this model in the web interface. There are two methods to start this new model. First, we can add it to the <code>docker-compose.yml</code> file and start the container using <code>docker-compose -p pecan -d up</code>.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb267-1" data-line-number="1">  <span class="fu">sipnet:</span></a>
-<a class="sourceLine" id="cb267-2" data-line-number="2">    <span class="fu">image:</span><span class="at"> pecan/model-ed2</span></a>
-<a class="sourceLine" id="cb267-3" data-line-number="3">    <span class="fu">networks:</span></a>
-<a class="sourceLine" id="cb267-4" data-line-number="4">      <span class="kw">-</span> pecan</a>
-<a class="sourceLine" id="cb267-5" data-line-number="5">    <span class="fu">volumes:</span></a>
-<a class="sourceLine" id="cb267-6" data-line-number="6">      <span class="kw">-</span> <span class="fu">pecan:</span><span class="at">/data</span></a>
-<a class="sourceLine" id="cb267-7" data-line-number="7">    <span class="fu">depends_on:</span></a>
-<a class="sourceLine" id="cb267-8" data-line-number="8">       <span class="kw">-</span> rabbitmq</a>
-<a class="sourceLine" id="cb267-9" data-line-number="9">    <span class="fu">restart:</span><span class="at"> unless-stopped</span></a></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb270-1" data-line-number="1">  <span class="fu">sipnet:</span></a>
+<a class="sourceLine" id="cb270-2" data-line-number="2">    <span class="fu">image:</span><span class="at"> pecan/model-ed2</span></a>
+<a class="sourceLine" id="cb270-3" data-line-number="3">    <span class="fu">networks:</span></a>
+<a class="sourceLine" id="cb270-4" data-line-number="4">      <span class="kw">-</span> pecan</a>
+<a class="sourceLine" id="cb270-5" data-line-number="5">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb270-6" data-line-number="6">      <span class="kw">-</span> <span class="fu">pecan:</span><span class="at">/data</span></a>
+<a class="sourceLine" id="cb270-7" data-line-number="7">    <span class="fu">depends_on:</span></a>
+<a class="sourceLine" id="cb270-8" data-line-number="8">       <span class="kw">-</span> rabbitmq</a>
+<a class="sourceLine" id="cb270-9" data-line-number="9">    <span class="fu">restart:</span><span class="at"> unless-stopped</span></a></code></pre></div>
 <p>Alternatively we can start the container manually using the following command.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb268-1" data-line-number="1"><span class="ex">docker</span> run \</a>
-<a class="sourceLine" id="cb268-2" data-line-number="2">    --detach \</a>
-<a class="sourceLine" id="cb268-3" data-line-number="3">    --rm \</a>
-<a class="sourceLine" id="cb268-4" data-line-number="4">    --name pecan-ed2 \</a>
-<a class="sourceLine" id="cb268-5" data-line-number="5">    --networks pecan_pecan \</a>
-<a class="sourceLine" id="cb268-6" data-line-number="6">    --volume pecan_pecan:/data</a>
-<a class="sourceLine" id="cb268-7" data-line-number="7">    <span class="ex">pecan/model-ed2</span></a></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="ex">docker</span> run \</a>
+<a class="sourceLine" id="cb271-2" data-line-number="2">    --detach \</a>
+<a class="sourceLine" id="cb271-3" data-line-number="3">    --rm \</a>
+<a class="sourceLine" id="cb271-4" data-line-number="4">    --name pecan-ed2 \</a>
+<a class="sourceLine" id="cb271-5" data-line-number="5">    --networks pecan_pecan \</a>
+<a class="sourceLine" id="cb271-6" data-line-number="6">    --volume pecan_pecan:/data</a>
+<a class="sourceLine" id="cb271-7" data-line-number="7">    <span class="ex">pecan/model-ed2</span></a></code></pre></div>
 <div id="common-problems" class="section level3">
 <h3><span class="header-section-number">33.4.1</span> Common problems</h3>
 <p>Following are some solutions for common problems that you might encounter when building the docker images for a model.</p>
@@ -1301,19 +1341,19 @@ Step 9/9 : COPY --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/
 Successfully built 07ac841be457
 Successfully tagged pecan/pecan-ed2:latest</code></pre>
 <p>At this point we have created a docker image with the binary and all PEcAn code that is needed to run the model. Some models (especially those build as native code) might be missing additional packages that need to be installed in the docker image. To see if all libraries are installed for the binary.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb270-1" data-line-number="1"><span class="op">&gt;</span> <span class="ex">docker</span> run -ti --rm pecan/pecan-ed2 /bin/bash</a>
-<a class="sourceLine" id="cb270-2" data-line-number="2"><span class="ex">root@8a95ee8b6b47</span>:/work# ldd /usr/local/bin/ed2.git  <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;not found&quot;</span></a>
-<a class="sourceLine" id="cb270-3" data-line-number="3">    <span class="ex">libmpi_usempif08.so.40</span> =<span class="op">&gt;</span> not found</a>
-<a class="sourceLine" id="cb270-4" data-line-number="4">    <span class="ex">libmpi_usempi_ignore_tkr.so.40</span> =<span class="op">&gt;</span> not found</a>
-<a class="sourceLine" id="cb270-5" data-line-number="5">    <span class="ex">libmpi_mpifh.so.40</span> =<span class="op">&gt;</span> not found</a>
-<a class="sourceLine" id="cb270-6" data-line-number="6">    <span class="ex">libmpi.so.40</span> =<span class="op">&gt;</span> not found</a>
-<a class="sourceLine" id="cb270-7" data-line-number="7">    <span class="ex">libgfortran.so.5</span> =<span class="op">&gt;</span> not found</a></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="op">&gt;</span> <span class="ex">docker</span> run -ti --rm pecan/pecan-ed2 /bin/bash</a>
+<a class="sourceLine" id="cb273-2" data-line-number="2"><span class="ex">root@8a95ee8b6b47</span>:/work# ldd /usr/local/bin/ed2.git  <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;not found&quot;</span></a>
+<a class="sourceLine" id="cb273-3" data-line-number="3">    <span class="ex">libmpi_usempif08.so.40</span> =<span class="op">&gt;</span> not found</a>
+<a class="sourceLine" id="cb273-4" data-line-number="4">    <span class="ex">libmpi_usempi_ignore_tkr.so.40</span> =<span class="op">&gt;</span> not found</a>
+<a class="sourceLine" id="cb273-5" data-line-number="5">    <span class="ex">libmpi_mpifh.so.40</span> =<span class="op">&gt;</span> not found</a>
+<a class="sourceLine" id="cb273-6" data-line-number="6">    <span class="ex">libmpi.so.40</span> =<span class="op">&gt;</span> not found</a>
+<a class="sourceLine" id="cb273-7" data-line-number="7">    <span class="ex">libgfortran.so.5</span> =<span class="op">&gt;</span> not found</a></code></pre></div>
 <p>Start the build container again (this is the number before the line FROM pecan/executor:latest, 7f23c6302130 in the example), and find the missing libraries listed above (for example libmpi_usempif08.so.40):</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="op">&gt;</span> <span class="ex">docker</span> run --rm -ti 7f23c6302130</a>
-<a class="sourceLine" id="cb271-2" data-line-number="2"><span class="ex">root@e716c63c031f</span>:/src# dpkg -S libmpi_usempif08.so.40</a>
-<a class="sourceLine" id="cb271-3" data-line-number="3"><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_usempif08.so.40.10.1</a>
-<a class="sourceLine" id="cb271-4" data-line-number="4"><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40.10.1</a>
-<a class="sourceLine" id="cb271-5" data-line-number="5"><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40</a></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb274-1" data-line-number="1"><span class="op">&gt;</span> <span class="ex">docker</span> run --rm -ti 7f23c6302130</a>
+<a class="sourceLine" id="cb274-2" data-line-number="2"><span class="ex">root@e716c63c031f</span>:/src# dpkg -S libmpi_usempif08.so.40</a>
+<a class="sourceLine" id="cb274-3" data-line-number="3"><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_usempif08.so.40.10.1</a>
+<a class="sourceLine" id="cb274-4" data-line-number="4"><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40.10.1</a>
+<a class="sourceLine" id="cb274-5" data-line-number="5"><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40</a></code></pre></div>
 <p>This shows the pages is libopenmpi3 that needs to be installed, do this for all missing packages, modify the Dockerfile and rebuild. Next time you run the ldd command there should be no more packages being listed.</p>
 
 </div>
