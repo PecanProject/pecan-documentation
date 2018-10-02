@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-05-17">
+<meta name="date" content="2018-10-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -46,12 +46,14 @@
 
 
 
-<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.4/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.10.16/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.10.16/js/dataTables.fixedColumns.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
@@ -201,22 +203,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1.6" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#get.da.data..r-plot.da.r"><i class="fa fa-check"></i><b>9.1.6</b> <strong>get.da.data.*.R, plot.da.R</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#for-a-detailed-usage-of-the-module-please-see-the-vignette-under-modulesassim.batchvignettes"><i class="fa fa-check"></i><b>9.2</b> For a detailed usage of the module, please see the vignette under <strong>/modules/assim.batch/vignettes</strong></a></li>
-<li class="chapter" data-level="9.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-sda"><i class="fa fa-check"></i><b>9.3</b> State data assimilation (SDA)</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda.enkf.r-description"><i class="fa fa-check"></i><b>9.3.1</b> <strong>sda.enkf.R Description</strong></a></li>
-<li class="chapter" data-level="9.3.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda.enkf.r-arguments"><i class="fa fa-check"></i><b>9.3.2</b> <strong>sda.enkf.R Arguments</strong></a></li>
-<li class="chapter" data-level="9.3.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-workflow"><i class="fa fa-check"></i><b>9.3.3</b> State Data Assimilation Workflow</a></li>
-<li class="chapter" data-level="9.3.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-tags-example"><i class="fa fa-check"></i><b>9.3.4</b> State Data Assimilation Tags Example</a></li>
-<li class="chapter" data-level="9.3.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-tags-descriptions"><i class="fa fa-check"></i><b>9.3.5</b> State Data Assimilation Tags Descriptions</a></li>
-<li class="chapter" data-level="9.3.6" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-specific-functions-for-sda-workflow"><i class="fa fa-check"></i><b>9.3.6</b> Model Specific Functions for SDA Workflow</a></li>
-<li class="chapter" data-level="9.3.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#analysis-options"><i class="fa fa-check"></i><b>9.3.7</b> Analysis Options</a></li>
-<li class="chapter" data-level="9.3.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.3.8</b> The Generalized Ensemble Filter</a></li>
+<li class="chapter" data-level="9.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-sda"><i class="fa fa-check"></i><b>9.3</b> State data assimilation (SDA)</a></li>
+<li class="chapter" data-level="9.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda.enkf.r-is-housed-within-pecanmodulesassim.sequentialr"><i class="fa fa-check"></i><b>9.4</b> sda.enkf.R is housed within: <strong>/pecan/modules/assim.sequential/R</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-tree-ring-tutorial-is-housed-within-pecandocumentationtutorialsstateassimilation"><i class="fa fa-check"></i><b>9.5</b> The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#more-descriptive-sda-methods-can-be-found-at-pecanbook_sourceadve_user_guide_websda_methods.rmd"><i class="fa fa-check"></i><b>9.6</b> More descriptive SDA methods can be found at: <strong>/pecan/book_source/adve_user_guide_web/SDA_Methods.Rmd</strong></a><ul>
+<li class="chapter" data-level="9.6.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda.enkf.r-description"><i class="fa fa-check"></i><b>9.6.1</b> <strong>sda.enkf.R Description</strong></a></li>
+<li class="chapter" data-level="9.6.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda.enkf.r-arguments"><i class="fa fa-check"></i><b>9.6.2</b> <strong>sda.enkf.R Arguments</strong></a></li>
+<li class="chapter" data-level="9.6.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-workflow"><i class="fa fa-check"></i><b>9.6.3</b> State Data Assimilation Workflow</a></li>
+<li class="chapter" data-level="9.6.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-tags-example"><i class="fa fa-check"></i><b>9.6.4</b> State Data Assimilation Tags Example</a></li>
+<li class="chapter" data-level="9.6.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#state-data-assimilation-tags-descriptions"><i class="fa fa-check"></i><b>9.6.5</b> State Data Assimilation Tags Descriptions</a></li>
+<li class="chapter" data-level="9.6.6" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-specific-functions-for-sda-workflow"><i class="fa fa-check"></i><b>9.6.6</b> Model Specific Functions for SDA Workflow</a></li>
+<li class="chapter" data-level="9.6.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#analysis-options"><i class="fa fa-check"></i><b>9.6.7</b> Analysis Options</a></li>
+<li class="chapter" data-level="9.6.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.6.8</b> The Generalized Ensemble Filter</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#multisettings"><i class="fa fa-check"></i><b>9.4</b> MultiSettings</a></li>
-<li class="chapter" data-level="9.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#Benchmarking"><i class="fa fa-check"></i><b>9.5</b> Benchmarking</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-preparation"><i class="fa fa-check"></i><b>9.5.1</b> Data Preparation</a></li>
-<li class="chapter" data-level="9.5.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-runs"><i class="fa fa-check"></i><b>9.5.2</b> Model Runs</a></li>
-<li class="chapter" data-level="9.5.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-benchmarking-shiny-app"><i class="fa fa-check"></i><b>9.5.3</b> The Benchmarking Shiny App</a></li>
-<li class="chapter" data-level="9.5.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#benchmarking-in-pecan.xml"><i class="fa fa-check"></i><b>9.5.4</b> Benchmarking in pecan.xml</a></li>
+<li class="chapter" data-level="9.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sda_methods"><i class="fa fa-check"></i><b>9.7</b> SDA_Methods</a></li>
+<li class="chapter" data-level="9.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-products"><i class="fa fa-check"></i><b>9.8</b> Data Products</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#tree-rings"><i class="fa fa-check"></i><b>9.8.1</b> Tree Rings</a></li>
+<li class="chapter" data-level="9.8.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#pollen"><i class="fa fa-check"></i><b>9.8.2</b> Pollen</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#current-models"><i class="fa fa-check"></i><b>9.9</b> Current Models</a></li>
+<li class="chapter" data-level="9.10" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-calibration"><i class="fa fa-check"></i><b>9.10</b> Model Calibration</a></li>
+<li class="chapter" data-level="9.11" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#initial-conditions"><i class="fa fa-check"></i><b>9.11</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.12" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#drivers"><i class="fa fa-check"></i><b>9.12</b> Drivers</a></li>
+<li class="chapter" data-level="9.13" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sequential-state-data-assimilation"><i class="fa fa-check"></i><b>9.13</b> Sequential State Data Assimilation</a><ul>
+<li class="chapter" data-level="9.13.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#general-description"><i class="fa fa-check"></i><b>9.13.1</b> General Description</a></li>
+<li class="chapter" data-level="9.13.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#enkf"><i class="fa fa-check"></i><b>9.13.2</b> EnKF</a></li>
+<li class="chapter" data-level="9.13.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.13.3</b> Generalized Ensemble Filter</a></li>
+<li class="chapter" data-level="9.13.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#ensemble-adjustment"><i class="fa fa-check"></i><b>9.13.4</b> Ensemble Adjustment</a></li>
+<li class="chapter" data-level="9.13.5" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#diagnostics"><i class="fa fa-check"></i><b>9.13.5</b> Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="9.14" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#multisettings"><i class="fa fa-check"></i><b>9.14</b> MultiSettings</a></li>
+<li class="chapter" data-level="9.15" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#Benchmarking"><i class="fa fa-check"></i><b>9.15</b> Benchmarking</a><ul>
+<li class="chapter" data-level="9.15.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-preparation"><i class="fa fa-check"></i><b>9.15.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="9.15.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-runs"><i class="fa fa-check"></i><b>9.15.2</b> Model Runs</a></li>
+<li class="chapter" data-level="9.15.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-benchmarking-shiny-app"><i class="fa fa-check"></i><b>9.15.3</b> The Benchmarking Shiny App</a></li>
+<li class="chapter" data-level="9.15.4" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#benchmarking-in-pecan.xml"><i class="fa fa-check"></i><b>9.15.4</b> Benchmarking in pecan.xml</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html"><i class="fa fa-check"></i><b>10</b> Remote execution with PEcAn</a><ul>
@@ -230,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.1" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#xml-configuration"><i class="fa fa-check"></i><b>10.4.1</b> XML configuration</a></li>
 <li class="chapter" data-level="10.4.2" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#configuration-for-pecan-web-interface"><i class="fa fa-check"></i><b>10.4.2</b> Configuration for PEcAn web interface</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#running-pecan-code-for-modules-remotely"><i class="fa fa-check"></i><b>10.5</b> Running PEcAn code for modules remotely</a><ul>
+<li class="chapter" data-level="10.5" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#running-pecan-code-for-remotely"><i class="fa fa-check"></i><b>10.5</b> Running PEcAn code for remotely</a><ul>
 <li class="chapter" data-level="10.5.1" data-path="remote-execution-with-pecan.html"><a href="remote-execution-with-pecan.html#geo.bu.edu"><i class="fa fa-check"></i><b>10.5.1</b> geo.bu.edu</a></li>
 </ul></li>
 </ul></li>
@@ -240,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="pecan-workflow-webworkflow-r.html"><a href="pecan-workflow-webworkflow-r.html#read-settings"><i class="fa fa-check"></i><b>12.1</b> Read Settings</a></li>
 <li class="chapter" data-level="12.2" data-path="pecan-workflow-webworkflow-r.html"><a href="pecan-workflow-webworkflow-r.html#input-conversions"><i class="fa fa-check"></i><b>12.2</b> Input Conversions</a><ul>
 <li class="chapter" data-level="12.2.1" data-path="pecan-workflow-webworkflow-r.html"><a href="pecan-workflow-webworkflow-r.html#input-data"><i class="fa fa-check"></i><b>12.2.1</b> Input Data</a></li>
-<li class="chapter" data-level="12.2.2" data-path="pecan-workflow-webworkflow-r.html"><a href="pecan-workflow-webworkflow-r.html#initial-conditions"><i class="fa fa-check"></i><b>12.2.2</b> Initial Conditions</a></li>
+<li class="chapter" data-level="12.2.2" data-path="pecan-workflow-webworkflow-r.html"><a href="pecan-workflow-webworkflow-r.html#initial-conditions-1"><i class="fa fa-check"></i><b>12.2.2</b> Initial Conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="12.3" data-path="pecan-workflow-webworkflow-r.html"><a href="pecan-workflow-webworkflow-r.html#meteorological-data"><i class="fa fa-check"></i><b>12.3</b> Meteorological Data</a><ul>
 <li class="chapter" data-level="12.3.1" data-path="pecan-workflow-webworkflow-r.html"><a href="pecan-workflow-webworkflow-r.html#downloading-raw-data-description-of-process"><i class="fa fa-check"></i><b>12.3.1</b> Downloading Raw data (Description of Process)</a></li>
@@ -285,282 +306,303 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.4" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#create-a-database-file-record-for-the-input-data"><i class="fa fa-check"></i><b>17.4</b> Create a database file record for the input data</a></li>
 <li class="chapter" data-level="17.5" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#creating-a-new-input-record-in-bety"><i class="fa fa-check"></i><b>17.5</b> Creating a new Input record in BETY</a><ul>
 <li class="chapter" data-level="17.5.1" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#InputConversions"><i class="fa fa-check"></i><b>17.5.1</b> Input Conversion</a></li>
+<li class="chapter" data-level="17.5.2" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#vegetation-data"><i class="fa fa-check"></i><b>17.5.2</b> Vegetation Data</a></li>
+<li class="chapter" data-level="17.5.3" data-path="creating-a-new-format-record-in-bety.html"><a href="creating-a-new-format-record-in-bety.html#soil-data"><i class="fa fa-check"></i><b>17.5.3</b> Soil Data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="reference-runs.html"><a href="reference-runs.html"><i class="fa fa-check"></i><b>18</b> Reference Runs</a><ul>
-<li class="chapter" data-level="18.1" data-path="reference-runs.html"><a href="reference-runs.html#editing-records"><i class="fa fa-check"></i><b>18.1</b> Editing records</a></li>
-<li class="chapter" data-level="18.2" data-path="reference-runs.html"><a href="reference-runs.html#standalone-tools-modules"><i class="fa fa-check"></i><b>18.2</b> Standalone tools (modules)</a></li>
-<li class="chapter" data-level="18.3" data-path="reference-runs.html"><a href="reference-runs.html#LoadData"><i class="fa fa-check"></i><b>18.3</b> Loading Data in PEcAn</a><ul>
-<li class="chapter" data-level="18.3.1" data-path="reference-runs.html"><a href="reference-runs.html#function-load_data"><i class="fa fa-check"></i><b>18.3.1</b> Function <code>load_data</code></a></li>
-<li class="chapter" data-level="18.3.2" data-path="reference-runs.html"><a href="reference-runs.html#example"><i class="fa fa-check"></i><b>18.3.2</b> Example</a></li>
+<li class="chapter" data-level="18" data-path="reference-runs.html"><a href="reference-runs.html"><i class="fa fa-check"></i><b>18</b> Reference Runs</a></li>
+<li class="chapter" data-level="19" data-path="pecan-data-ingest-via-web-interface.html"><a href="pecan-data-ingest-via-web-interface.html"><i class="fa fa-check"></i><b>19</b> Pecan Data Ingest via Web Interface</a></li>
+<li class="chapter" data-level="20" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>20</b> 1. Loading Data</a><ul>
+<li class="chapter" data-level="20.1" data-path="loading-data.html"><a href="loading-data.html#selecting-ingest-method"><i class="fa fa-check"></i><b>20.1</b> Selecting Ingest Method</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="loading-data.html"><a href="loading-data.html#dataone-upload-example"><i class="fa fa-check"></i><b>20.1.1</b> DataONE Upload Example</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="loading-data.html"><a href="loading-data.html#local-upload-example"><i class="fa fa-check"></i><b>20.2</b> Local Upload Example</a></li>
+<li class="chapter" data-level="20.3" data-path="loading-data.html"><a href="loading-data.html#creating-an-input-record"><i class="fa fa-check"></i><b>20.3</b> 2. Creating an Input Record</a></li>
+<li class="chapter" data-level="20.4" data-path="loading-data.html"><a href="loading-data.html#creating-a-format-record"><i class="fa fa-check"></i><b>20.4</b> 3. Creating a format record</a></li>
+<li class="chapter" data-level="20.5" data-path="loading-data.html"><a href="loading-data.html#formats_variables-record"><i class="fa fa-check"></i><b>20.5</b> 4. Formats_Variables Record</a></li>
+<li class="chapter" data-level="20.6" data-path="loading-data.html"><a href="loading-data.html#editing-records"><i class="fa fa-check"></i><b>20.6</b> Editing records</a></li>
+<li class="chapter" data-level="20.7" data-path="loading-data.html"><a href="loading-data.html#standalone-tools-modules"><i class="fa fa-check"></i><b>20.7</b> Standalone tools (modules)</a></li>
+<li class="chapter" data-level="20.8" data-path="loading-data.html"><a href="loading-data.html#LoadData"><i class="fa fa-check"></i><b>20.8</b> Loading Data in PEcAn</a><ul>
+<li class="chapter" data-level="20.8.1" data-path="loading-data.html"><a href="loading-data.html#function-load_data"><i class="fa fa-check"></i><b>20.8.1</b> Function <code>load_data</code></a></li>
+<li class="chapter" data-level="20.8.2" data-path="loading-data.html"><a href="loading-data.html#example"><i class="fa fa-check"></i><b>20.8.2</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html"><i class="fa fa-check"></i><b>19</b> Working with the VM</a><ul>
-<li class="chapter" data-level="19.1" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html#connecting-to-the-vm-via-ssh"><i class="fa fa-check"></i><b>19.1</b> Connecting to the VM via SSH</a></li>
-<li class="chapter" data-level="19.2" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html#connecting-to-bety-on-the-vm-via-ssh"><i class="fa fa-check"></i><b>19.2</b> Connecting to bety on the VM via SSh</a></li>
+<li class="chapter" data-level="21" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html"><i class="fa fa-check"></i><b>21</b> Working with the VM</a><ul>
+<li class="chapter" data-level="21.1" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html#connecting-to-the-vm-via-ssh"><i class="fa fa-check"></i><b>21.1</b> Connecting to the VM via SSH</a></li>
+<li class="chapter" data-level="21.2" data-path="working-with-the-vm.html"><a href="working-with-the-vm.html#connecting-to-bety-on-the-vm-via-ssh"><i class="fa fa-check"></i><b>21.2</b> Connecting to bety on the VM via SSh</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html"><i class="fa fa-check"></i><b>20</b> VM Desktop Conversion</a><ul>
-<li class="chapter" data-level="20.0.1" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html#install-rstudio-desktop"><i class="fa fa-check"></i><b>20.0.1</b> Install RStudio Desktop</a></li>
+<li class="chapter" data-level="22" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html"><i class="fa fa-check"></i><b>22</b> VM Desktop Conversion</a><ul>
+<li class="chapter" data-level="22.0.1" data-path="vm-desktop-conversion.html"><a href="vm-desktop-conversion.html#install-rstudio-desktop"><i class="fa fa-check"></i><b>22.0.1</b> Install RStudio Desktop</a></li>
 </ul></li>
 <li class="part"><span><b>V Developer user guide</b></span></li>
-<li class="chapter" data-level="21" data-path="introduction-developer-guide.html"><a href="introduction-developer-guide.html"><i class="fa fa-check"></i><b>21</b> Introduction: Developer Guide</a></li>
-<li class="chapter" data-level="22" data-path="pecan-setup.html"><a href="pecan-setup.html"><i class="fa fa-check"></i><b>22</b> PEcAn Setup</a><ul>
-<li class="chapter" data-level="22.1" data-path="pecan-setup.html"><a href="pecan-setup.html#installing-the-pecan-vm"><i class="fa fa-check"></i><b>22.1</b> Installing the PEcAn VM</a></li>
-<li class="chapter" data-level="22.2" data-path="pecan-setup.html"><a href="pecan-setup.html#install-pecan-by-hand"><i class="fa fa-check"></i><b>22.2</b> Install PEcAn by hand</a><ul>
-<li class="chapter" data-level="22.2.1" data-path="pecan-setup.html"><a href="pecan-setup.html#installation-prerequisites"><i class="fa fa-check"></i><b>22.2.1</b> Installation Prerequisites</a></li>
-<li class="chapter" data-level="22.2.2" data-path="pecan-setup.html"><a href="pecan-setup.html#os-specific-installations"><i class="fa fa-check"></i><b>22.2.2</b> OS Specific Installations</a></li>
-<li class="chapter" data-level="22.2.3" data-path="pecan-setup.html"><a href="pecan-setup.html#installing-bety"><i class="fa fa-check"></i><b>22.2.3</b> Installing BETY</a></li>
-<li class="chapter" data-level="22.2.4" data-path="pecan-setup.html"><a href="pecan-setup.html#install-models"><i class="fa fa-check"></i><b>22.2.4</b> Install Models</a></li>
-<li class="chapter" data-level="22.2.5" data-path="pecan-setup.html"><a href="pecan-setup.html#download-and-compile-pecan"><i class="fa fa-check"></i><b>22.2.5</b> Download and Compile PEcAn</a></li>
-<li class="chapter" data-level="22.2.6" data-path="pecan-setup.html"><a href="pecan-setup.html#pecan-testrun"><i class="fa fa-check"></i><b>22.2.6</b> PEcAn Testrun</a></li>
-<li class="chapter" data-level="22.2.7" data-path="pecan-setup.html"><a href="pecan-setup.html#pecan-customizations"><i class="fa fa-check"></i><b>22.2.7</b> PEcAn Customizations</a></li>
+<li class="chapter" data-level="23" data-path="introduction-developer-guide.html"><a href="introduction-developer-guide.html"><i class="fa fa-check"></i><b>23</b> Introduction: Developer Guide</a></li>
+<li class="chapter" data-level="24" data-path="pecan-setup.html"><a href="pecan-setup.html"><i class="fa fa-check"></i><b>24</b> PEcAn Setup</a><ul>
+<li class="chapter" data-level="24.1" data-path="pecan-setup.html"><a href="pecan-setup.html#installing-the-pecan-vm"><i class="fa fa-check"></i><b>24.1</b> Installing the PEcAn VM</a></li>
+<li class="chapter" data-level="24.2" data-path="pecan-setup.html"><a href="pecan-setup.html#install-pecan-by-hand"><i class="fa fa-check"></i><b>24.2</b> Install PEcAn by hand</a><ul>
+<li class="chapter" data-level="24.2.1" data-path="pecan-setup.html"><a href="pecan-setup.html#installation-prerequisites"><i class="fa fa-check"></i><b>24.2.1</b> Installation Prerequisites</a></li>
+<li class="chapter" data-level="24.2.2" data-path="pecan-setup.html"><a href="pecan-setup.html#os-specific-installations"><i class="fa fa-check"></i><b>24.2.2</b> OS Specific Installations</a></li>
+<li class="chapter" data-level="24.2.3" data-path="pecan-setup.html"><a href="pecan-setup.html#installing-bety"><i class="fa fa-check"></i><b>24.2.3</b> Installing BETY</a></li>
+<li class="chapter" data-level="24.2.4" data-path="pecan-setup.html"><a href="pecan-setup.html#install-models"><i class="fa fa-check"></i><b>24.2.4</b> Install Models</a></li>
+<li class="chapter" data-level="24.2.5" data-path="pecan-setup.html"><a href="pecan-setup.html#download-and-compile-pecan"><i class="fa fa-check"></i><b>24.2.5</b> Download and Compile PEcAn</a></li>
+<li class="chapter" data-level="24.2.6" data-path="pecan-setup.html"><a href="pecan-setup.html#pecan-testrun"><i class="fa fa-check"></i><b>24.2.6</b> PEcAn Testrun</a></li>
+<li class="chapter" data-level="24.2.7" data-path="pecan-setup.html"><a href="pecan-setup.html#pecan-customizations"><i class="fa fa-check"></i><b>24.2.7</b> PEcAn Customizations</a></li>
 </ul></li>
-<li class="chapter" data-level="22.3" data-path="pecan-setup.html"><a href="pecan-setup.html#aws-setup"><i class="fa fa-check"></i><b>22.3</b> AWS Setup</a><ul>
-<li class="chapter" data-level="22.3.1" data-path="pecan-setup.html"><a href="pecan-setup.html#porting-vm-to-aws"><i class="fa fa-check"></i><b>22.3.1</b> Porting VM to AWS</a></li>
-<li class="chapter" data-level="22.3.2" data-path="pecan-setup.html"><a href="pecan-setup.html#set-up-multiple-instances-optional"><i class="fa fa-check"></i><b>22.3.2</b> Set up multiple instances (optional)</a></li>
+<li class="chapter" data-level="24.3" data-path="pecan-setup.html"><a href="pecan-setup.html#aws-setup"><i class="fa fa-check"></i><b>24.3</b> AWS Setup</a><ul>
+<li class="chapter" data-level="24.3.1" data-path="pecan-setup.html"><a href="pecan-setup.html#porting-vm-to-aws"><i class="fa fa-check"></i><b>24.3.1</b> Porting VM to AWS</a></li>
+<li class="chapter" data-level="24.3.2" data-path="pecan-setup.html"><a href="pecan-setup.html#set-up-multiple-instances-optional"><i class="fa fa-check"></i><b>24.3.2</b> Set up multiple instances (optional)</a></li>
 </ul></li>
-<li class="chapter" data-level="22.4" data-path="pecan-setup.html"><a href="pecan-setup.html#shiny-setup"><i class="fa fa-check"></i><b>22.4</b> Shiny Setup</a><ul>
-<li class="chapter" data-level="22.4.1" data-path="pecan-setup.html"><a href="pecan-setup.html#install-the-shiny-r-package-and-shiny-server"><i class="fa fa-check"></i><b>22.4.1</b> Install the Shiny R package and Shiny server</a></li>
-<li class="chapter" data-level="22.4.2" data-path="pecan-setup.html"><a href="pecan-setup.html#modify-the-shiny-configuration-file"><i class="fa fa-check"></i><b>22.4.2</b> Modify the shiny configuration file</a></li>
-<li class="chapter" data-level="22.4.3" data-path="pecan-setup.html"><a href="pecan-setup.html#set-the-apache-proxy"><i class="fa fa-check"></i><b>22.4.3</b> Set the Apache proxy</a></li>
-<li class="chapter" data-level="22.4.4" data-path="pecan-setup.html"><a href="pecan-setup.html#enable-and-start-the-shiny-server-and-restart-apache"><i class="fa fa-check"></i><b>22.4.4</b> Enable and start the shiny server, and restart apache</a></li>
-<li class="chapter" data-level="22.4.5" data-path="pecan-setup.html"><a href="pecan-setup.html#troubleshooting-1"><i class="fa fa-check"></i><b>22.4.5</b> Troubleshooting</a></li>
-<li class="chapter" data-level="22.4.6" data-path="pecan-setup.html"><a href="pecan-setup.html#further-reading"><i class="fa fa-check"></i><b>22.4.6</b> Further reading</a></li>
+<li class="chapter" data-level="24.4" data-path="pecan-setup.html"><a href="pecan-setup.html#shiny-setup"><i class="fa fa-check"></i><b>24.4</b> Shiny Setup</a><ul>
+<li class="chapter" data-level="24.4.1" data-path="pecan-setup.html"><a href="pecan-setup.html#install-the-shiny-r-package-and-shiny-server"><i class="fa fa-check"></i><b>24.4.1</b> Install the Shiny R package and Shiny server</a></li>
+<li class="chapter" data-level="24.4.2" data-path="pecan-setup.html"><a href="pecan-setup.html#modify-the-shiny-configuration-file"><i class="fa fa-check"></i><b>24.4.2</b> Modify the shiny configuration file</a></li>
+<li class="chapter" data-level="24.4.3" data-path="pecan-setup.html"><a href="pecan-setup.html#set-the-apache-proxy"><i class="fa fa-check"></i><b>24.4.3</b> Set the Apache proxy</a></li>
+<li class="chapter" data-level="24.4.4" data-path="pecan-setup.html"><a href="pecan-setup.html#enable-and-start-the-shiny-server-and-restart-apache"><i class="fa fa-check"></i><b>24.4.4</b> Enable and start the shiny server, and restart apache</a></li>
+<li class="chapter" data-level="24.4.5" data-path="pecan-setup.html"><a href="pecan-setup.html#troubleshooting-1"><i class="fa fa-check"></i><b>24.4.5</b> Troubleshooting</a></li>
+<li class="chapter" data-level="24.4.6" data-path="pecan-setup.html"><a href="pecan-setup.html#further-reading"><i class="fa fa-check"></i><b>24.4.6</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="22.5" data-path="pecan-setup.html"><a href="pecan-setup.html#thredds-setup"><i class="fa fa-check"></i><b>22.5</b> Thredds Setup</a><ul>
-<li class="chapter" data-level="22.5.1" data-path="pecan-setup.html"><a href="pecan-setup.html#install-the-tomcat-8-and-thredds-webapp"><i class="fa fa-check"></i><b>22.5.1</b> Install the Tomcat 8 and Thredds webapp</a></li>
-<li class="chapter" data-level="22.5.2" data-path="pecan-setup.html"><a href="pecan-setup.html#ubuntu-1"><i class="fa fa-check"></i><b>22.5.2</b> Ubuntu</a></li>
-<li class="chapter" data-level="22.5.3" data-path="pecan-setup.html"><a href="pecan-setup.html#customize-the-thredds-server"><i class="fa fa-check"></i><b>22.5.3</b> Customize the Thredds server</a></li>
-<li class="chapter" data-level="22.5.4" data-path="pecan-setup.html"><a href="pecan-setup.html#update-the-catalog"><i class="fa fa-check"></i><b>22.5.4</b> Update the catalog</a></li>
-<li class="chapter" data-level="22.5.5" data-path="pecan-setup.html"><a href="pecan-setup.html#troubleshooting-2"><i class="fa fa-check"></i><b>22.5.5</b> Troubleshooting</a></li>
-<li class="chapter" data-level="22.5.6" data-path="pecan-setup.html"><a href="pecan-setup.html#further-reading-1"><i class="fa fa-check"></i><b>22.5.6</b> Further reading</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="23" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html"><i class="fa fa-check"></i><b>23</b> Maintaining PEcAn</a><ul>
-<li class="chapter" data-level="23.1" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#updating-pecan-code-and-bety-database"><i class="fa fa-check"></i><b>23.1</b> Updating PEcAn Code and Bety Database</a><ul>
-<li class="chapter" data-level="23.1.1" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#updating-pecan"><i class="fa fa-check"></i><b>23.1.1</b> Updating PEcAn</a></li>
-</ul></li>
-<li class="chapter" data-level="23.2" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#updating-bety"><i class="fa fa-check"></i><b>23.2</b> Updating BETY</a></li>
-<li class="chapter" data-level="23.3" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#database-synchronization"><i class="fa fa-check"></i><b>23.3</b> Database synchronization</a><ul>
-<li class="chapter" data-level="23.3.1" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#how-does-it-work"><i class="fa fa-check"></i><b>23.3.1</b> How does it work?</a></li>
-<li class="chapter" data-level="23.3.2" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#set-up"><i class="fa fa-check"></i><b>23.3.2</b> Set up</a></li>
-<li class="chapter" data-level="23.3.3" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#fetch-latest-data"><i class="fa fa-check"></i><b>23.3.3</b> Fetch latest data</a></li>
-<li class="chapter" data-level="23.3.4" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#sharing-data"><i class="fa fa-check"></i><b>23.3.4</b> Sharing data</a></li>
-<li class="chapter" data-level="23.3.5" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#automation"><i class="fa fa-check"></i><b>23.3.5</b> Automation</a></li>
-<li class="chapter" data-level="23.3.6" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#network-status-map"><i class="fa fa-check"></i><b>23.3.6</b> Network Status Map</a></li>
-<li class="chapter" data-level="23.3.7" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#tasks"><i class="fa fa-check"></i><b>23.3.7</b> Tasks</a></li>
+<li class="chapter" data-level="24.5" data-path="pecan-setup.html"><a href="pecan-setup.html#thredds-setup"><i class="fa fa-check"></i><b>24.5</b> Thredds Setup</a><ul>
+<li class="chapter" data-level="24.5.1" data-path="pecan-setup.html"><a href="pecan-setup.html#install-the-tomcat-8-and-thredds-webapp"><i class="fa fa-check"></i><b>24.5.1</b> Install the Tomcat 8 and Thredds webapp</a></li>
+<li class="chapter" data-level="24.5.2" data-path="pecan-setup.html"><a href="pecan-setup.html#ubuntu-1"><i class="fa fa-check"></i><b>24.5.2</b> Ubuntu</a></li>
+<li class="chapter" data-level="24.5.3" data-path="pecan-setup.html"><a href="pecan-setup.html#customize-the-thredds-server"><i class="fa fa-check"></i><b>24.5.3</b> Customize the Thredds server</a></li>
+<li class="chapter" data-level="24.5.4" data-path="pecan-setup.html"><a href="pecan-setup.html#update-the-catalog"><i class="fa fa-check"></i><b>24.5.4</b> Update the catalog</a></li>
+<li class="chapter" data-level="24.5.5" data-path="pecan-setup.html"><a href="pecan-setup.html#troubleshooting-2"><i class="fa fa-check"></i><b>24.5.5</b> Troubleshooting</a></li>
+<li class="chapter" data-level="24.5.6" data-path="pecan-setup.html"><a href="pecan-setup.html#further-reading-1"><i class="fa fa-check"></i><b>24.5.6</b> Further reading</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html"><i class="fa fa-check"></i><b>24</b> Git and GitHub Workflow</a><ul>
-<li class="chapter" data-level="24.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#using-git"><i class="fa fa-check"></i><b>24.1</b> Using Git</a><ul>
-<li class="chapter" data-level="24.1.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git"><i class="fa fa-check"></i><b>24.1.1</b> Git</a></li>
-<li class="chapter" data-level="24.1.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#recommended-git-workflow"><i class="fa fa-check"></i><b>24.1.2</b> Recommended Git Workflow</a></li>
-<li class="chapter" data-level="24.1.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#during-development"><i class="fa fa-check"></i><b>24.1.3</b> During development:</a></li>
-<li class="chapter" data-level="24.1.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-pecan"><i class="fa fa-check"></i><b>24.1.4</b> For PEcAn</a></li>
-<li class="chapter" data-level="24.1.5" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git-rstudio"><i class="fa fa-check"></i><b>24.1.5</b> Git + Rstudio</a></li>
-<li class="chapter" data-level="24.1.6" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-development"><i class="fa fa-check"></i><b>24.1.6</b> For development:</a></li>
+<li class="chapter" data-level="25" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html"><i class="fa fa-check"></i><b>25</b> Maintaining PEcAn</a><ul>
+<li class="chapter" data-level="25.1" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#updating-pecan-code-and-bety-database"><i class="fa fa-check"></i><b>25.1</b> Updating PEcAn Code and Bety Database</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#updating-pecan"><i class="fa fa-check"></i><b>25.1.1</b> Updating PEcAn</a></li>
 </ul></li>
-<li class="chapter" data-level="24.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#references"><i class="fa fa-check"></i><b>24.2</b> References:</a></li>
-<li class="chapter" data-level="24.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#github-use-with-pecan"><i class="fa fa-check"></i><b>24.3</b> GitHub use with PEcAn</a><ul>
-<li class="chapter" data-level="24.3.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#bugs-issues-features-etc."><i class="fa fa-check"></i><b>24.3.1</b> Bugs, Issues, Features, etc.</a></li>
-<li class="chapter" data-level="24.3.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#requesting-a-feature"><i class="fa fa-check"></i><b>24.3.2</b> Requesting a feature</a></li>
-<li class="chapter" data-level="24.3.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#closing-an-issue"><i class="fa fa-check"></i><b>24.3.3</b> Closing an issue</a></li>
-<li class="chapter" data-level="24.3.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#when-to-submit-an-issue"><i class="fa fa-check"></i><b>24.3.4</b> When to submit an issue?</a></li>
+<li class="chapter" data-level="25.2" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#updating-bety"><i class="fa fa-check"></i><b>25.2</b> Updating BETY</a></li>
+<li class="chapter" data-level="25.3" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#database-synchronization"><i class="fa fa-check"></i><b>25.3</b> Database synchronization</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#how-does-it-work"><i class="fa fa-check"></i><b>25.3.1</b> How does it work?</a></li>
+<li class="chapter" data-level="25.3.2" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#set-up"><i class="fa fa-check"></i><b>25.3.2</b> Set up</a></li>
+<li class="chapter" data-level="25.3.3" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#fetch-latest-data"><i class="fa fa-check"></i><b>25.3.3</b> Fetch latest data</a></li>
+<li class="chapter" data-level="25.3.4" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#sharing-data"><i class="fa fa-check"></i><b>25.3.4</b> Sharing data</a></li>
+<li class="chapter" data-level="25.3.5" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#automation"><i class="fa fa-check"></i><b>25.3.5</b> Automation</a></li>
+<li class="chapter" data-level="25.3.6" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#network-status-map"><i class="fa fa-check"></i><b>25.3.6</b> Network Status Map</a></li>
+<li class="chapter" data-level="25.3.7" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#tasks"><i class="fa fa-check"></i><b>25.3.7</b> Tasks</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="coding-practices.html"><a href="coding-practices.html"><i class="fa fa-check"></i><b>25</b> Coding Practices</a><ul>
-<li class="chapter" data-level="25.1" data-path="coding-practices.html"><a href="coding-practices.html#coding-style"><i class="fa fa-check"></i><b>25.1</b> Coding Style</a><ul>
-<li class="chapter" data-level="25.1.1" data-path="coding-practices.html"><a href="coding-practices.html#use-roxygen2-documentation"><i class="fa fa-check"></i><b>25.1.1</b> Use Roxygen2 documentation</a></li>
-<li class="chapter" data-level="25.1.2" data-path="coding-practices.html"><a href="coding-practices.html#write-your-name-at-the-top"><i class="fa fa-check"></i><b>25.1.2</b> Write your name at the top</a></li>
-<li class="chapter" data-level="25.1.3" data-path="coding-practices.html"><a href="coding-practices.html#use-testthat-testing-package"><i class="fa fa-check"></i><b>25.1.3</b> Use testthat testing package</a></li>
-<li class="chapter" data-level="25.1.4" data-path="coding-practices.html"><a href="coding-practices.html#dont-use-shortcuts"><i class="fa fa-check"></i><b>25.1.4</b> Don’t use shortcuts</a></li>
-<li class="chapter" data-level="25.1.5" data-path="coding-practices.html"><a href="coding-practices.html#package-dependencies"><i class="fa fa-check"></i><b>25.1.5</b> Package Dependencies:</a></li>
+<li class="chapter" data-level="26" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html"><i class="fa fa-check"></i><b>26</b> Git and GitHub Workflow</a><ul>
+<li class="chapter" data-level="26.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#using-git"><i class="fa fa-check"></i><b>26.1</b> Using Git</a><ul>
+<li class="chapter" data-level="26.1.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git"><i class="fa fa-check"></i><b>26.1.1</b> Git</a></li>
+<li class="chapter" data-level="26.1.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#pecan-project-and-github"><i class="fa fa-check"></i><b>26.1.2</b> PEcAn Project and Github</a></li>
+<li class="chapter" data-level="26.1.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#pecan-project-branches"><i class="fa fa-check"></i><b>26.1.3</b> PEcAn Project Branches</a></li>
+<li class="chapter" data-level="26.1.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#git-rstudio"><i class="fa fa-check"></i><b>26.1.4</b> Git + Rstudio</a></li>
+<li class="chapter" data-level="26.1.5" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#for-development"><i class="fa fa-check"></i><b>26.1.5</b> For development:</a></li>
+<li class="chapter" data-level="26.1.6" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#references"><i class="fa fa-check"></i><b>26.1.6</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="25.2" data-path="coding-practices.html"><a href="coding-practices.html#logging"><i class="fa fa-check"></i><b>25.2</b> Logging</a><ul>
-<li class="chapter" data-level="25.2.1" data-path="coding-practices.html"><a href="coding-practices.html#pecan-logging-functions"><i class="fa fa-check"></i><b>25.2.1</b> PEcAn logging functions</a></li>
-<li class="chapter" data-level="25.2.2" data-path="coding-practices.html"><a href="coding-practices.html#other-r-logging-packages"><i class="fa fa-check"></i><b>25.2.2</b> Other R logging packages</a></li>
-<li class="chapter" data-level="25.2.3" data-path="coding-practices.html"><a href="coding-practices.html#example-usage"><i class="fa fa-check"></i><b>25.2.3</b> Example Usage</a></li>
-</ul></li>
-<li class="chapter" data-level="25.3" data-path="coding-practices.html"><a href="coding-practices.html#package-data"><i class="fa fa-check"></i><b>25.3</b> Package Data</a><ul>
-<li class="chapter" data-level="25.3.1" data-path="coding-practices.html"><a href="coding-practices.html#summary"><i class="fa fa-check"></i><b>25.3.1</b> Summary:</a></li>
-<li class="chapter" data-level="25.3.2" data-path="coding-practices.html"><a href="coding-practices.html#accessing-data"><i class="fa fa-check"></i><b>25.3.2</b> Accessing data</a></li>
-</ul></li>
-<li class="chapter" data-level="25.4" data-path="coding-practices.html"><a href="coding-practices.html#packages-used-in-development"><i class="fa fa-check"></i><b>25.4</b> Packages used in development</a></li>
-<li class="chapter" data-level="25.5" data-path="coding-practices.html"><a href="coding-practices.html#roxygen2-1"><i class="fa fa-check"></i><b>25.5</b> Roxygen2</a><ul>
-<li class="chapter" data-level="25.5.1" data-path="coding-practices.html"><a href="coding-practices.html#canonical-references"><i class="fa fa-check"></i><b>25.5.1</b> Canonical references:</a></li>
-<li class="chapter" data-level="25.5.2" data-path="coding-practices.html"><a href="coding-practices.html#basic-roxygen2-instructions"><i class="fa fa-check"></i><b>25.5.2</b> Basic Roxygen2 instructions:</a></li>
-<li class="chapter" data-level="25.5.3" data-path="coding-practices.html"><a href="coding-practices.html#example-1"><i class="fa fa-check"></i><b>25.5.3</b> Example</a></li>
-<li class="chapter" data-level="25.5.4" data-path="coding-practices.html"><a href="coding-practices.html#updating-documentation"><i class="fa fa-check"></i><b>25.5.4</b> Updating documentation</a></li>
-</ul></li>
-<li class="chapter" data-level="25.6" data-path="coding-practices.html"><a href="coding-practices.html#testing"><i class="fa fa-check"></i><b>25.6</b> Testing</a><ul>
-<li class="chapter" data-level="25.6.1" data-path="coding-practices.html"><a href="coding-practices.html#rationale"><i class="fa fa-check"></i><b>25.6.1</b> Rationale</a></li>
-<li class="chapter" data-level="25.6.2" data-path="coding-practices.html"><a href="coding-practices.html#tests-makes-development-easier-and-less-error-prone"><i class="fa fa-check"></i><b>25.6.2</b> Tests makes development easier and less error prone</a></li>
-<li class="chapter" data-level="25.6.3" data-path="coding-practices.html"><a href="coding-practices.html#quick-start"><i class="fa fa-check"></i><b>25.6.3</b> Quick Start:</a></li>
-<li class="chapter" data-level="25.6.4" data-path="coding-practices.html"><a href="coding-practices.html#test-files"><i class="fa fa-check"></i><b>25.6.4</b> Test files</a></li>
-<li class="chapter" data-level="25.6.5" data-path="coding-practices.html"><a href="coding-practices.html#testing-the-shiny-server"><i class="fa fa-check"></i><b>25.6.5</b> Testing the Shiny Server</a></li>
+<li class="chapter" data-level="26.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#github-use-with-pecan"><i class="fa fa-check"></i><b>26.2</b> GitHub use with PEcAn</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#bugs-issues-features-etc."><i class="fa fa-check"></i><b>26.2.1</b> Bugs, Issues, Features, etc.</a></li>
+<li class="chapter" data-level="26.2.2" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#requesting-a-feature"><i class="fa fa-check"></i><b>26.2.2</b> Requesting a feature</a></li>
+<li class="chapter" data-level="26.2.3" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#closing-an-issue"><i class="fa fa-check"></i><b>26.2.3</b> Closing an issue</a></li>
+<li class="chapter" data-level="26.2.4" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html#when-to-submit-an-issue"><i class="fa fa-check"></i><b>26.2.4</b> When to submit an issue?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="directory-structure.html"><a href="directory-structure.html"><i class="fa fa-check"></i><b>26</b> Directory structure</a><ul>
-<li class="chapter" data-level="26.1" data-path="directory-structure.html"><a href="directory-structure.html#overview-of-pecan-repository-as-of-pecan-1.5.3"><i class="fa fa-check"></i><b>26.1</b> Overview of PEcAn repository as of PEcAn 1.5.3</a></li>
-<li class="chapter" data-level="26.2" data-path="directory-structure.html"><a href="directory-structure.html#generic-r-package-structure"><i class="fa fa-check"></i><b>26.2</b> Generic R package structure:</a></li>
+<li class="chapter" data-level="27" data-path="coding-practices.html"><a href="coding-practices.html"><i class="fa fa-check"></i><b>27</b> Coding Practices</a><ul>
+<li class="chapter" data-level="27.1" data-path="coding-practices.html"><a href="coding-practices.html#coding-style"><i class="fa fa-check"></i><b>27.1</b> Coding Style</a><ul>
+<li class="chapter" data-level="27.1.1" data-path="coding-practices.html"><a href="coding-practices.html#use-roxygen2-documentation"><i class="fa fa-check"></i><b>27.1.1</b> Use Roxygen2 documentation</a></li>
+<li class="chapter" data-level="27.1.2" data-path="coding-practices.html"><a href="coding-practices.html#write-your-name-at-the-top"><i class="fa fa-check"></i><b>27.1.2</b> Write your name at the top</a></li>
+<li class="chapter" data-level="27.1.3" data-path="coding-practices.html"><a href="coding-practices.html#use-testthat-testing-package"><i class="fa fa-check"></i><b>27.1.3</b> Use testthat testing package</a></li>
+<li class="chapter" data-level="27.1.4" data-path="coding-practices.html"><a href="coding-practices.html#dont-use-shortcuts"><i class="fa fa-check"></i><b>27.1.4</b> Don’t use shortcuts</a></li>
+<li class="chapter" data-level="27.1.5" data-path="coding-practices.html"><a href="coding-practices.html#package-dependencies"><i class="fa fa-check"></i><b>27.1.5</b> Package Dependencies:</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="coding-practices.html"><a href="coding-practices.html#logging"><i class="fa fa-check"></i><b>27.2</b> Logging</a><ul>
+<li class="chapter" data-level="27.2.1" data-path="coding-practices.html"><a href="coding-practices.html#pecan-logging-functions"><i class="fa fa-check"></i><b>27.2.1</b> PEcAn logging functions</a></li>
+<li class="chapter" data-level="27.2.2" data-path="coding-practices.html"><a href="coding-practices.html#other-r-logging-packages"><i class="fa fa-check"></i><b>27.2.2</b> Other R logging packages</a></li>
+<li class="chapter" data-level="27.2.3" data-path="coding-practices.html"><a href="coding-practices.html#example-usage"><i class="fa fa-check"></i><b>27.2.3</b> Example Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="coding-practices.html"><a href="coding-practices.html#package-data"><i class="fa fa-check"></i><b>27.3</b> Package Data</a><ul>
+<li class="chapter" data-level="27.3.1" data-path="coding-practices.html"><a href="coding-practices.html#summary"><i class="fa fa-check"></i><b>27.3.1</b> Summary:</a></li>
+<li class="chapter" data-level="27.3.2" data-path="coding-practices.html"><a href="coding-practices.html#accessing-data"><i class="fa fa-check"></i><b>27.3.2</b> Accessing data</a></li>
+</ul></li>
+<li class="chapter" data-level="27.4" data-path="coding-practices.html"><a href="coding-practices.html#packages-used-in-development"><i class="fa fa-check"></i><b>27.4</b> Packages used in development</a></li>
+<li class="chapter" data-level="27.5" data-path="coding-practices.html"><a href="coding-practices.html#roxygen2-1"><i class="fa fa-check"></i><b>27.5</b> Roxygen2</a><ul>
+<li class="chapter" data-level="27.5.1" data-path="coding-practices.html"><a href="coding-practices.html#canonical-references"><i class="fa fa-check"></i><b>27.5.1</b> Canonical references:</a></li>
+<li class="chapter" data-level="27.5.2" data-path="coding-practices.html"><a href="coding-practices.html#basic-roxygen2-instructions"><i class="fa fa-check"></i><b>27.5.2</b> Basic Roxygen2 instructions:</a></li>
+<li class="chapter" data-level="27.5.3" data-path="coding-practices.html"><a href="coding-practices.html#example-1"><i class="fa fa-check"></i><b>27.5.3</b> Example</a></li>
+<li class="chapter" data-level="27.5.4" data-path="coding-practices.html"><a href="coding-practices.html#updating-documentation"><i class="fa fa-check"></i><b>27.5.4</b> Updating documentation</a></li>
+</ul></li>
+<li class="chapter" data-level="27.6" data-path="coding-practices.html"><a href="coding-practices.html#testing"><i class="fa fa-check"></i><b>27.6</b> Testing</a><ul>
+<li class="chapter" data-level="27.6.1" data-path="coding-practices.html"><a href="coding-practices.html#rationale"><i class="fa fa-check"></i><b>27.6.1</b> Rationale</a></li>
+<li class="chapter" data-level="27.6.2" data-path="coding-practices.html"><a href="coding-practices.html#tests-makes-development-easier-and-less-error-prone"><i class="fa fa-check"></i><b>27.6.2</b> Tests makes development easier and less error prone</a></li>
+<li class="chapter" data-level="27.6.3" data-path="coding-practices.html"><a href="coding-practices.html#quick-start"><i class="fa fa-check"></i><b>27.6.3</b> Quick Start:</a></li>
+<li class="chapter" data-level="27.6.4" data-path="coding-practices.html"><a href="coding-practices.html#test-files"><i class="fa fa-check"></i><b>27.6.4</b> Test files</a></li>
+<li class="chapter" data-level="27.6.5" data-path="coding-practices.html"><a href="coding-practices.html#testing-the-shiny-server"><i class="fa fa-check"></i><b>27.6.5</b> Testing the Shiny Server</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="directory-structure.html"><a href="directory-structure.html"><i class="fa fa-check"></i><b>28</b> Directory structure</a><ul>
+<li class="chapter" data-level="28.1" data-path="directory-structure.html"><a href="directory-structure.html#overview-of-pecan-repository-as-of-pecan-1.5.3"><i class="fa fa-check"></i><b>28.1</b> Overview of PEcAn repository as of PEcAn 1.5.3</a></li>
+<li class="chapter" data-level="28.2" data-path="directory-structure.html"><a href="directory-structure.html#generic-r-package-structure"><i class="fa fa-check"></i><b>28.2</b> Generic R package structure:</a></li>
 </ul></li>
 <li class="part"><span><b>VI Reference Materials</b></span></li>
-<li class="chapter" data-level="27" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html"><i class="fa fa-check"></i><b>27</b> PEcAn standard formats</a><ul>
-<li class="chapter" data-level="27.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#defining-new-input-formats"><i class="fa fa-check"></i><b>27.1</b> Defining new input formats</a><ul>
-<li class="chapter" data-level="27.1.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#outputs"><i class="fa fa-check"></i><b>27.1.1</b> Outputs</a></li>
+<li class="chapter" data-level="29" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html"><i class="fa fa-check"></i><b>29</b> PEcAn standard formats</a><ul>
+<li class="chapter" data-level="29.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#defining-new-input-formats"><i class="fa fa-check"></i><b>29.1</b> Defining new input formats</a><ul>
+<li class="chapter" data-level="29.1.1" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#input-standards"><i class="fa fa-check"></i><b>29.1.1</b> Input Standards</a></li>
+<li class="chapter" data-level="29.1.2" data-path="pecan-standard-formats.html"><a href="pecan-standard-formats.html#output-standards"><i class="fa fa-check"></i><b>29.1.2</b> Output Standards</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="models-in-pecan.html"><a href="models-in-pecan.html"><i class="fa fa-check"></i><b>28</b> Models in PEcAn</a><ul>
-<li class="chapter" data-level="28.1" data-path="models-in-pecan.html"><a href="models-in-pecan.html#biocro-configuration"><i class="fa fa-check"></i><b>28.1</b> BioCro Configuration</a></li>
-<li class="chapter" data-level="28.2" data-path="models-in-pecan.html"><a href="models-in-pecan.html#biocro-1"><i class="fa fa-check"></i><b>28.2</b> BioCro</a></li>
-<li class="chapter" data-level="28.3" data-path="models-in-pecan.html"><a href="models-in-pecan.html#clm"><i class="fa fa-check"></i><b>28.3</b> CLM</a></li>
-<li class="chapter" data-level="28.4" data-path="models-in-pecan.html"><a href="models-in-pecan.html#dalec-1"><i class="fa fa-check"></i><b>28.4</b> DALEC</a></li>
-<li class="chapter" data-level="28.5" data-path="models-in-pecan.html"><a href="models-in-pecan.html#ed"><i class="fa fa-check"></i><b>28.5</b> ED</a></li>
-<li class="chapter" data-level="28.6" data-path="models-in-pecan.html"><a href="models-in-pecan.html#ed2-configuration"><i class="fa fa-check"></i><b>28.6</b> ED2 Configuration</a><ul>
-<li class="chapter" data-level="28.6.1" data-path="models-in-pecan.html"><a href="models-in-pecan.html#ed2in-configuration-variables"><i class="fa fa-check"></i><b>28.6.1</b> ED2IN configuration variables</a></li>
+<li class="chapter" data-level="30" data-path="models-in-pecan.html"><a href="models-in-pecan.html"><i class="fa fa-check"></i><b>30</b> Models in PEcAn</a></li>
+<li class="chapter" data-level="31" data-path="template-model-page.html"><a href="template-model-page.html"><i class="fa fa-check"></i><b>31</b> Template MODEL page</a><ul>
+<li class="chapter" data-level="31.1" data-path="template-model-page.html"><a href="template-model-page.html#biocro-configuration"><i class="fa fa-check"></i><b>31.1</b> BioCro Configuration</a></li>
+<li class="chapter" data-level="31.2" data-path="template-model-page.html"><a href="template-model-page.html#biocro-1"><i class="fa fa-check"></i><b>31.2</b> BioCro</a></li>
+<li class="chapter" data-level="31.3" data-path="template-model-page.html"><a href="template-model-page.html#clm"><i class="fa fa-check"></i><b>31.3</b> CLM</a></li>
+<li class="chapter" data-level="31.4" data-path="template-model-page.html"><a href="template-model-page.html#dalec-1"><i class="fa fa-check"></i><b>31.4</b> DALEC</a></li>
+<li class="chapter" data-level="31.5" data-path="template-model-page.html"><a href="template-model-page.html#ed"><i class="fa fa-check"></i><b>31.5</b> ED</a><ul>
+<li class="chapter" data-level="31.5.1" data-path="template-model-page.html"><a href="template-model-page.html#introduction-2"><i class="fa fa-check"></i><b>31.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="31.5.2" data-path="template-model-page.html"><a href="template-model-page.html#pecan-configuration-file-additions"><i class="fa fa-check"></i><b>31.5.2</b> PEcAn configuration file additions</a></li>
+<li class="chapter" data-level="31.5.3" data-path="template-model-page.html"><a href="template-model-page.html#model-specific-input-files"><i class="fa fa-check"></i><b>31.5.3</b> Model specific input files</a></li>
+<li class="chapter" data-level="31.5.4" data-path="template-model-page.html"><a href="template-model-page.html#model-configuration-files"><i class="fa fa-check"></i><b>31.5.4</b> Model configuration files</a></li>
+<li class="chapter" data-level="31.5.5" data-path="template-model-page.html"><a href="template-model-page.html#installation-notes"><i class="fa fa-check"></i><b>31.5.5</b> Installation notes</a></li>
 </ul></li>
-<li class="chapter" data-level="28.7" data-path="models-in-pecan.html"><a href="models-in-pecan.html#gday-1"><i class="fa fa-check"></i><b>28.7</b> GDAY</a></li>
-<li class="chapter" data-level="28.8" data-path="models-in-pecan.html"><a href="models-in-pecan.html#linkages-1"><i class="fa fa-check"></i><b>28.8</b> LINKAGES</a></li>
-<li class="chapter" data-level="28.9" data-path="models-in-pecan.html"><a href="models-in-pecan.html#lpj-guess-1"><i class="fa fa-check"></i><b>28.9</b> LPJ-GUESS</a></li>
-<li class="chapter" data-level="28.10" data-path="models-in-pecan.html"><a href="models-in-pecan.html#maespa-1"><i class="fa fa-check"></i><b>28.10</b> MAESPA</a></li>
+<li class="chapter" data-level="31.6" data-path="template-model-page.html"><a href="template-model-page.html#gday-1"><i class="fa fa-check"></i><b>31.6</b> GDAY</a></li>
+<li class="chapter" data-level="31.7" data-path="template-model-page.html"><a href="template-model-page.html#linkages-1"><i class="fa fa-check"></i><b>31.7</b> LINKAGES</a></li>
+<li class="chapter" data-level="31.8" data-path="template-model-page.html"><a href="template-model-page.html#lpj-guess-1"><i class="fa fa-check"></i><b>31.8</b> LPJ-GUESS</a></li>
+<li class="chapter" data-level="31.9" data-path="template-model-page.html"><a href="template-model-page.html#maespa-1"><i class="fa fa-check"></i><b>31.9</b> MAESPA</a></li>
 </ul></li>
-<li class="chapter" data-level="29" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>29</b> PEcAn Models</a><ul>
-<li class="chapter" data-level="29.1" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>29.1</b> PRELES</a></li>
-<li class="chapter" data-level="29.2" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-configuration"><i class="fa fa-check"></i><b>29.2</b> SIPNET configuration</a></li>
-<li class="chapter" data-level="29.3" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-1"><i class="fa fa-check"></i><b>29.3</b> Sipnet</a></li>
-</ul></li>
-<li class="chapter" data-level="30" data-path="template-model-page.html"><a href="template-model-page.html"><i class="fa fa-check"></i><b>30</b> Template MODEL page</a><ul>
-<li class="chapter" data-level="30.1" data-path="template-model-page.html"><a href="template-model-page.html#model-variables"><i class="fa fa-check"></i><b>30.1</b> Model Variables</a><ul>
-<li class="chapter" data-level="30.1.1" data-path="template-model-page.html"><a href="template-model-page.html#download-gfdl"><i class="fa fa-check"></i><b>30.1.1</b> Download GFDL</a></li>
-<li class="chapter" data-level="30.1.2" data-path="template-model-page.html"><a href="template-model-page.html#cm3"><i class="fa fa-check"></i><b>30.1.2</b> CM3</a></li>
-<li class="chapter" data-level="30.1.3" data-path="template-model-page.html"><a href="template-model-page.html#esm2m-esm2g"><i class="fa fa-check"></i><b>30.1.3</b> ESM2M &amp; ESM2G</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="31" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>31</b> Available Meteorological Drivers</a><ul>
-<li class="chapter" data-level="31.1" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#ameriflux"><i class="fa fa-check"></i><b>31.1</b> Ameriflux</a></li>
-<li class="chapter" data-level="31.2" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#amerifluxlbl"><i class="fa fa-check"></i><b>31.2</b> AmerifluxLBL</a></li>
-<li class="chapter" data-level="31.3" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnet2015"><i class="fa fa-check"></i><b>31.3</b> Fluxnet2015</a></li>
-<li class="chapter" data-level="31.4" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#narr"><i class="fa fa-check"></i><b>31.4</b> NARR</a></li>
-<li class="chapter" data-level="31.5" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cruncep"><i class="fa fa-check"></i><b>31.5</b> CRUNCEP</a></li>
-<li class="chapter" data-level="31.6" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cmip5"><i class="fa fa-check"></i><b>31.6</b> CMIP5</a></li>
-<li class="chapter" data-level="31.7" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#nldas"><i class="fa fa-check"></i><b>31.7</b> NLDAS</a></li>
-<li class="chapter" data-level="31.8" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#gldas"><i class="fa fa-check"></i><b>31.8</b> GLDAS</a></li>
-<li class="chapter" data-level="31.9" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#paleon"><i class="fa fa-check"></i><b>31.9</b> PalEON</a></li>
-<li class="chapter" data-level="31.10" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnetlathuile"><i class="fa fa-check"></i><b>31.10</b> FluxnetLaThuile</a></li>
-<li class="chapter" data-level="31.11" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#geostreams"><i class="fa fa-check"></i><b>31.11</b> Geostreams</a></li>
-</ul></li>
-<li class="chapter" data-level="32" data-path="pecan-docker-architecture.html"><a href="pecan-docker-architecture.html"><i class="fa fa-check"></i><b>32</b> PEcAn Docker Architecture</a></li>
-<li class="chapter" data-level="33" data-path="what-is-docker.html"><a href="what-is-docker.html"><i class="fa fa-check"></i><b>33</b> What is Docker?</a></li>
-<li class="chapter" data-level="34" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html"><i class="fa fa-check"></i><b>34</b> Dockerfiles for Models</a><ul>
-<li class="chapter" data-level="34.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#sipnet-2"><i class="fa fa-check"></i><b>34.1</b> SIPNET</a><ul>
-<li class="chapter" data-level="34.1.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#using-the-pecan-download.file-function"><i class="fa fa-check"></i><b>34.1.1</b> Using the PEcAn download.file() function</a></li>
+<li class="chapter" data-level="32" data-path="pecan-models.html"><a href="pecan-models.html"><i class="fa fa-check"></i><b>32</b> PEcAn Models</a><ul>
+<li class="chapter" data-level="32.1" data-path="pecan-models.html"><a href="pecan-models.html#preles"><i class="fa fa-check"></i><b>32.1</b> PRELES</a></li>
+<li class="chapter" data-level="32.2" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-configuration"><i class="fa fa-check"></i><b>32.2</b> SIPNET configuration</a></li>
+<li class="chapter" data-level="32.3" data-path="pecan-models.html"><a href="pecan-models.html#sipnet-1"><i class="fa fa-check"></i><b>32.3</b> Sipnet</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="pecan-models.html"><a href="pecan-models.html#download-gfdl"><i class="fa fa-check"></i><b>32.3.1</b> Download GFDL</a></li>
+<li class="chapter" data-level="32.3.2" data-path="pecan-models.html"><a href="pecan-models.html#cm3"><i class="fa fa-check"></i><b>32.3.2</b> CM3</a></li>
+<li class="chapter" data-level="32.3.3" data-path="pecan-models.html"><a href="pecan-models.html#esm2m-esm2g"><i class="fa fa-check"></i><b>32.3.3</b> ESM2M &amp; ESM2G</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="35" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>35</b> Debugging</a><ul>
-<li class="chapter" data-level="35.0.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>35.0.1</b> Using <code>tests/workflow.R</code></a></li>
-<li class="chapter" data-level="35.0.2" data-path="debugging.html"><a href="debugging.html#useful-scripts"><i class="fa fa-check"></i><b>35.0.2</b> Useful scripts</a></li>
-<li class="chapter" data-level="35.0.3" data-path="debugging.html"><a href="debugging.html#debugging-shiny-apps"><i class="fa fa-check"></i><b>35.0.3</b> Debugging Shiny Apps</a></li>
-<li class="chapter" data-level="35.1" data-path="debugging.html"><a href="debugging.html#troubleshooting-pecan"><i class="fa fa-check"></i><b>35.1</b> Troubleshooting PEcAn</a><ul>
-<li class="chapter" data-level="35.1.1" data-path="debugging.html"><a href="debugging.html#cookies-and-pecan-web-pages"><i class="fa fa-check"></i><b>35.1.1</b> Cookies and pecan web pages</a></li>
-<li class="chapter" data-level="35.1.2" data-path="debugging.html"><a href="debugging.html#warning-mkdir-function.mkdir-no-such-file-or-directory"><i class="fa fa-check"></i><b>35.1.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
-<li class="chapter" data-level="35.1.3" data-path="debugging.html"><a href="debugging.html#after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed"><i class="fa fa-check"></i><b>35.1.3</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
+<li class="chapter" data-level="33" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>33</b> Available Meteorological Drivers</a><ul>
+<li class="chapter" data-level="33.1" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#ameriflux"><i class="fa fa-check"></i><b>33.1</b> Ameriflux</a></li>
+<li class="chapter" data-level="33.2" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#amerifluxlbl"><i class="fa fa-check"></i><b>33.2</b> AmerifluxLBL</a></li>
+<li class="chapter" data-level="33.3" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnet2015"><i class="fa fa-check"></i><b>33.3</b> Fluxnet2015</a></li>
+<li class="chapter" data-level="33.4" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#narr"><i class="fa fa-check"></i><b>33.4</b> NARR</a></li>
+<li class="chapter" data-level="33.5" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cruncep"><i class="fa fa-check"></i><b>33.5</b> CRUNCEP</a></li>
+<li class="chapter" data-level="33.6" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cmip5"><i class="fa fa-check"></i><b>33.6</b> CMIP5</a></li>
+<li class="chapter" data-level="33.7" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#nldas"><i class="fa fa-check"></i><b>33.7</b> NLDAS</a></li>
+<li class="chapter" data-level="33.8" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#gldas"><i class="fa fa-check"></i><b>33.8</b> GLDAS</a></li>
+<li class="chapter" data-level="33.9" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#paleon"><i class="fa fa-check"></i><b>33.9</b> PalEON</a></li>
+<li class="chapter" data-level="33.10" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnetlathuile"><i class="fa fa-check"></i><b>33.10</b> FluxnetLaThuile</a></li>
+<li class="chapter" data-level="33.11" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#geostreams"><i class="fa fa-check"></i><b>33.11</b> Geostreams</a></li>
 </ul></li>
-<li class="chapter" data-level="35.2" data-path="debugging.html"><a href="debugging.html#pecan-project-use-to-teach-ecological-model-data-synthesis"><i class="fa fa-check"></i><b>35.2</b> PEcAn Project use to teach Ecological model-data synthesis</a><ul>
-<li class="chapter" data-level="35.2.1" data-path="debugging.html"><a href="debugging.html#university-classes"><i class="fa fa-check"></i><b>35.2.1</b> University classes</a></li>
-<li class="chapter" data-level="35.2.2" data-path="debugging.html"><a href="debugging.html#summer-courses-workshops"><i class="fa fa-check"></i><b>35.2.2</b> Summer Courses / Workshops</a></li>
-<li class="chapter" data-level="35.2.3" data-path="debugging.html"><a href="debugging.html#selected-publications"><i class="fa fa-check"></i><b>35.2.3</b> Selected Publications</a></li>
+<li class="chapter" data-level="34" data-path="what-is-docker.html"><a href="what-is-docker.html"><i class="fa fa-check"></i><b>34</b> What is Docker?</a><ul>
+<li class="chapter" data-level="34.1" data-path="what-is-docker.html"><a href="what-is-docker.html#working-with-docker"><i class="fa fa-check"></i><b>34.1</b> Working with Docker</a></li>
+<li class="chapter" data-level="34.2" data-path="what-is-docker.html"><a href="what-is-docker.html#working-with-docker-compose"><i class="fa fa-check"></i><b>34.2</b> Working with docker-compose</a></li>
 </ul></li>
-<li class="chapter" data-level="35.3" data-path="debugging.html"><a href="debugging.html#data-assimilation-with-dart"><i class="fa fa-check"></i><b>35.3</b> Data assimilation with DART</a></li>
+<li class="chapter" data-level="35" data-path="pecan-docker-architecture.html"><a href="pecan-docker-architecture.html"><i class="fa fa-check"></i><b>35</b> PEcAn Docker Architecture</a></li>
+<li class="chapter" data-level="36" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html"><i class="fa fa-check"></i><b>36</b> Quickstart for Docker and PEcAn.</a><ul>
+<li class="chapter" data-level="36.1" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#install-docker"><i class="fa fa-check"></i><b>36.1</b> Install Docker</a></li>
+<li class="chapter" data-level="36.2" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#running-pecan"><i class="fa fa-check"></i><b>36.2</b> Running PEcAn</a></li>
+<li class="chapter" data-level="36.3" data-path="quickstart-for-docker-and-pecan-.html"><a href="quickstart-for-docker-and-pecan-.html#testing-pecan"><i class="fa fa-check"></i><b>36.3</b> Testing PEcAn</a></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html"><i class="fa fa-check"></i><b>37</b> Dockerfiles for Models</a><ul>
+<li class="chapter" data-level="37.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#common-problems"><i class="fa fa-check"></i><b>37.1</b> Common problems</a><ul>
+<li class="chapter" data-level="37.1.1" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#debugging-missing-libraries"><i class="fa fa-check"></i><b>37.1.1</b> Debugging missing libraries</a></li>
+<li class="chapter" data-level="37.1.2" data-path="dockerfiles-for-models.html"><a href="dockerfiles-for-models.html#using-the-pecan-download.file-function"><i class="fa fa-check"></i><b>37.1.2</b> Using the PEcAn download.file() function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="38" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>38</b> Debugging</a><ul>
+<li class="chapter" data-level="38.0.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>38.0.1</b> Using <code>tests/workflow.R</code></a></li>
+<li class="chapter" data-level="38.0.2" data-path="debugging.html"><a href="debugging.html#useful-scripts"><i class="fa fa-check"></i><b>38.0.2</b> Useful scripts</a></li>
+<li class="chapter" data-level="38.0.3" data-path="debugging.html"><a href="debugging.html#debugging-shiny-apps"><i class="fa fa-check"></i><b>38.0.3</b> Debugging Shiny Apps</a></li>
+<li class="chapter" data-level="38.1" data-path="debugging.html"><a href="debugging.html#troubleshooting-pecan"><i class="fa fa-check"></i><b>38.1</b> Troubleshooting PEcAn</a><ul>
+<li class="chapter" data-level="38.1.1" data-path="debugging.html"><a href="debugging.html#cookies-and-pecan-web-pages"><i class="fa fa-check"></i><b>38.1.1</b> Cookies and pecan web pages</a></li>
+<li class="chapter" data-level="38.1.2" data-path="debugging.html"><a href="debugging.html#warning-mkdir-function.mkdir-no-such-file-or-directory"><i class="fa fa-check"></i><b>38.1.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
+<li class="chapter" data-level="38.1.3" data-path="debugging.html"><a href="debugging.html#after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed"><i class="fa fa-check"></i><b>38.1.3</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
+</ul></li>
+<li class="chapter" data-level="38.2" data-path="debugging.html"><a href="debugging.html#pecan-project-use-to-teach-ecological-model-data-synthesis"><i class="fa fa-check"></i><b>38.2</b> PEcAn Project use to teach Ecological model-data synthesis</a><ul>
+<li class="chapter" data-level="38.2.1" data-path="debugging.html"><a href="debugging.html#university-classes"><i class="fa fa-check"></i><b>38.2.1</b> University classes</a></li>
+<li class="chapter" data-level="38.2.2" data-path="debugging.html"><a href="debugging.html#summer-courses-workshops"><i class="fa fa-check"></i><b>38.2.2</b> Summer Courses / Workshops</a></li>
+<li class="chapter" data-level="38.2.3" data-path="debugging.html"><a href="debugging.html#selected-publications"><i class="fa fa-check"></i><b>38.2.3</b> Selected Publications</a></li>
+</ul></li>
+<li class="chapter" data-level="38.3" data-path="debugging.html"><a href="debugging.html#data-assimilation-with-dart"><i class="fa fa-check"></i><b>38.3</b> Data assimilation with DART</a></li>
 </ul></li>
 <li class="part"><span><b>VII Demos and Vignettes</b></span></li>
-<li class="chapter" data-level="36" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html"><i class="fa fa-check"></i><b>36</b> PEcAn Hands-On Demo 01: Basic Run</a><ul>
-<li class="chapter" data-level="36.1" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#objective"><i class="fa fa-check"></i><b>36.1</b> Objective</a><ul>
-<li class="chapter" data-level="36.1.1" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#pecan-url"><i class="fa fa-check"></i><b>36.1.1</b> PEcAn URL</a></li>
+<li class="chapter" data-level="39" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html"><i class="fa fa-check"></i><b>39</b> PEcAn Hands-On Demo 01: Basic Run</a><ul>
+<li class="chapter" data-level="39.1" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#objective"><i class="fa fa-check"></i><b>39.1</b> Objective</a><ul>
+<li class="chapter" data-level="39.1.1" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#pecan-url"><i class="fa fa-check"></i><b>39.1.1</b> PEcAn URL</a></li>
 </ul></li>
-<li class="chapter" data-level="36.2" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#basic-run"><i class="fa fa-check"></i><b>36.2</b> Basic Run</a><ul>
-<li class="chapter" data-level="36.2.1" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#start-pecan"><i class="fa fa-check"></i><b>36.2.1</b> Start PEcAn:</a></li>
-<li class="chapter" data-level="36.2.2" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#site-selection"><i class="fa fa-check"></i><b>36.2.2</b> Site Selection</a></li>
-<li class="chapter" data-level="36.2.3" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#host"><i class="fa fa-check"></i><b>36.2.3</b> Host</a></li>
-<li class="chapter" data-level="36.2.4" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#mode"><i class="fa fa-check"></i><b>36.2.4</b> Mode</a></li>
-<li class="chapter" data-level="36.2.5" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#site-group"><i class="fa fa-check"></i><b>36.2.5</b> Site Group</a></li>
-<li class="chapter" data-level="36.2.6" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#conversion"><i class="fa fa-check"></i><b>36.2.6</b> Conversion:</a></li>
-<li class="chapter" data-level="36.2.7" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#site"><i class="fa fa-check"></i><b>36.2.7</b> Site:</a></li>
-<li class="chapter" data-level="36.2.8" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#model-run-workflow"><i class="fa fa-check"></i><b>36.2.8</b> Model Run Workflow</a></li>
+<li class="chapter" data-level="39.2" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#basic-run"><i class="fa fa-check"></i><b>39.2</b> Basic Run</a><ul>
+<li class="chapter" data-level="39.2.1" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#start-pecan"><i class="fa fa-check"></i><b>39.2.1</b> Start PEcAn:</a></li>
+<li class="chapter" data-level="39.2.2" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#site-selection"><i class="fa fa-check"></i><b>39.2.2</b> Site Selection</a></li>
+<li class="chapter" data-level="39.2.3" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#host"><i class="fa fa-check"></i><b>39.2.3</b> Host</a></li>
+<li class="chapter" data-level="39.2.4" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#mode"><i class="fa fa-check"></i><b>39.2.4</b> Mode</a></li>
+<li class="chapter" data-level="39.2.5" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#site-group"><i class="fa fa-check"></i><b>39.2.5</b> Site Group</a></li>
+<li class="chapter" data-level="39.2.6" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#conversion"><i class="fa fa-check"></i><b>39.2.6</b> Conversion:</a></li>
+<li class="chapter" data-level="39.2.7" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#site"><i class="fa fa-check"></i><b>39.2.7</b> Site:</a></li>
+<li class="chapter" data-level="39.2.8" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#model-run-workflow"><i class="fa fa-check"></i><b>39.2.8</b> Model Run Workflow</a></li>
 </ul></li>
-<li class="chapter" data-level="36.3" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#next-steps"><i class="fa fa-check"></i><b>36.3</b> Next steps</a></li>
+<li class="chapter" data-level="39.3" data-path="pecan-hands-on-demo-01-basic-run.html"><a href="pecan-hands-on-demo-01-basic-run.html#next-steps"><i class="fa fa-check"></i><b>39.3</b> Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="37" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html"><i class="fa fa-check"></i><b>37</b> Demo 02: Sensitivity and Uncertainty Analysis</a><ul>
-<li class="chapter" data-level="37.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#run-specification-1"><i class="fa fa-check"></i><b>37.1</b> Run Specification</a><ul>
-<li class="chapter" data-level="37.1.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#additional-outputs"><i class="fa fa-check"></i><b>37.1.1</b> Additional Outputs:</a></li>
-<li class="chapter" data-level="37.1.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#run-id"><i class="fa fa-check"></i><b>37.1.2</b> 1. Run ID:</a></li>
-<li class="chapter" data-level="37.1.3" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#inputs-3"><i class="fa fa-check"></i><b>37.1.3</b> 2. Inputs:</a></li>
-<li class="chapter" data-level="37.1.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#outputs-1"><i class="fa fa-check"></i><b>37.1.4</b> 3. Outputs:</a></li>
-<li class="chapter" data-level="37.1.5" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pfts"><i class="fa fa-check"></i><b>37.1.5</b> 4. PFTs:</a></li>
-<li class="chapter" data-level="37.1.6" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pecan-files"><i class="fa fa-check"></i><b>37.1.6</b> PEcAn Files:</a></li>
+<li class="chapter" data-level="40" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html"><i class="fa fa-check"></i><b>40</b> Demo 02: Sensitivity and Uncertainty Analysis</a><ul>
+<li class="chapter" data-level="40.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#run-specification-1"><i class="fa fa-check"></i><b>40.1</b> Run Specification</a><ul>
+<li class="chapter" data-level="40.1.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#additional-outputs"><i class="fa fa-check"></i><b>40.1.1</b> Additional Outputs:</a></li>
+<li class="chapter" data-level="40.1.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#run-id"><i class="fa fa-check"></i><b>40.1.2</b> 1. Run ID:</a></li>
+<li class="chapter" data-level="40.1.3" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#inputs-3"><i class="fa fa-check"></i><b>40.1.3</b> 2. Inputs:</a></li>
+<li class="chapter" data-level="40.1.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#outputs"><i class="fa fa-check"></i><b>40.1.4</b> 3. Outputs:</a></li>
+<li class="chapter" data-level="40.1.5" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pfts"><i class="fa fa-check"></i><b>40.1.5</b> 4. PFTs:</a></li>
+<li class="chapter" data-level="40.1.6" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#pecan-files"><i class="fa fa-check"></i><b>40.1.6</b> PEcAn Files:</a></li>
 </ul></li>
-<li class="chapter" data-level="37.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#global-sensitivity-shiny"><i class="fa fa-check"></i><b>37.2</b> Global Sensitivity: Shiny</a><ul>
-<li class="chapter" data-level="37.2.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#next-steps-1"><i class="fa fa-check"></i><b>37.2.1</b> Next Steps</a></li>
-<li class="chapter" data-level="37.2.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#assimilation-by-hand"><i class="fa fa-check"></i><b>37.2.2</b> Assimilation ‘by hand’</a></li>
-<li class="chapter" data-level="37.2.3" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#mcmc-concepts"><i class="fa fa-check"></i><b>37.2.3</b> MCMC Concepts</a></li>
-<li class="chapter" data-level="37.2.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#more-info-about-tools-analyses-and-specific-tasks"><i class="fa fa-check"></i><b>37.2.4</b> More info about tools, analyses, and specific tasks…</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="38" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>38</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
-<li class="chapter" data-level="38.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>38.0.1</b> Author: “Ankur Desai”</a></li>
-<li class="chapter" data-level="38.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-2"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
-</ul></li>
-<li class="chapter" data-level="39" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>39</b> Simple Model-Data Comparisons</a><ul>
-<li class="chapter" data-level="39.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>39.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
-<li class="chapter" data-level="39.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#starting-rstudio-server"><i class="fa fa-check"></i><b>39.1</b> Starting RStudio Server</a></li>
-<li class="chapter" data-level="39.2" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#read-in-settings-from-an-xml-file"><i class="fa fa-check"></i><b>39.2</b> Read in settings From an XML file</a></li>
-<li class="chapter" data-level="39.3" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#read-in-model-output-from-specific-variables"><i class="fa fa-check"></i><b>39.3</b> Read in model output from specific variables</a></li>
-<li class="chapter" data-level="39.4" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#compare-model-to-flux-observations"><i class="fa fa-check"></i><b>39.4</b> Compare model to flux observations</a></li>
-</ul></li>
-<li class="chapter" data-level="40" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html"><i class="fa fa-check"></i><b>40</b> Parameter Data Assimilation</a><ul>
-<li class="chapter" data-level="40.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#objectives"><i class="fa fa-check"></i><b>40.1</b> Objectives</a></li>
-<li class="chapter" data-level="40.2" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#larger-context"><i class="fa fa-check"></i><b>40.2</b> Larger Context</a></li>
-<li class="chapter" data-level="40.3" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#connect-to-rstudio"><i class="fa fa-check"></i><b>40.3</b> Connect to Rstudio</a></li>
-<li class="chapter" data-level="40.4" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#defining-variables"><i class="fa fa-check"></i><b>40.4</b> Defining variables</a></li>
-<li class="chapter" data-level="40.5" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#initial-ensemble-analysis"><i class="fa fa-check"></i><b>40.5</b> Initial Ensemble Analysis</a><ul>
-<li class="chapter" data-level="40.5.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions"><i class="fa fa-check"></i><b>40.5.1</b> Questions:</a></li>
-</ul></li>
-<li class="chapter" data-level="40.6" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#choosing-parameters"><i class="fa fa-check"></i><b>40.6</b> Choosing Parameters</a><ul>
-<li class="chapter" data-level="40.6.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions-1"><i class="fa fa-check"></i><b>40.6.1</b> Questions:</a></li>
-</ul></li>
-<li class="chapter" data-level="40.7" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#editing-pecan-settings"><i class="fa fa-check"></i><b>40.7</b> Editing PEcAn settings</a></li>
-<li class="chapter" data-level="40.8" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#investigating-pecan-function-pda.emulator-optional"><i class="fa fa-check"></i><b>40.8</b> Investigating PEcAn function pda.emulator (optional)</a></li>
-<li class="chapter" data-level="40.9" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#running-a-demo-pda"><i class="fa fa-check"></i><b>40.9</b> Running a demo PDA</a></li>
-<li class="chapter" data-level="40.10" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#outputs-from-pecans-parameter-data-assimilation"><i class="fa fa-check"></i><b>40.10</b> Outputs from PEcAn’s Parameter Data Assimilation</a><ul>
-<li class="chapter" data-level="40.10.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions-2"><i class="fa fa-check"></i><b>40.10.1</b> Questions:</a></li>
-</ul></li>
-<li class="chapter" data-level="40.11" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#post-pda-analyses"><i class="fa fa-check"></i><b>40.11</b> Post-PDA analyses</a><ul>
-<li class="chapter" data-level="40.11.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions-3"><i class="fa fa-check"></i><b>40.11.1</b> Questions:</a></li>
+<li class="chapter" data-level="40.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#global-sensitivity-shiny"><i class="fa fa-check"></i><b>40.2</b> Global Sensitivity: Shiny</a><ul>
+<li class="chapter" data-level="40.2.1" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#next-steps-1"><i class="fa fa-check"></i><b>40.2.1</b> Next Steps</a></li>
+<li class="chapter" data-level="40.2.2" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#assimilation-by-hand"><i class="fa fa-check"></i><b>40.2.2</b> Assimilation ‘by hand’</a></li>
+<li class="chapter" data-level="40.2.3" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#mcmc-concepts"><i class="fa fa-check"></i><b>40.2.3</b> MCMC Concepts</a></li>
+<li class="chapter" data-level="40.2.4" data-path="demo-02-sensitivity-and-uncertainty-analysis.html"><a href="demo-02-sensitivity-and-uncertainty-analysis.html#more-info-about-tools-analyses-and-specific-tasks"><i class="fa fa-check"></i><b>40.2.4</b> More info about tools, analyses, and specific tasks…</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="41" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html"><i class="fa fa-check"></i><b>41</b> State-Variable Data Assimilation</a><ul>
-<li class="chapter" data-level="41.1" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#objectives-1"><i class="fa fa-check"></i><b>41.1</b> Objectives:</a></li>
-<li class="chapter" data-level="41.2" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#overview-1"><i class="fa fa-check"></i><b>41.2</b> Overview:</a><ul>
-<li class="chapter" data-level="41.2.1" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#initial-run"><i class="fa fa-check"></i><b>41.2.1</b> Initial Run</a></li>
-<li class="chapter" data-level="41.2.2" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#settings-1"><i class="fa fa-check"></i><b>41.2.2</b> Settings:</a></li>
-<li class="chapter" data-level="41.2.3" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#loading-data"><i class="fa fa-check"></i><b>41.2.3</b> Loading data</a></li>
-<li class="chapter" data-level="41.2.4" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#estimating-tree-level-data-uncertainties"><i class="fa fa-check"></i><b>41.2.4</b> Estimating tree-level data uncertainties</a></li>
+<li class="chapter" data-level="41" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html"><i class="fa fa-check"></i><b>41</b> PEcAn: Testing the Sensitivity Analysis Against Observations&quot;</a><ul>
+<li class="chapter" data-level="41.0.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#author-ankur-desai"><i class="fa fa-check"></i><b>41.0.1</b> Author: “Ankur Desai”</a></li>
+<li class="chapter" data-level="41.1" data-path="pecan-testing-the-sensitivity-analysis-against-observations.html"><a href="pecan-testing-the-sensitivity-analysis-against-observations.html#introduction-3"><i class="fa fa-check"></i><b>41.1</b> Introduction</a></li>
 </ul></li>
-<li class="chapter" data-level="41.3" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#allometric-equations"><i class="fa fa-check"></i><b>41.3</b> Allometric equations</a></li>
-<li class="chapter" data-level="41.4" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#estimate-stand-level-npp"><i class="fa fa-check"></i><b>41.4</b> Estimate stand-level NPP</a></li>
-<li class="chapter" data-level="41.5" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#build-initial-conditions"><i class="fa fa-check"></i><b>41.5</b> Build Initial Conditions</a></li>
-<li class="chapter" data-level="41.6" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#load-priors"><i class="fa fa-check"></i><b>41.6</b> Load Priors</a></li>
-<li class="chapter" data-level="41.7" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#ensemble-kalman-filter"><i class="fa fa-check"></i><b>41.7</b> Ensemble Kalman Filter</a></li>
-<li class="chapter" data-level="41.8" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#finishing-up"><i class="fa fa-check"></i><b>41.8</b> Finishing up</a></li>
+<li class="chapter" data-level="42" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html"><i class="fa fa-check"></i><b>42</b> Simple Model-Data Comparisons</a><ul>
+<li class="chapter" data-level="42.0.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#author-istem-fer-tess-mccabe"><i class="fa fa-check"></i><b>42.0.1</b> Author: Istem Fer, Tess McCabe</a></li>
+<li class="chapter" data-level="42.1" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#starting-rstudio-server"><i class="fa fa-check"></i><b>42.1</b> Starting RStudio Server</a></li>
+<li class="chapter" data-level="42.2" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#read-in-settings-from-an-xml-file"><i class="fa fa-check"></i><b>42.2</b> Read in settings From an XML file</a></li>
+<li class="chapter" data-level="42.3" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#read-in-model-output-from-specific-variables"><i class="fa fa-check"></i><b>42.3</b> Read in model output from specific variables</a></li>
+<li class="chapter" data-level="42.4" data-path="simple-model-data-comparisons.html"><a href="simple-model-data-comparisons.html#compare-model-to-flux-observations"><i class="fa fa-check"></i><b>42.4</b> Compare model to flux observations</a></li>
 </ul></li>
-<li class="chapter" data-level="42" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html"><i class="fa fa-check"></i><b>42</b> Data Assimilation Concepts&quot;</a><ul>
-<li class="chapter" data-level="42.1" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#fitting-the-model"><i class="fa fa-check"></i><b>42.1</b> Fitting the model</a></li>
-<li class="chapter" data-level="42.2" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#whats-going-on"><i class="fa fa-check"></i><b>42.2</b> What’s going on</a></li>
-<li class="chapter" data-level="42.3" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#evaluating-the-model-output"><i class="fa fa-check"></i><b>42.3</b> Evaluating the model output</a></li>
-<li class="chapter" data-level="42.4" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#additional-information"><i class="fa fa-check"></i><b>42.4</b> Additional information</a></li>
-<li class="chapter" data-level="42.5" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#citations"><i class="fa fa-check"></i><b>42.5</b> Citations</a></li>
+<li class="chapter" data-level="43" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html"><i class="fa fa-check"></i><b>43</b> Parameter Data Assimilation</a><ul>
+<li class="chapter" data-level="43.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#objectives"><i class="fa fa-check"></i><b>43.1</b> Objectives</a></li>
+<li class="chapter" data-level="43.2" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#larger-context"><i class="fa fa-check"></i><b>43.2</b> Larger Context</a></li>
+<li class="chapter" data-level="43.3" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#connect-to-rstudio"><i class="fa fa-check"></i><b>43.3</b> Connect to Rstudio</a></li>
+<li class="chapter" data-level="43.4" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#defining-variables"><i class="fa fa-check"></i><b>43.4</b> Defining variables</a></li>
+<li class="chapter" data-level="43.5" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#initial-ensemble-analysis"><i class="fa fa-check"></i><b>43.5</b> Initial Ensemble Analysis</a><ul>
+<li class="chapter" data-level="43.5.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions"><i class="fa fa-check"></i><b>43.5.1</b> Questions:</a></li>
+</ul></li>
+<li class="chapter" data-level="43.6" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#choosing-parameters"><i class="fa fa-check"></i><b>43.6</b> Choosing Parameters</a><ul>
+<li class="chapter" data-level="43.6.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions-1"><i class="fa fa-check"></i><b>43.6.1</b> Questions:</a></li>
+</ul></li>
+<li class="chapter" data-level="43.7" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#editing-pecan-settings"><i class="fa fa-check"></i><b>43.7</b> Editing PEcAn settings</a></li>
+<li class="chapter" data-level="43.8" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#investigating-pecan-function-pda.emulator-optional"><i class="fa fa-check"></i><b>43.8</b> Investigating PEcAn function pda.emulator (optional)</a></li>
+<li class="chapter" data-level="43.9" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#running-a-demo-pda"><i class="fa fa-check"></i><b>43.9</b> Running a demo PDA</a></li>
+<li class="chapter" data-level="43.10" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#outputs-from-pecans-parameter-data-assimilation"><i class="fa fa-check"></i><b>43.10</b> Outputs from PEcAn’s Parameter Data Assimilation</a><ul>
+<li class="chapter" data-level="43.10.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions-2"><i class="fa fa-check"></i><b>43.10.1</b> Questions:</a></li>
+</ul></li>
+<li class="chapter" data-level="43.11" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#post-pda-analyses"><i class="fa fa-check"></i><b>43.11</b> Post-PDA analyses</a><ul>
+<li class="chapter" data-level="43.11.1" data-path="parameter-data-assimilation-1.html"><a href="parameter-data-assimilation-1.html#questions-3"><i class="fa fa-check"></i><b>43.11.1</b> Questions:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="44" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html"><i class="fa fa-check"></i><b>44</b> State-Variable Data Assimilation</a><ul>
+<li class="chapter" data-level="44.1" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#objectives-1"><i class="fa fa-check"></i><b>44.1</b> Objectives:</a></li>
+<li class="chapter" data-level="44.2" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#overview-1"><i class="fa fa-check"></i><b>44.2</b> Overview:</a><ul>
+<li class="chapter" data-level="44.2.1" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#initial-run"><i class="fa fa-check"></i><b>44.2.1</b> Initial Run</a></li>
+<li class="chapter" data-level="44.2.2" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#settings-1"><i class="fa fa-check"></i><b>44.2.2</b> Settings:</a></li>
+<li class="chapter" data-level="44.2.3" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#loading-data-1"><i class="fa fa-check"></i><b>44.2.3</b> Loading data</a></li>
+<li class="chapter" data-level="44.2.4" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#estimating-tree-level-data-uncertainties"><i class="fa fa-check"></i><b>44.2.4</b> Estimating tree-level data uncertainties</a></li>
+</ul></li>
+<li class="chapter" data-level="44.3" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#allometric-equations"><i class="fa fa-check"></i><b>44.3</b> Allometric equations</a></li>
+<li class="chapter" data-level="44.4" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#estimate-stand-level-npp"><i class="fa fa-check"></i><b>44.4</b> Estimate stand-level NPP</a></li>
+<li class="chapter" data-level="44.5" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#build-initial-conditions"><i class="fa fa-check"></i><b>44.5</b> Build Initial Conditions</a></li>
+<li class="chapter" data-level="44.6" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#load-priors"><i class="fa fa-check"></i><b>44.6</b> Load Priors</a></li>
+<li class="chapter" data-level="44.7" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#ensemble-kalman-filter"><i class="fa fa-check"></i><b>44.7</b> Ensemble Kalman Filter</a></li>
+<li class="chapter" data-level="44.8" data-path="state-variable-data-assimilation.html"><a href="state-variable-data-assimilation.html#finishing-up"><i class="fa fa-check"></i><b>44.8</b> Finishing up</a></li>
+</ul></li>
+<li class="chapter" data-level="45" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html"><i class="fa fa-check"></i><b>45</b> Data Assimilation Concepts&quot;</a><ul>
+<li class="chapter" data-level="45.1" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#fitting-the-model"><i class="fa fa-check"></i><b>45.1</b> Fitting the model</a></li>
+<li class="chapter" data-level="45.2" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#whats-going-on"><i class="fa fa-check"></i><b>45.2</b> What’s going on</a></li>
+<li class="chapter" data-level="45.3" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#evaluating-the-model-output"><i class="fa fa-check"></i><b>45.3</b> Evaluating the model output</a></li>
+<li class="chapter" data-level="45.4" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#additional-information"><i class="fa fa-check"></i><b>45.4</b> Additional information</a></li>
+<li class="chapter" data-level="45.5" data-path="data-assimilation-concepts.html"><a href="data-assimilation-concepts.html#citations"><i class="fa fa-check"></i><b>45.5</b> Citations</a></li>
 </ul></li>
 <li class="part"><span><b>VIII Appendix</b></span></li>
-<li class="chapter" data-level="43" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>43</b> FAQ</a></li>
+<li class="chapter" data-level="46" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>46</b> FAQ</a></li>
 </ul>
 
       </nav>
@@ -670,10 +712,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="state-data-assimilation-sda" class="section level2">
 <h2><span class="header-section-number">9.3</span> State data assimilation (SDA)</h2>
-<p><code>sda.enkf.R</code> is housed within: <strong>/pecan/modules/assim.sequential/R</strong>
-The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></p>
+</div>
+<div id="sda.enkf.r-is-housed-within-pecanmodulesassim.sequentialr" class="section level2">
+<h2><span class="header-section-number">9.4</span> sda.enkf.R is housed within: <strong>/pecan/modules/assim.sequential/R</strong></h2>
+</div>
+<div id="the-tree-ring-tutorial-is-housed-within-pecandocumentationtutorialsstateassimilation" class="section level2">
+<h2><span class="header-section-number">9.5</span> The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/StateAssimilation</strong></h2>
+</div>
+<div id="more-descriptive-sda-methods-can-be-found-at-pecanbook_sourceadve_user_guide_websda_methods.rmd" class="section level2">
+<h2><span class="header-section-number">9.6</span> More descriptive SDA methods can be found at: <strong>/pecan/book_source/adve_user_guide_web/SDA_Methods.Rmd</strong></h2>
 <div id="sda.enkf.r-description" class="section level3">
-<h3><span class="header-section-number">9.3.1</span> <strong>sda.enkf.R Description</strong></h3>
+<h3><span class="header-section-number">9.6.1</span> <strong>sda.enkf.R Description</strong></h3>
 <p>This is the main ensemble Kalman filter and generalized filter code. Originally, this was just ensemble Kalman filter code. Mike Dietze and Ann Raiho added a generalized ensemble filter to avoid filter divergence. The output of this function will be all the of run outputs, a PDF of diagnostics, and an Rdata object that includes three lists:</p>
 <ul>
 <li>FORECAST will be the ensemble forecasts for each year</li>
@@ -682,9 +731,9 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </ul>
 </div>
 <div id="sda.enkf.r-arguments" class="section level3">
-<h3><span class="header-section-number">9.3.2</span> <strong>sda.enkf.R Arguments</strong></h3>
+<h3><span class="header-section-number">9.6.2</span> <strong>sda.enkf.R Arguments</strong></h3>
 <ul>
-<li><p>settings - (required) <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
+<li><p>settings - (required) <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">State Data Assimilation Tags Example</a> settings object</p></li>
 <li><p>obs.mean - (required) a list of observation means named with dates in YYYY/MM/DD format</p></li>
 <li><p>obs.cov - (required) a list of observation covariances names with dates in YYYY/MM/DD format</p></li>
 <li><p>IC - (optional) initial condition matrix (dimensions: ensemble memeber # by state variables). Default is NULL.</p></li>
@@ -692,10 +741,10 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </ul>
 </div>
 <div id="state-data-assimilation-workflow" class="section level3">
-<h3><span class="header-section-number">9.3.3</span> State Data Assimilation Workflow</h3>
+<h3><span class="header-section-number">9.6.3</span> State Data Assimilation Workflow</h3>
 <p>Before running sda.enkf, these tasks must be completed (in no particular order),</p>
 <ul>
-<li><p>Read in a <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings file with tags listed below. i.e. read.settings(‘pecan.SDA.xml’)</p></li>
+<li><p>Read in a <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">State Data Assimilation Tags Example</a> settings file with tags listed below. i.e. read.settings(‘pecan.SDA.xml’)</p></li>
 <li><p>Load data means (obs.mean) and covariances (obs.cov) as lists with PEcAn naming and unit conventions. Each observation must have a date in YYYY/MM/DD format (optional time) associated with it. If there are missing data, the date must still be represented in the list with an NA as the list object.</p></li>
 <li><p>Create initial conditions matrix (IC) that is state variables columns by ensemble members rows in dimension. <a href="settings-configured-analyses.html#sample.ic.model.r">sample.IC.MODEL</a> can be used to create the IC matrix, but it is not required. This IC matrix is fed into write.configs for the initial model runs.</p></li>
 </ul>
@@ -721,7 +770,7 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 <p>Create diagnostics</p>
 </div>
 <div id="state-data-assimilation-tags-example" class="section level3">
-<h3><span class="header-section-number">9.3.4</span> State Data Assimilation Tags Example</h3>
+<h3><span class="header-section-number">9.6.4</span> State Data Assimilation Tags Example</h3>
 <pre><code>&lt;state.data.assimilation&gt;
   &lt;n.ensemble&gt;25&lt;/n.ensemble&gt;
   &lt;process.variance&gt;FALSE&lt;/process.variance&gt;
@@ -750,7 +799,7 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
  &lt;/state.data.assimilation&gt;</code></pre>
 </div>
 <div id="state-data-assimilation-tags-descriptions" class="section level3">
-<h3><span class="header-section-number">9.3.5</span> State Data Assimilation Tags Descriptions</h3>
+<h3><span class="header-section-number">9.6.5</span> State Data Assimilation Tags Descriptions</h3>
 <ul>
 <li><strong>n.ensemble</strong> : [required] Number of ensemble members. Should be much larger than number of state variables you are assimilating.</li>
 <li><strong>process.variance</strong> : [optional] TRUE/FLASE flag for if process variance should be estimated (TRUE) or not (FALSE). If TRUE, a generalized ensemble filter will be used. If FALSE, an ensemble Kalman filter will be used. Default is FALSE.</li>
@@ -765,9 +814,9 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </ul>
 </div>
 <div id="model-specific-functions-for-sda-workflow" class="section level3">
-<h3><span class="header-section-number">9.3.6</span> Model Specific Functions for SDA Workflow</h3>
+<h3><span class="header-section-number">9.6.6</span> Model Specific Functions for SDA Workflow</h3>
 <div id="read.restart.model.r" class="section level4">
-<h4><span class="header-section-number">9.3.6.1</span> read.restart.MODEL.R</h4>
+<h4><span class="header-section-number">9.6.6.1</span> read.restart.MODEL.R</h4>
 <p>The purpose of read.restart is to read model restart files and return a matrix that is site rows by state variable columns. The state variables must be in PEcAn names and units. The arguments are:</p>
 <ul>
 <li><p>outdir - output directory</p></li>
@@ -779,7 +828,7 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </ul>
 </div>
 <div id="write.restart.model.r" class="section level4">
-<h4><span class="header-section-number">9.3.6.2</span> write.restart.MODEL.R</h4>
+<h4><span class="header-section-number">9.6.6.2</span> write.restart.MODEL.R</h4>
 <p>This model specific function takes in new state and new parameter matrices from sda.enkf.R after the analysis step and translates new variables back to the model variables. Then, updates start.time, stop.time, and job.sh so that start.model.runs() does the correct runs with the new states. In write.restart.LINKAGES and write.restart.SIPNET, job.sh is updated by using write.configs.MODEL.</p>
 <ul>
 <li><p>outdir - output directory</p></li>
@@ -794,7 +843,7 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </ul>
 </div>
 <div id="split.inputs.model.r" class="section level4">
-<h4><span class="header-section-number">9.3.6.3</span> split.inputs.MODEL.R</h4>
+<h4><span class="header-section-number">9.6.6.3</span> split.inputs.MODEL.R</h4>
 <p>This model specific function gives the correct met and/or other model inputs to settings<span class="math inline">\(run\)</span>inputs. This function returns settings<span class="math inline">\(run\)</span>inputs to an inputs argument in sda.enkf.R. But, the inputs will not need to change for all models and should return settings<span class="math inline">\(run\)</span>inputs unchanged if that is the case.</p>
 <ul>
 <li><p>settings - <a href="settings-configured-analyses.html#state-data-assimilation-tags-example">pecan.SDA.xml</a> settings object</p></li>
@@ -803,7 +852,7 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </ul>
 </div>
 <div id="sample.ic.model.r" class="section level4">
-<h4><span class="header-section-number">9.3.6.4</span> sample.IC.MODEL.R</h4>
+<h4><span class="header-section-number">9.6.6.4</span> sample.IC.MODEL.R</h4>
 <p>This model specific function is optional. But, it can be used to create initial condition matrix (IC) with # state variables columns by # ensemble rows. This IC matrix is used for the initial runs in sda.enkf.R in the write.configs.MODEL function.</p>
 <ul>
 <li><p>ne - number of ensemble members</p></li>
@@ -813,7 +862,7 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </div>
 </div>
 <div id="analysis-options" class="section level3">
-<h3><span class="header-section-number">9.3.7</span> Analysis Options</h3>
+<h3><span class="header-section-number">9.6.7</span> Analysis Options</h3>
 <p>There are four options depending on whether process variance is TRUE/FALSE and whether or not there is data or not.</p>
 <ul>
 <li><p>If there is no data and process variance = FALSE, there is no analysis step.</p></li>
@@ -823,7 +872,7 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 </ul>
 </div>
 <div id="the-generalized-ensemble-filter" class="section level3">
-<h3><span class="header-section-number">9.3.8</span> The Generalized Ensemble Filter</h3>
+<h3><span class="header-section-number">9.6.8</span> The Generalized Ensemble Filter</h3>
 <p>An ensemble filter is a sequential data assimilation algorithm with two procedures at every time step: a forecast followed by an analysis. The forecast ensembles arise from a model while the analysis makes an adjustment of the forecasts ensembles from the model towards the data. An ensemble Kalman filter is typically suggested for this type of analysis because of its computationally efficient analytical solution and its ability to update states based on an estimate of covariance structure. But, in some cases, the ensemble Kalman filter fails because of filter divergence. Filter divergence occurs when forecast variability is too small, which causes the analysis to favor the forecast and diverge from the data. Models often produce low forecast variability because there is little internal stochasticity. Our ensemble filter overcomes this problem in a Bayesian framework by including an estimation of model process variance. This methodology also maintains the benefits of the ensemble Kalman filter by updating the state vector based on the estimated covariance structure.</p>
 <p>This process begins after the model is spun up to equilibrium.</p>
 <p>The likelihood function uses the data vector <span class="math inline">\(\left(\boldsymbol{y_{t}}\right)\)</span> conditional on the estimated state vector <span class="math inline">\(\left(\boldsymbol{x_{t}}\right)\)</span> such that</p>
@@ -838,17 +887,182 @@ The tree ring tutorial is housed within: <strong>/pecan/documentation/tutorials/
 
 </div>
 </div>
+<div id="sda_methods" class="section level2">
+<h2><span class="header-section-number">9.7</span> SDA_Methods</h2>
+<p><em>By Ann Raiho</em></p>
+<p>Our goal is build a fully generalizable state data assimilation (SDA) workflow that will assimilate multiple types of data and data products into ecosystem models within PEcAn temporally and spatially. But, during development, specifically with PalEON goals in mind, we have been focusing on assimilating tree ring estimated NPP and AGB and pollen derived fractional composition into two ecosystem models, SIPNET and LINKAGES, at Harvard Forest. This methodology will soon be expanded to include the PalEON sites listed on the <a href="https://paleon.geography.wisc.edu/doku.php/working_groups;state_data_assimilation">state data assimilation wiki page</a>.</p>
+</div>
+<div id="data-products" class="section level2">
+<h2><span class="header-section-number">9.8</span> Data Products</h2>
+<p>During workflow development, we have been working with tree ring estimated NPP and AGB and pollen derived fractional composition data products. Both of these data products have been estimated with a full accounting of uncertainty, which provides us with state variable observation mean vector and covariance matrix at each time step. These data products are discussed in more detail below. Even though we have been working with specific data products during development, our workflow is generalizable to alternative data products as long as we can calculate a state variable observation mean vector and covariance for a time point.</p>
+<div id="tree-rings" class="section level3">
+<h3><span class="header-section-number">9.8.1</span> Tree Rings</h3>
+<p>We have been primarily been working with the tree ring data product created by Andria Dawson and Chris Paciorek and the PEcAn tree ring allometry module. They have developed a Bayesian model that estimates annual aboveground biomass increment (Mg/ha/yr) and aboveground biomass (Mg/ha) for each tree in a dataset. We obtain this data and aggregate to the level appropriate for the ecosystem model. In SIPNET, we are assimilating annual gross woody increment (Mg/ha/yr) and above ground woody biomass (Mg/ha). In LINKAGES, we are assimilating annual species biomass. More information on deriving these tree ring data products can be found in Dawson et al 201?.</p>
+<p>We have been working mostly with tree data collected at Harvard Forest. Tree rings and census data were collected at Lyford Plot between 1960 and 2010 in three separate plots. Other tree ring data will be added to this analysis in the future from past PEON courses (UNDERC), Kelly Heilman (Billy’s Lake and Bigwoods), and Alex Dye (Huron Mt. Club).</p>
+</div>
+<div id="pollen" class="section level3">
+<h3><span class="header-section-number">9.8.2</span> Pollen</h3>
+<p>STEPPS is a Bayesian model developed by Paciorek and McLachlan 2009 and Dawson et al 2016 to estimate spatially gridded fractional composition from fossil pollen. We have been working with STEPPS1 output, specifically with the grid cell that contains Harvard Forest. The temporal resolution of this data product is centennial. Our workflow currently operates at annual time steps, but does not require data at every time step. So, it is possible to assimilate fractional composition every one hundred years or to assimilate fractional composition data every year by accounting for variance inflation.</p>
+<p>In the future, pollen derived biomass (ReFAB) will also be available for data assimilation. Although, we have not discussed how STEPPS and ReFAB data assimilation will work.</p>
+<div id="variance-inflation" class="section level4">
+<h4><span class="header-section-number">9.8.2.1</span> Variance Inflation</h4>
+<p>*Side Note: Probably want to call this something else now.</p>
+<p>Since the fractional composition data product has a centennial resolution, in order to use fractional composition information every year we need to change the weight the data has on the analysis. The basic idea is to downweight the likelihood relative to the prior to account for (a) the fact that we assimilate an observation multiple times and (b) the fact that the number of STEPPS observations is ‘inflated’ because of the autocorrelation. To do this, we take the likelihood and raise it to the power of (1/w) where ‘w’ is an inflation factor.</p>
+<p>w = D * (N / ESS)</p>
+<p>where D is the length of the time step. In our case D = 100. N is the number of time steps. In our case N = 11. and ESS is the effective sample size. The ESS is calculated with the following function where ntimes is the same as N above and sims is a matrix with the dimensions number of MCMC samples by number of state variables.</p>
+<pre><code>ESS_calc &lt;- function(ntimes, sims){
+        # center based on mean at each time to remove baseline temporal correlation 
+        # (we want to estimate effective sample size effect from correlation of the errors)
+        row.means.sims &lt;- sims - rowMeans(sims)  
+        
+        # compute all pairwise covariances at different times
+        covars &lt;- NULL
+        for(lag in 1:(ntimes-1)){
+          covars &lt;- c(covars, rowMeans(row.means.sims[(lag+1):ntimes, , drop = FALSE] * row.means.sims[1:(ntimes-lag), , drop = FALSE])) 
+        }
+        vars &lt;- apply(row.means.sims, 1, var) # pointwise post variances at each time, might not be homoscedastic
+        
+        # nominal sample size scaled by ratio of variance of an average
+        # under independence to variance of average of correlated values
+        neff &lt;- ntimes * sum(vars) / (sum(vars) + 2 * sum(covars))
+        return(neff)
+      }</code></pre>
+<p>The ESS for the STEPPS1 data product is 3.6, so w in our assimilation of fractional composition at Harvard Forest will be w = 305.6.</p>
+</div>
+</div>
+</div>
+<div id="current-models" class="section level2">
+<h2><span class="header-section-number">9.9</span> Current Models</h2>
+<p>SIPNET and LINKAGES are the two ecosystem models that have been used during state data assimilation development within PEcAn. SIPNET is a simple ecosystem model that was built for… LINKAGES is a forest gap model created to simulate the process of succession that occurs when a gap is opened in the forest canopy. LINKAGES has 72 species level plant functional types and the ability to simulate some below ground processes (C and N cycles).</p>
+</div>
+<div id="model-calibration" class="section level2">
+<h2><span class="header-section-number">9.10</span> Model Calibration</h2>
+<p>Without model calibration both SIPNET and LINKAGES make incorrect predictions about Harvard Forest. To confront this problem, SIPNET and LINKAGES will both be calibrated using data collected at the Harvard Forest flux tower. Istem has completed calibration for SIPNET using a <a href="https://github.com/PecanProject/pecan/blob/develop/modules/assim.batch/R/pda.emulator.R">parameter data assimilation emulator</a> contained within the PEcAn workflow. LINKAGES will also be calibrated using this method. This method is also generalizable to other sites assuming there is data independent of data assimilation data available to calibrate against.</p>
+</div>
+<div id="initial-conditions" class="section level2">
+<h2><span class="header-section-number">9.11</span> Initial Conditions</h2>
+<p>The initial conditions for SIPNET are sampled across state space based on data distributions at the time when the data assimilation will begin. We do not sample LINAKGES for initial conditions and instead perform model spin up for 100 years prior to beginning data assimilation. In the future, we would like to estimate initial conditions based on data. We achieve adequate spread in the initial conditions by allowing the parameters to vary across ensemble members.</p>
+</div>
+<div id="drivers" class="section level2">
+<h2><span class="header-section-number">9.12</span> Drivers</h2>
+<p>We are currently using Global Climate Model (GCM) drivers from the PaLEON model intercomparison. Christy Rollinson and John Tipton are creating MET downscaled GCM drivers for the Paleon data assimilation sites. We will use these drivers when they are available because they are a closer representation of reality.</p>
+</div>
+<div id="sequential-state-data-assimilation" class="section level2">
+<h2><span class="header-section-number">9.13</span> Sequential State Data Assimilation</h2>
+<p>We are using sequential state data assimilation methods to assimilate paleon data products into ecosystem models because less computation power is required for sequential state data assimilation than for particle filter methods.</p>
+<div id="general-description" class="section level3">
+<h3><span class="header-section-number">9.13.1</span> General Description</h3>
+<p>The general sequential data assimilation framework consists of three steps at each time step:
+1. Read the state variable output for time t from the model forecast ensembles and save the forecast mean (muf) and covariance (Pf).
+2. If there are data mean (y) and covariance (R) at this time step, perform data assimilation analysis (either EnKF or generalized ensemble filter) to calculate the new mean (mua) and covariance (Pa) of the state variables.
+3. Use mua and Pa to restart and run the ecosystem model ensembles with new state variables for time t+1.</p>
+</div>
+<div id="enkf" class="section level3">
+<h3><span class="header-section-number">9.13.2</span> EnKF</h3>
+<p>There are two ways to implement sequential state data assimilation at this time. The first is the Ensemble Kalman Filter (EnKF). EnKF has an analytical solution, so the kalman gain, analysis mean vector, and analysis covariance matrix can be calculated directly:</p>
+<pre><code>       
+        K &lt;- Pf %*% t(H) %*% solve((R + H %*% Pf %*% t(H))) ## Kalman Gain
+        
+        mu.a &lt;- mu.f + K %*% (Y - H %*% mu.f) # Analysis mean vector
+        
+        Pa   &lt;- (diag(ncol(X)) - K %*% H) %*% Pf # Analysis covariance matrix
+        </code></pre>
+<p>The EnKF is typically used for sequential state data assimilation, but we found that EnKF lead to filter divergence when combined with our uncertain data products. Filter divergence led us to create a generalized ensemble filter that estimates process variance.</p>
+</div>
+<div id="generalized-ensemble-filter" class="section level3">
+<h3><span class="header-section-number">9.13.3</span> Generalized Ensemble Filter</h3>
+<p>The generalized ensemble filter follows generally the three steps of sequential state data assimilation. But, in the generalized ensemble filter we add a latent state vector that accounts for added process variance. Furthermore, instead of solving the analysis analytically like the EnKF, we have to estimate the mean analysis vector and covariance matrix with MCMC.</p>
+<div id="mapping-ensemble-output-to-tobit-space" class="section level4">
+<h4><span class="header-section-number">9.13.3.1</span> Mapping Ensemble Output to Tobit Space</h4>
+<p>There are some instances when we have right or left censored variables from the model forecast. For example, a model estimating species level biomass may have several ensemble members that produce zero biomass for a given species. We are considering this case a left censored state variable that needs to be mapped to normal space using a tobit model. We do this by creating two matrices with dimensions number of ensembles by state variable. The first matrix is a matrix of indicator variables (y.ind), and the second is a matrix of censored variables (y.censored). When the indicator variable is 0 the state variable (j) for ensemble member (i) is sampled. This allows us to impute a normal distribution for each state variable that contains ‘missing’ forecasts or forecasts of zero.</p>
+<pre><code>tobit2space.model &lt;- nimbleCode({
+    for(i in 1:N){
+      y.censored[i,1:J] ~ dmnorm(muf[1:J], cov = pf[1:J,1:J])
+      for(j in 1:J){
+        y.ind[i,j] ~ dconstraint(y.censored[i,j] &gt; 0)
+      }
+    }
+    
+    muf[1:J] ~ dmnorm(mean = mu_0[1:J], cov = pf[1:J,1:J])
+    
+    Sigma[1:J,1:J] &lt;- lambda_0[1:J,1:J]/nu_0
+    pf[1:J,1:J] ~ dinvwish(S = Sigma[1:J,1:J], df = J)
+    
+  })</code></pre>
+</div>
+<div id="generalized-ensemble-filter-model-description" class="section level4">
+<h4><span class="header-section-number">9.13.3.2</span> Generalized Ensemble Filter Model Description</h4>
+<p>Below is the BUGS code for the full analysis model. The forecast mean an covariance are calculated from the tobit2space model above. We use a tobit likelihood in this model because there are instances when the data may be left or right censored. Process variance is included by adding a latent model state (X) with a process precision matrix (q). We update our prior on q at each time step using our estimate of q from the previous time step.</p>
+<pre><code>  tobit.model &lt;- nimbleCode({ 
+    
+    q[1:N,1:N]  ~ dwish(R = aq[1:N,1:N], df = bq) ## aq and bq are estimated over time
+    Q[1:N,1:N] &lt;- inverse(q[1:N,1:N])
+    X.mod[1:N] ~ dmnorm(muf[1:N], prec = pf[1:N,1:N]) ## Model Forecast ##muf and pf are assigned from ensembles
+    
+    ## add process error
+    X[1:N]  ~ dmnorm(X.mod[1:N], prec = q[1:N,1:N])
+    
+    #agb linear
+    #y_star[1:YN,1:YN] &lt;- X[1:YN,1:YN] #[choose]
+    
+    #f.comp non linear
+    #y_star[1:YN] &lt;- X[1:YN] / sum(X[1:YN])
+    
+    ## Analysis
+    y.censored[1:YN] ~ dmnorm(X[1:YN], prec = r[1:YN,1:YN]) #is it an okay assumpution to just have X and Y in the same order?
+    
+    #don&#39;t flag y.censored as data, y.censored in inits
+    #remove y.censored samplers and only assign univariate samplers on NAs
+    
+    for(i in 1:YN){
+      y.ind[i] ~ dconstraint(y.censored[i] &gt; 0)
+    }
+    
+  })</code></pre>
+</div>
+</div>
+<div id="ensemble-adjustment" class="section level3">
+<h3><span class="header-section-number">9.13.4</span> Ensemble Adjustment</h3>
+<p>Each ensemble member has a different set of species parameters. We adjust the updated state variables by using an ensemble adjustment. The ensemble adjustment weights the ensemble members based on their likelihood during the analysis step.</p>
+<pre><code>      S_f  &lt;- svd(Pf)
+      L_f  &lt;- S_f$d
+      V_f  &lt;- S_f$v
+      
+      ## normalize
+      Z &lt;- X*0
+      for(i in seq_len(nrow(X))){
+          Z[i,] &lt;- 1/sqrt(L_f) * t(V_f)%*%(X[i,]-mu.f)
+      }
+      Z[is.na(Z)]&lt;-0
+      
+      ## analysis
+      S_a  &lt;- svd(Pa)
+      L_a  &lt;- S_a$d
+      V_a  &lt;- S_a$v
+      
+      ## analysis ensemble
+      X_a &lt;- X*0
+      for(i in seq_len(nrow(X))){
+        X_a[i,] &lt;- V_a %*%diag(sqrt(L_a))%*%Z[i,] + mu.a
+      }</code></pre>
+</div>
+<div id="diagnostics" class="section level3">
+<h3><span class="header-section-number">9.13.5</span> Diagnostics</h3>
+<p>There are three diagnostics we have currently implemented: time series, bias time series, and process variance. The time series diagnostics show the data, forecast, and analysis time series for each state variable. These are useful for visually assessing variance and magnitude of change of state variables through time. These time series are also updated throughout the analysis and are also created as a pdf at the end of the SDA workflow. There are two types of bias time series the first assess the bias in the update (the forecast minus the analysis) and the second assess the bias in the error (the forecast minus the data). These bias time series are useful for identifying which state variables have intrinsic bias within the model. For example, if red oak biomass in LINKAGES increases at every time step (the update and the error are always positive), this would suggest that LINKAGES has a positive growth or recruitment bias for red oak. Finally, when using the generalized ensemble filter to estimate process variance, there are two additional plots to assess estimation of process variance. The first is a correlation plot of the process covariance matrix. This tells us what correlations are incorrectly represented by the model. For example, if red oak biomass and white pine biomass are highly negatively correlated in the process covariance matrix, this means that the model either 1) has no relationship between red oak and white pine and they should affect each other negatively or 2) there is a positive relationship between red oak and white pine and there shouldn’t be any relationship. We can determine which of these is true by comparing the process covariance matrix to the model covariance matrix. The second process variance diagnostic plot shows how the degrees of freedom associated with estimating the process covariance matrix have changed through time. This plot should show increasing degrees of freedom through time.</p>
+
+</div>
+</div>
 <div id="multisettings" class="section level2">
-<h2><span class="header-section-number">9.4</span> MultiSettings</h2>
+<h2><span class="header-section-number">9.14</span> MultiSettings</h2>
 <p>(TODO: Under construction…)</p>
 
 </div>
 <div id="Benchmarking" class="section level2">
-<h2><span class="header-section-number">9.5</span> Benchmarking</h2>
+<h2><span class="header-section-number">9.15</span> Benchmarking</h2>
 <p>Benchmarking is the process of comparing model outputs against either experimental data or against other model outputs as a way to validate model performance.
 We have a suit of statistical comparisons that provide benchmarking scores as well as visual comparisons that help in diagnosing data-model and/or model-model differences.</p>
 <div id="data-preparation" class="section level3">
-<h3><span class="header-section-number">9.5.1</span> Data Preparation</h3>
+<h3><span class="header-section-number">9.15.1</span> Data Preparation</h3>
 <p>All data that you want to compare with model runs must be registered in the database.
 This is currently a step that must be done by hand either from the command line or through the online BETY interface.
 The data must have three records:</p>
@@ -859,13 +1073,13 @@ The data must have three records:</p>
 </ol>
 </div>
 <div id="model-runs" class="section level3">
-<h3><span class="header-section-number">9.5.2</span> Model Runs</h3>
+<h3><span class="header-section-number">9.15.2</span> Model Runs</h3>
 <p>Model runs can be setup and executed
 - Using the PEcAn web interface online or with a VM (<a href="GettingStarted.html#GettingStarted">see setup</a>)
 - By hand using the <a href="pecanXML.html#pecanXML">pecan.xml</a></p>
 </div>
 <div id="the-benchmarking-shiny-app" class="section level3">
-<h3><span class="header-section-number">9.5.3</span> The Benchmarking Shiny App</h3>
+<h3><span class="header-section-number">9.15.3</span> The Benchmarking Shiny App</h3>
 <p>The entire benchmarking process can be done through the Benchmarking R Shiny app.</p>
 <p>When the model run has completed, navigate to the workflow visualization Shiny app.</p>
 <ul>
@@ -880,7 +1094,7 @@ The data must have three records:</p>
 </ul></li>
 </ul>
 <div id="create-a-reference-run-record" class="section level4">
-<h4><span class="header-section-number">9.5.3.1</span> Create a reference run record</h4>
+<h4><span class="header-section-number">9.15.3.1</span> Create a reference run record</h4>
 <ul>
 <li>Navigate to the Benchmarking tab
 <ul>
@@ -889,7 +1103,7 @@ The data must have three records:</p>
 </ul>
 </div>
 <div id="setup-benchmarks-and-metrics" class="section level4">
-<h4><span class="header-section-number">9.5.3.2</span> Setup Benchmarks and metrics</h4>
+<h4><span class="header-section-number">9.15.3.2</span> Setup Benchmarks and metrics</h4>
 <ul>
 <li>From the menus select
 <ul>
@@ -900,7 +1114,7 @@ The data must have three records:</p>
 <li>Note: All these selections populate the benchmarking section of the <code>pecan.BENCH.xml</code> which is then saved in the same location as the original run output. This xml is purely for reference.</li>
 </ul>
 <div id="benchmarking-output" class="section level5">
-<h5><span class="header-section-number">9.5.3.2.1</span> Benchmarking Output</h5>
+<h5><span class="header-section-number">9.15.3.2.1</span> Benchmarking Output</h5>
 <ul>
 <li>All benchmarking results are stored in the benchmarking directory which is created in the same folder as the original model run.</li>
 <li>The benchmaking directory contains subdirectories for each of the datasets compared with the model output. The names of these directories are the same as the corresponding data set’s input id in BETY.</li>
@@ -917,7 +1131,7 @@ The data must have three records:</p>
 </div>
 </div>
 <div id="benchmarking-in-pecan.xml" class="section level3">
-<h3><span class="header-section-number">9.5.4</span> Benchmarking in pecan.xml</h3>
+<h3><span class="header-section-number">9.15.4</span> Benchmarking in pecan.xml</h3>
 <p>Before reading this section, it is recommended that you <a href="pecanXML.html#pecanXML">familiarize yourself with basics of the pecan.xml file.</a></p>
 <p>The <code>pecan.xml</code> has an <em>optional</em> benchmarking section. Below are all the tags in the benchmarking section explained. Many of these field are filled in automatically during the benchmarking process when using the benchmarking shiny app.</p>
 <p>The only time one should edit the benchmarking section by hand is for performing clone runs. See <a href="#CloneRun">clone run documentation.</a></p>
@@ -939,27 +1153,27 @@ In this example,
 - the output will be compared to data from <code>input_id = 1000013743</code>, specifically two variables of interest: <code>variable_id = 411, variable_id = 18</code>
 - for <code>variable_id = 411</code> we will perform only one metric of comparison <code>metric_id = 1000000001</code>
 - for for <code>variable_id = 18</code> we will perform two metrics of comparison <code>metric_id = 1000000001, metric_id = 1000000002</code></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">&lt;benchmarking&gt;</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="kw">&lt;ensemble_id&gt;</span>1000010983<span class="kw">&lt;/ensemble_id&gt;</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="kw">&lt;new_run&gt;</span>FALSE<span class="kw">&lt;/new_run&gt;</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="kw">&lt;benchmark&gt;</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">   <span class="kw">&lt;variable_id&gt;</span>411<span class="kw">&lt;/variable_id&gt;</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">   <span class="kw">&lt;metrics&gt;</span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">   <span class="kw">&lt;/metrics&gt;</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11">  <span class="kw">&lt;/benchmark&gt;</span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12">  <span class="kw">&lt;benchmark&gt;</span></a>
-<a class="sourceLine" id="cb14-13" data-line-number="13">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
-<a class="sourceLine" id="cb14-14" data-line-number="14">   <span class="kw">&lt;variable_id&gt;</span>18<span class="kw">&lt;/variable_id&gt;</span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16">   <span class="kw">&lt;metrics&gt;</span></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
-<a class="sourceLine" id="cb14-18" data-line-number="18">    <span class="kw">&lt;metric_id&gt;</span>1000000002<span class="kw">&lt;/metric_id&gt;</span></a>
-<a class="sourceLine" id="cb14-19" data-line-number="19">   <span class="kw">&lt;/metrics&gt;</span></a>
-<a class="sourceLine" id="cb14-20" data-line-number="20">  <span class="kw">&lt;/benchmark&gt;</span></a>
-<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="kw">&lt;/benchmarking&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">&lt;benchmarking&gt;</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  <span class="kw">&lt;ensemble_id&gt;</span>1000010983<span class="kw">&lt;/ensemble_id&gt;</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">  <span class="kw">&lt;new_run&gt;</span>FALSE<span class="kw">&lt;/new_run&gt;</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">  <span class="kw">&lt;benchmark&gt;</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">   <span class="kw">&lt;variable_id&gt;</span>411<span class="kw">&lt;/variable_id&gt;</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">   <span class="kw">&lt;metrics&gt;</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
+<a class="sourceLine" id="cb19-10" data-line-number="10">   <span class="kw">&lt;/metrics&gt;</span></a>
+<a class="sourceLine" id="cb19-11" data-line-number="11">  <span class="kw">&lt;/benchmark&gt;</span></a>
+<a class="sourceLine" id="cb19-12" data-line-number="12">  <span class="kw">&lt;benchmark&gt;</span></a>
+<a class="sourceLine" id="cb19-13" data-line-number="13">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
+<a class="sourceLine" id="cb19-14" data-line-number="14">   <span class="kw">&lt;variable_id&gt;</span>18<span class="kw">&lt;/variable_id&gt;</span></a>
+<a class="sourceLine" id="cb19-15" data-line-number="15">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
+<a class="sourceLine" id="cb19-16" data-line-number="16">   <span class="kw">&lt;metrics&gt;</span></a>
+<a class="sourceLine" id="cb19-17" data-line-number="17">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
+<a class="sourceLine" id="cb19-18" data-line-number="18">    <span class="kw">&lt;metric_id&gt;</span>1000000002<span class="kw">&lt;/metric_id&gt;</span></a>
+<a class="sourceLine" id="cb19-19" data-line-number="19">   <span class="kw">&lt;/metrics&gt;</span></a>
+<a class="sourceLine" id="cb19-20" data-line-number="20">  <span class="kw">&lt;/benchmark&gt;</span></a>
+<a class="sourceLine" id="cb19-21" data-line-number="21"><span class="kw">&lt;/benchmarking&gt;</span></a></code></pre></div>
 
 </div>
 </div>

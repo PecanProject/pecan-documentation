@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="template-model-page.html">
-<link rel="next" href="available-meteorological-drivers.html">
+<link rel="prev" href="pecan-docker-architecture.html">
+<link rel="next" href="dockerfiles-for-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -620,330 +620,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pecan-models" class="section level1">
-<h1><span class="header-section-number">32</span> PEcAn Models</h1>
-<p>This section will contain information about all models and output variables that are supported by PEcAn.</p>
+<div id="quickstart-for-docker-and-pecan." class="section level1">
+<h1><span class="header-section-number">36</span> Quickstart for Docker and PEcAn.</h1>
+<p>This is a short documentation on how to start with Docker and PEcAn. This will not go into much detail about about how to use docker.</p>
+<div id="install-docker" class="section level2">
+<h2><span class="header-section-number">36.1</span> Install Docker</h2>
+<p>You will need to install docker first. See <a href="https://www.docker.com/community-edition#/download" class="uri">https://www.docker.com/community-edition#/download</a></p>
+</div>
+<div id="running-pecan" class="section level2">
+<h2><span class="header-section-number">36.2</span> Running PEcAn</h2>
+<p>We will use a yaml file to describe the containers that we make up, This yaml file is called <a href="https://github.com/PecanProject/pecan/blob/master/docker-compose.yml">docker-compose.yml</a>. Before you get started you will need to download this file first. Place this file somewhere on your machine and cd to the folder that contains this file.</p>
+<p>Next we will start the docker containers to start Docker. Since both BETY and PEcAn depend on a populated database we will first start the database and populate it with some data. This only needs to be done once, if this is done already, you can skip this step and go to the next step</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb246-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d postgres</a>
+<a class="sourceLine" id="cb246-2" data-line-number="2"><span class="ex">docker</span> run -ti --rm \</a>
+<a class="sourceLine" id="cb246-3" data-line-number="3">    --network pecan_pecan \</a>
+<a class="sourceLine" id="cb246-4" data-line-number="4">    hub.ncsa.illinois.edu/pecan/bety:latest initialize</a>
+<a class="sourceLine" id="cb246-5" data-line-number="5"><span class="ex">docker</span> run -ti --rm \</a>
+<a class="sourceLine" id="cb246-6" data-line-number="6">    --network pecan_pecan \</a>
+<a class="sourceLine" id="cb246-7" data-line-number="7">    --volume pecan_pecan:/data \</a>
+<a class="sourceLine" id="cb246-8" data-line-number="8">    hub.ncsa.illinois.edu/pecan/data:develop</a></code></pre></div>
+<p>If this is finished (or you had done this in the past), we can start the full stack:</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="ex">docker-compose</span> -p pecan up -d</a></code></pre></div>
+<p>This will start all the containers marked green in the architecture diagram. Once this is done you have a working instance of PEcAn. Following is a list of URL’s you can visit</p>
 <table>
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="34%" />
+<col width="65%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Model Name</th>
-<th>Available in the VM</th>
-<th>Prescribed Inputs</th>
-<th>Input Functions/Values</th>
-<th>Restart Function</th>
+<th>URL</th>
+<th>Service</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="template-model-page.html#biocro-1">BioCro</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
+<td><a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a></td>
+<td>PEcAn web GUI</td>
 </tr>
 <tr class="even">
-<td><a href="template-model-page.html#clm">CLM</a></td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
+<td><a href="http://localhost:8000/bety/" class="uri">http://localhost:8000/bety/</a></td>
+<td>BETY web application</td>
 </tr>
 <tr class="odd">
-<td><a href="template-model-page.html#dalec-1">DALEC</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
+<td><a href="http://localhost:8000/minio/" class="uri">http://localhost:8000/minio/</a></td>
+<td>File browser (username carya, password illinois)</td>
 </tr>
 <tr class="even">
-<td><a href="template-model-page.html#ed">ED</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
+<td><a href="http://localhost:8000/" class="uri">http://localhost:8000/</a></td>
+<td>RabbitMQ (username guest, password guest)</td>
 </tr>
 <tr class="odd">
-<td>FATES</td>
-<td>No</td>
-<td>Yes</td>
-<td></td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><a href="template-model-page.html#gday-1">GDAY</a></td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><a href="template-model-page.html#linkages-1">LINKAGES</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><a href="template-model-page.html#lpj-guess-1">LPJ-GUESS</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><a href="template-model-page.html#maespa-1">MAESPA</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><a href="pecan-models.html#preles">PRELES</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Partially</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><a href="pecan-models.html#sipnet-1">Sipnet</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
+<td><a href="http://localhost:8001/" class="uri">http://localhost:8001/</a></td>
+<td>Træfik, webserver shows mapping from url to container</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Output Variables</strong></p>
-<p>PEcAn converts all model outputs to a single <a href="Model%20Output%20Variables">standard</a>. This standard evolved out of MsTMIP project, which is itself based on NACP, LBA, and other model-intercomparison projects. This standard was expanded for the PalEON MIP and the needs of the PEcAn modeling community to support variables not in these standards.</p>
-<p><em>Model developers</em>: do not add variables to your PEcAn output without first adding them to the PEcAn standard table! Also, do not create new variables equivalent to existing variables but just with different names or units.</p>
-
-<div id="preles" class="section level2">
-<h2><span class="header-section-number">32.1</span> PRELES</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
 </div>
-<div id="sipnet-configuration" class="section level2">
-<h2><span class="header-section-number">32.2</span> SIPNET configuration</h2>
-<p>SIPNET is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>sipnet.in</strong> : template for this file is located at models/sipnet/inst/sipnet.in and is not modified.<br />
-</li>
-<li><strong>sipnet.param-spatial</strong> : template for this file is located at models/sipnet/inst/template.param-spatial and is not modified.<br />
-</li>
-<li><strong>sipnet.param</strong> : template for this file is in models/sipnet/inst/template.param or it is specified in the &lt;model&gt; section as &lt;default.param&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
+<div id="testing-pecan" class="section level2">
+<h2><span class="header-section-number">36.3</span> Testing PEcAn</h2>
+<p>To test PEcAn you can use the following curl statement, or use the webpage to submit a request:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb248-1" data-line-number="1"><span class="ex">curl</span> -v -X POST \</a>
+<a class="sourceLine" id="cb248-2" data-line-number="2">    -F <span class="st">&#39;hostname=docker&#39;</span> \</a>
+<a class="sourceLine" id="cb248-3" data-line-number="3">    -F <span class="st">&#39;modelid=5000000002&#39;</span> \</a>
+<a class="sourceLine" id="cb248-4" data-line-number="4">    -F <span class="st">&#39;sitegroupid=1&#39;</span> \</a>
+<a class="sourceLine" id="cb248-5" data-line-number="5">    -F <span class="st">&#39;siteid=772&#39;</span> \</a>
+<a class="sourceLine" id="cb248-6" data-line-number="6">    -F <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> \</a>
+<a class="sourceLine" id="cb248-7" data-line-number="7">    -F <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> \</a>
+<a class="sourceLine" id="cb248-8" data-line-number="8">    -F <span class="st">&#39;start=2004/01/01&#39;</span> \</a>
+<a class="sourceLine" id="cb248-9" data-line-number="9">    -F <span class="st">&#39;end=2004/12/31&#39;</span> \</a>
+<a class="sourceLine" id="cb248-10" data-line-number="10">    -F <span class="st">&#39;input_met=5000000005&#39;</span> \</a>
+<a class="sourceLine" id="cb248-11" data-line-number="11">    -F <span class="st">&#39;email=&#39;</span> \</a>
+<a class="sourceLine" id="cb248-12" data-line-number="12">    -F <span class="st">&#39;notes=&#39;</span> \</a>
+<a class="sourceLine" id="cb248-13" data-line-number="13">    <span class="st">&#39;http://localhost:8000/pecan/04-runpecan.php&#39;</span></a></code></pre></div>
+<p>This should return some text with in there <code>Location:</code> this is shows the workflow id, you can prepend <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> to the front of this, for example: <a href="http://localhost:8000/pecan/05-running.php?workflowid=99000000001" class="uri">http://localhost:8000/pecan/05-running.php?workflowid=99000000001</a>. Here you will be able to see the progress of the workflow.</p>
+<p>To see what is happening behind the scenes you can use look at the log file of the specific docker containers, once of interest are <code>pecan_executor_1</code> this is the container that will execute a single workflow and <code>pecan_sipnet_1</code> which executes the sipnet mode. To see the logs you use <code>docker logs pecan_executor_1</code> Following is an example output:</p>
+<pre><code>2018-06-13 15:50:37,903 [MainThread     ] INFO    : pika.adapters.base_connection - Connecting to 172.18.0.2:5672
+2018-06-13 15:50:37,924 [MainThread     ] INFO    : pika.adapters.blocking_connection - Created channel=1
+2018-06-13 15:50:37,941 [MainThread     ] INFO    : root -  [*] Waiting for messages. To exit press CTRL+C
+2018-06-13 19:44:49,523 [MainThread     ] INFO    : root - b&#39;{&quot;folder&quot;: &quot;/data/workflows/PEcAn_99000000001&quot;, &quot;workflowid&quot;: &quot;99000000001&quot;}&#39;
+2018-06-13 19:44:49,524 [MainThread     ] INFO    : root - Starting job in /data/workflows/PEcAn_99000000001.
+2018-06-13 19:45:15,555 [MainThread     ] INFO    : root - Finished running job.</code></pre>
+<p>This shows that the executor connects to RabbitMQ, waits for messages. Once it picks up a message it will print the message, and execute the workflow in the folder passed in with the message. Once the workflow (including any model executions) is finished it will print Finished. The log file for <code>pecan_sipnet_1</code> is very similar, in this case it runs the <code>job.sh</code> in the run folder.</p>
+<p>To run multiple executors in parallel you can duplicate the executor section in the docker-compose file and just rename it from executor to executor1 and executor2 for example. The same can be done for the models. To make this easier it helps to deploy the containers using kubernetes allowing to easily scale up and down the containers.</p>
 
-</div>
-<div id="sipnet-1" class="section level2">
-<h2><span class="header-section-number">32.3</span> Sipnet</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td>Michael Dietze, Rob Kooper</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>SIPNET is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>sipnet.in</strong> : template for this file is located at models/sipnet/inst/sipnet.in and is not modified.<br />
-</li>
-<li><strong>sipnet.param-spatial</strong> : template for this file is located at models/sipnet/inst/template.param-spatial and is not modified.<br />
-</li>
-<li><strong>sipnet.param</strong> : template for this file is in models/sipnet/inst/template.param or it is specified in the &lt;model&gt; section as &lt;default.param&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p>SIPNET version unk:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_unk ]; then
-  cd
-  curl -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/PEcAn/models/sipnet_unk.tar.gz
-  tar zxf sipnet_unk.tar.gz
-  rm sipnet_unk.tar.gz
-fi
-cd ${HOME}/sipnet_unk/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.runk
-make clean</code></pre>
-<p>SIPNET version 136:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_r136 ]; then
-  cd
-  curl -o sipnet_r136.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_r136.tar.gz
-  tar zxf sipnet_r136.tar.gz
-  rm sipnet_r136.tar.gz
-  sed -i &#39;s#$(LD) $(LIBLINKS) \(.*\)#$(LD) \1 $(LIBLINKS)#&#39; ${HOME}/sipnet_r136/Makefile
-fi
-cd ${HOME}/sipnet_r136/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.r136
-make clean</code></pre>
-<p><strong>VM</strong></p>
-
-<div id="download-gfdl" class="section level3">
-<h3><span class="header-section-number">32.3.1</span> Download GFDL</h3>
-<p>The Downlad.GFDL function assimilates 3 hour frequency CMIP5 outputs generated by multiple GFDL models. GFDL developed several distinct modeling streams on the timescale of CMIP5 and AR5. These models include CM3, ESM2M and ESM2G with a spatial resolution of 2 degrees latitude by 2.5 degrees longitude. Each model has future outputs for the AR5 Representative Concentration Pathways ranging from 2006-2100.</p>
-</div>
-<div id="cm3" class="section level3">
-<h3><span class="header-section-number">32.3.2</span> CM3</h3>
-<p>GFDL’s CMIP5 experiments with CM3 included many of the integrations found in the long-term CMIP5 experimental design. The focus of this physical climate model is on the role of aerosols, aerosol-cloud interactions, and atmospheric chemistry in climate variability and climate change.</p>
-</div>
-<div id="esm2m-esm2g" class="section level3">
-<h3><span class="header-section-number">32.3.3</span> ESM2M &amp; ESM2G</h3>
-<p>Two new models representing ocean physics with alternative numerical frameworks to explore the implications of some of the fundamental assumptions embedded in these models. Both ESM2M and ESM2G utilize a more advanced land model, LM3, than was available in ESM2.1 including a variety of enhancements (Milly et al., in prep). GFDL’s CMIP5 experiments with Earth System Models included many of the integrations found in the long-term CMIP5 experimental design. The ESMs, by design, close the carbon cycle and are used to study the impact of climate change on ecosystems, ecosystem changes on climate and human activities on ecosystems.</p>
-<p>For more information please navigate <a href="https://gfdl.noaa.gov/cmip">here</a></p>
-<table width=100%>
-<th>
-</th>
-<th>
-CM#
-</th>
-<th>
-ESM2M
-</th>
-<th>
-ESM2G
-</th>
-<tr>
-<td>
-rcp26
-</td>
-<td>
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
-<tr>
-<td>
-rcp45
-</td>
-<td>
-r1i1p1, r3i1p1,r5i1p1
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
-<tr>
-<td>
-rcp60
-</td>
-<td>
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
-<tr>
-<td>
-rcp85
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
-
-</div>
 </div>
 </div>
             </section>
@@ -951,8 +711,8 @@ r1i1p1
           </div>
         </div>
       </div>
-<a href="template-model-page.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="available-meteorological-drivers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pecan-docker-architecture.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dockerfiles-for-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

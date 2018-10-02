@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="template-model-page.html">
-<link rel="next" href="available-meteorological-drivers.html">
+<link rel="prev" href="pecan-data-ingest-via-web-interface.html">
+<link rel="next" href="working-with-the-vm.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -620,328 +620,291 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pecan-models" class="section level1">
-<h1><span class="header-section-number">32</span> PEcAn Models</h1>
-<p>This section will contain information about all models and output variables that are supported by PEcAn.</p>
-<table>
+<div id="loading-data" class="section level1">
+<h1><span class="header-section-number">20</span> 1. Loading Data</h1>
+<div id="selecting-ingest-method" class="section level2">
+<h2><span class="header-section-number">20.1</span> Selecting Ingest Method</h2>
+<p>The Data-Ingest application is capable of loading data from the DataONE data federation and from the user’s local machine. The first step in the workflow is therefore to select an upload method. The application defaults to uploading from DataONE. To upload data from a local device, simply select the radio button titled <code>Local Files</code>.</p>
+<div id="dataone-upload-example" class="section level3">
+<h3><span class="header-section-number">20.1.1</span> DataONE Upload Example</h3>
+<p><br>
+<img src="images/data-ingest/D1Ingest-1.gif" alt="Select Method" /></p>
+<p><br>
+The DataONE download feature allows the user to download data at a given doi or DataONE specific package id. To do so, enter the doi or identifier in the <code>Import From DataONE</code> field and select <code>download</code>. The download process may take a couple of minutes to run depending on the number of files in the dataONE package. This may be a convenient option if the user does not wish to download files directly to their local machine. Once the files have been successfully downloaded from DataONE, they are displayed in a table. Before proceeding to the next step, the user can select a file to ingest by clicking on the corresponding row in the data table.
+<br></p>
+</div>
+</div>
+<div id="local-upload-example" class="section level2">
+<h2><span class="header-section-number">20.2</span> Local Upload Example</h2>
+<p><br>
+To upload local files, the user should first select the <code>Local Files</code> button. From there, the user can upload files from their local machines by selecting <code>Browse</code> or by dragging and dropping files into the text box. The files will begin uploading automatically. From there, the user should select a file to ingest and then select the <code>Next Step</code> button.
+<br>
+After this step, the workflow is identical for both methods. However, please note that if it becomes necessary to switch from loading data via <code>DataONE</code> to uploading local files after the first step, please restart the application.
+<br></p>
+<div class="figure">
+<img src="images/data-ingest/Local_loader_sm.gif" alt="Drag and Drop" />
+<p class="caption">Drag and Drop</p>
+</div>
+<p><br>
+<img src="images/data-ingest/local_browse.gif" alt="Browse" /></p>
+</div>
+<div id="creating-an-input-record" class="section level2">
+<h2><span class="header-section-number">20.3</span> 2. Creating an Input Record</h2>
+<p>Creating an input record requires some basic metadata about the file that is being ingested. Each entry field is briefly explained below.
+<br></p>
+<ul>
+<li>Site: To link the selected file with a site, the user can scroll or type to search all the sites in PEcAn. See Example:
+<br>
+<img src="images/data-ingest/Selectize_Input_sm.gif" alt="Choose Site" />
+<br></li>
+<li><p>Parent: To link the selected file with another dataset, type to search existing datasets in the <code>Parent</code> field.</p></li>
+<li><p>Name: this field should be autofilled by selecting a file in step 1.</p></li>
+<li><p>Format: If the selected file has an existing format name, the user can search and select in the <code>Format</code> field. If the selected file’s format is not already in pecan, the user can create a new format by selecting <code>Create New Format</code>. Once this new format is created, it will automatically populate the <code>Format</code> box and the <code>Current Mimetype</code> box (See Section 3).</p></li>
+<li><p>Mimetype: If the format already exists, select an existing mimetype.</p></li>
+<li><p>Start and End Date and Time: Inputs can be entered manually or by using the user interface. See example</p></li>
+</ul>
+<p><br>
+<img src="images/data-ingest/DateTime.gif" alt="Choose FIle for Ingest" /></p>
+<ul>
+<li>Notes: Describe the data that is being uploaded. Please include any citations or references.</li>
+</ul>
+</div>
+<div id="creating-a-format-record" class="section level2">
+<h2><span class="header-section-number">20.4</span> 3. Creating a format record</h2>
+<p>If it is necessary to add a new format to PEcAn, the user should fill out the form attached to the <code>Create New Format</code> button. The inputs to this form are described below:</p>
+<ul>
+<li><p>Mimetype: type to search existing mimetypes. If the mimetype is not in that list, please click on the link <code>Create New Mimetype</code> and create a new mimetype via the BETY website.</p></li>
+<li><p>New Format Name: Add the name of the new format. Please exclude spaces from the name. Instead please use underscores &quot;_&quot;.</p></li>
+<li><p>Header: If there is space before the first line of data in the dataset, please select <code>Yes</code></p></li>
+<li><p>Skip: The number of lines in the header that should be skipped before the data.</p></li>
+<li><p>Please enter notes that describe the format.</p></li>
+</ul>
+<p>Example:
+<br>
+<img src="images/data-ingest/new_format_record.gif" alt="Create New Format" /></p>
+</div>
+<div id="formats_variables-record" class="section level2">
+<h2><span class="header-section-number">20.5</span> 4. Formats_Variables Record</h2>
+<p>The final step in the ingest process is to register a formats-variables record. This record links pecan variables with variables from the selected data.</p>
+<ul>
+<li><p>Variable: PEcAn variable that is equivalent to variable in selected file.</p></li>
+<li><p>Name: The variable name in the imported data need only be specified if it differs from the BETY variable name.</p></li>
+<li><p>Unit: Should be in a format parseable by the udunits library and need only be secified if the units of the data in the file differ from the BETY standard.</p></li>
+<li><p>Storage Type: Storage type need only be specified if the variable is stored in a format other than would be expected (e.g. if numeric values are stored as quoted character strings). Additionally, storage_type stores POSIX codes that are used to store any time variables (e.g. a column with a 4-digit year would be <code>%Y</code>).</p></li>
+<li><p>Column Number: Vector of integers that list the column numbers associated with variables in a dataset. Required for text files that lack headers.
+<br>
+<img src="images/data-ingest/D1Ingest-9_sm.gif" alt="Create New Format" /></p></li>
+</ul>
+<p>Finally, the path to the ingest data is displayed in the <code>Select Files</code> box.</p>
+
+</div>
+<div id="editing-records" class="section level2">
+<h2><span class="header-section-number">20.6</span> Editing records</h2>
+<ul>
+<li>Models</li>
+<li>Species</li>
+<li>PFTs</li>
+<li>Traits</li>
+<li>Inputs</li>
+<li>DB files</li>
+<li>Variables</li>
+<li>Formats</li>
+<li>(Link each section to relevant Bety tables)</li>
+</ul>
+
+</div>
+<div id="standalone-tools-modules" class="section level2">
+<h2><span class="header-section-number">20.7</span> Standalone tools (modules)</h2>
+<ul>
+<li>RTM</li>
+<li>Photosynthesis</li>
+<li>Allometry</li>
+<li><code>benchmark::load_data</code></li>
+</ul>
+<p>(Link to vignettes)</p>
+
+</div>
+<div id="LoadData" class="section level2">
+<h2><span class="header-section-number">20.8</span> Loading Data in PEcAn</h2>
+<p>If you are loading data in to PEcAn for benchmarking, using the Benchmarking shiny app [provide link?] is recommended.</p>
+<p>Data can be loaded manually using the <code>load_data</code> function which in turn requires providing data format information using <code>query.format.vars</code> and the path to the data using <code>query.file.path</code>.</p>
+<p>Below is a description of the <code>load_data</code> function an a simple example of loading data manually.</p>
+<div id="function-load_data" class="section level3">
+<h3><span class="header-section-number">20.8.1</span> Function <code>load_data</code></h3>
+<div id="inputs-2" class="section level4">
+<h4><span class="header-section-number">20.8.1.1</span> Inputs</h4>
+<p>Required</p>
+<ul>
+<li><code>data.path</code>: path to the data that is the output of the function <code>query.file.path</code> (see example below)</li>
+<li><code>format</code>: R list object that is the output of the function <code>query.format.vars</code> (see example below)</li>
+</ul>
+<p>Optional</p>
+<ul>
+<li><code>start_year = NA</code>:</li>
+<li><code>end_year = NA</code>:</li>
+<li><code>site = NA</code></li>
+<li><code>vars.used.index=NULL</code></li>
+</ul>
+</div>
+<div id="output-1" class="section level4">
+<h4><span class="header-section-number">20.8.1.2</span> Output</h4>
+<ul>
+<li>R data frame containing the requested variables converted in to PEcAn standard name and units and time steps in <code>POSIX</code> format.</li>
+</ul>
+</div>
+</div>
+<div id="example" class="section level3">
+<h3><span class="header-section-number">20.8.2</span> Example</h3>
+<p>The data for this example has already been entered in to the database. To add new data go to <a href="creating-a-new-format-record-in-bety.html#NewInput">new data documentation</a>.</p>
+<p>To load the Ameriflux data for the Harvard Forest (US-Ha1) site.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a connection to the BETY database. This can be done using R function</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">bety =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">betyConnect</span>(<span class="dt">php.config =</span> <span class="st">&quot;pecan/web/config.php&quot;</span>)</a></code></pre></div>
+<p>where the complete path to the <code>config.php</code> is specified. See <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">here</a> for an example <code>config.php</code> file.</p></li>
+<li><p>Look up the inputs record for the data in BETY.</p>
+<div class="figure">
+<img src="images/Input_ID_name.png" alt="Input_ID_name" />
+<p class="caption">Input_ID_name</p>
+</div>
+<p>To find the input ID, either look at</p>
+<ul>
+<li><p>The url of the record (see image above)</p></li>
+<li><p>In R run</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">input_name =<span class="st"> &quot;AmerifluxLBL_site_0-758&quot;</span> <span class="co">#copied directly from online</span></a>
+<a class="sourceLine" id="cb66-3" data-line-number="3">input.id =<span class="st"> </span><span class="kw">tbl</span>(bety,<span class="st">&quot;inputs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(name <span class="op">==</span><span class="st"> </span>input_name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(id)</a></code></pre></div></li>
+</ul></li>
+<li><p>Additional arguments to <code>query.format.vars</code> are optional</p>
+<ol style="list-style-type: decimal">
+<li>If you only want to load a subset of dates in the data, specify start and end year, otherwise all data will be loaded.</li>
+<li>If you only want to load a select list of variables from the data, look up their IDs in BETY, otherwise all variables will be loaded.</li>
+</ol></li>
+<li><p>In R run</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">format =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(bety, input.id)</a></code></pre></div>
+<p>Examine the resulting R list object to make sure it returned the correct information.</p>
+<p>The example format contains the following objects:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="op">$</span>file_name</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">[<span class="dv">1</span>] <span class="st">&quot;AMERIFLUX_BASE_HH&quot;</span></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb68-4" data-line-number="4"><span class="op">$</span>mimetype</a>
+<a class="sourceLine" id="cb68-5" data-line-number="5">[<span class="dv">1</span>] <span class="st">&quot;csv&quot;</span></a>
+<a class="sourceLine" id="cb68-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb68-7" data-line-number="7"><span class="op">$</span>skip</a>
+<a class="sourceLine" id="cb68-8" data-line-number="8">[<span class="dv">1</span>] <span class="dv">2</span></a>
+<a class="sourceLine" id="cb68-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb68-10" data-line-number="10"><span class="op">$</span>header</a>
+<a class="sourceLine" id="cb68-11" data-line-number="11">[<span class="dv">1</span>] <span class="dv">1</span></a>
+<a class="sourceLine" id="cb68-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb68-13" data-line-number="13"><span class="op">$</span>na.strings</a>
+<a class="sourceLine" id="cb68-14" data-line-number="14">[<span class="dv">1</span>] <span class="st">&quot;-9999&quot;</span> <span class="st">&quot;-6999&quot;</span> <span class="st">&quot;9999&quot;</span>  <span class="st">&quot;NA&quot;</span>   </a>
+<a class="sourceLine" id="cb68-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb68-16" data-line-number="16"><span class="op">$</span>time.row</a>
+<a class="sourceLine" id="cb68-17" data-line-number="17">[<span class="dv">1</span>] <span class="dv">4</span></a>
+<a class="sourceLine" id="cb68-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb68-19" data-line-number="19"><span class="op">$</span>site</a>
+<a class="sourceLine" id="cb68-20" data-line-number="20">[<span class="dv">1</span>] <span class="dv">758</span></a>
+<a class="sourceLine" id="cb68-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb68-22" data-line-number="22"><span class="op">$</span>lat</a>
+<a class="sourceLine" id="cb68-23" data-line-number="23">[<span class="dv">1</span>] <span class="fl">42.5378</span></a>
+<a class="sourceLine" id="cb68-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb68-25" data-line-number="25"><span class="op">$</span>lon</a>
+<a class="sourceLine" id="cb68-26" data-line-number="26">[<span class="dv">1</span>] <span class="fl">-72.1715</span></a>
+<a class="sourceLine" id="cb68-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb68-28" data-line-number="28"><span class="op">$</span>time_zone</a>
+<a class="sourceLine" id="cb68-29" data-line-number="29">[<span class="dv">1</span>] <span class="st">&quot;America/New_York&quot;</span></a></code></pre></div>
+<p>The first 4 rows of the table <code>format$vars</code> looks like this:</p>
+<table style="width:100%;">
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="9%" />
+<col width="8%" />
+<col width="11%" />
+<col width="8%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="8%" />
+<col width="10%" />
+<col width="7%" />
+<col width="10%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Model Name</th>
-<th>Available in the VM</th>
-<th>Prescribed Inputs</th>
-<th>Input Functions/Values</th>
-<th>Restart Function</th>
+<th>bety_name</th>
+<th>variable_id</th>
+<th>input_name</th>
+<th>input_units</th>
+<th>storage_type</th>
+<th>column_number</th>
+<th>bety_units</th>
+<th>mstmip_name</th>
+<th>mstmip_units</th>
+<th>pecan_name</th>
+<th>pecan_units</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="template-model-page.html#biocro-1">BioCro</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><a href="template-model-page.html#clm">CLM</a></td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><a href="template-model-page.html#dalec-1">DALEC</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><a href="template-model-page.html#ed">ED</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td>FATES</td>
-<td>No</td>
-<td>Yes</td>
+<td>air_pressure</td>
+<td>554</td>
+<td>PA</td>
+<td>kPa</td>
 <td></td>
-<td>No</td>
+<td>19</td>
+<td>Pa</td>
+<td>Psurf</td>
+<td>Pa</td>
+<td>Psurf</td>
+<td>Pa</td>
 </tr>
 <tr class="even">
-<td><a href="template-model-page.html#gday-1">GDAY</a></td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
+<td>airT</td>
+<td>86</td>
+<td>TA</td>
+<td>celsius</td>
+<td></td>
+<td>4</td>
+<td>degrees C</td>
+<td>Tair</td>
+<td>K</td>
+<td>Tair</td>
+<td>K</td>
 </tr>
 <tr class="odd">
-<td><a href="template-model-page.html#linkages-1">LINKAGES</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
+<td>co2atm</td>
+<td>135</td>
+<td>CO2_1</td>
+<td>umol mol-1</td>
+<td></td>
+<td>20</td>
+<td>umol mol-1</td>
+<td>CO2air</td>
+<td>micromol mol-1</td>
+<td>CO2air</td>
+<td>micromol mol-1</td>
 </tr>
 <tr class="even">
-<td><a href="template-model-page.html#lpj-guess-1">LPJ-GUESS</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><a href="template-model-page.html#maespa-1">MAESPA</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><a href="pecan-models.html#preles">PRELES</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Partially</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><a href="pecan-models.html#sipnet-1">Sipnet</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
+<td>datetime</td>
+<td>5000000001</td>
+<td>TIMESTAMP_START</td>
+<td>ymd_hms</td>
+<td>%Y%m%d%H%M</td>
+<td>1</td>
+<td>ymd_hms</td>
+<td>NA</td>
+<td>NA</td>
+<td>datetime</td>
+<td>ymd_hms</td>
 </tr>
 </tbody>
-</table>
-<p><strong>Output Variables</strong></p>
-<p>PEcAn converts all model outputs to a single <a href="Model%20Output%20Variables">standard</a>. This standard evolved out of MsTMIP project, which is itself based on NACP, LBA, and other model-intercomparison projects. This standard was expanded for the PalEON MIP and the needs of the PEcAn modeling community to support variables not in these standards.</p>
-<p><em>Model developers</em>: do not add variables to your PEcAn output without first adding them to the PEcAn standard table! Also, do not create new variables equivalent to existing variables but just with different names or units.</p>
-
-<div id="preles" class="section level2">
-<h2><span class="header-section-number">32.1</span> PRELES</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
-</div>
-<div id="sipnet-configuration" class="section level2">
-<h2><span class="header-section-number">32.2</span> SIPNET configuration</h2>
-<p>SIPNET is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>sipnet.in</strong> : template for this file is located at models/sipnet/inst/sipnet.in and is not modified.<br />
-</li>
-<li><strong>sipnet.param-spatial</strong> : template for this file is located at models/sipnet/inst/template.param-spatial and is not modified.<br />
-</li>
-<li><strong>sipnet.param</strong> : template for this file is in models/sipnet/inst/template.param or it is specified in the &lt;model&gt; section as &lt;default.param&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-
-</div>
-<div id="sipnet-1" class="section level2">
-<h2><span class="header-section-number">32.3</span> Sipnet</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td>Michael Dietze, Rob Kooper</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>SIPNET is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>sipnet.in</strong> : template for this file is located at models/sipnet/inst/sipnet.in and is not modified.<br />
-</li>
-<li><strong>sipnet.param-spatial</strong> : template for this file is located at models/sipnet/inst/template.param-spatial and is not modified.<br />
-</li>
-<li><strong>sipnet.param</strong> : template for this file is in models/sipnet/inst/template.param or it is specified in the &lt;model&gt; section as &lt;default.param&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p>SIPNET version unk:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_unk ]; then
-  cd
-  curl -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/PEcAn/models/sipnet_unk.tar.gz
-  tar zxf sipnet_unk.tar.gz
-  rm sipnet_unk.tar.gz
-fi
-cd ${HOME}/sipnet_unk/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.runk
-make clean</code></pre>
-<p>SIPNET version 136:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_r136 ]; then
-  cd
-  curl -o sipnet_r136.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_r136.tar.gz
-  tar zxf sipnet_r136.tar.gz
-  rm sipnet_r136.tar.gz
-  sed -i &#39;s#$(LD) $(LIBLINKS) \(.*\)#$(LD) \1 $(LIBLINKS)#&#39; ${HOME}/sipnet_r136/Makefile
-fi
-cd ${HOME}/sipnet_r136/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.r136
-make clean</code></pre>
-<p><strong>VM</strong></p>
-
-<div id="download-gfdl" class="section level3">
-<h3><span class="header-section-number">32.3.1</span> Download GFDL</h3>
-<p>The Downlad.GFDL function assimilates 3 hour frequency CMIP5 outputs generated by multiple GFDL models. GFDL developed several distinct modeling streams on the timescale of CMIP5 and AR5. These models include CM3, ESM2M and ESM2G with a spatial resolution of 2 degrees latitude by 2.5 degrees longitude. Each model has future outputs for the AR5 Representative Concentration Pathways ranging from 2006-2100.</p>
-</div>
-<div id="cm3" class="section level3">
-<h3><span class="header-section-number">32.3.2</span> CM3</h3>
-<p>GFDL’s CMIP5 experiments with CM3 included many of the integrations found in the long-term CMIP5 experimental design. The focus of this physical climate model is on the role of aerosols, aerosol-cloud interactions, and atmospheric chemistry in climate variability and climate change.</p>
-</div>
-<div id="esm2m-esm2g" class="section level3">
-<h3><span class="header-section-number">32.3.3</span> ESM2M &amp; ESM2G</h3>
-<p>Two new models representing ocean physics with alternative numerical frameworks to explore the implications of some of the fundamental assumptions embedded in these models. Both ESM2M and ESM2G utilize a more advanced land model, LM3, than was available in ESM2.1 including a variety of enhancements (Milly et al., in prep). GFDL’s CMIP5 experiments with Earth System Models included many of the integrations found in the long-term CMIP5 experimental design. The ESMs, by design, close the carbon cycle and are used to study the impact of climate change on ecosystems, ecosystem changes on climate and human activities on ecosystems.</p>
-<p>For more information please navigate <a href="https://gfdl.noaa.gov/cmip">here</a></p>
-<table width=100%>
-<th>
-</th>
-<th>
-CM#
-</th>
-<th>
-ESM2M
-</th>
-<th>
-ESM2G
-</th>
-<tr>
-<td>
-rcp26
-</td>
-<td>
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
-<tr>
-<td>
-rcp45
-</td>
-<td>
-r1i1p1, r3i1p1,r5i1p1
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
-<tr>
-<td>
-rcp60
-</td>
-<td>
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
-<tr>
-<td>
-rcp85
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-<td>
-r1i1p1
-</td>
-</tr>
+</table></li>
+<li><p>Get the path to the data</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">data.path =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.file.path</span>(</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">  <span class="dt">input.id =</span> input.id, </a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">  <span class="dt">host_name =</span> PEcAn.remote<span class="op">::</span><span class="kw">fqdn</span>(), </a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">  <span class="dt">con =</span> bety<span class="op">$</span>con)</a></code></pre></div></li>
+<li><p>Load the data</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">data =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> data.path, <span class="dt">format =</span> format)</a></code></pre></div></li>
+</ol>
 
 </div>
 </div>
@@ -951,8 +914,8 @@ r1i1p1
           </div>
         </div>
       </div>
-<a href="template-model-page.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="available-meteorological-drivers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pecan-data-ingest-via-web-interface.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-the-vm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
