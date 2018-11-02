@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-11-01">
+<meta name="date" content="2018-11-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -728,7 +728,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Selecting a model will cause PEcAn to filter the available sites based on whether they possess the required Inputs for a given model (e.g. meteorology). To check what Inputs are missing for a site point your browser to the pecan/checksite.php webpage (e.g. localhost:6480/pecan/checksite.php). This page looks virtually identical to the site selection page, except that it has a <em>Check</em> button instead of <em>Prev</em> and <em>Next</em>. If you select a Machine, Model, and Site and then click <em>Check</em> the page should return a list of what Inputs are missing (listing both the name and the Format ID number). Don’t forget that its possible for PEcAn to have required Inputs in its database, but just not have them for the Machine where you want to run.</p>
 <p>To see more about what Inputs a given model can accept, and which of those are required, take a look at the MODEL_TYPE table entry in the database (e.g. go to <code>localhost:6480/bety</code>; Select <code>Runs &gt; Model Type</code>; and then click on the model you want to run).</p>
 <p>For information about loading missing Inputs into the database visit <a href="creating-a-new-format-record-in-bety.html#NewInput">Input records in BETY</a>, and also read the rest of the pages under this section, which will provide important information about the specific classes of Inputs (e.g. meteorology, vegetation, etc).</p>
-<p>Finally, we are continually developing and refining workflows and standards for processing Input data in a model-agnostic way. The details about what Inputs can be processed automatically are discussed input-by-input in the sections below. For those looking to dive into the code or troubleshoot further, these conversions are ultimately handled under the <code>PEcAn.utils::do_conversions</code> workflow module.</p>
+<p>Finally, we are continually developing and refining workflows and standards for processing Input data in a model-agnostic way. The details about what Inputs can be processed automatically are discussed input-by-input in the sections below. For those looking to dive into the code or troubleshoot further, these conversions are ultimately handled under the <code>PEcAn.workflow::do_conversions</code> workflow module.</p>
 
 </div>
 </div>

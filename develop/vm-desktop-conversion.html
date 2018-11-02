@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-11-01">
+<meta name="date" content="2018-11-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -658,24 +658,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="vm-desktop-conversion" class="section level1">
 <h1><span class="header-section-number">22</span> VM Desktop Conversion</h1>
-<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="fu">sudo</span> apt-get install xfce4 xorg</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="fu">sudo</span> apt-get install xfce4 xorg</a></code></pre></div>
 <p>For a more refined desktop environment, try</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="fu">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="fu">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </a></code></pre></div>
 <ul>
 <li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
 <li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
 </ul>
 <p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
-<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
-<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a></code></pre></div>
 <div id="install-rstudio-desktop" class="section level3">
 <h3><span class="header-section-number">22.0.1</span> Install RStudio Desktop</h3>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="fu">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb</a>
-<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="ex">apt-get</span> install libjpeg621</a>
-<a class="sourceLine" id="cb88-3" data-line-number="3"><span class="ex">dpkg</span> -i rstudio-*</a>
-<a class="sourceLine" id="cb88-4" data-line-number="4"><span class="fu">rm</span> rstudio-*</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="fu">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="ex">apt-get</span> install libjpeg621</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3"><span class="ex">dpkg</span> -i rstudio-*</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4"><span class="fu">rm</span> rstudio-*</a></code></pre></div>
 
 </div>
 </div>

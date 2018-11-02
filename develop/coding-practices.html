@@ -24,7 +24,7 @@
 
 
 
-<meta name="date" content="2018-11-01">
+<meta name="date" content="2018-11-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -797,31 +797,31 @@ install.packages("logging", repos="http://R-Forge.R-project.org")
 <div id="example-usage" class="section level3">
 <h3><span class="header-section-number">27.2.3</span> Example Usage</h3>
 <p>To be able to use the loggers there needs to be some initialization done. Neither package allows to read it from a configuration file, so we might want to use the pecan.xml file to set it up. The setup will always be somewhat the same:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="co"># load library</span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="kw">library</span>(logging)</a>
-<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="kw">logReset</span>()</a>
-<a class="sourceLine" id="cb202-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb202-5" data-line-number="5"><span class="co"># add handlers, responsible for actually printing/saving the messages</span></a>
-<a class="sourceLine" id="cb202-6" data-line-number="6"><span class="kw">addHandler</span>(writeToConsole)</a>
-<a class="sourceLine" id="cb202-7" data-line-number="7"><span class="kw">addHandler</span>(writeToFile, <span class="dt">file=</span><span class="st">&quot;file.log&quot;</span>)</a>
-<a class="sourceLine" id="cb202-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb202-9" data-line-number="9"><span class="co"># setup root logger with INFO</span></a>
-<a class="sourceLine" id="cb202-10" data-line-number="10"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>)</a>
-<a class="sourceLine" id="cb202-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb202-12" data-line-number="12"><span class="co"># make all of PEcAn print debug messages</span></a>
-<a class="sourceLine" id="cb202-13" data-line-number="13"><span class="kw">setLevel</span>(<span class="st">&#39;DEBUG&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn&#39;</span>))</a>
-<a class="sourceLine" id="cb202-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb202-15" data-line-number="15"><span class="co"># only print info and above for the SQL part of PEcAn</span></a>
-<a class="sourceLine" id="cb202-16" data-line-number="16"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.SQL&#39;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co"># load library</span></a>
+<a class="sourceLine" id="cb205-2" data-line-number="2"><span class="kw">library</span>(logging)</a>
+<a class="sourceLine" id="cb205-3" data-line-number="3"><span class="kw">logReset</span>()</a>
+<a class="sourceLine" id="cb205-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb205-5" data-line-number="5"><span class="co"># add handlers, responsible for actually printing/saving the messages</span></a>
+<a class="sourceLine" id="cb205-6" data-line-number="6"><span class="kw">addHandler</span>(writeToConsole)</a>
+<a class="sourceLine" id="cb205-7" data-line-number="7"><span class="kw">addHandler</span>(writeToFile, <span class="dt">file=</span><span class="st">&quot;file.log&quot;</span>)</a>
+<a class="sourceLine" id="cb205-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb205-9" data-line-number="9"><span class="co"># setup root logger with INFO</span></a>
+<a class="sourceLine" id="cb205-10" data-line-number="10"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>)</a>
+<a class="sourceLine" id="cb205-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb205-12" data-line-number="12"><span class="co"># make all of PEcAn print debug messages</span></a>
+<a class="sourceLine" id="cb205-13" data-line-number="13"><span class="kw">setLevel</span>(<span class="st">&#39;DEBUG&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn&#39;</span>))</a>
+<a class="sourceLine" id="cb205-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb205-15" data-line-number="15"><span class="co"># only print info and above for the SQL part of PEcAn</span></a>
+<a class="sourceLine" id="cb205-16" data-line-number="16"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.SQL&#39;</span>))</a></code></pre></div>
 <p>To now use logging in the code you can use the following code:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">pl &lt;-<span class="st"> </span><span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.MetaAnalysis.function1&#39;</span>)</a>
-<a class="sourceLine" id="cb203-2" data-line-number="2">pl<span class="op">$</span><span class="kw">info</span>(<span class="st">&quot;This is an INFO message.&quot;</span>)</a>
-<a class="sourceLine" id="cb203-3" data-line-number="3">pl<span class="op">$</span><span class="kw">debug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x)</a>
-<a class="sourceLine" id="cb203-4" data-line-number="4">pl<span class="op">$</span><span class="kw">error</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">pl &lt;-<span class="st"> </span><span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.MetaAnalysis.function1&#39;</span>)</a>
+<a class="sourceLine" id="cb206-2" data-line-number="2">pl<span class="op">$</span><span class="kw">info</span>(<span class="st">&quot;This is an INFO message.&quot;</span>)</a>
+<a class="sourceLine" id="cb206-3" data-line-number="3">pl<span class="op">$</span><span class="kw">debug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x)</a>
+<a class="sourceLine" id="cb206-4" data-line-number="4">pl<span class="op">$</span><span class="kw">error</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>)</a></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="kw">loginfo</span>(<span class="st">&quot;This is an INFO message.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
-<a class="sourceLine" id="cb204-2" data-line-number="2"><span class="kw">logdebug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
-<a class="sourceLine" id="cb204-3" data-line-number="3"><span class="kw">logerror</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">loginfo</span>(<span class="st">&quot;This is an INFO message.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
+<a class="sourceLine" id="cb207-2" data-line-number="2"><span class="kw">logdebug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
+<a class="sourceLine" id="cb207-3" data-line-number="3"><span class="kw">logerror</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -850,12 +850,12 @@ Extensions</a>.</p>
 <li>efficient way: (especially for large data sets) using the <code>data</code>
 function:</li>
 </ul>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">data</span>(foo) <span class="co"># accesses data with, e.g. load(foo.RData), read(foo.csv), or source(foo.R) </span></a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">data</span>(foo) <span class="co"># accesses data with, e.g. load(foo.RData), read(foo.csv), or source(foo.R) </span></a></code></pre></div>
 <ul>
 <li>easy way: by adding the following line to the package DESCRIPTION:
 <em>note:</em> this should be used with caution or it can cause difficulty as discussed in redmine issue #1118</li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">LazyData<span class="op">:</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1">LazyData<span class="op">:</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
 <p>From the R help page:</p>
 <p>Currently, a limited number of data formats can be accessed using the <code>data</code> function by placing one of the following filetypes in a packages’ <code>data</code> directory:
 * files ending <code>.R</code> or <code>.r</code> are <code>source()</code>d in, with the R working
@@ -867,8 +867,8 @@ had been run <em>via</em> <code>utils::data</code>.)
 * files ending <code>.csv</code> or <code>.CSV</code> are read using <code>read.table(..., header = TRUE, sep = ';')</code>, and also result in a data frame.</p>
 <p>If your data does not fall in those 4 categories, or you can use the
 <code>system.file</code> function to get access to the data:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ed.trait.dictionary.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;PEcAn.utils&quot;</span>)</a>
-<a class="sourceLine" id="cb207-2" data-line-number="2">[<span class="dv">1</span>] <span class="st">&quot;/home/kooper/R/x86_64-pc-linux-gnu-library/2.15/PEcAn.utils/data/ed.trait.dictionary.csv&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="kw">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ed.trait.dictionary.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;PEcAn.utils&quot;</span>)</a>
+<a class="sourceLine" id="cb210-2" data-line-number="2">[<span class="dv">1</span>] <span class="st">&quot;/home/kooper/R/x86_64-pc-linux-gnu-library/2.15/PEcAn.utils/data/ed.trait.dictionary.csv&quot;</span></a></code></pre></div>
 <p>The arguments are folder, filename(s) and then package. It will return
 the fully qualified path name to a file in a package, in this case it
 points to the trait data. This is almost the same as the data function,
@@ -898,37 +898,37 @@ Style]]</p>
 <p>Provides functions to simplify development</p>
 <p>Documentation:
 <a href="https://github.com/hadley/devtools">The R devtools packate</a></p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb208-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb208-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb208-4" data-line-number="4"><span class="kw">install</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb208-5" data-line-number="5"><span class="kw">build</span>(<span class="st">&quot;pkg&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb211-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb211-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb211-4" data-line-number="4"><span class="kw">install</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb211-5" data-line-number="5"><span class="kw">build</span>(<span class="st">&quot;pkg&quot;</span>)</a></code></pre></div>
 <p>other tips for devtools (from the documentation):</p>
 <ul>
 <li>Adding the following to your <code>~/.Rprofile</code> will load devtools when
 running R in interactive mode:</li>
 </ul>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="co"># load devtools by default</span></a>
-<a class="sourceLine" id="cb209-2" data-line-number="2"><span class="cf">if</span> (<span class="kw">interactive</span>()) {</a>
-<a class="sourceLine" id="cb209-3" data-line-number="3">  <span class="kw">suppressMessages</span>(<span class="kw">require</span>(devtools))</a>
-<a class="sourceLine" id="cb209-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="co"># load devtools by default</span></a>
+<a class="sourceLine" id="cb212-2" data-line-number="2"><span class="cf">if</span> (<span class="kw">interactive</span>()) {</a>
+<a class="sourceLine" id="cb212-3" data-line-number="3">  <span class="kw">suppressMessages</span>(<span class="kw">require</span>(devtools))</a>
+<a class="sourceLine" id="cb212-4" data-line-number="4">}</a></code></pre></div>
 <ul>
 <li>Adding the following to your .Rpackages will allow devtools to recognize package by folder name, rather than directory path</li>
 </ul>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="co"># in this example, devhome is the pecan trunk directory </span></a>
-<a class="sourceLine" id="cb210-2" data-line-number="2">devhome &lt;-<span class="st"> &quot;/home/dlebauer/R-dev/pecandev/&quot;</span></a>
-<a class="sourceLine" id="cb210-3" data-line-number="3"><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb210-4" data-line-number="4">    <span class="dt">default =</span> <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb210-5" data-line-number="5">      <span class="kw">file.path</span>(devhome, x, x)</a>
-<a class="sourceLine" id="cb210-6" data-line-number="6">    }, </a>
-<a class="sourceLine" id="cb210-7" data-line-number="7">  <span class="st">&quot;utils&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb210-8" data-line-number="8">  <span class="st">&quot;common&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb210-9" data-line-number="9">  <span class="st">&quot;all&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb210-10" data-line-number="10">  <span class="st">&quot;ed&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb210-11" data-line-number="11">  <span class="st">&quot;uncertainty&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb210-12" data-line-number="12">  <span class="st">&quot;meta.analysis&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb210-13" data-line-number="13">  <span class="st">&quot;db&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb210-14" data-line-number="14">)</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="co"># in this example, devhome is the pecan trunk directory </span></a>
+<a class="sourceLine" id="cb213-2" data-line-number="2">devhome &lt;-<span class="st"> &quot;/home/dlebauer/R-dev/pecandev/&quot;</span></a>
+<a class="sourceLine" id="cb213-3" data-line-number="3"><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb213-4" data-line-number="4">    <span class="dt">default =</span> <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb213-5" data-line-number="5">      <span class="kw">file.path</span>(devhome, x, x)</a>
+<a class="sourceLine" id="cb213-6" data-line-number="6">    }, </a>
+<a class="sourceLine" id="cb213-7" data-line-number="7">  <span class="st">&quot;utils&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb213-8" data-line-number="8">  <span class="st">&quot;common&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb213-9" data-line-number="9">  <span class="st">&quot;all&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb213-10" data-line-number="10">  <span class="st">&quot;ed&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb213-11" data-line-number="11">  <span class="st">&quot;uncertainty&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb213-12" data-line-number="12">  <span class="st">&quot;meta.analysis&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb213-13" data-line-number="13">  <span class="st">&quot;db&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb213-14" data-line-number="14">)</a></code></pre></div>
 <p>Now, devtools can take <code>pkg</code> as an argument instead of <code>/path/to/pkg/</code>,
 e.g. so you can use <code>build(&quot;pkg&quot;)</code> instead of <code>build(&quot;/path/to/pkg/&quot;)</code></p>
 
@@ -1045,8 +1045,8 @@ myfun &lt;- function(a, b, c){
 <li>After adding documentation run the following command (replacing common with the name of the folder you want to update):
 ** In R using devtools to call roxygenize:</li>
 </ul>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">require</span>(devtools)</a>
-<a class="sourceLine" id="cb214-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;common&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">require</span>(devtools)</a>
+<a class="sourceLine" id="cb217-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;common&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -1096,7 +1096,7 @@ git checkout goat-cheddar</code></pre></li>
 <li>open existing (or create new) file in <code>inst/tests/</code>. If working on code in “myfunction” or a set of functions in “R/myfile.R”, the file should be named accordingly, e.g. “inst/tests/test.myfile.R”</li>
 <li>if you are lucky, the function has already been tested and has some examples.</li>
 <li><p>if not, you may need to create a minimal example, often requiring a settings file. The default settings file can be obtained in this way:</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata/test.settings.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.utils&quot;</span>))</a></code></pre></div></li>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata/test.settings.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.utils&quot;</span>))</a></code></pre></div></li>
 <li><p>write what you want to do</p>
 <pre><code>test_that(&quot;make.cheas can make cheese&quot;,{
   goat.cheddar &lt;- make.cheas(source = &#39;goat&#39;, style = &#39;cheddar&#39;)
@@ -1107,15 +1107,15 @@ git checkout goat-cheddar</code></pre></li>
 <li>now edit the goat.cheddar function until it makes savory, creamy, orange cheese.</li>
 <li>commit often</li>
 <li><p>update documentation and test</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb218-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;mypkg&quot;</span>)</a>
-<a class="sourceLine" id="cb218-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;mypkg&quot;</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;mypkg&quot;</span>)</a>
+<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;mypkg&quot;</span>)</a></code></pre></div></li>
 <li>commit again</li>
 <li><p>when complete, merge, and push</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="fu">git</span> commit -m <span class="st">&quot;make.cheas makes goat.cheddar now&quot;</span></a>
-<a class="sourceLine" id="cb219-2" data-line-number="2"><span class="fu">git</span> checkout master</a>
-<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="fu">git</span> merge goat-cheddar</a>
-<a class="sourceLine" id="cb219-4" data-line-number="4"><span class="fu">git</span> push</a></code></pre></div></li>
+<div class="sourceCode" id="cb222"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="fu">git</span> commit -m <span class="st">&quot;make.cheas makes goat.cheddar now&quot;</span></a>
+<a class="sourceLine" id="cb222-2" data-line-number="2"><span class="fu">git</span> checkout master</a>
+<a class="sourceLine" id="cb222-3" data-line-number="3"><span class="fu">git</span> merge goat-cheddar</a>
+<a class="sourceLine" id="cb222-4" data-line-number="4"><span class="fu">git</span> push</a></code></pre></div></li>
 </ul>
 </div>
 <div id="test-files" class="section level3">
@@ -1130,20 +1130,20 @@ PEcAn.utils files.</p>
 <ul>
 <li>A generic settings can be found in the PEcAn.all package</li>
 </ul>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
-<a class="sourceLine" id="cb220-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb223-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
 <ul>
 <li>database settings can be specified, and tests run only if a connection is available</li>
 </ul>
 <p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </a>
-<a class="sourceLine" id="cb221-2" data-line-number="2">                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </a>
-<a class="sourceLine" id="cb221-3" data-line-number="3">                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></a>
-<a class="sourceLine" id="cb221-4" data-line-number="4">                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></a>
-<a class="sourceLine" id="cb221-5" data-line-number="5"><span class="kw">test_that</span>(..., {</a>
-<a class="sourceLine" id="cb221-6" data-line-number="6">  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</a>
-<a class="sourceLine" id="cb221-7" data-line-number="7">  ## write tests here</a>
-<a class="sourceLine" id="cb221-8" data-line-number="8">})</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1">settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb224-2" data-line-number="2">                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb224-3" data-line-number="3">                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></a>
+<a class="sourceLine" id="cb224-4" data-line-number="4">                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></a>
+<a class="sourceLine" id="cb224-5" data-line-number="5"><span class="kw">test_that</span>(..., {</a>
+<a class="sourceLine" id="cb224-6" data-line-number="6">  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</a>
+<a class="sourceLine" id="cb224-7" data-line-number="7">  ## write tests here</a>
+<a class="sourceLine" id="cb224-8" data-line-number="8">})</a></code></pre></div>
 <ul>
 <li>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
 wiki</a></li>
@@ -1151,8 +1151,8 @@ wiki</a></li>
 <li><p>Model specific settings can go in the model-specific module, for
 example:</p></li>
 </ul>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
-<a class="sourceLine" id="cb222-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb225-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
 <ul>
 <li>test-specific settings:
 <ul>
@@ -1176,8 +1176,8 @@ example:</p></li>
   &lt;/pecan&gt;&quot;
 settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</a>
-<a class="sourceLine" id="cb224-2" data-line-number="2">settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</a></code></pre></div></li>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</a>
+<a class="sourceLine" id="cb227-2" data-line-number="2">settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</a></code></pre></div></li>
 </ul></li>
 </ul>
 </div>
@@ -1305,59 +1305,59 @@ for details on how to use the testthat package.</p>
 <div id="how-to-run-tests" class="section level5">
 <h5><span class="header-section-number">27.6.4.7.2</span> How to run tests</h5>
 <p>add the following to “pecan/tests/testthat.R”</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
-<a class="sourceLine" id="cb225-2" data-line-number="2"><span class="kw">library</span>(mypackage)</a>
-<a class="sourceLine" id="cb225-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb225-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
+<a class="sourceLine" id="cb228-2" data-line-number="2"><span class="kw">library</span>(mypackage)</a>
+<a class="sourceLine" id="cb228-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb228-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="basic-use-of-the-testthat-package" class="section level4">
 <h4><span class="header-section-number">27.6.4.8</span> basic use of the testthat package</h4>
 <p>Here is an example of tests (these should be placed in
 <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
-<a class="sourceLine" id="cb226-2" data-line-number="2">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb226-3" data-line-number="3">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</a>
-<a class="sourceLine" id="cb226-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb226-5" data-line-number="5">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
-<a class="sourceLine" id="cb226-6" data-line-number="6">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb226-7" data-line-number="7">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
-<a class="sourceLine" id="cb226-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb226-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb226-10" data-line-number="10"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
-<a class="sourceLine" id="cb226-11" data-line-number="11">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb226-12" data-line-number="12">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb226-13" data-line-number="13">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb226-14" data-line-number="14">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
-<a class="sourceLine" id="cb226-15" data-line-number="15">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
-<a class="sourceLine" id="cb226-16" data-line-number="16">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
-<a class="sourceLine" id="cb226-17" data-line-number="17">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
-<a class="sourceLine" id="cb226-18" data-line-number="18">})</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
+<a class="sourceLine" id="cb229-2" data-line-number="2">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb229-3" data-line-number="3">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb229-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb229-5" data-line-number="5">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
+<a class="sourceLine" id="cb229-6" data-line-number="6">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb229-7" data-line-number="7">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
+<a class="sourceLine" id="cb229-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb229-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb229-10" data-line-number="10"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
+<a class="sourceLine" id="cb229-11" data-line-number="11">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb229-12" data-line-number="12">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb229-13" data-line-number="13">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb229-14" data-line-number="14">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
+<a class="sourceLine" id="cb229-15" data-line-number="15">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
+<a class="sourceLine" id="cb229-16" data-line-number="16">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
+<a class="sourceLine" id="cb229-17" data-line-number="17">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb229-18" data-line-number="18">})</a></code></pre></div>
 <div id="script-testing" class="section level5">
 <h5><span class="header-section-number">27.6.4.8.1</span> Script testing</h5>
 <p>It is useful to add tests to a script during development. This allows
 you to test that the code is doing what you expect it to do.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1"><span class="op">*</span><span class="st"> </span>here is a fake script using the iris data set</a>
-<a class="sourceLine" id="cb227-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb227-3" data-line-number="3"><span class="kw">test_that</span>(<span class="st">&quot;the iris data set has the same basic features as before&quot;</span>,{</a>
-<a class="sourceLine" id="cb227-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">dim</span>(iris), <span class="kw">c</span>(<span class="dv">150</span>,<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb227-5" data-line-number="5">  <span class="kw">expect_that</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">is_a</span>(<span class="st">&quot;numeric&quot;</span>))</a>
-<a class="sourceLine" id="cb227-6" data-line-number="6">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Sepal.Length, <span class="st">&quot;numeric&quot;</span>)<span class="co">#equivalent to prev. line</span></a>
-<a class="sourceLine" id="cb227-7" data-line-number="7">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Species, <span class="st">&quot;factor&quot;</span>)</a>
-<a class="sourceLine" id="cb227-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb227-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb227-10" data-line-number="10">iris.color &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Species =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>),</a>
-<a class="sourceLine" id="cb227-11" data-line-number="11">                         <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>))</a>
-<a class="sourceLine" id="cb227-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb227-13" data-line-number="13">newiris &lt;-<span class="st"> </span><span class="kw">merge</span>(iris, iris.color)</a>
-<a class="sourceLine" id="cb227-14" data-line-number="14">iris.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>color, <span class="dt">data =</span> newiris)</a>
-<a class="sourceLine" id="cb227-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb227-16" data-line-number="16"><span class="kw">test_that</span>(<span class="st">&quot;changes to Iris code occurred as expected&quot;</span>,{</a>
-<a class="sourceLine" id="cb227-17" data-line-number="17">  <span class="kw">expect_that</span>(<span class="kw">dim</span>(newiris), <span class="kw">equals</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">6</span>)))</a>
-<a class="sourceLine" id="cb227-18" data-line-number="18">  <span class="kw">expect_that</span>(<span class="kw">unique</span>(newiris<span class="op">$</span>color),</a>
-<a class="sourceLine" id="cb227-19" data-line-number="19">              <span class="kw">is_identical_to</span>(<span class="kw">unique</span>(iris.color<span class="op">$</span>color)))</a>
-<a class="sourceLine" id="cb227-20" data-line-number="20">  <span class="kw">expect_equivalent</span>(iris.model<span class="op">$</span>coefficients[<span class="st">&quot;(Intercept)&quot;</span>], <span class="fl">4.26</span>)</a>
-<a class="sourceLine" id="cb227-21" data-line-number="21">})</a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="op">*</span><span class="st"> </span>here is a fake script using the iris data set</a>
+<a class="sourceLine" id="cb230-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb230-3" data-line-number="3"><span class="kw">test_that</span>(<span class="st">&quot;the iris data set has the same basic features as before&quot;</span>,{</a>
+<a class="sourceLine" id="cb230-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">dim</span>(iris), <span class="kw">c</span>(<span class="dv">150</span>,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb230-5" data-line-number="5">  <span class="kw">expect_that</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">is_a</span>(<span class="st">&quot;numeric&quot;</span>))</a>
+<a class="sourceLine" id="cb230-6" data-line-number="6">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Sepal.Length, <span class="st">&quot;numeric&quot;</span>)<span class="co">#equivalent to prev. line</span></a>
+<a class="sourceLine" id="cb230-7" data-line-number="7">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Species, <span class="st">&quot;factor&quot;</span>)</a>
+<a class="sourceLine" id="cb230-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb230-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb230-10" data-line-number="10">iris.color &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Species =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>),</a>
+<a class="sourceLine" id="cb230-11" data-line-number="11">                         <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>))</a>
+<a class="sourceLine" id="cb230-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb230-13" data-line-number="13">newiris &lt;-<span class="st"> </span><span class="kw">merge</span>(iris, iris.color)</a>
+<a class="sourceLine" id="cb230-14" data-line-number="14">iris.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>color, <span class="dt">data =</span> newiris)</a>
+<a class="sourceLine" id="cb230-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb230-16" data-line-number="16"><span class="kw">test_that</span>(<span class="st">&quot;changes to Iris code occurred as expected&quot;</span>,{</a>
+<a class="sourceLine" id="cb230-17" data-line-number="17">  <span class="kw">expect_that</span>(<span class="kw">dim</span>(newiris), <span class="kw">equals</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">6</span>)))</a>
+<a class="sourceLine" id="cb230-18" data-line-number="18">  <span class="kw">expect_that</span>(<span class="kw">unique</span>(newiris<span class="op">$</span>color),</a>
+<a class="sourceLine" id="cb230-19" data-line-number="19">              <span class="kw">is_identical_to</span>(<span class="kw">unique</span>(iris.color<span class="op">$</span>color)))</a>
+<a class="sourceLine" id="cb230-20" data-line-number="20">  <span class="kw">expect_equivalent</span>(iris.model<span class="op">$</span>coefficients[<span class="st">&quot;(Intercept)&quot;</span>], <span class="fl">4.26</span>)</a>
+<a class="sourceLine" id="cb230-21" data-line-number="21">})</a></code></pre></div>
 </div>
 <div id="function-testing" class="section level5">
 <h5><span class="header-section-number">27.6.4.8.2</span> Function testing</h5>
@@ -1365,28 +1365,28 @@ you to test that the code is doing what you expect it to do.</p>
 are in source:R/utils.R and the tests are in source:tests/test.utils.R.</p>
 <p>Recently, I made the function <code>as.sequence</code> to turn any vector into a
 sequence, with custom handling of NA’s:</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="cf">function</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>){</a>
-<a class="sourceLine" id="cb228-2" data-line-number="2">  x2 &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">factor</span>(x, <span class="kw">unique</span>(x)))</a>
-<a class="sourceLine" id="cb228-3" data-line-number="3">  <span class="cf">if</span>(<span class="kw">all</span>(<span class="kw">is.na</span>(x2))){</a>
-<a class="sourceLine" id="cb228-4" data-line-number="4">    x2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">length</span>(x2))</a>
-<a class="sourceLine" id="cb228-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb228-6" data-line-number="6">  <span class="cf">if</span>(na.rm <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>){</a>
-<a class="sourceLine" id="cb228-7" data-line-number="7">    x2[<span class="kw">is.na</span>(x2)] &lt;-<span class="st"> </span><span class="kw">max</span>(x2, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb228-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb228-9" data-line-number="9">  <span class="kw">return</span>(x2)</a>
-<a class="sourceLine" id="cb228-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="cf">function</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>){</a>
+<a class="sourceLine" id="cb231-2" data-line-number="2">  x2 &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">factor</span>(x, <span class="kw">unique</span>(x)))</a>
+<a class="sourceLine" id="cb231-3" data-line-number="3">  <span class="cf">if</span>(<span class="kw">all</span>(<span class="kw">is.na</span>(x2))){</a>
+<a class="sourceLine" id="cb231-4" data-line-number="4">    x2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">length</span>(x2))</a>
+<a class="sourceLine" id="cb231-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb231-6" data-line-number="6">  <span class="cf">if</span>(na.rm <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>){</a>
+<a class="sourceLine" id="cb231-7" data-line-number="7">    x2[<span class="kw">is.na</span>(x2)] &lt;-<span class="st"> </span><span class="kw">max</span>(x2, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb231-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb231-9" data-line-number="9">  <span class="kw">return</span>(x2)</a>
+<a class="sourceLine" id="cb231-10" data-line-number="10">}</a></code></pre></div>
 <p>The next step was to add documentation and test. Many people find it
 more efficient to write tests before writing the function. This is true,
 but it also requires more discipline. I wrote these tests to handle the
 variety of cases that I had observed.</p>
 <p>As currently used, the function is exposed to a fairly restricted set of
 options - results of downloads from the database and transformations.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">test_that</span>(“as.sequence works”;{</a>
-<a class="sourceLine" id="cb229-2" data-line-number="2"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, “b”)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb229-3" data-line-number="3"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb229-4" data-line-number="4"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>), <span class="dt">na.rm =</span> <span class="ot">FALSE</span>), <span class="kw">c</span>(<span class="dv">1</span>,<span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb229-5" data-line-number="5"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(<span class="ot">NA</span>,<span class="ot">NA</span>)), <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb229-6" data-line-number="6">})</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1"><span class="kw">test_that</span>(“as.sequence works”;{</a>
+<a class="sourceLine" id="cb232-2" data-line-number="2"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, “b”)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb232-3" data-line-number="3"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb232-4" data-line-number="4"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>), <span class="dt">na.rm =</span> <span class="ot">FALSE</span>), <span class="kw">c</span>(<span class="dv">1</span>,<span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb232-5" data-line-number="5"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(<span class="ot">NA</span>,<span class="ot">NA</span>)), <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb232-6" data-line-number="6">})</a></code></pre></div>
 </div>
 </div>
 </div>
