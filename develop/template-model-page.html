@@ -966,7 +966,12 @@ List of inputs required by model, such as met, etc.</p>
 <li><code>jobtemplate</code></li>
 <li><code>prerun</code></li>
 <li><code>postrun</code></li>
-<li><code>binary</code></li>
+<li><code>binary</code> – The full path to the ED2 binary on the target machine.</li>
+<li><code>binary_args</code> – Additional arguments to be passed to the ED2 binary. Some common arguments are:
+<ul>
+<li><code>-s</code> – Delay OpenMPI initialization until the last possible moment. This is needed when running ED2 in a Docker container. It is included by default when the host is <code>rabbitmq</code>.</li>
+<li><code>-f /path/to/ED2IN</code> – Full path to a specific ED2IN namelist file. Typically, this is not needed because, by default, ED searches for the ED2IN in the current directory and the PEcAn workflow places the ED2IN file and a symbolic link to the ED executable in the same (run) directory for you.</li>
+</ul></li>
 </ul></li>
 <li><code>run/site</code>
 <ul>
