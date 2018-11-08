@@ -519,7 +519,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="32.5" data-path="docker-index.html"><a href="docker-index.html#docker-build-images"><i class="fa fa-check"></i><b>32.5</b> Building and modifying images</a><ul>
 <li class="chapter" data-level="32.5.1" data-path="docker-index.html"><a href="docker-index.html#docker-local-devel"><i class="fa fa-check"></i><b>32.5.1</b> Local development and testing with Docker</a></li>
 <li class="chapter" data-level="32.5.2" data-path="docker-index.html"><a href="docker-index.html#docker-troubleshooting"><i class="fa fa-check"></i><b>32.5.2</b> Troubleshooting Docker</a></li>
-<li class="chapter" data-level="32.5.3" data-path="docker-index.html"><a href="docker-index.html#using-the-pecan-download.file-function"><i class="fa fa-check"></i><b>32.5.3</b> Using the PEcAn download.file() function</a></li>
+</ul></li>
+<li class="chapter" data-level="32.6" data-path="docker-index.html"><a href="docker-index.html#docker-migrate"><i class="fa fa-check"></i><b>32.6</b> Migrating PEcAn from VM to Docker</a><ul>
+<li class="chapter" data-level="32.6.1" data-path="docker-index.html"><a href="docker-index.html#running-bety-as-a-docker-container"><i class="fa fa-check"></i><b>32.6.1</b> Running BETY as a docker container</a></li>
+<li class="chapter" data-level="32.6.2" data-path="docker-index.html"><a href="docker-index.html#using-the-pecan-download.file-function"><i class="fa fa-check"></i><b>32.6.2</b> Using the PEcAn download.file() function</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="33" data-path="shiny.html"><a href="shiny.html"><i class="fa fa-check"></i><b>33</b> SHINY</a><ul>
@@ -663,6 +666,7 @@ It contains the following sections:</p>
 <li><a href="docker-index.html#docker-quickstart">Docker quickstart</a> – Brief tutorial for setting up a Docker-based PEcAn instance</li>
 <li><a href="docker-index.html#pecan-docker">PEcAn Docker infrastructure</a> – Detailed description of the containers comprising the PEcAn Docker-based infrastructure</li>
 <li><a href="docker-index.html#model-docker">Dockerfiles for models</a> – General guide for writing Dockerfiles for new models</li>
+<li><a href="docker-index.html#docker-migrate">Migrating from VM to Docker</a> – Steps to migrate from running PEcAn on a VM to a docker.</li>
 </ul>
 
 <div id="docker-intro" class="section level2">
@@ -1778,8 +1782,42 @@ Then, build the image as usual.</p>
 
 </div>
 </div>
+</div>
+<div id="docker-migrate" class="section level2">
+<h2><span class="header-section-number">32.6</span> Migrating PEcAn from VM to Docker</h2>
+<p>This document assumes you have read through the <a href="docker-index.html#docker-intro">Introduction to Docker</a> as well as <a href="docker-index.html#docker-quickstart">Docker quickstart</a> and have docker running on the VM.</p>
+<p>This document will slowly replace each of the components with the appropriate docker images. At then end of this document you should be able to use the docker-compose command to bring up the full docker stack as if you had started with this origianally.</p>
+<div id="running-bety-as-a-docker-container" class="section level3">
+<h3><span class="header-section-number">32.6.1</span> Running BETY as a docker container</h3>
+<p>This will replace the BETY application running on the machine with a docker image. This will assume you still have the database running on the local machine and the only thing we replace is the BETY application.</p>
+<p>If you are running systemd (Ubuntu 16.04 or Centos 7) you can copy the following file to /etc/systemd/system/bety.service (replace LOCAL_SERVER=99 with your actual server). If you have postgres running on another server replace 127.0.0.1 with the actual ip address of the postgres server.</p>
+<pre><code>[Unit]
+Description=BETY container
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run -t --rm --name bety --add-host=postgres:127.0.0.1 --network=host --env RAILS_RELATIVE_URL_ROOT=/bety --env LOCAL_SERVER=99 pecan/bety
+ExecStop=/usr/bin/docker stop -t 2 bety
+
+[Install]
+WantedBy=local.target</code></pre>
+<p>At this point we can enable the bety service (this only needs to be done once). First we need to tell systemd a new service is available using <code>systemctl daemon-reload</code>. Next we enable the BETY service so it will restart automatically when the machine reboots, using <code>systemctl enable bety</code>. Finally we can start the BETY service using <code>systemctl start bety</code>. At this point BETY is running as a docker container on port 8000. You can see the log messages using <code>journalctl -u bety</code>.</p>
+<p>Next we need to modify apache configuration files. The file /etc/apache2/conf-enabled/bety.conf will be replaced with the following content:</p>
+<pre><code>ProxyPass                /bety/ http://localhost:8000/bety/
+ProxyPassReverse         /bety/ http://localhost:8000/bety/
+RedirectMatch permanent ^/bety$ /bety/</code></pre>
+<p>Once this modified we can restart apache using <code>systemctl restart apache2</code>. At this point BETY is running in a container and is accessable trough the webserver at <a href="http://server/bety/" class="uri">http://server/bety/</a>.</p>
+<p>To upgrade to a new version of BETY you can now use the docker commands. You can use the following commands to stop BETY, pull the latest image down, migrate the database (you made a backup correct?) and start BETY again.</p>
+<pre><code>systemctl stop bety
+docker pull pecan/bety:latest
+docker run -ti --rm --add-host=postgres:127.0.0.1 --network=host --env LOCAL_SERVER=99 pecan/bety migrate
+systemctl start bety</code></pre>
+<p>Once you are satisfied with the migration of BETY you can remove the bety folder as well as any ruby binaries you have installed.</p>
+
+</div>
 <div id="using-the-pecan-download.file-function" class="section level3">
-<h3><span class="header-section-number">32.5.3</span> Using the PEcAn download.file() function</h3>
+<h3><span class="header-section-number">32.6.2</span> Using the PEcAn download.file() function</h3>
 <p>download.file(url, destination_file, method) <br>
 <br></p>
 <p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
