@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Shiklomanov">
 
 
-<meta name="date" content="2018-11-16">
+<meta name="date" content="2018-11-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -682,7 +682,7 @@ Both are located in the <code>docker</code> directory in the PEcAn source code r
 In the RabbitMQ documentation, it is known as a “producer”.
 It runs once for every message posted to RabbitMQ, and then immediately exits (unlike the <code>receiver.py</code>, which runs continuously – see <a href="rabbitmq.html#rabbitmq-basics-receiver">below</a>).</p>
 <p>Its usage is as follows:</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb319-1" data-line-number="1"><span class="ex">python3</span> sender.py <span class="op">&lt;</span>URI<span class="op">&gt;</span> <span class="op">&lt;</span>queue<span class="op">&gt;</span> <span class="op">&lt;</span>message<span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb322-1" data-line-number="1"><span class="ex">python3</span> sender.py <span class="op">&lt;</span>URI<span class="op">&gt;</span> <span class="op">&lt;</span>queue<span class="op">&gt;</span> <span class="op">&lt;</span>message<span class="op">&gt;</span></a></code></pre></div>
 <p>The arguments are:</p>
 <ul>
 <li><p><code>&lt;URI&gt;</code> – The unique identifier of the RabbitMQ instance, similar to a URL.
@@ -691,7 +691,7 @@ By default, this is <code>amqp://guest:guest@rabbitmq/%2F</code> (the <code>%2F<
 <li><p><code>&lt;queue&gt;</code> – The name of the queue on which to post the message.</p></li>
 <li><p><code>&lt;message&gt;</code> – The contents of the message to post, in JSON format.
 A typical message posted by PEcAn looks like the following:</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb320-1" data-line-number="1"><span class="fu">{</span> <span class="dt">&quot;folder&quot;</span> <span class="fu">:</span> <span class="st">&quot;/path/to/PEcAn_WORKFLOWID&quot;</span><span class="fu">,</span> <span class="dt">&quot;workflow&quot;</span> <span class="fu">:</span> <span class="st">&quot;WORKFLOWID&quot;</span> <span class="fu">}</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb323"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb323-1" data-line-number="1"><span class="fu">{</span> <span class="dt">&quot;folder&quot;</span> <span class="fu">:</span> <span class="st">&quot;/path/to/PEcAn_WORKFLOWID&quot;</span><span class="fu">,</span> <span class="dt">&quot;workflow&quot;</span> <span class="fu">:</span> <span class="st">&quot;WORKFLOWID&quot;</span> <span class="fu">}</span></a></code></pre></div></li>
 </ul>
 <p>The <code>PEcAn.remote::start_rabbitmq</code> function is a wrapper for this script that provides an easy way to post a <code>folder</code> message to RabbitMQ from R.</p>
 </div>
@@ -713,7 +713,7 @@ For the PEcAn workflow itself, this is set to <code>R CMD BATCH workflow.R</code
 This default executable is <em>overridden</em> if the message contains a <code>custom_application</code> key.
 If included, the string specified by the <code>custom_application</code> key will be run as a command exactly as is on the container, from the directory specified by <code>folder</code>.
 For instance, in the example below, the container will print “Hello there!” instead of running its default application.</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb322-1" data-line-number="1"><span class="fu">{</span><span class="dt">&quot;custom_application&quot;</span><span class="fu">:</span> <span class="st">&quot;echo &#39;Hello there!&#39;&quot;</span><span class="fu">,</span> <span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;/path/to/my/dir&quot;</span><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb325-1" data-line-number="1"><span class="fu">{</span><span class="dt">&quot;custom_application&quot;</span><span class="fu">:</span> <span class="st">&quot;echo &#39;Hello there!&#39;&quot;</span><span class="fu">,</span> <span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;/path/to/my/dir&quot;</span><span class="fu">}</span></a></code></pre></div>
 <p>NOTE that in RabbitMQ messages, the <code>folder</code> key is always required.</p></li>
 </ul>
 </div>
@@ -729,7 +729,7 @@ For instance, in the example below, the container will print “Hello there!” 
 <li><code>$rabbitmq_password</code> – The RabbitMQ password (default: <code>guest</code>)</li>
 </ul>
 <p>In addition, for running models via RabbitMQ, you will also need to add an entry like the following to the <code>config.php</code> <code>$hostlist</code>:</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode php"><code class="sourceCode php"><a class="sourceLine" id="cb323-1" data-line-number="1"><span class="kw">$hostlist</span>=<span class="kw">array</span><span class="ot">(</span><span class="kw">$fqdn</span> =&gt; <span class="kw">array</span><span class="ot">(</span><span class="st">&quot;rabbitmq&quot;</span> =&gt; <span class="st">&quot;amqp://guest:guest@rabbitmq/%2F&quot;</span><span class="ot">),</span> <span class="st">...</span><span class="ot">)</span></a></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode php"><code class="sourceCode php"><a class="sourceLine" id="cb326-1" data-line-number="1"><span class="kw">$hostlist</span>=<span class="kw">array</span><span class="ot">(</span><span class="kw">$fqdn</span> =&gt; <span class="kw">array</span><span class="ot">(</span><span class="st">&quot;rabbitmq&quot;</span> =&gt; <span class="st">&quot;amqp://guest:guest@rabbitmq/%2F&quot;</span><span class="ot">),</span> <span class="st">...</span><span class="ot">)</span></a></code></pre></div>
 <p>This will set the hostname to the name of the current machine (defined by the <code>$fqdn</code> variable earlier in the <code>config.php</code> file) to an array with one entry, whose key is <code>rabbitmq</code> and whose value is the RabbitMQ URI (<code>amqp://...</code>).</p>
 <p>These values are converted into the appropriate entries in the <code>pecan.xml</code> in <code>web/04-runpecan.php</code>.</p>
 </div>
@@ -737,12 +737,12 @@ For instance, in the example below, the container will print “Hello there!” 
 <h2><span class="header-section-number">36.4</span> RabbitMQ in the PEcAn XML</h2>
 <p>RabbitMQ is a special case of remote execution, so it is configured by the <code>host</code> node.
 An example RabbitMQ configuration is as follows:</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb324-1" data-line-number="1"><span class="kw">&lt;host&gt;</span></a>
-<a class="sourceLine" id="cb324-2" data-line-number="2">  <span class="kw">&lt;rabbitmq&gt;</span></a>
-<a class="sourceLine" id="cb324-3" data-line-number="3">    <span class="kw">&lt;uri&gt;</span>amqp://guest:guest@rabbitmq/%2F<span class="kw">&lt;/uri&gt;</span></a>
-<a class="sourceLine" id="cb324-4" data-line-number="4">    <span class="kw">&lt;queue&gt;</span>sipnet_136<span class="kw">&lt;/queue&gt;</span></a>
-<a class="sourceLine" id="cb324-5" data-line-number="5">  <span class="kw">&lt;/rabbitmq&gt;</span></a>
-<a class="sourceLine" id="cb324-6" data-line-number="6"><span class="kw">&lt;/host&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb327-1" data-line-number="1"><span class="kw">&lt;host&gt;</span></a>
+<a class="sourceLine" id="cb327-2" data-line-number="2">  <span class="kw">&lt;rabbitmq&gt;</span></a>
+<a class="sourceLine" id="cb327-3" data-line-number="3">    <span class="kw">&lt;uri&gt;</span>amqp://guest:guest@rabbitmq/%2F<span class="kw">&lt;/uri&gt;</span></a>
+<a class="sourceLine" id="cb327-4" data-line-number="4">    <span class="kw">&lt;queue&gt;</span>sipnet_136<span class="kw">&lt;/queue&gt;</span></a>
+<a class="sourceLine" id="cb327-5" data-line-number="5">  <span class="kw">&lt;/rabbitmq&gt;</span></a>
+<a class="sourceLine" id="cb327-6" data-line-number="6"><span class="kw">&lt;/host&gt;</span></a></code></pre></div>
 <p>Here, <code>uri</code> and <code>queue</code> have the same general meanings as described in <a href="rabbitmq.html#rabbitmq-basics-sender">“producer”</a>.
 Note that <code>queue</code> here refers to the target model.
 In PEcAn, RabbitMQ model queues are named as <code>MODELTYPE_REVISION</code>,
@@ -754,24 +754,24 @@ Another example is <code>ED2_git</code>, referring to the latest <code>git</code
 <p>As described in the <a href="rabbitmq.html#rabbitmq-basics-receiver">“consumer”</a> section, our standard RabbitMQ receiver script is configured using three environment variables: <code>RABBITMQ_URI</code>, <code>RABBITMQ_QUEUE</code>, and <code>APPLICATION</code>.
 Therefore, configuring a container to work with PEcAn’s RabbitMQ instance requires setting these three variables in the Dockerfile using an <a href="https://docs.docker.com/engine/reference/builder/#env"><code>ENV</code></a> statement.</p>
 <p>For example, this excerpt from <code>docker/base/Dockerfile.executor</code> (for the <code>pecan/executor</code> image responsible for the PEcAn workflow) sets these variables as follows:</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb325-1" data-line-number="1"><span class="kw">ENV</span> RABBITMQ_URI=<span class="st">&quot;amqp://guest:guest@rabbitmq/%2F&quot;</span> \</a>
-<a class="sourceLine" id="cb325-2" data-line-number="2">    RABBITMQ_QUEUE=<span class="st">&quot;pecan&quot;</span> \</a>
-<a class="sourceLine" id="cb325-3" data-line-number="3">    APPLICATION=<span class="st">&quot;R CMD BATCH workflow.R&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb328-1" data-line-number="1"><span class="kw">ENV</span> RABBITMQ_URI=<span class="st">&quot;amqp://guest:guest@rabbitmq/%2F&quot;</span> \</a>
+<a class="sourceLine" id="cb328-2" data-line-number="2">    RABBITMQ_QUEUE=<span class="st">&quot;pecan&quot;</span> \</a>
+<a class="sourceLine" id="cb328-3" data-line-number="3">    APPLICATION=<span class="st">&quot;R CMD BATCH workflow.R&quot;</span></a></code></pre></div>
 <p>Similarly, this excerpt from <code>docker/models/Dockerfile.sipnet</code> (which builds the SIPNET model image) is a typical example for a model image.
 Note the use of <a href="https://docs.docker.com/engine/reference/builder/#arg"><code>ARG</code></a> here to specify a default version model version of 136 while allowing this to be configurable (via <code>--build-arg MODEL_VERSION=X</code>) at build time:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb326-1" data-line-number="1"><span class="kw">ARG</span> MODEL_VERSION=136</a>
-<a class="sourceLine" id="cb326-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb326-3" data-line-number="3"><span class="kw">ENV</span> APPLICATION=<span class="st">&quot;./job.sh&quot;</span> \</a>
-<a class="sourceLine" id="cb326-4" data-line-number="4">    MODEL_TYPE=<span class="st">&quot;SIPNET&quot;</span> \</a>
-<a class="sourceLine" id="cb326-5" data-line-number="5">    MODEL_VERSION=<span class="st">&quot;${MODEL_VERSION}&quot;</span></a>
-<a class="sourceLine" id="cb326-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb326-7" data-line-number="7"><span class="kw">ENV</span> RABBITMQ_QUEUE=<span class="st">&quot;${MODEL_TYPE}_${MODEL_VERSION}&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb329-1" data-line-number="1"><span class="kw">ARG</span> MODEL_VERSION=136</a>
+<a class="sourceLine" id="cb329-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb329-3" data-line-number="3"><span class="kw">ENV</span> APPLICATION=<span class="st">&quot;./job.sh&quot;</span> \</a>
+<a class="sourceLine" id="cb329-4" data-line-number="4">    MODEL_TYPE=<span class="st">&quot;SIPNET&quot;</span> \</a>
+<a class="sourceLine" id="cb329-5" data-line-number="5">    MODEL_VERSION=<span class="st">&quot;${MODEL_VERSION}&quot;</span></a>
+<a class="sourceLine" id="cb329-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb329-7" data-line-number="7"><span class="kw">ENV</span> RABBITMQ_QUEUE=<span class="st">&quot;${MODEL_TYPE}_${MODEL_VERSION}&quot;</span></a></code></pre></div>
 <p><strong>WARNING</strong>: Dockerfile environment variables set via <code>ENV</code> are assigned <em>all at once</em>; <em>they do not evaluate successively, left to right</em>.
 Consider the following block:</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb327-1" data-line-number="1"><span class="co"># Don&#39;t do this!</span></a>
-<a class="sourceLine" id="cb327-2" data-line-number="2"><span class="kw">ENV</span> MODEL_TYPE=<span class="st">&quot;SIPNET&quot;</span> \</a>
-<a class="sourceLine" id="cb327-3" data-line-number="3">    MODEL_VERSION=136 \</a>
-<a class="sourceLine" id="cb327-4" data-line-number="4">    RABBITMQ_QUEUE=${MODEL_TYPE}_${MODEL_VERSION}   <span class="co"># &lt;- Doesn&#39;t know about MODEL_TYPE or MODEL_VERSION!</span></a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb330-1" data-line-number="1"><span class="co"># Don&#39;t do this!</span></a>
+<a class="sourceLine" id="cb330-2" data-line-number="2"><span class="kw">ENV</span> MODEL_TYPE=<span class="st">&quot;SIPNET&quot;</span> \</a>
+<a class="sourceLine" id="cb330-3" data-line-number="3">    MODEL_VERSION=136 \</a>
+<a class="sourceLine" id="cb330-4" data-line-number="4">    RABBITMQ_QUEUE=${MODEL_TYPE}_${MODEL_VERSION}   <span class="co"># &lt;- Doesn&#39;t know about MODEL_TYPE or MODEL_VERSION!</span></a></code></pre></div>
 <p>In this block, the expansion for setting <code>RABBITMQ_QUEUE</code> <em>is not aware</em> of the current values of <code>MODEL_TYPE</code> or <code>MODEL_VERSION</code>, and will therefore be set incorrectly to just <code>_</code> (unless they have been set previously, in which case it will be aware only of their earlier values).
 As such, <strong>variables depending on other variables must be set in a separate, subsequent <code>ENV</code> statement than the variables they depend on</strong>.</p>
 </div>
@@ -785,13 +785,13 @@ All the services that interact with RabbitMQ (<code>executor</code> and all mode
 All the pages up to the <code>04-runpecan.php</code> run on the <code>web</code> container, and are primarily for setting up the <code>pecan.xml</code> file.</p></li>
 <li><p>Once the user starts the PEcAn workflow at <code>04-runpecan.php</code>, the underlying PHP code connects to RabbitMQ (based on the URI provided in <code>config.php</code>) and posts the following message to the <code>pecan</code> queue:</p></li>
 </ol>
-<div class="sourceCode" id="cb328"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb328-1" data-line-number="1">  <span class="fu">{</span><span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;/workflows/PEcAn_WORKFLOWID&quot;</span><span class="fu">,</span> <span class="dt">&quot;workflowid&quot;</span><span class="fu">:</span> <span class="st">&quot;WORKFLOWID&quot;</span><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb331-1" data-line-number="1">  <span class="fu">{</span><span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;/workflows/PEcAn_WORKFLOWID&quot;</span><span class="fu">,</span> <span class="dt">&quot;workflowid&quot;</span><span class="fu">:</span> <span class="st">&quot;WORKFLOWID&quot;</span><span class="fu">}</span></a></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>The <code>executor</code> service, which is listening on the <code>pecan</code> queue, hears this message and executes its <code>APPLICATION</code> (<code>R CMD BATCH workflow.R</code>) in the working directory specified in the message’s <code>folder</code>.
 The <code>executor</code> service then performs the pre-execution steps (e.g. trait meta-analysis, conversions) itself.
 Then, to actually execute the model, <code>executor</code> posts the following message to the target model’s queue:</li>
 </ol>
-<div class="sourceCode" id="cb329"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb329-1" data-line-number="1">  <span class="fu">{</span><span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;/workflows/PEcAn_WORKFLOWID/run/RUNID&quot;</span><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb332-1" data-line-number="1">  <span class="fu">{</span><span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;/workflows/PEcAn_WORKFLOWID/run/RUNID&quot;</span><span class="fu">}</span></a></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li><p>The target model service, which is listening on its dedicated queue, hears this message and runs its <code>APPLICATION</code>, which is <code>job.sh</code>, in the directory indicated by the message.
 Upon exiting (normally), the model service writes its status into a file called <code>rabbitmq.out</code> in the same directory.</p></li>

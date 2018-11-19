@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Shiklomanov">
 
 
-<meta name="date" content="2018-11-16">
+<meta name="date" content="2018-11-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -970,18 +970,37 @@ List of inputs required by model, such as met, etc.</p>
 <li><code>model</code>
 <ul>
 <li><code>id</code> – BETY model ID. Each ID corresponds to a different revision of ED (see below)</li>
-<li><code>revision</code> – The revision (a.k.a. release) number of ED (e.g. “r82”). “rgit” indicates the latest code on the ED repository</li>
-<li><code>ed2in</code> – Path and filename of the ED2IN configuration file</li>
-<li><code>start.date</code> – Run start date</li>
-<li><code>end.date</code> – Run end date</li>
+<li><code>revision</code> – The revision (a.k.a. release) number of ED (e.g. “r82”). “rgit” indicates the latest code on the ED repository.</li>
+<li><code>edin</code> – Name of the template ED2IN configuration file. If this is a functional path that points to a specific file, that file is used. If no file is found following the path literally, the workflow will try the path relative to the <code>PEcAn.ED2</code> package using <code>system.file</code> (recall that files in <code>inst</code> are moved in the package root, but all other directory structure is preserved). If this is omitted, <code>PEcAn.ED2::write.configs.ED2</code> will look for a file called <code>ED2IN.&lt;revision&gt;</code> (e.g. <code>ED2IN.rgit</code>, <code>ED2IN.r86</code>) in the <code>PEcAn.ED2</code> package.
+<ul>
+<li><strong>Example</strong>: <code>&lt;edin&gt;ED2IN.rgit&lt;/edin&gt;</code> will use the <code>ED2IN.rgit</code> file shipped with <code>PEcAn.ED2</code> <em>regardless of the revision of ED used</em>. (Note however that if a file called <code>ED2IN.rgit</code> exists in the workflow runtime directory, that file will be used instead).</li>
+</ul></li>
+<li><code>start.date</code>, <code>end.date</code> – Run start and end date, respectively</li>
+<li><code>met.start</code>, <code>met.end</code> – Start and end year of meteorology inputs. By default (if omitted), these are set to the years of <code>start.date</code> and <code>end.date</code>, respectively. Setting these values to a shorter interval than <code>start.date</code> and <code>end.date</code> will cause ED to loop the meteorology input over the specified years. This may be useful for, for example, spinning up ED under a set of constant climate conditions.</li>
 <li><code>phenol.scheme</code></li>
 <li><code>phenol</code></li>
 <li><code>phenol.start</code></li>
 <li><code>phenol.end</code></li>
-<li><code>ed2in_tags</code> – Named list of additional tags in the ED2IN to be modified. These modifications override any of those set by the standard PEcAn workflow.</li>
+<li><p><code>ed2in_tags</code> – Named list of additional tags in the ED2IN to be modified. These modifications override any of those set by other parts of the PEcAn workflow. These tags must be in all caps. Any tags that are not already in the ED2IN file will be added; this makes this an effective way to run newer versions of ED2 that have new ED2IN parameters without having to provide an entire new ED2IN. For example:</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">&lt;model&gt;</span></a>
+<a class="sourceLine" id="cb251-2" data-line-number="2">  <span class="kw">&lt;ed2in_tags&gt;</span></a>
+<a class="sourceLine" id="cb251-3" data-line-number="3">    <span class="kw">&lt;IOOUTPUT&gt;</span>0<span class="kw">&lt;/IOOUTPUT&gt;</span></a>
+<a class="sourceLine" id="cb251-4" data-line-number="4">    <span class="kw">&lt;PLANT_HYDRO_SCHEME&gt;</span>0<span class="kw">&lt;/PLANT_HYDRO_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb251-5" data-line-number="5">    <span class="kw">&lt;ISTOMATA_SCHEME&gt;</span>0<span class="kw">&lt;/ISTOMATA_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb251-6" data-line-number="6">    <span class="kw">&lt;ISTRUCT_GROWTH_SCHEME&gt;</span>0<span class="kw">&lt;/ISTRUCT_GROWTH_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb251-7" data-line-number="7">    <span class="kw">&lt;TRAIT_PLASTICITY_SCHEME&gt;</span>0<span class="kw">&lt;/TRAIT_PLASTICITY_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb251-8" data-line-number="8">  <span class="kw">&lt;/ed2in_tags&gt;</span></a>
+<a class="sourceLine" id="cb251-9" data-line-number="9"><span class="kw">&lt;/model&gt;</span></a></code></pre></div></li>
+<li><code>barebones_ed2in</code> – Whether or not to try to annotate the ED2IN file with comments. If “true”, skip all comments and only write the tags themselves. If “false” (default), try to transfer comments from the template file into the target file.</li>
 <li><code>jobtemplate</code></li>
-<li><code>prerun</code></li>
-<li><code>postrun</code></li>
+<li><code>prerun</code> – String of commands to be added to the <code>job.sh</code> model execution script before the model is run. Multiple commands should be separated by proper <code>bash</code> syntax – i.e. either with <code>&amp;&amp;</code> or <code>;</code>.
+<ul>
+<li><p>One common use of this argument is to load modules on some HPC systems – for instance:</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="kw">&lt;prerun&gt;</span>module load git hdf5<span class="kw">&lt;/prerun&gt;</span></a></code></pre></div></li>
+<li><p>If your particular version of ED is failing early during execution with a mysterious “Segmentation fault”, that may indicate that its process is exceeding its stack limit. In this case, you may need to remove the stack limit restriction with a <code>prerun</code> command like the following:</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">&lt;prerun&gt;</span>ulimit -s unlimited<span class="kw">&lt;/prerun&gt;</span></a></code></pre></div></li>
+</ul></li>
+<li><code>postrun</code> – Same as <code>&lt;prerun&gt;</code>, but for commands to be run <em>after</em> model execution.</li>
 <li><code>binary</code> – The full path to the ED2 binary on the target machine.</li>
 <li><code>binary_args</code> – Additional arguments to be passed to the ED2 binary. Some common arguments are:
 <ul>
@@ -996,7 +1015,7 @@ List of inputs required by model, such as met, etc.</p>
 </ul></li>
 <li><code>inputs</code>
 <ul>
-<li><code>met/path</code> – Path to ED_MET_DRIVER_HEADER file</li>
+<li><code>met/path</code> – Path to <code>ED_MET_DRIVER_HEADER</code> file</li>
 <li><code>pss</code>: [required] location of patch file</li>
 <li><code>css</code>: [required] location of cohort file</li>
 <li><code>site</code>: [optional] location of site file</li>
@@ -1074,23 +1093,23 @@ List of inputs required by model, such as met, etc.</p>
 </div>
 <div id="tacc-lonestar" class="section level4">
 <h4><span class="header-section-number">31.6.5.3</span> TACC lonestar</h4>
-<div class="sourceCode" id="cb251"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
-<a class="sourceLine" id="cb251-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
-<a class="sourceLine" id="cb251-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
-<a class="sourceLine" id="cb251-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
-<a class="sourceLine" id="cb251-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
-<a class="sourceLine" id="cb251-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</a>
-<a class="sourceLine" id="cb251-7" data-line-number="7"><span class="fu">make</span> OPT=lonestar</a></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb254-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb254-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb254-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb254-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb254-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb254-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</a>
+<a class="sourceLine" id="cb254-7" data-line-number="7"><span class="fu">make</span> OPT=lonestar</a></code></pre></div>
 </div>
 <div id="tacc-stampede" class="section level4">
 <h4><span class="header-section-number">31.6.5.4</span> TACC stampede</h4>
-<div class="sourceCode" id="cb252"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
-<a class="sourceLine" id="cb252-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
-<a class="sourceLine" id="cb252-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
-<a class="sourceLine" id="cb252-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
-<a class="sourceLine" id="cb252-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
-<a class="sourceLine" id="cb252-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</a>
-<a class="sourceLine" id="cb252-7" data-line-number="7"><span class="fu">make</span> OPT=stampede</a></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb255-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb255-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb255-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb255-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb255-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</a>
+<a class="sourceLine" id="cb255-7" data-line-number="7"><span class="fu">make</span> OPT=stampede</a></code></pre></div>
 
 </div>
 </div>

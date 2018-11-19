@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Shiklomanov">
 
 
-<meta name="date" content="2018-11-16">
+<meta name="date" content="2018-11-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -679,8 +679,8 @@ The basic idea is that users build the PEcAn settings object via an R script (ma
 <p><code>pecanapi</code> is specifically designed to only depend on CRAN packages, and not on any PEcAn internal packages.
 This makes it easy to install, and allows it to be used without needing to download and install PEcAn itself (which is large and has many complex R package and system dependencies).
 It can be installed directly from GitHub as follows:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" data-line-number="1">## devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &quot;api&quot;)</a>
-<a class="sourceLine" id="cb335-2" data-line-number="2"><span class="kw">library</span>(pecanapi)</a></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" data-line-number="1">## devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &quot;api&quot;)</a>
+<a class="sourceLine" id="cb338-2" data-line-number="2"><span class="kw">library</span>(pecanapi)</a></code></pre></div>
 <pre><code>## Error in library(pecanapi): there is no package called &#39;pecanapi&#39;</code></pre>
 <p>This vignette covers the following major sections:</p>
 <ul>
@@ -698,28 +698,28 @@ If you are trying to access a remote instance of PEcAn, you will need to substit
 <p>To perform database operations, you will also need to have read access to the PEcAn database.
 Note that the PEcAn database Docker container (<code>postgres</code>) does not provide this by default, so you will need to open port 5432 (the PostgreSQL default) to that container.
 You can do this by creating a <code>docker-compose.override.yml</code> file with the following contents in the root directory of the PEcAn source code:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb337-1" data-line-number="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
-<a class="sourceLine" id="cb337-2" data-line-number="2"><span class="fu">services:</span></a>
-<a class="sourceLine" id="cb337-3" data-line-number="3">  <span class="fu">postgres:</span></a>
-<a class="sourceLine" id="cb337-4" data-line-number="4">    <span class="fu">ports:</span></a>
-<a class="sourceLine" id="cb337-5" data-line-number="5">      <span class="kw">-</span> <span class="fu">5432:</span><span class="at">5432</span></a></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb340-1" data-line-number="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb340-2" data-line-number="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb340-3" data-line-number="3">  <span class="fu">postgres:</span></a>
+<a class="sourceLine" id="cb340-4" data-line-number="4">    <span class="fu">ports:</span></a>
+<a class="sourceLine" id="cb340-5" data-line-number="5">      <span class="kw">-</span> <span class="fu">5432:</span><span class="at">5432</span></a></code></pre></div>
 <p>Here, the first port is the one used to access the database (can be any open port; most PostgreSQL applications assume 5432 by default), and the second is the port the database is actually running on (which will always be 5432).
 After making this change, reload the <code>postgres</code> container by running <code>docker-compose up -d</code>.
 To check that this works, open an R session and try to create a database connection object to the PEcAn database.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" data-line-number="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
-<a class="sourceLine" id="cb338-2" data-line-number="2">  RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
-<a class="sourceLine" id="cb338-3" data-line-number="3">  <span class="dt">user =</span> <span class="st">&quot;bety&quot;</span>,</a>
-<a class="sourceLine" id="cb338-4" data-line-number="4">  <span class="dt">password =</span> <span class="st">&quot;bety&quot;</span>,</a>
-<a class="sourceLine" id="cb338-5" data-line-number="5">  <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,</a>
-<a class="sourceLine" id="cb338-6" data-line-number="6">  <span class="dt">port =</span> <span class="dv">5432</span></a>
-<a class="sourceLine" id="cb338-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb338-8" data-line-number="8">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" data-line-number="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
+<a class="sourceLine" id="cb341-2" data-line-number="2">  RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
+<a class="sourceLine" id="cb341-3" data-line-number="3">  <span class="dt">user =</span> <span class="st">&quot;bety&quot;</span>,</a>
+<a class="sourceLine" id="cb341-4" data-line-number="4">  <span class="dt">password =</span> <span class="st">&quot;bety&quot;</span>,</a>
+<a class="sourceLine" id="cb341-5" data-line-number="5">  <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,</a>
+<a class="sourceLine" id="cb341-6" data-line-number="6">  <span class="dt">port =</span> <span class="dv">5432</span></a>
+<a class="sourceLine" id="cb341-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb341-8" data-line-number="8">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
 <p>This code should print out five table names from the PEcAn database.
 If it throws an error, you have a problem with your database connection.</p>
 <p>The rest of this tutorial assumes that you are using this same database connection object (<code>con</code>).</p>
 <p>In addition, any API operations that modify the database will not work unless a user ID is set.
 To avoid having to manually specify the ID each time, we can set it via <code>options</code>:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">pecanapi.user_id =</span> <span class="dv">99000000002</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">pecanapi.user_id =</span> <span class="dv">99000000002</span>)</a></code></pre></div>
 <p>The <code>pecanapi</code> package has many other options that it uses for its default configuration, including the Docker server and RabbitMQ hostname and credentials.
 To learn more about them, see <code>?pecanapi_options</code>.</p>
 </div>
@@ -733,27 +733,27 @@ However, chances are you may have to look them up in the database first.
 <code>pecanapi</code> provides several <code>search_*</code> utilities to make this easier.</p>
 <p>First, let’s pick a model.
 To list all models, we can run <code>search_models</code> with no arguments (other than the database connection object, <code>con</code>).</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" data-line-number="1">models &lt;-<span class="st"> </span><span class="kw">search_models</span>(con)</a></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" data-line-number="1">models &lt;-<span class="st"> </span><span class="kw">search_models</span>(con)</a></code></pre></div>
 <p>We can narrow down our search by model name, revision, or “type”.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" data-line-number="1"><span class="kw">search_models</span>(con, <span class="st">&quot;ED&quot;</span>)</a>
-<a class="sourceLine" id="cb341-2" data-line-number="2"><span class="kw">search_models</span>(con, <span class="st">&quot;sipnet&quot;</span>)</a>
-<a class="sourceLine" id="cb341-3" data-line-number="3"><span class="kw">search_models</span>(con, <span class="st">&quot;ED&quot;</span>, <span class="dt">revision =</span> <span class="st">&quot;git&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" data-line-number="1"><span class="kw">search_models</span>(con, <span class="st">&quot;ED&quot;</span>)</a>
+<a class="sourceLine" id="cb344-2" data-line-number="2"><span class="kw">search_models</span>(con, <span class="st">&quot;sipnet&quot;</span>)</a>
+<a class="sourceLine" id="cb344-3" data-line-number="3"><span class="kw">search_models</span>(con, <span class="st">&quot;ED&quot;</span>, <span class="dt">revision =</span> <span class="st">&quot;git&quot;</span>)</a></code></pre></div>
 <p>Note that the search is case-insensitive by default, and searches before and after the input string.
 See <code>?search_models</code> to learn how to toggle this behavior.
 For the purposes of this tutorial, let’s use the SIPNET model because it has low input requirements and runs very quickly.
 Specifically, let’s use the <code>136</code> version.
 We could grab the model ID from the search results, but <code>pecanapi</code> also provides an additional helper function for retrieving model IDs if you know the exact name and revision.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" data-line-number="1">model_id &lt;-<span class="st"> </span><span class="kw">get_model_id</span>(con, <span class="st">&quot;SIPNET&quot;</span>, <span class="st">&quot;136&quot;</span>)</a>
-<a class="sourceLine" id="cb342-2" data-line-number="2">model_id</a></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" data-line-number="1">model_id &lt;-<span class="st"> </span><span class="kw">get_model_id</span>(con, <span class="st">&quot;SIPNET&quot;</span>, <span class="st">&quot;136&quot;</span>)</a>
+<a class="sourceLine" id="cb345-2" data-line-number="2">model_id</a></code></pre></div>
 <p>We can repeat this process for sites with the <code>search_sites</code> function (though there is currently no <code>get_site_id</code> function).
 Note the use of <code>%</code> as a wildcard (matches zero or more of any character, equivalent to the regular expression <code>.*</code>).
 The two sites in the search below are largely identical, so we’ll use the one with more site information (i.e. where <code>mat</code> is not <code>NA</code>).</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" data-line-number="1">all_umbs &lt;-<span class="st"> </span><span class="kw">search_sites</span>(con, <span class="st">&quot;umbs%disturbance&quot;</span>)</a>
-<a class="sourceLine" id="cb343-2" data-line-number="2">all_umbs</a>
-<a class="sourceLine" id="cb343-3" data-line-number="3">site_id &lt;-<span class="st"> </span><span class="kw">subset</span>(all_umbs, <span class="op">!</span><span class="kw">is.na</span>(mat))[[<span class="st">&quot;id&quot;</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" data-line-number="1">all_umbs &lt;-<span class="st"> </span><span class="kw">search_sites</span>(con, <span class="st">&quot;umbs%disturbance&quot;</span>)</a>
+<a class="sourceLine" id="cb346-2" data-line-number="2">all_umbs</a>
+<a class="sourceLine" id="cb346-3" data-line-number="3">site_id &lt;-<span class="st"> </span><span class="kw">subset</span>(all_umbs, <span class="op">!</span><span class="kw">is.na</span>(mat))[[<span class="st">&quot;id&quot;</span>]]</a></code></pre></div>
 <p>With site and model IDs in hand, we are ready to create a workflow.</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" data-line-number="1">workflow &lt;-<span class="st"> </span><span class="kw">insert_new_workflow</span>(con, site_id, model_id, <span class="dt">start_date =</span> <span class="st">&quot;2004-01-01&quot;</span>, <span class="dt">end_date =</span> <span class="st">&quot;2004-12-31&quot;</span>)</a>
-<a class="sourceLine" id="cb344-2" data-line-number="2">workflow</a></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" data-line-number="1">workflow &lt;-<span class="st"> </span><span class="kw">insert_new_workflow</span>(con, site_id, model_id, <span class="dt">start_date =</span> <span class="st">&quot;2004-01-01&quot;</span>, <span class="dt">end_date =</span> <span class="st">&quot;2004-12-31&quot;</span>)</a>
+<a class="sourceLine" id="cb347-2" data-line-number="2">workflow</a></code></pre></div>
 <p>The <code>insert_new_workflow</code> function inserts the workflow into the database and returns a <code>data.frame</code> containing the row that was inserted.</p>
 </div>
 <div id="pecanapi-settings" class="section level2">
@@ -763,93 +763,93 @@ The PEcAn settings list is a nested list providing parameters for the various ac
 It can be created manually with a bunch of <code>list</code> calls.
 However, this is tedious and error-prone, so <code>pecanapi</code> provides several utilities that facilitate this process.</p>
 <p>We start with a blank list.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">list</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">list</span>()</a></code></pre></div>
 <p>Let’s start by adding the workflow we created in the previous section to this list.
 This is done via the <code>add_workflow</code> function, which takes as input a workflow <code>data.frame</code> and adds the relevant fields to the right places in the settings list.</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_workflow</span>(settings, workflow)</a></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_workflow</span>(settings, workflow)</a></code></pre></div>
 <p>All <code>add_*</code> functions work by incrementally adding to an input settings object and returning a new modified settings object.
 The first argument of these functions is always the settings list, which gives these functions a consistent syntax and makes it easy to string multiple settings modifications together using the <code>magrittr</code> pipe (<code>%&gt;%</code>), similar to <code>tidyverse</code> tabular data manipulations.</p>
 <p>Let’s continue by adding a basic database configuration to this settings list.</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_database</span>(settings)</a></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_database</span>(settings)</a></code></pre></div>
 <pre><code>## Error in add_database(settings): could not find function &quot;add_database&quot;</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" data-line-number="1">settings</a></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" data-line-number="1">settings</a></code></pre></div>
 <pre><code>## list()</code></pre>
 <p>The <code>add_database</code> function adds a sensible default configuration for the PEcAn database in the right place with the right names in the settings file.
 These defaults can, of course, be modified in the function call (see <code>?add_database</code>), or, better yet, by setting package options, which is where most <code>add_*</code> functions get their defaults (see <code>?pecanapi_options</code>).</p>
 <p>Similarly, <code>add_rabbitmq</code> automatically adds the RabbitMQ configuration to the settings object.
 Like <code>add_database</code>, it takes all of its defaults from <code>options</code> (see <code>?pecanapi_options</code>).</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_rabbitmq</span>(settings)</a></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_rabbitmq</span>(settings)</a></code></pre></div>
 <pre><code>## Error in add_rabbitmq(settings): could not find function &quot;add_rabbitmq&quot;</code></pre>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" data-line-number="1">settings</a></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" data-line-number="1">settings</a></code></pre></div>
 <pre><code>## list()</code></pre>
 <p>PFTs are added to the settings object with the <code>add_pft</code> function.
 To search for PFTs, use the <code>search_pfts</code> function, which can take optional arguments for PFT name (<code>name</code>), description of its definition (<code>definition</code>), and model type (<code>modeltype</code>).</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" data-line-number="1"><span class="kw">search_pfts</span>(con, <span class="dt">name =</span> <span class="st">&quot;deciduous&quot;</span>, <span class="dt">modeltype =</span> <span class="st">&quot;sipnet&quot;</span>)</a>
-<a class="sourceLine" id="cb355-2" data-line-number="2"><span class="kw">search_pfts</span>(con, <span class="dt">name =</span> <span class="st">&quot;tundra&quot;</span>, <span class="dt">modeltype =</span> <span class="st">&quot;ED&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" data-line-number="1"><span class="kw">search_pfts</span>(con, <span class="dt">name =</span> <span class="st">&quot;deciduous&quot;</span>, <span class="dt">modeltype =</span> <span class="st">&quot;sipnet&quot;</span>)</a>
+<a class="sourceLine" id="cb358-2" data-line-number="2"><span class="kw">search_pfts</span>(con, <span class="dt">name =</span> <span class="st">&quot;tundra&quot;</span>, <span class="dt">modeltype =</span> <span class="st">&quot;ED&quot;</span>)</a></code></pre></div>
 <p>As with <code>search_models</code> and <code>search_sites</code>, these functions are case insensitive and do partial matching by default.
 The <code>add_pft</code> function adds individual PFTs by name.</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_pft</span>(settings, <span class="st">&quot;temperate.deciduous&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_pft</span>(settings, <span class="st">&quot;temperate.deciduous&quot;</span>)</a></code></pre></div>
 <pre><code>## Error in add_pft(settings, &quot;temperate.deciduous&quot;): could not find function &quot;add_pft&quot;</code></pre>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" data-line-number="1">settings</a></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" data-line-number="1">settings</a></code></pre></div>
 <pre><code>## list()</code></pre>
 <p>This adds the <code>temperate.deciduous</code> PFT to the appropriate spot in the settings hierarchy.
 Whereas <code>add_pft</code> adds a single PFT to the settings, <code>add_pft_list</code> can add a vector of PFTs.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_pft_list</span>(settings, <span class="kw">c</span>(<span class="st">&quot;temperate.coniferous&quot;</span>, <span class="st">&quot;miscanthus&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">add_pft_list</span>(settings, <span class="kw">c</span>(<span class="st">&quot;temperate.coniferous&quot;</span>, <span class="st">&quot;miscanthus&quot;</span>))</a></code></pre></div>
 <pre><code>## Error in add_pft_list(settings, c(&quot;temperate.coniferous&quot;, &quot;miscanthus&quot;)): could not find function &quot;add_pft_list&quot;</code></pre>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" data-line-number="1">settings</a></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" data-line-number="1">settings</a></code></pre></div>
 <pre><code>## list()</code></pre>
 <p>Like <code>add_database</code>, <code>add_pft</code> and <code>add_pft_list</code> can also take arbitrary additional configuration arguments via their <code>...</code> argument.
 For <code>add_pft</code>, such arguments are passed only to that PFT, while for <code>add_pft_list</code>, they are shared between all PFTs.
 For more details, see <code>?add_pft</code>.</p>
 <p>One final note is that, because the settings object is just a list, you can make arbitrary modifications to it via base R’s <code>modifyList</code> function (indeed, many of the <code>pecanapi::add_*</code> functions use <code>modifyList</code> under the hood).</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" data-line-number="1">customization &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb364-2" data-line-number="2">    <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">iter =</span> <span class="dv">3000</span>, <span class="dt">random.effects =</span> <span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb364-3" data-line-number="3">    <span class="dt">run =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb364-4" data-line-number="4">      <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;ncss&quot;</span>))</a>
-<a class="sourceLine" id="cb364-5" data-line-number="5">    )</a>
-<a class="sourceLine" id="cb364-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb364-7" data-line-number="7">settings &lt;-<span class="st"> </span><span class="kw">modifyList</span>(settings, customization)</a></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" data-line-number="1">customization &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb367-2" data-line-number="2">    <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">iter =</span> <span class="dv">3000</span>, <span class="dt">random.effects =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb367-3" data-line-number="3">    <span class="dt">run =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb367-4" data-line-number="4">      <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;ncss&quot;</span>))</a>
+<a class="sourceLine" id="cb367-5" data-line-number="5">    )</a>
+<a class="sourceLine" id="cb367-6" data-line-number="6">  )</a>
+<a class="sourceLine" id="cb367-7" data-line-number="7">settings &lt;-<span class="st"> </span><span class="kw">modifyList</span>(settings, customization)</a></code></pre></div>
 <p>Note that <code>modifyList</code> operates recursively on nested lists, which makes it easy to modify settings at different levels of the list hierarchy.
 For instance, below, we modify the previous settings object to make <code>random.effects = TRUE</code>, and change the download method of the <code>inputs</code> to OpenDAP, but keep all the other settings the same.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">modifyList</span>(settings, <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb365-2" data-line-number="2">  <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">random.effects =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb365-3" data-line-number="3">  <span class="dt">run =</span> <span class="kw">list</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">&quot;opendap&quot;</span>)))</a>
-<a class="sourceLine" id="cb365-4" data-line-number="4">))</a></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">modifyList</span>(settings, <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb368-2" data-line-number="2">  <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">random.effects =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb368-3" data-line-number="3">  <span class="dt">run =</span> <span class="kw">list</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">&quot;opendap&quot;</span>)))</a>
+<a class="sourceLine" id="cb368-4" data-line-number="4">))</a></code></pre></div>
 <p>All of these steps can be chained together via <code>magrittr</code> pipes (<code>%&gt;%</code>).</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
-<a class="sourceLine" id="cb366-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb366-3" data-line-number="3"><span class="st">  </span><span class="kw">add_workflow</span>(workflow) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb366-4" data-line-number="4"><span class="st">  </span><span class="kw">add_database</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb366-5" data-line-number="5"><span class="st">  </span><span class="kw">add_rabbitmq</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb366-6" data-line-number="6"><span class="st">  </span><span class="kw">add_pft</span>(<span class="st">&quot;temperate.deciduous&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb366-7" data-line-number="7"><span class="st">  </span><span class="kw">add_pft</span>(<span class="st">&quot;temperate.coniferous&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb366-8" data-line-number="8"><span class="st">  </span><span class="kw">modifyList</span>(<span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb366-9" data-line-number="9">    <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">iter =</span> <span class="dv">3000</span>, <span class="dt">random.effects =</span> <span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb366-10" data-line-number="10">    <span class="dt">run =</span> <span class="kw">list</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;ncss&quot;</span>))),</a>
-<a class="sourceLine" id="cb366-11" data-line-number="11">    <span class="dt">host =</span> <span class="kw">list</span>(<span class="dt">rabbitmq =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb366-12" data-line-number="12">      <span class="dt">uri =</span> <span class="st">&quot;amqp://guest:guest@rabbitmq:5672/%2F&quot;</span>,</a>
-<a class="sourceLine" id="cb366-13" data-line-number="13">      <span class="dt">queue =</span> <span class="st">&quot;SIPNET_136&quot;</span></a>
-<a class="sourceLine" id="cb366-14" data-line-number="14">    ))</a>
-<a class="sourceLine" id="cb366-15" data-line-number="15">  ))</a></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb369-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb369-3" data-line-number="3"><span class="st">  </span><span class="kw">add_workflow</span>(workflow) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb369-4" data-line-number="4"><span class="st">  </span><span class="kw">add_database</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb369-5" data-line-number="5"><span class="st">  </span><span class="kw">add_rabbitmq</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb369-6" data-line-number="6"><span class="st">  </span><span class="kw">add_pft</span>(<span class="st">&quot;temperate.deciduous&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb369-7" data-line-number="7"><span class="st">  </span><span class="kw">add_pft</span>(<span class="st">&quot;temperate.coniferous&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb369-8" data-line-number="8"><span class="st">  </span><span class="kw">modifyList</span>(<span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb369-9" data-line-number="9">    <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">iter =</span> <span class="dv">3000</span>, <span class="dt">random.effects =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb369-10" data-line-number="10">    <span class="dt">run =</span> <span class="kw">list</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;ncss&quot;</span>))),</a>
+<a class="sourceLine" id="cb369-11" data-line-number="11">    <span class="dt">host =</span> <span class="kw">list</span>(<span class="dt">rabbitmq =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb369-12" data-line-number="12">      <span class="dt">uri =</span> <span class="st">&quot;amqp://guest:guest@rabbitmq:5672/%2F&quot;</span>,</a>
+<a class="sourceLine" id="cb369-13" data-line-number="13">      <span class="dt">queue =</span> <span class="st">&quot;SIPNET_136&quot;</span></a>
+<a class="sourceLine" id="cb369-14" data-line-number="14">    ))</a>
+<a class="sourceLine" id="cb369-15" data-line-number="15">  ))</a></code></pre></div>
 </div>
 <div id="pecanapi-submit" class="section level2">
 <h2><span class="header-section-number">45.5</span> Submitting a run</h2>
 <p>Now that we have all the pieces, let’s put them together into a single settings object.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb367-2" data-line-number="2"><span class="st">  </span><span class="kw">add_workflow</span>(workflow) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb367-3" data-line-number="3"><span class="st">  </span><span class="kw">add_database</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb367-4" data-line-number="4"><span class="st">  </span><span class="kw">add_pft</span>(<span class="st">&quot;temperate.deciduous&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb367-5" data-line-number="5"><span class="st">  </span><span class="kw">modifyList</span>(<span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb367-6" data-line-number="6">    <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">iter =</span> <span class="dv">3000</span>, <span class="dt">random.effects =</span> <span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb367-7" data-line-number="7">    <span class="dt">run =</span> <span class="kw">list</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;ncss&quot;</span>))),</a>
-<a class="sourceLine" id="cb367-8" data-line-number="8">    <span class="dt">host =</span> <span class="kw">list</span>(<span class="dt">rabbitmq =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb367-9" data-line-number="9">      <span class="dt">uri =</span> <span class="st">&quot;amqp://guest:guest@rabbitmq:5672/%2F&quot;</span>,</a>
-<a class="sourceLine" id="cb367-10" data-line-number="10">      <span class="dt">queue =</span> <span class="st">&quot;SIPNET_136&quot;</span></a>
-<a class="sourceLine" id="cb367-11" data-line-number="11">    ))</a>
-<a class="sourceLine" id="cb367-12" data-line-number="12">  ))</a></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb370-2" data-line-number="2"><span class="st">  </span><span class="kw">add_workflow</span>(workflow) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb370-3" data-line-number="3"><span class="st">  </span><span class="kw">add_database</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb370-4" data-line-number="4"><span class="st">  </span><span class="kw">add_pft</span>(<span class="st">&quot;temperate.deciduous&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb370-5" data-line-number="5"><span class="st">  </span><span class="kw">modifyList</span>(<span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb370-6" data-line-number="6">    <span class="dt">meta.analysis =</span> <span class="kw">list</span>(<span class="dt">iter =</span> <span class="dv">3000</span>, <span class="dt">random.effects =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb370-7" data-line-number="7">    <span class="dt">run =</span> <span class="kw">list</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">met =</span> <span class="kw">list</span>(<span class="dt">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;ncss&quot;</span>))),</a>
+<a class="sourceLine" id="cb370-8" data-line-number="8">    <span class="dt">host =</span> <span class="kw">list</span>(<span class="dt">rabbitmq =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb370-9" data-line-number="9">      <span class="dt">uri =</span> <span class="st">&quot;amqp://guest:guest@rabbitmq:5672/%2F&quot;</span>,</a>
+<a class="sourceLine" id="cb370-10" data-line-number="10">      <span class="dt">queue =</span> <span class="st">&quot;SIPNET_136&quot;</span></a>
+<a class="sourceLine" id="cb370-11" data-line-number="11">    ))</a>
+<a class="sourceLine" id="cb370-12" data-line-number="12">  ))</a></code></pre></div>
 <p>We can then submit these settings as a run via the <code>submit_workflow</code> function.
 This function has only one required input – the settings list – but a number of optional arguments for specifying how to connect to the RabbitMQ API (see <code>?submit_workflow</code> for details).</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" data-line-number="1"><span class="kw">submit_workflow</span>(settings)</a></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" data-line-number="1"><span class="kw">submit_workflow</span>(settings)</a></code></pre></div>
 <p>If the workflow was submitted successfully, this will return the HTTP response <code>routed = TRUE</code> as a named list.
 Note that this only means that the RabbitMQ message was posted; the workflow can still crash for various reasons.
 To see the status of the workflow, look at <code>docker-compose logs executor</code> or use the Portainer interface.</p>
@@ -861,15 +861,15 @@ You can explore these files by browsing to <code>localhost:8000/thredds/</code> 
 <p>All files, regardless of file type, can be downloaded directly (via HTTP) through the THREDDS <code>fileServer</code> protocol.
 In <code>pecanapi</code>, URLs for these files can be easily constructed via <code>output_url</code> for any workflow output and <code>run_url</code> for run-specific outputs.
 For instance, to read the <code>workflow.Rout</code> file from the workflow we created earlier, you can do the following:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" data-line-number="1">workflow_id &lt;-<span class="st"> </span>workflow[[<span class="st">&quot;id&quot;</span>]]</a>
-<a class="sourceLine" id="cb369-2" data-line-number="2"><span class="kw">readLines</span>(workflow_id, <span class="st">&quot;workflow.Rout&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" data-line-number="1">workflow_id &lt;-<span class="st"> </span>workflow[[<span class="st">&quot;id&quot;</span>]]</a>
+<a class="sourceLine" id="cb372-2" data-line-number="2"><span class="kw">readLines</span>(workflow_id, <span class="st">&quot;workflow.Rout&quot;</span>)</a></code></pre></div>
 <p>Outputs in NetCDF format can also be accessed via the OpenDAP service, which allows remote variable selection and subsetting (meaning you can only download the outputs you need without needing to download the entire file).
 These URLs are created via the <code>thredds_dap_url</code> (for a generic URL) or <code>run_dap</code> (to access outputs from a specific model run).</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" data-line-number="1">sipnet_out &lt;-<span class="st"> </span>ncdf4<span class="op">::</span><span class="kw">nc_open</span>(<span class="kw">run_dap</span>(workflow_id, <span class="st">&quot;2004.nc&quot;</span>))</a>
-<a class="sourceLine" id="cb370-2" data-line-number="2">gpp &lt;-<span class="st"> </span>ncdf4<span class="op">::</span><span class="kw">ncvar_get</span>(sipnet_out, <span class="st">&quot;GPP&quot;</span>)</a>
-<a class="sourceLine" id="cb370-3" data-line-number="3">time &lt;-<span class="st"> </span>ncdf4<span class="op">::</span><span class="kw">ncvar_get</span>(sipnet_out, <span class="st">&quot;time&quot;</span>)</a>
-<a class="sourceLine" id="cb370-4" data-line-number="4">ncdf4<span class="op">::</span><span class="kw">nc_close</span>(sipnet_out)</a>
-<a class="sourceLine" id="cb370-5" data-line-number="5"><span class="kw">plot</span>(time, gpp, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" data-line-number="1">sipnet_out &lt;-<span class="st"> </span>ncdf4<span class="op">::</span><span class="kw">nc_open</span>(<span class="kw">run_dap</span>(workflow_id, <span class="st">&quot;2004.nc&quot;</span>))</a>
+<a class="sourceLine" id="cb373-2" data-line-number="2">gpp &lt;-<span class="st"> </span>ncdf4<span class="op">::</span><span class="kw">ncvar_get</span>(sipnet_out, <span class="st">&quot;GPP&quot;</span>)</a>
+<a class="sourceLine" id="cb373-3" data-line-number="3">time &lt;-<span class="st"> </span>ncdf4<span class="op">::</span><span class="kw">ncvar_get</span>(sipnet_out, <span class="st">&quot;time&quot;</span>)</a>
+<a class="sourceLine" id="cb373-4" data-line-number="4">ncdf4<span class="op">::</span><span class="kw">nc_close</span>(sipnet_out)</a>
+<a class="sourceLine" id="cb373-5" data-line-number="5"><span class="kw">plot</span>(time, gpp, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
