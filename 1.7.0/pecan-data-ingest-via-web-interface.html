@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="The Predictive Ecosystem Analyzer">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <title>20 Pecan Data Ingest via Web Interface | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="20 Pecan Data Ingest via Web Interface | The Predictive Ecosystem Analyzer>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="20 Pecan Data Ingest via Web Interface | The Predictive Ecosystem Analyzer />
   <meta property="og:type" content="book" />
   
   
@@ -17,15 +17,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="20 Pecan Data Ingest via Web Interface | The Predictive Ecosystem Analyzer />
   
   
   
 
-<meta name="author" content="Alexey Shiklomanov">
+<meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="working-with-the-vm.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -807,7 +808,7 @@ The final step in the ingest process is to register a formats-variables record. 
 <ol style="list-style-type: decimal">
 <li>Create a connection to the BETY database. This can be done using R function</li>
 </ol>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">bety =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">betyConnect</span>(<span class="dt">php.config =</span> <span class="st">&quot;pecan/web/config.php&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">bety =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">betyConnect</span>(<span class="dt">php.config =</span> <span class="st">&quot;pecan/web/config.php&quot;</span>)</code></pre>
 <p>where the complete path to the <code>config.php</code> is specified. See <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">here</a> for an example <code>config.php</code> file.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Look up the inputs record for the data in BETY.</li>
@@ -818,9 +819,9 @@ The final step in the ingest process is to register a formats-variables record. 
 <li><p>The url of the record (see image above)</p></li>
 <li><p>In R run</p></li>
 </ul>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2">input_name =<span class="st"> &quot;AmerifluxLBL_site_0-758&quot;</span> <span class="co">#copied directly from online</span></a>
-<a class="sourceLine" id="cb92-3" data-line-number="3">input.id =<span class="st"> </span><span class="kw">tbl</span>(bety,<span class="st">&quot;inputs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(name <span class="op">==</span><span class="st"> </span>input_name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(id)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+input_name =<span class="st"> &quot;AmerifluxLBL_site_0-758&quot;</span> <span class="co">#copied directly from online</span>
+input.id =<span class="st"> </span><span class="kw">tbl</span>(bety,<span class="st">&quot;inputs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(name <span class="op">==</span><span class="st"> </span>input_name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(id)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Additional arguments to <code>query.format.vars</code> are optional</p>
 <ol style="list-style-type: decimal">
@@ -829,38 +830,38 @@ The final step in the ingest process is to register a formats-variables record. 
 </ol></li>
 <li><p>In R run</p></li>
 </ol>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">   format =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(bety, input.id)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">   format =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(bety, input.id)</code></pre>
 <p>Examine the resulting R list object to make sure it returned the correct information.</p>
 <p>The example format contains the following objects:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">   <span class="op">$</span>file_name</a>
-<a class="sourceLine" id="cb94-2" data-line-number="2">   [<span class="dv">1</span>] <span class="st">&quot;AMERIFLUX_BASE_HH&quot;</span></a>
-<a class="sourceLine" id="cb94-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb94-4" data-line-number="4">   <span class="op">$</span>mimetype</a>
-<a class="sourceLine" id="cb94-5" data-line-number="5">   [<span class="dv">1</span>] <span class="st">&quot;csv&quot;</span></a>
-<a class="sourceLine" id="cb94-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb94-7" data-line-number="7">   <span class="op">$</span>skip</a>
-<a class="sourceLine" id="cb94-8" data-line-number="8">   [<span class="dv">1</span>] <span class="dv">2</span></a>
-<a class="sourceLine" id="cb94-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb94-10" data-line-number="10">   <span class="op">$</span>header</a>
-<a class="sourceLine" id="cb94-11" data-line-number="11">   [<span class="dv">1</span>] <span class="dv">1</span></a>
-<a class="sourceLine" id="cb94-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb94-13" data-line-number="13">   <span class="op">$</span>na.strings</a>
-<a class="sourceLine" id="cb94-14" data-line-number="14">   [<span class="dv">1</span>] <span class="st">&quot;-9999&quot;</span> <span class="st">&quot;-6999&quot;</span> <span class="st">&quot;9999&quot;</span>  <span class="st">&quot;NA&quot;</span>   </a>
-<a class="sourceLine" id="cb94-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb94-16" data-line-number="16">   <span class="op">$</span>time.row</a>
-<a class="sourceLine" id="cb94-17" data-line-number="17">   [<span class="dv">1</span>] <span class="dv">4</span></a>
-<a class="sourceLine" id="cb94-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb94-19" data-line-number="19">   <span class="op">$</span>site</a>
-<a class="sourceLine" id="cb94-20" data-line-number="20">   [<span class="dv">1</span>] <span class="dv">758</span></a>
-<a class="sourceLine" id="cb94-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb94-22" data-line-number="22">   <span class="op">$</span>lat</a>
-<a class="sourceLine" id="cb94-23" data-line-number="23">   [<span class="dv">1</span>] <span class="fl">42.5378</span></a>
-<a class="sourceLine" id="cb94-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb94-25" data-line-number="25">   <span class="op">$</span>lon</a>
-<a class="sourceLine" id="cb94-26" data-line-number="26">   [<span class="dv">1</span>] <span class="fl">-72.1715</span></a>
-<a class="sourceLine" id="cb94-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb94-28" data-line-number="28">   <span class="op">$</span>time_zone</a>
-<a class="sourceLine" id="cb94-29" data-line-number="29">   [<span class="dv">1</span>] <span class="st">&quot;America/New_York&quot;</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">   <span class="op">$</span>file_name
+   [<span class="dv">1</span>] <span class="st">&quot;AMERIFLUX_BASE_HH&quot;</span>
+
+   <span class="op">$</span>mimetype
+   [<span class="dv">1</span>] <span class="st">&quot;csv&quot;</span>
+
+   <span class="op">$</span>skip
+   [<span class="dv">1</span>] <span class="dv">2</span>
+
+   <span class="op">$</span>header
+   [<span class="dv">1</span>] <span class="dv">1</span>
+
+   <span class="op">$</span>na.strings
+   [<span class="dv">1</span>] <span class="st">&quot;-9999&quot;</span> <span class="st">&quot;-6999&quot;</span> <span class="st">&quot;9999&quot;</span>  <span class="st">&quot;NA&quot;</span>   
+
+   <span class="op">$</span>time.row
+   [<span class="dv">1</span>] <span class="dv">4</span>
+
+   <span class="op">$</span>site
+   [<span class="dv">1</span>] <span class="dv">758</span>
+
+   <span class="op">$</span>lat
+   [<span class="dv">1</span>] <span class="fl">42.5378</span>
+
+   <span class="op">$</span>lon
+   [<span class="dv">1</span>] <span class="fl">-72.1715</span>
+
+   <span class="op">$</span>time_zone
+   [<span class="dv">1</span>] <span class="st">&quot;America/New_York&quot;</span></code></pre>
 <p>The first 4 rows of the table <code>format$vars</code> looks like this:</p>
 <table style="width:100%;">
 <colgroup>
@@ -949,14 +950,14 @@ The final step in the ingest process is to register a formats-variables record. 
 <ol start="5" style="list-style-type: decimal">
 <li>Get the path to the data</li>
 </ol>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">   data.path =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.file.path</span>(</a>
-<a class="sourceLine" id="cb95-2" data-line-number="2">     <span class="dt">input.id =</span> input.id, </a>
-<a class="sourceLine" id="cb95-3" data-line-number="3">     <span class="dt">host_name =</span> PEcAn.remote<span class="op">::</span><span class="kw">fqdn</span>(), </a>
-<a class="sourceLine" id="cb95-4" data-line-number="4">     <span class="dt">con =</span> bety<span class="op">$</span>con)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">   data.path =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.file.path</span>(
+     <span class="dt">input.id =</span> input.id, 
+     <span class="dt">host_name =</span> PEcAn.remote<span class="op">::</span><span class="kw">fqdn</span>(), 
+     <span class="dt">con =</span> bety<span class="op">$</span>con)</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>Load the data</li>
 </ol>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">   data =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> data.path, <span class="dt">format =</span> format)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">   data =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> data.path, <span class="dt">format =</span> format)</code></pre>
 
 </div>
 </div>
@@ -987,7 +988,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -997,6 +998,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1014,7 +1019,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

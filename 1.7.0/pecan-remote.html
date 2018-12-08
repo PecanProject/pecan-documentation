@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="The Predictive Ecosystem Analyzer">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <title>10 Remote execution with PEcAn | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="10 Remote execution with PEcAn | The Predictive Ecosystem Analyzer>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="10 Remote execution with PEcAn | The Predictive Ecosystem Analyzer />
   <meta property="og:type" content="book" />
   
   
@@ -17,15 +17,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="10 Remote execution with PEcAn | The Predictive Ecosystem Analyzer />
   
   
   
 
-<meta name="author" content="Alexey Shiklomanov">
+<meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="the-pecan-docker-api.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -701,16 +702,16 @@ PEcAn uses remote execution primarily to run ecosystem models.</p>
 <h2><span class="header-section-number">10.1</span> Basics of SSH</h2>
 <p>All of the PEcAn remote infrastructure depends on the system <code>ssh</code> utility, so it’s important to make sure this works before attempting the advanced remote execution functionality in PEcAn.</p>
 <p>To connect to a remote server interactively, the command is simply:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></code></pre>
 <p>For instance, my connection to the BU shared computing cluster looks like:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu</a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> ashiklom@geo.bu.edu</code></pre>
 <p>It will prompt me for my BU password, and, if successful, will drop me into a login shell on the remote machine.</p>
 <p>Alternatively to the login shell, <code>ssh</code> can be used to execute arbitrary code, whose output will be returned exactly as it would if you ran the command locally.
 For example, the following:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</code></pre>
 <p>will run the <code>pwd</code> command, and return the path to my home directory on the BU SCC.
 The more advanced example below will run some simple R code on the BU SCC and return the output as if it was run locally.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript -e <span class="st">&quot;seq(1, 10)&quot;</span></a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript -e <span class="st">&quot;seq(1, 10)&quot;</span></code></pre>
 </div>
 <div id="ssh-authentication-password-vs.ssh-key" class="section level2">
 <h2><span class="header-section-number">10.2</span> SSH authentication – password vs. SSH key</h2>
@@ -729,25 +730,25 @@ Even simple password-protection can be tricky in scripts, since (by design) it i
 <p>A convenient and secure way to follow SSH security protocol, but prevent having to go through the full authentication process every time, is to use SSH tunnels (or “sockets”, which are effectively synonymous).
 Essentially, an SSH socket is a read- and write-protectected file that contains all of the information about an SSH connection.</p>
 <p>To create an SSH tunnel, use a command like the following:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="fu">ssh</span> -n -N -f -o ControlMaster=yes -S /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -n -N -f -o ControlMaster=yes -S /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></code></pre>
 <p>If appropriate, this will prompt you for your password (if using password authentication), and then will drop you back to the command line (thanks to the <code>-N</code> flag, which runs SSH without executing a command, the <code>-f</code> flag, which pushes SSH into the background, and the <code>-n</code> flag, which prevents ssh from reading any input).
 It will also create the file <code>/path/to/socket/file</code>.</p>
 <p>To use this socket with another command, use the <code>-S /path/to/file</code> flag, pointing to the same tunnel file you just created.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></code></pre>
 <p>This will let you access the server without any sort of authentication step.
 As before, if <code>&lt;optional command&gt;</code> is blank, you will be dropped into an interactive shell on the remote, or if it’s a command, that command will be executed and the output returned.</p>
 <p>To close a socket, use the following:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</code></pre>
 <p>This will delete the socket file and close the connection.
 Alternatively, a scorched earth approach to closing the SSH tunnel if you don’t remember where you put the socket file is something like the following:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="ex">pgrep</span> ssh   # See which processes will be killed</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="ex">pkill</span> ssh   # Kill those processes</a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">pgrep</span> ssh   # See which processes will be killed
+<span class="ex">pkill</span> ssh   # Kill those processes</code></pre>
 <p>…which will kill all user processes called <code>ssh</code>.</p>
 <p>To automatically create tunnels following a specific pattern, you can add the following to your
 <code>~/.ssh/config</code></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"> <span class="ex">ControlMaster</span> auto</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3"> <span class="ex">ControlPath</span> /tmp/%r@%h:%p</a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span>
+ <span class="ex">ControlMaster</span> auto
+ <span class="ex">ControlPath</span> /tmp/%r@%h:%p</code></pre>
 <p>For more information, see <code>man ssh</code>.</p>
 </div>
 <div id="ssh-tunnels-and-pecan" class="section level3">
@@ -757,9 +758,9 @@ If working from the web interface, the tunnel will be opened for you by some und
 The best way to do this is to create the tunnel first, outside of R, as described above.
 (In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>.
 To follow along, replace these with your own username and designated server, respectively).</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</a></code></pre></div>
+<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</code></pre>
 <p>Then, in R, create a <code>host</code> object, which is just a list containing the elements <code>name</code> (hostname) and <code>tunnel</code> (path to tunnel file).</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</code></pre>
 <p>This host object can then be used in any of the remote execution functions.</p>
 </div>
 </div>
@@ -930,7 +931,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -940,6 +941,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -957,7 +962,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
