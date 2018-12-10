@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="The Predictive Ecosystem Analyzer">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <title>4 Getting Started | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="4 Getting Started | The Predictive Ecosystem Analyzer>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="4 Getting Started | The Predictive Ecosystem Analyzer />
   <meta property="og:type" content="book" />
   
   
@@ -17,15 +17,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="4 Getting Started | The Predictive Ecosystem Analyzer />
   
   
   
 
-<meta name="author" content="Alexey Shiklomanov">
+<meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2018-12-01">
+<meta name="date" content="2018-12-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="web-workflow.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -684,7 +685,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>PEcAn consists of a set of scripts and code that is compiled within a Linux operating system and saved in a “virtual machine” (VM). Virtual machines allow for running consistent set-ups without worrying about differences between operating systems, library dependencies, compiling the code, etc.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Install VirtualBox</strong> This is the software that runs the virtual machine. You can find the download link and instructions at <a href="http://www.virtualbox.org" class="uri">http://www.virtualbox.org</a>. <em>NOTE: On Windows you may see a warning about Logo testing, it is okay to ignore the warning.</em></p></li>
-<li><p><strong>Download the PEcAn VM</strong> You can find the download link at <a href="http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN" class="uri">http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN</a>, under the “<strong>Files</strong>” header. Click the “.ova” file to begin the download. Note that the file is ~5 GB, so this download can take several minutes to hours depending on your connection speed.</p></li>
+<li><p><strong>Download the PEcAn VM</strong> You can find the download link at <a href="http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN" class="uri">http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN</a>, under the “<strong>Files</strong>” header. Click the “.ova” file to begin the download. Note that the file is ~7 GB, so this download can take several minutes to hours depending on your connection speed. Also, the VM requires &gt;4 GB of RAM to operate correctly. Please check current usage of RAM and shutdown processes as needed.</p></li>
 <li><p><strong>Import the VM</strong> Once the download is complete, open VirtualBox. In the VirtualBox menus, go to “File” → “Import Appliance” and locate the downloaded “.ova” file.
 In the Appliance Import Settings, make sure you select “Reinitialize the MAC address of all network cards” (picture below). This is not selected by default and can result in networking issues since multiple machines might claim to have the same network MAC Address. (NOTE: If you experience network connection difficulties in the VM with this enabled, try re-importing the VM without this setting selected). Finally, click “Import” to build the Virtual Machine from its image.</p></li>
 </ol>
@@ -908,7 +909,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -918,6 +919,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -935,7 +940,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

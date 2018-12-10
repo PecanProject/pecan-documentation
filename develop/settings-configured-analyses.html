@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="The Predictive Ecosystem Analyzer">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <title>9 Settings-configured analyses | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="9 Settings-configured analyses | The Predictive Ecosystem Analyzer>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="9 Settings-configured analyses | The Predictive Ecosystem Analyzer />
   <meta property="og:type" content="book" />
   
   
@@ -17,15 +17,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="9 Settings-configured analyses | The Predictive Ecosystem Analyzer />
   
   
   
 
-<meta name="author" content="Alexey Shiklomanov">
+<meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2018-12-01">
+<meta name="date" content="2018-12-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="pecan-remote.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -1197,27 +1198,27 @@ In this example,
 - the output will be compared to data from <code>input_id = 1000013743</code>, specifically two variables of interest: <code>variable_id = 411, variable_id = 18</code>
 - for <code>variable_id = 411</code> we will perform only one metric of comparison <code>metric_id = 1000000001</code>
 - for for <code>variable_id = 18</code> we will perform two metrics of comparison <code>metric_id = 1000000001, metric_id = 1000000002</code></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">&lt;benchmarking&gt;</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">  <span class="kw">&lt;ensemble_id&gt;</span>1000010983<span class="kw">&lt;/ensemble_id&gt;</span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">  <span class="kw">&lt;new_run&gt;</span>FALSE<span class="kw">&lt;/new_run&gt;</span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4">  <span class="kw">&lt;benchmark&gt;</span></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
-<a class="sourceLine" id="cb37-6" data-line-number="6">   <span class="kw">&lt;variable_id&gt;</span>411<span class="kw">&lt;/variable_id&gt;</span></a>
-<a class="sourceLine" id="cb37-7" data-line-number="7">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
-<a class="sourceLine" id="cb37-8" data-line-number="8">   <span class="kw">&lt;metrics&gt;</span></a>
-<a class="sourceLine" id="cb37-9" data-line-number="9">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
-<a class="sourceLine" id="cb37-10" data-line-number="10">   <span class="kw">&lt;/metrics&gt;</span></a>
-<a class="sourceLine" id="cb37-11" data-line-number="11">  <span class="kw">&lt;/benchmark&gt;</span></a>
-<a class="sourceLine" id="cb37-12" data-line-number="12">  <span class="kw">&lt;benchmark&gt;</span></a>
-<a class="sourceLine" id="cb37-13" data-line-number="13">   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span></a>
-<a class="sourceLine" id="cb37-14" data-line-number="14">   <span class="kw">&lt;variable_id&gt;</span>18<span class="kw">&lt;/variable_id&gt;</span></a>
-<a class="sourceLine" id="cb37-15" data-line-number="15">   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span></a>
-<a class="sourceLine" id="cb37-16" data-line-number="16">   <span class="kw">&lt;metrics&gt;</span></a>
-<a class="sourceLine" id="cb37-17" data-line-number="17">    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span></a>
-<a class="sourceLine" id="cb37-18" data-line-number="18">    <span class="kw">&lt;metric_id&gt;</span>1000000002<span class="kw">&lt;/metric_id&gt;</span></a>
-<a class="sourceLine" id="cb37-19" data-line-number="19">   <span class="kw">&lt;/metrics&gt;</span></a>
-<a class="sourceLine" id="cb37-20" data-line-number="20">  <span class="kw">&lt;/benchmark&gt;</span></a>
-<a class="sourceLine" id="cb37-21" data-line-number="21"><span class="kw">&lt;/benchmarking&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;benchmarking&gt;</span>
+  <span class="kw">&lt;ensemble_id&gt;</span>1000010983<span class="kw">&lt;/ensemble_id&gt;</span>
+  <span class="kw">&lt;new_run&gt;</span>FALSE<span class="kw">&lt;/new_run&gt;</span>
+  <span class="kw">&lt;benchmark&gt;</span>
+   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span>
+   <span class="kw">&lt;variable_id&gt;</span>411<span class="kw">&lt;/variable_id&gt;</span>
+   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span>
+   <span class="kw">&lt;metrics&gt;</span>
+    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span>
+   <span class="kw">&lt;/metrics&gt;</span>
+  <span class="kw">&lt;/benchmark&gt;</span>
+  <span class="kw">&lt;benchmark&gt;</span>
+   <span class="kw">&lt;input_id&gt;</span>1000013743<span class="kw">&lt;/input_id&gt;</span>
+   <span class="kw">&lt;variable_id&gt;</span>18<span class="kw">&lt;/variable_id&gt;</span>
+   <span class="kw">&lt;site_id&gt;</span>853<span class="kw">&lt;/site_id&gt;</span>
+   <span class="kw">&lt;metrics&gt;</span>
+    <span class="kw">&lt;metric_id&gt;</span>1000000001<span class="kw">&lt;/metric_id&gt;</span>
+    <span class="kw">&lt;metric_id&gt;</span>1000000002<span class="kw">&lt;/metric_id&gt;</span>
+   <span class="kw">&lt;/metrics&gt;</span>
+  <span class="kw">&lt;/benchmark&gt;</span>
+<span class="kw">&lt;/benchmarking&gt;</span></code></pre>
 
 </div>
 </div>
@@ -1248,7 +1249,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1258,6 +1259,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1275,7 +1280,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

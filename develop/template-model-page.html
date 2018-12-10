@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="The Predictive Ecosystem Analyzer">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <title>31 Template MODEL page | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="31 Template MODEL page | The Predictive Ecosystem Analyzer>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="31 Template MODEL page | The Predictive Ecosystem Analyzer />
   <meta property="og:type" content="book" />
   
   
@@ -17,15 +17,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="31 Template MODEL page | The Predictive Ecosystem Analyzer />
   
   
   
 
-<meta name="author" content="Alexey Shiklomanov">
+<meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2018-12-01">
+<meta name="date" content="2018-12-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="available-meteorological-drivers.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -982,23 +983,23 @@ List of inputs required by model, such as met, etc.</p>
 <li><code>phenol.start</code></li>
 <li><code>phenol.end</code></li>
 <li><p><code>ed2in_tags</code> – Named list of additional tags in the ED2IN to be modified. These modifications override any of those set by other parts of the PEcAn workflow. These tags must be in all caps. Any tags that are not already in the ED2IN file will be added; this makes this an effective way to run newer versions of ED2 that have new ED2IN parameters without having to provide an entire new ED2IN. For example:</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">&lt;model&gt;</span></a>
-<a class="sourceLine" id="cb251-2" data-line-number="2">  <span class="kw">&lt;ed2in_tags&gt;</span></a>
-<a class="sourceLine" id="cb251-3" data-line-number="3">    <span class="kw">&lt;IOOUTPUT&gt;</span>0<span class="kw">&lt;/IOOUTPUT&gt;</span></a>
-<a class="sourceLine" id="cb251-4" data-line-number="4">    <span class="kw">&lt;PLANT_HYDRO_SCHEME&gt;</span>0<span class="kw">&lt;/PLANT_HYDRO_SCHEME&gt;</span></a>
-<a class="sourceLine" id="cb251-5" data-line-number="5">    <span class="kw">&lt;ISTOMATA_SCHEME&gt;</span>0<span class="kw">&lt;/ISTOMATA_SCHEME&gt;</span></a>
-<a class="sourceLine" id="cb251-6" data-line-number="6">    <span class="kw">&lt;ISTRUCT_GROWTH_SCHEME&gt;</span>0<span class="kw">&lt;/ISTRUCT_GROWTH_SCHEME&gt;</span></a>
-<a class="sourceLine" id="cb251-7" data-line-number="7">    <span class="kw">&lt;TRAIT_PLASTICITY_SCHEME&gt;</span>0<span class="kw">&lt;/TRAIT_PLASTICITY_SCHEME&gt;</span></a>
-<a class="sourceLine" id="cb251-8" data-line-number="8">  <span class="kw">&lt;/ed2in_tags&gt;</span></a>
-<a class="sourceLine" id="cb251-9" data-line-number="9"><span class="kw">&lt;/model&gt;</span></a></code></pre></div></li>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;model&gt;</span>
+  <span class="kw">&lt;ed2in_tags&gt;</span>
+    <span class="kw">&lt;IOOUTPUT&gt;</span>0<span class="kw">&lt;/IOOUTPUT&gt;</span>
+    <span class="kw">&lt;PLANT_HYDRO_SCHEME&gt;</span>0<span class="kw">&lt;/PLANT_HYDRO_SCHEME&gt;</span>
+    <span class="kw">&lt;ISTOMATA_SCHEME&gt;</span>0<span class="kw">&lt;/ISTOMATA_SCHEME&gt;</span>
+    <span class="kw">&lt;ISTRUCT_GROWTH_SCHEME&gt;</span>0<span class="kw">&lt;/ISTRUCT_GROWTH_SCHEME&gt;</span>
+    <span class="kw">&lt;TRAIT_PLASTICITY_SCHEME&gt;</span>0<span class="kw">&lt;/TRAIT_PLASTICITY_SCHEME&gt;</span>
+  <span class="kw">&lt;/ed2in_tags&gt;</span>
+<span class="kw">&lt;/model&gt;</span></code></pre></li>
 <li><code>barebones_ed2in</code> – Whether or not to try to annotate the ED2IN file with comments. If “true”, skip all comments and only write the tags themselves. If “false” (default), try to transfer comments from the template file into the target file.</li>
 <li><code>jobtemplate</code></li>
 <li><code>prerun</code> – String of commands to be added to the <code>job.sh</code> model execution script before the model is run. Multiple commands should be separated by proper <code>bash</code> syntax – i.e. either with <code>&amp;&amp;</code> or <code>;</code>.
 <ul>
 <li><p>One common use of this argument is to load modules on some HPC systems – for instance:</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="kw">&lt;prerun&gt;</span>module load git hdf5<span class="kw">&lt;/prerun&gt;</span></a></code></pre></div></li>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;prerun&gt;</span>module load git hdf5<span class="kw">&lt;/prerun&gt;</span></code></pre></li>
 <li><p>If your particular version of ED is failing early during execution with a mysterious “Segmentation fault”, that may indicate that its process is exceeding its stack limit. In this case, you may need to remove the stack limit restriction with a <code>prerun</code> command like the following:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">&lt;prerun&gt;</span>ulimit -s unlimited<span class="kw">&lt;/prerun&gt;</span></a></code></pre></div></li>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;prerun&gt;</span>ulimit -s unlimited<span class="kw">&lt;/prerun&gt;</span></code></pre></li>
 </ul></li>
 <li><code>postrun</code> – Same as <code>&lt;prerun&gt;</code>, but for commands to be run <em>after</em> model execution.</li>
 <li><code>binary</code> – The full path to the ED2 binary on the target machine.</li>
@@ -1093,23 +1094,23 @@ List of inputs required by model, such as met, etc.</p>
 </div>
 <div id="tacc-lonestar" class="section level4">
 <h4><span class="header-section-number">31.6.5.3</span> TACC lonestar</h4>
-<div class="sourceCode" id="cb254"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb254-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
-<a class="sourceLine" id="cb254-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
-<a class="sourceLine" id="cb254-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
-<a class="sourceLine" id="cb254-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
-<a class="sourceLine" id="cb254-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
-<a class="sourceLine" id="cb254-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</a>
-<a class="sourceLine" id="cb254-7" data-line-number="7"><span class="fu">make</span> OPT=lonestar</a></code></pre></div>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">module</span> load hdf5
+<span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
+<span class="fu">tar</span> zxf ED.r82.tgz
+<span class="fu">rm</span> ED.r82.tgz
+<span class="bu">cd</span> ED.r82/ED/build/bin
+<span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar
+<span class="fu">make</span> OPT=lonestar</code></pre>
 </div>
 <div id="tacc-stampede" class="section level4">
 <h4><span class="header-section-number">31.6.5.4</span> TACC stampede</h4>
-<div class="sourceCode" id="cb255"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
-<a class="sourceLine" id="cb255-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
-<a class="sourceLine" id="cb255-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
-<a class="sourceLine" id="cb255-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
-<a class="sourceLine" id="cb255-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
-<a class="sourceLine" id="cb255-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</a>
-<a class="sourceLine" id="cb255-7" data-line-number="7"><span class="fu">make</span> OPT=stampede</a></code></pre></div>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">module</span> load hdf5
+<span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
+<span class="fu">tar</span> zxf ED.r82.tgz
+<span class="fu">rm</span> ED.r82.tgz
+<span class="bu">cd</span> ED.r82/ED/build/bin
+<span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede
+<span class="fu">make</span> OPT=stampede</code></pre>
 
 </div>
 </div>
@@ -1594,7 +1595,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1604,6 +1605,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1621,7 +1626,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

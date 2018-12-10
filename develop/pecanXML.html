@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="The Predictive Ecosystem Analyzer">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <title>7 The PEcAn XML | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="7 The PEcAn XML | The Predictive Ecosystem Analyzer>
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="7 The PEcAn XML | The Predictive Ecosystem Analyzer />
   <meta property="og:type" content="book" />
   
   
@@ -17,15 +17,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="7 The PEcAn XML | The Predictive Ecosystem Analyzer />
   
   
   
 
-<meta name="author" content="Alexey Shiklomanov">
+<meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2018-12-01">
+<meta name="date" content="2018-12-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="additional-web-configuration.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -699,101 +700,101 @@ It contains the following major sections (“nodes”):</p>
 </ul></li>
 </ul>
 <p>A basic example looks like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">&lt;pecan&gt;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">&lt;info&gt;</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="kw">&lt;notes&gt;</span>Example run<span class="kw">&lt;/notes&gt;</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="kw">&lt;userid&gt;</span>-1<span class="kw">&lt;/userid&gt;</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="kw">&lt;username&gt;</span>guestuser<span class="kw">&lt;/username&gt;</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="kw">&lt;date&gt;</span>2018/09/18 19:12:28 +0000<span class="kw">&lt;/date&gt;</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="kw">&lt;/info&gt;</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">&lt;outdir&gt;</span>/data/workflows/PEcAn_99000000006<span class="kw">&lt;/outdir&gt;</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="kw">&lt;database&gt;</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="kw">&lt;bety&gt;</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">      <span class="kw">&lt;user&gt;</span>bety<span class="kw">&lt;/user&gt;</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">      <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">      <span class="kw">&lt;host&gt;</span>postgres<span class="kw">&lt;/host&gt;</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">      <span class="kw">&lt;dbname&gt;</span>bety<span class="kw">&lt;/dbname&gt;</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">      <span class="kw">&lt;driver&gt;</span>PostgreSQL<span class="kw">&lt;/driver&gt;</span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">      <span class="kw">&lt;write&gt;</span>true<span class="kw">&lt;/write&gt;</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="kw">&lt;/bety&gt;</span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">    <span class="kw">&lt;dbfiles&gt;</span>/data/dbfiles<span class="kw">&lt;/dbfiles&gt;</span></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">  <span class="kw">&lt;/database&gt;</span></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21">  <span class="kw">&lt;pfts&gt;</span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22">    <span class="kw">&lt;pft&gt;</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23">      <span class="kw">&lt;name&gt;</span>tundra.grasses<span class="kw">&lt;/name&gt;</span> </a>
-<a class="sourceLine" id="cb1-24" data-line-number="24">      <span class="kw">&lt;constants&gt;</span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25">        <span class="kw">&lt;num&gt;</span>1<span class="kw">&lt;/num&gt;</span></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26">      <span class="kw">&lt;/constants&gt;</span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27">    <span class="kw">&lt;/pft&gt;</span></a>
-<a class="sourceLine" id="cb1-28" data-line-number="28">  <span class="kw">&lt;/pfts&gt;</span></a>
-<a class="sourceLine" id="cb1-29" data-line-number="29">  <span class="kw">&lt;meta.analysis&gt;</span></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30">    <span class="kw">&lt;iter&gt;</span>3000<span class="kw">&lt;/iter&gt;</span></a>
-<a class="sourceLine" id="cb1-31" data-line-number="31">    <span class="kw">&lt;random.effects&gt;</span>FALSE<span class="kw">&lt;/random.effects&gt;</span></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32">  <span class="kw">&lt;/meta.analysis&gt;</span></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33">  <span class="kw">&lt;ensemble&gt;</span></a>
-<a class="sourceLine" id="cb1-34" data-line-number="34">   <span class="kw">&lt;size&gt;</span>1<span class="kw">&lt;/size&gt;</span></a>
-<a class="sourceLine" id="cb1-35" data-line-number="35">   <span class="kw">&lt;variable&gt;</span>NPP<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb1-36" data-line-number="36">   <span class="kw">&lt;samplingspace&gt;</span></a>
-<a class="sourceLine" id="cb1-37" data-line-number="37">   <span class="kw">&lt;parameters&gt;</span></a>
-<a class="sourceLine" id="cb1-38" data-line-number="38">    <span class="kw">&lt;method&gt;</span>uniform<span class="kw">&lt;/method&gt;</span></a>
-<a class="sourceLine" id="cb1-39" data-line-number="39">   <span class="kw">&lt;/parameters&gt;</span></a>
-<a class="sourceLine" id="cb1-40" data-line-number="40">   <span class="kw">&lt;met&gt;</span></a>
-<a class="sourceLine" id="cb1-41" data-line-number="41">    <span class="kw">&lt;method&gt;</span>sampling<span class="kw">&lt;/method&gt;</span></a>
-<a class="sourceLine" id="cb1-42" data-line-number="42">    <span class="kw">&lt;/met&gt;</span></a>
-<a class="sourceLine" id="cb1-43" data-line-number="43">   <span class="kw">&lt;/samplingspace&gt;</span></a>
-<a class="sourceLine" id="cb1-44" data-line-number="44">  <span class="kw">&lt;/ensemble&gt;</span></a>
-<a class="sourceLine" id="cb1-45" data-line-number="45">  <span class="kw">&lt;model&gt;</span></a>
-<a class="sourceLine" id="cb1-46" data-line-number="46">    <span class="kw">&lt;id&gt;</span>5000000002<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb1-47" data-line-number="47">  <span class="kw">&lt;/model&gt;</span></a>
-<a class="sourceLine" id="cb1-48" data-line-number="48">  <span class="kw">&lt;workflow&gt;</span></a>
-<a class="sourceLine" id="cb1-49" data-line-number="49">    <span class="kw">&lt;id&gt;</span>99000000006<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb1-50" data-line-number="50">  <span class="kw">&lt;/workflow&gt;</span></a>
-<a class="sourceLine" id="cb1-51" data-line-number="51">  <span class="kw">&lt;run&gt;</span></a>
-<a class="sourceLine" id="cb1-52" data-line-number="52">    <span class="kw">&lt;site&gt;</span></a>
-<a class="sourceLine" id="cb1-53" data-line-number="53">      <span class="kw">&lt;id&gt;</span>1000000098<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb1-54" data-line-number="54">      <span class="kw">&lt;met.start&gt;</span>2004/01/01<span class="kw">&lt;/met.start&gt;</span></a>
-<a class="sourceLine" id="cb1-55" data-line-number="55">      <span class="kw">&lt;met.end&gt;</span>2004/12/31<span class="kw">&lt;/met.end&gt;</span></a>
-<a class="sourceLine" id="cb1-56" data-line-number="56">    <span class="kw">&lt;/site&gt;</span></a>
-<a class="sourceLine" id="cb1-57" data-line-number="57">    <span class="kw">&lt;inputs&gt;</span></a>
-<a class="sourceLine" id="cb1-58" data-line-number="58">      <span class="kw">&lt;met&gt;</span></a>
-<a class="sourceLine" id="cb1-59" data-line-number="59">        <span class="kw">&lt;source&gt;</span>CRUNCEP<span class="kw">&lt;/source&gt;</span></a>
-<a class="sourceLine" id="cb1-60" data-line-number="60">        <span class="kw">&lt;output&gt;</span>SIPNET<span class="kw">&lt;/output&gt;</span></a>
-<a class="sourceLine" id="cb1-61" data-line-number="61">      <span class="kw">&lt;/met&gt;</span></a>
-<a class="sourceLine" id="cb1-62" data-line-number="62">    <span class="kw">&lt;/inputs&gt;</span></a>
-<a class="sourceLine" id="cb1-63" data-line-number="63">    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span></a>
-<a class="sourceLine" id="cb1-64" data-line-number="64">    <span class="kw">&lt;end.date&gt;</span>2004/12/31<span class="kw">&lt;/end.date&gt;</span></a>
-<a class="sourceLine" id="cb1-65" data-line-number="65">  <span class="kw">&lt;/run&gt;</span></a>
-<a class="sourceLine" id="cb1-66" data-line-number="66">  <span class="kw">&lt;host&gt;</span></a>
-<a class="sourceLine" id="cb1-67" data-line-number="67">    <span class="kw">&lt;name&gt;</span>localhost<span class="kw">&lt;/name&gt;</span></a>
-<a class="sourceLine" id="cb1-68" data-line-number="68">    <span class="kw">&lt;rabbitmq&gt;</span></a>
-<a class="sourceLine" id="cb1-69" data-line-number="69">      <span class="kw">&lt;uri&gt;</span>amqp://guest:guest@rabbitmq:5672/%2F<span class="kw">&lt;/uri&gt;</span></a>
-<a class="sourceLine" id="cb1-70" data-line-number="70">      <span class="kw">&lt;queue&gt;</span>SIPNET_136<span class="kw">&lt;/queue&gt;</span></a>
-<a class="sourceLine" id="cb1-71" data-line-number="71">    <span class="kw">&lt;/rabbitmq&gt;</span></a>
-<a class="sourceLine" id="cb1-72" data-line-number="72">  <span class="kw">&lt;/host&gt;</span></a>
-<a class="sourceLine" id="cb1-73" data-line-number="73"><span class="kw">&lt;/pecan&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;pecan&gt;</span>
+  <span class="kw">&lt;info&gt;</span>
+    <span class="kw">&lt;notes&gt;</span>Example run<span class="kw">&lt;/notes&gt;</span>
+    <span class="kw">&lt;userid&gt;</span>-1<span class="kw">&lt;/userid&gt;</span>
+    <span class="kw">&lt;username&gt;</span>guestuser<span class="kw">&lt;/username&gt;</span>
+    <span class="kw">&lt;date&gt;</span>2018/09/18 19:12:28 +0000<span class="kw">&lt;/date&gt;</span>
+  <span class="kw">&lt;/info&gt;</span>
+  <span class="kw">&lt;outdir&gt;</span>/data/workflows/PEcAn_99000000006<span class="kw">&lt;/outdir&gt;</span>
+  <span class="kw">&lt;database&gt;</span>
+    <span class="kw">&lt;bety&gt;</span>
+      <span class="kw">&lt;user&gt;</span>bety<span class="kw">&lt;/user&gt;</span>
+      <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span>
+      <span class="kw">&lt;host&gt;</span>postgres<span class="kw">&lt;/host&gt;</span>
+      <span class="kw">&lt;dbname&gt;</span>bety<span class="kw">&lt;/dbname&gt;</span>
+      <span class="kw">&lt;driver&gt;</span>PostgreSQL<span class="kw">&lt;/driver&gt;</span>
+      <span class="kw">&lt;write&gt;</span>true<span class="kw">&lt;/write&gt;</span>
+    <span class="kw">&lt;/bety&gt;</span>
+    <span class="kw">&lt;dbfiles&gt;</span>/data/dbfiles<span class="kw">&lt;/dbfiles&gt;</span>
+  <span class="kw">&lt;/database&gt;</span>
+  <span class="kw">&lt;pfts&gt;</span>
+    <span class="kw">&lt;pft&gt;</span>
+      <span class="kw">&lt;name&gt;</span>tundra.grasses<span class="kw">&lt;/name&gt;</span> 
+      <span class="kw">&lt;constants&gt;</span>
+        <span class="kw">&lt;num&gt;</span>1<span class="kw">&lt;/num&gt;</span>
+      <span class="kw">&lt;/constants&gt;</span>
+    <span class="kw">&lt;/pft&gt;</span>
+  <span class="kw">&lt;/pfts&gt;</span>
+  <span class="kw">&lt;meta.analysis&gt;</span>
+    <span class="kw">&lt;iter&gt;</span>3000<span class="kw">&lt;/iter&gt;</span>
+    <span class="kw">&lt;random.effects&gt;</span>FALSE<span class="kw">&lt;/random.effects&gt;</span>
+  <span class="kw">&lt;/meta.analysis&gt;</span>
+  <span class="kw">&lt;ensemble&gt;</span>
+   <span class="kw">&lt;size&gt;</span>1<span class="kw">&lt;/size&gt;</span>
+   <span class="kw">&lt;variable&gt;</span>NPP<span class="kw">&lt;/variable&gt;</span>
+   <span class="kw">&lt;samplingspace&gt;</span>
+   <span class="kw">&lt;parameters&gt;</span>
+    <span class="kw">&lt;method&gt;</span>uniform<span class="kw">&lt;/method&gt;</span>
+   <span class="kw">&lt;/parameters&gt;</span>
+   <span class="kw">&lt;met&gt;</span>
+    <span class="kw">&lt;method&gt;</span>sampling<span class="kw">&lt;/method&gt;</span>
+    <span class="kw">&lt;/met&gt;</span>
+   <span class="kw">&lt;/samplingspace&gt;</span>
+  <span class="kw">&lt;/ensemble&gt;</span>
+  <span class="kw">&lt;model&gt;</span>
+    <span class="kw">&lt;id&gt;</span>5000000002<span class="kw">&lt;/id&gt;</span>
+  <span class="kw">&lt;/model&gt;</span>
+  <span class="kw">&lt;workflow&gt;</span>
+    <span class="kw">&lt;id&gt;</span>99000000006<span class="kw">&lt;/id&gt;</span>
+  <span class="kw">&lt;/workflow&gt;</span>
+  <span class="kw">&lt;run&gt;</span>
+    <span class="kw">&lt;site&gt;</span>
+      <span class="kw">&lt;id&gt;</span>1000000098<span class="kw">&lt;/id&gt;</span>
+      <span class="kw">&lt;met.start&gt;</span>2004/01/01<span class="kw">&lt;/met.start&gt;</span>
+      <span class="kw">&lt;met.end&gt;</span>2004/12/31<span class="kw">&lt;/met.end&gt;</span>
+    <span class="kw">&lt;/site&gt;</span>
+    <span class="kw">&lt;inputs&gt;</span>
+      <span class="kw">&lt;met&gt;</span>
+        <span class="kw">&lt;source&gt;</span>CRUNCEP<span class="kw">&lt;/source&gt;</span>
+        <span class="kw">&lt;output&gt;</span>SIPNET<span class="kw">&lt;/output&gt;</span>
+      <span class="kw">&lt;/met&gt;</span>
+    <span class="kw">&lt;/inputs&gt;</span>
+    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span>
+    <span class="kw">&lt;end.date&gt;</span>2004/12/31<span class="kw">&lt;/end.date&gt;</span>
+  <span class="kw">&lt;/run&gt;</span>
+  <span class="kw">&lt;host&gt;</span>
+    <span class="kw">&lt;name&gt;</span>localhost<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;rabbitmq&gt;</span>
+      <span class="kw">&lt;uri&gt;</span>amqp://guest:guest@rabbitmq:5672/%2F<span class="kw">&lt;/uri&gt;</span>
+      <span class="kw">&lt;queue&gt;</span>SIPNET_136<span class="kw">&lt;/queue&gt;</span>
+    <span class="kw">&lt;/rabbitmq&gt;</span>
+  <span class="kw">&lt;/host&gt;</span>
+<span class="kw">&lt;/pecan&gt;</span></code></pre>
 <p>In the following sections, we step through each of these sections in detail.</p>
 <div id="xml-core-config" class="section level2">
 <h2><span class="header-section-number">7.1</span> Core configuration</h2>
 <div id="xml-structure" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Top-level structure</h3>
 <p>The first line of the XML file should contain version and encoding information.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span></code></pre>
 <p>The rest of the XML file should be surrounded by <code>&lt;pecan&gt;...&lt;/pecan&gt;</code> tags.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;pecan&gt;</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  ...XML body here...</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">&lt;/pecan&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;pecan&gt;</span>
+  ...XML body here...
+<span class="kw">&lt;/pecan&gt;</span></code></pre>
 </div>
 <div id="xml-info" class="section level3">
 <h3><span class="header-section-number">7.1.2</span> <code>info</code>: Run metadata</h3>
 <p>This section contains run metadata.
 This information is not essential to a successful model run, but is useful for tracking run provenance.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb4-1" data-line-number="1">  <span class="kw">&lt;info&gt;</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">    <span class="kw">&lt;notes&gt;</span>Example run<span class="kw">&lt;/notes&gt;</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">    <span class="kw">&lt;userid&gt;</span>-1<span class="kw">&lt;/userid&gt;</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="kw">&lt;username&gt;</span>guestuser<span class="kw">&lt;/username&gt;</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="kw">&lt;date&gt;</span>2018/09/18 19:12:28 +0000<span class="kw">&lt;/date&gt;</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="kw">&lt;/info&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;info&gt;</span>
+    <span class="kw">&lt;notes&gt;</span>Example run<span class="kw">&lt;/notes&gt;</span>
+    <span class="kw">&lt;userid&gt;</span>-1<span class="kw">&lt;/userid&gt;</span>
+    <span class="kw">&lt;username&gt;</span>guestuser<span class="kw">&lt;/username&gt;</span>
+    <span class="kw">&lt;date&gt;</span>2018/09/18 19:12:28 +0000<span class="kw">&lt;/date&gt;</span>
+  <span class="kw">&lt;/info&gt;</span></code></pre>
 <p>The <code>&lt;notes&gt;</code> tag will be filled in by the web GUI if you provide notes, or you can add notes yourself within these tags. We suggest adding notes that help identify your run and a brief description of what the run is for. Because these notes are searchable within the PEcAn database and web interface, they can be a useful way to distinguish between similar runs.</p>
 <p>The <code>&lt;userid&gt;</code> and <code>&lt;username&gt;</code> section is filled in from the GUI if you are signed in. If you are not using the GUI, add the user name and ID you are associated with that exists within the PEcAn database.</p>
 <p>The <code>&lt;date&gt;&lt;/date&gt;</code> tag is filled automatically at the time of your run from the GUI. If you are not using the GUI, add the date you execute the run. This tag is not the tag for the dates you would like to run your model simulation.</p>
@@ -804,7 +805,7 @@ This information is not essential to a successful model run, but is useful for t
 This is the directory where all model input and output files will be stored.
 By default, the web interface names this folder <code>PEcAn_&lt;workflow ID&gt;</code>, and higher-level location is set by the <code>$output_folder$</code> variable in the <code>web/config.php</code> file.
 If no <code>outdir</code> is specified, PEcAn defaults to the working directory from which it is called, which may be counterintuitive.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" data-line-number="1">  <span class="kw">&lt;outdir&gt;</span>/data/workflows/PEcAn_99000000006<span class="kw">&lt;/outdir&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;outdir&gt;</span>/data/workflows/PEcAn_99000000006<span class="kw">&lt;/outdir&gt;</span></code></pre>
 </div>
 <div id="xml-database" class="section level3">
 <h3><span class="header-section-number">7.1.4</span> <code>database</code>: PEcAn database settings</h3>
@@ -812,27 +813,27 @@ If no <code>outdir</code> is specified, PEcAn defaults to the working directory 
 <h4><span class="header-section-number">7.1.4.1</span> <code>bety</code>: PEcAn database (Bety) configuration</h4>
 <p>The <code>bety</code> tag defines the driver to use to connect to the database (the only driver we support, and the default, is <code>PostgreSQL</code>) and parameters required to connect to the database. Note that connection parameters are passed <em>exactly</em> as entered to the underlying R database driver, and any invalid or extra parameters will result in an error.</p>
 <p>In other words, this configuration…</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb6-1" data-line-number="1">  <span class="kw">&lt;database&gt;</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">    ...</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="kw">&lt;bety&gt;</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">      <span class="kw">&lt;user&gt;</span>bety<span class="kw">&lt;/user&gt;</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">      <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">      <span class="kw">&lt;host&gt;</span>postgres<span class="kw">&lt;/host&gt;</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">      <span class="kw">&lt;dbname&gt;</span>bety<span class="kw">&lt;/dbname&gt;</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">      <span class="kw">&lt;driver&gt;</span>PostgreSQL<span class="kw">&lt;/driver&gt;</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">      <span class="kw">&lt;write&gt;</span>true<span class="kw">&lt;/write&gt;</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10">    <span class="kw">&lt;/bety&gt;</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11">    ...</a>
-<a class="sourceLine" id="cb6-12" data-line-number="12">  <span class="kw">&lt;/database&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;database&gt;</span>
+    ...
+    <span class="kw">&lt;bety&gt;</span>
+      <span class="kw">&lt;user&gt;</span>bety<span class="kw">&lt;/user&gt;</span>
+      <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span>
+      <span class="kw">&lt;host&gt;</span>postgres<span class="kw">&lt;/host&gt;</span>
+      <span class="kw">&lt;dbname&gt;</span>bety<span class="kw">&lt;/dbname&gt;</span>
+      <span class="kw">&lt;driver&gt;</span>PostgreSQL<span class="kw">&lt;/driver&gt;</span>
+      <span class="kw">&lt;write&gt;</span>true<span class="kw">&lt;/write&gt;</span>
+    <span class="kw">&lt;/bety&gt;</span>
+    ...
+  <span class="kw">&lt;/database&gt;</span></code></pre>
 <p>…will be translated into R code like the following:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  DBI<span class="op">::</span><span class="kw">dbDriver</span>(<span class="st">&quot;PostgreSQL&quot;</span>),</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">user =</span> <span class="st">&quot;bety&quot;</span>,</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">password =</span> <span class="st">&quot;bety&quot;</span>,</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="dt">dbname =</span> <span class="st">&quot;bety&quot;</span>,</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="dt">host =</span> <span class="st">&quot;postgres&quot;</span>,</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">  <span class="dt">write =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(
+  DBI<span class="op">::</span><span class="kw">dbDriver</span>(<span class="st">&quot;PostgreSQL&quot;</span>),
+  <span class="dt">user =</span> <span class="st">&quot;bety&quot;</span>,
+  <span class="dt">password =</span> <span class="st">&quot;bety&quot;</span>,
+  <span class="dt">dbname =</span> <span class="st">&quot;bety&quot;</span>,
+  <span class="dt">host =</span> <span class="st">&quot;postgres&quot;</span>,
+  <span class="dt">write =</span> <span class="ot">TRUE</span>
+)</code></pre>
 <p>Common parameters are described as follows:</p>
 <ul>
 <li><code>driver</code>: The driver to use to connect to the database. This should always be set to <code>PostgreSQL</code>, unless you absolutely know what you’re doing.</li>
@@ -852,25 +853,25 @@ The default <code>config.php</code> settings on any given platform (VM, Docker, 
 <div id="xml-dbfiles" class="section level4">
 <h4><span class="header-section-number">7.1.4.2</span> <code>dbfiles</code>: Location of database files</h4>
 <p>The <code>dbfiles</code> is a path to the local location of files needed to run models using PEcAn, including model executables and inputs.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb8-1" data-line-number="1">  <span class="kw">&lt;database&gt;</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">    ...</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">    <span class="kw">&lt;dbfiles&gt;</span>/data/dbfiles<span class="kw">&lt;/dbfiles&gt;</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">    ...</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">  <span class="kw">&lt;/database&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;database&gt;</span>
+    ...
+    <span class="kw">&lt;dbfiles&gt;</span>/data/dbfiles<span class="kw">&lt;/dbfiles&gt;</span>
+    ...
+  <span class="kw">&lt;/database&gt;</span></code></pre>
 </div>
 <div id="xml-fia" class="section level4">
 <h4><span class="header-section-number">7.1.4.3</span> (Experimental) <code>fia</code>: FIA database connection parameters</h4>
 <p>If a version of the FIA database is available, it can be configured using <code>&lt;fia&gt;</code> node, whose syntax is identical to that of the <code>&lt;bety&gt;</code> node.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb9-1" data-line-number="1">  <span class="kw">&lt;database&gt;</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">    ...</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">    <span class="kw">&lt;fia&gt;</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">        <span class="kw">&lt;dbname&gt;</span>fia5data<span class="kw">&lt;/dbname&gt;</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">        <span class="kw">&lt;username&gt;</span>bety<span class="kw">&lt;/username&gt;</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">        <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">        <span class="kw">&lt;host&gt;</span>localhost<span class="kw">&lt;/host&gt;</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">    <span class="kw">&lt;/fia&gt;</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9">    ...</a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">  <span class="kw">&lt;/database&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;database&gt;</span>
+    ...
+    <span class="kw">&lt;fia&gt;</span>
+        <span class="kw">&lt;dbname&gt;</span>fia5data<span class="kw">&lt;/dbname&gt;</span>
+        <span class="kw">&lt;username&gt;</span>bety<span class="kw">&lt;/username&gt;</span>
+        <span class="kw">&lt;password&gt;</span>bety<span class="kw">&lt;/password&gt;</span>
+        <span class="kw">&lt;host&gt;</span>localhost<span class="kw">&lt;/host&gt;</span>
+    <span class="kw">&lt;/fia&gt;</span>
+    ...
+  <span class="kw">&lt;/database&gt;</span></code></pre>
 <p>Currently, this is only used for extraction of specific site vegetation information (notably, for ED2 <code>css</code>, <code>pss</code>, and <code>site</code> files).
 Stability not ensured as of 1.5.3.</p>
 </div>
@@ -878,14 +879,14 @@ Stability not ensured as of 1.5.3.</p>
 <div id="xml-pft" class="section level3">
 <h3><span class="header-section-number">7.1.5</span> <code>pft</code>: Plant functional type selection</h3>
 <p>The PEcAn system requires at least 1 plant functional type (PFT) to be specified inside the <code>&lt;pfts&gt;</code> section.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb10-1" data-line-number="1">  <span class="kw">&lt;pfts&gt;</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">    <span class="kw">&lt;pft&gt;</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">      <span class="kw">&lt;name&gt;</span>tundra.grasses<span class="kw">&lt;/name&gt;</span> </a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">      <span class="kw">&lt;constants&gt;</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">        <span class="kw">&lt;num&gt;</span>1<span class="kw">&lt;/num&gt;</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">      <span class="kw">&lt;/constants&gt;</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">    <span class="kw">&lt;/pft&gt;</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">  <span class="kw">&lt;/pfts&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;pfts&gt;</span>
+    <span class="kw">&lt;pft&gt;</span>
+      <span class="kw">&lt;name&gt;</span>tundra.grasses<span class="kw">&lt;/name&gt;</span> 
+      <span class="kw">&lt;constants&gt;</span>
+        <span class="kw">&lt;num&gt;</span>1<span class="kw">&lt;/num&gt;</span>
+      <span class="kw">&lt;/constants&gt;</span>
+    <span class="kw">&lt;/pft&gt;</span>
+  <span class="kw">&lt;/pfts&gt;</span></code></pre>
 <ul>
 <li><code>name</code> : (required) the name of the PFT, which must <em>exactly</em> match the name in the PEcAn database.</li>
 <li><code>outdir</code>: (optional) Directory path in which PFT-specific output will be stored during meta-analysis and sensitivity analysis. If not specified (recommended), it will be written into <code>&lt;outdir&gt;/&lt;pftname&gt;</code>.</li>
@@ -900,10 +901,10 @@ Stability not ensured as of 1.5.3.</p>
 <h3><span class="header-section-number">7.1.6</span> <code>meta.analysis</code>: Trait Meta Analysis</h3>
 <p>The section meta.analysis needs to exists for a meta.analysis to be executed, even though all tags inside are optional.
 Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to manually set all parameters), you should omit this node.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb11-1" data-line-number="1">  <span class="kw">&lt;meta.analysis&gt;</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="kw">&lt;iter&gt;</span>3000<span class="kw">&lt;/iter&gt;</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="kw">&lt;random.effects&gt;</span>FALSE<span class="kw">&lt;/random.effects&gt;</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="kw">&lt;/meta.analysis&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;meta.analysis&gt;</span>
+    <span class="kw">&lt;iter&gt;</span>3000<span class="kw">&lt;/iter&gt;</span>
+    <span class="kw">&lt;random.effects&gt;</span>FALSE<span class="kw">&lt;/random.effects&gt;</span>
+  <span class="kw">&lt;/meta.analysis&gt;</span></code></pre>
 <p>Some of the tags that can go in this section are:</p>
 <ul>
 <li><code>iter</code>: <a href="http:/en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a> (Markov Chain Monte Carlo) chain length, i.e. the total number of posterior samples in the meta-analysis, default is 3000. Smaller numbers will run faster but produce larger errors.</li>
@@ -919,15 +920,15 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <div id="xml-model" class="section level3">
 <h3><span class="header-section-number">7.1.7</span> <code>model</code>: Model configuration</h3>
 <p>This section describes which model PEcAn should run and some instructions for how to run it.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">&lt;model&gt;</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">    <span class="kw">&lt;id&gt;</span>7<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">    <span class="kw">&lt;type&gt;</span>ED2<span class="kw">&lt;/type&gt;</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">    <span class="kw">&lt;binary&gt;</span>/usr/local/bin/ed2.r82<span class="kw">&lt;/binary&gt;</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">    <span class="kw">&lt;job.sh&gt;</span>module load hdf5<span class="kw">&lt;/job.sh&gt;</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">    <span class="kw">&lt;config.header&gt;</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">        <span class="co">&lt;!--...xml code passed directly to config file...--&gt;</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">    <span class="kw">&lt;/config.header&gt;</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="kw">&lt;/model&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;model&gt;</span>
+    <span class="kw">&lt;id&gt;</span>7<span class="kw">&lt;/id&gt;</span>
+    <span class="kw">&lt;type&gt;</span>ED2<span class="kw">&lt;/type&gt;</span>
+    <span class="kw">&lt;binary&gt;</span>/usr/local/bin/ed2.r82<span class="kw">&lt;/binary&gt;</span>
+    <span class="kw">&lt;job.sh&gt;</span>module load hdf5<span class="kw">&lt;/job.sh&gt;</span>
+    <span class="kw">&lt;config.header&gt;</span>
+        <span class="co">&lt;!--...xml code passed directly to config file...--&gt;</span>
+    <span class="kw">&lt;/config.header&gt;</span>
+<span class="kw">&lt;/model&gt;</span></code></pre>
 <p>Some important tags are as follows:</p>
 <ul>
 <li><code>id</code> – The unique numeric ID of the model in the PEcAn database <code>models</code> table. If this is present, then <code>type</code> and <code>binary</code> are optional since they can be determined from the PEcAn database.</li>
@@ -953,16 +954,16 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <h4><span class="header-section-number">7.1.7.2</span> ED2 specific tags</h4>
 <p>Following variables are ED specific and are used in the <a href="ED2-Configuration">ED2 Configuration</a>.</p>
 <p>Starting at 1.3.7 the tags for inputs have moved to <code>&lt;run&gt;&lt;inputs&gt;</code>. This includes, veg, soil, psscss, inputs.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb13-1" data-line-number="1">    <span class="kw">&lt;edin&gt;</span>/home/carya/runs/PEcAn_4/ED2IN.template<span class="kw">&lt;/edin&gt;</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">    <span class="kw">&lt;config.header&gt;</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">        <span class="kw">&lt;radiation&gt;</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">            <span class="kw">&lt;lai_min&gt;</span>0.01<span class="kw">&lt;/lai_min&gt;</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">        <span class="kw">&lt;/radiation&gt;</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">        <span class="kw">&lt;ed_misc&gt;</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">            <span class="kw">&lt;output_month&gt;</span>12<span class="kw">&lt;/output_month&gt;</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">        <span class="kw">&lt;/ed_misc&gt;</span> </a>
-<a class="sourceLine" id="cb13-9" data-line-number="9">    <span class="kw">&lt;/config.header&gt;</span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10">    <span class="kw">&lt;phenol.scheme&gt;</span>0<span class="kw">&lt;/phenol.scheme&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;edin&gt;</span>/home/carya/runs/PEcAn_4/ED2IN.template<span class="kw">&lt;/edin&gt;</span>
+    <span class="kw">&lt;config.header&gt;</span>
+        <span class="kw">&lt;radiation&gt;</span>
+            <span class="kw">&lt;lai_min&gt;</span>0.01<span class="kw">&lt;/lai_min&gt;</span>
+        <span class="kw">&lt;/radiation&gt;</span>
+        <span class="kw">&lt;ed_misc&gt;</span>
+            <span class="kw">&lt;output_month&gt;</span>12<span class="kw">&lt;/output_month&gt;</span>
+        <span class="kw">&lt;/ed_misc&gt;</span> 
+    <span class="kw">&lt;/config.header&gt;</span>
+    <span class="kw">&lt;phenol.scheme&gt;</span>0<span class="kw">&lt;/phenol.scheme&gt;</span></code></pre>
 <ul>
 <li><strong>edin</strong> : [required] template used to write ED2IN file</li>
 <li><strong>veg</strong> : <strong>OBSOLETE</strong> [required] location of VEG database, now part of <code>&lt;run&gt;&lt;inputs&gt;</code></li>
@@ -975,25 +976,25 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <div id="xml-run" class="section level3">
 <h3><span class="header-section-number">7.1.8</span> <code>run</code>: Run Setup</h3>
 <p>This section provides detailed configuration for the model run, including the site and time period for the simulation and what input files will be used.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb14-1" data-line-number="1">  <span class="kw">&lt;run&gt;</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="kw">&lt;site&gt;</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">      <span class="kw">&lt;id&gt;</span>1000000098<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">      <span class="kw">&lt;met.start&gt;</span>2004/01/01<span class="kw">&lt;/met.start&gt;</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">      <span class="kw">&lt;met.end&gt;</span>2004/12/31<span class="kw">&lt;/met.end&gt;</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">      <span class="kw">&lt;site.pft&gt;</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">        <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen<span class="kw">&lt;/pft.name&gt;</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">        <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen.test<span class="kw">&lt;/pft.name&gt;</span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9">      <span class="kw">&lt;/site.pft&gt;</span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">    <span class="kw">&lt;/site&gt;</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11">    <span class="kw">&lt;inputs&gt;</span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12">      <span class="kw">&lt;met&gt;</span></a>
-<a class="sourceLine" id="cb14-13" data-line-number="13">        <span class="kw">&lt;source&gt;</span>CRUNCEP<span class="kw">&lt;/source&gt;</span></a>
-<a class="sourceLine" id="cb14-14" data-line-number="14">        <span class="kw">&lt;output&gt;</span>SIPNET<span class="kw">&lt;/output&gt;</span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15">      <span class="kw">&lt;/met&gt;</span></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16">    <span class="kw">&lt;/inputs&gt;</span></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17">    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span></a>
-<a class="sourceLine" id="cb14-18" data-line-number="18">    <span class="kw">&lt;end.date&gt;</span>2004/12/31<span class="kw">&lt;/end.date&gt;</span></a>
-<a class="sourceLine" id="cb14-19" data-line-number="19">  <span class="kw">&lt;/run&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;run&gt;</span>
+    <span class="kw">&lt;site&gt;</span>
+      <span class="kw">&lt;id&gt;</span>1000000098<span class="kw">&lt;/id&gt;</span>
+      <span class="kw">&lt;met.start&gt;</span>2004/01/01<span class="kw">&lt;/met.start&gt;</span>
+      <span class="kw">&lt;met.end&gt;</span>2004/12/31<span class="kw">&lt;/met.end&gt;</span>
+      <span class="kw">&lt;site.pft&gt;</span>
+        <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen<span class="kw">&lt;/pft.name&gt;</span>
+        <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen.test<span class="kw">&lt;/pft.name&gt;</span>
+      <span class="kw">&lt;/site.pft&gt;</span>
+    <span class="kw">&lt;/site&gt;</span>
+    <span class="kw">&lt;inputs&gt;</span>
+      <span class="kw">&lt;met&gt;</span>
+        <span class="kw">&lt;source&gt;</span>CRUNCEP<span class="kw">&lt;/source&gt;</span>
+        <span class="kw">&lt;output&gt;</span>SIPNET<span class="kw">&lt;/output&gt;</span>
+      <span class="kw">&lt;/met&gt;</span>
+    <span class="kw">&lt;/inputs&gt;</span>
+    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span>
+    <span class="kw">&lt;end.date&gt;</span>2004/12/31<span class="kw">&lt;/end.date&gt;</span>
+  <span class="kw">&lt;/run&gt;</span></code></pre>
 <div id="xml-run-site" class="section level4">
 <h4><span class="header-section-number">7.1.8.1</span> <code>site</code>: Where to run the model</h4>
 <p>This contains the following tags:</p>
@@ -1004,10 +1005,10 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <li><code>met.start</code>, <code>met.end</code> – ???</li>
 <li><code>&lt;site.pft&gt;</code> (optional) If this tag is found under the site tag, then PEcAn automatically makes sure that only PFTs defined under this tag is used for generating parameter’s samples. Following shows an exmaple of how this tag can be added to the PEcAn xml :</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb15-1" data-line-number="1">    <span class="kw">&lt;site.pft&gt;</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">     <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen<span class="kw">&lt;/pft.name&gt;</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">     <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen<span class="kw">&lt;/pft.name&gt;</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">    <span class="kw">&lt;/site.pft&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;site.pft&gt;</span>
+     <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen<span class="kw">&lt;/pft.name&gt;</span>
+     <span class="kw">&lt;pft.name&gt;</span>temperate.needleleaf.evergreen<span class="kw">&lt;/pft.name&gt;</span>
+    <span class="kw">&lt;/site.pft&gt;</span></code></pre>
 <p>For multi-site runs if the <code>pft.site</code> tag (see {#xml-run-inputs}) is defined under <code>input</code>, then the above process will be done automatically under prepare settings step in PEcAn main workflow and there is no need for adding the tags manually. Using the <code>pft.site</code> tag however, requires a lookup table as an input (see {#xml-run-inputs}).</p>
 </div>
 <div id="xml-run-inputs" class="section level4">
@@ -1070,17 +1071,17 @@ If no <code>host</code> tag is provided, PEcAn assumes models are run on <code>l
 For detailed information on configuring this for RabbitMQ, see the <a href="rabbitmq.html#rabbitmq-xml">RabbitMQ</a> page.
 The following provides a quick overview of XML tags related to remote execution.</p>
 <p><strong>NOTE</strong>: Any paths specified in the <code>pecan.xml</code> refer to paths on the <code>host</code> specified in this section, /not/ the machine on which PEcAn is running (unless models are running on <code>localhost</code> or this section is omitted).</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb18-1" data-line-number="1">    <span class="kw">&lt;host&gt;</span></a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">        <span class="kw">&lt;name&gt;</span>pecan2.bu.edu<span class="kw">&lt;/name&gt;</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">        <span class="kw">&lt;rundir&gt;</span>/fs/data3/guestuser/pecan/testworkflow/run<span class="kw">&lt;/rundir&gt;</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">        <span class="kw">&lt;outdir&gt;</span>/fs/data3/guestuser/pecan/testworkflow/out<span class="kw">&lt;/outdir&gt;</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">        <span class="kw">&lt;scratchdir&gt;</span>/tmp/carya<span class="kw">&lt;/scratchdir&gt;</span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">        <span class="kw">&lt;clearscratch&gt;</span>TRUE<span class="kw">&lt;/clearscratch&gt;</span></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">        <span class="kw">&lt;qsub&gt;</span>qsub -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash<span class="kw">&lt;/qsub&gt;</span></a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">        <span class="kw">&lt;qsub.jobid&gt;</span>Your job ([0-9]+) .*<span class="kw">&lt;/qsub.jobid&gt;</span></a>
-<a class="sourceLine" id="cb18-9" data-line-number="9">        <span class="kw">&lt;qstat&gt;</span>qstat -j @JOBID@ <span class="er">&amp;</span>&gt; /dev/null || echo DONE<span class="kw">&lt;/qstat&gt;</span></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10">        <span class="kw">&lt;job.sh&gt;</span>module load udunits R/R-3.0.0_gnu-4.4.6<span class="kw">&lt;/job.sh&gt;</span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11">    <span class="kw">&lt;/host&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;host&gt;</span>
+        <span class="kw">&lt;name&gt;</span>pecan2.bu.edu<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;rundir&gt;</span>/fs/data3/guestuser/pecan/testworkflow/run<span class="kw">&lt;/rundir&gt;</span>
+        <span class="kw">&lt;outdir&gt;</span>/fs/data3/guestuser/pecan/testworkflow/out<span class="kw">&lt;/outdir&gt;</span>
+        <span class="kw">&lt;scratchdir&gt;</span>/tmp/carya<span class="kw">&lt;/scratchdir&gt;</span>
+        <span class="kw">&lt;clearscratch&gt;</span>TRUE<span class="kw">&lt;/clearscratch&gt;</span>
+        <span class="kw">&lt;qsub&gt;</span>qsub -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash<span class="kw">&lt;/qsub&gt;</span>
+        <span class="kw">&lt;qsub.jobid&gt;</span>Your job ([0-9]+) .*<span class="kw">&lt;/qsub.jobid&gt;</span>
+        <span class="kw">&lt;qstat&gt;</span>qstat -j @JOBID@ <span class="er">&amp;</span>&gt; /dev/null || echo DONE<span class="kw">&lt;/qstat&gt;</span>
+        <span class="kw">&lt;job.sh&gt;</span>module load udunits R/R-3.0.0_gnu-4.4.6<span class="kw">&lt;/job.sh&gt;</span>
+    <span class="kw">&lt;/host&gt;</span></code></pre>
 <p>The <code>host</code> section has the following tags:</p>
 <ul>
 <li><code>name</code>: [optional] name of host server where model is located and executed, if not specified localhost is assumed.</li>
@@ -1100,33 +1101,33 @@ The following provides a quick overview of XML tags related to remote execution.
 <div id="xml-ensemble" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> <code>ensemble</code>: Ensemble Runs</h3>
 <p>As with <code>meta.analysis</code>, if this section is missing, then PEcAn will not do an ensemble analysis.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb19-1" data-line-number="1">  <span class="kw">&lt;ensemble&gt;</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">    <span class="kw">&lt;size&gt;</span>1<span class="kw">&lt;/size&gt;</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="kw">&lt;variable&gt;</span>NPP<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">    <span class="kw">&lt;samplingspace&gt;</span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">      <span class="kw">&lt;parameters&gt;</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6">        <span class="kw">&lt;method&gt;</span>uniform<span class="kw">&lt;/method&gt;</span></a>
-<a class="sourceLine" id="cb19-7" data-line-number="7">      <span class="kw">&lt;/parameters&gt;</span></a>
-<a class="sourceLine" id="cb19-8" data-line-number="8">      <span class="kw">&lt;met&gt;</span></a>
-<a class="sourceLine" id="cb19-9" data-line-number="9">        <span class="kw">&lt;method&gt;</span>sampling<span class="kw">&lt;/method&gt;</span></a>
-<a class="sourceLine" id="cb19-10" data-line-number="10">      <span class="kw">&lt;/met&gt;</span></a>
-<a class="sourceLine" id="cb19-11" data-line-number="11">    <span class="kw">&lt;/samplingspace&gt;</span></a>
-<a class="sourceLine" id="cb19-12" data-line-number="12">  <span class="kw">&lt;/ensemble&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;ensemble&gt;</span>
+    <span class="kw">&lt;size&gt;</span>1<span class="kw">&lt;/size&gt;</span>
+    <span class="kw">&lt;variable&gt;</span>NPP<span class="kw">&lt;/variable&gt;</span>
+    <span class="kw">&lt;samplingspace&gt;</span>
+      <span class="kw">&lt;parameters&gt;</span>
+        <span class="kw">&lt;method&gt;</span>uniform<span class="kw">&lt;/method&gt;</span>
+      <span class="kw">&lt;/parameters&gt;</span>
+      <span class="kw">&lt;met&gt;</span>
+        <span class="kw">&lt;method&gt;</span>sampling<span class="kw">&lt;/method&gt;</span>
+      <span class="kw">&lt;/met&gt;</span>
+    <span class="kw">&lt;/samplingspace&gt;</span>
+  <span class="kw">&lt;/ensemble&gt;</span></code></pre>
 <p>An alternative configuration is as follows:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">&lt;ensemble&gt;</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="kw">&lt;size&gt;</span>5<span class="kw">&lt;/size&gt;</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">  <span class="kw">&lt;variable&gt;</span>GPP<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">  <span class="kw">&lt;start.year&gt;</span>1995<span class="kw">&lt;/start.year&gt;</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">  <span class="kw">&lt;end.year&gt;</span>1999<span class="kw">&lt;/end.year&gt;</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">  <span class="kw">&lt;samplingspace&gt;</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">  <span class="kw">&lt;parameters&gt;</span></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">    <span class="kw">&lt;method&gt;</span>lhc<span class="kw">&lt;/method&gt;</span></a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">  <span class="kw">&lt;/parameters&gt;</span></a>
-<a class="sourceLine" id="cb20-10" data-line-number="10">  <span class="kw">&lt;met&gt;</span></a>
-<a class="sourceLine" id="cb20-11" data-line-number="11">    <span class="kw">&lt;method&gt;</span>sampling<span class="kw">&lt;/method&gt;</span></a>
-<a class="sourceLine" id="cb20-12" data-line-number="12">  <span class="kw">&lt;/met&gt;</span></a>
-<a class="sourceLine" id="cb20-13" data-line-number="13">  <span class="kw">&lt;/samplingspace&gt;</span></a>
-<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="kw">&lt;/ensemble&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;ensemble&gt;</span>
+  <span class="kw">&lt;size&gt;</span>5<span class="kw">&lt;/size&gt;</span>
+  <span class="kw">&lt;variable&gt;</span>GPP<span class="kw">&lt;/variable&gt;</span>
+  <span class="kw">&lt;start.year&gt;</span>1995<span class="kw">&lt;/start.year&gt;</span>
+  <span class="kw">&lt;end.year&gt;</span>1999<span class="kw">&lt;/end.year&gt;</span>
+  <span class="kw">&lt;samplingspace&gt;</span>
+  <span class="kw">&lt;parameters&gt;</span>
+    <span class="kw">&lt;method&gt;</span>lhc<span class="kw">&lt;/method&gt;</span>
+  <span class="kw">&lt;/parameters&gt;</span>
+  <span class="kw">&lt;met&gt;</span>
+    <span class="kw">&lt;method&gt;</span>sampling<span class="kw">&lt;/method&gt;</span>
+  <span class="kw">&lt;/met&gt;</span>
+  <span class="kw">&lt;/samplingspace&gt;</span>
+<span class="kw">&lt;/ensemble&gt;</span></code></pre>
 <p>Tags in this block can be broken down into two categories: Those used for setup (which determine how the ensemble analysis runs) and those used for post-hoc analysis and visualization (i.e. which do not affect how the ensemble is generated).</p>
 <p>Tags related to ensemble setup are:</p>
 <ul>
@@ -1153,20 +1154,20 @@ For the cases where we need simulations with a predefined set of parameters, met
 <div id="xml-sensitivity-analysis" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> <code>sensitivity.analysis</code>: Sensitivity analysis</h3>
 <p>Only if this section is defined a sensitivity analysis is done. This section will have <code>&lt;quantile&gt;</code> or <code>&lt;sigma&gt;</code> nodes. If neither are given, the default is to use the median +/- [1 2 3] x sigma (e.g. the 0.00135 0.0228 0.159 0.5 0.841 0.977 0.999 quantiles); If the 0.5 (median) quantile is omitted, it will be added in the code.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">&lt;sensitivity.analysis&gt;</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">    <span class="kw">&lt;quantiles&gt;</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">        <span class="kw">&lt;sigma&gt;</span>-3<span class="kw">&lt;/sigma&gt;</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">        <span class="kw">&lt;sigma&gt;</span>-2<span class="kw">&lt;/sigma&gt;</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5">        <span class="kw">&lt;sigma&gt;</span>-1<span class="kw">&lt;/sigma&gt;</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6">        <span class="kw">&lt;sigma&gt;</span>1<span class="kw">&lt;/sigma&gt;</span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7">        <span class="kw">&lt;sigma&gt;</span>2<span class="kw">&lt;/sigma&gt;</span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8">        <span class="kw">&lt;sigma&gt;</span>3<span class="kw">&lt;/sigma&gt;</span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9">    <span class="kw">&lt;/quantiles&gt;</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10">  <span class="kw">&lt;variable&gt;</span>GPP<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11">  <span class="kw">&lt;perpft&gt;</span>TRUE<span class="kw">&lt;/perpft&gt;</span></a>
-<a class="sourceLine" id="cb21-12" data-line-number="12">    <span class="kw">&lt;start.year&gt;</span>2004<span class="kw">&lt;/start.year&gt;</span></a>
-<a class="sourceLine" id="cb21-13" data-line-number="13">    <span class="kw">&lt;end.year&gt;</span>2006<span class="kw">&lt;/end.year&gt;</span></a>
-<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="kw">&lt;/sensitivity.analysis&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;sensitivity.analysis&gt;</span>
+    <span class="kw">&lt;quantiles&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>-3<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>-2<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>-1<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>1<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>2<span class="kw">&lt;/sigma&gt;</span>
+        <span class="kw">&lt;sigma&gt;</span>3<span class="kw">&lt;/sigma&gt;</span>
+    <span class="kw">&lt;/quantiles&gt;</span>
+  <span class="kw">&lt;variable&gt;</span>GPP<span class="kw">&lt;/variable&gt;</span>
+  <span class="kw">&lt;perpft&gt;</span>TRUE<span class="kw">&lt;/perpft&gt;</span>
+    <span class="kw">&lt;start.year&gt;</span>2004<span class="kw">&lt;/start.year&gt;</span>
+    <span class="kw">&lt;end.year&gt;</span>2006<span class="kw">&lt;/end.year&gt;</span>
+<span class="kw">&lt;/sensitivity.analysis&gt;</span></code></pre>
 <ul>
 <li><code>quantiles/sigma</code> : [optional] The number of standard deviations relative to the standard normal (i.e. “Z-score”) for which to perform the ensemble analysis. For instance, <code>&lt;sigma&gt;1&lt;/sigma&gt;</code> corresponds to the quantile associated with 1 standard deviation greater than the mean (i.e. 0.681). Use a separate <code>&lt;sigma&gt;</code> tag, all under the <code>&lt;quantiles&gt;</code> tag, to specify multiple quantiles. Note that we <em>do not automatically add the quantile associated with <code>-sigma</code></em> – i.e. if you want +/- 1 standard deviation, then you must include both <code>&lt;sigma&gt;1&lt;/sigma&gt;</code> <em>and</em> <code>&lt;sigma&gt;-1&lt;/sigma&gt;</code>.</li>
 <li><code>start.date</code> : [required?] start date of the sensitivity analysis (in YYYY/MM/DD format)</li>
@@ -1203,9 +1204,9 @@ For the cases where we need simulations with a predefined set of parameters, met
  &lt;/multisettings&gt;</code></pre>
 <p>These tags correspond to different pecan analysis that need to know that there will be multiple settings read in.</p>
 <p>Next you’ll want to add the following tags to denote the group of sites you want to use. It leverages site groups, which are defined in BETY.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb24-1" data-line-number="1"> <span class="kw">&lt;sitegroup&gt;</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">   <span class="kw">&lt;id&gt;</span>1000000022<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"> <span class="kw">&lt;/sitegroup&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"> <span class="kw">&lt;sitegroup&gt;</span>
+   <span class="kw">&lt;id&gt;</span>1000000022<span class="kw">&lt;/id&gt;</span>
+ <span class="kw">&lt;/sitegroup&gt;</span></code></pre>
 <p>If you add this tag, you must remove the <code>&lt;site&gt; &lt;/site&gt;</code> tags from the <code>&lt;run&gt;</code> tag portion of your xml.
 The id of your sitegroup can be found by lookig up your site group within BETY.</p>
 <p>You do not have to use the sitegroup tag. You can manually add multiple sites using the structure in the example below.</p>
@@ -1219,43 +1220,43 @@ The id of your sitegroup can be found by lookig up your site group within BETY.<
 <pre><code># Write pecan.CHECKED.xml
 PEcAn.settings::write.settings(settings, outputfile = &quot;pecan.CHECKED.xml&quot;)</code></pre>
 <p>Once this section is run, you’ll need to open <code>pecan.CHECKED.xml</code>. You will notice that it has expanded from your original <code>pecan.xml</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb27-1" data-line-number="1"> <span class="kw">&lt;run&gt;</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">  <span class="kw">&lt;settings.1&gt;</span></a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">   <span class="kw">&lt;site&gt;</span></a>
-<a class="sourceLine" id="cb27-4" data-line-number="4">    <span class="kw">&lt;id&gt;</span>796<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">    <span class="kw">&lt;met.start&gt;</span>2005/01/01<span class="kw">&lt;/met.start&gt;</span></a>
-<a class="sourceLine" id="cb27-6" data-line-number="6">    <span class="kw">&lt;met.end&gt;</span>2011/12/31<span class="kw">&lt;/met.end&gt;</span></a>
-<a class="sourceLine" id="cb27-7" data-line-number="7">    <span class="kw">&lt;name&gt;</span>Bartlett Experimental Forest (US-Bar)<span class="kw">&lt;/name&gt;</span></a>
-<a class="sourceLine" id="cb27-8" data-line-number="8">    <span class="kw">&lt;lat&gt;</span>44.06464<span class="kw">&lt;/lat&gt;</span></a>
-<a class="sourceLine" id="cb27-9" data-line-number="9">    <span class="kw">&lt;lon&gt;</span>-71.288077<span class="kw">&lt;/lon&gt;</span></a>
-<a class="sourceLine" id="cb27-10" data-line-number="10">   <span class="kw">&lt;/site&gt;</span></a>
-<a class="sourceLine" id="cb27-11" data-line-number="11">   <span class="kw">&lt;start.date&gt;</span>2005/01/01<span class="kw">&lt;/start.date&gt;</span></a>
-<a class="sourceLine" id="cb27-12" data-line-number="12">   <span class="kw">&lt;end.date&gt;</span>2011/12/31<span class="kw">&lt;/end.date&gt;</span></a>
-<a class="sourceLine" id="cb27-13" data-line-number="13">   <span class="kw">&lt;inputs&gt;</span></a>
-<a class="sourceLine" id="cb27-14" data-line-number="14">    <span class="kw">&lt;met&gt;</span></a>
-<a class="sourceLine" id="cb27-15" data-line-number="15">     <span class="kw">&lt;path&gt;</span>/fs/data1/pecan.data/dbfiles/AmerifluxLBL_SIPNET_site_0-796/AMF_US-Bar_BASE_HH_4-1.2005-01-01.2011-12-31.clim<span class="kw">&lt;/path&gt;</span></a>
-<a class="sourceLine" id="cb27-16" data-line-number="16">    <span class="kw">&lt;/met&gt;</span></a>
-<a class="sourceLine" id="cb27-17" data-line-number="17">   <span class="kw">&lt;/inputs&gt;</span></a>
-<a class="sourceLine" id="cb27-18" data-line-number="18">  <span class="kw">&lt;/settings.1&gt;</span></a>
-<a class="sourceLine" id="cb27-19" data-line-number="19">  <span class="kw">&lt;settings.2&gt;</span></a>
-<a class="sourceLine" id="cb27-20" data-line-number="20">   <span class="kw">&lt;site&gt;</span></a>
-<a class="sourceLine" id="cb27-21" data-line-number="21">    <span class="kw">&lt;id&gt;</span>767<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb27-22" data-line-number="22">    <span class="kw">&lt;met.start&gt;</span>2001/01/01<span class="kw">&lt;/met.start&gt;</span></a>
-<a class="sourceLine" id="cb27-23" data-line-number="23">    <span class="kw">&lt;met.end&gt;</span>2014/12/31<span class="kw">&lt;/met.end&gt;</span></a>
-<a class="sourceLine" id="cb27-24" data-line-number="24">    <span class="kw">&lt;name&gt;</span>Morgan Monroe State Forest (US-MMS)<span class="kw">&lt;/name&gt;</span></a>
-<a class="sourceLine" id="cb27-25" data-line-number="25">    <span class="kw">&lt;lat&gt;</span>39.3231<span class="kw">&lt;/lat&gt;</span></a>
-<a class="sourceLine" id="cb27-26" data-line-number="26">    <span class="kw">&lt;lon&gt;</span>-86.4131<span class="kw">&lt;/lon&gt;</span></a>
-<a class="sourceLine" id="cb27-27" data-line-number="27">   <span class="kw">&lt;/site&gt;</span></a>
-<a class="sourceLine" id="cb27-28" data-line-number="28">   <span class="kw">&lt;start.date&gt;</span>2001/01/01<span class="kw">&lt;/start.date&gt;</span></a>
-<a class="sourceLine" id="cb27-29" data-line-number="29">   <span class="kw">&lt;end.date&gt;</span>2014/12/31<span class="kw">&lt;/end.date&gt;</span></a>
-<a class="sourceLine" id="cb27-30" data-line-number="30">   <span class="kw">&lt;inputs&gt;</span></a>
-<a class="sourceLine" id="cb27-31" data-line-number="31">    <span class="kw">&lt;met&gt;</span></a>
-<a class="sourceLine" id="cb27-32" data-line-number="32">     <span class="kw">&lt;path&gt;</span>/fs/data1/pecan.data/dbfiles/AmerifluxLBL_SIPNET_site_0-767/AMF_US-MMS_BASE_HR_8-1.2001-01-01.2014-12-31.clim<span class="kw">&lt;/path&gt;</span></a>
-<a class="sourceLine" id="cb27-33" data-line-number="33">    <span class="kw">&lt;/met&gt;</span></a>
-<a class="sourceLine" id="cb27-34" data-line-number="34">   <span class="kw">&lt;/inputs&gt;</span></a>
-<a class="sourceLine" id="cb27-35" data-line-number="35">  <span class="kw">&lt;/settings.2&gt;</span></a>
-<a class="sourceLine" id="cb27-36" data-line-number="36">....</a>
-<a class="sourceLine" id="cb27-37" data-line-number="37"><span class="kw">&lt;/run&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"> <span class="kw">&lt;run&gt;</span>
+  <span class="kw">&lt;settings.1&gt;</span>
+   <span class="kw">&lt;site&gt;</span>
+    <span class="kw">&lt;id&gt;</span>796<span class="kw">&lt;/id&gt;</span>
+    <span class="kw">&lt;met.start&gt;</span>2005/01/01<span class="kw">&lt;/met.start&gt;</span>
+    <span class="kw">&lt;met.end&gt;</span>2011/12/31<span class="kw">&lt;/met.end&gt;</span>
+    <span class="kw">&lt;name&gt;</span>Bartlett Experimental Forest (US-Bar)<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;lat&gt;</span>44.06464<span class="kw">&lt;/lat&gt;</span>
+    <span class="kw">&lt;lon&gt;</span>-71.288077<span class="kw">&lt;/lon&gt;</span>
+   <span class="kw">&lt;/site&gt;</span>
+   <span class="kw">&lt;start.date&gt;</span>2005/01/01<span class="kw">&lt;/start.date&gt;</span>
+   <span class="kw">&lt;end.date&gt;</span>2011/12/31<span class="kw">&lt;/end.date&gt;</span>
+   <span class="kw">&lt;inputs&gt;</span>
+    <span class="kw">&lt;met&gt;</span>
+     <span class="kw">&lt;path&gt;</span>/fs/data1/pecan.data/dbfiles/AmerifluxLBL_SIPNET_site_0-796/AMF_US-Bar_BASE_HH_4-1.2005-01-01.2011-12-31.clim<span class="kw">&lt;/path&gt;</span>
+    <span class="kw">&lt;/met&gt;</span>
+   <span class="kw">&lt;/inputs&gt;</span>
+  <span class="kw">&lt;/settings.1&gt;</span>
+  <span class="kw">&lt;settings.2&gt;</span>
+   <span class="kw">&lt;site&gt;</span>
+    <span class="kw">&lt;id&gt;</span>767<span class="kw">&lt;/id&gt;</span>
+    <span class="kw">&lt;met.start&gt;</span>2001/01/01<span class="kw">&lt;/met.start&gt;</span>
+    <span class="kw">&lt;met.end&gt;</span>2014/12/31<span class="kw">&lt;/met.end&gt;</span>
+    <span class="kw">&lt;name&gt;</span>Morgan Monroe State Forest (US-MMS)<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;lat&gt;</span>39.3231<span class="kw">&lt;/lat&gt;</span>
+    <span class="kw">&lt;lon&gt;</span>-86.4131<span class="kw">&lt;/lon&gt;</span>
+   <span class="kw">&lt;/site&gt;</span>
+   <span class="kw">&lt;start.date&gt;</span>2001/01/01<span class="kw">&lt;/start.date&gt;</span>
+   <span class="kw">&lt;end.date&gt;</span>2014/12/31<span class="kw">&lt;/end.date&gt;</span>
+   <span class="kw">&lt;inputs&gt;</span>
+    <span class="kw">&lt;met&gt;</span>
+     <span class="kw">&lt;path&gt;</span>/fs/data1/pecan.data/dbfiles/AmerifluxLBL_SIPNET_site_0-767/AMF_US-MMS_BASE_HR_8-1.2001-01-01.2014-12-31.clim<span class="kw">&lt;/path&gt;</span>
+    <span class="kw">&lt;/met&gt;</span>
+   <span class="kw">&lt;/inputs&gt;</span>
+  <span class="kw">&lt;/settings.2&gt;</span>
+....
+<span class="kw">&lt;/run&gt;</span></code></pre>
 <ul>
 <li>The <code>...</code> replaces the rest of the site settings for however many sites are within the site group.</li>
 </ul>
@@ -1270,21 +1271,21 @@ PEcAn.settings::write.settings(settings, outputfile = &quot;pecan.CHECKED.xml&qu
 <div id="xml-state-data-assimilation" class="section level3">
 <h3><span class="header-section-number">7.2.5</span> (experimental) State Data Assimilation</h3>
 <p>The following tags can be used for state data assimilation. More detailed information can be found here: <a href="settings-configured-analyses.html#sda">State Data Assimilation Documentation</a></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">&lt;state.data.assimilation&gt;</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">    <span class="kw">&lt;process.variance&gt;</span>FALSE<span class="kw">&lt;/process.variance&gt;</span></a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">  <span class="kw">&lt;sample.parameters&gt;</span>FALSE<span class="kw">&lt;/sample.parameters&gt;</span></a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">  <span class="kw">&lt;state.variables&gt;</span></a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">   <span class="kw">&lt;variable&gt;</span>AGB.pft<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb29-6" data-line-number="6">   <span class="kw">&lt;variable&gt;</span>TotSoilCarb<span class="kw">&lt;/variable&gt;</span></a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">  <span class="kw">&lt;/state.variables&gt;</span></a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">  <span class="kw">&lt;spin.up&gt;</span></a>
-<a class="sourceLine" id="cb29-9" data-line-number="9">    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span></a>
-<a class="sourceLine" id="cb29-10" data-line-number="10">      <span class="kw">&lt;end.date&gt;</span>2006/12/31<span class="kw">&lt;/end.date&gt;</span></a>
-<a class="sourceLine" id="cb29-11" data-line-number="11">  <span class="kw">&lt;/spin.up&gt;</span></a>
-<a class="sourceLine" id="cb29-12" data-line-number="12">  <span class="kw">&lt;forecast.time.step&gt;</span>1<span class="kw">&lt;/forecast.time.step&gt;</span></a>
-<a class="sourceLine" id="cb29-13" data-line-number="13">    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span></a>
-<a class="sourceLine" id="cb29-14" data-line-number="14">    <span class="kw">&lt;end.date&gt;</span>2006/12/31<span class="kw">&lt;/end.date&gt;</span></a>
-<a class="sourceLine" id="cb29-15" data-line-number="15"><span class="kw">&lt;/state.data.assimilation&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;state.data.assimilation&gt;</span>
+    <span class="kw">&lt;process.variance&gt;</span>FALSE<span class="kw">&lt;/process.variance&gt;</span>
+  <span class="kw">&lt;sample.parameters&gt;</span>FALSE<span class="kw">&lt;/sample.parameters&gt;</span>
+  <span class="kw">&lt;state.variables&gt;</span>
+   <span class="kw">&lt;variable&gt;</span>AGB.pft<span class="kw">&lt;/variable&gt;</span>
+   <span class="kw">&lt;variable&gt;</span>TotSoilCarb<span class="kw">&lt;/variable&gt;</span>
+  <span class="kw">&lt;/state.variables&gt;</span>
+  <span class="kw">&lt;spin.up&gt;</span>
+    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span>
+      <span class="kw">&lt;end.date&gt;</span>2006/12/31<span class="kw">&lt;/end.date&gt;</span>
+  <span class="kw">&lt;/spin.up&gt;</span>
+  <span class="kw">&lt;forecast.time.step&gt;</span>1<span class="kw">&lt;/forecast.time.step&gt;</span>
+    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span>
+    <span class="kw">&lt;end.date&gt;</span>2006/12/31<span class="kw">&lt;/end.date&gt;</span>
+<span class="kw">&lt;/state.data.assimilation&gt;</span></code></pre>
 <ul>
 <li><strong>process.variance</strong> : [optional] TRUE/FLASE flag for if process variance should be estimated (TRUE) or not (FALSE). If TRUE, a generalized ensemble filter will be used. If FALSE, an ensemble Kalman filter will be used. Default is FALSE.</li>
 <li><strong>sample.parameters</strong> : [optional] TRUE/FLASE flag for if parameters should be sampled for each ensemble member or not. This allows for more spread in the intial conditions of the forecast.</li>
@@ -1301,11 +1302,11 @@ PEcAn.settings::write.settings(settings, outputfile = &quot;pecan.CHECKED.xml&qu
 <div id="xml-browndog" class="section level3">
 <h3><span class="header-section-number">7.2.6</span> (experimental) Brown Dog</h3>
 <p>This section describes how to connect to <a href="http://browndog.ncsa.illinois.edu">Brown Dog</a>. This facilitates processing and conversions of data.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb30-1" data-line-number="1">  <span class="kw">&lt;browndog&gt;</span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">    <span class="kw">&lt;url&gt;</span>...<span class="kw">&lt;/url&gt;</span></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">    <span class="kw">&lt;username&gt;</span>...<span class="kw">&lt;/username&gt;</span></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4">    <span class="kw">&lt;password&gt;</span>...<span class="kw">&lt;/password&gt;</span></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5">  <span class="kw">&lt;/browndog&gt;</span></a></code></pre></div>
+<pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;browndog&gt;</span>
+    <span class="kw">&lt;url&gt;</span>...<span class="kw">&lt;/url&gt;</span>
+    <span class="kw">&lt;username&gt;</span>...<span class="kw">&lt;/username&gt;</span>
+    <span class="kw">&lt;password&gt;</span>...<span class="kw">&lt;/password&gt;</span>
+  <span class="kw">&lt;/browndog&gt;</span></code></pre>
 <ul>
 <li><code>url</code>: (required) endpoint for Brown Dog to be used.</li>
 <li><code>username</code>: (optional) username to be used with the endpoint for Brown Dog.</li>
@@ -1350,7 +1351,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1360,6 +1361,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1377,7 +1382,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
