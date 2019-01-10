@@ -25,7 +25,7 @@
 <meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2019-01-09">
+<meta name="date" content="2019-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -686,10 +686,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><p><strong>Install VirtualBox</strong> This is the software that runs the virtual machine. You can find the download link and instructions at <a href="http://www.virtualbox.org" class="uri">http://www.virtualbox.org</a>. <em>NOTE: On Windows you may see a warning about Logo testing, it is okay to ignore the warning.</em></p></li>
 <li><p><strong>Download the PEcAn VM</strong> You can find the download link at <a href="http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN" class="uri">http://opensource.ncsa.illinois.edu/projects/artifacts.php?key=PECAN</a>, under the “<strong>Files</strong>” header. Click the “.ova” file to begin the download. Note that the file is ~7 GB, so this download can take several minutes to hours depending on your connection speed. Also, the VM requires &gt;4 GB of RAM to operate correctly. Please check current usage of RAM and shutdown processes as needed.</p></li>
-<li><p><strong>Import the VM</strong> Once the download is complete, open VirtualBox. In the VirtualBox menus, go to “File” → “Import Appliance” and locate the downloaded “.ova” file.
-In the Appliance Import Settings, make sure you select “Reinitialize the MAC address of all network cards” (picture below). This is not selected by default and can result in networking issues since multiple machines might claim to have the same network MAC Address. (NOTE: If you experience network connection difficulties in the VM with this enabled, try re-importing the VM without this setting selected). Finally, click “Import” to build the Virtual Machine from its image.</p></li>
+<li><p><strong>Import the VM</strong> Once the download is complete, open VirtualBox. In the VirtualBox menus, go to “File” → “Import Appliance” and locate the downloaded “.ova” file.</p></li>
 </ol>
+<p>For Virtualbox version 5.x: In the Appliance Import Settings, make sure you select “Reinitialize the MAC address of all network cards” (picture below). This is not selected by default and can result in networking issues since multiple machines might claim to have the same network MAC Address.</p>
 <p><img src="figures/pic1.jpg" width="259" style="display: block; margin: auto;" /></p>
+<p>For Virtualbox versions starting with 6.0, there is a slightly different interface (see figure). Select “Generate new MAC addresses for all network adapters” from the MAC Address Policy:</p>
+<p><img src="figures/pic1v2.png" width="510" style="display: block; margin: auto;" /></p>
+<p>NOTE: If you experience network connection difficulties in the VM with this enabled, try re-importing the VM without this setting selected).</p>
+<p>Finally, click “Import” to build the Virtual Machine from its image.</p>
 <ol start="4" style="list-style-type: decimal">
 <li><strong>Launch PEcAn</strong> Double click the icon for the PEcAn VM. A terminal window will pop up showing the machine booting up which may take a minute. It is done booting when you get to the <code>pecan login:</code> prompt. You do not need to login as the VM behaves like a server that we will be accessing through you web browser. Feel free to minimize the VM window.</li>
 </ol>
