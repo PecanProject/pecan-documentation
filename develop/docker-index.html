@@ -25,7 +25,7 @@
 <meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2019-01-14">
+<meta name="date" content="2019-01-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -515,8 +515,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="30.3.1" data-path="docker-index.html"><a href="docker-index.html#pecan-docker-overview"><i class="fa fa-check"></i><b>30.3.1</b> Overview</a></li>
 <li class="chapter" data-level="30.3.2" data-path="docker-index.html"><a href="docker-index.html#pecan-docker-compose"><i class="fa fa-check"></i><b>30.3.2</b> PEcAn’s <code>docker-compose</code></a></li>
 </ul></li>
-<li class="chapter" data-level="30.4" data-path="docker-index.html"><a href="docker-index.html#model-docker"><i class="fa fa-check"></i><b>30.4</b> Dockerfiles for Models</a><ul>
-<li class="chapter" data-level="30.4.1" data-path="docker-index.html"><a href="docker-index.html#common-problems"><i class="fa fa-check"></i><b>30.4.1</b> Common problems</a></li>
+<li class="chapter" data-level="30.4" data-path="docker-index.html"><a href="docker-index.html#model-docker"><i class="fa fa-check"></i><b>30.4</b> Models using Docker</a><ul>
+<li class="chapter" data-level="30.4.1" data-path="docker-index.html"><a href="docker-index.html#model-docker-json-file"><i class="fa fa-check"></i><b>30.4.1</b> Model information</a></li>
+<li class="chapter" data-level="30.4.2" data-path="docker-index.html"><a href="docker-index.html#model-docker-Dockerfile"><i class="fa fa-check"></i><b>30.4.2</b> Model build</a></li>
+<li class="chapter" data-level="30.4.3" data-path="docker-index.html"><a href="docker-index.html#common-problems"><i class="fa fa-check"></i><b>30.4.3</b> Common problems</a></li>
 </ul></li>
 <li class="chapter" data-level="30.5" data-path="docker-index.html"><a href="docker-index.html#docker-build-images"><i class="fa fa-check"></i><b>30.5</b> Building and modifying images</a><ul>
 <li class="chapter" data-level="30.5.1" data-path="docker-index.html"><a href="docker-index.html#docker-local-devel"><i class="fa fa-check"></i><b>30.5.1</b> Local development and testing with Docker</a></li>
@@ -893,10 +895,12 @@ Once this is done you have a working instance of PEcAn.</p>
 <p>If all of the containers started successfully, you should be able to access the various components from a browser via the following URLs:</p>
 <ul>
 <li>PEcAn web interface (running models) – <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> (NOTE: The trailing backslash is necessary.)</li>
+<li>PEcAn documentation and home page – <a href="http://localhost:8000/" class="uri">http://localhost:8000/</a></li>
 <li>BETY web interface – <a href="http://localhost:8000/bety/" class="uri">http://localhost:8000/bety/</a></li>
 <li>File browser (minio) – <a href="http://localhost:8000/minio/" class="uri">http://localhost:8000/minio/</a></li>
-<li>RabbitMQ management console (for managing queued processes) – <a href="http://localhost:8000/" class="uri">http://localhost:8000/</a></li>
+<li>RabbitMQ management console (for managing queued processes) – <a href="http://localhost:8000/rabbitmq/" class="uri">http://localhost:8000/rabbitmq/</a></li>
 <li>Traefik, webserver showing maps from URLs onto their respective containers – <a href="http://localhost:8001/" class="uri">http://localhost:8001/</a></li>
+<li>Monitor, service that monitors models and shows all models that are online as well as how many instances are online and the number of jobs waiting. The output is in JSON – <a href="http://localhost:8000/monitor/" class="uri">http://localhost:8000/monitor/</a></li>
 </ul>
 </div>
 <div id="start-model-runs-using-curl" class="section level4">
@@ -959,8 +963,10 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
 <li><a href="docker-index.html#pecan-dc-postgres"><code>postgres</code></a></li>
 <li><a href="docker-index.html#pecan-dc-rabbitmq"><code>rabbitmq</code></a></li>
 <li><a href="docker-index.html#pecan-dc-bety"><code>bety</code></a></li>
+<li><a href="docker-index.html#pecan-dc-docs"><code>docs</code></a></li>
 <li><a href="docker-index.html#pecan-dc-web"><code>web</code></a></li>
 <li><a href="docker-index.html#pecan-dc-executor"><code>executor</code></a></li>
+<li><a href="docker-index.html#pecan-dc-monitor"><code>monitor</code></a></li>
 <li><a href="docker-index.html#pecan-dc-models">Model-specific services</a></li>
 </ul>
 <p>For reference, the complete <code>docker-compose</code> file is as follows:</p>
@@ -1099,6 +1105,20 @@ services:
     volumes:
     - pecan:/data
     - pecan:/var/www/html/pecan/data
+  monitor:
+    image: pecan/monitor:${PECAN_VERSION:-latest}
+    restart: unless-stopped
+    networks: pecan
+    ports: 9999:9999
+    environment:
+    - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
+    - FQDN=${PECAN_FQDN:-docker}
+    depends_on: rabbitmq
+    labels:
+    - traefik.enable=true
+    - traefik.frontend.rule=${TRAEFIK_FRONTEND_RULE:-}PathPrefixStrip:/monitor/
+    - traefik.backend=monitor
+    volumes: pecan:/data
   executor:
     image: pecan/executor:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1419,7 +1439,7 @@ In PEcAn, RabbitMQ functions as a task manager and scheduler, coordinating the e
   - traefik.frontend.rule=${TRAEFIK_FRONTEND_RULE:-}PathPrefix:/rabbitmq
   - traefik.website.frontend.whiteList.sourceRange=${TRAEFIK_IPFILTER:-172.16.0.0/12}
   volumes: rabbitmq:/var/lib/rabbitmq</code></pre>
-<p>Note that the <code>traefik.frontend.rule</code> indicates that browsing to <a href="http://localhost:8000" class="uri">http://localhost:8000</a> (with no further tags) leads to the RabbitMQ management console.</p>
+<p>Note that the <code>traefik.frontend.rule</code> indicates that browsing to <a href="http://localhost:8000/rabbitmq/" class="uri">http://localhost:8000/rabbitmq/</a> leads to the RabbitMQ management console.</p>
 <p>By default, the RabbitMQ management console has username/password <code>guest/guest</code>, which is highly insecure.
 For production instances of PEcAn, we highly recommend changing these credentials to something more secure, and removing access to the RabbitMQ management console via Traefik.</p>
 </div>
@@ -1445,8 +1465,21 @@ However, note that certain features of the PEcAn web interface do link to the BE
   - traefik.backend=bety</code></pre>
 <p>The BETY container Dockerfile is located in the root directory of the <a href="https://github.com/pecan/bety">BETY GitHub repository</a> (<a href="https://github.com/PecanProject/bety/blob/master/Dockerfile">direct link</a>).</p>
 </div>
+<div id="pecan-dc-docs" class="section level4">
+<h4><span class="header-section-number">30.3.2.9</span> <code>docs</code></h4>
+<p>This service will show the documentation for the version of PEcAn running as well as a homepage with links to all relevant endpoints. You can access this at <a href="http://localhost:8000/" class="uri">http://localhost:8000/</a>. You can find the documentation for PEcAn at <a href="http://localhost:8000/docs/pecan/" class="uri">http://localhost:8000/docs/pecan/</a>.</p>
+<p>Our current configuration is as follows:</p>
+<pre><code>docs:
+  image: pecan/docs:${PECAN_VERSION:-latest}
+  restart: unless-stopped
+  networks: pecan
+  labels:
+  - traefik.enable=true
+  - traefik.frontend.rule=${TRAEFIK_FRONTEND_RULE:-}PathPrefix:/
+  - traefik.backend=docs</code></pre>
+</div>
 <div id="pecan-dc-web" class="section level4">
-<h4><span class="header-section-number">30.3.2.9</span> <code>web</code></h4>
+<h4><span class="header-section-number">30.3.2.10</span> <code>web</code></h4>
 <p>This service runs the PEcAn web interface.
 It is effectively a thin wrapper around a standard Apache web server container from Docker Hub that installs some additional dependencies and copies over the necessary files from the PEcAn source code.</p>
 <p>Our configuration is as follows:</p>
@@ -1472,7 +1505,7 @@ It is effectively a thin wrapper around a standard Apache web server container f
 <p>In terms of <a href="#pecan-docker-develop">actively developing PEcAn using Docker</a>, this is the service to modify when making changes to the web interface (i.e. PHP, HTML, and JavaScript code located in the PEcAn <code>web</code> directory).</p>
 </div>
 <div id="pecan-dc-executor" class="section level4">
-<h4><span class="header-section-number">30.3.2.10</span> <code>executor</code></h4>
+<h4><span class="header-section-number">30.3.2.11</span> <code>executor</code></h4>
 <p>This service is in charge of running the R code underlying the core PEcAn workflow.
 However, it is <em>not</em> in charge of executing the models themselves – model binaries are located on their <a href="docker-index.html#pecan-dc-models">own dedicated Docker containers</a>, and model execution is coordinated by RabbitMQ.</p>
 <p>Our configuration is as follows:</p>
@@ -1493,8 +1526,28 @@ To facilitate caching, the <code>pecan/base</code> image is itself built on top 
 <p>In terms of <a href="#pecan-docker-develop">actively developing PEcAn using Docker</a>, this is the service to modify when making changes to the PEcAn R source code.
 Note that, unlike changes to the <code>web</code> image’s PHP code, changes to the R source code do not immediately propagate to the PEcAn container; instead, you have to re-compile the code by running <code>make</code> inside the container.</p>
 </div>
+<div id="pecan-dc-monitor" class="section level4">
+<h4><span class="header-section-number">30.3.2.12</span> <code>monitor</code></h4>
+<p>This service will show all models that are currently running <a href="http://localhost:8000/monitor/" class="uri">http://localhost:8000/monitor/</a>. This list returned is JSON and shows all models (grouped by type and version) that are currently running, or where seen in the past. This list will also contain a list of all current active containers, as well as how many jobs are waiting to be processed.</p>
+<p>This service is also responsible for registering any new models with PEcAn so users can select it and execute the model from the web interface.</p>
+<p>Our current configuration is as follows:</p>
+<pre><code>monitor:
+  image: pecan/monitor:${PECAN_VERSION:-latest}
+  restart: unless-stopped
+  networks: pecan
+  ports: 9999:9999
+  environment:
+  - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
+  - FQDN=${PECAN_FQDN:-docker}
+  depends_on: rabbitmq
+  labels:
+  - traefik.enable=true
+  - traefik.frontend.rule=${TRAEFIK_FRONTEND_RULE:-}PathPrefixStrip:/monitor/
+  - traefik.backend=monitor
+  volumes: pecan:/data</code></pre>
+</div>
 <div id="pecan-dc-models" class="section level4">
-<h4><span class="header-section-number">30.3.2.11</span> Model-specific containers</h4>
+<h4><span class="header-section-number">30.3.2.13</span> Model-specific containers</h4>
 <p>Additional models are added as additional services.
 In general, their configuration should be similar to the following configuration for SIPNET, which ships with PEcAn:</p>
 <pre><code>sipnet:
@@ -1511,28 +1564,58 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
 </div>
 </div>
 <div id="model-docker" class="section level2">
-<h2><span class="header-section-number">30.4</span> Dockerfiles for Models</h2>
+<h2><span class="header-section-number">30.4</span> Models using Docker</h2>
+<p>This section will discuss how to add new models to PEcAn docker. To be able to add a new model to PEcAn when using docker is as simple as starting a new container. The model will come online and let the PEcAn framework know there is a new model available, there is no need to go through the process of registering this model with PEcAn. Users will be able to select this new model from web interface and run with this model selected.</p>
+<p>For this process to work a docker image of the model will need to be created as well as small json file that is used to announce this new model. A separate service in PEcAn (<a href="docker-index.html#pecan-dc-monitor"><code>monitor</code></a>) will use this json file to keep track of all models available as well as register these models with PEcAn.</p>
+<div id="model-docker-json-file" class="section level3">
+<h3><span class="header-section-number">30.4.1</span> Model information</h3>
+<p>Each model will have a small json file called model_info.json that is used to describe the model and to used by the monitor service to register the model with PEcAn. This file will contain information about the model that is send as part of the heartbeat of the container to the monitor service. Below is an example of this file for the ED model. The required fields are <code>name</code>, <code>type</code>, <code>version</code> and <code>binary</code>. There are 2 special values that can be used, <code>@VERSION@</code> which will be replaced by the version that is passed in when building the container, and <code>@BINARY@</code> which will be replaced by the binary when building the docker image.</p>
+<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2.2&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;@VERSION@&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;binary&quot;</span><span class="fu">:</span> <span class="st">&quot;@BINARY@&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The Ecosystem Demography Biosphere Model (ED2) is an integrated terrestrial biosphere model incorporating hydrology, land-surface biophysics, vegetation dynamics, and soil carbon and nitrogen biogeochemistry&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;Mike Dietze&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;contributors&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;David LeBauer&quot;</span><span class="ot">,</span> <span class="st">&quot;Xiaohui Feng&quot;</span><span class="ot">,</span> <span class="st">&quot;Dan Wang&quot;</span><span class="ot">,</span> <span class="st">&quot;Carl Davidson&quot;</span><span class="ot">,</span> <span class="st">&quot;Rob Kooper&quot;</span><span class="ot">,</span> <span class="st">&quot;Shawn Serbin&quot;</span><span class="ot">,</span> <span class="st">&quot;Alexey Shiklomanov&quot;</span><span class="ot">]</span><span class="fu">,</span>
+  <span class="dt">&quot;links&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+    <span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;https://github.com/EDmodel/ED2&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;issues&quot;</span><span class="fu">:</span> <span class="st">&quot;https://github.com/EDmodel/ED2/issues&quot;</span>
+  <span class="fu">},</span>
+  <span class="dt">&quot;inputs&quot;</span><span class="fu">:</span> <span class="fu">{},</span>
+  <span class="dt">&quot;citation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;Medvigy D., Wofsy S. C., Munger J. W., Hollinger D. Y., Moorcroft P. R. 2009. Mechanistic scaling of ecosystem function and dynamics in space and time: Ecosystem Demography model version 2. J. Geophys. Res. 114 (doi:10.1029/2008JG000812)&quot;</span><span class="ot">]</span>
+<span class="fu">}</span></code></pre>
+<p>Other fields that are recommended, but currently not used yet, are:
+- <code>description</code> : a longer description of the model.
+- <code>creator</code> : contact person about this docker image.
+- <code>contribuor</code> : other people that have contributed to this docker image.
+- <code>links</code> : addtional links to help people when using this docker image, for example values that can be used are <code>source</code> to link to the source code, <code>issues</code> to link to issue tracking system, and <code>documentation</code> to link to model specific documentation.
+- <code>citation</code> : how the model should be cited in publications.</p>
+</div>
+<div id="model-docker-Dockerfile" class="section level3">
+<h3><span class="header-section-number">30.4.2</span> Model build</h3>
 <p>In general we try to minimize the size of the images. To be able to do this we split the process of creating the building of the model images into two pieces (or leverage of an image that exists from the original model developers). If you look at the example Dockerfile you will see that there are 2 sections, the first section will build the model binary, the second section will build the actual PEcAn model, which copies the binary from the first section.</p>
 <p>This is an example of how the ED2 model is build. This will install all the packages needed to build ED2 model, gets the latest version from GitHub and builds the model.</p>
-<p>The second section will create the actual model executor. This will leverage the PEcAn executor image that has PEcAn already installed as well as the python code to listen for messages and run the actual model code. This will install some additional packages needed by the model binary (more about that below) as well as set the <code>MODEL_TYPE</code> and <code>MODEL_VERSION</code> variables. These variables will be used to specify the queue that the model will listen on for any execution requests.</p>
-<p>It is important that the <code>MODEL_TYPE</code> and <code>MODEL_VERSION</code> match what is in the BETY database. The PEcAn code will use what is in the BETY database to send out a message to a specfic worker queue, if you do not set these variables correctly your model executor will pick up messages for the wrong model.</p>
-<p>To build the docker image, we use a Dockerfile (see example below) and run the following command. This command will expect the Dockerfile.ed2 to live in the current folder. It will also copy the content of the current folder and make it available to the build process (in this example we do not need any additional files). The image will be named pecan/model-ed2, since we do not specify the exact version it will be atomically be named <code>pecan/model-ed2:latest</code>.</p>
+<p>The second section will create the actual model runner. This will leverage the PEcAn model image that has PEcAn already installed as well as the python code to listen for messages and run the actual model code. This will install some additional packages needed by the model binary (more about that below), copy the model_info.json file and change the <code>@VERSION@</code> and <code>@BINARY@</code> placeholders.</p>
+<p>It is important values for <code>type</code> and <code>version</code> are set correct. The PEcAn code will use these to register the model with the BETY database, which is then used by PEcAn to send out a message to a specfic worker queue, if you do not set these variables correctly your model executor will pick up messages for the wrong model.</p>
+<p>To build the docker image, we use a Dockerfile (see example below) and run the following command. This command will expect the Dockerfile to live in the model specific folder and the command is executed in the root pecan folder. It will copy the content of the pecan folder and make it available to the build process (in this example we do not need any additional files).</p>
+<p>Since we can have multiple different versions of a model be available for PEcAn we ar using the following naming schema <code>pecan/model-&lt;modeltype&gt;-&lt;version&gt;:&lt;pecan version</code>. For example the image below will be named pecan/model-ed2-git, since we do not specify the exact version it will be atomically be named <code>pecan/model-ed2-git:latest</code>.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> build \
-    --tag pecan/model-ed2 \
-    --file Dockerfile.ed2 \
+    --tag pecan/model-ed2-git \
+    --file models/ed/Dockerfile \
     .</code></pre>
 <p>Example of a Dockerfile, in this case to build the ED2 model.</p>
 <pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span class="co"># ----------------------------------------------------------------------</span>
-<span class="co"># FIRST STAGE : BUILD MODEL BINARY</span>
+<span class="co"># BUILD MODEL BINARY</span>
 <span class="co"># ----------------------------------------------------------------------</span>
-<span class="kw">FROM</span> debian:testing as model-binary
+<span class="kw">FROM</span> debian:stretch as model-binary
 
 <span class="co"># Some variables that can be used to set control the docker build</span>
 <span class="kw">ARG</span> MODEL_VERSION=git
 
 <span class="co"># install dependencies</span>
 <span class="kw">RUN</span> apt-get update \
-    &amp;&amp; apt-get install -y \
+    &amp;&amp; apt-get install -y --no-install-recommends \
        build-essential \
        curl \
        gfortran \
@@ -1543,7 +1626,7 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
 
 <span class="co"># download, unzip and build ed2</span>
 <span class="kw">WORKDIR</span> /src
-<span class="kw">RUN</span> git clone https://github.com/EDmodel/ED2.git \
+<span class="kw">RUN</span> git -c http.sslVerify=false clone https://github.com/EDmodel/ED2.git \
     &amp;&amp; cd ED2/ED/build \
     &amp;&amp; curl -o make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.Linux \
     &amp;&amp; if [ <span class="st">&quot;${MODEL_VERSION}&quot;</span> != <span class="st">&quot;git&quot;</span> ]; then git checkout ${MODEL_VERSION}; fi \
@@ -1552,9 +1635,9 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
 <span class="co">########################################################################</span>
 
 <span class="co"># ----------------------------------------------------------------------</span>
-<span class="co"># SECOND STAGE : BUILD PECAN FOR MODEL</span>
+<span class="co"># BUILD PECAN FOR MODEL</span>
 <span class="co"># ----------------------------------------------------------------------</span>
-<span class="kw">FROM</span> pecan/executor:latest
+<span class="kw">FROM</span> pecan/models:latest
 
 <span class="co"># ----------------------------------------------------------------------</span>
 <span class="co"># INSTALL MODEL SPECIFIC PIECES</span>
@@ -1562,8 +1645,8 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
 
 <span class="kw">RUN</span> apt-get update \
     &amp;&amp; apt-get install -y --no-install-recommends \
-       libgfortran5 \
-       libopenmpi3 \
+       libgfortran3 \
+       libopenmpi2 \
     &amp;&amp; rm -rf /var/lib/apt/lists/*
 
 <span class="co"># ----------------------------------------------------------------------</span>
@@ -1573,12 +1656,10 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
 <span class="co"># Some variables that can be used to set control the docker build</span>
 <span class="kw">ARG</span> MODEL_VERSION=git
 
-<span class="co"># variables to store in docker image</span>
-<span class="kw">ENV</span> APPLICATION=<span class="st">&quot;./job.sh&quot;</span> \
-    MODEL_TYPE=<span class="st">&quot;ED2&quot;</span> \
-    MODEL_VERSION=<span class="st">&quot;${MODEL_VERSION}&quot;</span>
-
-<span class="kw">ENV</span> RABBITMQ_QUEUE=<span class="st">&quot;${MODEL_TYPE}_${MODEL_VERSION}&quot;</span>
+<span class="co"># Setup model_info file</span>
+<span class="kw">COPY</span> models/ed/model_info.json /work/model.json
+<span class="kw">RUN</span> sed -i -e <span class="st">&quot;s/@VERSION@/${MODEL_VERSION}/g&quot;</span> \
+           -e <span class="st">&quot;s#@BINARY@#/usr/local/bin/ed2.${MODEL_VERSION}#g&quot;</span> /work/model.json
 
 <span class="co"># COPY model binary</span>
 <span class="kw">COPY</span> --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/ed2.${MODEL_VERSION}</code></pre>
@@ -1587,12 +1668,12 @@ Consider the following block:</p>
 <pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span class="co"># Don&#39;t do this!</span>
 <span class="kw">ENV</span> MODEL_TYPE=<span class="st">&quot;SIPNET&quot;</span> \
     MODEL_VERSION=136 \
-    RABBITMQ_QUEUE=${MODEL_TYPE}_${MODEL_VERSION}   <span class="co"># &lt;- Doesn&#39;t know about MODEL_TYPE or MODEL_VERSION!</span></code></pre>
-<p>In this block, the expansion for setting <code>RABBITMQ_QUEUE</code> <em>is not aware</em> of the current values of <code>MODEL_TYPE</code> or <code>MODEL_VERSION</code>, and will therefore be set incorrectly to just <code>_</code> (unless they have been set previously, in which case it will be aware only of their earlier values).
+    MODEL_TYPE_VERSION=${MODEL_TYPE}_${MODEL_VERSION}   <span class="co"># &lt;- Doesn&#39;t know about MODEL_TYPE or MODEL_VERSION!</span></code></pre>
+<p>In this block, the expansion for setting <code>MODEL_TYPE_VERSION</code> <em>is not aware</em> of the current values of <code>MODEL_TYPE</code> or <code>MODEL_VERSION</code>, and will therefore be set incorrectly to just <code>_</code> (unless they have been set previously, in which case it will be aware only of their earlier values).
 As such, <strong>variables depending on other variables must be set in a separate, subsequent <code>ENV</code> statement than the variables they depend on</strong>.</p>
 <p>Once the model has build and is working we can add it to the PEcAn stack and be able to use this model in the web interface. There are two methods to start this new model. First, we can add it to the <code>docker-compose.yml</code> file and start the container using <code>docker-compose -p pecan -d up</code>.</p>
 <pre class="sourceCode yaml"><code class="sourceCode yaml">  <span class="fu">sipnet:</span>
-    <span class="fu">image:</span><span class="at"> pecan/model-ed2</span>
+    <span class="fu">image:</span><span class="at"> pecan/model-ed2-git</span>
     <span class="fu">networks:</span>
       <span class="kw">-</span> pecan
     <span class="fu">volumes:</span>
@@ -1604,15 +1685,16 @@ As such, <strong>variables depending on other variables must be set in a separat
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run \
     --detach \
     --rm \
-    --name pecan-ed2 \
+    --name pecan-ed2-git \
     --networks pecan_pecan \
     --volume pecan_pecan:/data
-    <span class="ex">pecan/model-ed2</span></code></pre>
+    <span class="ex">pecan/model-ed2-git</span></code></pre>
+</div>
 <div id="common-problems" class="section level3">
-<h3><span class="header-section-number">30.4.1</span> Common problems</h3>
+<h3><span class="header-section-number">30.4.3</span> Common problems</h3>
 <p>Following are some solutions for common problems that you might encounter when building the docker images for a model.</p>
 <div id="debugging-missing-libraries" class="section level4">
-<h4><span class="header-section-number">30.4.1.1</span> Debugging missing libraries</h4>
+<h4><span class="header-section-number">30.4.3.1</span> Debugging missing libraries</h4>
 <p>When building the model binary it might require specific libraries to be installed. In the second stage the model binary is copied into a new image, which could result in the binary missing specific libraries. In the case of the ED2 model the following was used to find the libraries that are needed to be installed (libgfortran5 and libopenmpi3).</p>
 <p>The first step is to build the model using the Dockerfile (in this case the ap-get install was missing in the second stage).</p>
 <pre><code>Step 5/9 : RUN git clone https://github.com/EDmodel/ED2.git     &amp;&amp; cd ED2/ED/build     &amp;&amp; curl -o make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.`uname -s`     &amp;&amp; if [ &quot;${MODEL_VERSION}&quot; != &quot;git&quot; ]; then git checkout ${MODEL_VERSION}; fi     &amp;&amp; ./install.sh -g -p VM
