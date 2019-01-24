@@ -25,7 +25,7 @@
 <meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2019-01-17">
+<meta name="date" content="2019-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -230,11 +230,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.6" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-specific-functions-for-sda-workflow"><i class="fa fa-check"></i><b>9.2.6</b> Model Specific Functions for SDA Workflow</a></li>
 <li class="chapter" data-level="9.2.7" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#analysis-options"><i class="fa fa-check"></i><b>9.2.7</b> Analysis Options</a></li>
 <li class="chapter" data-level="9.2.8" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#the-generalized-ensemble-filter"><i class="fa fa-check"></i><b>9.2.8</b> The Generalized Ensemble Filter</a></li>
-<li class="chapter" data-level="9.2.9" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-products"><i class="fa fa-check"></i><b>9.2.9</b> Data Products</a></li>
-<li class="chapter" data-level="9.2.10" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#current-models"><i class="fa fa-check"></i><b>9.2.10</b> Current Models</a></li>
-<li class="chapter" data-level="9.2.11" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-calibration"><i class="fa fa-check"></i><b>9.2.11</b> Model Calibration</a></li>
-<li class="chapter" data-level="9.2.12" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#initial-conditions"><i class="fa fa-check"></i><b>9.2.12</b> Initial Conditions</a></li>
-<li class="chapter" data-level="9.2.13" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#drivers"><i class="fa fa-check"></i><b>9.2.13</b> Drivers</a></li>
+<li class="chapter" data-level="9.2.9" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#multi-site-state-data-assimilation."><i class="fa fa-check"></i><b>9.2.9</b> Multi-site State data assimilation.</a></li>
+<li class="chapter" data-level="9.2.10" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#data-products"><i class="fa fa-check"></i><b>9.2.10</b> Data Products</a></li>
+<li class="chapter" data-level="9.2.11" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#current-models"><i class="fa fa-check"></i><b>9.2.11</b> Current Models</a></li>
+<li class="chapter" data-level="9.2.12" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#model-calibration"><i class="fa fa-check"></i><b>9.2.12</b> Model Calibration</a></li>
+<li class="chapter" data-level="9.2.13" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#initial-conditions"><i class="fa fa-check"></i><b>9.2.13</b> Initial Conditions</a></li>
+<li class="chapter" data-level="9.2.14" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#drivers"><i class="fa fa-check"></i><b>9.2.14</b> Drivers</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#sequential-state-data-assimilation"><i class="fa fa-check"></i><b>9.3</b> Sequential State Data Assimilation</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html#general-description"><i class="fa fa-check"></i><b>9.3.1</b> General Description</a></li>
@@ -674,8 +675,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">9</span> Settings-configured analyses</h1>
 <p>These analyses can be run through the web interface, but lack graphical interfaces and currently can only be configured throughthe XML settings. To run these analyses use the <strong>Edit pecan.xml</strong> checkbox on the Input configuration page. Eventually, these modules will be integrated into the web user interface.</p>
 <ul>
-<li>Parameter Data Assimilation (PDA)</li>
-<li>State Data Assimilation (SDA)</li>
+<li>Parameter Data Assimilation (PDA) {#pda}</li>
+<li>State Data Assimilation (SDA) {#sda}</li>
 <li>MultiSettings</li>
 <li>Benchmarking</li>
 </ul>
@@ -812,7 +813,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="state-data-assimilation-tags-example" class="section level3">
 <h3><span class="header-section-number">9.2.4</span> State Data Assimilation Tags Example</h3>
 <pre><code>&lt;state.data.assimilation&gt;
-  &lt;n.ensemble&gt;25&lt;/n.ensemble&gt;
+  &lt;adjustment&gt;TRUE&lt;/adjustment&gt;
   &lt;process.variance&gt;FALSE&lt;/process.variance&gt;
   &lt;sample.parameters&gt;FALSE&lt;/sample.parameters&gt;
    &lt;state.variables&gt;
@@ -841,7 +842,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="state-data-assimilation-tags-descriptions" class="section level3">
 <h3><span class="header-section-number">9.2.5</span> State Data Assimilation Tags Descriptions</h3>
 <ul>
-<li><strong>n.ensemble</strong> : [required] Number of ensemble members. Should be much larger than number of state variables you are assimilating.</li>
+<li><strong>adjustment</strong> : [optional] TRUE/FLASE flag for if ensembles needs to be adjusted based on weights estimated given their likelihood during analysis step. The defualt is TRUE for this flag.</li>
 <li><strong>process.variance</strong> : [optional] TRUE/FLASE flag for if process variance should be estimated (TRUE) or not (FALSE). If TRUE, a generalized ensemble filter will be used. If FALSE, an ensemble Kalman filter will be used. Default is FALSE.</li>
 <li><strong>sample.parameters</strong> : [optional] TRUE/FLASE flag for if parameters should be sampled for each ensemble member or not. This allows for more spread in the initial conditions of the forecast.</li>
 <li><strong>state.variable</strong> : [required] State variable that is to be assimilated (in PEcAn standard format).</li>
@@ -924,26 +925,201 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(\boldsymbol{V}_{t+1} = n_{t}\bar{\boldsymbol{Q}}_{t}\)</span></p>
 <p><span class="math inline">\(n_{t+1} = \frac{\sum_{i=1}^{I}\sum_{j=1}^{J}\frac{v_{ijt}^{2}+v_{iit}v_{jjt}}{Var(\boldsymbol{\bar{Q}}_{t})}}{I\times J}\)</span></p>
 <p>where we calculate the mean of the process covariance matrix <span class="math inline">\(\left(\bar{\boldsymbol{Q}_{t}}\right)\)</span> from the posterior samples at time t. Degrees of freedom for the Wishart are typically calculated element by element where <span class="math inline">\(v_{ij}\)</span> are the elements of <span class="math inline">\(\boldsymbol{V}_{t}\)</span>. <span class="math inline">\(I\)</span> and <span class="math inline">\(J\)</span> index rows and columns of <span class="math inline">\(\boldsymbol{V}\)</span>. Here, we calculate a mean number of degrees of freedom for <span class="math inline">\(t+1\)</span> by summing over all the elements of the scale matrix <span class="math inline">\(\left(\boldsymbol{V}\right)\)</span> and dividing by the count of those elements <span class="math inline">\(\left(I\times J\right)\)</span>. We fit this model sequentially through time in the R computing environment using R package ‘rjags.’</p>
+</div>
+<div id="multi-site-state-data-assimilation." class="section level3">
+<h3><span class="header-section-number">9.2.9</span> Multi-site State data assimilation.</h3>
+<p><code>sda.enkf.multisite</code> function allows for assimilation of observed data at multiple sites at the same time. In order to run a multi-site SDA, one needs to send a multisettings pecan xml file to this function. This multisettings xml file needs to contain information required for running at least two sites under <code>run</code> tag. The code will automatically run the ensembles for all the sites and reformats the outputs matching the required formats for analysis step.</p>
+<p>The observed mean and cov needs to be formatted as list of different dates with observations. For each element of this list also there needs to be a list with mean and cov matrices of different sites named by their siteid. This would look like something like this:</p>
+<pre><code>&gt; obs.mean
+
+$`2010/12/31`
+$`2010/12/31`$`1000000650`
+   AbvGrndWood     GWBI
+    111.502    1.0746
+
+$`2010/12/31`$`1000000651`
+   AbvGrndWood     GWBI
+    114.302    1.574695</code></pre>
+<pre><code>&gt; obs.cov
+
+$`2010/12/31`
+$`2010/12/31`$`1000000650`
+           [,1]        [,2]
+[1,] 19.7821691 0.213584319
+[2,]  0.5135843 0.005162113
+
+$`2010/12/31`$`1000000651`
+           [,1]        [,2]
+[1,] 15.2821691 0.513584319
+[2,]  0.1213583 0.001162113</code></pre>
+<p>An example of multi-settings pecan xml file also may look like below:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;pecan.multi&gt;
+ &lt;state.data.assimilation&gt;
+   &lt;process.variance&gt;FALSE&lt;/process.variance&gt;
+   &lt;adjustment&gt;TRUE&lt;/adjustment&gt;
+   &lt;data&gt;
+    &lt;format_id&gt;1000000040&lt;/format_id&gt;
+    &lt;input.id&gt;1000013298&lt;/input.id&gt;
+  &lt;/data&gt;
+   &lt;state.variables&gt;
+   &lt;variable&gt;
+      &lt;variable.name&gt;GWBI&lt;/variable.name&gt;
+   &lt;unit&gt;KgC/m^2&lt;/unit&gt;
+       &lt;min_value&gt;0&lt;/min_value&gt;
+       &lt;max_value&gt;9999&lt;/max_value&gt;
+   &lt;/variable&gt;
+   &lt;variable&gt;
+   &lt;variable.name&gt;AbvGrndWood&lt;/variable.name&gt;
+   &lt;unit&gt;KgC/m^2&lt;/unit&gt;
+   &lt;min_value&gt;0&lt;/min_value&gt;
+   &lt;max_value&gt;9999&lt;/max_value&gt;
+   &lt;/variable&gt;
+   &lt;/state.variables&gt;
+  &lt;start.date&gt;1960/01/01&lt;/start.date&gt;
+  &lt;end.date&gt;2000/12/31&lt;/end.date&gt;
+  &lt;/state.data.assimilation&gt;
+ &lt;info&gt;
+    &lt;notes&gt;&lt;/notes&gt;
+    &lt;userid&gt;-1&lt;/userid&gt;
+    &lt;username&gt;&lt;/username&gt;
+    &lt;date&gt;2017/12/06 21:19:33 +0000&lt;/date&gt;
+  &lt;/info&gt;
+ &lt;outdir&gt;/fs/data3/hamzed/output/MultiSite_Sandbox/paleon_sda_SIPNET-8768&lt;/outdir&gt;
+ &lt;database&gt;
+    &lt;bety&gt;
+      &lt;user&gt;bety&lt;/user&gt;
+      &lt;password&gt;bety&lt;/password&gt;
+      &lt;host&gt;128.197.168.114&lt;/host&gt;
+      &lt;dbname&gt;bety&lt;/dbname&gt;
+      &lt;driver&gt;PostgreSQL&lt;/driver&gt;
+      &lt;write&gt;false&lt;/write&gt;
+    &lt;/bety&gt;
+    &lt;dbfiles&gt;/fs/data1/pecan.data/dbfiles/&lt;/dbfiles&gt;
+  &lt;/database&gt;
+ &lt;pfts&gt;
+  &lt;pft&gt;
+   &lt;name&gt;temperate.deciduous_SDA&lt;/name&gt;
+   &lt;constants&gt;
+    &lt;num&gt;2&lt;/num&gt;
+   &lt;/constants&gt;
+   &lt;outdir&gt;/fs/data2/output//PEcAn_1000008768/pft/temperate.deciduous_SDA&lt;/outdir&gt;
+   &lt;posteriorid&gt;1000008552&lt;/posteriorid&gt;
+  &lt;/pft&gt;
+ &lt;/pfts&gt;
+ &lt;meta.analysis&gt;
+    &lt;iter&gt;3000&lt;/iter&gt;
+    &lt;random.effects&gt;FALSE&lt;/random.effects&gt;
+  &lt;/meta.analysis&gt;
+ &lt;ensemble&gt;
+  &lt;size&gt;20&lt;/size&gt;
+  &lt;ensemble.id&gt;1000016146&lt;/ensemble.id&gt;
+  &lt;start.year&gt;1995&lt;/start.year&gt;
+  &lt;end.year&gt;1999&lt;/end.year&gt;
+  &lt;samplingspace&gt;
+  &lt;parameters&gt;
+    &lt;method&gt;uniform&lt;/method&gt;
+  &lt;/parameters&gt;
+  &lt;met&gt;
+    &lt;method&gt;sampling&lt;/method&gt;
+  &lt;/met&gt;
+  &lt;soil&gt;    
+  &lt;parent&gt;parameters&lt;/parent&gt;
+  &lt;/soil&gt;
+  &lt;vegetation&gt;
+  &lt;parent&gt;soil&lt;/parent&gt;
+  &lt;/vegetation&gt;
+  &lt;/samplingspace&gt;
+ &lt;/ensemble&gt;
+ &lt;model&gt;
+  &lt;id&gt;1000000022&lt;/id&gt;
+  &lt;default.param&gt;/fs/data3/hamzed/output/paleon_sda_SIPNET-8768/Bartlett.param&lt;/default.param&gt;
+  &lt;type&gt;SIPNET&lt;/type&gt;
+  &lt;revision&gt;r136&lt;/revision&gt;
+  &lt;delete.raw&gt;FALSE&lt;/delete.raw&gt;
+  &lt;binary&gt;/fs/data5/pecan.models/SIPNET/trunk/sipnet_ssr&lt;/binary&gt;
+ &lt;/model&gt;
+ &lt;workflow&gt;
+    &lt;id&gt;1000008768&lt;/id&gt;
+  &lt;/workflow&gt;
+ &lt;run&gt;
+  &lt;settings.1000000650&gt;
+  &lt;site&gt;
+   &lt;id&gt;1000000650&lt;/id&gt;
+   &lt;met.start&gt;1960/01/01&lt;/met.start&gt;
+   &lt;met.end&gt;1965/12/31&lt;/met.end&gt;
+   &lt;name&gt;Harvard Forest - Lyford Plots (PalEON PHA)&lt;/name&gt;
+   &lt;lat&gt;42.53&lt;/lat&gt;
+   &lt;lon&gt;-72.18&lt;/lon&gt;
+  &lt;/site&gt;
+  &lt;inputs&gt;
+   &lt;met&gt;
+    &lt;source&gt;CRUNCEP&lt;/source&gt;
+    &lt;output&gt;SIPNET&lt;/output&gt;
+    &lt;path&gt;
+    &lt;path1&gt;/fs/data1/pecan.data/dbfiles/CRUNCEP_SIPNET_site_0-758/CRUNCEP.1960-01-01.2010-12-31.clim&lt;/path1&gt;
+    &lt;/path&gt;
+   &lt;/met&gt;
+  &lt;/inputs&gt;
+  &lt;start.date&gt;1960/01/01&lt;/start.date&gt;
+  &lt;end.date&gt;1980/12/31&lt;/end.date&gt;
+  &lt;/settings.1000000650&gt;
+  &lt;settings.1000000651&gt;
+  &lt;site&gt;
+   &lt;id&gt;1000000651&lt;/id&gt;
+   &lt;met.start&gt;1960/01/01&lt;/met.start&gt;
+   &lt;met.end&gt;1965/12/31&lt;/met.end&gt;
+   &lt;name&gt;Harvard Forest - Lyford Plots (PalEON PHA)&lt;/name&gt;
+   &lt;lat&gt;42.53&lt;/lat&gt;
+   &lt;lon&gt;-72.18&lt;/lon&gt;
+  &lt;/site&gt;
+  &lt;inputs&gt;
+   &lt;met&gt;
+    &lt;source&gt;CRUNCEP&lt;/source&gt;
+    &lt;output&gt;SIPNET&lt;/output&gt;
+    &lt;path&gt;
+    &lt;path1&gt;/fs/data1/pecan.data/dbfiles/CRUNCEP_SIPNET_site_0-758/CRUNCEP.1960-01-01.2010-12-31.clim&lt;/path1&gt;
+    &lt;/path&gt;
+   &lt;/met&gt;
+  &lt;/inputs&gt;
+  &lt;start.date&gt;1960/01/01&lt;/start.date&gt;
+  &lt;end.date&gt;1980/12/31&lt;/end.date&gt;
+  &lt;/settings.1000000651&gt;
+ &lt;/run&gt;
+ &lt;host&gt;
+  &lt;name&gt;localhost&lt;/name&gt;
+  &lt;rundir&gt;/fs/data3/hamzed/output/MultiSite_Sandbox/paleon_sda_SIPNET-8768/run&lt;/rundir&gt;
+  &lt;outdir&gt;/fs/data3/hamzed/output/MultiSite_Sandbox/paleon_sda_SIPNET-8768/out&lt;/outdir&gt;
+ &lt;/host&gt;
+ &lt;settings.info&gt;
+  &lt;deprecated.settings.fixed&gt;TRUE&lt;/deprecated.settings.fixed&gt;
+  &lt;settings.updated&gt;TRUE&lt;/settings.updated&gt;
+  &lt;checked&gt;TRUE&lt;/checked&gt;
+ &lt;/settings.info&gt;
+ &lt;rundir&gt;/fs/data3/hamzed/output/MultiSite_Sandbox/paleon_sda_SIPNET-8768/run&lt;/rundir&gt;
+ &lt;modeloutdir&gt;/fs/data3/hamzed/output/MultiSite_Sandbox/paleon_sda_SIPNET-8768/out&lt;/modeloutdir&gt;
+ &lt;multisettings&gt;run&lt;/multisettings&gt;
+&lt;/pecan.multi&gt;</code></pre>
 <p>==&gt; 03_hidden_analyses/03_sda_methods.Rmd &lt;==
 ## State Data Assimilation Methods</p>
 <p><em>By Ann Raiho</em></p>
 <p>Our goal is build a fully generalizable state data assimilation (SDA) workflow that will assimilate multiple types of data and data products into ecosystem models within PEcAn temporally and spatially. But, during development, specifically with PalEON goals in mind, we have been focusing on assimilating tree ring estimated NPP and AGB and pollen derived fractional composition into two ecosystem models, SIPNET and LINKAGES, at Harvard Forest. This methodology will soon be expanded to include the PalEON sites listed on the <a href="https://paleon.geography.wisc.edu/doku.php/working_groups;state_data_assimilation">state data assimilation wiki page</a>.</p>
 </div>
 <div id="data-products" class="section level3">
-<h3><span class="header-section-number">9.2.9</span> Data Products</h3>
+<h3><span class="header-section-number">9.2.10</span> Data Products</h3>
 <p>During workflow development, we have been working with tree ring estimated NPP and AGB and pollen derived fractional composition data products. Both of these data products have been estimated with a full accounting of uncertainty, which provides us with state variable observation mean vector and covariance matrix at each time step. These data products are discussed in more detail below. Even though we have been working with specific data products during development, our workflow is generalizable to alternative data products as long as we can calculate a state variable observation mean vector and covariance for a time point.</p>
 <div id="tree-rings" class="section level4">
-<h4><span class="header-section-number">9.2.9.1</span> Tree Rings</h4>
+<h4><span class="header-section-number">9.2.10.1</span> Tree Rings</h4>
 <p>We have been primarily been working with the tree ring data product created by Andria Dawson and Chris Paciorek and the PEcAn tree ring allometry module. They have developed a Bayesian model that estimates annual aboveground biomass increment (Mg/ha/yr) and aboveground biomass (Mg/ha) for each tree in a dataset. We obtain this data and aggregate to the level appropriate for the ecosystem model. In SIPNET, we are assimilating annual gross woody increment (Mg/ha/yr) and above ground woody biomass (Mg/ha). In LINKAGES, we are assimilating annual species biomass. More information on deriving these tree ring data products can be found in Dawson et al 201?.</p>
 <p>We have been working mostly with tree data collected at Harvard Forest. Tree rings and census data were collected at Lyford Plot between 1960 and 2010 in three separate plots. Other tree ring data will be added to this analysis in the future from past PEON courses (UNDERC), Kelly Heilman (Billy’s Lake and Bigwoods), and Alex Dye (Huron Mt. Club).</p>
 </div>
 <div id="pollen" class="section level4">
-<h4><span class="header-section-number">9.2.9.2</span> Pollen</h4>
+<h4><span class="header-section-number">9.2.10.2</span> Pollen</h4>
 <p>STEPPS is a Bayesian model developed by Paciorek and McLachlan 2009 and Dawson et al 2016 to estimate spatially gridded fractional composition from fossil pollen. We have been working with STEPPS1 output, specifically with the grid cell that contains Harvard Forest. The temporal resolution of this data product is centennial. Our workflow currently operates at annual time steps, but does not require data at every time step. So, it is possible to assimilate fractional composition every one hundred years or to assimilate fractional composition data every year by accounting for variance inflation.</p>
 <p>In the future, pollen derived biomass (ReFAB) will also be available for data assimilation. Although, we have not discussed how STEPPS and ReFAB data assimilation will work.</p>
 </div>
 <div id="variance-inflation" class="section level4">
-<h4><span class="header-section-number">9.2.9.3</span> Variance Inflation</h4>
+<h4><span class="header-section-number">9.2.10.3</span> Variance Inflation</h4>
 <p>*Side Note: Probably want to call this something else now.</p>
 <p>Since the fractional composition data product has a centennial resolution, in order to use fractional composition information every year we need to change the weight the data has on the analysis. The basic idea is to downweight the likelihood relative to the prior to account for (a) the fact that we assimilate an observation multiple times and (b) the fact that the number of STEPPS observations is ‘inflated’ because of the autocorrelation. To do this, we take the likelihood and raise it to the power of (1/w) where ‘w’ is an inflation factor.</p>
 <p>w = D * (N / ESS)</p>
@@ -969,19 +1145,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div id="current-models" class="section level3">
-<h3><span class="header-section-number">9.2.10</span> Current Models</h3>
+<h3><span class="header-section-number">9.2.11</span> Current Models</h3>
 <p>SIPNET and LINKAGES are the two ecosystem models that have been used during state data assimilation development within PEcAn. SIPNET is a simple ecosystem model that was built for… LINKAGES is a forest gap model created to simulate the process of succession that occurs when a gap is opened in the forest canopy. LINKAGES has 72 species level plant functional types and the ability to simulate some below ground processes (C and N cycles).</p>
 </div>
 <div id="model-calibration" class="section level3">
-<h3><span class="header-section-number">9.2.11</span> Model Calibration</h3>
+<h3><span class="header-section-number">9.2.12</span> Model Calibration</h3>
 <p>Without model calibration both SIPNET and LINKAGES make incorrect predictions about Harvard Forest. To confront this problem, SIPNET and LINKAGES will both be calibrated using data collected at the Harvard Forest flux tower. Istem has completed calibration for SIPNET using a <a href="https://github.com/PecanProject/pecan/blob/develop/modules/assim.batch/R/pda.emulator.R">parameter data assimilation emulator</a> contained within the PEcAn workflow. LINKAGES will also be calibrated using this method. This method is also generalizable to other sites assuming there is data independent of data assimilation data available to calibrate against.</p>
 </div>
 <div id="initial-conditions" class="section level3">
-<h3><span class="header-section-number">9.2.12</span> Initial Conditions</h3>
+<h3><span class="header-section-number">9.2.13</span> Initial Conditions</h3>
 <p>The initial conditions for SIPNET are sampled across state space based on data distributions at the time when the data assimilation will begin. We do not sample LINAKGES for initial conditions and instead perform model spin up for 100 years prior to beginning data assimilation. In the future, we would like to estimate initial conditions based on data. We achieve adequate spread in the initial conditions by allowing the parameters to vary across ensemble members.</p>
 </div>
 <div id="drivers" class="section level3">
-<h3><span class="header-section-number">9.2.13</span> Drivers</h3>
+<h3><span class="header-section-number">9.2.14</span> Drivers</h3>
 <p>We are currently using Global Climate Model (GCM) drivers from the PaLEON model intercomparison. Christy Rollinson and John Tipton are creating MET downscaled GCM drivers for the Paleon data assimilation sites. We will use these drivers when they are available because they are a closer representation of reality.</p>
 </div>
 </div>
