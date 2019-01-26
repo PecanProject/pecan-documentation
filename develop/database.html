@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>42 Data Assimilation Concepts&quot; | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="42 Data Assimilation Concepts&quot; | The Predictive Ecosystem Analyzer">
+  <title>33 BETY Database Administration | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="33 BETY Database Administration | The Predictive Ecosystem Analyzer">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="42 Data Assimilation Concepts&quot; | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="33 BETY Database Administration | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="42 Data Assimilation Concepts&quot; | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="33 BETY Database Administration | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="state-variable-data-assimilation.html">
-<link rel="next" href="pecanapi-vignette.html">
+<link rel="prev" href="rabbitmq.html">
+<link rel="next" href="bookediting.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -673,128 +673,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-assimilation-concepts" class="section level1">
-<h1><span class="header-section-number">42</span> Data Assimilation Concepts&quot;</h1>
-<p>The goal of this tutorial is to help you gain some hands-on familiarity with some of the concepts, tools, and techniques involved in Bayesian Calibration. As a warm-up to more advanced approaches to model-data fusion involving full ecosystem models, this example will focus on fitting the Farquhar, von Caemmerer, and Berry (1980) photosynthesis model [FvCB model] to leaf-level photosynthetic data. This is a simple, nonlinear model consisting of 3 equations that models net carbon assimilation, <span class="math inline">\(A^{(m)}\)</span>, at the scale of an individual leaf as a function of light and CO2.</p>
-<p><span class="math display">\[A_j = \frac{\alpha Q}{\sqrt{1+(\alpha^2 Q^2)/(Jmax^2)}} \frac{C_i- \Gamma}{4 C_i + 8 \Gamma}\]</span></p>
-<p><span class="math display">\[A_c = V_{cmax} \frac{C_i - \Gamma}{C_i+ K_C (1+[O]/K_O) }\]</span></p>
-<p><span class="math display">\[A^{(m)} = min(A_j,A_c) - r\]</span></p>
-<p>The first equation <span class="math inline">\(A_j\)</span> describes the RUBP-regeneration limited case. In this equation the first fraction is a nonrectangular hyperbola predicting <span class="math inline">\(J\)</span>, the electron transport rate, as a function of incident light <span class="math inline">\(Q\)</span>, quantum yield <span class="math inline">\(\alpha\)</span>, and the assymptotic saturation of <span class="math inline">\(J\)</span> at high light <span class="math inline">\(J_{max}\)</span>. The second equation, <span class="math inline">\(A_c\)</span>, describes the Rubisco limited case. The third equation says that the overall net assimilation is determined by whichever of the two above cases is limiting, minus the leaf respiration rate, <span class="math inline">\(r\)</span>.</p>
-<p>To keep things simple, as a Data Model (a.k.a. Likelihood or Cost Function) we’ll assume that the observed leaf-level assimilation <span class="math inline">\(A^{(o)}\)</span> is Normally distributed around the model predictions with observation error <span class="math inline">\(\tau\)</span>.</p>
-<p><span class="math display">\[A^{(o)} \sim N(A^{(m)},\tau)\]</span></p>
-<p>To fit this model to data we’re going to rely on a piece of statistical software known as JAGS. The above model would be written in JAGS as:</p>
-<pre><code>model{
-
-## Priors
-  Jmax ~ dlnorm(4.7,2.7)             ## maximum electron transport rate prior
-  alpha~dnorm(0.25,100)              ##quantum yield  (mol electrons/mole photon) prior
-  vmax ~dlnorm(4.6,2.7)              ## maximum rubisco capacity prior
-
-  r ~ dlnorm(0.75,1.56)              ## leaf respiration prior
-  cp ~ dlnorm(1.9,2.7)               ## CO2 compensation point prior
-  tau ~ dgamma(0.1,0.1)
-
-  for(i in 1:n){
-
-     ## electron transport limited
-     Aj[i]&lt;-(alpha*q[i]/(sqrt(1+(alpha*alpha*q[i]*q[i])/(Jmax*Jmax))))*(pi[i]-cp)/(4*pi[i]+8*cp)    
-
-     ## maximum rubisco limited without covariates
-     Ac[i]&lt;- vmax*(pi[i]-cp)/(pi[i]+Kc*(1+po/Ko))                                                    
-
-     Am[i]&lt;-min(Aj[i], Ac[i]) - r      ## predicted net photosynthesis
-     Ao[i]~dnorm(Am[i],tau)            ## likelihood
-     }
-
-}</code></pre>
-<p>The first chunk of code defines the <em>prior</em> probability distributions. In Bayesian inference every unknown parameter that needs to be estimated is required to have a prior distribution. Priors are the expression of our belief about what values a parameter might take on <strong>prior to observing the data</strong>. They can arise from many sources of information (literature survey, meta-analysis, expert opinion, etc.) provided that they do not make use of the data that is being used to fit the model. In this particular case, the priors were defined by Feng and Dietze 2013. Most priors are lognormal or gamma, which were choosen because most of these parameters need to be positive.</p>
-<p>After the priors is the Data Model, which in JAGS needs to be implemented as a loop over every observation. This is simply a codified version of the earlier equations.</p>
-<p>Table 1: FvCB model parameters in the statistical code, their symbols in equations, and definitions</p>
-<table>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Symbol</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>alpha0</td>
-<td><span class="math inline">\(\alpha\)</span></td>
-<td>quantum yield (mol electrons/mole photon)</td>
-</tr>
-<tr class="even">
-<td>Jmax</td>
-<td><span class="math inline">\(J_{max}\)</span></td>
-<td>maximum electron transport</td>
-</tr>
-<tr class="odd">
-<td>cp</td>
-<td><span class="math inline">\(\Gamma\)</span></td>
-<td>CO2 compensation point</td>
-</tr>
-<tr class="even">
-<td>vmax0</td>
-<td><span class="math inline">\(V_{cmax}\)</span></td>
-<td>maximum Rubisco capacity (a.k.a Vcmax)</td>
-</tr>
-<tr class="odd">
-<td>r</td>
-<td><span class="math inline">\(R_d\)</span></td>
-<td>leaf respiration</td>
-</tr>
-<tr class="even">
-<td>tau</td>
-<td><span class="math inline">\(\tau\)</span></td>
-<td>residual precision</td>
-</tr>
-<tr class="odd">
-<td>q</td>
-<td><span class="math inline">\(Q\)</span></td>
-<td>PAR</td>
-</tr>
-<tr class="even">
-<td>pi</td>
-<td><span class="math inline">\(C_i\)</span></td>
-<td>CO2 concentration</td>
-</tr>
-</tbody>
-</table>
-<div id="fitting-the-model" class="section level2">
-<h2><span class="header-section-number">42.1</span> Fitting the model</h2>
-<p>To begin with we’ll load up an example A-Ci and A-Q curve that was collected during the 2012 edition of the <a href="http://www.fluxcourse.org/">Flux Course</a> at Niwot Ridge. The exact syntax below may be a bit confusing to those unaccustomed to R, but the essence is that the <code>filenames</code> line is looking up where the example data is stored in the PEcAn.photosynthesis package and the <code>dat</code> line is loading up two files (once A-Ci, the other A-Q) and concatanating them together.</p>
-<p>In PEcAn we’ve written a wrapper function, <span class="math inline">\(fitA\)</span>, around the statistical model discussed above, which has a number of other bells and whistles discussed in the <a href="https://github.com/PecanProject/pecan/blob/master/modules/photosynthesis/vignettes/ResponseCurves.Rmd">PEcAn Photosynthesis Vignette</a>. For today we’ll just use the most basic version, which takes as arguments the data and the number of MCMC iterations we want to run.</p>
+<div id="database" class="section level1">
+<h1><span class="header-section-number">33</span> BETY Database Administration</h1>
+<p>This section provides additional details about the BETY database used by PEcAn. It will discuss best practices for setting up the BETY database, how to backup the database and how to restore the database.</p>
+<div id="database-setup" class="section level2">
+<h2><span class="header-section-number">33.1</span> Best practices</h2>
+<p>When using the BETY database in non testing mode, it is best not to use the default users. This is accomplished when running the initialize of the database. When the database is initally created the database will be created with some default users (best known is the carya user) as well as the guestuser that can be used in the BETY web application. To disable these users you will either need to disable the users from the web interface, or you can reinitialize the database and remove the <code>-u</code> flag from the command line (the <code>-u</code> flag will create the default users). To disable the guestuser as well you can remove the <code>-g</code> flag from the command line, or disable the account from BETY.</p>
+<p>The default installation of BETY and PEcAn will assume there is a database called bety with a default username and password. The default installation will setup the database account to not have any superuser abilities. It is also best to limit access to the postgres database from trusted hosts, either by using firewalls, or configuring postgresql to only accept connections from a limited set of hosts.</p>
 </div>
-<div id="whats-going-on" class="section level2">
-<h2><span class="header-section-number">42.2</span> What’s going on</h2>
-<p>Bayesian numerical methods for model calibration are based on sampling parameter values from the posterior distribution. Fundamentally what’s returned is a matrix, with the number of iterations as rows and the number of parameters as columns, which are samples from the posterior distribution, from which we can approximate any quantity of interest (mean, median, variance, CI, etc.).</p>
-<p>The following plots follow the trajectory of two correlated parameters, Jmax and alpha. In the first figure, arrows show the first 10 iterations. Internally JAGS is choosing between a variety of different Bayesian sampling methods (e.g. Metropolis-Hasting, Gibbs sampling, slice sampling, rejection sampling, etc) to draw a new value for each parameter conditional on the current value. After just 10 steps we don’t have a good picture of the overall posterior, but it should still be clear that the sampling is not a complete random walk.</p>
-<p>After 100 steps, we can see a cloud start to form, with occassional wanderings around the periphery.</p>
-<p>After <span class="math inline">\(nrow(params)\)</span> steps what we see is a point cloud of samples from the joint posterior distribution. When viewed sequentially, points are not independent, but we are interested in working with the overall distribution, where the order of samples is not important.</p>
+<div id="backup-of-bety-database" class="section level2">
+<h2><span class="header-section-number">33.2</span> Backup of BETY database</h2>
+<p>It is good practice to make sure you backup the BETY database. Just creating a copy of the files on disk is not enough to ensure you have a valid backup. Most likely if you do this you will end up with a corrupted backup of the database.</p>
+<p>To backup the database you can use the <code>pg_dump</code> command, which will make sure the database id backed up in a consistent state. You can run <code>sudo -u postgres pg_dump -d bety -Z 9 -f bety.sql.gz</code>, this will create a compressed file that can be used to resotore the database.</p>
+<p>In the PEcAn distribution in scripts folder there is a script called <code>backup.bety.sh</code>. This script will create the backup of the database. It will create multiple backups allowing you to restore the database from one of these copies. The database will be backed up to one of the following files:
+- bety-d-X, daily backup, where X is the day of the month.
+- bety-w-X, weekly backup, where X is the week number in the year
+- bety-m-X, montly backup, where X is the month of the year
+- bety-y-X, yearly backup, where X is the actual year.
+Using this scheme, we can restore the database using any of the files generated.</p>
+<p>It is recommeneded to run this script using a cronjob at midnight such that you have a daily backup of the database and do not have to remember to create these backups. When running this script (either cron or by hand) make sure to place the backups on a different machine than the machine that holds the database in case of a larger system failure.</p>
 </div>
-<div id="evaluating-the-model-output" class="section level2">
-<h2><span class="header-section-number">42.3</span> Evaluating the model output</h2>
-<p>A really important aspect of Bayesian inference is that the output is the <strong>joint</strong> posterior probability of all the parameters. This is very different from an optimization approach, which tries to find a single best parameter value. It is also different from estimating the independent posterior probabilities of each parameter – Bayesian posteriors frequently have strong correlation among parameters for reasons having to do both with model structure and the underlying data.</p>
-<p>The model we’re fitting has six free parameters, and therefore the output matrix has 6 columns, of which we’ve only looked at two. Unfortunately it is impossible to visualize a 6 dimensional parameter space on a two dimensional screen, so a very common practice (for models with a small to medium number of parameters) is to look at all pairwise scatterplots. If parameters are uncorrelated we will typically see oval shaped clouds that are oriented in the same directions as the axes. For parameters with linear correlations those clouds will be along a diagonal. For parameters with nonlinear trade-offs the shapes of the parameter clouds can be more complex, such as the banana-shaped or triangular. For the FvCB model we see very few parameters that are uncorrelated or have simple linear correlations, a fact that we should keep in mind when interpreting individual parameters.</p>
-<p>The three most common outputs that are performed on almost all Bayesian analyses are to look at the MCMC chains themselves, the marginal distributions of each parameter, and the overall summary statistics.</p>
-<p>The ‘trace’ diagrams below show the history of individual parameters during the MCMC sampling. There are different color lines that represent the fact that JAGS ran the MCMC multiple times, with each run (i.e. each color) being refered to as a different <span class="math inline">\(chain\)</span>. It is common to run multiple chains in order to assess whether the model, started from different points, consistently converges on the same answer. The ideal trace plot looks like white noise with all chains in agreement.</p>
-<p>The ‘density’ figures represent smoothed versions of the <em>marginal</em> distributions of each parameter. The tick marks on the x-axis are the actual samples. You will note that some posteriors will look approximately Normal, while others may be skewed or have clearly defined boundaries. On occassion there will even be posteriors that are multimodal. There is no assumption built into Bayesian statistics that the posteriors need be Normal, so as long as an MCMC has converged this diversity of shapes is valid. [note: the most common cause of multi-modal posteriors is a lack of convergence]</p>
-<p>Finally, the summary table reports, for each parameter, a mean, standard deviation, two variants of standard error, and standard quantile estimates (95% CI, interquartile, and median). The standard deviation of the posterior is a good summary statistic about <strong>how uncertain we are about a parameter</strong>. The Naive SE is the traditonal <span class="math inline">\(\frac{SD}{\sqrt{n}}\)</span>, which is an estimate of the <strong>NUMERICAL accuracy in our estimate of the mean</strong>. As we run the MCMC longer (i.e. take more samples), we get an answer that is numerically more precise (SE converges to 0) but the uncertainty in the parameter (i.e. SD) stays the same because that’s determined by the sample size of the DATA not the length of the MCMC. Finally, the Time-series SE is a variant of the SE calculation that accounts for the autocorrelation in the MCMC samples. In practice is is therefore more appropriate to use this term to assess numerical accuracy.</p>
-<p>Assessing the convergence of the MCMC is first done visually, but more generally the use of statistical diagnostics to assess convergence is highly encouraged. There are a number of metrics in the literature, but the most common is the Gelman-Brooks-Rubin statistic, which compare the variance within each chain to the variance across chains. If the chains have converged then this quantity should be 1. Values less than 1.05 are typically considered sufficient by most statisticians, but these are just rules-of-thumb.</p>
-<p>As with any modeling, whether statistical or process-based, another common diagnostic is a predicted vs observed plot. In a perfect model the data would fall along the 1:1 line. The deviations away from this line are the model residuals. If observations lie along a line other than the 1:1 this indicates that the model is biased in some way. This bias is often assessed by fitting a linear regression to the points, though two important things are noteworthy about this practice. First, the <span class="math inline">\(R^2\)</span> and residual error of this regression are not the appropriate statistics to use to assess model performance (though you will frequently find them reported incorrectly in the literature). The correct <span class="math inline">\(R^2\)</span> and residual error (a.k.a Root Mean Square Error, RMSE) are based on deviations from the 1:1 line, not the regression. The code below shows these two terms calculated by hand. The second thing to note about the regression line is that the standard regression F-test, which assesses deviations from 0, is not the test you are actually interested in, which is whether the line differs from 1:1. Therefore, while the test on the intercept is correct, as this value should be 0 in an unbiased model, the test statistic on the slope is typically of less interest (unless your question really is about whether the model is doing better than random). However, this form of bias can easily be assessed by looking to see if the CI for the slope overlaps with 1.</p>
-<p>In the final set of plots we look at the actual A-Ci and A-Q curves themselves. Here we’ve added two interval estimates around the curves. The CI captures the uncertainty in the <em>parameters</em> and will asympotically shrink with more and more data. The PI (predictive interval) includes the parameter and residual error. If our fit is good then 95% PI should thus encompass at least 95% of the observations. That said, as with any statistical model we want to look for systematic deviations in the residuals from either the mean or the range of the PI.</p>
-<p>Note: on the last figure you will get warnings about “No ACi” and “No AQ” which can be ignored. These are occuring because the file that had the ACi curve didn’t have an AQ curve, and the file that had the AQ curve didn’t have an ACi curve.</p>
-</div>
-<div id="additional-information" class="section level2">
-<h2><span class="header-section-number">42.4</span> Additional information</h2>
-<p>There is a more detailed R Vignette on the use of the PEcAn photosynthesis module available in the <a href="https://github.com/PecanProject/pecan/blob/master/modules/photosynthesis/vignettes/ResponseCurves.Rmd">PEcAn Repository</a>.</p>
-</div>
-<div id="citations" class="section level2">
-<h2><span class="header-section-number">42.5</span> Citations</h2>
-<p>Dietze, M.C. (2014). Gaps in knowledge and data driving uncertainty in models of photosynthesis. Photosynth. Res., 19, 3–14.</p>
-<p>Farquhar, G., Caemmerer, S. &amp; Berry, J.A. (1980). A biochemical model of photosynthetic CO2 assimilation in leaves of C3 species. Planta, 149, 78–90.</p>
-<p>Feng, X. &amp; Dietze, M.C. (2013). Scale dependence in the effects of leaf ecophysiological traits on photosynthesis: Bayesian parameterization of photosynthesis models. New Phytol., 200, 1132–1144.</p>
+<div id="restore-of-bety-database" class="section level2">
+<h2><span class="header-section-number">33.3</span> Restore of BETY database</h2>
+<p>Hopefully this section will never need to be used. Following are 5 steps that have been used to restore the database. Before you start it is worth it to read up online a bit on restoring the database as well as join the slack channel and ask any of the people there for help.</p>
+<ol style="list-style-type: decimal">
+<li>stop apache (BETY/PEcAn web apps) <code>service httpd stop</code> or <code>service apache2 stop</code></li>
+<li>backup database (you know just incase) <code>pg_dump -d bety &gt; baddb.sql</code></li>
+<li>drop database <code>sudo -u postgres psql -c 'drop database bety'</code></li>
+<li>create database <code>sudo -u postgres psql -c 'create database bety with owner bety'</code></li>
+<li>load database (assuming dump is called bety.sql.gz) <code>zcat bety.sql.gz | grep -v  search_path |  sudo -u postgres psql -d bety</code></li>
+<li>start apache again <code>service httpd start</code> or <code>service apache2 start</code></li>
+</ol>
+<p>If during step 5 there is a lot of errors, it is helpful to add <code>-v ON_ERROR_STOP=1</code> to the end of the command. This will stop the restore at the first error and will help with debugging the issue.</p>
 
 </div>
 </div>
@@ -803,8 +713,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="state-variable-data-assimilation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pecanapi-vignette.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rabbitmq.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bookediting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
