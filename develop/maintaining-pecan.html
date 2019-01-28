@@ -394,8 +394,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.3.3" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#fetch-latest-data"><i class="fa fa-check"></i><b>22.3.3</b> Fetch latest data</a></li>
 <li class="chapter" data-level="22.3.4" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#sharing-data"><i class="fa fa-check"></i><b>22.3.4</b> Sharing data</a></li>
 <li class="chapter" data-level="22.3.5" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#automation"><i class="fa fa-check"></i><b>22.3.5</b> Automation</a></li>
-<li class="chapter" data-level="22.3.6" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#network-status-map"><i class="fa fa-check"></i><b>22.3.6</b> Network Status Map</a></li>
-<li class="chapter" data-level="22.3.7" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#tasks"><i class="fa fa-check"></i><b>22.3.7</b> Tasks</a></li>
+<li class="chapter" data-level="22.3.6" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#database-maintentance"><i class="fa fa-check"></i><b>22.3.6</b> Database maintentance</a></li>
+<li class="chapter" data-level="22.3.7" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#troubleshooting-3"><i class="fa fa-check"></i><b>22.3.7</b> Troubleshooting</a></li>
+<li class="chapter" data-level="22.3.8" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#network-status-map"><i class="fa fa-check"></i><b>22.3.8</b> Network Status Map</a></li>
+<li class="chapter" data-level="22.3.9" data-path="maintaining-pecan.html"><a href="maintaining-pecan.html#tasks"><i class="fa fa-check"></i><b>22.3.9</b> Tasks</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="git-and-github-workflow.html"><a href="git-and-github-workflow.html"><i class="fa fa-check"></i><b>23</b> Git and GitHub Workflow</a><ul>
@@ -739,10 +741,10 @@ email: <a href="mailto:ashiklom@bu.edu">ashiklom@bu.edu</a></em></p>
 </div>
 <div id="set-up" class="section level3">
 <h3><span class="header-section-number">22.3.2</span> Set up</h3>
-<p>Requests for new machine ID’s is currently handled manually. To request a machine ID contact Rob Kooper <a href="mailto:kooper@illinois.edu">kooper@illinois.edu</a>. In the examples below this ID is referred to as MYSITE.</p>
-<p>To setup the database to use this ID you need to call load.bety in ‘CREATE’ mode</p>
-<pre><code>sudo -u postgres {$PECAN}/scripts/load.bety.sh -c -u -m X </code></pre>
-<p>WARNING: At the momment running CREATE deletes all current records in the database. If you are running from the VM this includes both all runs you have done and all information that the database is prepopulated with (e.g. input and model records). Remote records can be fetched (see below), but local records will be lost (we’re working on improving this!)</p>
+<p>Requests for new machine ID’s is currently handled manually. To request a machine ID contact Rob Kooper <a href="mailto:kooper@illinois.edu">kooper@illinois.edu</a>. In the examples below this ID is referred to as ‘my siteid’.</p>
+<p>To setup the database to use this ID you need to call load.bety in ‘CREATE’ mode (replacing <my siteid> with the ID if your site)</p>
+<pre><code>sudo -u postgres {$PECAN}/scripts/load.bety.sh -c -u -m &lt;my siteid&gt; </code></pre>
+<p>WARNING: At the moment running CREATE deletes all current records in the database. If you are running from the VM this includes both all runs you have done and all information that the database is prepopulated with (e.g. input and model records). Remote records can be fetched (see below), but local records will be lost (we’re working on improving this!)</p>
 </div>
 <div id="fetch-latest-data" class="section level3">
 <h3><span class="header-section-number">22.3.3</span> Fetch latest data</h3>
@@ -756,7 +758,7 @@ email: <a href="mailto:ashiklom@bu.edu">ashiklom@bu.edu</a></em></p>
 - CREATE: If ‘YES’, this indicates that the existing database (<code>bety</code>, or the one specified by DATABASE) should be removed. Set to YES (in caps) to remove the database. <strong>THIS WILL REMOVE ALL DATA</strong> in DATABASE. The default is NO.
 - KEEPTMP: indicates whether the downloaded file should be preserved. Set to YES (in caps) to keep downloaded files; the default is NO.
 - USERS: determines if default users should be created. Set to YES (in caps) to create default users with default passwords. The default is NO.</p>
-<p>All of these variables can be specified as command line arguments, to see the options use -h.</p>
+<p>All of these variables can be specified as command line arguments as well, to see the options use -h.</p>
 <pre><code>load.bety.sh -h
 ./scripts/load.bety.sh [-c YES|NO] [-d database] [-h] [-m my siteid] [-o owner] [-p psql options] [-r remote siteid] [-t YES|NO] [-u YES|NO]
  -c create database, THIS WILL ERASE THE CURRENT DATABASE, default is NO
@@ -824,18 +826,96 @@ MYSITE=1 REMOTESITE=5 /home/dietze/pecan/scripts/load.bety.sh
 MYSITE=1 REMOTESITE=0 /home/dietze/pecan/scripts/load.bety.sh 
 ## Timestamp sync log
 echo $(date +%c) &gt;&gt; /home/dietze/db.sync.log</code></pre>
-<p>Typically such a script is set up to run as a cron job. Make sure to schedule this job (<code>crontab -e</code>) as the user that has database privledges (typically postgres). The example below is a cron table that runs the sync every hour at 12 min after the hour.</p>
+<p>Typically such a script is set up to run as a cron job. Make sure to schedule this job (<code>crontab -e</code>) as the user that has database privileges (typically postgres). The example below is a cron table that runs the sync every hour at 12 min after the hour.</p>
 <pre><code>MAILTO=user@yourUniversity.edu
 12 * * * * /home/dietze/db.sync.sh</code></pre>
 </div>
+<div id="database-maintentance" class="section level3">
+<h3><span class="header-section-number">22.3.6</span> Database maintentance</h3>
+<p>All databases need maintenance performed on them. Depending upon the database type this can happen automatically, or it needs to be run through a scheduler or manually. The BETYdb database is Postgresql and it needs to be reindexed and vacuumed on a regular basis. Reindexing introduces efficiencies back into the database by reorganizing the indexes. Vacuuming the database frees up resources to the database by rearranging and compacting the database. Both of these operations are necessary and safe. As always if there’s a concern, a backup of the database should be made ahead of time. While running the reindexing and vacuuming commands, users will notice a slowdown at times. Therefore it’s better to run these maintenance tasks during off hours.</p>
+<div id="reindexing-the-database" class="section level4">
+<h4><span class="header-section-number">22.3.6.1</span> Reindexing the database</h4>
+<p>As mentioned above, reindexing allows the database to become more efficient. Over time as data gets updated and deleted, the indexes become less efficient. This has a negative inpact on executed statements. Reindexing makes the indexes efficient again (at least for a while) allowing faster statement execution and reducing the overall load on the database.</p>
+<p>The reindex.bety.sh script is provided to simplify reindexing the database.</p>
+<pre><code>reindex.bety.sh -h
+./reindex.bety.sh [-c datalog] [-d database] [-h] [-i table names] [-p psql options] [-q] [-s] [-t tablename]
+ -c catalog, database catalog name used to search for tables, default is bety
+ -d database, default is bety
+ -h this help page
+ -i table names, list of space-separated table names to skip over when reindexing
+ -p additional psql command line options, default is -U bety
+ -q the reindexing should be quiet
+ -s reindex the database after reindexing the tables (this should be done sparingly)
+ -t tablename, the name of the one table to reindex</code></pre>
+<p>If the database is small enough it’s reasonable to reindex the entire database at one time. To do this manually run or schedule the REINDEX statement. For example:</p>
+<pre><code>reindex.bety.sh -s</code></pre>
+<p>For larger databases it may be desireable to reindex entire tables at a time. An efficient way to do this is to reindex the larger tables and then the entire database. For example:</p>
+<pre><code>reindex.bety.sh -t traits; reindex.bety.sh -t yields;
+reindex.bety.sh -s</code></pre>
+<p>For very large databases it may be desirable to reindex one or more individual indexes before reindexing tables and the databases. In this case running specific psql commands to reindex those specific indexes, followed by reindexing the table is a possible approach. For example:</p>
+<pre><code>psql -U bety -c &quot;REINDEX INDEX index_yields_on_citation_id; REINDEX INDEX index_yields_on_cultivar_id;&quot;
+reindex.bety.sh -t yields;</code></pre>
+<p>Splitting up the indexing commands over time allows the database to operate efficiently with minimal impact on users. One approach is to schedule the reindexing of large, complex tables at a spcific off-time during the week, followed by a general reindexing and excluding those large tables on a weekend night.</p>
+<p>Please refere to the Automation section above for information on using cron to schedule reindexing commands.</p>
+</div>
+<div id="vacuuming-the-database" class="section level4">
+<h4><span class="header-section-number">22.3.6.2</span> Vacuuming the database</h4>
+<p>Vacuuming the BETYdb Postgresql database reduces the amount of resources it uses and introduces its own efficiencies.</p>
+<p>Over time, modified and deleted records leave ‘holes’ in the storage of the database. This is a common feature for most databases. Each database has its own way of handing this, in Postgresql it’s the VACUUM command. The VACUUM command performs two main operations: cleaning up tables to make memory use more efficient, and analyze tables for optimum statement execution. The use of the keyword ANALYZE indicates the second operation should take place.</p>
+<p>The vacuum.bety.sh script is provided to simplify vacuuming the database.</p>
+<pre><code>vacuum.bety.db -h
+./vacuum.bety.sh [-c datalog] [-d database] [-f] [-h] [-i table names] [-n] [-p psql options] [-q] [-s] [-t tablename] [-z]
+ -c catalog, database catalog name used to search for tables, default is bety
+ -d database, default is bety
+ -f perform a full vacuum to return resources to the system. Specify rarely, if ever
+ -h this help page
+ -i table names, list of space-separated table names to skip over when vacuuming
+ -n only vacuum the tables and do not analyze, default is to first vacuum and then analyze
+ -p additional psql command line options, default is -U bety
+ -q the export should be quiet
+ -s skip vacuuming the database after vacuuming the tables
+ -t tablename, the name of the one table to vacuum
+ -z only perform analyze, do not perform a regular vacuum, overrides -n and -f, sets -s</code></pre>
+<p>For small databases with light loads it may be possible to set aside a time for a complete vacuum. During this time, commands executed against the database might fail (a temporary condition as the database gets cleaned up). The following commands can be used to perform all the vaccum operations in one go.</p>
+<pre><code>vacuum.bety.sh -f</code></pre>
+<p>Generally it’s not desireable to have down time. If the system running the database doesn’t need resources that the database is using returned to it, a FULL vacuum can be avoided. This is the default behavior of the script</p>
+<pre><code>vacuum.bety.sh</code></pre>
+<p>In larger databases, vacuuming the entire database can take a long time causing a negative impact on users. This means that individual tables need to be vacuumed. How often a vacuum needs to be performed is dependent upon a table’s activity. The more frequently updates and deletes occur on a table, the more frequent the vaccum should be. For large tables it may be desireable to separate the table cleanup from the analysis. An example for completely vacuuming and analyzing a table is:</p>
+<pre><code>psql -U bety -c &quot;VACUUM traits; VACUUM ANALYZE traits;&quot;</code></pre>
+<p>Similar to indexes, vacuuming the most active tables followed by general database vacuuming and vacuum analyze may be a desireable approach.</p>
+<p>Also note that it isn’t necessary to run VACUUM ANALYZE for each vacuum performed. Separating the commands and performing a VACUUM ANALYZE after several regular vacuums may be sufficient, with less load on the database.</p>
+<p>If the BETYdb database is running on a system with limited resources, or with resources that have become limited, the VACCUM command can return resources to the system from the database. The normal vacuuming process releases resources back to the database for reuse, but not to the system; generally this isn’t a problem. Postgresql has a VACUUM keyword FULL that returns resources back to the system. Requesting a FULL vacuum will lock the table being vacuumed while it is being re-written preventing any statements from being executed against it. If performing VECUUM FULL against the entire database, only the table being actively worked on is locked.</p>
+<p>To minimize the impact a VACUUM FULL has on users, it’s best to perform a normal vacuum before a FULL vacuum. If this approach is taken, there sould be a minimal time gap between the normal VACUUM and the VACUUM FULL commands. A normal vacuum allows changes to be made thus requiring the full vacuum to handle those changes, extending it’s run time. Reducing the time between the two commands lessens the work VACUUM FULL needs to do.</p>
+<pre><code>psql -U bety -c &quot;VACUUM yields; VACUUM FULL yields; VACUUM ANALYZE yields;&quot;</code></pre>
+<p>Give its impact, it’s typically not desireable to perform a VACUUM FULL after every normal vacuum; it should be done on an “as needed” basis or infrequently.</p>
+</div>
+</div>
+<div id="troubleshooting-3" class="section level3">
+<h3><span class="header-section-number">22.3.7</span> Troubleshooting</h3>
+<p>There are several possibilities if a scheduled cron job apepars to be running but isn’t producing the expected results. The following are suggestions on what to try to resolve the issue.</p>
+<div id="username-and-password" class="section level5">
+<h5><span class="header-section-number">22.3.7.0.1</span> Username and password</h5>
+<p>The user that scheduled a cron job may not have access permissions to the database. This can be easily confirmed by running the command line from the cron job while logged in as the user that scheduled the job. An error message will be shown if the user doesn’t have permissions.</p>
+<p>To resolve this, be sure to include a valid database user (not a BETYdb user) with their credentials on the command in crontab.</p>
+</div>
+<div id="db_hba.conf-file" class="section level5">
+<h5><span class="header-section-number">22.3.7.0.2</span> db_hba.conf file</h5>
+<p>Iit’s possible that the machine hosting the docker image of the database doesn’t have permissions to access the database. This may due to the cron job running on a machine that is not the docker instance of the database.</p>
+<p>It may be necessary to look at the loga on the hosting machine to determine if database access permissions are causing a problem. Logs are stored in different locations depending upon the Operating System of the host and upon other environmental factors. This document doesn’t provide information on where to find the logs.</p>
+<p>To begin, it’s best to look at the contents of the relevent database configuration file. The following command will display the contents of the db_hba.conf file.</p>
+<pre><code>psql -U postgres -qAt -c &quot;show hba_file&quot; | xargs grep -v -E &#39;^[[:space:]]*#&#39;</code></pre>
+<p>This command should return a series of text lines. For each row except those begining with ‘local’, the fourth item describes the machines that can access the database. In some cases an IP mask is specified in the fifth that further restricts the machines that have access. The special work ‘all’ in the fourth column grants permissions to all machines. The last column on each line contains the authentication option for the machine(s) specified in the fourth column (with a possible fifth column IP mask modifier).</p>
+<p>Ensure that the host machine is listed under the fourth column (machine addresse range, or ‘all’), is also included in the IP mask if one was specified, and finally that any authentication option are not set to ‘reject’. If the host machine is not included the db_hba.conf file will need to be updated to allow access.</p>
+</div>
+</div>
 <div id="network-status-map" class="section level3">
-<h3><span class="header-section-number">22.3.6</span> Network Status Map</h3>
+<h3><span class="header-section-number">22.3.8</span> Network Status Map</h3>
 <p><a href="https://pecan2.bu.edu/pecan/status.php" class="uri">https://pecan2.bu.edu/pecan/status.php</a></p>
 <p>Nodes: red = down, yellow = out-of-date schema, green = good</p>
 <p>Edges: red = fail, yellow = out-of-date sync, green = good</p>
 </div>
 <div id="tasks" class="section level3">
-<h3><span class="header-section-number">22.3.7</span> Tasks</h3>
+<h3><span class="header-section-number">22.3.9</span> Tasks</h3>
 <p>Following is a list of tasks we plan on working on to improve these scripts:
 - <a href="https://github.com/PecanProject/bety/issues/368">pecanproject/bety#368</a> allow site-specific customization of information and UI elements including title, contacts, logo, color scheme.</p>
 
