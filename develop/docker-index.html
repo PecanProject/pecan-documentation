@@ -880,11 +880,12 @@ Added carya43 with access_level=4 and page_access_level=3 with id=327
 Added carya44 with access_level=4 and page_access_level=4 with id=329
 Added guestuser with access_level=4 and page_access_level=4 with id=331</code></pre>
 <p>Once the command has finished successfully, proceed with the next step:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data pecan/data:develop</code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data --env FQDN=docker pecan/data:develop</code></pre>
 <p>The breakdown of this command is as follows:</p>
 <ul>
 <li><code>docker run -ti --rm --network pecan_pecan</code> – Same as <a href="#docker-run-init">above</a>.</li>
 <li><code>--volume pecan_pecan:/data</code> – This mounts the data from the subsequent container (<code>pecan/data:develop</code>) onto the current project volume, called <code>pecan_pecan</code> (as with the network, the project name <code>pecan</code> is the prefix, and the volume name also happens to be <code>pecan</code> as specified in the <code>docker-compose.yml</code> file).</li>
+<li><code>--env FQDN=docker</code> – the Fully Qualified Domain Name, this is the same value as specified in the <code>docker-compose.yml</code> file (for the web, monitor and executor containers). This will link the data files to the name in the machines table in BETY.</li>
 <li><code>pecan/data:develop</code> – As above, this is the target image to run. Since there is no argument after the image name, this command will run the default command (<a href="https://docs.docker.com/engine/reference/builder/#cmd"><code>CMD</code></a>) specified for this docker container. In this case, it is the <a href="https://github.com/PecanProject/pecan/blob/develop/docker/add-data.sh"><code>docker/add_data.sh</code></a> script from the PEcAn repository.</li>
 </ul>
 <p>Under the hood, this container runs the <code>docker/add-data.sh</code> script, which downloads a bunch of input files and registers them with the PEcAn database.</p>
@@ -1149,6 +1150,13 @@ services:
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
     depends_on: rabbitmq
     volumes: pecan:/data
+  maespa:
+    image: pecan/model-maespa-git:${PECAN_VERSION:-latest}
+    restart: unless-stopped
+    networks: pecan
+    environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
+    depends_on: rabbitmq
+    volumes: pecan:/data
 networks:
   pecan: ~
 volumes:
@@ -1164,6 +1172,9 @@ volumes:
 # ----------------------------------------------------------------------
 # GENERAL CONFIGURATION
 # ----------------------------------------------------------------------
+
+# project name (-p flag for docker-compose)
+#COMPOSE_PROJECT_NAME=dev
 
 # Folder to store all data
 DATA_DIR=/home/kooper/pecan
