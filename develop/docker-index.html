@@ -25,7 +25,7 @@
 <meta name="author" content="By: PEcAn Team">
 
 
-<meta name="date" content="2019-03-08">
+<meta name="date" content="2019-03-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -508,8 +508,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="29.1.3" data-path="docker-index.html"><a href="docker-index.html#docker-compose"><i class="fa fa-check"></i><b>29.1.3</b> <code>docker-compose</code></a></li>
 </ul></li>
 <li class="chapter" data-level="29.2" data-path="docker-index.html"><a href="docker-index.html#docker-quickstart"><i class="fa fa-check"></i><b>29.2</b> Quickstart for Docker and PEcAn</a><ul>
-<li class="chapter" data-level="29.2.1" data-path="docker-index.html"><a href="docker-index.html#install-docker"><i class="fa fa-check"></i><b>29.2.1</b> Install Docker</a></li>
+<li class="chapter" data-level="29.2.1" data-path="docker-index.html"><a href="docker-index.html#install-docker-and-docker-compose"><i class="fa fa-check"></i><b>29.2.1</b> Install Docker and docker-compose</a></li>
 <li class="chapter" data-level="29.2.2" data-path="docker-index.html"><a href="docker-index.html#setup-pecan-using-docker-compose"><i class="fa fa-check"></i><b>29.2.2</b> Setup PEcAn using docker-compose</a></li>
+<li class="chapter" data-level="29.2.3" data-path="docker-index.html"><a href="docker-index.html#pecan-docker-quickstart-init"><i class="fa fa-check"></i><b>29.2.3</b> Initialize PEcAn (first time only)</a></li>
+<li class="chapter" data-level="29.2.4" data-path="docker-index.html"><a href="docker-index.html#start-pecan"><i class="fa fa-check"></i><b>29.2.4</b> Start PEcAn</a></li>
+<li class="chapter" data-level="29.2.5" data-path="docker-index.html"><a href="docker-index.html#start-model-runs-using-curl"><i class="fa fa-check"></i><b>29.2.5</b> Start model runs using curl</a></li>
+<li class="chapter" data-level="29.2.6" data-path="docker-index.html"><a href="docker-index.html#docker-quickstart-troubleshooting"><i class="fa fa-check"></i><b>29.2.6</b> Troubleshooting</a></li>
 </ul></li>
 <li class="chapter" data-level="29.3" data-path="docker-index.html"><a href="docker-index.html#pecan-docker"><i class="fa fa-check"></i><b>29.3</b> PEcAn Docker Architecture</a><ul>
 <li class="chapter" data-level="29.3.1" data-path="docker-index.html"><a href="docker-index.html#pecan-docker-overview"><i class="fa fa-check"></i><b>29.3.1</b> Overview</a></li>
@@ -778,9 +782,9 @@ To configure BETY as described above, we can use a <code>docker-compose.yml</cod
 </div>
 <div id="docker-quickstart" class="section level2">
 <h2><span class="header-section-number">29.2</span> Quickstart for Docker and PEcAn</h2>
-<p>This is a short documentation on how to start with Docker and PEcAn. This will not go into much detail about about how to use docker.</p>
-<div id="install-docker" class="section level3">
-<h3><span class="header-section-number">29.2.1</span> Install Docker</h3>
+<p>This is a short documentation on how to start with Docker and PEcAn. This will not go into much detail about about how to use docker. The previous section will talk more about <a href="docker-index.html#docker-intro"><code>docker</code></a> and <a href="docker-index.html#docker-compose"><code>docker-compose</code></a>. The quickstart below assumes you have a basic understanding of both of these technologies.</p>
+<div id="install-docker-and-docker-compose" class="section level3">
+<h3><span class="header-section-number">29.2.1</span> Install Docker and docker-compose</h3>
 <p>You will need to install docker first. See <a href="https://www.docker.com/community-edition#/download" class="uri">https://www.docker.com/community-edition#/download</a></p>
 <p>Once Docker is installed, make sure it is running.
 To test that Docker is installed and running, open a terminal and run the following commands:</p>
@@ -791,18 +795,46 @@ Refer to the Docker documentation for debugging.</p>
 <p>NOTE: Depending on how Docker is installed and configured, you may have to run this command as <code>sudo</code>.
 Try running the command without <code>sudo</code> first.
 If that fails, but running as <code>sudo</code> succeeds, see <a href="https://docs.docker.com/install/linux/linux-postinstall/">these instructions</a> for steps to use Docker as a non-root user.</p>
+<p>Next make sure you have docker-compose installed. If you are running this on a Mac or Windows this might be already installed. On Linux you will need to install this , see separately <a href="https://docs.docker.com/compose/install/" class="uri">https://docs.docker.com/compose/install/</a>.</p>
+<p>You can check to see if docker-compose is installed using</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> -v</code></pre>
+<p>This should print the current version of docker-compose. We have tested the instruction below with versions of docker-compose 1.22 and above.</p>
 </div>
 <div id="setup-pecan-using-docker-compose" class="section level3">
 <h3><span class="header-section-number">29.2.2</span> Setup PEcAn using docker-compose</h3>
-<p>The PEcAn Docker stack is configured using a <code>docker-compose.yml</code> file (see also <a href="docker-index.html#docker-compose"><code>docker-compose</code></a>).
-If you cloned the PEcAn source from GitHub, you can find this file in the root directory of the repository.
-Alternatively, if you do not want to clone the PEcAn source, you can download just this file directly from GitHub <a href="https://github.com/PecanProject/pecan/blob/develop/docker-compose.yml">here</a>. (NOTE that this is the latest, <code>develop</code> branch version. If you want a specific release, you should change the branch accordingly.).</p>
-<p>The following instructions assume you are in the same directory as the file (if not, <code>cd</code> into it) and that the file is called <code>docker-compose.yml</code>.
-The <code>docker-compose</code> commands assume this.
-If you want to explicitly point <code>docker-compose</code> to a specific file, you can do so by calling all commands as <code>docker-compose -f /path/to/my-docker-compose.yml ...other options...</code>.
-(NOTE that this <code>-f</code> option must go <em>immediately</em> after <code>docker-compose</code>. More generally, <code>docker-compose</code> options are very sensitive to their location relative to other commands in the same line – that is, <code>docker-compose -f /my/docker-compose.yml -p pecan up -d postgres</code> is <em>not</em> the same as <code>docker-compose -d postgres -p pecan up -f /my/docker-compose.yml</code>. If expected ever don’t seem to be working, check that the arguments are in the right order.)</p>
-<div id="pecan-docker-quickstart-init" class="section level4">
-<h4><span class="header-section-number">29.2.2.1</span> Initialize the PEcAn database (first time only)</h4>
+<p>This section will let you download some configuration files. The documentation provides links to the latest released version (master branch in GitHub) or the develop version that we are working on (develop branch in GitHub) which will become the next release. If you cloned the PEcAn GitHub repository you can use <code>git checkout &lt;branch&gt;</code> to switch branches.</p>
+<p>The PEcAn Docker stack is configured using a <code>docker-compose.yml</code> file. You can download just this file directly from GitHub <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker-compose.yml">latest</a> or <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker-compose.yml">develop</a>. You can also find this file in the root of cloned PEcAn GitHub repository. There is no need to edit the <code>docker-compose.yml</code> file. You can use either the <code>.env</code> file to change some of the settings, or the <code>docker-compose.override.yml</code> file to modify the <code>docker-compose.yml</code> file. This makes it easier for you to get an updated version of the <code>docker-compose.yml</code> file and not lose any chances you have made to it.</p>
+<p>Some of the settings in the <code>docker-compose.yml</code> can be set using a <code>.env</code> file. You can download either the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker/env.example">latest</a> or the <a href="https://raw.githubusercontent.com/PecanProject/pecan/develop/docker/env.example">develop</a> version. If you have cloned the GitHub repository it is also located in the docker folder. This file should be called <code>.env</code> and be placed in the same folder as your <code>docker-compose.yml</code> file. This file will allow you to set which version of PEcAn or BETY to use. See the comments in this file to control the settings. Option you might want to set are:</p>
+<ul>
+<li><code>PECAN_VERSION</code> : The docker images to use for PEcAn. The default is <code>latest</code> which is the latest released version of PEcAn. Setting this to <code>develop</code> will result in using the version of PEcAn which will become the next release.</li>
+<li><code>PECAN_FQDN</code> : Is the name of the server where PEcAn is running. This is what is used to register all files generated by this version of PEcAn (see also <code>TRAEFIK_HOST</code>).</li>
+<li><code>PECAN_NAME</code> : A short name of this PEcAn server that is shown in the pull down menu and might be easier to recognize.</li>
+<li><code>BETY_VERSION</code> : This controls the version of BETY. The default is <code>latest</code> which is the latest released version of BETY. Setting this to <code>develop</code> will result in using the version of BETY which will become the next release.</li>
+<li><code>TRAEFIK_HOST</code> : Should be the FQDN of the server, this is needed when generating a SSL certificate. For SSL certificates you will need to set <code>TRAEFIK_ACME_ENABLE</code> as well as <code>TRAEFIK_ACME_EMAIL</code>.</li>
+<li><code>TRAEFIK_IPFILTER</code> : is used to limit access to certain resources, such as RabbitMQ and the Traefik dashboard.</li>
+</ul>
+<p>A final file, which is optional, is a <code>docker-compose.override.yml</code>. You can download a version for the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker/docker-compose.example.yml">latest</a> and <a href="https://raw.githubusercontent.com/PecanProject/pecan/develop/docker/docker-compose.example.yml">develop</a> versions. If you have cloned the GitHub repository it is located in the docker folder. Use this file as an example of what you can do, only copy the pieces over that you really need. This will allow you to make changes to the docker-compose file for your local installation. You can use this to add additional containers to your stack, change the path where docker stores the data for the containers, or you can use this to open up the postgresql port.</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span>
+
+<span class="fu">services:</span>
+  <span class="co"># expose database to localhost for ease of access</span>
+  <span class="fu">postgres:</span>
+    <span class="fu">ports:</span>
+      <span class="kw">-</span> <span class="fu">5432:</span><span class="at">5432</span></code></pre>
+<p>Once you have the <code>docker-compose.yml</code> file as well as the optional <code>.env</code> and <code>docker-compose.override.yml</code> in a folder you can start the PEcAn stack. The following instructions assume you are in the same directory as the file (if not, <code>cd</code> into it).</p>
+<p>In the rest of this section we will use a few arguments for the <code>docker-compose</code> application. The location of these arguments are important. The general syntax of <code>docker-compose</code> is <code>docker-compose &lt;ARGUMENTS FOR DOCKER COMPOSE&gt; &lt;COMMAND&gt; &lt;ARGUMENTS FOR COMMAND&gt; [SERVICES]</code>. More generally, <code>docker-compose</code> options are very sensitive to their location relative to other commands in the same line – that is, <code>docker-compose -f /my/docker-compose.yml -p pecan up -d postgres</code> is <em>not</em> the same as <code>docker-compose -d postgres -p pecan up -f /my/docker-compose.yml</code>. If expected ever don’t seem to be working, check that the arguments are in the right order.)</p>
+<ul>
+<li><code>-f &lt;filename&gt;</code> : <em>ARGUMENTS FOR DOCKER COMPOSE</em> : Allows you to specify a docker-compose.yml file explicitly. You can use this argument multiple times. Default is to use the docker-compose.yml and docker-compose.override.yml in your current folder.</li>
+<li><code>-p &lt;projectname&gt;</code> : <em>ARGUMENTS FOR DOCKER COMPOSE</em> : Project name, all volumes, networks, and containers will be prefixed with this argument. The default value is to use the current folder name.</li>
+<li><code>-d</code> : <em>ARGUMENTS FOR <code>up</code> COMMAND</em> : Will start all the containers in the background and return back to the command shell.</li>
+</ul>
+<p>If no services as added to the docker-compose command all services possible will be started.</p>
+</div>
+<div id="pecan-docker-quickstart-init" class="section level3">
+<h3><span class="header-section-number">29.2.3</span> Initialize PEcAn (first time only)</h3>
+<p>Before you can start to use PEcAn for the first time you will need to initialize the database (and optionally add some data). The following two sections will <a href="docker-index.html#pecan-docker-quickstart-init-db">first initialize the database</a> and <a href="docker-index.html#pecan-docker-quickstart-init-data">secondly add some data</a> to the system.</p>
+<div id="pecan-docker-quickstart-init-db" class="section level4">
+<h4><span class="header-section-number">29.2.3.1</span> Initialize the PEcAn database</h4>
 <p>The commands described in this section will set up the PEcAn database (BETY) and pre-load it with some common “default” data.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> -p pecan up -d postgres
 
@@ -820,45 +852,17 @@ As a side effect, the above command will also create blank data <a href="https:/
 Because our project is called <code>pecan</code> and <code>docker-compose.yml</code> describes a network called <code>pecan</code>, the resulting network is called <code>pecan_pecan</code>.
 This is relevant to the following commands, which will actually initialize and populate the BETY database.</p>
 <p>Assuming the above ran successfully, next run the following:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run -ti --rm --network pecan_pecan pecan/bety:latest initialize</code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> run --rm bety initialize</code></pre>
 <p>The breakdown of this command is as follows: {#docker-run-init}</p>
 <ul>
-<li><code>docker run</code> – This says we will be running a specific command inside the target Docker container. See <code>docker run --help</code> and the <a href="https://docs.docker.com/engine/reference/run/">Docker run reference</a> for more information.</li>
-<li><code>-ti</code> – This is actually two flags, <code>-t</code> to allocate a pseudo-tty and <code>-i</code> to keep STDIN open even if detached. <code>-t</code> is necessary to ensure lower-level script commands run correctly. <code>-i</code> makes sure that the command output (<code>stdin</code>) is displayed.</li>
+<li><code>docker-compose run</code> – This says we will be running a specific command inside the target service (bety in this case).</li>
 <li><code>--rm</code> – This automatically removes the resulting container once the specified command exits, as well as any volumes associated with the container. This is useful as a general “clean-up” flag for one-off commands (like this one) to make sure you don’t leave any “zombie” containers or volumes around at the end.</li>
-<li><code>--network pecan_pecan</code> – This indicates that the container will use the existing <code>pecan_pecan</code> network. This network is what ensures communication between the <code>postgres</code> container (which, recall, is <em>just</em> a PostGIS installation, and has no data inside it) and the “volumes” where the actual data are persistently stored.</li>
-<li><code>pecan/bety:latest</code> – This is the name of the image in which to run the specified command, in the form <code>repository/image:version</code>. This is interpreted as follows:
-<ul>
-<li>First, it sees if there are any images called <code>pecan/bety:latest</code> available on your local machine. If there are, it uses that one.</li>
-<li>If that image version is <em>not</em> available locally, it will next try to find the image online. By default, it searches <a href="https://hub.docker.com/">Docker Hub</a>, such that <code>pecan/bety</code> gets expanded to the container at <code>https://hub.docker.com/r/pecan/bety</code>. For custom repositories, a full name can be given, such as <code>hub.ncsa.illinois.edu/pecan/bety:latest</code>.</li>
-<li>If <code>:version</code> is omitted, Docker assumes <code>:latest</code>. NOTE that while online containers <em>should</em> have a <code>:latest</code> version, not all of them do, and if a <code>:latest</code> version does not exist, Docker will be unable to find the image and will throw an error.</li>
-</ul></li>
-<li>Everything after the image name (here, <code>pecan/bety:latest</code>) is interpreted as an argument to the image’s specified <a href="https://docs.docker.com/engine/reference/builder/#entrypoint">entrypoint</a>. For the <code>pecan/bety</code> image, the entrypoint is the script <a href="https://github.com/PecanProject/bety/blob/master/docker/entrypoint.sh"><code>docker/entrypoint.sh</code></a> located in the BETY repository. Here, the <code>initialize</code> argument is parsed to mean “Create a new database”, which first runs <code>psql</code> commands to create the <code>bety</code> role and database and then runs the <code>load.bety.sh</code> script.
+<li><code>bety</code> – This is the name of the service in which we want to run the specified command.</li>
+<li>Everything after the service name (here, <code>bety</code>) is interpreted as an argument to the image’s specified <a href="https://docs.docker.com/engine/reference/builder/#entrypoint">entrypoint</a>. For the <code>bety</code> service, the entrypoint is the script <a href="https://github.com/PecanProject/bety/blob/master/docker/entrypoint.sh"><code>docker/entrypoint.sh</code></a> located in the BETY repository. Here, the <code>initialize</code> argument is parsed to mean “Create a new database”, which first runs <code>psql</code> commands to create the <code>bety</code> role and database and then runs the <code>load.bety.sh</code> script.
 <ul>
 <li>NOTE: The entrypoint script that is used is the one copied into the Docker container at the time it was built, which, depending on the indicated image version and how often images are built on Docker Hub relative to updates to the source, may be older than whatever is in the source code.</li>
-<li>NOTE: The <code>load.bety.sh</code> script is, somewhat confusingly, located in the <em>PEcAn</em> GitHub repository (<a href="https://github.com/PecanProject/pecan/blob/develop/scripts/load.bety.sh"><code>scripts/load.bety.sh</code></a>), <em>not</em> in the BETY repository. As part of its build process, the BETY image downloads the latest <code>develop</code> version of <code>load.bety.sh</code> from the PEcAn repository and stores it in the root folder of the image. The relevant parts of the Dockerfile are <a href="https://github.com/PecanProject/bety/blob/master/Dockerfile#L33-L36">here</a>. As with <code>entrypoint.sh</code>, note that this script is only updated when the image is re-built, and because the origin is in a different repository, new versions are not built whenever <code>load.bety.sh</code> is updated. This is a <a href="https://github.com/PecanProject/bety/issues/597">known issue</a>.</li>
 </ul></li>
 </ul>
-<p>The above command should produce a bunch of output, some of which may look like errors.
-Some of these errors are normal and should not stop the command from completing successfully.
-You will know you have encountered more serious errors if the command exits or hangs with output resembling the following:</p>
-<pre><code>LINE 1: SELECT count(*) FROM formats WHERE ...
-                             ^
-Error: Relation `formats` does not exist</code></pre>
-<p><strong>If the above command fails</strong>, you can try to fix things interactively by first opening a shell inside the container…</p>
-<pre><code>docker run -ti --rm --network pecan_pecan pecan/bety:latest /bin/bash</code></pre>
-<p>…and then running the following commands, which emulate the functionality of the <code>entrypoint.sh</code> with the <code>initialize</code> argument.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Create the bety role in the postgresql database</span>
-<span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE ROLE bety WITH LOGIN CREATEDB NOSUPERUSER NOCREATEROLE PASSWORD &#39;bety&#39;&quot;</span>
-
-<span class="co"># Initialize the bety database itself, and set to be owned by role bety</span>
-<span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE DATABASE bety WITH OWNER bety&quot;</span>
-
-<span class="co"># If either of these fail with a &quot;role/database bety already exists&quot;,</span>
-<span class="co"># that&#39;s fine. You can safely proceed to the next command.</span>
-
-<span class="co"># Load the actual bety database tables and values</span>
-<span class="ex">./load.bety.sh</span> -a <span class="st">&quot;postgres&quot;</span> -d <span class="st">&quot;bety&quot;</span> -p <span class="st">&quot;-h postgres -p 5432&quot;</span> -o bety -c -u -g -m <span class="va">${LOCAL_SERVER}</span> -r 0 -w https://ebi-forecast.igb.illinois.edu/pecan/dump/all/bety.tar.gz</code></pre>
 <p>Note that this command may throw a bunch of errors related to functions and/or operators already existing.
 This is normal – it just means that the PostGIS extension to PostgreSQL is already installed.
 The important thing is that you see output near the end like:</p>
@@ -879,39 +883,55 @@ Added carya42 with access_level=4 and page_access_level=2 with id=325
 Added carya43 with access_level=4 and page_access_level=3 with id=327
 Added carya44 with access_level=4 and page_access_level=4 with id=329
 Added guestuser with access_level=4 and page_access_level=4 with id=331</code></pre>
-<p>Once the command has finished successfully, proceed with the next step:</p>
+<p>If you do not see this output, you can look at the <a href="docker-index.html#docker-quickstart-troubleshooting">troubleshooting</a> section at the end of this section for some troubleshooting tips, as well as some solutions to common problems.</p>
+<p>Once the command has finished successfully, proceed with the next step which will load some initial data into the database and place the data in the docker volumes.</p>
+</div>
+<div id="pecan-docker-quickstart-init-data" class="section level4">
+<h4><span class="header-section-number">29.2.3.2</span> Add example data (first time only)</h4>
+<p>The following command will add some initial data to the PEcAn stack and register the data with the database.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data --env FQDN=docker pecan/data:develop</code></pre>
 <p>The breakdown of this command is as follows:</p>
 <ul>
-<li><code>docker run -ti --rm --network pecan_pecan</code> – Same as <a href="#docker-run-init">above</a>.</li>
+<li><code>docker run</code> – This says we will be running a specific command inside the target Docker container. See <code>docker run --help</code> and the <a href="https://docs.docker.com/engine/reference/run/">Docker run reference</a> for more information.</li>
+<li><code>-ti</code> – This is actually two flags, <code>-t</code> to allocate a pseudo-tty and <code>-i</code> to keep STDIN open even if detached. <code>-t</code> is necessary to ensure lower-level script commands run correctly. <code>-i</code> makes sure that the command output (<code>stdin</code>) is displayed.</li>
+<li><code>--rm</code> – This automatically removes the resulting container once the specified command exits, as well as any volumes associated with the container. This is useful as a general “clean-up” flag for one-off commands (like this one) to make sure you don’t leave any “zombie” containers or volumes around at the end.</li>
+<li><code>--network pecan_pecan</code> – This indicates that the container will use the existing <code>pecan_pecan</code> network. This network is what ensures communication between the <code>postgres</code> container (which, recall, is <em>just</em> a PostGIS installation with some data) and the “volumes” where the actual data are persistently stored.</li>
+<li><code>pecan/data:develop</code> – This is the name of the image in which to run the specified command, in the form <code>repository/image:version</code>. This is interpreted as follows:
+<ul>
+<li>First, it sees if there are any images called <code>pecan/data:develop</code> available on your local machine. If there are, it uses that one.</li>
+<li>If that image version is <em>not</em> available locally, it will next try to find the image online. By default, it searches <a href="https://hub.docker.com/">Docker Hub</a>, such that <code>pecan/data</code> gets expanded to the container at <code>https://hub.docker.com/r/pecan/data</code>. For custom repositories, a full name can be given, such as <code>hub.ncsa.illinois.edu/pecan/data:latest</code>.</li>
+<li>If <code>:version</code> is omitted, Docker assumes <code>:latest</code>. NOTE that while online containers <em>should</em> have a <code>:latest</code> version, not all of them do, and if a <code>:latest</code> version does not exist, Docker will be unable to find the image and will throw an error.</li>
+</ul></li>
+<li>Everything after the image name (here, <code>pecan/data:develop</code>) is interpreted as an argument to the image’s specified <a href="https://docs.docker.com/engine/reference/builder/#entrypoint">entrypoint</a>.</li>
 <li><code>--volume pecan_pecan:/data</code> – This mounts the data from the subsequent container (<code>pecan/data:develop</code>) onto the current project volume, called <code>pecan_pecan</code> (as with the network, the project name <code>pecan</code> is the prefix, and the volume name also happens to be <code>pecan</code> as specified in the <code>docker-compose.yml</code> file).</li>
-<li><code>--env FQDN=docker</code> – the Fully Qualified Domain Name, this is the same value as specified in the <code>docker-compose.yml</code> file (for the web, monitor and executor containers). This will link the data files to the name in the machines table in BETY.</li>
+<li><code>--env FQDN=docker</code> – the Fully Qualified Domain Name, this is the same value as specified in the <code>.env</code> file (for the web, monitor and executor containers). This will link the data files to the name in the machines table in BETY.</li>
 <li><code>pecan/data:develop</code> – As above, this is the target image to run. Since there is no argument after the image name, this command will run the default command (<a href="https://docs.docker.com/engine/reference/builder/#cmd"><code>CMD</code></a>) specified for this docker container. In this case, it is the <a href="https://github.com/PecanProject/pecan/blob/develop/docker/add-data.sh"><code>docker/add_data.sh</code></a> script from the PEcAn repository.</li>
 </ul>
-<p>Under the hood, this container runs the <code>docker/add-data.sh</code> script, which downloads a bunch of input files and registers them with the PEcAn database.</p>
-<p>Successful execution of this command should take some time because it involves downloading and copying reasonably large amounts of data and performing a number of database operations.</p>
+<p>Under the hood, this container runs the <code>docker/add-data.sh</code> script, which copies a bunch of input files and registers them with the PEcAn database.</p>
+<p>Successful execution of this command should take some time because it involves copying reasonably large amounts of data and performing a number of database operations.</p>
 </div>
-<div id="start-pecan" class="section level4">
-<h4><span class="header-section-number">29.2.2.2</span> Start PEcAn</h4>
+</div>
+<div id="start-pecan" class="section level3">
+<h3><span class="header-section-number">29.2.4</span> Start PEcAn</h3>
 <p>If you already completed the above steps, you can start the full stack by just running the following:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> -p pecan up -d</code></pre>
 <p>This will build and start all containers required to run PEcAn.
 With the <code>-d</code> flag, this will run all of these containers quietly in the background, and show a nice architecture diagram with the name and status of each container while they are starting.
 Once this is done you have a working instance of PEcAn.</p>
-<p>If all of the containers started successfully, you should be able to access the various components from a browser via the following URLs:</p>
+<p>If all of the containers started successfully, you should be able to access the various components from a browser via the following URLs (if you run these commands on a remote machine replace localhost with the actual hostname).</p>
 <ul>
 <li>PEcAn web interface (running models) – <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> (NOTE: The trailing backslash is necessary.)</li>
 <li>PEcAn documentation and home page – <a href="http://localhost:8000/" class="uri">http://localhost:8000/</a></li>
 <li>BETY web interface – <a href="http://localhost:8000/bety/" class="uri">http://localhost:8000/bety/</a></li>
 <li>File browser (minio) – <a href="http://localhost:8000/minio/" class="uri">http://localhost:8000/minio/</a></li>
 <li>RabbitMQ management console (for managing queued processes) – <a href="http://localhost:8000/rabbitmq/" class="uri">http://localhost:8000/rabbitmq/</a></li>
-<li>Traefik, webserver showing maps from URLs onto their respective containers – <a href="http://localhost:8001/" class="uri">http://localhost:8001/</a></li>
+<li>Traefik, webserver showing maps from URLs onto their respective containers – <a href="http://localhost:8000/traefik/" class="uri">http://localhost:8000/traefik/</a></li>
 <li>Monitor, service that monitors models and shows all models that are online as well as how many instances are online and the number of jobs waiting. The output is in JSON – <a href="http://localhost:8000/monitor/" class="uri">http://localhost:8000/monitor/</a></li>
 </ul>
 </div>
-<div id="start-model-runs-using-curl" class="section level4">
-<h4><span class="header-section-number">29.2.2.3</span> Start model runs using curl</h4>
-<p>To test PEcAn you can use the following <code>curl</code> statement, or use the webpage to submit a request:</p>
+<div id="start-model-runs-using-curl" class="section level3">
+<h3><span class="header-section-number">29.2.5</span> Start model runs using curl</h3>
+<p>To test PEcAn you can use the following <code>curl</code> statement, or use the webpage to submit a request (if you run these commands on a remote machine replace localhost with the actual hostname):</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">curl</span> -v -X POST \
     -F <span class="st">&#39;hostname=docker&#39;</span> \
     -F <span class="st">&#39;modelid=5000000002&#39;</span> \
@@ -935,8 +955,28 @@ Once this is done you have a working instance of PEcAn.</p>
 2018-06-13 19:45:15,555 [MainThread     ] INFO    : root - Finished running job.</code></pre>
 <p>This shows that the executor connects to RabbitMQ, waits for messages. Once it picks up a message it will print the message, and execute the workflow in the folder passed in with the message. Once the workflow (including any model executions) is finished it will print Finished. The log file for <code>pecan_sipnet_1</code> is very similar, in this case it runs the <code>job.sh</code> in the run folder.</p>
 <p>To run multiple executors in parallel you can duplicate the executor section in the docker-compose file and just rename it from executor to executor1 and executor2 for example. The same can be done for the models. To make this easier it helps to deploy the containers using Kubernetes allowing to easily scale up and down the containers.</p>
-
 </div>
+<div id="docker-quickstart-troubleshooting" class="section level3">
+<h3><span class="header-section-number">29.2.6</span> Troubleshooting</h3>
+<p>When initializing the database, you will know you have encountered more serious errors if the command exits or hangs with output resembling the following:</p>
+<pre><code>LINE 1: SELECT count(*) FROM formats WHERE ...
+                             ^
+Error: Relation `formats` does not exist</code></pre>
+<p><strong>If the above command fails</strong>, you can try to fix things interactively by first opening a shell inside the container…</p>
+<pre><code>docker run -ti --rm --network pecan_pecan pecan/bety:latest /bin/bash</code></pre>
+<p>…and then running the following commands, which emulate the functionality of the <code>entrypoint.sh</code> with the <code>initialize</code> argument.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Create the bety role in the postgresql database</span>
+<span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE ROLE bety WITH LOGIN CREATEDB NOSUPERUSER NOCREATEROLE PASSWORD &#39;bety&#39;&quot;</span>
+
+<span class="co"># Initialize the bety database itself, and set to be owned by role bety</span>
+<span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE DATABASE bety WITH OWNER bety&quot;</span>
+
+<span class="co"># If either of these fail with a &quot;role/database bety already exists&quot;,</span>
+<span class="co"># that&#39;s fine. You can safely proceed to the next command.</span>
+
+<span class="co"># Load the actual bety database tables and values</span>
+<span class="ex">./script/load.bety.sh</span> -a <span class="st">&quot;postgres&quot;</span> -d <span class="st">&quot;bety&quot;</span> -p <span class="st">&quot;-h postgres -p 5432&quot;</span> -o bety -c -u -g -m <span class="va">${LOCAL_SERVER}</span> -r 0 -w https://ebi-forecast.igb.illinois.edu/pecan/dump/all/bety.tar.gz</code></pre>
+
 </div>
 </div>
 <div id="pecan-docker" class="section level2">
@@ -1176,66 +1216,63 @@ volumes:
 # project name (-p flag for docker-compose)
 #COMPOSE_PROJECT_NAME=dev
 
-# Folder to store all data
-DATA_DIR=/home/kooper/pecan
-
 # ----------------------------------------------------------------------
 # TRAEFIK CONFIGURATION
 # ----------------------------------------------------------------------
 
 # hostname of server
-TRAEFIK_HOST=Host:pecan-docker.ncsa.illinois.edu;
+#TRAEFIK_HOST=Host:pecan-docker.ncsa.illinois.edu;
 
 # only allow access from localhost and NCSA
-TRAEFIK_IPFILTER=172.16.0.0/12, 141.142.0.0/16
+#TRAEFIK_IPFILTER=172.16.0.0/12, 141.142.0.0/16
 
 # Run traffik on port 80 (http) and port 443 (https)
-TRAEFIK_HTTP_PORT=80
-TRAEFIK_HTTPS_PORT=443
-TRAEFIK_HTTPS_OPTIONS=TLS
+#TRAEFIK_HTTP_PORT=80
+#TRAEFIK_HTTPS_PORT=443
+#TRAEFIK_HTTPS_OPTIONS=TLS
 
 # enable SSL cerificate generation
-TRAEFIK_ACME_ENABLE=true
+#TRAEFIK_ACME_ENABLE=true
 
 # Use you real email address here to be notified if cert expires
-TRAEFIK_ACME_EMAIL=pecanproj@gmail.com
+#TRAEFIK_ACME_EMAIL=pecanproj@gmail.com
 
 # Always use https, trafic to http is redirected to https
-TRAEFIK_HTTP_REDIRECT=Redirect.EntryPoint:https
+#TRAEFIK_HTTP_REDIRECT=Redirect.EntryPoint:https
 
 # ----------------------------------------------------------------------
 # PEcAn CONFIGURATION
 # ----------------------------------------------------------------------
 
 # what version of pecan to use
-PECAN_VERSION=develop
+#PECAN_VERSION=develop
 
 # the fully qualified hostname used for this server
-PECAN_FQDN=pecan-docker.ncsa.illinois.edu
+#PECAN_FQDN=pecan-docker.ncsa.illinois.edu
 
 # short name shown in the menu
-PECAN_FQDN=pecan-docker
+#PECAN_NAME=pecan-docker
 
 # ----------------------------------------------------------------------
 # BETY CONFIGURATION
 # ----------------------------------------------------------------------
 
 # what version of BETY to use
-BETY_VERSION=latest
+#BETY_VERSION=develop
 
 # what is our server number, 99=vm, 98=docker
-BETY_LOCAL_SERVER=98
+#BETY_LOCAL_SERVER=98
 
 # secret used to encrypt cookies in BETY
-BETY_SECRET_KEY=1208q7493e8wfhdsohfo9ewhrfiouaho908ruq30oiewfdjspadosuf08q345uwrasdy98t7q243
+#BETY_SECRET_KEY=1208q7493e8wfhdsohfo9ewhrfiouaho908ruq30oiewfdjspadosuf08q345uwrasdy98t7q243
 
 # ----------------------------------------------------------------------
 # MINIO CONFIGURATION
 # ----------------------------------------------------------------------
 
 # minio username and password
-MINIO_ACCESS_KEY=carya
-MINIO_SECRET_KEY=illinois
+#MINIO_ACCESS_KEY=carya
+#MINIO_SECRET_KEY=illinois
 
 # ----------------------------------------------------------------------
 # PORTAINER CONFIGURATION
@@ -1243,18 +1280,18 @@ MINIO_SECRET_KEY=illinois
 
 # password for portainer admin account
 # use docker run --rm httpd:2.4-alpine htpasswd -nbB admin &lt;password&gt; | cut -d &quot;:&quot; -f 2
-PORTAINER_PASSWORD=$2y$05$5meDPBtS3NNxyGhBpYceVOxmFhiiC3uY5KEy2m0YRbWghhBr2EVn2
+#PORTAINER_PASSWORD=$2y$05$5meDPBtS3NNxyGhBpYceVOxmFhiiC3uY5KEy2m0YRbWghhBr2EVn2
 
 # ----------------------------------------------------------------------
 # RABBITMQ CONFIGURATION
 # ----------------------------------------------------------------------
 
 # RabbitMQ username and password
-RABBITMQ_DEFAULT_USER=carya
-RABBITMQ_DEFAULT_PASS=illinois
+#RABBITMQ_DEFAULT_USER=carya
+#RABBITMQ_DEFAULT_PASS=illinois
 
 # create the correct URI with above username and password
-RABBITMQ_URI=amqp://carya:illinois@rabbitmq/%2F</code></pre>
+#RABBITMQ_URI=amqp://carya:illinois@rabbitmq/%2F</code></pre>
 <p>You can also extend the <code>docker-compose.yml</code> file with a <code>docker-compose.override.yml</code> file (in the same directory), allowing you to add more services, or for example to change where the volumes are stored (see <a href="https://docs.docker.com/compose/extends/">official documentation</a>). For example the following will change the volume for postgres to be stored in your home directory:</p>
 <pre><code>version: &quot;3&quot;
 
@@ -1585,7 +1622,8 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
 <p>For this process to work a docker image of the model will need to be created as well as small json file that is used to announce this new model. A separate service in PEcAn (<a href="docker-index.html#pecan-dc-monitor"><code>monitor</code></a>) will use this json file to keep track of all models available as well as register these models with PEcAn.</p>
 <div id="model-docker-json-file" class="section level3">
 <h3><span class="header-section-number">29.4.1</span> Model information</h3>
-<p>Each model will have a small json file called model_info.json that is used to describe the model and to used by the monitor service to register the model with PEcAn. This file will contain information about the model that is send as part of the heartbeat of the container to the monitor service. Below is an example of this file for the ED model. The required fields are <code>name</code>, <code>type</code>, <code>version</code> and <code>binary</code>. There are 2 special values that can be used, <code>@VERSION@</code> which will be replaced by the version that is passed in when building the container, and <code>@BINARY@</code> which will be replaced by the binary when building the docker image.</p>
+<p>Each model will have a small json file called model_info.json that is used to describe the model and used by the monitor service to register the model with PEcAn. This file will contain information about the model that is send as part of the heartbeat of the container to the monitor service. Below is an example of this file for the ED model. The required fields are <code>name</code>, <code>type</code>, <code>version</code> and <code>binary</code>. The fields <code>type</code> and <code>version</code> are used by PEcAn to send the messages to RabbitMQ. There is no need to specify the queue name explicitly. The queue name will be created by combining these two fields with an underscore. The field <code>binary</code> is used to point to the actual binary in the docker container.</p>
+<p>There are 2 special values that can be used, <code>@VERSION@</code> which will be replaced by the version that is passed in when building the container, and <code>@BINARY@</code> which will be replaced by the binary when building the docker image.</p>
 <pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
   <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2.2&quot;</span><span class="fu">,</span>
   <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2&quot;</span><span class="fu">,</span>
@@ -1601,12 +1639,14 @@ For additional tips on constructing a Dockerfile for your model, see <a href="do
   <span class="dt">&quot;inputs&quot;</span><span class="fu">:</span> <span class="fu">{},</span>
   <span class="dt">&quot;citation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;Medvigy D., Wofsy S. C., Munger J. W., Hollinger D. Y., Moorcroft P. R. 2009. Mechanistic scaling of ecosystem function and dynamics in space and time: Ecosystem Demography model version 2. J. Geophys. Res. 114 (doi:10.1029/2008JG000812)&quot;</span><span class="ot">]</span>
 <span class="fu">}</span></code></pre>
-<p>Other fields that are recommended, but currently not used yet, are:
-- <code>description</code> : a longer description of the model.
-- <code>creator</code> : contact person about this docker image.
-- <code>contribuor</code> : other people that have contributed to this docker image.
-- <code>links</code> : addtional links to help people when using this docker image, for example values that can be used are <code>source</code> to link to the source code, <code>issues</code> to link to issue tracking system, and <code>documentation</code> to link to model specific documentation.
-- <code>citation</code> : how the model should be cited in publications.</p>
+<p>Other fields that are recommended, but currently not used yet, are:</p>
+<ul>
+<li><code>description</code> : a longer description of the model.</li>
+<li><code>creator</code> : contact person about this docker image.</li>
+<li><code>contribuor</code> : other people that have contributed to this docker image.</li>
+<li><code>links</code> : addtional links to help people when using this docker image, for example values that can be used are <code>source</code> to link to the source code, <code>issues</code> to link to issue tracking system, and <code>documentation</code> to link to model specific documentation.</li>
+<li><code>citation</code> : how the model should be cited in publications.</li>
+</ul>
 </div>
 <div id="model-docker-Dockerfile" class="section level3">
 <h3><span class="header-section-number">29.4.2</span> Model build</h3>
