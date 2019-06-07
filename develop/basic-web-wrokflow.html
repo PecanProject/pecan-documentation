@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>23 Remote execution with PEcAn | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="23 Remote execution with PEcAn | The Predictive Ecosystem Analyzer" />
+  <title>6 Basic Web workflow | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="6 Basic Web workflow | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="23 Remote execution with PEcAn | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="6 Basic Web workflow | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="23 Remote execution with PEcAn | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="6 Basic Web workflow | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="docker-index.html">
-<link rel="next" href="data-assimilation-with-dart.html">
+<link rel="prev" href="user-section.html">
+<link rel="next" href="intermediate-user.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -490,238 +490,214 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pecan-remote" class="section level1">
-<h1><span class="header-section-number">23</span> Remote execution with PEcAn</h1>
-<p>Remote execution allows the user to leverage the power and storage of high performance computing clusters, AWS instances, or specially configured virtual machines, but without leaving their local working environment.
-PEcAn uses remote execution primarily to run ecosystem models.</p>
-<p>The infrastructure for remote execution lives in the <code>PEcAn.remote</code> package (<code>base/remote</code> in the PEcAn repository).</p>
-<p>This section describes the following:</p>
+<div id="basic-web-wrokflow" class="section level1">
+<h1><span class="header-section-number">6</span> Basic Web workflow</h1>
+<p>This chapter describes the major steps of the PEcAn web-based workflow, which are as follows:</p>
+<ul>
+<li><a href="basic-web-wrokflow.html#web-site-model">Model and site selection</a></li>
+<li><a href="basic-web-wrokflow.html#web-model-config">Model configuration</a></li>
+<li>Run execution – TODO!</li>
+<li>Results – TODO!</li>
+<li>Interactive visualizations – TODO!</li>
+</ul>
+<p>We recommend that all new users begin with [PEcAn Hands-On Demo 01: Basic Run]. The documentation below assumes you are already familiar with how to navigate to PEcAn’s interactive web interface for running models.</p>
+<div id="web-site-model" class="section level2">
+<h2><span class="header-section-number">6.1</span> Site and model selection</h2>
+<p>This page is used to select the model to run and the site at which you would like to run that model.</p>
+<p><strong>NOTE:</strong> If this page does not load for you, it may be related to a known Google Maps API key issue. See <a href="https://github.com/PecanProject/pecan/issues/1269">issue #1269</a> for a possible solution.</p>
+<div id="selecting-a-model" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Selecting a model</h3>
 <ol style="list-style-type: decimal">
-<li>Checking capabilities to connect to the remote machine correctly:</li>
+<li><p>On the <strong>Select Host</strong> webpage <strong>use the Host pull-down menu to select the server you want to run on</strong>. PEcAn is designed to allow models to be run both locally and on remote high-performance computing (HPC) resources (i.e. clusters). We recommend that users start with local runs. More information about connecting your PEcAn instance to a cluster can be found on the <a href="pecan-remote.html#pecan-remote">Remote execution with PEcAn</a> page.</p></li>
+<li><p>Next, <strong>select the model you want to run under the Model pull-down menu</strong>. The list of models currently supported by PEcAn, along with information about these models, is available on the <a href="pecan-models.html#pecan-models">PEcAn Models</a> page.</p>
+<ol style="list-style-type: lower-roman">
+<li><p>If a PEcAn-supported model is not listed, this is most likely because the model has not been installed on the server. The PEcAn team does not have permissions to redistribute all of the models that are coupled to it, so you will have to install some PEcAn-compatible models yourself. Please consult the PEcAn model listing for information about obtaining and installing different models. Once the model is installed and you have added the location of the model executable to Bety (see <a href="adding-to-pecan.html#adding-model">Adding An Ecosystem Model</a>), your model should appear on the PEcAn <strong>Select Host</strong> page after your refresh the page.</p></li>
+<li><p>If you would like to add a new model to PEcAn please consult our guide for <a href="adding-to-pecan.html#adding-model">Adding an Ecosystem Model</a> and contact the PEcAn team for assistance.</p></li>
+</ol></li>
+<li><p>If selecting your model causes your <strong>site to disappear</strong> from the Google Map, that means the site exists but there are no drivers for that model-site combination registered in the database.</p>
+<ol style="list-style-type: lower-roman">
+<li><p>Click the “Conversion” checkbox. If your site reappears, that means PEcAn should be able to automatically generate the required inputs for this site by converting from existing input files in other formats.</p></li>
+<li><p>If the site still does not reappear, that means there are required input files for that model-site combination that PEcAn cannot autogenerate. This may be because the model has unique input requirements or because it has not yet been fully coupled to the PEcAn input processing workflow. Go to the troubleshooting section under <a href="basic-web-wrokflow.html#selecting-a-site">Selecting a site</a> for more information on diagnosing what drivers are missing.</p></li>
+</ol></li>
+</ol>
+</div>
+<div id="selecting-a-site" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Selecting a site</h3>
+</div>
+<div id="site-groups" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Site Groups</h3>
+<ol style="list-style-type: decimal">
+<li><p>PEcAn provides the option of organizing sites into groups to make them easier to find and easier to run as a group. We have pre-loaded a number of common research networks (e.g., FLUXNET, LTER, NEON), but you are free to create new site groups through Bety.</p></li>
+<li><p>If you are searching for a site that is not part of an existing site group, or you are unsure which site group it belongs to, select “All Sites” to see all sites in Bety. Note that this may take a while to render.</p></li>
+</ol>
+</div>
+<div id="using-existing-sites" class="section level3">
+<h3><span class="header-section-number">6.1.4</span> Using existing sites</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Find the site on the map</strong> The simplest way of determining if a site exists in PEcAn is through the Google Map interface of the web-based workflow. You’ll want to make sure that the “Site Group” is set to “All Sites” and the “Model” is set to “All Models”.</p></li>
+<li><p><strong>Find the site in BETY</strong> If the site is not on the map, it may still be in Bety but with insufficient geographic information. To locate the site in Bety, first login to your local version of the BETY database. If using the VM, navigate to <code>localhost:6480/bety</code> and login with username <code>bety</code> and password <code>illinois</code>. Then, navigate to <code>Data &gt; Sites</code> and use the “Search” box to search for your site. If you <strong>do</strong> find your site, click “Edit” and add geographic information so that the site will show up on the map. Also, note that the site ID number shows up in the URL for the “Show” or “Edit” pages. This ID is often useful to know, for example when editing a PEcAn settings file by hand. If you did not find you site, follow the instructions below to add a site.</p></li>
+</ol>
+</div>
+<div id="adding-a-new-site" class="section level3">
+<h3><span class="header-section-number">6.1.5</span> Adding a new site</h3>
+<p>(TODO: Move most of this out)</p>
+<ol style="list-style-type: decimal">
+<li><p>Log into Bety as described above.</p></li>
+<li><p><strong>Pick a citation for your site</strong> Each site requires an associated “citation” that must be added before the site itself is added. First, navigate to “Data &gt; Citations” and use the “Search” box to see if the relevant citation already exists. If it does, click the check mark under “Actions” to proceed to site creation.</p></li>
 </ol>
 <ul>
-<li>Basics of command line SSH</li>
-<li>SSH authentication with keys and passwords</li>
-<li>Basics of SSH tunnels, and how they are used in PEcAn</li>
+<li><p><strong>To create a new citation</strong>, click the <strong>New Citation</strong> button, fill in the fields, and then click “Create”. The “field URL” should contain the web address that takes you to this publication on the publisher’s website. The “PDF” field should be the full web address to a PDF for this citation.</p></li>
+<li><p>Note that our definition of a citation is flexible, and a citation need not be a peer-reviewed publication. Most of the fields in “New Citation” can be left blank, but we recommend at least adding a descriptive title, such as “EBI Farm Field Data” and a relevant contact person as the “Author”.</p></li>
 </ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Description of PEcAn related tools that control remote execution</li>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Once the Citation is created or selected this should automatically take you to the Sites page and list any Sites already associated with this citation. To create a new site click the <strong>New Site</strong> button.</p></li>
+<li><p>When creating a new site, the most important fields are the <strong>Site name</strong> and coordinates (<strong>latitude</strong> and <strong>longitude</strong>). The coordinates can be entered by hand or by clicking on the site location on the Google Map interface. All other information is optional, but can be useful for searching and indexing purposes.</p></li>
+<li><p>When you are done click <strong>Create</strong>. At this point, once the PEcAn site-level page is refreshed, the site should automatically appear.</p></li>
 </ol>
+</div>
+<div id="troubleshooting" class="section level3">
+<h3><span class="header-section-number">6.1.6</span> Troubleshooting</h3>
+<div id="my-site-shows-up-when-i-dont-have-any-model-selected-but-disappears-once-i-select-the-model-i-want-to-run" class="section level4">
+<h4><span class="header-section-number">6.1.6.1</span> My site shows up when I don’t have any model selected, but disappears once I select the model I want to run</h4>
+<p>Selecting a model will cause PEcAn to filter the available sites based on whether they possess the required Inputs for a given model (e.g. meteorology). To check what Inputs are missing for a site point your browser to the pecan/checksite.php webpage (e.g. localhost:6480/pecan/checksite.php). This page looks virtually identical to the site selection page, except that it has a <em>Check</em> button instead of <em>Prev</em> and <em>Next</em>. If you select a Machine, Model, and Site and then click <em>Check</em> the page should return a list of what Inputs are missing (listing both the name and the Format ID number). Don’t forget that its possible for PEcAn to have required Inputs in its database, but just not have them for the Machine where you want to run.</p>
+<p>To see more about what Inputs a given model can accept, and which of those are required, take a look at the MODEL_TYPE table entry in the database (e.g. go to <code>localhost:6480/bety</code>; Select <code>Runs &gt; Model Type</code>; and then click on the model you want to run).</p>
+<p>For information about loading missing Inputs into the database visit <a href="adding-to-pecan.html#input-records-in-bety">Input records in BETY</a>, and also read the rest of the pages under this section, which will provide important information about the specific classes of Inputs (e.g. meteorology, vegetation, etc).</p>
+<p>Finally, we are continually developing and refining workflows and standards for processing Input data in a model-agnostic way. The details about what Inputs can be processed automatically are discussed input-by-input in the sections below. For those looking to dive into the code or troubleshoot further, these conversions are ultimately handled under the <code>PEcAn.workflow::do_conversions</code> workflow module.</p>
+</div>
+</div>
+</div>
+<div id="web-model-config" class="section level2">
+<h2><span class="header-section-number">6.2</span> Model configuration</h2>
+<p>This page is used for basic model configuration, including when your model will run and what input data it will use.</p>
+<div id="choosing-meteorology" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Choosing meteorology</h3>
+<p>Once a Machine, Model, and Site have been selected, PEcAn will take you to the Input selection page. From this page you will select what Plant Functional Type (PFT) you want to run at a site, the start and end dates of the run, and various Input selections. The most common of these across all models is the need to specify meteorological forcing data. The exact name of the menu item for meteorology will vary by model because all of the Input requirements are generated individually for each model based on the MODEL_TYPE table. In general there are 3 possible cases for meteorology</p>
 <ul>
-<li>Basic remote execution R functions in <code>PEcAn.remote</code></li>
+<li>PEcAn already has driver files in its database</li>
+<li>PEcAn does not have drivers, but can generate them from publicly available data</li>
+<li>You need (or want) to upload your own drivers</li>
 </ul>
-<ol start="3" style="list-style-type: decimal">
-<li>SETUP- Configuration Files and settings</li>
+<p>The first two cases will appear automatically in the the pull down menu. For meteorological files that already exist you will see the date range that’s available. By contrast, met that can be generated will appear as “Use <source>”, where <source> is the origin of the data (e.g. “Use Ameriflux” will use the micromet from an Ameriflux eddy covariance tower, if one is present at the site).</p>
+<p>If you want to upload your own met data this can be done in three ways.</p>
+<ol style="list-style-type: decimal">
+<li><p>The default way to add met data is to incorporate it into the overall meteorological processing workflow. This is preferred if you are working with a common meteorological data product that is not yet in PEcAn’s workflow. This case can be divided into two special cases:</p>
+<ol style="list-style-type: lower-roman">
+<li><p>Data is in a common MIME-type that PEcAn already has a converter for (e.g. CSV). In this case you’ll want to create a new Format record for the meta-data so that the existing converter can process this data. See documentation for [Creating a new Format record in BETY] for more details.</p></li>
+<li><p>Data is in a more complicated format or interactive database, but large/useful enough to warrent a custom conversion function. Details on creating custom met conversions is in the [Input Conversion], though at this stage you would also be strongly encouraged to contact the PEcAn development team.</p></li>
+</ol></li>
+<li><p>The second-best way is to upload data in PEcAn’s standard meteorological format (netCDF files, CF metadata). See [Input Conversion] for details about variables and units. From this standard, PEcAn can then convert the file to the model-specific format required by the model you have chosen. This approach is preferred for a rare or one-off meterological file format, because PEcAn will also be able to convert the file into the format required by any other model as well.</p></li>
+<li><p>The last option for adding met data is to add it in a model-specific format, which is often easiest if you’ve already been running your model at a site and are just switching to using PEcAn.</p></li>
 </ol>
-<ul>
-<li>Remote model execution configuration in the <code>pecan.xml</code> and <code>config.php</code></li>
-<li>Additional information about preparing remote servers for execution</li>
-</ul>
-<div id="basics-of-ssh" class="section level2">
-<h2><span class="header-section-number">23.1</span> Basics of SSH</h2>
-<p>All of the PEcAn remote infrastructure depends on the system <code>ssh</code> utility, so it’s important to make sure this works before attempting the advanced remote execution functionality in PEcAn.</p>
-<p>To connect to a remote server interactively, the command is simply:</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></code></pre>
-<p>For instance, my connection to the BU shared computing cluster looks like:</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> ashiklom@geo.bu.edu</code></pre>
-<p>It will prompt me for my BU password, and, if successful, will drop me into a login shell on the remote machine.</p>
-<p>Alternatively to the login shell, <code>ssh</code> can be used to execute arbitrary code, whose output will be returned exactly as it would if you ran the command locally.
-For example, the following:</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</code></pre>
-<p>will run the <code>pwd</code> command, and return the path to my home directory on the BU SCC.
-The more advanced example below will run some simple R code on the BU SCC and return the output as if it was run locally.</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript -e <span class="st">&quot;seq(1, 10)&quot;</span></code></pre>
 </div>
-<div id="ssh-authentication-password-vs.ssh-key" class="section level2">
-<h2><span class="header-section-number">23.2</span> SSH authentication – password vs. SSH key</h2>
-<p>Because this server uses passwords for authentication, this command will then prompt me for my password.</p>
-<p>An alternative to password authentication is using SSH keys.
-Under this system, the host machine (say, your laptop, or the PEcAn VM) has to generate a public and private key pair (using the <code>ssh-keygen</code> command).
-The private key (by default, a file in <code>~/.ssh/id_rsa</code>) lives on the host machine, and should <strong>never</strong> be shared with anyone.
-The public key will be distributed to any remote machines to which you want the host to be able to connect.
-On each remote machine, the public key should be added to a list of authorized keys located in the <code>~/.ssh/authorized_keys</code> file (on the remote machine).
-The authorized keys list indicates which machines (technically, which keys – a single machine, and even a single user, can have many keys) are allowed to connect to it.
-This is the system used by all of the PEcAn servers (<code>pecan1</code>, <code>pecan2</code>, <code>test-pecan</code>).</p>
+<div id="met-workflow" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Met workflow</h3>
+<p>In a nutshell, the PEcAn met workflow is designed to reduce the problem of converting <em>n</em> possible met inputs into <em>m</em> possible model formats, which requires <em>n x m</em> conversion functions as well as numerous custom functions for downscaling, gap filling, etc. Instead, PEcAn works with a single met standard, and thus requires <em>n</em> conversion functions, one for converting each data source into the PEcAn standard, and then <em>m</em> conversion functions for converting from that standard to what an individual model requires. For a new model joining the PEcAn system the burden in particularly low – writing one conversion function provides access to <em>n</em> inputs. Similarly, PEcAn performs all other operations/manipulations (extracting a site, downscaling, gap filling, etc) within the PEcAn standard, which means these operations only need be implemented once.</p>
+<p>Consider a generic met data product named MET for simplicity. PEcAn will use a function, download.MET, to pull data for the selected year from a public data source (e.g. Ameriflux, North American Regional Reanalysis, etc). Next, PEcAn will use a function, met2CF.MET, to convert the data into the PEcAn standard. If the data is already at the site scale it will then gapfill the data. If the data is a regional or global data product, PEcAn will then permute the data to allow easier site-level extraction, then it will extract data for the requested site and data range. Modules to address the temporal and spatial downscaling of meteorological data products, as well as their uncertainties, are in development but not yet part of the operational workflow. All of these functions are located within the data.atmosphere module.</p>
+<p>Once data is in the standard format and processed, it will be converted to the model-specific format using a met2model.MODEL function (located in that MODEL’s module).</p>
+<p>More detailed information on how PEcAn processes inputs can be found on our [Input Conversion] page.</p>
 </div>
-<div id="ssh-tunneling" class="section level2">
-<h2><span class="header-section-number">23.3</span> SSH tunneling</h2>
-<p>SSH authentication can be more advanced than indicated above, especially on systems that require dual authentication.
-Even simple password-protection can be tricky in scripts, since (by design) it is fairly difficult to get SSH to accept a password from anything other than the raw keyboard input (i.e. SSH doesn’t let you pass passwords as input or arguments, because this exposes your password as plain text).</p>
-<p>A convenient and secure way to follow SSH security protocol, but prevent having to go through the full authentication process every time, is to use SSH tunnels (or “sockets”, which are effectively synonymous).
-Essentially, an SSH socket is a read- and write-protectected file that contains all of the information about an SSH connection.</p>
-<p>To create an SSH tunnel, use a command like the following:</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -n -N -f -o ControlMaster=yes -S /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></code></pre>
-<p>If appropriate, this will prompt you for your password (if using password authentication), and then will drop you back to the command line (thanks to the <code>-N</code> flag, which runs SSH without executing a command, the <code>-f</code> flag, which pushes SSH into the background, and the <code>-n</code> flag, which prevents ssh from reading any input).
-It will also create the file <code>/path/to/socket/file</code>.</p>
-<p>To use this socket with another command, use the <code>-S /path/to/file</code> flag, pointing to the same tunnel file you just created.</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></code></pre>
-<p>This will let you access the server without any sort of authentication step.
-As before, if <code>&lt;optional command&gt;</code> is blank, you will be dropped into an interactive shell on the remote, or if it’s a command, that command will be executed and the output returned.</p>
-<p>To close a socket, use the following:</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</code></pre>
-<p>This will delete the socket file and close the connection.
-Alternatively, a scorched earth approach to closing the SSH tunnel if you don’t remember where you put the socket file is something like the following:</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">pgrep</span> ssh   # See which processes will be killed
-<span class="ex">pkill</span> ssh   # Kill those processes</code></pre>
-<p>…which will kill all user processes called <code>ssh</code>.</p>
-<p>To automatically create tunnels following a specific pattern, you can add the following to your
-<code>~/.ssh/config</code></p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span>
- <span class="ex">ControlMaster</span> auto
- <span class="ex">ControlPath</span> /tmp/%r@%h:%p</code></pre>
-<p>For more information, see <code>man ssh</code>.</p>
+<div id="troubleshooting-meteorological-conversions" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Troubleshooting meteorological conversions</h3>
+<p>At the current moment, most of the issues below address possible errors that the Ameriflux meteorology workflow might report</p>
+<div id="could-not-do-gapfill-the-following-variables-have-nas" class="section level4">
+<h4><span class="header-section-number">6.2.3.1</span> Could not do gapfill … The following variables have NA’s</h4>
+<p>This error message means that there were gaps in the downloaded data, for whatever variables that were listed, which were larger than the current algorithm could fill. Particularly common is missing radiation or PAR data, as Ameriflux frequently converts nighttime data to NULL, and work is in progress to detect this based on solar geometry. Also common are incomplete years (first or last year of tower operations).</p>
 </div>
-<div id="ssh-tunnels-and-pecan" class="section level2">
-<h2><span class="header-section-number">23.4</span> SSH tunnels and PEcAn</h2>
-<p>Many of the <code>PEcAn.remote</code> functions assume that a tunnel is already open.
-If working from the web interface, the tunnel will be opened for you by some under-the-hood PHP and Bash code, but if debugging or working locally, you will have to create the tunnel yourself.
-The best way to do this is to create the tunnel first, outside of R, as described above.
-(In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>.
-To follow along, replace these with your own username and designated server, respectively).</p>
-<pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</code></pre>
-<p>Then, in R, create a <code>host</code> object, which is just a list containing the elements <code>name</code> (hostname) and <code>tunnel</code> (path to tunnel file).</p>
-<pre class="sourceCode r"><code class="sourceCode r">my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</code></pre>
-<p>This host object can then be used in any of the remote execution functions.</p>
+<div id="could-not-get-information-about-.-is-this-an-ameriflux-site" class="section level4">
+<h4><span class="header-section-number">6.2.3.2</span> Could not get information about <site> . Is this an Ameriflux site?</h4>
+<p>This message occurs when PEcAn believes that a site is part of Ameriflux (because it was listed on the Ameriflux or FLUXNET webpage and has a US-* site code), but no data is present on the Ameriflux server. The most common reasons for this is that you have selected a site that has not submitted data to Ameriflux yet (or that data hasn’t been processed yet), or you have selected a year that’s outside the tower’s operational period. Visit <a href="http://ameriflux.lbl.gov/sites/site-list-and-pages/">Ameriflux</a> and <a href="http://fluxnet.ornl.gov/site_status">FLUXNET</a> for lists of available site years.</p>
 </div>
-<div id="basic-remote-execute-functions" class="section level2">
-<h2><span class="header-section-number">23.5</span> Basic remote execute functions</h2>
-<p>The <code>PEcAn.remote::remote.execute.cmd</code> function runs a system command on a remote server (or on the local server, if <code>host$name == &quot;localhost&quot;</code>).</p>
-<pre><code>x &lt;- PEcAn.remote::remote.execute.cmd(host = my_host, cmd = &quot;echo&quot;, args = &quot;Hello world&quot;)
-x</code></pre>
-<p>Note that <code>remote.execute.cmd</code> is similar to base R’s <code>system2</code>, in that the base command (in this case, <code>echo</code>) is passed separately from its arguments (<code>&quot;Hello world&quot;</code>).
-Note also that the output of the remote command is returned as a character.</p>
-<p>For R code, there is a special wrapper around <code>remote.execute.cmd</code> – <code>PEcAn.remote::remote.execute.R</code>, which runs R code (passed as a string) on a remote and returns the output.</p>
-<pre><code>code &lt;- &quot;
-    x &lt;- 2:4
-    y &lt;- 3:1
-    x ^ y
-&quot;
-out &lt;- PEcAn.remote::remote.execute.R(code = code, host = my_host)</code></pre>
-<p>For additional functions related to remote file operations and other stuff, see the <code>PEcAn.remote</code> package documentation.</p>
+<div id="could-not-download-data-for-for-the-year" class="section level4">
+<h4><span class="header-section-number">6.2.3.3</span> Could not download data for <site> for the year <YEAR></h4>
+<p>This is similar to the previous error, but in this case PEcAn did find data for the site listed, but just not for the year requested. This can usually be fixed by just altering the years of the run to match those with available data.</p>
 </div>
-<div id="remote-model-execution-with-pecan" class="section level2">
-<h2><span class="header-section-number">23.6</span> Remote model execution with PEcAn</h2>
-<p>The workhorse of remote model execution is the <code>PEcAn.remote::start.model.runs</code> function, which distributes execution of each run in a list of runs (e.g. multiple runs in an ensemble) to the local machine or a remote based on the configuration in the PEcAn settings.</p>
-<p>Broadly, there are three major types of model execution:</p>
-<ul>
-<li>Serialized (<code>PEcAn.remote::start_serial</code>) – This runs models one at a time, directly on the local machine or remote (i.e. same as calling the executables one at a time for each run).</li>
-<li>Via a queue system, (<code>PEcAn.remote::start_qsub</code>) – This uses a queue management system, such as SGE (e.g. <code>qsub</code>, <code>qstat</code>) found on the BU SCC machines, to submit jobs.
-For computationally intensive tasks, this is the recommended way to go.</li>
-<li>Via a model launcher script (<code>PEcAn.remote::setup_modellauncher</code>) – This is a highly customizable approach where task submission is controlled by a user-provided script (<code>launcher.sh</code>).</li>
-</ul>
+<div id="i-could-not-find-the-requested-var-or-dimvar-in-the-file" class="section level4">
+<h4><span class="header-section-number">6.2.3.4</span> I could not find the requested var (or dimvar) in the file!</h4>
+<p>PEcAn could not find a required variable within the downloaded file. Most likely this is due to that variable not being measured at this site. The most common cause of failure is the absence of atmospheric pressure data (PRESS), but since most models have a low sensitivity to this variable we are working on methods to estimate this from other sources.</p>
 </div>
-<div id="xml-configuration" class="section level2">
-<h2><span class="header-section-number">23.7</span> XML configuration</h2>
-<p>The relevant section of the PEcAn XML file is the <code>&lt;host&gt;</code> block.
-Here is a minimal example from one of my recent runs:</p>
-<pre><code>&lt;host&gt;
-    &lt;name&gt;geo.bu.edu&lt;/name&gt;
-    &lt;user&gt;ashiklom&lt;/user&gt;
-    &lt;tunnel&gt;/home/carya/output//PEcAn_99000000008/tunnel/tunnel&lt;/tunnel&gt;
-&lt;/host&gt;</code></pre>
-<p>Breaking this down:</p>
-<ul>
-<li><code>name</code> – The hostname of the machine where the runs will be performed.
-Set it to <code>localhost</code> to run on the local machine.</li>
-<li><code>user</code> – Your username on the remote machine (note that this may be different from the username on your local machine).</li>
-<li><code>tunnel</code> – This is the tunnel file for the connection used by all remote execution files.
-The tunnel is created automatically by the web interface, but must be created by the user for command line execution.</li>
-</ul>
-<p>This configuration will run in serialized mode.
-To use <code>qsub</code>, the configuration is slightly more involved:</p>
-<pre><code>&lt;host&gt;
-  &lt;name&gt;geo.bu.edu&lt;/name&gt;
-  &lt;user&gt;ashiklom&lt;/user&gt;
-  &lt;qsub&gt;qsub -V -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash&lt;/qsub&gt;
-  &lt;qsub.jobid&gt;Your job ([0-9]+) .*&lt;/qsub.jobid&gt;
-  &lt;qstat&gt;qstat -j @JOBID@ || echo DONE&lt;/qstat&gt;
-  &lt;tunnel&gt;/home/carya/output//PEcAn_99000000008/tunnel/tunnel&lt;/tunnel&gt;
-&lt;/host&gt;</code></pre>
-<p>The additional fields are as follows:</p>
-<ul>
-<li><code>qsub</code> – The command used to submit jobs to the queue system.
-Despite the name, this can be any command used for any queue system.
-The following variables are available to be set here:
-<ul>
-<li><code>@NAME@</code> – Job name to display</li>
-<li><code>@STDOUT@</code> – File to which <code>stdout</code> will be redirected</li>
-<li><code>@STDERR@</code> – File to which <code>stderr</code> will be redirected</li>
-</ul></li>
-<li><code>qsub.jobid</code> – A regular expression, from which the job ID will be determined.
-This string will be parsed by R as <code>jobid &lt;- gsub(qsub.jobid, &quot;\\1&quot;, output)</code> – note that the first pattern match is taken as the job ID.</li>
-<li><code>qstat</code> – The command used to check the status of a job.
-Internally, PEcAn will look for the <code>DONE</code> string at the end, so a structure like <code>&lt;some command indicating if any jobs are still running&gt; || echo DONE</code> is required.
-The <code>@JOBID@</code> here is the job ID determined from the <code>qsub.jobid</code> parsing.</li>
-</ul>
-<p>Documentation for using the model launcher is currently unavailable.</p>
 </div>
-<div id="configuration-for-pecan-web-interface" class="section level2">
-<h2><span class="header-section-number">23.8</span> Configuration for PEcAn web interface</h2>
-<p>The <code>config.php</code> has a few variables that will control where the web
-interface can run jobs, and how to run those jobs. It is located in the <code>/web</code> directory and if you have not touched it yet it will
-be named as <code>config.example.php</code>. Rename it to ’config.php` and edit by folowing the following directions.</p>
-<p>These variables are <code>$hostlist</code>, <code>$qsublist</code>, <code>$qsuboptions</code>, and <code>$SSHtunnel</code>. In
-the near future <code>$hostlist</code>, <code>$qsublist</code>, <code>$qsuboptions</code> will be
-combined into a single list.</p>
-<p><code>$SSHtunnel</code> : points to the script that creates an SSH tunnel.
-The script is located in the web folder and the default value of
-<code>dirname(__FILE__) . DIRECTORY_SEPARATOR . &quot;sshtunnel.sh&quot;;</code> most
-likely will work.</p>
-<p><code>$hostlist</code> : is an array with by default a single value, only
-allowing jobs to run on the local server. Adding any other servers
-to this list will show them in the pull down menu when selecting
-machines, and will trigger the web page to be show to ask for a
-username and password for the remote execution (make sure to use
-HTTPS setup when asking for password to prevent it from being send
-in the clear).</p>
-<p><code>$qsublist</code> : is an array of hosts that require qsub to be used
-when running the models. This list can include <code>$fqdn</code> to indicate
-that jobs on the local machine should use qsub to run the models.</p>
-<p><code>$qsuboptions</code> : is an array that lists options for each machine.
-Currently it support the following options (see also
-[Run Setup] and look at the tags)</p>
-<pre><code>array(&quot;geo.bu.edu&quot; =&gt;
-    array(&quot;qsub&quot;   =&gt; &quot;qsub -V -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash&quot;,
-          &quot;jobid&quot;  =&gt; &quot;Your job ([0-9]+) .*&quot;,
-          &quot;qstat&quot;  =&gt; &quot;qstat -j @JOBID@ || echo DONE&quot;,
-          &quot;job.sh&quot; =&gt; &quot;module load udunits R/R-3.0.0_gnu-4.4.6&quot;,
-          &quot;models&quot; =&gt; array(&quot;ED2&quot;    =&gt; &quot;module load hdf5&quot;))</code></pre>
-<p>In this list <code>qsub</code> is the actual command line for qsub, <code>jobid</code>
-is the text returned from qsub, <code>qstat</code> is the command to check
-to see if the job is finished. <code>job.sh</code> and the value in models
-are additional entries to add to the job.sh file generated to
-run the model. This can be used to make sure modules are loaded
-on the HPC cluster before running the actual model.</p>
 </div>
-<div id="running-pecan-code-for-remotely" class="section level2">
-<h2><span class="header-section-number">23.9</span> Running PEcAn code for remotely</h2>
-<p>You do not need to download PEcAn fully on your remote machine. You can compile and install the model specific code pieces of
-PEcAn on the cluster easily without having to install the
-full code base of PEcAn (and all OS dependencies). Use the <code>git clone</code> command to:</p>
-<pre><code>devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;base/utils&#39;)</code></pre>
-<p>Next we need to install the model specific pieces, this is done
-almost the same (example for ED2):</p>
-<pre><code>devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;models/ed&#39;)</code></pre>
-<p>This should install dependencies required.</p>
-<ul>
-<li>The following are some notes on how to install the model specifics on different HPC
-clusters*</li>
-</ul>
+<div id="selecting-plant-functional-types-pfts-and-other-parameter-groupings." class="section level2">
+<h2><span class="header-section-number">6.3</span> Selecting Plant Functional Types (PFTs) and other parameter groupings.</h2>
+<div id="using-existing-pfts" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Using existing PFTs</h3>
+<p>PEcAn does not automatically know what vegetation types are present at your study site so you need to select the PFT.</p>
+<p>Some models, such as ED2 and LINKAGES, support competition among multiple PFTs and thus you are encouraged to highlight multiple choices. Other models, such as SIPNET and DALEC, only support one PFT at a site.</p>
+<p>Many models also have parameters that control non-vegetation processes (e.g. soil biogeochemistry and hydrology). PEcAn allows users to assign these parameters to functional groups as well (e.g. a <code>soils</code> PFT)</p>
 </div>
-<div id="special-case-geo.bu.edu" class="section level2">
-<h2><span class="header-section-number">23.10</span> Special case: <code>geo.bu.edu</code></h2>
-<p>Following modules need to be loaded:</p>
-<pre><code>module load hdf5 udunits R/R-3.0.0_gnu-4.4.6</code></pre>
-<p>Next the following packages need to be installed, otherwise it
-will fall back on the older versions install site-library</p>
-<pre><code>install.packages(c(&#39;udunits2&#39;, &#39;lubridate&#39;), 
-   configure.args=c(udunits2=&#39;--with-udunits2-lib=/project/earth/packages/udunits-2.1.24/lib --with-udunits2-include=/project/earth/packages/udunits-2.1.24/include&#39;),
-   repos=&#39;http://cran.us.r-project.org&#39;)</code></pre>
-<p>Finally to install support for both ED and SIPNET:</p>
-<pre><code>devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;base/utils&#39;)
-devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;models/sipnet&#39;)
-devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;models/ed&#39;)</code></pre>
+<div id="creating-new-pfts" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Creating new PFTs</h3>
+<p>To modify or add a new Plant Functional Type (PFT), or to change a PFT’s priors, navigate
+on the grey menu bar to Data &gt; PFTs</p>
+<ol style="list-style-type: decimal">
+<li><p>To add a new pft, click “new PFT” at the top and enter a name and description. (hint:
+we’re trying to name PFTs based on model.biome.pft, ED2 is the default model if one
+isn’t specified)</p></li>
+<li><p>To add new species to a PFT click on [+] View Related Species and type the species,
+genus, or family you are looking for into the Search box. Click on the + to add.</p></li>
+<li><p>To remove a species from a PFT, click on [+] View Related Species and click on the X
+of the species you want to remove from the PFT.</p></li>
+<li><p>To remove a prior, click [-] View Related Prior and click on the X of the variable who’s
+prior you want to remove. This will cause the parameter to be excluded from all
+analyses (meta-analysis, sensitivity analysis, etc) and revert to its default value.</p></li>
+<li><p>To add a prior, choose one from the white box of priors on the right to choose.</p></li>
+<li><p>To view the specification of a prior, or to add a new prior, click BETY-DB &gt; Priors and
+enter the information on the variable, distribution name, distribution parameters, etc. N
+is the sample size underlying the prior specification (0 is ok for uninformative priors).</p></li>
+<li><p>You can also got to Data &gt; Variables in order to use the search function to find an
+existing variable (or create a new one). Please try not to create new variables
+unnecessarily (e.g. changes of variable name or units to what your model uses is handled
+internally, so you want to find the trait with the correct MEANING).</p></li>
+</ol>
+<p>Additional information on adding PFTs, Species, and Priors can be found in Adding An [Ecosystem Model].</p>
+</div>
+<div id="choosing-initial-vegetation" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> Choosing initial vegetation</h3>
+<p>On the Input Selection webpage, in addition to selecting PFTs, start &amp; end dates, and meteorology, many models also require some way of specifying the initial conditions for the vegetation, which may range from setting the aboveground biomass and LAI up to detailed inventory-like data on species composition and stand structure.</p>
+<p>At the moment, PEcAn has three cases for initial conditions:</p>
+<ol style="list-style-type: decimal">
+<li><p>If files already exist in the database, they can simply be selected from the menu. For ED2, there are 3 different veg files (site, pss, css) and it is important that you select a complete set, not mix and match.</p></li>
+<li><p>If files don’t exist they can be uploaded following the instructions in <a href="adding-to-pecan.html#create-a-database-file-record-for-the-input-data">Create a database file record for the input data</a>.</p></li>
+<li><p>Automated vegetation initial condition workflow</p></li>
+</ol>
+<p>As with meteorology, PEcAn is working to develop a model-agnostic workflow for converting various sources of vegetation data to common standards, developing common processing tools, and then writing out to model-specific formats. This process is in a much early stage than the meteorology workflow, as we are still researching what the options are for standard formats, but ultimately aims to be much more broad in scope, considering not just plot inventory data but also historical documentation, paleoecological proxies, satellite remote sensing (e.g. LANDSAT), airborne hyperspectral imagery, and active remote sensing (Lidar, Radar).</p>
+<p>At the moment, what is functional is a prototype workflow that works for inventory-based vegetation data. This data can come from either files that have been registered with the BETY Inputs and Formats tables or can be queried from the USFS Forest Inventory and Analysis (FIA). For more information visit Section 13.1.2.2 Vegetation Data</p>
+</div>
+<div id="us-fia" class="section level3">
+<h3><span class="header-section-number">6.3.4</span> US FIA</h3>
+<p>This tool works with an internal copy of the FIA that is uploaded to a postGRES database along side BETY, however for space reasons this database does not ship with the PEcAn VM. To turn this feature on:</p>
+<ol style="list-style-type: decimal">
+<li>Download and Install the FIA database. Instructions in <a href="workflow-modules.html#install-data">Installing data for PEcAn</a></li>
+<li>For web-base runs, specify the database settings in the <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">config.php</a></li>
+<li>For R-based runs, specify the database settings in the <a href="pecanXML.html#pecanXML">THE PEcAn XML</a></li>
+</ol>
+<p>More detailed information on how PEcAn processes inputs can be found on our [Input Conversion]page.</p>
+</div>
+<div id="spin-up" class="section level3">
+<h3><span class="header-section-number">6.3.5</span> Spin up</h3>
+<p>A number of ecosystem models are typically initialized by spinning up to steady state. At the moment PEcAn doesn’t handle spin up automatically (e.g. looping met, checking for stability), but there are various ways to achieve a spin-up within the system.</p>
+<p><strong>Option 1:</strong> If there are model-specific settings in a model’s settings/config file, then that file can be accessed by clicking on the <strong>Edit model config</strong> check box. If this box is selected then PEcAn will pause the site run workflow after it has generated your model config file, but before it runs the model, and give you an opportunity to edit the file by hand, allowing you to change any model-specific spin up settings (e.g met recycling, spin up length)</p>
+<p><strong>Option 2:</strong> Set start_year very early and set the met drivers to be a long time series (e.g. PalEON, something custom uploaded to Inputs)</p>
+<p><strong>Option 3:</strong> In the MODEL_TYPE table, add your model’s restart format as an optional input, modify the model specific write.config function to use that restart, and then load a previous spin-up to the Inputs table</p>
+<p>Beyond these options, we hope to eventually develop more general, model-agnostic tools for spin up. In particular, we have started to explore the accelerated spin-up and semi-analytical techniques being developed by Yiqi Luo’s lab</p>
+</div>
+<div id="selecting-a-soils-product" class="section level3">
+<h3><span class="header-section-number">6.3.6</span> Selecting a soils product</h3>
+<p>Many models have requirements for soils information, which may include: site-specific soil texture and depth information; soil biogeochemical initial conditions (e.g. soil carbon and nitrogen pools); soil moisture initial conditions; and soil thermal initial conditions.</p>
+<p>As with <a href="basic-web-wrokflow.html#choosing-initial-vegetation">Choosing initial vegetation</a>, we eventually hope to develop data standards, soils workflows, and spin-up tools, but at the moment this workflow is in the early stages of development. Model requirements need to be met by<a href="adding-to-pecan.html#creating-a-new-input-record-in-bety">Creating a new Input record in BETY</a> into the database or using files that have already been uploaded. Similar to met, we recommend that this file be in the PEcAn-standard netCDF described below, but model-specific files can also be registered.</p>
+</div>
+<div id="soil-texture-depth-and-physical-parameters" class="section level3">
+<h3><span class="header-section-number">6.3.7</span> Soil texture, depth, and physical parameters</h3>
+<p>A PEcAn-standard netCDF file format exists for soil texture, depth, and physical parameters, using PEcAn standard names that are largely a direct extention of the CF standard.</p>
+<p>The easiest way to create this file is with the PEcAn R function <code>soil2netcdf</code> as described in the Soil Data section of the Advanced Users Guide.</p>
+<p>A table of standard names and units can be listed using <code>PEcAn.data.land::soil.units()</code> with no arguments.</p>
+<p>More detailed information on how PEcAn processes inputs can be found on our [Input Conversion] page.</p>
+</div>
+<div id="other-model-inputs" class="section level3">
+<h3><span class="header-section-number">6.3.8</span> Other model inputs</h3>
+<p>Finally, any other model-specific inputs (e.g. N deposition, land use history, etc), should be met by <a href="adding-to-pecan.html#creating-a-new-input-record-in-bety">Creating a new Input record in BETY</a> or using files that have already been uploaded.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -729,8 +705,8 @@ devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;models/ed
           </div>
         </div>
       </div>
-<a href="docker-index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-assimilation-with-dart.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="user-section.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intermediate-user.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -760,7 +736,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/03_topical_pages/95_remote_execution.Rmd",
+"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/02_demos_tutorials_workflows/03_web_workflow.Rmd",
 "text": "Edit"
 },
 "history": {
