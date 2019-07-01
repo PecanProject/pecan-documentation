@@ -944,6 +944,26 @@ services:
     - traefik.enable=true
     - traefik.frontend.rule=${TRAEFIK_FRONTEND_RULE:-}PathPrefix:/bety/
     - traefik.backend=bety
+  rstudio-nginx:
+    image: pecan/rstudio-nginx:${PECAN_VERSION:-latest}
+    networks: pecan
+    labels:
+    - traefik.enable=true
+    - traefik.backend=rstudio
+    - traefik.port=80
+    - traefik.frontend.rule=${TRAEFIK_FRONTEND_RULE:-}PathPrefix:/rstudio
+    - traefik.website.frontend.whiteList.sourceRange=${TRAEFIK_IPFILTER:-172.16.0.0/12}
+  rstudio:
+    image: pecan/base:${PECAN_VERSION:-latest}
+    restart: unless-stopped
+    networks: pecan
+    environment:
+    - USER=${PECAN_RSTUDIO_USER:-carya}
+    - PASSWORD=${PECAN_RSTUDIO_PASS:-ilinois}
+    entrypoint: /init
+    volumes:
+    - pecan:/data
+    - rstudio:/home
   docs:
     image: pecan/docs:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1023,7 +1043,8 @@ volumes:
   postgres: ~
   rabbitmq: ~
   pecan: ~
-  portainer: ~</code></pre>
+  portainer: ~
+  rstudio: ~</code></pre>
 <p>There are two ways you can override different values in the docker-compose.yml file. The first method is to create a file called <code>.env</code> that is placed in the same folder as the docker-compose.yml file. This file can override some of configuration variables used by docker-compose. For example the following is an example of the env file</p>
 <pre><code># This file will override the configation options in the docker-compose
 # file. Copy this file to the same folder as docker-compose as .env
@@ -1110,7 +1131,15 @@ volumes:
 #RABBITMQ_DEFAULT_PASS=illinois
 
 # create the correct URI with above username and password
-#RABBITMQ_URI=amqp://carya:illinois@rabbitmq/%2F</code></pre>
+#RABBITMQ_URI=amqp://carya:illinois@rabbitmq/%2F
+
+# ----------------------------------------------------------------------
+# RSTUDIO CONFIGURATION
+# ----------------------------------------------------------------------
+
+# Default RStudio username and password for startup of container
+#PECAN_RSTUDIO_USER=carya
+#PECAN_RSTUDIO_PASS=illinois</code></pre>
 <p>You can also extend the <code>docker-compose.yml</code> file with a <code>docker-compose.override.yml</code> file (in the same directory), allowing you to add more services, or for example to change where the volumes are stored (see <a href="https://docs.docker.com/compose/extends/">official documentation</a>). For example the following will change the volume for postgres to be stored in your home directory:</p>
 <pre><code>version: &quot;3&quot;
 
