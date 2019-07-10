@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-04" />
+<meta name="date" content="2019-07-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -551,7 +551,10 @@ It contains the following major sections (“nodes”):</p>
   <span class="kw">&lt;/pfts&gt;</span>
   <span class="kw">&lt;meta.analysis&gt;</span>
     <span class="kw">&lt;iter&gt;</span>3000<span class="kw">&lt;/iter&gt;</span>
-    <span class="kw">&lt;random.effects&gt;</span>FALSE<span class="kw">&lt;/random.effects&gt;</span>
+    <span class="kw">&lt;random.effects&gt;</span>
+     <span class="kw">&lt;on&gt;</span>FALSE<span class="kw">&lt;/on&gt;</span>
+     <span class="kw">&lt;use_ghs&gt;</span>TRUE<span class="kw">&lt;/use_ghs&gt;</span>
+    <span class="kw">&lt;/random.effects&gt;</span>
   <span class="kw">&lt;/meta.analysis&gt;</span>
   <span class="kw">&lt;ensemble&gt;</span>
    <span class="kw">&lt;size&gt;</span>1<span class="kw">&lt;/size&gt;</span>
@@ -725,12 +728,17 @@ Stability not ensured as of 1.5.3.</p>
 Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to manually set all parameters), you should omit this node.</p>
 <pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;meta.analysis&gt;</span>
     <span class="kw">&lt;iter&gt;</span>3000<span class="kw">&lt;/iter&gt;</span>
-    <span class="kw">&lt;random.effects&gt;</span>FALSE<span class="kw">&lt;/random.effects&gt;</span>
+    <span class="kw">&lt;random.effects&gt;</span>
+      <span class="kw">&lt;on&gt;</span>FALSE<span class="kw">&lt;/on&gt;</span>
+      <span class="kw">&lt;use_ghs&gt;</span>TRUE<span class="kw">&lt;/use_ghs&gt;</span>
+    <span class="kw">&lt;/random.effects&gt;</span>
   <span class="kw">&lt;/meta.analysis&gt;</span></code></pre>
 <p>Some of the tags that can go in this section are:</p>
 <ul>
 <li><code>iter</code>: <a href="http:/en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a> (Markov Chain Monte Carlo) chain length, i.e. the total number of posterior samples in the meta-analysis, default is 3000. Smaller numbers will run faster but produce larger errors.</li>
-<li><code>random.effects</code>: Whether to include random effects (site, treatment) in meta-analysis model. Can be set to FALSE to work around convergence problems caused by an over parameterized model (e.g. too many sites, not enough data). The default value is TRUE.</li>
+<li><code>random.effects</code>: Settings related to whether to include random effects (site, treatment) in meta-analysis model.</li>
+<li><code>on</code>: Default is set to FALSE to work around convergence problems caused by an over parameterized model (e.g. too many sites, not enough data). Can be turned to TRUE for including hierarchical random effects.</li>
+<li><code>use_ghs</code>: Default is set to TRUE to include greenhouse measurements. Can be set to FALSE to exclude cases where all data is from greenhouse.</li>
 <li><code>update</code>: Should previous results of meta.analysis and get.traits be re-used. If set to TRUE the meta-analysis and get.trait.data will always be executed. Setting this to FALSE will try and reuse existing results. Future versions will allow for AUTO as well which will try and reuse if the PFT/traits have not changed. The default value is FALSE.</li>
 <li><code>threshold</code>: threshold for Gelman-Rubin convergence diagnostic (MGPRF); default is 1.2.</li>
 </ul>
