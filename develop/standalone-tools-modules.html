@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>16 Standalone tools (modules) | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="16 Standalone tools (modules) | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="16 Standalone tools (modules) | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-10" />
+<meta name="date" content="2019-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,7 +74,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -532,7 +531,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Create a connection to the BETY database. This can be done using R function</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">bety =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">betyConnect</span>(<span class="dt">php.config =</span> <span class="st">&quot;pecan/web/config.php&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">bety =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">betyConnect</span>(<span class="dt">php.config =</span> <span class="st">&quot;pecan/web/config.php&quot;</span>)</a></code></pre></div>
 <p>where the complete path to the <code>config.php</code> is specified. See <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">here</a> for an example <code>config.php</code> file.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Look up the inputs record for the data in BETY.</li>
@@ -545,9 +544,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>In R run</li>
 </ul></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-input_name =<span class="st"> &quot;AmerifluxLBL_site_0-758&quot;</span> <span class="co">#copied directly from online</span>
-input.id =<span class="st"> </span><span class="kw">tbl</span>(bety,<span class="st">&quot;inputs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(name <span class="op">==</span><span class="st"> </span>input_name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(id)</code></pre>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb195-2" data-line-number="2">input_name =<span class="st"> &quot;AmerifluxLBL_site_0-758&quot;</span> <span class="co">#copied directly from online</span></a>
+<a class="sourceLine" id="cb195-3" data-line-number="3">input.id =<span class="st"> </span><span class="kw">tbl</span>(bety,<span class="st">&quot;inputs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(name <span class="op">==</span><span class="st"> </span>input_name) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(id)</a></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Additional arguments to <code>query.format.vars</code> are optional</p>
 <ol style="list-style-type: decimal">
@@ -556,38 +555,38 @@ input.id =<span class="st"> </span><span class="kw">tbl</span>(bety,<span class=
 </ol></li>
 <li><p>In R run</p></li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">   format =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(bety, input.id)</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">   format =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(bety, input.id)</a></code></pre></div>
 <p>Examine the resulting R list object to make sure it returned the correct information.</p>
 <p>The example format contains the following objects:</p>
-<pre class="sourceCode r"><code class="sourceCode r">   <span class="op">$</span>file_name
-   [<span class="dv">1</span>] <span class="st">&quot;AMERIFLUX_BASE_HH&quot;</span>
-
-   <span class="op">$</span>mimetype
-   [<span class="dv">1</span>] <span class="st">&quot;csv&quot;</span>
-
-   <span class="op">$</span>skip
-   [<span class="dv">1</span>] <span class="dv">2</span>
-
-   <span class="op">$</span>header
-   [<span class="dv">1</span>] <span class="dv">1</span>
-
-   <span class="op">$</span>na.strings
-   [<span class="dv">1</span>] <span class="st">&quot;-9999&quot;</span> <span class="st">&quot;-6999&quot;</span> <span class="st">&quot;9999&quot;</span>  <span class="st">&quot;NA&quot;</span>   
-
-   <span class="op">$</span>time.row
-   [<span class="dv">1</span>] <span class="dv">4</span>
-
-   <span class="op">$</span>site
-   [<span class="dv">1</span>] <span class="dv">758</span>
-
-   <span class="op">$</span>lat
-   [<span class="dv">1</span>] <span class="fl">42.5378</span>
-
-   <span class="op">$</span>lon
-   [<span class="dv">1</span>] <span class="fl">-72.1715</span>
-
-   <span class="op">$</span>time_zone
-   [<span class="dv">1</span>] <span class="st">&quot;America/New_York&quot;</span></code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">   <span class="op">$</span>file_name</a>
+<a class="sourceLine" id="cb197-2" data-line-number="2">   [<span class="dv">1</span>] <span class="st">&quot;AMERIFLUX_BASE_HH&quot;</span></a>
+<a class="sourceLine" id="cb197-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb197-4" data-line-number="4">   <span class="op">$</span>mimetype</a>
+<a class="sourceLine" id="cb197-5" data-line-number="5">   [<span class="dv">1</span>] <span class="st">&quot;csv&quot;</span></a>
+<a class="sourceLine" id="cb197-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb197-7" data-line-number="7">   <span class="op">$</span>skip</a>
+<a class="sourceLine" id="cb197-8" data-line-number="8">   [<span class="dv">1</span>] <span class="dv">2</span></a>
+<a class="sourceLine" id="cb197-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb197-10" data-line-number="10">   <span class="op">$</span>header</a>
+<a class="sourceLine" id="cb197-11" data-line-number="11">   [<span class="dv">1</span>] <span class="dv">1</span></a>
+<a class="sourceLine" id="cb197-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb197-13" data-line-number="13">   <span class="op">$</span>na.strings</a>
+<a class="sourceLine" id="cb197-14" data-line-number="14">   [<span class="dv">1</span>] <span class="st">&quot;-9999&quot;</span> <span class="st">&quot;-6999&quot;</span> <span class="st">&quot;9999&quot;</span>  <span class="st">&quot;NA&quot;</span>   </a>
+<a class="sourceLine" id="cb197-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb197-16" data-line-number="16">   <span class="op">$</span>time.row</a>
+<a class="sourceLine" id="cb197-17" data-line-number="17">   [<span class="dv">1</span>] <span class="dv">4</span></a>
+<a class="sourceLine" id="cb197-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb197-19" data-line-number="19">   <span class="op">$</span>site</a>
+<a class="sourceLine" id="cb197-20" data-line-number="20">   [<span class="dv">1</span>] <span class="dv">758</span></a>
+<a class="sourceLine" id="cb197-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb197-22" data-line-number="22">   <span class="op">$</span>lat</a>
+<a class="sourceLine" id="cb197-23" data-line-number="23">   [<span class="dv">1</span>] <span class="fl">42.5378</span></a>
+<a class="sourceLine" id="cb197-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb197-25" data-line-number="25">   <span class="op">$</span>lon</a>
+<a class="sourceLine" id="cb197-26" data-line-number="26">   [<span class="dv">1</span>] <span class="fl">-72.1715</span></a>
+<a class="sourceLine" id="cb197-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb197-28" data-line-number="28">   <span class="op">$</span>time_zone</a>
+<a class="sourceLine" id="cb197-29" data-line-number="29">   [<span class="dv">1</span>] <span class="st">&quot;America/New_York&quot;</span></a></code></pre></div>
 <p>The first 4 rows of the table <code>format$vars</code> looks like this:</p>
 <table style="width:100%;">
 <colgroup>
@@ -676,14 +675,14 @@ input.id =<span class="st"> </span><span class="kw">tbl</span>(bety,<span class=
 <ol start="5" style="list-style-type: decimal">
 <li>Get the path to the data</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">   data.path =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.file.path</span>(
-     <span class="dt">input.id =</span> input.id, 
-     <span class="dt">host_name =</span> PEcAn.remote<span class="op">::</span><span class="kw">fqdn</span>(), 
-     <span class="dt">con =</span> bety<span class="op">$</span>con)</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">   data.path =<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.file.path</span>(</a>
+<a class="sourceLine" id="cb198-2" data-line-number="2">     <span class="dt">input.id =</span> input.id, </a>
+<a class="sourceLine" id="cb198-3" data-line-number="3">     <span class="dt">host_name =</span> PEcAn.remote<span class="op">::</span><span class="kw">fqdn</span>(), </a>
+<a class="sourceLine" id="cb198-4" data-line-number="4">     <span class="dt">con =</span> bety<span class="op">$</span>con)</a></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Load the data</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">   data =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> data.path, <span class="dt">format =</span> format)</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1">   data =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> data.path, <span class="dt">format =</span> format)</a></code></pre></div>
 
 </div>
 </div>

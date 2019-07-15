@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 PEcAn Models | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="13 PEcAn Models | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 PEcAn Models | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-10" />
+<meta name="date" content="2019-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,7 +74,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -846,23 +845,23 @@ List of inputs required by model, such as met, etc.</p>
 <li><code>phenol.end</code></li>
 <li><code>all_pfts</code> – (Logical) If false or missing (default), only run ED2 with the PFTs configured via PEcAn (i.e. in the <code>&lt;pfts&gt;</code> section of the XML). If <code>true</code>, run with all 17 of ED2’s PFTs, using ED2’s internal default parameters for all PFTs not configured through PEcAn. See <a href="pecan-models.html#models-ed-pft-configuration">below</a> for more details.</li>
 <li><p><code>ed2in_tags</code> – Named list of additional tags in the ED2IN to be modified. These modifications override any of those set by other parts of the PEcAn workflow. These tags must be in all caps. Any tags that are not already in the ED2IN file will be added; this makes this an effective way to run newer versions of ED2 that have new ED2IN parameters without having to provide an entire new ED2IN. For example:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;model&gt;</span>
-  <span class="kw">&lt;ed2in_tags&gt;</span>
-    <span class="kw">&lt;IOOUTPUT&gt;</span>0<span class="kw">&lt;/IOOUTPUT&gt;</span>
-    <span class="kw">&lt;PLANT_HYDRO_SCHEME&gt;</span>0<span class="kw">&lt;/PLANT_HYDRO_SCHEME&gt;</span>
-    <span class="kw">&lt;ISTOMATA_SCHEME&gt;</span>0<span class="kw">&lt;/ISTOMATA_SCHEME&gt;</span>
-    <span class="kw">&lt;ISTRUCT_GROWTH_SCHEME&gt;</span>0<span class="kw">&lt;/ISTRUCT_GROWTH_SCHEME&gt;</span>
-    <span class="kw">&lt;TRAIT_PLASTICITY_SCHEME&gt;</span>0<span class="kw">&lt;/TRAIT_PLASTICITY_SCHEME&gt;</span>
-  <span class="kw">&lt;/ed2in_tags&gt;</span>
-<span class="kw">&lt;/model&gt;</span></code></pre></li>
+<div class="sourceCode" id="cb166"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="kw">&lt;model&gt;</span></a>
+<a class="sourceLine" id="cb166-2" data-line-number="2">  <span class="kw">&lt;ed2in_tags&gt;</span></a>
+<a class="sourceLine" id="cb166-3" data-line-number="3">    <span class="kw">&lt;IOOUTPUT&gt;</span>0<span class="kw">&lt;/IOOUTPUT&gt;</span></a>
+<a class="sourceLine" id="cb166-4" data-line-number="4">    <span class="kw">&lt;PLANT_HYDRO_SCHEME&gt;</span>0<span class="kw">&lt;/PLANT_HYDRO_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb166-5" data-line-number="5">    <span class="kw">&lt;ISTOMATA_SCHEME&gt;</span>0<span class="kw">&lt;/ISTOMATA_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb166-6" data-line-number="6">    <span class="kw">&lt;ISTRUCT_GROWTH_SCHEME&gt;</span>0<span class="kw">&lt;/ISTRUCT_GROWTH_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb166-7" data-line-number="7">    <span class="kw">&lt;TRAIT_PLASTICITY_SCHEME&gt;</span>0<span class="kw">&lt;/TRAIT_PLASTICITY_SCHEME&gt;</span></a>
+<a class="sourceLine" id="cb166-8" data-line-number="8">  <span class="kw">&lt;/ed2in_tags&gt;</span></a>
+<a class="sourceLine" id="cb166-9" data-line-number="9"><span class="kw">&lt;/model&gt;</span></a></code></pre></div></li>
 <li><code>barebones_ed2in</code> – Whether or not to try to annotate the ED2IN file with comments. If “true”, skip all comments and only write the tags themselves. If “false” (default), try to transfer comments from the template file into the target file.</li>
 <li><code>jobtemplate</code></li>
 <li><code>prerun</code> – String of commands to be added to the <code>job.sh</code> model execution script before the model is run. Multiple commands should be separated by proper <code>bash</code> syntax – i.e. either with <code>&amp;&amp;</code> or <code>;</code>.
 <ul>
 <li><p>One common use of this argument is to load modules on some HPC systems – for instance:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;prerun&gt;</span>module load git hdf5<span class="kw">&lt;/prerun&gt;</span></code></pre></li>
+<div class="sourceCode" id="cb167"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">&lt;prerun&gt;</span>module load git hdf5<span class="kw">&lt;/prerun&gt;</span></a></code></pre></div></li>
 <li><p>If your particular version of ED is failing early during execution with a mysterious “Segmentation fault”, that may indicate that its process is exceeding its stack limit. In this case, you may need to remove the stack limit restriction with a <code>prerun</code> command like the following:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;prerun&gt;</span>ulimit -s unlimited<span class="kw">&lt;/prerun&gt;</span></code></pre></li>
+<div class="sourceCode" id="cb168"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">&lt;prerun&gt;</span>ulimit -s unlimited<span class="kw">&lt;/prerun&gt;</span></a></code></pre></div></li>
 </ul></li>
 <li><code>postrun</code> – Same as <code>&lt;prerun&gt;</code>, but for commands to be run <em>after</em> model execution.</li>
 <li><code>binary</code> – The full path to the ED2 binary on the target machine.</li>
@@ -926,10 +925,10 @@ The configuration process proceeds as follows:</p>
 <p>First, the mappings between PEcAn PFT names and ED2 PFT numbers are determined according to the following logic:</p>
 <ul>
 <li><p>If the PFT has a <code>&lt;ed2_pft_number&gt;</code> XML tag, that number is used. For example:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;pft&gt;</span>
-  <span class="kw">&lt;name&gt;</span>umbs.early_hardwood<span class="kw">&lt;/name&gt;</span>
-  <span class="kw">&lt;ed2_pft_number&gt;</span>9<span class="kw">&lt;/ed2_pft_number&gt;</span>
-<span class="kw">&lt;/pft&gt;</span></code></pre></li>
+<div class="sourceCode" id="cb169"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">&lt;pft&gt;</span></a>
+<a class="sourceLine" id="cb169-2" data-line-number="2">  <span class="kw">&lt;name&gt;</span>umbs.early_hardwood<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb169-3" data-line-number="3">  <span class="kw">&lt;ed2_pft_number&gt;</span>9<span class="kw">&lt;/ed2_pft_number&gt;</span></a>
+<a class="sourceLine" id="cb169-4" data-line-number="4"><span class="kw">&lt;/pft&gt;</span></a></code></pre></div></li>
 <li><p>If <code>&lt;ed2_pft_number&gt;</code> is not provided, the code tries to cross-reference the PFT <code>name</code> against the <code>pftmapping.csv</code> data provided with the <code>PEcAn.ED2</code> package. If the name is not matched (perfectly!), the function will exit with an error.</p></li>
 </ul>
 <p>Second, the PFT number from the previous step is used to write that PFT’s parameters to the <code>config.xml</code>.
@@ -938,12 +937,12 @@ The order of precedence for parameters is as follows (from highest to lowest):</
 <li><p><strong>Explicit user overrides</strong>.
 These are specified via a <code>&lt;constants&gt;</code> tag in the PFT definition in the <code>pecan.xml</code>.
 For example:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;pft&gt;</span>
-  <span class="kw">&lt;name&gt;</span>umbs.early_hardwood<span class="kw">&lt;/name&gt;</span>
-  <span class="kw">&lt;constants&gt;</span>
-     <span class="kw">&lt;sla&gt;</span>36.3<span class="kw">&lt;/sla&gt;</span>
-  <span class="kw">&lt;/constants&gt;</span>
-<span class="kw">&lt;/pft&gt;</span></code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">&lt;pft&gt;</span></a>
+<a class="sourceLine" id="cb170-2" data-line-number="2">  <span class="kw">&lt;name&gt;</span>umbs.early_hardwood<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb170-3" data-line-number="3">  <span class="kw">&lt;constants&gt;</span></a>
+<a class="sourceLine" id="cb170-4" data-line-number="4">     <span class="kw">&lt;sla&gt;</span>36.3<span class="kw">&lt;/sla&gt;</span></a>
+<a class="sourceLine" id="cb170-5" data-line-number="5">  <span class="kw">&lt;/constants&gt;</span></a>
+<a class="sourceLine" id="cb170-6" data-line-number="6"><span class="kw">&lt;/pft&gt;</span></a></code></pre></div>
 Note that these values are passed through <a href="https://pecanproject.github.io/models/ed/docs/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>, so they should generally be given in PEcAn’s default units rather than ED2’s.</li>
 <li><strong>Samples from the PEcAn meta analysis</strong>.
 These are also converted via <a href="https://pecanproject.github.io/models/ed/docs/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>.</li>
@@ -958,9 +957,9 @@ Again, the best way to know which parameters ED2 is actually using is to check t
 By default, PEcAn will set this field to only include the PFTs specified by the user.
 This is the recommended behavior because it ensures that all PFTs in ED2 were parameterized (one way or another, at least partially) through PEcAn.
 However, if you would like ED2 to run with all 17 PFTs (NOTE: using ED2’s internal defaults for all PFTs not specified by the user!), you can set the <code>&lt;all_pfts&gt;</code> XML tag (in the <code>&lt;model&gt;</code> section) to <code>true</code>:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;model&gt;</span>
-    <span class="kw">&lt;all_pfts&gt;</span>true<span class="kw">&lt;/all_pfts&gt;</span>
-<span class="kw">&lt;/model&gt;</span></code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">&lt;model&gt;</span></a>
+<a class="sourceLine" id="cb171-2" data-line-number="2">    <span class="kw">&lt;all_pfts&gt;</span>true<span class="kw">&lt;/all_pfts&gt;</span></a>
+<a class="sourceLine" id="cb171-3" data-line-number="3"><span class="kw">&lt;/model&gt;</span></a></code></pre></div>
 </div>
 <div id="model-specific-input-files" class="section level4">
 <h4><span class="header-section-number">13.0.4.4</span> Model specific input files</h4>
@@ -1030,23 +1029,23 @@ However, if you would like ED2 to run with all 17 PFTs (NOTE: using ED2’s inte
 </div>
 <div id="tacc-lonestar" class="section level4">
 <h4><span class="header-section-number">13.0.4.9</span> TACC lonestar</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">module</span> load hdf5
-<span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="fu">tar</span> zxf ED.r82.tgz
-<span class="fu">rm</span> ED.r82.tgz
-<span class="bu">cd</span> ED.r82/ED/build/bin
-<span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar
-<span class="fu">make</span> OPT=lonestar</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb172-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb172-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb172-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb172-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb172-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</a>
+<a class="sourceLine" id="cb172-7" data-line-number="7"><span class="fu">make</span> OPT=lonestar</a></code></pre></div>
 </div>
 <div id="tacc-stampede" class="section level4">
 <h4><span class="header-section-number">13.0.4.10</span> TACC stampede</h4>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">module</span> load hdf5
-<span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz
-<span class="fu">tar</span> zxf ED.r82.tgz
-<span class="fu">rm</span> ED.r82.tgz
-<span class="bu">cd</span> ED.r82/ED/build/bin
-<span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede
-<span class="fu">make</span> OPT=stampede</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="ex">module</span> load hdf5</a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</a>
+<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="fu">tar</span> zxf ED.r82.tgz</a>
+<a class="sourceLine" id="cb173-4" data-line-number="4"><span class="fu">rm</span> ED.r82.tgz</a>
+<a class="sourceLine" id="cb173-5" data-line-number="5"><span class="bu">cd</span> ED.r82/ED/build/bin</a>
+<a class="sourceLine" id="cb173-6" data-line-number="6"><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</a>
+<a class="sourceLine" id="cb173-7" data-line-number="7"><span class="fu">make</span> OPT=stampede</a></code></pre></div>
 
 </div>
 </div>

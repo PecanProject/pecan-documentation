@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 About the PEcAn Book | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="3 About the PEcAn Book | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 About the PEcAn Book | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-10" />
+<meta name="date" content="2019-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,7 +74,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -529,25 +528,25 @@ For instance, the file name for this chapter’s source file is <code>06_referen
 This numbering means that if you need to create an additional chapter <em>before</em> an existing one, you will have to renumber all chapters following it.</p>
 <p>To ensure correct rendering, you should also make sure that <strong>each chapter starts with a level 1 heading</strong> (<code># heading</code>).
 For instance, this chapter’s source starts with:</p>
-<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu"># Editing this book {#bookediting}</span>
-
-The file organization of this documentation can be described simply as follows:
-...</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu"># Editing this book {#bookediting}</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">The file organization of this documentation can be described simply as follows:</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">...</a></code></pre></div>
 <p>Furthermore, to keep the organization consistent, each chapter should have <strong>exactly one level 1 heading</strong> (i.e. do not combine multiple chapters into a single file).
 In other words, <strong>do not spread a single chapter across multiple files</strong>, and <strong>do not put multiple chapters in the same file</strong>.</p>
 <p>Each <strong>section</strong> directory has a file starting with <code>00</code> that contains only the section (or “Part”) title.
 This is used to create the greyed-out section headers in the rendered HTML.
 For instance, this section has a file called <code>00_introduction.Rmd</code> which contains only the following:</p>
-<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu"># (PART) Introduction {-}</span></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu"># (PART) Introduction {-}</span></a></code></pre></div>
 <p>To cross-reference a different section, use that section’s unique tag (starts with <code>#</code>; appears next to the section heading surrounded in curly braces).
 For instance, the following Markdown contains two sections that cross-reference each other:</p>
-<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="fu">## Introduction {#intro}</span>
-
-Here is the intro. This is a link to the <span class="ot">[next section](#section-one)</span>.
-
-<span class="fu">## First section. {#section-one}</span>
-
-As mentioned in the <span class="ot">[previous section](#intro)</span>.</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">## Introduction {#intro}</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">Here is the intro. This is a link to the <span class="ot">[next section](#section-one)</span>.</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="fu">## First section. {#section-one}</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">As mentioned in the <span class="ot">[previous section](#intro)</span>.</a></code></pre></div>
 <p>If no header tag exists for a section you want to cross-reference, you should create one.
 We have no strict rules about this, but it’s useful to have tags that give some sense of their parent hierarchy and reference their parent sections (e.g. <code>#models</code>, <code>#models-ed</code>, and <code>#models-ed-xml</code> to refer to a chapter on models, with a subsection on ED and a sub-subsection on ED XML configuration).
 If section organization changes, it is fine to move header tags, but <strong>avoid altering existing tags</strong> as this will break all the links pointing to that tag.

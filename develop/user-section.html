@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 User Tutorial Section | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="5 User Tutorial Section | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 User Tutorial Section | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-10" />
+<meta name="date" content="2019-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,7 +74,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -930,62 +929,62 @@ pft     contains the parameter information for each PFT</code></pre>
 </div>
 <div id="read-in-settings-from-an-xml-file" class="section level4">
 <h4><span class="header-section-number">5.5.1.3</span> Read in settings From an XML file</h4>
-<pre class="sourceCode r"><code class="sourceCode r">## Read in the xml
-
-settings&lt;-PEcAn.settings<span class="op">::</span><span class="kw">read.settings</span>(<span class="st">&quot;~/output/PEcAn_99000000001/pecan.CONFIGS.xml&quot;</span>)
-
-## To read in the model output 
-runid&lt;-<span class="kw">as.character</span>(<span class="kw">read.table</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;/run/&quot;</span>,<span class="st">&quot;runs.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id </span>
-outdir&lt;-<span class="st"> </span><span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="st">&quot;/out/&quot;</span>,runid,<span class="dt">sep=</span> <span class="st">&quot;&quot;</span>)
-start.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>start.date))
-end.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>end.date))
-
-site.id&lt;-settings<span class="op">$</span>run<span class="op">$</span>site<span class="op">$</span>id
-File_path&lt;-<span class="st">&quot;~/output/dbfiles/AmerifluxLBL_site_0-772/AMF_US-NR1_BASE_HH_9-1.csv&quot;</span>
-
-## Open up a connection to The Bety Database 
-bety &lt;-dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">host =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>host, <span class="dt">user =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>user, <span class="dt">password =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>password, <span class="dt">dbname =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>dbname)</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">## Read in the xml</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">settings&lt;-PEcAn.settings<span class="op">::</span><span class="kw">read.settings</span>(<span class="st">&quot;~/output/PEcAn_99000000001/pecan.CONFIGS.xml&quot;</span>)</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">## To read in the model output </a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">runid&lt;-<span class="kw">as.character</span>(<span class="kw">read.table</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;/run/&quot;</span>,<span class="st">&quot;runs.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id </span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">outdir&lt;-<span class="st"> </span><span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="st">&quot;/out/&quot;</span>,runid,<span class="dt">sep=</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">start.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>start.date))</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">end.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>end.date))</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11">site.id&lt;-settings<span class="op">$</span>run<span class="op">$</span>site<span class="op">$</span>id</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">File_path&lt;-<span class="st">&quot;~/output/dbfiles/AmerifluxLBL_site_0-772/AMF_US-NR1_BASE_HH_9-1.csv&quot;</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">## Open up a connection to The Bety Database </a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">bety &lt;-dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">host =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>host, <span class="dt">user =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>user, <span class="dt">password =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>password, <span class="dt">dbname =</span> settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>dbname)</a></code></pre></div>
 </div>
 <div id="read-in-model-output-from-specific-variables" class="section level4">
 <h4><span class="header-section-number">5.5.1.4</span> Read in model output from specific variables</h4>
-<pre class="sourceCode r"><code class="sourceCode r">model_vars&lt;-<span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;NEE&quot;</span>) <span class="co">#varibles being read</span>
-model &lt;-<span class="st"> </span>PEcAn.utils<span class="op">::</span><span class="kw">read.output</span>(runid,outdir,start.year, end.year, model_vars,<span class="dt">dataframe=</span><span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">model_vars&lt;-<span class="kw">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;NEE&quot;</span>) <span class="co">#varibles being read</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">model &lt;-<span class="st"> </span>PEcAn.utils<span class="op">::</span><span class="kw">read.output</span>(runid,outdir,start.year, end.year, model_vars,<span class="dt">dataframe=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <p>The arguments to read.output are the run ID, the folder where the run is located, the start year, the end year, and the variables being read. The README file in the Input file dropdown menu of any successful run lists the run ID, the output folder, and the start and end year.</p>
 </div>
 <div id="compare-model-to-flux-observations" class="section level4">
 <h4><span class="header-section-number">5.5.1.5</span> Compare model to flux observations</h4>
 <p><strong>First</strong> <em>load up the observations</em> and take a look at the contents of the file</p>
-<pre class="sourceCode r"><code class="sourceCode r">File_format&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(<span class="dt">bety =</span> bety, <span class="dt">format.id =</span> <span class="dv">5000000002</span>) <span class="co">#This matches the file with a premade &quot;format&quot; or a template that describes how the information in the file is organized</span>
-
-site&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.site</span>(site.id,bety<span class="op">$</span>con) <span class="co">#This tells PEcAn where the data comes from</span>
-
-observations&lt;-PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> File_path, <span class="dt">format=</span> File_format, <span class="dt">time.row =</span> File_format<span class="op">$</span>time.row,  <span class="dt">site =</span> site, <span class="dt">start_year =</span> start.year, <span class="dt">end_year =</span> end.year) <span class="co">#This will throw an error that not all of the units can be converted. That&#39;s ok, as the units of the varibles of interest (NEE) are being converted. </span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">File_format&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(<span class="dt">bety =</span> bety, <span class="dt">format.id =</span> <span class="dv">5000000002</span>) <span class="co">#This matches the file with a premade &quot;format&quot; or a template that describes how the information in the file is organized</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">site&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.site</span>(site.id,bety<span class="op">$</span>con) <span class="co">#This tells PEcAn where the data comes from</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">observations&lt;-PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> File_path, <span class="dt">format=</span> File_format, <span class="dt">time.row =</span> File_format<span class="op">$</span>time.row,  <span class="dt">site =</span> site, <span class="dt">start_year =</span> start.year, <span class="dt">end_year =</span> end.year) <span class="co">#This will throw an error that not all of the units can be converted. That&#39;s ok, as the units of the varibles of interest (NEE) are being converted. </span></a></code></pre></div>
 <p>File_Path refers to where you stored your observational data. In this example the default file path is an Ameriflux dataset from Niwot Ridge.</p>
 <p>File_format queries the database for the format your file is in. The defualt format ID “5000000002” is for csv files downloaded from the Ameriflux website.
 You could query for diffent kinds of formats that exist in bety or <a href="https://pecanproject.github.io/pecan-documentation/adding-an-ecosystem-model.html#formats">make your own</a>.</p>
 <p>Here 772 is the database site ID for Niwot Ridge Forest, which tells pecan where the data is from and what time zone to assign any time data read in.</p>
 <p><strong>Second</strong> <em>apply a conservative u* filter to observations</em></p>
-<pre class="sourceCode r"><code class="sourceCode r">observations<span class="op">$</span>NEE[observations<span class="op">$</span>UST<span class="op">&lt;</span><span class="fl">0.2</span>]&lt;-<span class="ot">NA</span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">observations<span class="op">$</span>NEE[observations<span class="op">$</span>UST<span class="op">&lt;</span><span class="fl">0.2</span>]&lt;-<span class="ot">NA</span></a></code></pre></div>
 <p><strong>Third</strong> <em>align model output and observations</em></p>
-<pre class="sourceCode r"><code class="sourceCode r">aligned_dat =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">align_data</span>(<span class="dt">model.calc =</span> model, <span class="dt">obvs.calc =</span> observations, <span class="dt">var =</span><span class="st">&quot;NEE&quot;</span>, <span class="dt">align_method =</span> <span class="st">&quot;match_timestep&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">aligned_dat =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">align_data</span>(<span class="dt">model.calc =</span> model, <span class="dt">obvs.calc =</span> observations, <span class="dt">var =</span><span class="st">&quot;NEE&quot;</span>, <span class="dt">align_method =</span> <span class="st">&quot;match_timestep&quot;</span>)</a></code></pre></div>
 <p>When we aligned the data, we got a dataframe with the variables we requested in a <span class="math inline">\(NEE.m\)</span> and a <span class="math inline">\(NEE.o\)</span> format. The <span class="math inline">\(.o\)</span> is for observations, and the <span class="math inline">\(.m\)</span> is for model. The posix column allows for easy plotting along a timeseries.</p>
 <p><strong>Fourth</strong>, <em>plot model predictions vs. observations</em> and compare this to a 1:1 line</p>
-<pre class="sourceCode r"><code class="sourceCode r">## predicted vs observed plot
-<span class="kw">plot</span>(aligned_dat<span class="op">$</span>NEE.m, aligned_dat<span class="op">$</span>NEE.o)
-<span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)  ## intercept=0, slope=1</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">## predicted vs observed plot</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">plot</span>(aligned_dat<span class="op">$</span>NEE.m, aligned_dat<span class="op">$</span>NEE.o)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)  ## intercept=0, slope=1</a></code></pre></div>
 <p><strong>Fifth</strong>, <em>calculate the Root Mean Square Error (RMSE)</em> between the model and the data</p>
-<pre class="sourceCode r"><code class="sourceCode r">rmse =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((aligned_dat<span class="op">$</span>NEE.m<span class="op">-</span>aligned_dat<span class="op">$</span>NEE.o)<span class="op">^</span><span class="dv">2</span>,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">rmse =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((aligned_dat<span class="op">$</span>NEE.m<span class="op">-</span>aligned_dat<span class="op">$</span>NEE.o)<span class="op">^</span><span class="dv">2</span>,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <p><em>na.rm</em> makes sure we don’t include missing or screened values in either time series.</p>
 <p><strong>Finally</strong>, <em>plot time-series</em> of both the model and data together</p>
-<pre class="sourceCode r"><code class="sourceCode r">## plot aligned data
-<span class="kw">plot</span>(aligned_dat<span class="op">$</span>posix, aligned_dat<span class="op">$</span>NEE.o, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)
-<span class="kw">lines</span>(aligned_dat<span class="op">$</span>posix,aligned_dat<span class="op">$</span>NEE.m, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">## plot aligned data</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">plot</span>(aligned_dat<span class="op">$</span>posix, aligned_dat<span class="op">$</span>NEE.o, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="kw">lines</span>(aligned_dat<span class="op">$</span>posix,aligned_dat<span class="op">$</span>NEE.m, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><strong>Bonus</strong> <em>How would you compare aggregated data?</em></p>
 <p>Try RMSE against monthly NEE instead of half-hourly. In this case, first average the values up to monthly in the observations. Then, use align_data to match the monthly timestep in model output.</p>
 <p><strong>NOTE</strong>: Align_data uses two seperate alignment function, match_timestep and mean_over_larger_timestep. Match_timestep will use only that data that is present in both the model and the observation. This is helpful for sparse observations. Mean_over_larger_timestep aggregates the values over the largest timestep present. If you were to look at averaged monthly data, you would use mean_over_larger_timestep.</p>
-<pre class="sourceCode r"><code class="sourceCode r">monthlyNEEobs&lt;-<span class="kw">aggregate</span>(observations, <span class="dt">by=</span> <span class="kw">list</span>(<span class="kw">month</span>(observations<span class="op">$</span>posix)), <span class="dt">simplify=</span><span class="ot">TRUE</span>, <span class="dt">FUN =</span>mean, <span class="dt">na.rm=</span> <span class="ot">TRUE</span>)
-plottable&lt;-<span class="kw">align_data</span>(<span class="dt">model.calc =</span> model, <span class="dt">obvs.calc =</span> monthlyNEEobs, <span class="dt">align_method =</span> <span class="st">&quot;mean_over_larger_timestep&quot;</span>, <span class="dt">var=</span> <span class="st">&quot;NEE&quot;</span>)
-<span class="kw">head</span>(plottable)</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">monthlyNEEobs&lt;-<span class="kw">aggregate</span>(observations, <span class="dt">by=</span> <span class="kw">list</span>(<span class="kw">month</span>(observations<span class="op">$</span>posix)), <span class="dt">simplify=</span><span class="ot">TRUE</span>, <span class="dt">FUN =</span>mean, <span class="dt">na.rm=</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">plottable&lt;-<span class="kw">align_data</span>(<span class="dt">model.calc =</span> model, <span class="dt">obvs.calc =</span> monthlyNEEobs, <span class="dt">align_method =</span> <span class="st">&quot;mean_over_larger_timestep&quot;</span>, <span class="dt">var=</span> <span class="st">&quot;NEE&quot;</span>)</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="kw">head</span>(plottable)</a></code></pre></div>
 
 </div>
 </div>
@@ -1080,70 +1079,70 @@ plottable&lt;-<span class="kw">align_data</span>(<span class="dt">model.calc =</
 <div id="fitting-the-model" class="section level4">
 <h4><span class="header-section-number">5.5.2.1</span> Fitting the model</h4>
 <p>To begin with we’ll load up an example A-Ci and A-Q curve that was collected during the 2012 edition of the <a href="http://www.fluxcourse.org/">Flux Course</a> at Niwot Ridge. The exact syntax below may be a bit confusing to those unaccustomed to R, but the essence is that the <code>filenames</code> line is looking up where the example data is stored in the PEcAn.photosynthesis package and the <code>dat</code> line is loading up two files (once A-Ci, the other A-Q) and concatanating them together.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PEcAn.photosynthesis)
-
-### Load built in data
-filenames &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="kw">paste0</span>(<span class="st">&quot;flux-course-3&quot;</span>,<span class="kw">c</span>(<span class="st">&quot;aci&quot;</span>,<span class="st">&quot;aq&quot;</span>)), <span class="dt">package =</span> <span class="st">&quot;PEcAn.photosynthesis&quot;</span>)
-dat&lt;-<span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">lapply</span>(filenames, read_Licor))
-
-## Simple plots
-aci =<span class="st"> </span><span class="kw">as.character</span>(dat<span class="op">$</span>fname) <span class="op">==</span><span class="st"> </span><span class="kw">basename</span>(filenames[<span class="dv">1</span>])
-<span class="kw">plot</span>(dat<span class="op">$</span>Ci[aci],dat<span class="op">$</span>Photo[aci],<span class="dt">main=</span><span class="st">&quot;ACi&quot;</span>)
-<span class="kw">plot</span>(dat<span class="op">$</span>PARi[<span class="op">!</span>aci],dat<span class="op">$</span>Photo[<span class="op">!</span>aci],<span class="dt">main=</span><span class="st">&quot;AQ&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">library</span>(PEcAn.photosynthesis)</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">### Load built in data</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">filenames &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="kw">paste0</span>(<span class="st">&quot;flux-course-3&quot;</span>,<span class="kw">c</span>(<span class="st">&quot;aci&quot;</span>,<span class="st">&quot;aq&quot;</span>)), <span class="dt">package =</span> <span class="st">&quot;PEcAn.photosynthesis&quot;</span>)</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">dat&lt;-<span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, <span class="kw">lapply</span>(filenames, read_Licor))</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">## Simple plots</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">aci =<span class="st"> </span><span class="kw">as.character</span>(dat<span class="op">$</span>fname) <span class="op">==</span><span class="st"> </span><span class="kw">basename</span>(filenames[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="kw">plot</span>(dat<span class="op">$</span>Ci[aci],dat<span class="op">$</span>Photo[aci],<span class="dt">main=</span><span class="st">&quot;ACi&quot;</span>)</a>
+<a class="sourceLine" id="cb25-10" data-line-number="10"><span class="kw">plot</span>(dat<span class="op">$</span>PARi[<span class="op">!</span>aci],dat<span class="op">$</span>Photo[<span class="op">!</span>aci],<span class="dt">main=</span><span class="st">&quot;AQ&quot;</span>)</a></code></pre></div>
 <p>In PEcAn we’ve written a wrapper function, <span class="math inline">\(fitA\)</span>, around the statistical model discussed above, which has a number of other bells and whistles discussed in the <a href="https://github.com/PecanProject/pecan/blob/master/modules/photosynthesis/vignettes/ResponseCurves.Rmd">PEcAn Photosynthesis Vignette</a>. For today we’ll just use the most basic version, which takes as arguments the data and the number of MCMC iterations we want to run.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">fitA</span>(dat,<span class="dt">model=</span><span class="kw">list</span>(<span class="dt">n.iter=</span><span class="dv">10000</span>))</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">fit &lt;-<span class="st"> </span><span class="kw">fitA</span>(dat,<span class="dt">model=</span><span class="kw">list</span>(<span class="dt">n.iter=</span><span class="dv">10000</span>))</a></code></pre></div>
 </div>
 <div id="whats-going-on" class="section level4">
 <h4><span class="header-section-number">5.5.2.2</span> What’s going on</h4>
 <p>Bayesian numerical methods for model calibration are based on sampling parameter values from the posterior distribution. Fundamentally what’s returned is a matrix, with the number of iterations as rows and the number of parameters as columns, which are samples from the posterior distribution, from which we can approximate any quantity of interest (mean, median, variance, CI, etc.).</p>
 <p>The following plots follow the trajectory of two correlated parameters, Jmax and alpha. In the first figure, arrows show the first 10 iterations. Internally JAGS is choosing between a variety of different Bayesian sampling methods (e.g. Metropolis-Hasting, Gibbs sampling, slice sampling, rejection sampling, etc) to draw a new value for each parameter conditional on the current value. After just 10 steps we don’t have a good picture of the overall posterior, but it should still be clear that the sampling is not a complete random walk.</p>
-<pre class="sourceCode r"><code class="sourceCode r">params &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(fit<span class="op">$</span>params)
-xrng =<span class="st"> </span><span class="kw">range</span>(fit<span class="op">$</span>params[,<span class="st">&quot;alpha0&quot;</span>])
-yrng =<span class="st"> </span><span class="kw">range</span>(fit<span class="op">$</span>params[,<span class="st">&quot;Jmax0&quot;</span>])
-
-n =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
-<span class="kw">plot</span>(params[n,<span class="st">&quot;alpha0&quot;</span>],params[n,<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">type=</span><span class="st">&#39;n&#39;</span>,<span class="dt">xlim=</span>xrng,<span class="dt">ylim=</span>yrng)
-<span class="kw">arrows</span>(params[n[<span class="op">-</span><span class="dv">10</span>],<span class="st">&quot;alpha0&quot;</span>],params[n[<span class="op">-</span><span class="dv">10</span>],<span class="st">&quot;Jmax0&quot;</span>],params[n[<span class="op">-</span><span class="dv">1</span>],<span class="st">&quot;alpha0&quot;</span>],params[n[<span class="op">-</span><span class="dv">1</span>],<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">length=</span><span class="fl">0.125</span>,<span class="dt">lwd=</span><span class="fl">1.1</span>)</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">params &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(fit<span class="op">$</span>params)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">xrng =<span class="st"> </span><span class="kw">range</span>(fit<span class="op">$</span>params[,<span class="st">&quot;alpha0&quot;</span>])</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">yrng =<span class="st"> </span><span class="kw">range</span>(fit<span class="op">$</span>params[,<span class="st">&quot;Jmax0&quot;</span>])</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">n =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb27-6" data-line-number="6"><span class="kw">plot</span>(params[n,<span class="st">&quot;alpha0&quot;</span>],params[n,<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">type=</span><span class="st">&#39;n&#39;</span>,<span class="dt">xlim=</span>xrng,<span class="dt">ylim=</span>yrng)</a>
+<a class="sourceLine" id="cb27-7" data-line-number="7"><span class="kw">arrows</span>(params[n[<span class="op">-</span><span class="dv">10</span>],<span class="st">&quot;alpha0&quot;</span>],params[n[<span class="op">-</span><span class="dv">10</span>],<span class="st">&quot;Jmax0&quot;</span>],params[n[<span class="op">-</span><span class="dv">1</span>],<span class="st">&quot;alpha0&quot;</span>],params[n[<span class="op">-</span><span class="dv">1</span>],<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">length=</span><span class="fl">0.125</span>,<span class="dt">lwd=</span><span class="fl">1.1</span>)</a></code></pre></div>
 <p>After 100 steps, we can see a cloud start to form, with occassional wanderings around the periphery.</p>
-<pre class="sourceCode r"><code class="sourceCode r">n =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span>
-<span class="kw">plot</span>(params[n,<span class="st">&quot;alpha0&quot;</span>],params[n,<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">type=</span><span class="st">&#39;l&#39;</span>,<span class="dt">xlim=</span>xrng,<span class="dt">ylim=</span>yrng)</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">n =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">plot</span>(params[n,<span class="st">&quot;alpha0&quot;</span>],params[n,<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">type=</span><span class="st">&#39;l&#39;</span>,<span class="dt">xlim=</span>xrng,<span class="dt">ylim=</span>yrng)</a></code></pre></div>
 <p>After <span class="math inline">\(nrow(params)\)</span> steps what we see is a point cloud of samples from the joint posterior distribution. When viewed sequentially, points are not independent, but we are interested in working with the overall distribution, where the order of samples is not important.</p>
-<pre class="sourceCode r"><code class="sourceCode r">n =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(params)
-<span class="kw">plot</span>(params[n,<span class="st">&quot;alpha0&quot;</span>],params[n,<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">type=</span><span class="st">&#39;p&#39;</span>,<span class="dt">pch=</span><span class="st">&quot;+&quot;</span>,<span class="dt">cex=</span><span class="fl">0.5</span>,<span class="dt">xlim=</span>xrng,<span class="dt">ylim=</span>yrng)</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">n =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(params)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">plot</span>(params[n,<span class="st">&quot;alpha0&quot;</span>],params[n,<span class="st">&quot;Jmax0&quot;</span>],<span class="dt">type=</span><span class="st">&#39;p&#39;</span>,<span class="dt">pch=</span><span class="st">&quot;+&quot;</span>,<span class="dt">cex=</span><span class="fl">0.5</span>,<span class="dt">xlim=</span>xrng,<span class="dt">ylim=</span>yrng)</a></code></pre></div>
 </div>
 <div id="evaluating-the-model-output" class="section level4">
 <h4><span class="header-section-number">5.5.2.3</span> Evaluating the model output</h4>
 <p>A really important aspect of Bayesian inference is that the output is the <strong>joint</strong> posterior probability of all the parameters. This is very different from an optimization approach, which tries to find a single best parameter value. It is also different from estimating the independent posterior probabilities of each parameter – Bayesian posteriors frequently have strong correlation among parameters for reasons having to do both with model structure and the underlying data.</p>
 <p>The model we’re fitting has six free parameters, and therefore the output matrix has 6 columns, of which we’ve only looked at two. Unfortunately it is impossible to visualize a 6 dimensional parameter space on a two dimensional screen, so a very common practice (for models with a small to medium number of parameters) is to look at all pairwise scatterplots. If parameters are uncorrelated we will typically see oval shaped clouds that are oriented in the same directions as the axes. For parameters with linear correlations those clouds will be along a diagonal. For parameters with nonlinear trade-offs the shapes of the parameter clouds can be more complex, such as the banana-shaped or triangular. For the FvCB model we see very few parameters that are uncorrelated or have simple linear correlations, a fact that we should keep in mind when interpreting individual parameters.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(params,<span class="dt">pch=</span><span class="st">&quot;.&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">pairs</span>(params,<span class="dt">pch=</span><span class="st">&quot;.&quot;</span>)</a></code></pre></div>
 <p>The three most common outputs that are performed on almost all Bayesian analyses are to look at the MCMC chains themselves, the marginal distributions of each parameter, and the overall summary statistics.</p>
 <p>The ‘trace’ diagrams below show the history of individual parameters during the MCMC sampling. There are different color lines that represent the fact that JAGS ran the MCMC multiple times, with each run (i.e. each color) being refered to as a different <span class="math inline">\(chain\)</span>. It is common to run multiple chains in order to assess whether the model, started from different points, consistently converges on the same answer. The ideal trace plot looks like white noise with all chains in agreement.</p>
 <p>The ‘density’ figures represent smoothed versions of the <em>marginal</em> distributions of each parameter. The tick marks on the x-axis are the actual samples. You will note that some posteriors will look approximately Normal, while others may be skewed or have clearly defined boundaries. On occassion there will even be posteriors that are multimodal. There is no assumption built into Bayesian statistics that the posteriors need be Normal, so as long as an MCMC has converged this diversity of shapes is valid. [note: the most common cause of multi-modal posteriors is a lack of convergence]</p>
 <p>Finally, the summary table reports, for each parameter, a mean, standard deviation, two variants of standard error, and standard quantile estimates (95% CI, interquartile, and median). The standard deviation of the posterior is a good summary statistic about <strong>how uncertain we are about a parameter</strong>. The Naive SE is the traditonal <span class="math inline">\(\frac{SD}{\sqrt{n}}\)</span>, which is an estimate of the <strong>NUMERICAL accuracy in our estimate of the mean</strong>. As we run the MCMC longer (i.e. take more samples), we get an answer that is numerically more precise (SE converges to 0) but the uncertainty in the parameter (i.e. SD) stays the same because that’s determined by the sample size of the DATA not the length of the MCMC. Finally, the Time-series SE is a variant of the SE calculation that accounts for the autocorrelation in the MCMC samples. In practice is is therefore more appropriate to use this term to assess numerical accuracy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit<span class="op">$</span>params,<span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)    ## MCMC diagnostic plots
-<span class="kw">summary</span>(fit<span class="op">$</span>params) ## parameter estimates  </code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">plot</span>(fit<span class="op">$</span>params,<span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)    ## MCMC diagnostic plots</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">summary</span>(fit<span class="op">$</span>params) ## parameter estimates  </a></code></pre></div>
 <p>Assessing the convergence of the MCMC is first done visually, but more generally the use of statistical diagnostics to assess convergence is highly encouraged. There are a number of metrics in the literature, but the most common is the Gelman-Brooks-Rubin statistic, which compare the variance within each chain to the variance across chains. If the chains have converged then this quantity should be 1. Values less than 1.05 are typically considered sufficient by most statisticians, but these are just rules-of-thumb.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gelman.plot</span>(fit<span class="op">$</span>params,<span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)
-<span class="kw">gelman.diag</span>(fit<span class="op">$</span>params)</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">gelman.plot</span>(fit<span class="op">$</span>params,<span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="kw">gelman.diag</span>(fit<span class="op">$</span>params)</a></code></pre></div>
 <p>As with any modeling, whether statistical or process-based, another common diagnostic is a predicted vs observed plot. In a perfect model the data would fall along the 1:1 line. The deviations away from this line are the model residuals. If observations lie along a line other than the 1:1 this indicates that the model is biased in some way. This bias is often assessed by fitting a linear regression to the points, though two important things are noteworthy about this practice. First, the <span class="math inline">\(R^2\)</span> and residual error of this regression are not the appropriate statistics to use to assess model performance (though you will frequently find them reported incorrectly in the literature). The correct <span class="math inline">\(R^2\)</span> and residual error (a.k.a Root Mean Square Error, RMSE) are based on deviations from the 1:1 line, not the regression. The code below shows these two terms calculated by hand. The second thing to note about the regression line is that the standard regression F-test, which assesses deviations from 0, is not the test you are actually interested in, which is whether the line differs from 1:1. Therefore, while the test on the intercept is correct, as this value should be 0 in an unbiased model, the test statistic on the slope is typically of less interest (unless your question really is about whether the model is doing better than random). However, this form of bias can easily be assessed by looking to see if the CI for the slope overlaps with 1.</p>
-<pre class="sourceCode r"><code class="sourceCode r">## predicted vs observed plot
-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
-mstats =<span class="st"> </span><span class="kw">summary</span>(fit<span class="op">$</span>predict)
-pmean =<span class="st"> </span>mstats<span class="op">$</span>statistics[<span class="kw">grep</span>(<span class="st">&quot;pmean&quot;</span>,<span class="kw">rownames</span>(mstats<span class="op">$</span>statistics)),<span class="dv">1</span>]
-<span class="kw">plot</span>(pmean,dat<span class="op">$</span>Photo,<span class="dt">pch=</span><span class="st">&quot;+&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Predicted A&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Observed A&quot;</span>)
-<span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="dv">2</span>,<span class="dt">lwd=</span><span class="dv">2</span>)
-bias.fit =<span class="st"> </span><span class="kw">lm</span>(dat<span class="op">$</span>Photo<span class="op">~</span>pmean)
-<span class="kw">abline</span>(bias.fit,<span class="dt">col=</span><span class="dv">3</span>,<span class="dt">lty=</span><span class="dv">2</span>,<span class="dt">lwd=</span><span class="dv">2</span>)
-<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;1:1&quot;</span>,<span class="st">&quot;regression&quot;</span>),<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="dv">2</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">lty=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
-<span class="kw">summary</span>(bias.fit)
-RMSE =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((pmean<span class="op">-</span>dat<span class="op">$</span>Photo)<span class="op">^</span><span class="dv">2</span>))
-RMSE
-R2 =<span class="st"> </span><span class="dv">1</span><span class="op">-</span>RMSE<span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="kw">var</span>(dat<span class="op">$</span>Photo)
-R2
-<span class="kw">confint</span>(bias.fit)</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">## predicted vs observed plot</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">mstats =<span class="st"> </span><span class="kw">summary</span>(fit<span class="op">$</span>predict)</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">pmean =<span class="st"> </span>mstats<span class="op">$</span>statistics[<span class="kw">grep</span>(<span class="st">&quot;pmean&quot;</span>,<span class="kw">rownames</span>(mstats<span class="op">$</span>statistics)),<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5"><span class="kw">plot</span>(pmean,dat<span class="op">$</span>Photo,<span class="dt">pch=</span><span class="st">&quot;+&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Predicted A&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Observed A&quot;</span>)</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6"><span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="dv">2</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">bias.fit =<span class="st"> </span><span class="kw">lm</span>(dat<span class="op">$</span>Photo<span class="op">~</span>pmean)</a>
+<a class="sourceLine" id="cb33-8" data-line-number="8"><span class="kw">abline</span>(bias.fit,<span class="dt">col=</span><span class="dv">3</span>,<span class="dt">lty=</span><span class="dv">2</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb33-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;1:1&quot;</span>,<span class="st">&quot;regression&quot;</span>),<span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="dv">2</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">lty=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb33-10" data-line-number="10"><span class="kw">summary</span>(bias.fit)</a>
+<a class="sourceLine" id="cb33-11" data-line-number="11">RMSE =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((pmean<span class="op">-</span>dat<span class="op">$</span>Photo)<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb33-12" data-line-number="12">RMSE</a>
+<a class="sourceLine" id="cb33-13" data-line-number="13">R2 =<span class="st"> </span><span class="dv">1</span><span class="op">-</span>RMSE<span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="kw">var</span>(dat<span class="op">$</span>Photo)</a>
+<a class="sourceLine" id="cb33-14" data-line-number="14">R2</a>
+<a class="sourceLine" id="cb33-15" data-line-number="15"><span class="kw">confint</span>(bias.fit)</a></code></pre></div>
 <p>In the final set of plots we look at the actual A-Ci and A-Q curves themselves. Here we’ve added two interval estimates around the curves. The CI captures the uncertainty in the <em>parameters</em> and will asympotically shrink with more and more data. The PI (predictive interval) includes the parameter and residual error. If our fit is good then 95% PI should thus encompass at least 95% of the observations. That said, as with any statistical model we want to look for systematic deviations in the residuals from either the mean or the range of the PI.</p>
-<pre class="sourceCode r"><code class="sourceCode r">## Response curve
-<span class="kw">plot_photo</span>(dat,fit)</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">## Response curve</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw">plot_photo</span>(dat,fit)</a></code></pre></div>
 <p>Note: on the last figure you will get warnings about “No ACi” and “No AQ” which can be ignored. These are occuring because the file that had the ACi curve didn’t have an AQ curve, and the file that had the AQ curve didn’t have an ACi curve.</p>
 </div>
 <div id="additional-information" class="section level4">
@@ -1233,67 +1232,67 @@ R2
 <div id="defining-variables" class="section level4">
 <h4><span class="header-section-number">5.5.3.4</span> Defining variables</h4>
 <p>The following variables need to be set specific to the site being run and the workflow being run</p>
-<pre class="sourceCode r"><code class="sourceCode r">workflow_id &lt;-<span class="st"> </span><span class="dv">99000000002</span>  ## comes from the History table, your successful ensemble run&#39;s workflow ID
-
-## from URL/bety/inputs.  
-##   Search by Ameriflux ID (e.g. US-NR1)
-##   Find the &quot;plain&quot; site record (no CF or model name) that&#39;s on your server 
-##    (probably last in the list)
-##   Click on the magnifying glass icon then look under &quot;View Related Files&quot;
-datadir     &lt;-<span class="st"> &quot;/home/carya/output/dbfiles/AmerifluxLBL_site_0-772/&quot;</span> 
-
-## where PEcAn is saving output (default OK on VM)
-outdir      &lt;-<span class="st"> &quot;/home/carya/output/&quot;</span> </code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">workflow_id &lt;-<span class="st"> </span><span class="dv">99000000002</span>  ## comes from the History table, your successful ensemble run&#39;s workflow ID</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">## from URL/bety/inputs.  </a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">##   Search by Ameriflux ID (e.g. US-NR1)</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">##   Find the &quot;plain&quot; site record (no CF or model name) that&#39;s on your server </a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">##    (probably last in the list)</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">##   Click on the magnifying glass icon then look under &quot;View Related Files&quot;</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">datadir     &lt;-<span class="st"> &quot;/home/carya/output/dbfiles/AmerifluxLBL_site_0-772/&quot;</span> </a>
+<a class="sourceLine" id="cb35-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">## where PEcAn is saving output (default OK on VM)</a>
+<a class="sourceLine" id="cb35-11" data-line-number="11">outdir      &lt;-<span class="st"> &quot;/home/carya/output/&quot;</span> </a></code></pre></div>
 </div>
 <div id="initial-ensemble-analysis" class="section level4">
 <h4><span class="header-section-number">5.5.3.5</span> Initial Ensemble Analysis</h4>
 <p>A good place to start when thinking about a new PDA analysis is to look at the current model fit to observed data. In fact, we want to compare data to a full ensemble prediction from the model. This is important because our current parameter distributions will be the priors for PDA. While the analysis will translate these priors into more optimal (in terms of producing model output that matches observations) and more confident (i.e. narrower) posterior distributions, these results are inherently constrained by the current parameter distributions. Thus, if reality falls far outside the prior ensemble confidence interval (which reflects the current uncertainty of all model parameters), data assimilation will not be able to fix this. In such cases, the prior parameter estimates must already be over-constrained, or there are structural errors in the model itself that need fixing.
 To begin, let’s load up some NEE observations so that we can plot them along with our ensemble predictions. In the code below the elements in bold may vary depending on site and your previous runs.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PEcAn.all)
-
-<span class="co"># read settings</span>
-settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id),<span class="st">&quot;pecan.CONFIGS.xml&quot;</span>))
-
-<span class="co"># open up a DB connection</span>
-bety&lt;-settings<span class="op">$</span>database<span class="op">$</span>bety
-bety &lt;-dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">host =</span> bety<span class="op">$</span>host, <span class="dt">user =</span> bety<span class="op">$</span>user, <span class="dt">password =</span> bety<span class="op">$</span>password, <span class="dt">dbname =</span> bety<span class="op">$</span>dbname)
-
-<span class="co"># Fill out the arguments needed by load_data function</span>
-
-<span class="co"># read file format information</span>
-format     &lt;-<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(<span class="dt">bety =</span> bety, <span class="dt">format.id =</span> <span class="dv">5000000002</span>)
-start_year &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>start.date)
-end_year   &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>end.date)
-vars.used.index &lt;-<span class="st"> </span><span class="kw">which</span>(format<span class="op">$</span>vars<span class="op">$</span>bety_name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;NEE&quot;</span>, <span class="st">&quot;UST&quot;</span>))
-
-obs &lt;-PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> <span class="kw">file.path</span>(datadir, <span class="st">&quot;AMF_US-NR1_BASE_HH_9-1.csv&quot;</span>), 
-                                 <span class="dt">format =</span> format, <span class="dt">start_year =</span> start_year,  <span class="dt">end_year =</span> end_year,
-                                  <span class="dt">site =</span> settings<span class="op">$</span>run<span class="op">$</span>site, 
-                                  <span class="dt">vars.used.index =</span> vars.used.index,
-                                  <span class="dt">time.row =</span> format<span class="op">$</span>time.row)
-
-obs<span class="op">$</span>NEE[obs<span class="op">$</span>UST<span class="op">&lt;</span><span class="fl">0.4</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>  ## U* filter
-NEEo &lt;-<span class="st"> </span>obs<span class="op">$</span>NEE</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">library</span>(PEcAn.all)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="co"># read settings</span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id),<span class="st">&quot;pecan.CONFIGS.xml&quot;</span>))</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb36-6" data-line-number="6"><span class="co"># open up a DB connection</span></a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">bety&lt;-settings<span class="op">$</span>database<span class="op">$</span>bety</a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">bety &lt;-dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">host =</span> bety<span class="op">$</span>host, <span class="dt">user =</span> bety<span class="op">$</span>user, <span class="dt">password =</span> bety<span class="op">$</span>password, <span class="dt">dbname =</span> bety<span class="op">$</span>dbname)</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb36-10" data-line-number="10"><span class="co"># Fill out the arguments needed by load_data function</span></a>
+<a class="sourceLine" id="cb36-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb36-12" data-line-number="12"><span class="co"># read file format information</span></a>
+<a class="sourceLine" id="cb36-13" data-line-number="13">format     &lt;-<span class="st"> </span>PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(<span class="dt">bety =</span> bety, <span class="dt">format.id =</span> <span class="dv">5000000002</span>)</a>
+<a class="sourceLine" id="cb36-14" data-line-number="14">start_year &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>start.date)</a>
+<a class="sourceLine" id="cb36-15" data-line-number="15">end_year   &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>end.date)</a>
+<a class="sourceLine" id="cb36-16" data-line-number="16">vars.used.index &lt;-<span class="st"> </span><span class="kw">which</span>(format<span class="op">$</span>vars<span class="op">$</span>bety_name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;NEE&quot;</span>, <span class="st">&quot;UST&quot;</span>))</a>
+<a class="sourceLine" id="cb36-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb36-18" data-line-number="18">obs &lt;-PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> <span class="kw">file.path</span>(datadir, <span class="st">&quot;AMF_US-NR1_BASE_HH_9-1.csv&quot;</span>), </a>
+<a class="sourceLine" id="cb36-19" data-line-number="19">                                 <span class="dt">format =</span> format, <span class="dt">start_year =</span> start_year,  <span class="dt">end_year =</span> end_year,</a>
+<a class="sourceLine" id="cb36-20" data-line-number="20">                                  <span class="dt">site =</span> settings<span class="op">$</span>run<span class="op">$</span>site, </a>
+<a class="sourceLine" id="cb36-21" data-line-number="21">                                  <span class="dt">vars.used.index =</span> vars.used.index,</a>
+<a class="sourceLine" id="cb36-22" data-line-number="22">                                  <span class="dt">time.row =</span> format<span class="op">$</span>time.row)</a>
+<a class="sourceLine" id="cb36-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb36-24" data-line-number="24">obs<span class="op">$</span>NEE[obs<span class="op">$</span>UST<span class="op">&lt;</span><span class="fl">0.4</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>  ## U* filter</a>
+<a class="sourceLine" id="cb36-25" data-line-number="25">NEEo &lt;-<span class="st"> </span>obs<span class="op">$</span>NEE</a></code></pre></div>
 <p>Now let’s load up our ensemble outputs from the previous ensemble analysis (Demo 2) and plot our ensemble predictions against our NEE observations.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load outputs, try not to delete prePDA ensemble output filename from your environment</span>
-prePDA_ensemble_output_file &lt;-<span class="st"> </span><span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id, <span class="st">&quot;/ensemble.ts.&quot;</span>, settings<span class="op">$</span>ensemble<span class="op">$</span>ensemble.id, <span class="st">&quot;.NEE.2003.2006.Rdata&quot;</span>))
-<span class="kw">load</span>(prePDA_ensemble_output_file)
-
-<span class="co"># calculate CI</span>
-pre_pda_ens &lt;-<span class="st"> </span>ensemble.ts[[<span class="st">&quot;NEE&quot;</span>]]
-preCI &lt;-<span class="st"> </span><span class="kw">apply</span>(pre_pda_ens, <span class="dv">2</span>, quantile, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-
-<span class="co"># plot model ensemble</span>
-ymin &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">min</span>(<span class="kw">c</span>(preCI, NEEo), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-ymax &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">max</span>(<span class="kw">c</span>(preCI, NEEo), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-<span class="kw">plot</span>(preCI[<span class="dv">2</span>,], <span class="dt">ylim =</span> <span class="kw">c</span>(ymin, ymax), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">xlab =</span> <span class="st">&quot;time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;NEE&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;pre-PDA model ensemble vs data&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)
-prepoly &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(preCI)[<span class="dv">2</span>]
-<span class="kw">polygon</span>(<span class="kw">c</span>(prepoly, <span class="kw">rev</span>(prepoly)), <span class="kw">c</span>(preCI[<span class="dv">3</span>,], <span class="kw">rev</span>(preCI[<span class="dv">1</span>,])), <span class="dt">col=</span><span class="st">&#39;khaki&#39;</span>, <span class="dt">border=</span><span class="ot">NA</span>)
-
-<span class="co"># add data</span>
-<span class="kw">points</span>(NEEo, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">col=</span> <span class="kw">adjustcolor</span>(<span class="st">&quot;purple&quot;</span>,<span class="dt">alpha.f=</span><span class="fl">0.5</span>))
-<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Data&quot;</span>,<span class="st">&quot;Pre-PDA Model&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">15</span>),
-        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;khaki&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># load outputs, try not to delete prePDA ensemble output filename from your environment</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">prePDA_ensemble_output_file &lt;-<span class="st"> </span><span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id, <span class="st">&quot;/ensemble.ts.&quot;</span>, settings<span class="op">$</span>ensemble<span class="op">$</span>ensemble.id, <span class="st">&quot;.NEE.2003.2006.Rdata&quot;</span>))</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="kw">load</span>(prePDA_ensemble_output_file)</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb37-5" data-line-number="5"><span class="co"># calculate CI</span></a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">pre_pda_ens &lt;-<span class="st"> </span>ensemble.ts[[<span class="st">&quot;NEE&quot;</span>]]</a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">preCI &lt;-<span class="st"> </span><span class="kw">apply</span>(pre_pda_ens, <span class="dv">2</span>, quantile, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb37-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb37-9" data-line-number="9"><span class="co"># plot model ensemble</span></a>
+<a class="sourceLine" id="cb37-10" data-line-number="10">ymin &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">min</span>(<span class="kw">c</span>(preCI, NEEo), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb37-11" data-line-number="11">ymax &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">max</span>(<span class="kw">c</span>(preCI, NEEo), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb37-12" data-line-number="12"><span class="kw">plot</span>(preCI[<span class="dv">2</span>,], <span class="dt">ylim =</span> <span class="kw">c</span>(ymin, ymax), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">xlab =</span> <span class="st">&quot;time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;NEE&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;pre-PDA model ensemble vs data&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb37-13" data-line-number="13">prepoly &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(preCI)[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb37-14" data-line-number="14"><span class="kw">polygon</span>(<span class="kw">c</span>(prepoly, <span class="kw">rev</span>(prepoly)), <span class="kw">c</span>(preCI[<span class="dv">3</span>,], <span class="kw">rev</span>(preCI[<span class="dv">1</span>,])), <span class="dt">col=</span><span class="st">&#39;khaki&#39;</span>, <span class="dt">border=</span><span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb37-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb37-16" data-line-number="16"><span class="co"># add data</span></a>
+<a class="sourceLine" id="cb37-17" data-line-number="17"><span class="kw">points</span>(NEEo, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">col=</span> <span class="kw">adjustcolor</span>(<span class="st">&quot;purple&quot;</span>,<span class="dt">alpha.f=</span><span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb37-18" data-line-number="18"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Data&quot;</span>,<span class="st">&quot;Pre-PDA Model&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">15</span>),</a>
+<a class="sourceLine" id="cb37-19" data-line-number="19">        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;khaki&quot;</span>))</a></code></pre></div>
 <p>When interpreting your results it is important to remember the difference between a confidence interval, which just includes parameter uncertainties, and a predictive interval, which includes parameter and residual uncertainties. Your ensemble analysis plot illustrates the former—i.e., the confidence in the mean NEE. By contrast, the data reflect both changes in mean NEE, and random variability. As such, we can’t expect all the data to fall within the CI; in fact, if we had unlimited data to constrain mean NEE, the CI would collapse to a single line and none of the data would be contained! However, your plot will give you an idea of how much uncertainty there is in your model currently, and help to identify systematic errors like bias (values consistently too high or low) or poorly represented seasonal patterns.</p>
 </div>
 <div id="questions" class="section level4">
@@ -1366,8 +1365,8 @@ In addition, you may need to edit <code>&lt;inputs&gt;&lt;file&gt;&lt;path&gt;</
     &lt;/inputs&gt;
   &lt;/assim.batch&gt;</code></pre>
 <p>Once you’ve made and saved the changes to your XML, load the file and check that it contains the new settings:</p>
-<pre class="sourceCode r"><code class="sourceCode r">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id),<span class="st">&quot;pecan.PDA.xml&quot;</span>))
-settings<span class="op">$</span>assim.batch</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id),<span class="st">&quot;pecan.PDA.xml&quot;</span>))</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">settings<span class="op">$</span>assim.batch</a></code></pre></div>
 <p>If the printed list contains everything you just added to pecan.PDA.xml, you’re ready to proceed.</p>
 </div>
 <div id="investigating-pecan-function-pda.emulator-optional" class="section level4">
@@ -1386,9 +1385,9 @@ settings<span class="op">$</span>assim.batch</code></pre>
 <div id="running-a-demo-pda" class="section level4">
 <h4><span class="header-section-number">5.5.3.11</span> Running a demo PDA</h4>
 <p>Now we can go ahead and run a data assimilation MCMC with emulator. Since you’ve already loaded the settings containing your modified &lt;assim.batch&gt; XML block, all you need to do to start the PDA is run <code>pda.emulator(settings)</code>. But, in the emulator workflow, there is a bit of a time consuming step where we calculate the effective sample size of the input data, and we have already done this step for you. You could load it up and pass it to the function explicitly in order to skip this step:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load input data</span>
-<span class="kw">load</span>(<span class="st">&quot;/home/carya/pda/pda_externals.Rdata&quot;</span>)
-postPDA.settings &lt;-<span class="st"> </span><span class="kw">pda.emulator</span>(settings, <span class="dt">external.data =</span> inputs_w_neff)</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># load input data</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">load</span>(<span class="st">&quot;/home/carya/pda/pda_externals.Rdata&quot;</span>)</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">postPDA.settings &lt;-<span class="st"> </span><span class="kw">pda.emulator</span>(settings, <span class="dt">external.data =</span> inputs_w_neff)</a></code></pre></div>
 <p>After executing the code above, you will see print-outs to the console. The code begins with loading the prior values which in this case are the posterior distributions coming from your previous meta analysis. Then, normally, it loads the observational data and carries out necessary conversions and formatting to align it with model outputs, as we did separately above, but today it will skip this step as we are passing data externally. After this step, you will see a progress bar where the actual model is run n.knot times with the proposed parameter sets and then the outputs from these runs are read. Next, this model output is compared to the specified observational data, and the likelihood is calculated using the heteroskedastic Laplacian discussed previously. Once we calculate the likelihoods, we fit an emulator which interpolates the model output in parameter space between the points where the model has actually been run. Now we can put this emulator in the MCMC algorithm instead of the model itself. Within the MCMC loop the code proposes new parameter value from a multivariate normal jump distribution. The corresponding likelihood will be approximated by the emulator and the new parameter value is accepted or rejected based on its posterior probability relative to the current value.</p>
 </div>
 <div id="outputs-from-pecans-parameter-data-assimilation" class="section level4">
@@ -1415,76 +1414,76 @@ If you haven’t done so already, take a look at all of the outputs described he
 <h4><span class="header-section-number">5.5.3.14</span> Post-PDA analyses</h4>
 <p>In addition to the outputs of the PDA itself, you may want to conduct ensemble and/or sensitivity analyses based on the posteriors of the data assimilation, in order to check progress towards improved model fit and/or changing sensitivity. For this, you need to generate new model runs based on parameters sampled from the updated (by PDA) posterior, which is a simple matter of rerunning several steps of the PEcAn workflow.
 The PDA you ran has automatically produced an updated XML file (<code>pecan.pda***.xml</code>) that includes the posterior id to be used in the next round of runs. Locate this file in your run directory and load the file for the post-pda ensemble/sensitivity analysis (if you already have the <code>settings</code> list in your working environment you don’t need to re-read the settings):</p>
-<pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># read post-PDA settings if you don&#39;t have them in your wotking environment</span>
- <span class="co"># replace the *** with the ensemble id given by the workflow</span>
- <span class="co"># postPDA.settings &lt;- read.settings(file.path(outdir,paste0(&quot;PEcAn_&quot;, workflow_id),&quot;pecan.pda***.xml&quot;))</span>
-
- <span class="co"># Call model specific write.configs</span>
-  postPDA.settings &lt;-<span class="st"> </span><span class="kw">run.write.configs</span>(postPDA.settings,
-                          <span class="dt">write=</span>postPDA.settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>write,     
-                          <span class="dt">ens.sample.method=</span>postPDA.settings<span class="op">$</span>ensemble<span class="op">$</span>method)
-
- <span class="co"># Let&#39;s save the settings with the new ensemble id </span>
-  PEcAn.settings<span class="op">::</span><span class="kw">write.settings</span>(settings, <span class="dt">outputfile=</span><span class="kw">paste0</span>(<span class="st">&#39;pecan.pda&#39;</span>, postPDA.settings<span class="op">$</span>assim.batch<span class="op">$</span>ensemble.id,<span class="st">&#39;.xml&#39;</span>))
-
- <span class="co"># Start ecosystem model runs, this one takes awhile...</span>
-  PEcAn.remote<span class="op">::</span><span class="kw">start.model.runs</span>(postPDA.settings, postPDA.settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>write)
-
- <span class="co"># Get results of model runs</span>
-  <span class="kw">get.results</span>(postPDA.settings)
-
- <span class="co"># Repeat ensemble analysis with PDA-constrained params </span>
- <span class="kw">run.ensemble.analysis</span>(postPDA.settings, <span class="ot">TRUE</span>)
- 
- <span class="co"># let&#39;s re-load the pre-PDA ensemble outputs</span>
- <span class="kw">load</span>(prePDA_ensemble_output_file)
- pre_pda_ens &lt;-<span class="st"> </span>ensemble.ts[[<span class="st">&quot;NEE&quot;</span>]]
- 
- <span class="co"># nowload the post-PDA ensemble outputs </span>
- postPDA_ensemble_output_file &lt;-<span class="st"> </span><span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>, workflow_id, <span class="st">&quot;/ensemble.ts.&quot;</span>, postPDA.settings<span class="op">$</span>ensemble<span class="op">$</span>ensemble.id, <span class="st">&quot;.NEE.2003.2006.Rdata&quot;</span>))
- <span class="kw">load</span>(postPDA_ensemble_output_file)
- post_pda_ens &lt;-<span class="st"> </span>ensemble.ts[[<span class="st">&quot;NEE&quot;</span>]]
- 
- <span class="co"># try changing the window value for daily, weekly, monthly smoothing later</span>
- <span class="co"># see if this changes your model-data agreement, why?</span>
- window &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co"># no smoothing</span>
- pre_pda &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(pre_pda_ens, <span class="dv">1</span>, <span class="cf">function</span>(x) {
-        <span class="kw">tapply</span>(x, <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(x)<span class="op">/</span>window <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">each =</span> window)[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)], 
-               mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)}))
- post_pda &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(post_pda_ens, <span class="dv">1</span>, <span class="cf">function</span>(x) {
-        <span class="kw">tapply</span>(x, <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(x)<span class="op">/</span>window <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">each =</span> window)[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)], 
-               mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)}))
- fobs &lt;-<span class="st"> </span><span class="kw">tapply</span>(NEEo, <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(NEEo) <span class="op">/</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), 
-                          <span class="dt">each =</span> window)[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(NEEo)], mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
- 
- 
- <span class="co"># save the comparison plots to pdf</span>
- <span class="kw">pdf</span>(<span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id),<span class="st">&quot;model.data.comparison.pdf&quot;</span>), <span class="dt">onefile=</span>T,
-     <span class="dt">paper=</span><span class="st">&#39;A4r&#39;</span>, <span class="dt">height=</span><span class="dv">15</span>, <span class="dt">width=</span><span class="dv">20</span>) 
- 
- <span class="co"># now plot the pre-PDA ensemble similar to the way we did before</span>
- preCI &lt;-<span class="st"> </span><span class="kw">apply</span>(pre_pda, <span class="dv">2</span>, quantile, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
- ymin &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">min</span>(<span class="kw">c</span>(preCI, fobs), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
- ymax &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">max</span>(<span class="kw">c</span>(preCI, fobs), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
- <span class="kw">plot</span>(pre_pda[<span class="dv">1</span>,], <span class="dt">ylim =</span> <span class="kw">c</span>(ymin, ymax), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">xlab =</span> <span class="st">&quot;time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;NEE&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;pre-PDA vs post-PDA&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)
- prepoly &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(preCI)[<span class="dv">2</span>]
- <span class="kw">polygon</span>(<span class="kw">c</span>(prepoly, <span class="kw">rev</span>(prepoly)),<span class="kw">c</span>(preCI[<span class="dv">3</span>,], <span class="kw">rev</span>(preCI[<span class="dv">1</span>,])),<span class="dt">col=</span><span class="st">&#39;khaki&#39;</span>,<span class="dt">border=</span><span class="ot">NA</span>)
-
- <span class="co"># plot the post-PDA ensemble</span>
- postCI &lt;-<span class="st"> </span><span class="kw">apply</span>(post_pda, <span class="dv">2</span>, quantile, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
- postpoly &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(postCI)[<span class="dv">2</span>]
- <span class="kw">polygon</span>(<span class="kw">c</span>(postpoly, <span class="kw">rev</span>(postpoly)),<span class="kw">c</span>(postCI[<span class="dv">3</span>,], <span class="kw">rev</span>(postCI[<span class="dv">1</span>,])),<span class="dt">col=</span><span class="st">&#39;lightblue&#39;</span>,<span class="dt">border=</span><span class="ot">NA</span>)
- 
- <span class="co"># finally let&#39;s add the data and see how we did</span>
- <span class="kw">points</span>(fobs, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">col=</span> <span class="kw">adjustcolor</span>(<span class="st">&quot;purple&quot;</span>,<span class="dt">alpha.f=</span><span class="fl">0.7</span>))
- <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Data&quot;</span>,<span class="st">&quot;Pre-PDA Model&quot;</span>, <span class="st">&quot;Post-PDA Model&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>),
-        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;khaki&quot;</span>,<span class="st">&quot;lightblue&quot;</span>))
- 
- <span class="kw">dev.off</span>()
-
-
- <span class="co"># Repeat variance decomposition to see how constraints have changed</span>
- <span class="kw">run.sensitivity.analysis</span>(postPDA.settings)</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"> <span class="co"># read post-PDA settings if you don&#39;t have them in your wotking environment</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"> <span class="co"># replace the *** with the ensemble id given by the workflow</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"> <span class="co"># postPDA.settings &lt;- read.settings(file.path(outdir,paste0(&quot;PEcAn_&quot;, workflow_id),&quot;pecan.pda***.xml&quot;))</span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5"> <span class="co"># Call model specific write.configs</span></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6">  postPDA.settings &lt;-<span class="st"> </span><span class="kw">run.write.configs</span>(postPDA.settings,</a>
+<a class="sourceLine" id="cb41-7" data-line-number="7">                          <span class="dt">write=</span>postPDA.settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>write,     </a>
+<a class="sourceLine" id="cb41-8" data-line-number="8">                          <span class="dt">ens.sample.method=</span>postPDA.settings<span class="op">$</span>ensemble<span class="op">$</span>method)</a>
+<a class="sourceLine" id="cb41-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb41-10" data-line-number="10"> <span class="co"># Let&#39;s save the settings with the new ensemble id </span></a>
+<a class="sourceLine" id="cb41-11" data-line-number="11">  PEcAn.settings<span class="op">::</span><span class="kw">write.settings</span>(settings, <span class="dt">outputfile=</span><span class="kw">paste0</span>(<span class="st">&#39;pecan.pda&#39;</span>, postPDA.settings<span class="op">$</span>assim.batch<span class="op">$</span>ensemble.id,<span class="st">&#39;.xml&#39;</span>))</a>
+<a class="sourceLine" id="cb41-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb41-13" data-line-number="13"> <span class="co"># Start ecosystem model runs, this one takes awhile...</span></a>
+<a class="sourceLine" id="cb41-14" data-line-number="14">  PEcAn.remote<span class="op">::</span><span class="kw">start.model.runs</span>(postPDA.settings, postPDA.settings<span class="op">$</span>database<span class="op">$</span>bety<span class="op">$</span>write)</a>
+<a class="sourceLine" id="cb41-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb41-16" data-line-number="16"> <span class="co"># Get results of model runs</span></a>
+<a class="sourceLine" id="cb41-17" data-line-number="17">  <span class="kw">get.results</span>(postPDA.settings)</a>
+<a class="sourceLine" id="cb41-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb41-19" data-line-number="19"> <span class="co"># Repeat ensemble analysis with PDA-constrained params </span></a>
+<a class="sourceLine" id="cb41-20" data-line-number="20"> <span class="kw">run.ensemble.analysis</span>(postPDA.settings, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb41-21" data-line-number="21"> </a>
+<a class="sourceLine" id="cb41-22" data-line-number="22"> <span class="co"># let&#39;s re-load the pre-PDA ensemble outputs</span></a>
+<a class="sourceLine" id="cb41-23" data-line-number="23"> <span class="kw">load</span>(prePDA_ensemble_output_file)</a>
+<a class="sourceLine" id="cb41-24" data-line-number="24"> pre_pda_ens &lt;-<span class="st"> </span>ensemble.ts[[<span class="st">&quot;NEE&quot;</span>]]</a>
+<a class="sourceLine" id="cb41-25" data-line-number="25"> </a>
+<a class="sourceLine" id="cb41-26" data-line-number="26"> <span class="co"># nowload the post-PDA ensemble outputs </span></a>
+<a class="sourceLine" id="cb41-27" data-line-number="27"> postPDA_ensemble_output_file &lt;-<span class="st"> </span><span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>, workflow_id, <span class="st">&quot;/ensemble.ts.&quot;</span>, postPDA.settings<span class="op">$</span>ensemble<span class="op">$</span>ensemble.id, <span class="st">&quot;.NEE.2003.2006.Rdata&quot;</span>))</a>
+<a class="sourceLine" id="cb41-28" data-line-number="28"> <span class="kw">load</span>(postPDA_ensemble_output_file)</a>
+<a class="sourceLine" id="cb41-29" data-line-number="29"> post_pda_ens &lt;-<span class="st"> </span>ensemble.ts[[<span class="st">&quot;NEE&quot;</span>]]</a>
+<a class="sourceLine" id="cb41-30" data-line-number="30"> </a>
+<a class="sourceLine" id="cb41-31" data-line-number="31"> <span class="co"># try changing the window value for daily, weekly, monthly smoothing later</span></a>
+<a class="sourceLine" id="cb41-32" data-line-number="32"> <span class="co"># see if this changes your model-data agreement, why?</span></a>
+<a class="sourceLine" id="cb41-33" data-line-number="33"> window &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co"># no smoothing</span></a>
+<a class="sourceLine" id="cb41-34" data-line-number="34"> pre_pda &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(pre_pda_ens, <span class="dv">1</span>, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb41-35" data-line-number="35">        <span class="kw">tapply</span>(x, <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(x)<span class="op">/</span>window <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">each =</span> window)[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)], </a>
+<a class="sourceLine" id="cb41-36" data-line-number="36">               mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)}))</a>
+<a class="sourceLine" id="cb41-37" data-line-number="37"> post_pda &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(post_pda_ens, <span class="dv">1</span>, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb41-38" data-line-number="38">        <span class="kw">tapply</span>(x, <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(x)<span class="op">/</span>window <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">each =</span> window)[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)], </a>
+<a class="sourceLine" id="cb41-39" data-line-number="39">               mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)}))</a>
+<a class="sourceLine" id="cb41-40" data-line-number="40"> fobs &lt;-<span class="st"> </span><span class="kw">tapply</span>(NEEo, <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(NEEo) <span class="op">/</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb41-41" data-line-number="41">                          <span class="dt">each =</span> window)[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(NEEo)], mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb41-42" data-line-number="42"> </a>
+<a class="sourceLine" id="cb41-43" data-line-number="43"> </a>
+<a class="sourceLine" id="cb41-44" data-line-number="44"> <span class="co"># save the comparison plots to pdf</span></a>
+<a class="sourceLine" id="cb41-45" data-line-number="45"> <span class="kw">pdf</span>(<span class="kw">file.path</span>(outdir,<span class="kw">paste0</span>(<span class="st">&quot;PEcAn_&quot;</span>,workflow_id),<span class="st">&quot;model.data.comparison.pdf&quot;</span>), <span class="dt">onefile=</span>T,</a>
+<a class="sourceLine" id="cb41-46" data-line-number="46">     <span class="dt">paper=</span><span class="st">&#39;A4r&#39;</span>, <span class="dt">height=</span><span class="dv">15</span>, <span class="dt">width=</span><span class="dv">20</span>) </a>
+<a class="sourceLine" id="cb41-47" data-line-number="47"> </a>
+<a class="sourceLine" id="cb41-48" data-line-number="48"> <span class="co"># now plot the pre-PDA ensemble similar to the way we did before</span></a>
+<a class="sourceLine" id="cb41-49" data-line-number="49"> preCI &lt;-<span class="st"> </span><span class="kw">apply</span>(pre_pda, <span class="dv">2</span>, quantile, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb41-50" data-line-number="50"> ymin &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">min</span>(<span class="kw">c</span>(preCI, fobs), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb41-51" data-line-number="51"> ymax &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">max</span>(<span class="kw">c</span>(preCI, fobs), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb41-52" data-line-number="52"> <span class="kw">plot</span>(pre_pda[<span class="dv">1</span>,], <span class="dt">ylim =</span> <span class="kw">c</span>(ymin, ymax), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">xlab =</span> <span class="st">&quot;time&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;NEE&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;pre-PDA vs post-PDA&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb41-53" data-line-number="53"> prepoly &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(preCI)[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb41-54" data-line-number="54"> <span class="kw">polygon</span>(<span class="kw">c</span>(prepoly, <span class="kw">rev</span>(prepoly)),<span class="kw">c</span>(preCI[<span class="dv">3</span>,], <span class="kw">rev</span>(preCI[<span class="dv">1</span>,])),<span class="dt">col=</span><span class="st">&#39;khaki&#39;</span>,<span class="dt">border=</span><span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb41-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb41-56" data-line-number="56"> <span class="co"># plot the post-PDA ensemble</span></a>
+<a class="sourceLine" id="cb41-57" data-line-number="57"> postCI &lt;-<span class="st"> </span><span class="kw">apply</span>(post_pda, <span class="dv">2</span>, quantile, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb41-58" data-line-number="58"> postpoly &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(postCI)[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb41-59" data-line-number="59"> <span class="kw">polygon</span>(<span class="kw">c</span>(postpoly, <span class="kw">rev</span>(postpoly)),<span class="kw">c</span>(postCI[<span class="dv">3</span>,], <span class="kw">rev</span>(postCI[<span class="dv">1</span>,])),<span class="dt">col=</span><span class="st">&#39;lightblue&#39;</span>,<span class="dt">border=</span><span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb41-60" data-line-number="60"> </a>
+<a class="sourceLine" id="cb41-61" data-line-number="61"> <span class="co"># finally let&#39;s add the data and see how we did</span></a>
+<a class="sourceLine" id="cb41-62" data-line-number="62"> <span class="kw">points</span>(fobs, <span class="dt">pch =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">col=</span> <span class="kw">adjustcolor</span>(<span class="st">&quot;purple&quot;</span>,<span class="dt">alpha.f=</span><span class="fl">0.7</span>))</a>
+<a class="sourceLine" id="cb41-63" data-line-number="63"> <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Data&quot;</span>,<span class="st">&quot;Pre-PDA Model&quot;</span>, <span class="st">&quot;Post-PDA Model&quot;</span>), <span class="dt">pch=</span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>),</a>
+<a class="sourceLine" id="cb41-64" data-line-number="64">        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;khaki&quot;</span>,<span class="st">&quot;lightblue&quot;</span>))</a>
+<a class="sourceLine" id="cb41-65" data-line-number="65"> </a>
+<a class="sourceLine" id="cb41-66" data-line-number="66"> <span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb41-67" data-line-number="67"></a>
+<a class="sourceLine" id="cb41-68" data-line-number="68"></a>
+<a class="sourceLine" id="cb41-69" data-line-number="69"> <span class="co"># Repeat variance decomposition to see how constraints have changed</span></a>
+<a class="sourceLine" id="cb41-70" data-line-number="70"> <span class="kw">run.sensitivity.analysis</span>(postPDA.settings)</a></code></pre></div>
 <p>Now you can check the new figures produced by your analyses under <code>PEcAn_[workflow_id]/pft/*/variance.decomposition.*.pdf</code> and <code>PEcAn_[workflow_id]/pft/*/sensitivity.analysis.*.pdf</code>, and compare them to the previous ones. Also, take a look at the comparison of model outputs to data when we run SIPNET with pre- and post-PDA parameter (mean) values under <code>PEcAn_[workflow_id]/model.data.comparison.pdf</code>.</p>
 </div>
 <div id="questions-3" class="section level4">
@@ -1645,7 +1644,7 @@ and two measurement errors or DBH (<span class="math inline">\(\tau_D\)</span>) 
 <span class="math display">\[\tau_{D} \sim Gamma(a_D,r_D)\]</span>
 <span class="math display">\[\tau_{r} \sim Gamma(a_r,r_r)\]</span></p>
 <p>This model is encapsulated in the PEcAn function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">InventoryGrowthFusion</span>(combined,n,iter)</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">InventoryGrowthFusion</span>(combined,n,iter)</a></code></pre></div>
 <p>where the first argument is the combined data set formatted for JAGS and the second is the number of MCMC interations. The model itself is written for JAGS and is embedded in the function. Running the above InventoryGrowthFusion will run a full MCMC algorithm, so it does take a while to run. The code returns the results as an mcmc.list object, and the next line in the script saves this to the outputs directory We then call the function InventoryGrowthFusionDiagnostics to print out a set of MCMC diagnostics and example time-series for growth and DBH.</p>
 </div>
 <div id="allometric-equations" class="section level4">
@@ -1702,85 +1701,85 @@ and two measurement errors or DBH (<span class="math inline">\(\tau_D\)</span>) 
 <div id="a.-read-in-settings-object-from-a-run-xml" class="section level4">
 <h4><span class="header-section-number">5.5.5.4</span> A. Read in settings object from a run xml</h4>
 <p>Open up a connection to the bety database and create a settings object from your xml, just like in the modelVSdata tutorial.</p>
-<pre class="sourceCode r"><code class="sourceCode r">settings&lt;-PEcAn.settings<span class="op">::</span><span class="kw">read.settings</span>(<span class="st">&quot;~/output/PEcAn_99000000002/pecan.CONFIGS.xml&quot;</span>)
-
-bety&lt;-settings<span class="op">$</span>database<span class="op">$</span>bety
-bety &lt;-dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">host =</span> bety<span class="op">$</span>host, <span class="dt">user =</span> bety<span class="op">$</span>user, <span class="dt">password =</span> bety<span class="op">$</span>password, <span class="dt">dbname =</span> bety<span class="op">$</span>dbname)</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">settings&lt;-PEcAn.settings<span class="op">::</span><span class="kw">read.settings</span>(<span class="st">&quot;~/output/PEcAn_99000000002/pecan.CONFIGS.xml&quot;</span>)</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">bety&lt;-settings<span class="op">$</span>database<span class="op">$</span>bety</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">bety &lt;-dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">host =</span> bety<span class="op">$</span>host, <span class="dt">user =</span> bety<span class="op">$</span>user, <span class="dt">password =</span> bety<span class="op">$</span>password, <span class="dt">dbname =</span> bety<span class="op">$</span>dbname)</a></code></pre></div>
 <p>We read in the pecan.CONFIG.xml instead of the pecan.xml because the pecan.CONFIG.xml has already incorperated some of the information from the database we would have to query again if we used the pecan.xml.</p>
-<pre class="sourceCode r"><code class="sourceCode r">runid&lt;-<span class="kw">as.character</span>(<span class="kw">read.table</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;/run/&quot;</span>,<span class="st">&quot;runs.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id </span>
-outdir&lt;-<span class="st"> </span><span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="st">&quot;/out/&quot;</span>,runid,<span class="dt">sep=</span> <span class="st">&quot;&quot;</span>)
-start.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>start.date))
-end.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>end.date))
-
-site.id&lt;-settings<span class="op">$</span>run<span class="op">$</span>site<span class="op">$</span>id</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">runid&lt;-<span class="kw">as.character</span>(<span class="kw">read.table</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;/run/&quot;</span>,<span class="st">&quot;runs.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))[<span class="dv">1</span>,<span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id </span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">outdir&lt;-<span class="st"> </span><span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="st">&quot;/out/&quot;</span>,runid,<span class="dt">sep=</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">start.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>start.date))</a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">end.year&lt;-<span class="kw">as.numeric</span>(lubridate<span class="op">::</span><span class="kw">year</span>(settings<span class="op">$</span>run<span class="op">$</span>end.date))</a>
+<a class="sourceLine" id="cb45-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6">site.id&lt;-settings<span class="op">$</span>run<span class="op">$</span>site<span class="op">$</span>id</a></code></pre></div>
 <p>Back to the files pane, within the <em>run/</em> folder, find a folder called <em>pft/</em> and within that a folder with the pft name (such as <em>temprature.coniferous</em>). Within that is a PDF file that starts <em>sensitivity.analysis</em>. In Rstudio, just click on the PDF to view it. You discussed this PDF last tutorial, through the web interface. Here, we see how the model NEE in SIPNET changes with each parameter.</p>
 <p>Let’s read that sensitivity output. Navigate back up (<em>..</em>) to the <em>~/output/<strong>RUNDIR</strong>/</em> folder. Find a series of files that end in “<em>.RData</em>”. These files contain the R variables used to make these plots. In particular, there is <strong>sensitivity.output.<em>.RData<strong> which contains the annual NEE as a function of each parameter quantile. Click on it to load a variable into your environment. There is </strong>sensitivity.results.</em>.RData</strong> which contains plotting functions and variance decomposition output, which we don’t need in this tutorial. And finally, there is **sensitivity.samples.*.RData** which contains the actual parameter values and the RunIDs associated with each sensitivity run.</p>
 <p>Click on <em>sensitivity.samples.</em>.RData* to load it into your environment, or run the <code>{r}load()</code> script below. You should see a set of five new variables (pft.names, trait.names, sa.ensemble.id, sa.run.ids, sa.samples).</p>
 <p>Let’s extract a parameter and it’s sensitivity NEE output from the list sa.samples, which is organized by PFT, and then by parameter. First, let’s look at a list of PFTs and parameters available:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="st">&quot;/sensitivity.samples.&quot;</span>, settings<span class="op">$</span>sensitivity.analysis<span class="op">$</span>ensemble.id,<span class="st">&quot;.Rdata&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
-
-<span class="kw">names</span>(sa.samples)
-<span class="kw">names</span>(sa.samples<span class="op">$</span>temperate.coniferous)</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">load</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="st">&quot;/sensitivity.samples.&quot;</span>, settings<span class="op">$</span>sensitivity.analysis<span class="op">$</span>ensemble.id,<span class="st">&quot;.Rdata&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="kw">names</span>(sa.samples)</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="kw">names</span>(sa.samples<span class="op">$</span>temperate.coniferous)</a></code></pre></div>
 <p>Now to see the actual parameter values used by the runs, just pick a parameter and type:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sa.samples<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">sa.samples<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt</a></code></pre></div>
 <p>Let’s store that value for future use:</p>
-<pre class="sourceCode r"><code class="sourceCode r">psnTOpt &lt;-<span class="st"> </span>sa.samples<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">psnTOpt &lt;-<span class="st"> </span>sa.samples<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt</a></code></pre></div>
 <p>Now, to see the annual NEE output from the model for a particular PFT and parameter range, try</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="kw">paste</span>(<span class="st">&quot;/sensitivity.output&quot;</span>, settings<span class="op">$</span>sensitivity.analysis<span class="op">$</span>ensemble.id,settings<span class="op">$</span>sensitivity.analysis<span class="op">$</span>variable,start.year,end.year,<span class="st">&quot;Rdata&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;.&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
-
-sensitivity.output<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">load</span>(<span class="kw">paste</span>(settings<span class="op">$</span>outdir,<span class="kw">paste</span>(<span class="st">&quot;/sensitivity.output&quot;</span>, settings<span class="op">$</span>sensitivity.analysis<span class="op">$</span>ensemble.id,settings<span class="op">$</span>sensitivity.analysis<span class="op">$</span>variable,start.year,end.year,<span class="st">&quot;Rdata&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;.&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">sensitivity.output<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt</a></code></pre></div>
 <p>You could even plot the two:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(psnTOpt,sensitivity.output<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt)</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">plot</span>(psnTOpt,sensitivity.output<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt)</a></code></pre></div>
 <p>What do you notice?</p>
 <p>Let’s try to read the output from a single run id as you did in the earlier tutorial.</p>
-<pre class="sourceCode r"><code class="sourceCode r">runids &lt;-<span class="st"> </span>sa.run.ids<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt
-arun &lt;-<span class="st"> </span>PEcAn.utils<span class="op">::</span><span class="kw">read.output</span>(runids[<span class="dv">1</span>], <span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;out&quot;</span>, runids[<span class="dv">1</span>], <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>), <span class="dt">start.year=</span> start.year, <span class="dt">end.year=</span> end.year,<span class="st">&quot;NEE&quot;</span>, <span class="dt">dataframe =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">plot</span>(arun<span class="op">$</span>posix,arun<span class="op">$</span>NEE)</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">runids &lt;-<span class="st"> </span>sa.run.ids<span class="op">$</span>temperate.coniferous<span class="op">$</span>psnTOpt</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">arun &lt;-<span class="st"> </span>PEcAn.utils<span class="op">::</span><span class="kw">read.output</span>(runids[<span class="dv">1</span>], <span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;out&quot;</span>, runids[<span class="dv">1</span>], <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>), <span class="dt">start.year=</span> start.year, <span class="dt">end.year=</span> end.year,<span class="st">&quot;NEE&quot;</span>, <span class="dt">dataframe =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb51-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb51-4" data-line-number="4"><span class="kw">plot</span>(arun<span class="op">$</span>posix,arun<span class="op">$</span>NEE)</a></code></pre></div>
 </div>
 <div id="b.-now-lets-bring-in-the-actual-observations" class="section level4">
 <h4><span class="header-section-number">5.5.5.5</span> B. Now let’s bring in the actual observations</h4>
 <p>Recall reading Ameriflux NEE in the modelVSdata tutorial.</p>
-<pre class="sourceCode r"><code class="sourceCode r">File_path&lt;-<span class="st">&quot;~/output/dbfiles/AmerifluxLBL_site_0-772/AMF_US-NR1_BASE_HH_9-1.csv&quot;</span>
-
-File_format&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(<span class="dt">bety =</span> bety, <span class="dt">format.id =</span> <span class="dv">5000000002</span>) <span class="co">#This matches the file with a premade &quot;format&quot; or a template that describes how the information in the file is organized</span>
-site&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.site</span>(<span class="dt">site.id =</span> site.id,bety<span class="op">$</span>con)  
-
-obs&lt;-PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> File_path, <span class="dt">format=</span> File_format, <span class="dt">time.row =</span> File_format<span class="op">$</span>time.row,  <span class="dt">site =</span> site, <span class="dt">start_year =</span> start.year, <span class="dt">end_year =</span> end.year) 
-
-obs<span class="op">$</span>NEE[obs<span class="op">$</span>UST<span class="op">&lt;</span><span class="fl">0.2</span>]&lt;-<span class="ot">NA</span> <span class="co">#Apply a U* filter</span>
-
-plottable&lt;-<span class="kw">align_data</span>(<span class="dt">model.calc =</span> arun, <span class="dt">obvs.calc =</span> obs, <span class="dt">align_method =</span> <span class="st">&quot;match_timestep&quot;</span>, <span class="dt">var=</span> <span class="st">&quot;NEE&quot;</span>)
-<span class="kw">head</span>(plottable)</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">File_path&lt;-<span class="st">&quot;~/output/dbfiles/AmerifluxLBL_site_0-772/AMF_US-NR1_BASE_HH_9-1.csv&quot;</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">File_format&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.format.vars</span>(<span class="dt">bety =</span> bety, <span class="dt">format.id =</span> <span class="dv">5000000002</span>) <span class="co">#This matches the file with a premade &quot;format&quot; or a template that describes how the information in the file is organized</span></a>
+<a class="sourceLine" id="cb52-4" data-line-number="4">site&lt;-PEcAn.DB<span class="op">::</span><span class="kw">query.site</span>(<span class="dt">site.id =</span> site.id,bety<span class="op">$</span>con)  </a>
+<a class="sourceLine" id="cb52-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb52-6" data-line-number="6">obs&lt;-PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> File_path, <span class="dt">format=</span> File_format, <span class="dt">time.row =</span> File_format<span class="op">$</span>time.row,  <span class="dt">site =</span> site, <span class="dt">start_year =</span> start.year, <span class="dt">end_year =</span> end.year) </a>
+<a class="sourceLine" id="cb52-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb52-8" data-line-number="8">obs<span class="op">$</span>NEE[obs<span class="op">$</span>UST<span class="op">&lt;</span><span class="fl">0.2</span>]&lt;-<span class="ot">NA</span> <span class="co">#Apply a U* filter</span></a>
+<a class="sourceLine" id="cb52-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb52-10" data-line-number="10">plottable&lt;-<span class="kw">align_data</span>(<span class="dt">model.calc =</span> arun, <span class="dt">obvs.calc =</span> obs, <span class="dt">align_method =</span> <span class="st">&quot;match_timestep&quot;</span>, <span class="dt">var=</span> <span class="st">&quot;NEE&quot;</span>)</a>
+<a class="sourceLine" id="cb52-11" data-line-number="11"><span class="kw">head</span>(plottable)</a></code></pre></div>
 </div>
 <div id="c.-finally-we-can-finally-compare-model-to-data" class="section level4">
 <h4><span class="header-section-number">5.5.5.6</span> C. Finally, we can finally compare model to data</h4>
 <p>In the modelVSdata, you also compared NEE to the ensemble model run. Here we will do the same except we include each sensitivity run.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(plottable<span class="op">$</span>NEE.m,plottable<span class="op">$</span>NEE.o)
-<span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">plot</span>(plottable<span class="op">$</span>NEE.m,plottable<span class="op">$</span>NEE.o)</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p>And remember the formula for RMSE:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">mean</span>((plottable<span class="op">$</span>NEE.o<span class="op">-</span>plottable<span class="op">$</span>NEE.m)<span class="op">^</span><span class="dv">2</span>,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))    </code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">mean</span>((plottable<span class="op">$</span>NEE.o<span class="op">-</span>plottable<span class="op">$</span>NEE.m)<span class="op">^</span><span class="dv">2</span>,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))    </a></code></pre></div>
 <p>All we need to do to go beyond this is to make a loop that reads in each sensitivity run NEE based on runids, calculates RMSE against the observations, and stores it in an array, by combining the steps above in a for loop. Make sure you change the directory names and year to your specific run.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rmses &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(runids))
-<span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(runids)){
-arun &lt;-<span class="st"> </span><span class="kw">read.output</span>(runids[r],<span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;out&quot;</span>, runids[r], <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>),<span class="dv">2004</span>,<span class="dv">2004</span>,<span class="st">&quot;NEE&quot;</span>, <span class="dt">dataframe=</span> <span class="ot">TRUE</span>)
-plottable&lt;-<span class="kw">align_data</span>(<span class="dt">model.calc =</span> arun, <span class="dt">obvs.calc =</span> obs, <span class="dt">align_method =</span> <span class="st">&quot;match_timestep&quot;</span>, <span class="dt">var=</span> <span class="st">&quot;NEE&quot;</span>)
-rmses[r] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((plottable<span class="op">$</span>NEE.o<span class="op">-</span>plottable<span class="op">$</span>NEE.m)<span class="op">^</span><span class="dv">2</span>,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-}
-
-rmses</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">rmses &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(runids))</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(runids)){</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">arun &lt;-<span class="st"> </span><span class="kw">read.output</span>(runids[r],<span class="kw">paste</span>(settings<span class="op">$</span>outdir, <span class="st">&quot;out&quot;</span>, runids[r], <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>),<span class="dv">2004</span>,<span class="dv">2004</span>,<span class="st">&quot;NEE&quot;</span>, <span class="dt">dataframe=</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">plottable&lt;-<span class="kw">align_data</span>(<span class="dt">model.calc =</span> arun, <span class="dt">obvs.calc =</span> obs, <span class="dt">align_method =</span> <span class="st">&quot;match_timestep&quot;</span>, <span class="dt">var=</span> <span class="st">&quot;NEE&quot;</span>)</a>
+<a class="sourceLine" id="cb55-5" data-line-number="5">rmses[r] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((plottable<span class="op">$</span>NEE.o<span class="op">-</span>plottable<span class="op">$</span>NEE.m)<span class="op">^</span><span class="dv">2</span>,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb55-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb55-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb55-8" data-line-number="8">rmses</a></code></pre></div>
 <p>Let’s plot that array</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(psnTOpt,rmses)</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">plot</span>(psnTOpt,rmses)</a></code></pre></div>
 <p>Can you identify a minimum (if there is one)? If so, is there any reason to believe this is the “best” parameter? Why or why not? Think about all the other parameters.</p>
 <p>Now that you have the hang of it, here are a few more things to try:</p>
 <ol style="list-style-type: decimal">
 <li>Try a different error functions, given actual NEE uncertainty. You learned earlier that uncertainty in half-hourly observed NEE is not Gaussian. This makes RMSE not the correct measure for goodness-of-fit. Go to <em>~/pecan/modules/uncertainty/R</em>, open <em>flux_uncertainty.R</em>, and click on the <em>source</em> button in the program editing pane.</li>
 </ol>
 <p>Alternatively, you can source the function from the console using:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;pecan/modules/uncertainty/R/flux_uncertainty.R&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;pecan/modules/uncertainty/R/flux_uncertainty.R&quot;</span>)</a></code></pre></div>
 <p>Then you can run:</p>
-<pre class="sourceCode r"><code class="sourceCode r">unc &lt;-<span class="st"> </span><span class="kw">flux.uncertainty</span>(plottable<span class="op">$</span>NEE.o,<span class="dt">QC=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">17520</span>)) 
-<span class="kw">plot_flux_uncertainty</span>(unc)</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">unc &lt;-<span class="st"> </span><span class="kw">flux.uncertainty</span>(plottable<span class="op">$</span>NEE.o,<span class="dt">QC=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">17520</span>)) </a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="kw">plot_flux_uncertainty</span>(unc)</a></code></pre></div>
 <p>The figure shows you uncertainty (err) as a function of NEE magnitude (mag). How might you use this information to change the RMSE calculation?</p>
 <p>Try a few other parameters. Repeat the above steps but with a different parameter. You might want to select one from the sensitivity PDF that has a large sensitivity or from the variance decomposition that is also poorly constrained.</p>
 
@@ -1796,38 +1795,38 @@ rmses</code></pre>
 <div id="web-curl-submission" class="section level3">
 <h3><span class="header-section-number">5.6.1</span> Submitting Workflow from Command Line</h3>
 <p>This is how you can submit a workflow from the command line through the pecan web interface. This will use curl to submit all the requireed parameters to the web interface and trigger a run.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># the host where the model should run</span>
-<span class="co"># never use remote sites since you will need to pass your username/password and that WILL be stored</span>
-<span class="va">hostname=</span>pecan.vm
-<span class="co"># the site id where to run the model (NIWOT in this case)</span>
-<span class="va">siteid=</span>772
-<span class="co"># start date and end date, / need to be replaced with %2F or use - (NOT TESTED)</span>
-<span class="va">start=</span>2004-01-01
-<span class="va">end=</span>2004-12-31
-
-<span class="co"># if of model you want to run, rest of section parameters depend on the model selected (SIPNET 136)</span>
-<span class="va">modelid=</span>5000000002
-<span class="co"># PFT selected (we should just use a number here)</span>
-<span class="co"># </span><span class="al">NOTE</span><span class="co">: the square brackets are needed and will need be escaped with a \ if you call this from command line</span>
-<span class="ex">pft</span>[]=temperate.coniferous
-<span class="co"># initial pool condition (-1 means nothing is selected)</span>
-<span class="va">input_poolinitcond=</span>-1
-<span class="co"># met data</span>
-<span class="va">input_met=</span>99000000006
-
-<span class="co"># variables to collect</span>
-<span class="va">variables=</span>NPP,GPP
-<span class="co"># ensemble size</span>
-<span class="va">runs=</span>10
-<span class="co"># use sensitivity analysis</span>
-<span class="va">sensitivity=</span>-1,1
-
-<span class="co"># redirect to the edit pecan.xml file</span>
-<span class="va">pecan_edit=</span>on
-<span class="co"># redirect to edit the model configuration files</span>
-<span class="va">model_edit=</span>on
-<span class="co"># use browndog</span>
-<span class="va">browndog=</span>on</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="co"># the host where the model should run</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="co"># never use remote sites since you will need to pass your username/password and that WILL be stored</span></a>
+<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="va">hostname=</span>pecan.vm</a>
+<a class="sourceLine" id="cb59-4" data-line-number="4"><span class="co"># the site id where to run the model (NIWOT in this case)</span></a>
+<a class="sourceLine" id="cb59-5" data-line-number="5"><span class="va">siteid=</span>772</a>
+<a class="sourceLine" id="cb59-6" data-line-number="6"><span class="co"># start date and end date, / need to be replaced with %2F or use - (NOT TESTED)</span></a>
+<a class="sourceLine" id="cb59-7" data-line-number="7"><span class="va">start=</span>2004-01-01</a>
+<a class="sourceLine" id="cb59-8" data-line-number="8"><span class="va">end=</span>2004-12-31</a>
+<a class="sourceLine" id="cb59-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb59-10" data-line-number="10"><span class="co"># if of model you want to run, rest of section parameters depend on the model selected (SIPNET 136)</span></a>
+<a class="sourceLine" id="cb59-11" data-line-number="11"><span class="va">modelid=</span>5000000002</a>
+<a class="sourceLine" id="cb59-12" data-line-number="12"><span class="co"># PFT selected (we should just use a number here)</span></a>
+<a class="sourceLine" id="cb59-13" data-line-number="13"><span class="co"># </span><span class="al">NOTE</span><span class="co">: the square brackets are needed and will need be escaped with a \ if you call this from command line</span></a>
+<a class="sourceLine" id="cb59-14" data-line-number="14"><span class="ex">pft</span>[]=temperate.coniferous</a>
+<a class="sourceLine" id="cb59-15" data-line-number="15"><span class="co"># initial pool condition (-1 means nothing is selected)</span></a>
+<a class="sourceLine" id="cb59-16" data-line-number="16"><span class="va">input_poolinitcond=</span>-1</a>
+<a class="sourceLine" id="cb59-17" data-line-number="17"><span class="co"># met data</span></a>
+<a class="sourceLine" id="cb59-18" data-line-number="18"><span class="va">input_met=</span>99000000006</a>
+<a class="sourceLine" id="cb59-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb59-20" data-line-number="20"><span class="co"># variables to collect</span></a>
+<a class="sourceLine" id="cb59-21" data-line-number="21"><span class="va">variables=</span>NPP,GPP</a>
+<a class="sourceLine" id="cb59-22" data-line-number="22"><span class="co"># ensemble size</span></a>
+<a class="sourceLine" id="cb59-23" data-line-number="23"><span class="va">runs=</span>10</a>
+<a class="sourceLine" id="cb59-24" data-line-number="24"><span class="co"># use sensitivity analysis</span></a>
+<a class="sourceLine" id="cb59-25" data-line-number="25"><span class="va">sensitivity=</span>-1,1</a>
+<a class="sourceLine" id="cb59-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb59-27" data-line-number="27"><span class="co"># redirect to the edit pecan.xml file</span></a>
+<a class="sourceLine" id="cb59-28" data-line-number="28"><span class="va">pecan_edit=</span>on</a>
+<a class="sourceLine" id="cb59-29" data-line-number="29"><span class="co"># redirect to edit the model configuration files</span></a>
+<a class="sourceLine" id="cb59-30" data-line-number="30"><span class="va">model_edit=</span>on</a>
+<a class="sourceLine" id="cb59-31" data-line-number="31"><span class="co"># use browndog</span></a>
+<a class="sourceLine" id="cb59-32" data-line-number="32"><span class="va">browndog=</span>on</a></code></pre></div>
 <p>For example the following will run the above workflow. Using -v in curl will show verbose output (needed) and the grep will make sure it only shows the redirect. This will show the actual workflowid:</p>
 <pre><code>curl -s -v &#39;http://localhost:6480/pecan/04-runpecan.php?hostname=pecan.vm&amp;siteid=772&amp;start=2004-01-01&amp;end=2004-12-31&amp;modelid=5000000002&amp;pft\[\]=temperate.coniferous&amp;input_poolinitcond=-1&amp;input_met=99000000006&#39; 2&gt;&amp;1 | grep &#39;Location:&#39;
 &lt; Location: 05-running.php?workflowid=99000000004</code></pre>

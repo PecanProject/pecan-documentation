@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Install PEcAn | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="4 Install PEcAn | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Install PEcAn | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-10" />
+<meta name="date" content="2019-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,7 +74,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -538,7 +537,7 @@ This will not go into much detail about about how to use Docker – for more det
 <li><p><strong>Install Docker</strong>. Follow the instructions for your operating system at <a href="https://www.docker.com/community-edition#/download" class="uri">https://www.docker.com/community-edition#/download</a>.
 Once Docker is installed, make sure it is running.
 To test that Docker is installed and running, open a terminal and run the following commands:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run hello-world</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">docker</span> run hello-world</a></code></pre></div>
 <p>If successful, this should return a message starting with <code>&quot;Hello from Docker!&quot;</code>.
 If this doesn’t work, there is something wrong with your configuration.
 Refer to the Docker documentation for debugging.</p>
@@ -547,17 +546,17 @@ Try running the command without <code>sudo</code> first.
 If that fails, but running as <code>sudo</code> succeeds, see <a href="https://docs.docker.com/install/linux/linux-postinstall/">these instructions</a> for steps to use Docker as a non-root user.</p></li>
 <li><p><strong>Install docker-compose</strong>. If you are running this on a Mac or Windows this might be already installed. On Linux you will need to install this it separately; see <a href="https://docs.docker.com/compose/install/" class="uri">https://docs.docker.com/compose/install/</a>.</p>
 <p>To see if docker-compose is successfully installed, use the following shell command:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> -v</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">docker-compose</span> -v</a></code></pre></div>
 <p>This should print the current version of docker-compose. We have tested the instruction below with versions of docker-compose 1.22 and above.</p></li>
 <li><p><strong>Download the PEcAn docker-compose file</strong>. It is located in the root directory of the <a href="https://github.com/pecanproject/pecan">PEcAn source code</a>. For reference, here are direct links to the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker-compose.yml">latest stable version</a> and the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker-compose.yml">bleeding edge development version</a>. (To download the files, you should be able to right click the link and select “Save link as”.) Make sure the file is saved as <code>docker-compose.yml</code> in a directory called <code>pecan</code>.</p></li>
 <li><p><strong>Initialize the PEcAn database and data images</strong>. The following <code>docker-compose</code> commands are used to download all the data PEcAn needs to start working. For more on how they work, see our <a href="docker-index.html#pecan-docker-quickstart-init">Docker topical pages</a>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Create and start the PEcAn database container (without any data)</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> up -d postgres</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ex">docker-compose</span> up -d postgres</a></code></pre></div>
 <p>If this is successful, the end of the output should look like the following:</p>
 <pre><code>Creating pecan_postgres_1 ... done</code></pre></li>
 <li><p>“Initialize” the data for the PEcAn database.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> run --rm bety initialize</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">docker-compose</span> run --rm bety initialize</a></code></pre></div>
 <p>This should produce a lot of output describing the database operations happening under the hood.
 Some of these will look like errors (including starting with <code>ERROR</code>), but <em>this is normal</em>.
 This command succeeded if the output ends with the following:</p>
@@ -567,7 +566,7 @@ Added carya43 with access_level=4 and page_access_level=3 with id=327
 Added carya44 with access_level=4 and page_access_level=4 with id=329
 Added guestuser with access_level=4 and page_access_level=4 with id=331</code></pre></li>
 <li><p>Download and configure the core PEcAn database files.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data --env FQDN=docker pecan/data:develop</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data --env FQDN=docker pecan/data:develop</a></code></pre></div>
 <p>This will produce a lot of output describing file operations.
 This command succeeded if the output ends with the following:</p>
 <pre><code>######################################################################
@@ -575,7 +574,7 @@ Done!
 ###################################################################### </code></pre></li>
 </ol></li>
 <li><p><strong>Start the PEcAn stack</strong>. Assuming all of the steps above completed successfully, start the full stack by running the following shell command:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-compose</span> up -d</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">docker-compose</span> up -d</a></code></pre></div>
 <p>If all of the containers started successfully, you should be able to access the various components from a browser via the following URLs (if you run these commands on a remote machine replace localhost with the actual hostname).</p>
 <ul>
 <li>PEcAn web interface (running models) – <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> (NOTE: The trailing backslash is necessary.)</li>
