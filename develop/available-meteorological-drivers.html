@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14 Available Meteorological Drivers | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="14 Available Meteorological Drivers | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14 Available Meteorological Drivers | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-31" />
+<meta name="date" content="2019-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="pecan-models.html">
-<link rel="next" href="database-synchronization.html">
+<link rel="prev" href="pecan-models.html"/>
+<link rel="next" href="database-synchronization.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -324,9 +324,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.0.9" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#paleon"><i class="fa fa-check"></i><b>14.0.9</b> PalEON</a></li>
 <li class="chapter" data-level="14.0.10" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnetlathuile"><i class="fa fa-check"></i><b>14.0.10</b> FluxnetLaThuile</a></li>
 <li class="chapter" data-level="14.0.11" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#geostreams"><i class="fa fa-check"></i><b>14.0.11</b> Geostreams</a></li>
-<li class="chapter" data-level="14.0.12" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#download-gfdl"><i class="fa fa-check"></i><b>14.0.12</b> Download GFDL</a></li>
-<li class="chapter" data-level="14.0.13" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cm3"><i class="fa fa-check"></i><b>14.0.13</b> CM3</a></li>
-<li class="chapter" data-level="14.0.14" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#esm2m-esm2g"><i class="fa fa-check"></i><b>14.0.14</b> ESM2M &amp; ESM2G</a></li>
+<li class="chapter" data-level="14.0.12" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#era5"><i class="fa fa-check"></i><b>14.0.12</b> ERA5</a></li>
+<li class="chapter" data-level="14.0.13" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#download-gfdl"><i class="fa fa-check"></i><b>14.0.13</b> Download GFDL</a></li>
+<li class="chapter" data-level="14.0.14" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cm3"><i class="fa fa-check"></i><b>14.0.14</b> CM3</a></li>
+<li class="chapter" data-level="14.0.15" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#esm2m-esm2g"><i class="fa fa-check"></i><b>14.0.15</b> ESM2M &amp; ESM2G</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="database-synchronization.html"><a href="database-synchronization.html"><i class="fa fa-check"></i><b>15</b> Database synchronization</a><ul>
 <li class="chapter" data-level="15.0.1" data-path="database-synchronization.html"><a href="database-synchronization.html#how-does-it-work"><i class="fa fa-check"></i><b>15.0.1</b> How does it work?</a></li>
@@ -569,18 +570,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Resolution: varies</p>
 <p>Availability: varies by site</p>
 <p>Notes: This is a protocol, not a single archive. The PEcAn functions currently default to querying [<a href="https://terraref.ncsa.illinois.edu/clowder/api/geostreams" class="uri">https://terraref.ncsa.illinois.edu/clowder/api/geostreams</a>], which requires login and contains data from only two sites (Urbana IL and Maricopa AZ). However the interface can be used with any server that supports the <a href="https://opensource.ncsa.illinois.edu/confluence/display/CATS/Geostreams+API">Geostreams API</a>.</p>
+</div>
+<div id="era5" class="section level3">
+<h3><span class="header-section-number">14.0.12</span> ERA5</h3>
+<p>Scale: Global</p>
+<p>Resolution: 3 hrs and 31 km</p>
+<p>Availability: 1950-present</p>
+<p>Notes:</p>
+<p>It’s important to know that the raw ERA5 tiles needs to be downloaded and registered in the database first. Inside the <code>inst</code> folder in the data.atmosphere package there are R files for downloading and registering files in the BETY. However, it assumes that you have registered and setup your API requirements. Check out how to setup your API [here] (<a href="https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5#HowtodownloadERA5-3-DownloadERA5datathroughtheCDSAPI" class="uri">https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5#HowtodownloadERA5-3-DownloadERA5datathroughtheCDSAPI</a>).
+In the <code>inst</code> folder you can find two files (<code>ERA5_db_register.R</code> and <code>ERA5_USA_download.R</code>). If you setup your <code>ecmwf</code> account as it’s explained in the link above, <code>ERA5_USA_download.R</code> will help you to download all the tiles with all the variables required for pecan <code>extract.nc.ERA5</code> function to generate pecan standard met files. Besides installing the required packages for this file, it should work from top to bottom with no problem. After downloading the tiles, there is simple script in <code>ERA5_db_register.R</code> which helps you register your tiles in the bety. <code>met.process</code> later on uses that entery to find the required tiles for extracting met data for your sites. There are important points about this file. 1- Make sure you don’t change the site id in the script (which is the same the <code>ParentSite</code> in ERA5 registeration xml file). 2- Make sure the start and end date in that script matches the downloaded tiles. Set your <code>ERA5.files.path</code> to where you downloaded the tiles and then the rest of the script should be working fine.</p>
 
 </div>
 <div id="download-gfdl" class="section level3">
-<h3><span class="header-section-number">14.0.12</span> Download GFDL</h3>
+<h3><span class="header-section-number">14.0.13</span> Download GFDL</h3>
 <p>The Downlad.GFDL function assimilates 3 hour frequency CMIP5 outputs generated by multiple GFDL models. GFDL developed several distinct modeling streams on the timescale of CMIP5 and AR5. These models include CM3, ESM2M and ESM2G with a spatial resolution of 2 degrees latitude by 2.5 degrees longitude. Each model has future outputs for the AR5 Representative Concentration Pathways ranging from 2006-2100.</p>
 </div>
 <div id="cm3" class="section level3">
-<h3><span class="header-section-number">14.0.13</span> CM3</h3>
+<h3><span class="header-section-number">14.0.14</span> CM3</h3>
 <p>GFDL’s CMIP5 experiments with CM3 included many of the integrations found in the long-term CMIP5 experimental design. The focus of this physical climate model is on the role of aerosols, aerosol-cloud interactions, and atmospheric chemistry in climate variability and climate change.</p>
 </div>
 <div id="esm2m-esm2g" class="section level3">
-<h3><span class="header-section-number">14.0.14</span> ESM2M &amp; ESM2G</h3>
+<h3><span class="header-section-number">14.0.15</span> ESM2M &amp; ESM2G</h3>
 <p>Two new models representing ocean physics with alternative numerical frameworks to explore the implications of some of the fundamental assumptions embedded in these models. Both ESM2M and ESM2G utilize a more advanced land model, LM3, than was available in ESM2.1 including a variety of enhancements (Milly et al., in prep). GFDL’s CMIP5 experiments with Earth System Models included many of the integrations found in the long-term CMIP5 experimental design. The ESMs, by design, close the carbon cycle and are used to study the impact of climate change on ecosystems, ecosystem changes on climate and human activities on ecosystems.</p>
 <p>For more information please navigate <a href="https://gfdl.noaa.gov/cmip">here</a></p>
 <table width=100%>
@@ -710,8 +720,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

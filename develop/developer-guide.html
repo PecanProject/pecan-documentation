@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Developer guide | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="8 Developer guide | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Developer guide | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-07-31" />
+<meta name="date" content="2019-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intermediate-user.html">
-<link rel="next" href="working-with-vm.html">
+<link rel="prev" href="intermediate-user.html"/>
+<link rel="next" href="working-with-vm.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -324,9 +324,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.0.9" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#paleon"><i class="fa fa-check"></i><b>14.0.9</b> PalEON</a></li>
 <li class="chapter" data-level="14.0.10" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#fluxnetlathuile"><i class="fa fa-check"></i><b>14.0.10</b> FluxnetLaThuile</a></li>
 <li class="chapter" data-level="14.0.11" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#geostreams"><i class="fa fa-check"></i><b>14.0.11</b> Geostreams</a></li>
-<li class="chapter" data-level="14.0.12" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#download-gfdl"><i class="fa fa-check"></i><b>14.0.12</b> Download GFDL</a></li>
-<li class="chapter" data-level="14.0.13" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cm3"><i class="fa fa-check"></i><b>14.0.13</b> CM3</a></li>
-<li class="chapter" data-level="14.0.14" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#esm2m-esm2g"><i class="fa fa-check"></i><b>14.0.14</b> ESM2M &amp; ESM2G</a></li>
+<li class="chapter" data-level="14.0.12" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#era5"><i class="fa fa-check"></i><b>14.0.12</b> ERA5</a></li>
+<li class="chapter" data-level="14.0.13" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#download-gfdl"><i class="fa fa-check"></i><b>14.0.13</b> Download GFDL</a></li>
+<li class="chapter" data-level="14.0.14" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#cm3"><i class="fa fa-check"></i><b>14.0.14</b> CM3</a></li>
+<li class="chapter" data-level="14.0.15" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#esm2m-esm2g"><i class="fa fa-check"></i><b>14.0.15</b> ESM2M &amp; ESM2G</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="database-synchronization.html"><a href="database-synchronization.html"><i class="fa fa-check"></i><b>15</b> Database synchronization</a><ul>
 <li class="chapter" data-level="15.0.1" data-path="database-synchronization.html"><a href="database-synchronization.html#how-does-it-work"><i class="fa fa-check"></i><b>15.0.1</b> How does it work?</a></li>
@@ -1908,8 +1909,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
