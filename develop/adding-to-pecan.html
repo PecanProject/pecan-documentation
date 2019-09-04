@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-08-26" />
+<meta name="date" content="2019-09-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,7 +49,7 @@
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.6/datatables.js"></script>
+<script src="libs/datatables-binding-0.7/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
@@ -923,19 +923,19 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 <div id="example-2-converting-paleon-data" class="section level6">
 <h6><span class="header-section-number">18.3.3.0.0.2</span> Example 2: Converting PalEON data</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb216-1" data-line-number="1">   <span class="kw">&lt;soil&gt;</span></a>
-<a class="sourceLine" id="cb216-2" data-line-number="2">     <span class="kw">&lt;id&gt;</span>1000012896<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb216-3" data-line-number="3">   <span class="kw">&lt;/soil&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb215-1" data-line-number="1">   <span class="kw">&lt;soil&gt;</span></a>
+<a class="sourceLine" id="cb215-2" data-line-number="2">     <span class="kw">&lt;id&gt;</span>1000012896<span class="kw">&lt;/id&gt;</span></a>
+<a class="sourceLine" id="cb215-3" data-line-number="3">   <span class="kw">&lt;/soil&gt;</span></a></code></pre></div>
 <p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 </div>
 <div id="example-3-extracting-soil-properties-from-gssurgo-database" class="section level6">
 <h6><span class="header-section-number">18.3.3.0.0.3</span> Example 3: Extracting soil properties from gSSURGO database</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the gSSURGO data product. This product needs no installation and it extract soil proeprties for the lower 48 states in U.S. In order to let the pecan know that you’re planning to use gSSURGO, you can the following XML tag under input in your pecan xml file.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">&lt;inputs&gt;</span></a>
-<a class="sourceLine" id="cb217-2" data-line-number="2">   <span class="kw">&lt;soil&gt;</span></a>
-<a class="sourceLine" id="cb217-3" data-line-number="3">     <span class="kw">&lt;source&gt;</span>gSSURGO<span class="kw">&lt;/source&gt;</span></a>
-<a class="sourceLine" id="cb217-4" data-line-number="4">   <span class="kw">&lt;/soil&gt;</span></a>
-<a class="sourceLine" id="cb217-5" data-line-number="5"><span class="kw">&lt;/inputs&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">&lt;inputs&gt;</span></a>
+<a class="sourceLine" id="cb216-2" data-line-number="2">   <span class="kw">&lt;soil&gt;</span></a>
+<a class="sourceLine" id="cb216-3" data-line-number="3">     <span class="kw">&lt;source&gt;</span>gSSURGO<span class="kw">&lt;/source&gt;</span></a>
+<a class="sourceLine" id="cb216-4" data-line-number="4">   <span class="kw">&lt;/soil&gt;</span></a>
+<a class="sourceLine" id="cb216-5" data-line-number="5"><span class="kw">&lt;/inputs&gt;</span></a></code></pre></div>
 </div>
 </div>
 </div>

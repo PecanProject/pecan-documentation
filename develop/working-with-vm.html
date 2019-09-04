@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-08-26" />
+<meta name="date" content="2019-09-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,7 +49,7 @@
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.6/datatables.js"></script>
+<script src="libs/datatables-binding-0.7/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
@@ -507,7 +507,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ssh-vm" class="section level2">
 <h2><span class="header-section-number">9.2</span> Connecting to the VM via SSH</h2>
 <p>Once the VM is running anywhere on your machine, you can connect to it from a separate terminal via SSH as follows:</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="fu">ssh</span> -p 6422 carya@localhost</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="fu">ssh</span> -p 6422 carya@localhost</a></code></pre></div>
 <p>You will be prompted for a password. Like everywhere else in PEcAn, the username is <code>carya</code> and the password is <code>illinois</code>. The same password is used for any system maintenance you wish to do on the VM via <code>sudo</code>.</p>
 <p>As a shortcut, you can add the following to your <code>~/.ssh/config</code> file (or create one if it does not exist).</p>
 <pre><code>Host pecan-vm
@@ -634,81 +634,81 @@ Congratulations! You just started a PEcAn server in the “cloud”!</li>
 # - PACKAGE  = openssh
 # ----------------------------------------------------------------------</code></pre>
 <p>To enable tunnels run the following on the host machine:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;ssh,tcp,,6422,,22&quot;</span></a>
-<a class="sourceLine" id="cb120-2" data-line-number="2"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;www,tcp,,6480,,80&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;ssh,tcp,,6422,,22&quot;</span></a>
+<a class="sourceLine" id="cb119-2" data-line-number="2"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;www,tcp,,6480,,80&quot;</span></a></code></pre></div>
 <p>Make sure machine is up to date.</p>
 <p>UBUNTU</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb121-2" data-line-number="2"><span class="fu">sudo</span> apt-get -y dist-upgrade</a>
-<a class="sourceLine" id="cb121-3" data-line-number="3"><span class="fu">sudo</span> reboot</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb120-2" data-line-number="2"><span class="fu">sudo</span> apt-get -y dist-upgrade</a>
+<a class="sourceLine" id="cb120-3" data-line-number="3"><span class="fu">sudo</span> reboot</a></code></pre></div>
 <p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="fu">sudo</span> yum -y update</a>
-<a class="sourceLine" id="cb122-2" data-line-number="2"><span class="fu">sudo</span> reboot</a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="fu">sudo</span> yum -y update</a>
+<a class="sourceLine" id="cb121-2" data-line-number="2"><span class="fu">sudo</span> reboot</a></code></pre></div>
 <p>Install compiler and other packages needed and install the tools.</p>
 <p>UBUNTU</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install build-essential linux-headers-server dkms</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install build-essential linux-headers-server dkms</a></code></pre></div>
 <p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="fu">sudo</span> yum -y groupinstall <span class="st">&quot;Development Tools&quot;</span></a>
-<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="fu">sudo</span> yum -y install wget</a></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="fu">sudo</span> yum -y groupinstall <span class="st">&quot;Development Tools&quot;</span></a>
+<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="fu">sudo</span> yum -y install wget</a></code></pre></div>
 <p>Install Virtual Box additions for better integration</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
-<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
-<a class="sourceLine" id="cb125-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a>
-<a class="sourceLine" id="cb125-4" data-line-number="4"><span class="fu">sudo</span> usermod -a -G vboxsf carya</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
+<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
+<a class="sourceLine" id="cb124-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a>
+<a class="sourceLine" id="cb124-4" data-line-number="4"><span class="fu">sudo</span> usermod -a -G vboxsf carya</a></code></pre></div>
 <p><strong>Finishing up the machine</strong></p>
 <p><strong>Add a message to the login:</strong></p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb126-2" data-line-number="2"><span class="bu">export</span> <span class="va">PORT=$(</span> <span class="fu">hostname</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/pecan//&#39;</span> <span class="va">)</span></a>
-<a class="sourceLine" id="cb126-3" data-line-number="3"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/motd <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb126-4" data-line-number="4">PEcAn version 1.4.3</a>
-<a class="sourceLine" id="cb126-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb126-6" data-line-number="6">For more information about:</a>
-<a class="sourceLine" id="cb126-7" data-line-number="7">Pecan    - http://pecanproject.org</a>
-<a class="sourceLine" id="cb126-8" data-line-number="8">BETY     - http://www.betydb.org</a>
-<a class="sourceLine" id="cb126-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb126-10" data-line-number="10">For a list of all models currently navigate [here](../users_guide/basic_users_guide/models_table.md)</a>
-<a class="sourceLine" id="cb126-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb126-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb126-13" data-line-number="13">You can access this system using a webbrowser at</a>
-<a class="sourceLine" id="cb126-14" data-line-number="14"> http://&lt;hosting machine&gt;:<span class="va">${PORT}</span>80/</a>
-<a class="sourceLine" id="cb126-15" data-line-number="15">or using SSH at</a>
-<a class="sourceLine" id="cb126-16" data-line-number="16"> ssh -l carya -p <span class="va">${PORT}</span>22 &lt;hosting machine&gt;</a>
-<a class="sourceLine" id="cb126-17" data-line-number="17">where &lt;hosting machine&gt; is the machine where the VM runs on.</a>
-<a class="sourceLine" id="cb126-18" data-line-number="18"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb126-19" data-line-number="19"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="bu">export</span> <span class="va">PORT=$(</span> <span class="fu">hostname</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/pecan//&#39;</span> <span class="va">)</span></a>
+<a class="sourceLine" id="cb125-3" data-line-number="3"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/motd <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb125-4" data-line-number="4">PEcAn version 1.4.3</a>
+<a class="sourceLine" id="cb125-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb125-6" data-line-number="6">For more information about:</a>
+<a class="sourceLine" id="cb125-7" data-line-number="7">Pecan    - http://pecanproject.org</a>
+<a class="sourceLine" id="cb125-8" data-line-number="8">BETY     - http://www.betydb.org</a>
+<a class="sourceLine" id="cb125-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb125-10" data-line-number="10">For a list of all models currently navigate [here](../users_guide/basic_users_guide/models_table.md)</a>
+<a class="sourceLine" id="cb125-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb125-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb125-13" data-line-number="13">You can access this system using a webbrowser at</a>
+<a class="sourceLine" id="cb125-14" data-line-number="14"> http://&lt;hosting machine&gt;:<span class="va">${PORT}</span>80/</a>
+<a class="sourceLine" id="cb125-15" data-line-number="15">or using SSH at</a>
+<a class="sourceLine" id="cb125-16" data-line-number="16"> ssh -l carya -p <span class="va">${PORT}</span>22 &lt;hosting machine&gt;</a>
+<a class="sourceLine" id="cb125-17" data-line-number="17">where &lt;hosting machine&gt; is the machine where the VM runs on.</a>
+<a class="sourceLine" id="cb125-18" data-line-number="18"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb125-19" data-line-number="19"><span class="bu">exit</span></a></code></pre></div>
 <p><strong>Finishing up</strong></p>
 <p>Script to clean the VM and remove as much as possible history <a href="http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh">cleanvm.sh</a></p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="fu">wget</span> -O ~/cleanvm.sh http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="fu">chmod</span> 755 ~/cleanvm.sh</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="fu">wget</span> -O ~/cleanvm.sh http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh</a>
+<a class="sourceLine" id="cb126-2" data-line-number="2"><span class="fu">chmod</span> 755 ~/cleanvm.sh</a></code></pre></div>
 <p>Make sure machine has SSH keys <a href="http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local">rc.local</a></p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="fu">sudo</span> wget -O /etc/rc.local http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="fu">sudo</span> wget -O /etc/rc.local http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local</a></code></pre></div>
 <p>Change the resolution of the console</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="fu">sudo</span> sed -i -e <span class="st">&#39;s/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1024x768/&#39;</span> /etc/default/grub</a>
-<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="fu">sudo</span> update-grub</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="fu">sudo</span> sed -i -e <span class="st">&#39;s/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1024x768/&#39;</span> /etc/default/grub</a>
+<a class="sourceLine" id="cb128-2" data-line-number="2"><span class="fu">sudo</span> update-grub</a></code></pre></div>
 <p>Once all done, stop the virtual machine</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="bu">history</span> -c <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="bu">history</span> -c <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></a></code></pre></div>
 </div>
 <div id="vm-dektop-conversion" class="section level3">
 <h3><span class="header-section-number">9.3.3</span> VM Desktop Conversion</h3>
-<div class="sourceCode" id="cb131"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="fu">sudo</span> apt-get install xfce4 xorg</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="fu">sudo</span> apt-get install xfce4 xorg</a></code></pre></div>
 <p>For a more refined desktop environment, try</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="fu">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="fu">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </a></code></pre></div>
 <ul>
 <li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
 <li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
 </ul>
 <p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
-<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
-<a class="sourceLine" id="cb133-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
+<a class="sourceLine" id="cb132-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
+<a class="sourceLine" id="cb132-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a></code></pre></div>
 </div>
 <div id="install-rstudio" class="section level3">
 <h3><span class="header-section-number">9.3.4</span> Install RStudio Desktop</h3>
-<div class="sourceCode" id="cb134"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="fu">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb</a>
-<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="ex">apt-get</span> install libjpeg621</a>
-<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="ex">dpkg</span> -i rstudio-*</a>
-<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="fu">rm</span> rstudio-*</a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="fu">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb</a>
+<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="ex">apt-get</span> install libjpeg621</a>
+<a class="sourceLine" id="cb133-3" data-line-number="3"><span class="ex">dpkg</span> -i rstudio-*</a>
+<a class="sourceLine" id="cb133-4" data-line-number="4"><span class="fu">rm</span> rstudio-*</a></code></pre></div>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-08-26" />
+<meta name="date" content="2019-09-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,7 +49,7 @@
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.6/datatables.js"></script>
+<script src="libs/datatables-binding-0.7/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
@@ -1050,13 +1050,13 @@ have your name listed after the author tag in the function documentation.</p>
 </div>
 <div id="use---as-an-assignment-operator" class="section level4">
 <h4><span class="header-section-number">8.3.1.7</span> Use “&lt;-” as an assignment operator</h4>
-<p>Because most R code uses &lt;- (except where = is required), we will use &lt;-
+<p>Because most R code uses &lt;- (except where = is required), we will use &lt;-.
 <code>=</code> is reserved for function arguments</p>
 </div>
 <div id="use-spaces" class="section level4">
 <h4><span class="header-section-number">8.3.1.8</span> Use Spaces</h4>
 <ul>
-<li>around all binary operators (=, +, -, &lt;-, etc.).</li>
+<li>around all binary operators (<code>=</code>, <code>+</code>, <code>-</code>, <code>&lt;-</code>, etc.).</li>
 <li>after but not before a comma</li>
 </ul>
 </div>
@@ -1066,41 +1066,70 @@ have your name listed after the author tag in the function documentation.</p>
 </div>
 <div id="package-dependencies" class="section level4">
 <h4><span class="header-section-number">8.3.1.10</span> Package Dependencies</h4>
-<p>In the source code for PEcAn functions, all functions that are not from base R or the current package must be called with explicit namespacing; i.e. <code>package::function</code> (e.g. <code>ncdf4::nc_open(...)</code>, <code>dplyr::select()</code>, <code>PEcAn.logger::logger.warn()</code>).
-This is intended to maximize clarity for current and future developers (including yourself), and to make it easier to quickly identify (and possibly remove) external dependencies.</p>
-<p>In addition, it may be a good idea to call some base R functions with known, common namespace conflicts this way as well.
-For instance, if you want to use base R’s <code>filter</code> function, it’s a good idea to write it as <code>stats::filter</code> to avoid unintentional conflicts with <code>dplyr::filter</code>.</p>
-<p>The one exception to this rule is infix operators (e.g. <code>magrittr::&quot;%&gt;%&quot;</code>) which cannot be conveniently namespaced.
-These functions should be imported using the Roxygen <code>@importFrom</code> tag.
-For example:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="co">#&#39; My function</span></a>
-<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb77-3" data-line-number="3"><span class="co">#&#39; @param a First param</span></a>
-<a class="sourceLine" id="cb77-4" data-line-number="4"><span class="co">#&#39; @param b Second param</span></a>
-<a class="sourceLine" id="cb77-5" data-line-number="5"><span class="co">#&#39; @returns Something</span></a>
-<a class="sourceLine" id="cb77-6" data-line-number="6"><span class="co">#&#39; @importFrom magrittr %&gt;%</span></a>
-<a class="sourceLine" id="cb77-7" data-line-number="7"><span class="co">#&#39; @export</span></a>
-<a class="sourceLine" id="cb77-8" data-line-number="8">f &lt;-<span class="st"> </span><span class="kw">myfunction</span>(a, b) {</a>
-<a class="sourceLine" id="cb77-9" data-line-number="9">  <span class="kw">something</span>(a) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">something_else</span>(b)</a>
-<a class="sourceLine" id="cb77-10" data-line-number="10">}</a></code></pre></div>
-<p><strong>Never use <code>library</code> or <code>require</code> inside package functions</strong>.</p>
-<p>Any package dependencies added in this way should be added to the <code>Imports:</code> list in the package <code>DESCRIPTION</code> file.
-<strong>Do not use <code>Depends:</code> unless you have a <em>very</em> good reason.</strong>
-The <code>Imports</code> list should be sorted alphabetically, with each package on its own line.
-It is also a good idea to include version requirements in the <code>Imports</code> list (e.g. <code>dplyr (&gt;=0.7)</code>).</p>
-<p>External packages that do not provide essential functionality can be relegated to <code>Suggests</code> instead of <code>Imports</code>.
-In particular, consider this for packages that are large, difficult to install, and/or bring in a large number of their own dependencies.
-Functions using these kinds of dependencies should check for their availability with <code>requireNamespace</code> and fail informatively in their absence.
-For example:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">g &lt;-<span class="st"> </span><span class="kw">myfunction</span>() {</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;BayesianTools&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>) {</a>
-<a class="sourceLine" id="cb78-3" data-line-number="3">    PEcAn.logger<span class="op">::</span><span class="kw">logger.severe</span>(</a>
-<a class="sourceLine" id="cb78-4" data-line-number="4">      <span class="st">&quot;`BayesianTools` package required but not found.&quot;</span>,</a>
-<a class="sourceLine" id="cb78-5" data-line-number="5">      <span class="st">&quot;Please make sure it is installed before using `g`.&quot;</span>)</a>
-<a class="sourceLine" id="cb78-6" data-line-number="6">  })</a>
-<a class="sourceLine" id="cb78-7" data-line-number="7">  BayesianTools<span class="op">::</span><span class="kw">do_stuff</span>(...)</a>
-<a class="sourceLine" id="cb78-8" data-line-number="8">}</a></code></pre></div>
+<div id="executive-summary-what-to-usually-do" class="section level5">
+<h5><span class="header-section-number">8.3.1.10.1</span> Executive Summary: What to usually do</h5>
+<p>When you’re editing one PEcAn package and want to use a function from any other R package (including other PEcAn packages), the standard method is to add the other package to the <code>Imports:</code> field of your DESCRIPTION file, spell the function in fully namespaced form (<code>pkg::function()</code>) everywhere you call it, and be done. There are a few cases where this isn’t enough, but they’re rarer than you think. The rest of this section mostly deals with the exceptions to this rule and why not to use them when they can be avoided.</p>
+</div>
+<div id="big-picture-whats-possible-to-do" class="section level5">
+<h5><span class="header-section-number">8.3.1.10.2</span> Big Picture: What’s possible to do</h5>
+<p>To make one PEcAn package use functionality from another R package (including other PEcAn packages), you must do at least one and up to four things in your own package.</p>
+<ul>
+<li>Always, <em>declare</em> which packages your package depends on, so that R can install them as needed when someone installs your package and so that human readers can understand what additional functionality it uses. Declare dependencies by manually adding them to your package’s DESCRIPTION file.</li>
+<li>Sometimes, <em>import</em> functions from the dependency package into your package’s namespace, so that your functions know where to find them. This is only sometimes necessary, because you can usually use <code>::</code> to call functions without importing them. Import functions by writing Roxygen <code>@importFrom</code> statements and do not edit the NAMESPACE file by hand.</li>
+<li>Rarely, <em>load</em> dependency code into the R environment, so that the person using your package can use it without loading it separately. This is usually a bad idea, has caused many subtle bugs, and in PEcAn it should only be used when unavoidable. When unavoidable, prefer <code>requireNamespace(... quietly = TRUE)</code> over <code>Depends:</code> or <code>require()</code> or <code>library()</code>.</li>
+<li>Only if your dependency relies on non-R tools, <em>install</em> any components that R won’t know how to find for itself. These components are often but not always identifiable from a <code>SystemRequirements</code> field in the dependency’s DESCRIPTION file. The exact installation procedure will vary case by case and from one operating system to another, and for PEcAn the key point is that you should skip this step until it proves necessary. When it does prove necessary, edit the documentation for your package to include advice on installing the dependency components, then edit the PEcAn build and testing scripts as needed so that they follow your advice.</li>
+</ul>
+<p>The advice below about each step is written specifically for PEcAn, although much of it holds for R packages in general. For more details about working with dependencies, start with Hadley Wickham’s <a href="http://r-pkgs.had.co.nz/description.html#dependencies">R packages</a> and treat the CRAN team’s <a href="https://cran.r-project.org/doc/manuals/R-exts.html">Writing R Extensions</a> as the final authority.</p>
+</div>
+<div id="declaring-dependencies-depends-suggests-imports" class="section level5">
+<h5><span class="header-section-number">8.3.1.10.3</span> Declaring Dependencies: Depends, Suggests, Imports</h5>
+<p>List all dependencies in the DESCRIPTION file. Every package that is used by your package’s code must appear in exactly one of the sections <code>Depends</code>, <code>Imports</code>, or <code>Suggests</code>.</p>
+<p>Please list packages in alphabetical order within each section. R doesn’t care about the order, but you will later when you’re trying to check whether this package uses a particular dependency.</p>
+<ul>
+<li><p><code>Imports</code> is the correct place to declare most PEcAn dependencies. This ensures that they get installed, but <em>does not</em> automatically import any of their functions – Since PEcAn style prefers to mostly use <code>::</code> instead of importing, this is what we want.</p></li>
+<li><p><code>Depends</code> is, despite the name, usually the wrong place to declare PEcAn dependencies. The only difference between <code>Depends</code> and <code>Imports</code> is that when the user attaches your packages to their own R workspace (e.g. using <code>library(&quot;PEcAn.yourpkg&quot;)</code>), the packages in <code>Depends</code> are attached as well. Notice that a call like <code>PEcAn.yourpkg::yourfun()</code> <em>will not</em> attach your package <em>or</em> its dependencies, so your code still needs to import or <code>::</code>-qualify all functions from packages listed in <code>Depends</code>. In short, <code>Depends</code> is not a shortcut, is for user convenience not developer convenience, and makes it easy to create subtle bugs that appear to work during interactive test sessions but fail when run from scripts. As the <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Package-Dependencies">R extensions manual</a> puts it (emphasis added):</p>
+<blockquote>
+<p>This [Imports and Depends] scheme was developed before all packages had namespaces (R 2.14.0 in October 2011), and good practice changed once that was in place. Field ‘Depends’ should nowadays be used rarely, only for packages which are intended to be put on the search path to make their facilities <strong>available to the end user (and not to the package itself)</strong>.&quot;</p>
+</blockquote></li>
+<li><p>The <code>Suggests</code> field can be used to declare dependencies on packages that make your package more useful but are not completely essential. Again from the <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Package-Dependencies">R extensions manual</a>:</p>
+<blockquote>
+<p>The <code>Suggests</code> field uses the same syntax as <code>Depends</code> and lists packages that are not necessarily needed. This includes packages used only in examples, tests or vignettes (see <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Writing-package-vignettes">Writing package vignettes</a>), and packages loaded in the body of functions. E.g., suppose an example from package foo uses a dataset from package bar. Then it is not necessary to have bar use foo unless one wants to execute all the examples/tests/vignettes: it is useful to have bar, but not necessary.</p>
+</blockquote>
+<p>Some of the PEcAn model interface packages push this definition of “not necessarily needed” by declaring their coupled model package in <code>Suggests</code> rather than <code>Imports</code>. For example, the <code>PEcAn.BIOCRO</code> package cannot do anything useful when the BioCro model is not installed, but it lists BioCro in Suggests because <em>PEcAn as a whole</em> can work without it. This is a compromise to simplify installation of PEcAn for users who only plan to use a few models, so that they can avoid the bother of installing BioCro if they only plan to run, say, SIPNET.</p>
+<p>Since the point of Suggests is that they are allowed to be missing, all code that uses a suggested package must behave reasonably when the package is not found. Depending on the situation, “reasonably” could mean checking whether the package is available and throwing an error as needed (PEcAn.BIOCRO uses its <code>.onLoad</code> function to check at load time whether BioCro is installed and will refuse to load if it is not), or providing an alternative behavior (<code>PEcAn.data.atmosphere::get_NARR_thredds</code> checks at call time for either <code>parallel</code> or <code>doParallel</code> and uses whichever one it finds first), or something else, but your code should never just assume that the suggested package is available.</p>
+<p>You are not allowed to import functions from <code>Suggests</code> into your package’s namespace, so always call them in <code>::</code>-qualified form. By default R will not install suggested packages when your package is installed, but users can change this using the <code>dependencies</code> argument of <code>install.packages</code>. Note that for testing on Travis CI, PEcAn <em>does</em> install all <code>Suggests</code> (because they are required for full package checks), so any of your code that runs when a suggested package is not available will never be exercised by Travis checks.</p>
+<p>It is often tempting to move a dependency from Imports to Suggests because it is a hassle to install (large, hard to compile, no longer available from CRAN, currently broken on GitHub, etc), in the hopes that this will isolate the rest of PEcAn from the troublesome dependency. This helps for some cases, but fails for two very common ones: It does not reduce install time for CI builds, because all suggested packages need to be present when running full package checks (<code>R CMD check</code> or <code>devtools::check</code> or <code>make check</code>). It also does not prevent breakage when updating PEcAn via <code>make install</code>, because <code>devtools::install_deps</code> does not install suggested packages that are missing but does try to <em>upgrade</em> any that are already installed to the newest available version – even if the installed version took ages to compile and would have worked just fine!</p></li>
+</ul>
+</div>
+<div id="importing-functions-use-roxygen" class="section level5">
+<h5><span class="header-section-number">8.3.1.10.4</span> Importing Functions: Use Roxygen</h5>
+<p>PEcAn style is to import very few functions and instead use fully namespaced function calls (<code>pkg::fn()</code>) everywhere it’s practical to do so. In cases where double-colon notation would be especially burdensome, such as when importing custom binary operators like <code>%&gt;%</code>, it’s acceptable to import specific functions into the package namespace. Do this by using Roxygen comments of the form <code>#' @importFrom pkg function</code>, not by hand-editing the NAMESPACE file.</p>
+<p>If the import is only used in one or a few functions, use an <code>@importFrom</code> in the documentation for each function that uses it. If it is used all over the package, use a single <code>@importFrom</code> in the Roxygen documentation block for the whole package, which probably lives in a file called either <code>zzz.R</code> or <code>&lt;your_package_name&gt;-package.R</code>:</p>
+<pre><code>## NULL</code></pre>
+<p>Roxygen will make sure there’s only one NAMESPACE entry per imported function no matter how many <code>importFrom</code> statements there are, but please pick a scheme (either import on every usage or once for the whole package), stick with it, and do not make function <code>x()</code> rely on an importFrom in the comments above function <code>y()</code>.</p>
+<p>Please do <em>not</em> import entire package namespaces (<code>#' @import pkg</code>); it increases the chance of function name collisions and makes it much harder to understand which package a given function was called from.</p>
+<p>A special note about importing functions from the <a href="https://tidyverse.org">tidyverse</a>: Be sure to import from the package(s) that actually contain the functions you want to use, e.g. <code>Imports: dplyr, magrittr, purrr</code> / <code>@importFrom magrittr %&gt;%</code> / <code>purrr::map(...)</code>, not <code>Imports: tidyverse</code> / <code>@importFrom tidyverse %&gt;%</code> / <code>tidyverse::map(...)</code>. The package named <code>tidyverse</code> is just a interactive shortcut that loads the whole collection of constituent packages; it doesn’t export any functions in its own namespace and therefore importing it into your package doesn’t make them available.</p>
+</div>
+<div id="loading-code-dont-but-use-requirenamespace-when-you-do" class="section level5">
+<h5><span class="header-section-number">8.3.1.10.5</span> Loading Code: Don’t… But Use <code>requireNamespace</code> When You Do</h5>
+<p>The very short version of this section: We want to maintain clear separation between the <a href="http://r-pkgs.had.co.nz/namespace.html">package’s namespace</a> (which we control and want to keep predictable) and the global namespace (which the user controls, might change in ways we have no control over, and will be justifiably angry if we change it in ways they were not expecting). Therefore, avoid attaching packages to the search path (so no <code>Depends</code> and no <code>library()</code> or <code>require()</code> inside functions), and do not explicitly load other namespaces if you can help it.</p>
+<p>The longer version requires that we make a distinction often glossed over: <em>Loading</em> a package makes it possible for <em>R</em> to find things in the package namespace and does any actions needed to make it ready for use (e.g. running its .onLoad method, loading DLLs if the package contains compiled code, etc). <em>Attaching</em> a package (usually by calling <code>library(&quot;somePackage&quot;)</code>) loads it if it wasn’t already loaded, and then adds it to the search path so that the <em>user</em> can find things in its namespace. As discussed in the “Declaring Dependancies” section above, dependencies listed in <code>Depends</code> will be attached when your package is attached, but they will be <em>neither attached nor loaded</em> when your package is loaded without being attached.</p>
+<p>Loading a dependency into the package namespace is undesirable because it makes it hard to understand our own code – if we need to use something from elsewhere, we’d prefer call it from its own namespace using <code>::</code> (which implicitly loads the dependency!) or explicitly import it with a Roxygen <code>@import</code> directive. But in a few cases this isn’t enough. The most common reason to need to explicitly load a dependency is that some packages <em>define</em> new S3 methods for generic functions defined in other packages, but do not <em>export</em> these methods directly. We would prefer that these packages did not do this, but sometimes we have to use them anyway. An <a href="https://github.com/PecanProject/pecan/issues/1368">example from PEcAn</a> is that PEcAn.MA needs to call <code>as.matrix</code> on objects of class <code>mcmc.list</code>. When the <code>coda</code> namespace is loaded, <code>as.matrix(some_mcmc.list)</code> can be correctly dispatched by <code>base::as.matrix</code> to the unexported method <code>coda:::as.matrix.mcmc.list</code>, but when <code>coda</code> is not loaded this dispatch will fail. Unfortunately coda does not export <code>as.matrix.mcmc.list</code> so we cannot call it directly or import it into the PEcAn.MA namespace, so instead we <a href="https://github.com/PecanProject/pecan/pull/1966/files#diff-e0b625a54a8654cc9b22d9c076e7a838R13">load the <code>coda</code> namespace</a> whenever PEcAn.MA is loaded.</p>
+<p>Attaching packages to the user’s search path is even more problematic because it makes it hard for the user to understand <em>how your package will affect their own code</em>. Packages attached by a function stay attached after the function exits, so they can cause name collisions far downstream of the function call, potentially in code that has nothing to do with your package. And worse, since names are looked up in reverse order of package loading, it can cause behavior that differs in strange ways depending on the order of lines that look independent of each other:</p>
+<p>This is not to say that users will <em>never</em> want your package to attach another one for them, just that it’s rare and that attaching dependencies is much more likely to cause bugs than to fix them and additionally doesn’t usually save the package author any work.</p>
+<p>One possible exception to the do-not-attach-packages rule is a case where your dependency ignores all good practice and wrongly assumes, without checking, that all of its own dependencies are attached; if its DESCRIPTION uses only <code>Depends</code> instead of <code>Imports</code>, this is often a warning sign. For example, a small-but-surprising number of packages depend on the <code>methods</code> package without proper checks (this is probably because most <em>but not all</em> R interpreters attach <code>methods</code> by default and therefore it’s easy for an author to forget it might ever be otherwise unless they happen to test with a but-not-all interpreter).</p>
+<p>If you find yourself with a dependency that does this, accept first that you are relying on a package that is broken, and you should either convince its maintainer to fix it or find a way to remove the dependency from PEcAn. But as a short-term workaround, it is sometimes possible for your code to attach the direct dependency so that it will behave right with regard to its secondary dependencies. If so, make sure the attachment happens every time your package is loaded (e.g. by calling <code>library(depname)</code> inside your package’s <code>.onLoad</code> method) and not just when your package is attached (e.g. by putting it in Depends).</p>
+<p>When you do need to load or attach a dependency, it is probably better to do it inside your package’s <code>.onLoad</code> method rather than in individual functions, but this isn’t ironclad. To only load, use <code>requireNamespace(pkgname, quietly=TRUE)</code> – this will make it available inside your package’s namespace while avoiding (most) annoying loadtime messages and not disturbing the user’s search path. To attach when you really can’t avoid it, declare the dependency in <code>Depends</code> and <em>also</em> attach it using <code>library(pkgname)</code> in your .onLoad method.</p>
+<p>Note that scripts in <code>inst/</code> are considered to be sample code rather than part of the package namespace, so it is acceptable for them to explicitly attach packages using <code>library()</code>. You may also see code that uses <code>require(pkgname)</code>; this is just like <code>library</code>, but returns FALSE instead of erroring if package load fails. It is OK for scripts in <code>inst/</code> that can do <em>and do</em> do something useful when a dependency is missing, but if it is used as <code>if(!require(pkg)){ stop(...)}</code> then replace it with <code>library(pkg)</code>.</p>
+<p>If you think your package needs to load or attach code for any reason, please note why in your pull request description and be prepared for questions about it during code review. If your reviewers can think of an alternate approach that avoids loading or attaching, they will likely ask you to use it even if it creates extra work for you.</p>
+</div>
+<div id="installing-dependencies-let-the-machines-do-it" class="section level5">
+<h5><span class="header-section-number">8.3.1.10.6</span> Installing dependencies: Let the machines do it</h5>
+<p>In most cases you won’t need to think about how dependencies get installed – just declare them in your package’s DESCRIPTION and the installation will be handled automatically by R and devtools during the build process. In PEcAn packages, the rare cases where this isn’t enough will probably fall into one of two categories.</p>
+<p>First, some dependencies rely on non-R software that R does not know how to install automatically. For example, rjags relies on JAGS, which might be installed in a different place on every machine. If your dependency falls in this category, you will know (because your CI builds will keep failing until you figure out how to fix it), but the exact details of the fix will differ for every case.</p>
+<p>Second, some dependencies <em>will</em> install automatically, but they take a long time to compile or conflict with dependencies needed by other packages or are otherwise annoying to deal with. To save time during CI builds, PEcAn’s Travis configuration file includes a manually curated list of the most-annoying dependencies and installs them from pre-compiled binaries before starting the normal installation process. If you suspect you’re adding a dependency that will be “annoying”, please <em>do not</em> add it to the Travis binary-install list right away; instead, focus on getting your package to work right using the default automatic installation. Then, if needed to keep build times reasonable, submit a separate pull request to change the Travis configuration. This two-step procedure makes it much easier to understand which merges changed package code and which ones changed the testing configuration without changing package functionality, and also lets you focus on what the code is supposed to do instead of on installation details.</p>
 
+</div>
 </div>
 </div>
 <div id="developer-logging" class="section level3">
@@ -1135,7 +1164,7 @@ For example:</p>
 <div id="logging" class="section level5">
 <h5><span class="header-section-number">8.3.2.2.1</span> <code>logging</code></h5>
 <p>The logging development is done at <a href="http://logging.r-forge.r-project.org/" class="uri">http://logging.r-forge.r-project.org/</a> and more information is located at <a href="http://cran.r-project.org/web/packages/logging/index.html" class="uri">http://cran.r-project.org/web/packages/logging/index.html</a> . To install use the following command:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;logging&quot;</span>, <span class="dt">repos=</span><span class="st">&quot;http://R-Forge.R-project.org&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;logging&quot;</span>, <span class="dt">repos=</span><span class="st">&quot;http://R-Forge.R-project.org&quot;</span>)</a></code></pre></div>
 <p>This has my preference pure based on documentation.</p>
 </div>
 </div>
@@ -1145,31 +1174,31 @@ For example:</p>
 <div id="example-usage" class="section level5">
 <h5><span class="header-section-number">8.3.2.3.1</span> Example Usage</h5>
 <p>To be able to use the loggers there needs to be some initialization done. Neither package allows to read it from a configuration file, so we might want to use the pecan.xml file to set it up. The setup will always be somewhat the same:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="co"># load library</span></a>
-<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="kw">library</span>(logging)</a>
-<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="kw">logReset</span>()</a>
-<a class="sourceLine" id="cb80-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb80-5" data-line-number="5"><span class="co"># add handlers, responsible for actually printing/saving the messages</span></a>
-<a class="sourceLine" id="cb80-6" data-line-number="6"><span class="kw">addHandler</span>(writeToConsole)</a>
-<a class="sourceLine" id="cb80-7" data-line-number="7"><span class="kw">addHandler</span>(writeToFile, <span class="dt">file=</span><span class="st">&quot;file.log&quot;</span>)</a>
-<a class="sourceLine" id="cb80-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb80-9" data-line-number="9"><span class="co"># setup root logger with INFO</span></a>
-<a class="sourceLine" id="cb80-10" data-line-number="10"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>)</a>
-<a class="sourceLine" id="cb80-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb80-12" data-line-number="12"><span class="co"># make all of PEcAn print debug messages</span></a>
-<a class="sourceLine" id="cb80-13" data-line-number="13"><span class="kw">setLevel</span>(<span class="st">&#39;DEBUG&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn&#39;</span>))</a>
-<a class="sourceLine" id="cb80-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb80-15" data-line-number="15"><span class="co"># only print info and above for the SQL part of PEcAn</span></a>
-<a class="sourceLine" id="cb80-16" data-line-number="16"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.SQL&#39;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co"># load library</span></a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="kw">library</span>(logging)</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw">logReset</span>()</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb79-5" data-line-number="5"><span class="co"># add handlers, responsible for actually printing/saving the messages</span></a>
+<a class="sourceLine" id="cb79-6" data-line-number="6"><span class="kw">addHandler</span>(writeToConsole)</a>
+<a class="sourceLine" id="cb79-7" data-line-number="7"><span class="kw">addHandler</span>(writeToFile, <span class="dt">file=</span><span class="st">&quot;file.log&quot;</span>)</a>
+<a class="sourceLine" id="cb79-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb79-9" data-line-number="9"><span class="co"># setup root logger with INFO</span></a>
+<a class="sourceLine" id="cb79-10" data-line-number="10"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>)</a>
+<a class="sourceLine" id="cb79-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb79-12" data-line-number="12"><span class="co"># make all of PEcAn print debug messages</span></a>
+<a class="sourceLine" id="cb79-13" data-line-number="13"><span class="kw">setLevel</span>(<span class="st">&#39;DEBUG&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn&#39;</span>))</a>
+<a class="sourceLine" id="cb79-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb79-15" data-line-number="15"><span class="co"># only print info and above for the SQL part of PEcAn</span></a>
+<a class="sourceLine" id="cb79-16" data-line-number="16"><span class="kw">setLevel</span>(<span class="st">&#39;INFO&#39;</span>, <span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.SQL&#39;</span>))</a></code></pre></div>
 <p>To now use logging in the code you can use the following code:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">pl &lt;-<span class="st"> </span><span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.MetaAnalysis.function1&#39;</span>)</a>
-<a class="sourceLine" id="cb81-2" data-line-number="2">pl<span class="op">$</span><span class="kw">info</span>(<span class="st">&quot;This is an INFO message.&quot;</span>)</a>
-<a class="sourceLine" id="cb81-3" data-line-number="3">pl<span class="op">$</span><span class="kw">debug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x)</a>
-<a class="sourceLine" id="cb81-4" data-line-number="4">pl<span class="op">$</span><span class="kw">error</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">pl &lt;-<span class="st"> </span><span class="kw">getLogger</span>(<span class="st">&#39;PEcAn.MetaAnalysis.function1&#39;</span>)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">pl<span class="op">$</span><span class="kw">info</span>(<span class="st">&quot;This is an INFO message.&quot;</span>)</a>
+<a class="sourceLine" id="cb80-3" data-line-number="3">pl<span class="op">$</span><span class="kw">debug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x)</a>
+<a class="sourceLine" id="cb80-4" data-line-number="4">pl<span class="op">$</span><span class="kw">error</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>)</a></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">loginfo</span>(<span class="st">&quot;This is an INFO message.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
-<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="kw">logdebug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
-<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="kw">logerror</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">loginfo</span>(<span class="st">&quot;This is an INFO message.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="kw">logdebug</span>(<span class="st">&quot;The value for x=%d&quot;</span>, x, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a>
+<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="kw">logerror</span>(<span class="st">&quot;Something bad happened and I am scared now.&quot;</span>, <span class="dt">logger=</span><span class="st">&quot;PEcAn.MetaAnalysis.function1&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -1199,12 +1228,12 @@ Extensions</a>.</p>
 <li>efficient way: (especially for large data sets) using the <code>data</code>
 function:</li>
 </ul>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">data</span>(foo) <span class="co"># accesses data with, e.g. load(foo.RData), read(foo.csv), or source(foo.R) </span></a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">data</span>(foo) <span class="co"># accesses data with, e.g. load(foo.RData), read(foo.csv), or source(foo.R) </span></a></code></pre></div>
 <ul>
 <li>easy way: by adding the following line to the package DESCRIPTION:
 <em>note:</em> this should be used with caution or it can cause difficulty as discussed in redmine issue #1118</li>
 </ul>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">LazyData<span class="op">:</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">LazyData<span class="op">:</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
 <p>From the R help page:</p>
 <p>Currently, a limited number of data formats can be accessed using the <code>data</code> function by placing one of the following filetypes in a packages’ <code>data</code> directory:
 * files ending <code>.R</code> or <code>.r</code> are <code>source()</code>d in, with the R working
@@ -1216,8 +1245,8 @@ had been run <em>via</em> <code>utils::data</code>.)
 * files ending <code>.csv</code> or <code>.CSV</code> are read using <code>read.table(..., header = TRUE, sep = ';')</code>, and also result in a data frame.</p>
 <p>If your data does not fall in those 4 categories, or you can use the
 <code>system.file</code> function to get access to the data:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="kw">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ed.trait.dictionary.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;PEcAn.utils&quot;</span>)</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2">[<span class="dv">1</span>] <span class="st">&quot;/home/kooper/R/x86_64-pc-linux-gnu-library/2.15/PEcAn.utils/data/ed.trait.dictionary.csv&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ed.trait.dictionary.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;PEcAn.utils&quot;</span>)</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">[<span class="dv">1</span>] <span class="st">&quot;/home/kooper/R/x86_64-pc-linux-gnu-library/2.15/PEcAn.utils/data/ed.trait.dictionary.csv&quot;</span></a></code></pre></div>
 <p>The arguments are folder, filename(s) and then package. It will return
 the fully qualified path name to a file in a package, in this case it
 points to the trait data. This is almost the same as the data function,
@@ -1346,8 +1375,8 @@ myfun &lt;- function(a, b, c){
 <li>After adding documentation run the following command (replacing common with the name of the folder you want to update):
 ** In R using devtools to call roxygenize:</li>
 </ul>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">require</span>(devtools)</a>
-<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;common&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">require</span>(devtools)</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;common&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -1396,7 +1425,7 @@ git checkout goat-cheddar</code></pre></li>
 <li>open existing (or create new) file in <code>inst/tests/</code>. If working on code in “myfunction” or a set of functions in “R/myfile.R”, the file should be named accordingly, e.g. “inst/tests/test.myfile.R”</li>
 <li>if you are lucky, the function has already been tested and has some examples.</li>
 <li><p>if not, you may need to create a minimal example, often requiring a settings file. The default settings file can be obtained in this way:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata/test.settings.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.utils&quot;</span>))</a></code></pre></div></li>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata/test.settings.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.utils&quot;</span>))</a></code></pre></div></li>
 <li><p>write what you want to do</p>
 <pre><code>test_that(&quot;make.cheas can make cheese&quot;,{
   goat.cheddar &lt;- make.cheas(source = &#39;goat&#39;, style = &#39;cheddar&#39;)
@@ -1424,20 +1453,20 @@ PEcAn.utils files.</p>
 <ul>
 <li>A generic settings can be found in the PEcAn.all package</li>
 </ul>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
-<a class="sourceLine" id="cb93-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
 <ul>
 <li>database settings can be specified, and tests run only if a connection is available</li>
 </ul>
 <p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </a>
-<a class="sourceLine" id="cb94-2" data-line-number="2">                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </a>
-<a class="sourceLine" id="cb94-3" data-line-number="3">                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></a>
-<a class="sourceLine" id="cb94-4" data-line-number="4">                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></a>
-<a class="sourceLine" id="cb94-5" data-line-number="5"><span class="kw">test_that</span>(..., {</a>
-<a class="sourceLine" id="cb94-6" data-line-number="6">  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</a>
-<a class="sourceLine" id="cb94-7" data-line-number="7">  ## write tests here</a>
-<a class="sourceLine" id="cb94-8" data-line-number="8">})</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></a>
+<a class="sourceLine" id="cb93-4" data-line-number="4">                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></a>
+<a class="sourceLine" id="cb93-5" data-line-number="5"><span class="kw">test_that</span>(..., {</a>
+<a class="sourceLine" id="cb93-6" data-line-number="6">  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</a>
+<a class="sourceLine" id="cb93-7" data-line-number="7">  ## write tests here</a>
+<a class="sourceLine" id="cb93-8" data-line-number="8">})</a></code></pre></div>
 <ul>
 <li>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
 wiki</a></li>
@@ -1445,8 +1474,8 @@ wiki</a></li>
 <li><p>Model specific settings can go in the model-specific module, for
 example:</p></li>
 </ul>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
-<a class="sourceLine" id="cb95-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb94-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
 <ul>
 <li>test-specific settings:
 <ul>
@@ -1470,8 +1499,8 @@ example:</p></li>
   &lt;/pecan&gt;&quot;
 settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</a>
-<a class="sourceLine" id="cb97-2" data-line-number="2">settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</a></code></pre></div></li>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</a>
+<a class="sourceLine" id="cb96-2" data-line-number="2">settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</a></code></pre></div></li>
 </ul></li>
 </ul>
 </div>
@@ -1599,59 +1628,59 @@ for details on how to use the testthat package.</p>
 <div id="how-to-run-tests" class="section level5">
 <h5><span class="header-section-number">8.3.5.11.2</span> How to run tests</h5>
 <p>add the following to “pecan/tests/testthat.R”</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
-<a class="sourceLine" id="cb98-2" data-line-number="2"><span class="kw">library</span>(mypackage)</a>
-<a class="sourceLine" id="cb98-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb98-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"><span class="kw">library</span>(mypackage)</a>
+<a class="sourceLine" id="cb97-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb97-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="basic-use-of-the-testthat-package" class="section level4">
 <h4><span class="header-section-number">8.3.5.12</span> basic use of the testthat package</h4>
 <p>Here is an example of tests (these should be placed in
 <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
-<a class="sourceLine" id="cb99-2" data-line-number="2">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb99-3" data-line-number="3">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</a>
-<a class="sourceLine" id="cb99-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb99-5" data-line-number="5">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
-<a class="sourceLine" id="cb99-6" data-line-number="6">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb99-7" data-line-number="7">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
-<a class="sourceLine" id="cb99-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb99-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb99-10" data-line-number="10"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
-<a class="sourceLine" id="cb99-11" data-line-number="11">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb99-12" data-line-number="12">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb99-13" data-line-number="13">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb99-14" data-line-number="14">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
-<a class="sourceLine" id="cb99-15" data-line-number="15">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
-<a class="sourceLine" id="cb99-16" data-line-number="16">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
-<a class="sourceLine" id="cb99-17" data-line-number="17">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
-<a class="sourceLine" id="cb99-18" data-line-number="18">})</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
+<a class="sourceLine" id="cb98-2" data-line-number="2">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb98-3" data-line-number="3">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb98-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb98-5" data-line-number="5">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
+<a class="sourceLine" id="cb98-6" data-line-number="6">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb98-7" data-line-number="7">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
+<a class="sourceLine" id="cb98-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb98-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb98-10" data-line-number="10"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
+<a class="sourceLine" id="cb98-11" data-line-number="11">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb98-12" data-line-number="12">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb98-13" data-line-number="13">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb98-14" data-line-number="14">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
+<a class="sourceLine" id="cb98-15" data-line-number="15">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
+<a class="sourceLine" id="cb98-16" data-line-number="16">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
+<a class="sourceLine" id="cb98-17" data-line-number="17">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb98-18" data-line-number="18">})</a></code></pre></div>
 <div id="script-testing" class="section level5">
 <h5><span class="header-section-number">8.3.5.12.1</span> Script testing</h5>
 <p>It is useful to add tests to a script during development. This allows
 you to test that the code is doing what you expect it to do.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="op">*</span><span class="st"> </span>here is a fake script using the iris data set</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="kw">test_that</span>(<span class="st">&quot;the iris data set has the same basic features as before&quot;</span>,{</a>
-<a class="sourceLine" id="cb100-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">dim</span>(iris), <span class="kw">c</span>(<span class="dv">150</span>,<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb100-5" data-line-number="5">  <span class="kw">expect_that</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">is_a</span>(<span class="st">&quot;numeric&quot;</span>))</a>
-<a class="sourceLine" id="cb100-6" data-line-number="6">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Sepal.Length, <span class="st">&quot;numeric&quot;</span>)<span class="co">#equivalent to prev. line</span></a>
-<a class="sourceLine" id="cb100-7" data-line-number="7">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Species, <span class="st">&quot;factor&quot;</span>)</a>
-<a class="sourceLine" id="cb100-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb100-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb100-10" data-line-number="10">iris.color &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Species =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>),</a>
-<a class="sourceLine" id="cb100-11" data-line-number="11">                         <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>))</a>
-<a class="sourceLine" id="cb100-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb100-13" data-line-number="13">newiris &lt;-<span class="st"> </span><span class="kw">merge</span>(iris, iris.color)</a>
-<a class="sourceLine" id="cb100-14" data-line-number="14">iris.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>color, <span class="dt">data =</span> newiris)</a>
-<a class="sourceLine" id="cb100-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb100-16" data-line-number="16"><span class="kw">test_that</span>(<span class="st">&quot;changes to Iris code occurred as expected&quot;</span>,{</a>
-<a class="sourceLine" id="cb100-17" data-line-number="17">  <span class="kw">expect_that</span>(<span class="kw">dim</span>(newiris), <span class="kw">equals</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">6</span>)))</a>
-<a class="sourceLine" id="cb100-18" data-line-number="18">  <span class="kw">expect_that</span>(<span class="kw">unique</span>(newiris<span class="op">$</span>color),</a>
-<a class="sourceLine" id="cb100-19" data-line-number="19">              <span class="kw">is_identical_to</span>(<span class="kw">unique</span>(iris.color<span class="op">$</span>color)))</a>
-<a class="sourceLine" id="cb100-20" data-line-number="20">  <span class="kw">expect_equivalent</span>(iris.model<span class="op">$</span>coefficients[<span class="st">&quot;(Intercept)&quot;</span>], <span class="fl">4.26</span>)</a>
-<a class="sourceLine" id="cb100-21" data-line-number="21">})</a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="op">*</span><span class="st"> </span>here is a fake script using the iris data set</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb99-3" data-line-number="3"><span class="kw">test_that</span>(<span class="st">&quot;the iris data set has the same basic features as before&quot;</span>,{</a>
+<a class="sourceLine" id="cb99-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">dim</span>(iris), <span class="kw">c</span>(<span class="dv">150</span>,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb99-5" data-line-number="5">  <span class="kw">expect_that</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">is_a</span>(<span class="st">&quot;numeric&quot;</span>))</a>
+<a class="sourceLine" id="cb99-6" data-line-number="6">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Sepal.Length, <span class="st">&quot;numeric&quot;</span>)<span class="co">#equivalent to prev. line</span></a>
+<a class="sourceLine" id="cb99-7" data-line-number="7">  <span class="kw">expect_is</span>(iris<span class="op">$</span>Species, <span class="st">&quot;factor&quot;</span>)</a>
+<a class="sourceLine" id="cb99-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb99-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb99-10" data-line-number="10">iris.color &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Species =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>),</a>
+<a class="sourceLine" id="cb99-11" data-line-number="11">                         <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>))</a>
+<a class="sourceLine" id="cb99-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb99-13" data-line-number="13">newiris &lt;-<span class="st"> </span><span class="kw">merge</span>(iris, iris.color)</a>
+<a class="sourceLine" id="cb99-14" data-line-number="14">iris.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Length <span class="op">~</span><span class="st"> </span>color, <span class="dt">data =</span> newiris)</a>
+<a class="sourceLine" id="cb99-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb99-16" data-line-number="16"><span class="kw">test_that</span>(<span class="st">&quot;changes to Iris code occurred as expected&quot;</span>,{</a>
+<a class="sourceLine" id="cb99-17" data-line-number="17">  <span class="kw">expect_that</span>(<span class="kw">dim</span>(newiris), <span class="kw">equals</span>(<span class="kw">c</span>(<span class="dv">150</span>, <span class="dv">6</span>)))</a>
+<a class="sourceLine" id="cb99-18" data-line-number="18">  <span class="kw">expect_that</span>(<span class="kw">unique</span>(newiris<span class="op">$</span>color),</a>
+<a class="sourceLine" id="cb99-19" data-line-number="19">              <span class="kw">is_identical_to</span>(<span class="kw">unique</span>(iris.color<span class="op">$</span>color)))</a>
+<a class="sourceLine" id="cb99-20" data-line-number="20">  <span class="kw">expect_equivalent</span>(iris.model<span class="op">$</span>coefficients[<span class="st">&quot;(Intercept)&quot;</span>], <span class="fl">4.26</span>)</a>
+<a class="sourceLine" id="cb99-21" data-line-number="21">})</a></code></pre></div>
 </div>
 <div id="function-testing" class="section level5">
 <h5><span class="header-section-number">8.3.5.12.2</span> Function testing</h5>
@@ -1659,28 +1688,28 @@ you to test that the code is doing what you expect it to do.</p>
 are in source:R/utils.R and the tests are in source:tests/test.utils.R.</p>
 <p>Recently, I made the function <code>as.sequence</code> to turn any vector into a
 sequence, with custom handling of NA’s:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="cf">function</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>){</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2">  x2 &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">factor</span>(x, <span class="kw">unique</span>(x)))</a>
-<a class="sourceLine" id="cb101-3" data-line-number="3">  <span class="cf">if</span>(<span class="kw">all</span>(<span class="kw">is.na</span>(x2))){</a>
-<a class="sourceLine" id="cb101-4" data-line-number="4">    x2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">length</span>(x2))</a>
-<a class="sourceLine" id="cb101-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb101-6" data-line-number="6">  <span class="cf">if</span>(na.rm <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>){</a>
-<a class="sourceLine" id="cb101-7" data-line-number="7">    x2[<span class="kw">is.na</span>(x2)] &lt;-<span class="st"> </span><span class="kw">max</span>(x2, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb101-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb101-9" data-line-number="9">  <span class="kw">return</span>(x2)</a>
-<a class="sourceLine" id="cb101-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="cf">function</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>){</a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">  x2 &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">factor</span>(x, <span class="kw">unique</span>(x)))</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3">  <span class="cf">if</span>(<span class="kw">all</span>(<span class="kw">is.na</span>(x2))){</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4">    x2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">length</span>(x2))</a>
+<a class="sourceLine" id="cb100-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb100-6" data-line-number="6">  <span class="cf">if</span>(na.rm <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>){</a>
+<a class="sourceLine" id="cb100-7" data-line-number="7">    x2[<span class="kw">is.na</span>(x2)] &lt;-<span class="st"> </span><span class="kw">max</span>(x2, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb100-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb100-9" data-line-number="9">  <span class="kw">return</span>(x2)</a>
+<a class="sourceLine" id="cb100-10" data-line-number="10">}</a></code></pre></div>
 <p>The next step was to add documentation and test. Many people find it
 more efficient to write tests before writing the function. This is true,
 but it also requires more discipline. I wrote these tests to handle the
 variety of cases that I had observed.</p>
 <p>As currently used, the function is exposed to a fairly restricted set of
 options - results of downloads from the database and transformations.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">test_that</span>(“as.sequence works”;{</a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, “b”)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb102-3" data-line-number="3"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb102-4" data-line-number="4"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>), <span class="dt">na.rm =</span> <span class="ot">FALSE</span>), <span class="kw">c</span>(<span class="dv">1</span>,<span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb102-5" data-line-number="5"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(<span class="ot">NA</span>,<span class="ot">NA</span>)), <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb102-6" data-line-number="6">})</a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">test_that</span>(“as.sequence works”;{</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, “b”)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb101-3" data-line-number="3"> <span class="kw">expect_identical</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>)), <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb101-4" data-line-number="4"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(“a”, <span class="ot">NA</span>), <span class="dt">na.rm =</span> <span class="ot">FALSE</span>), <span class="kw">c</span>(<span class="dv">1</span>,<span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb101-5" data-line-number="5"> <span class="kw">expect_equal</span>(<span class="kw">as.sequence</span>(<span class="kw">c</span>(<span class="ot">NA</span>,<span class="ot">NA</span>)), <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb101-6" data-line-number="6">})</a></code></pre></div>
 </div>
 </div>
 <div id="testing-the-shiny-server" class="section level4">
@@ -1706,6 +1735,49 @@ So, any changes you make to the code in <code>server.R</code> and <code>ui.R</co
 <p>If for whatever reason this doesn’t work with RStudio, you can always run R from the command line.
 Also, note that the ability to forward ports (<code>ssh -L</code>) may depend on the <code>ssh</code> configuration of your remote machine.
 These instructions have been tested on the PEcAn VM (v.1.5.2+).</p>
+</div>
+<div id="testing-pecan-in-bulk" class="section level4">
+<h4><span class="header-section-number">8.3.5.14</span> Testing PEcAn in bulk</h4>
+<p>The <a href="https://github.com/pecanproject/pecan/tree/develop/base/workflow/inst/batch_run.R"><code>base/workflow/inst/batch_run.R</code></a> script can be used to quickly run a series of user-specified integration tests without having to create a bunch of XML files.
+This script is powered by the <a href=""><code>PEcAn.workflow::create_execute_test_xml()</code></a> function,
+which takes as input information about the model, meteorology driver, site ID, run dates, and others,
+uses these to construct a PEcAn XML file,
+and then uses the <code>system()</code> command to run a workflow with that XML.</p>
+<p>If run without arguments, <code>batch_run.R</code> will try to run the model configurations specified in the <a href="https://github.com/pecanproject/pecan/tree/develop/base/workflow/inst/default_tests.csv"><code>base/workflow/inst/default_tests.csv</code></a> file.
+This file contains a CSV table with the following columns:</p>
+<ul>
+<li><code>model</code> – The name of the model (<code>models.model_name</code> column in BETY)</li>
+<li><code>revision</code> – The version of the model (<code>models.revision</code> column in BETY)</li>
+<li><code>met</code> – The name of the meteorology driver source</li>
+<li><code>site_id</code> – The numeric site ID for the model run (<code>sites.site_id</code>)</li>
+<li><code>pft</code> – The name of the plant functional type to run. If <code>NA</code>, the script will use the first PFT associated with the model.</li>
+<li><code>start_date</code>, <code>end_date</code> – The start and end dates for the model run, respectively. These should be formatted according to ISO standard (<code>YYYY-MM-DD</code>, e.g. <code>2010-03-16</code>)</li>
+<li><code>sensitivity</code> – Whether or not to run the sensitivity analysis. <code>TRUE</code> means run it, <code>FALSE</code> means do not.</li>
+<li><code>ensemble_size</code> – The number of ensemble members to run. Set this to 1 to do a single run at the trait median.</li>
+<li><code>comment</code> – An string providing some user-friendly information about the run.</li>
+</ul>
+<p>The <code>batch_run.R</code> script will run a workflow for every row in the input table, sequentially (for now; eventually, it will try to run them in parallel),
+and at the end of each workflow, will perform some basic checks, including whether or not the workflow finished and if the model produced any output.
+These results are summarized in a CSV table (by default, a file called <code>test_result_table.csv</code>), with all of the columns as the input test CSV plus the following:</p>
+<ul>
+<li><code>outdir</code> – Absolute path to the workflow directory.</li>
+<li><code>workflow_complete</code> – Whether or not the PEcAn workflow completed. Note that this is a relatively low bar – PEcAn workflows can complete without having run the model or finished some other steps.</li>
+<li><code>has_jobsh</code> – Whether or not PEcAn was able to write the model’s <code>job.sh</code> script. This is a good indication of whether or not the model’s <code>write.configs</code> step was successful, and may be useful for separating model configuration errors from model execution errors.</li>
+<li><code>model_output_raw</code> – Whether or not the model produced any output files at all. This is just a check to see of the <code>&lt;workflow&gt;/out</code> directory is empty or not. Note that some models may produce logfiles or similar artifacts as soon as they are executed, whether or not they ran even a single timestep, so this is not an indication of model success.</li>
+<li><code>model_output_processed</code> – Whether or not PEcAn was able to post-process any model output. This test just sees if there are any files of the form <code>YYYY.nc</code> (e.g. <code>1992.nc</code>) in the <code>&lt;workflow&gt;/out</code> directory.</li>
+</ul>
+<p>Right now, these checks are not particularly robust or comprehensive, but they should be sufficient for catching common errors.
+Development of more, better tests is ongoing.</p>
+<p>The <code>batch_run.R</code> script can take the following command-line arguments:</p>
+<ul>
+<li><code>--help</code> – Prints a help message about the script’s arguments</li>
+<li><code>--dbfiles=&lt;path&gt;</code> – The path to the PEcAn <code>dbfiles</code> folder. The default value is <code>~/output/dbfiles</code>, based on the file structure of the PEcAn VM. Note that for this and all other paths, if a relative path is given, it is assumed to be relative to the current working directory, i.e. the directory from which the script was called.</li>
+<li><code>--table=&lt;path&gt;</code> – Path to an alternate test table. The default is the <code>base/workflow/inst/default_tests.csv</code> file. See preceding paragraph for a description of the format.</li>
+<li><code>--userid=&lt;id&gt;</code> – The numeric user ID for registering the workflow. The default value is 99000000002, corresponding to the guest user on the PEcAn VM.</li>
+<li><code>--outdir=&lt;path&gt;</code> – Path to a directory (which will be created if it doesn’t exist) for storing the PEcAn workflow outputs. Default is <code>batch_test_output</code> (in the current working directory).</li>
+<li><code>--pecandir=&lt;path&gt;</code> – Path to the PEcAn source code root directory. Default is the current working directory.</li>
+<li><code>--outfile=&lt;path&gt;</code> – Full path (including file name) of the CSV file summarizing the results of the runs. Default is <code>test_result_table.csv</code>. The format of the output</li>
+</ul>
 
 </div>
 </div>
@@ -1714,37 +1786,37 @@ These instructions have been tested on the PEcAn VM (v.1.5.2+).</p>
 <p>Provides functions to simplify development</p>
 <p>Documentation:
 <a href="https://github.com/hadley/devtools">The R devtools packate</a></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="kw">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb105-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb105-4" data-line-number="4"><span class="kw">install</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb105-5" data-line-number="5"><span class="kw">build</span>(<span class="st">&quot;pkg&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="kw">install</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb104-5" data-line-number="5"><span class="kw">build</span>(<span class="st">&quot;pkg&quot;</span>)</a></code></pre></div>
 <p>other tips for devtools (from the documentation):</p>
 <ul>
 <li>Adding the following to your <code>~/.Rprofile</code> will load devtools when
 running R in interactive mode:</li>
 </ul>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co"># load devtools by default</span></a>
-<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="cf">if</span> (<span class="kw">interactive</span>()) {</a>
-<a class="sourceLine" id="cb106-3" data-line-number="3">  <span class="kw">suppressMessages</span>(<span class="kw">require</span>(devtools))</a>
-<a class="sourceLine" id="cb106-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co"># load devtools by default</span></a>
+<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="cf">if</span> (<span class="kw">interactive</span>()) {</a>
+<a class="sourceLine" id="cb105-3" data-line-number="3">  <span class="kw">suppressMessages</span>(<span class="kw">require</span>(devtools))</a>
+<a class="sourceLine" id="cb105-4" data-line-number="4">}</a></code></pre></div>
 <ul>
 <li>Adding the following to your .Rpackages will allow devtools to recognize package by folder name, rather than directory path</li>
 </ul>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="co"># in this example, devhome is the pecan trunk directory </span></a>
-<a class="sourceLine" id="cb107-2" data-line-number="2">devhome &lt;-<span class="st"> &quot;/home/dlebauer/R-dev/pecandev/&quot;</span></a>
-<a class="sourceLine" id="cb107-3" data-line-number="3"><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb107-4" data-line-number="4">    <span class="dt">default =</span> <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb107-5" data-line-number="5">      <span class="kw">file.path</span>(devhome, x, x)</a>
-<a class="sourceLine" id="cb107-6" data-line-number="6">    }, </a>
-<a class="sourceLine" id="cb107-7" data-line-number="7">  <span class="st">&quot;utils&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb107-8" data-line-number="8">  <span class="st">&quot;common&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb107-9" data-line-number="9">  <span class="st">&quot;all&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb107-10" data-line-number="10">  <span class="st">&quot;ed&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb107-11" data-line-number="11">  <span class="st">&quot;uncertainty&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb107-12" data-line-number="12">  <span class="st">&quot;meta.analysis&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb107-13" data-line-number="13">  <span class="st">&quot;db&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb107-14" data-line-number="14">)</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co"># in this example, devhome is the pecan trunk directory </span></a>
+<a class="sourceLine" id="cb106-2" data-line-number="2">devhome &lt;-<span class="st"> &quot;/home/dlebauer/R-dev/pecandev/&quot;</span></a>
+<a class="sourceLine" id="cb106-3" data-line-number="3"><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb106-4" data-line-number="4">    <span class="dt">default =</span> <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb106-5" data-line-number="5">      <span class="kw">file.path</span>(devhome, x, x)</a>
+<a class="sourceLine" id="cb106-6" data-line-number="6">    }, </a>
+<a class="sourceLine" id="cb106-7" data-line-number="7">  <span class="st">&quot;utils&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb106-8" data-line-number="8">  <span class="st">&quot;common&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb106-9" data-line-number="9">  <span class="st">&quot;all&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb106-10" data-line-number="10">  <span class="st">&quot;ed&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb106-11" data-line-number="11">  <span class="st">&quot;uncertainty&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb106-12" data-line-number="12">  <span class="st">&quot;meta.analysis&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb106-13" data-line-number="13">  <span class="st">&quot;db&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb106-14" data-line-number="14">)</a></code></pre></div>
 <p>Now, devtools can take <code>pkg</code> as an argument instead of <code>/path/to/pkg/</code>,
 e.g. so you can use <code>build(&quot;pkg&quot;)</code> instead of <code>build(&quot;/path/to/pkg/&quot;)</code></p>
 
@@ -1754,39 +1826,39 @@ e.g. so you can use <code>build(&quot;pkg&quot;)</code> instead of <code>build(
 <h2><span class="header-section-number">8.4</span> Download and Compile PEcAn</h2>
 <p>Set <code>R_LIBS_USER</code></p>
 <p><a href="http://cran.r-project.org/doc/manuals/r-devel/R-admin.html#Managing-libraries">CRAN Reference</a></p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co"># point R to personal lib folder</span></a>
-<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</a>
-<a class="sourceLine" id="cb108-3" data-line-number="3"><span class="bu">source</span> ~/.profile</a>
-<a class="sourceLine" id="cb108-4" data-line-number="4"><span class="fu">mkdir</span> -p <span class="va">${R_LIBS_USER}</span></a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="co"># point R to personal lib folder</span></a>
+<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</a>
+<a class="sourceLine" id="cb107-3" data-line-number="3"><span class="bu">source</span> ~/.profile</a>
+<a class="sourceLine" id="cb107-4" data-line-number="4"><span class="fu">mkdir</span> -p <span class="va">${R_LIBS_USER}</span></a></code></pre></div>
 <div id="download-compile-and-install-pecan-from-github" class="section level3">
 <h3><span class="header-section-number">8.4.1</span> Download, compile and install PEcAn from GitHub</h3>
-<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="co"># download pecan</span></a>
-<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb109-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</a>
-<a class="sourceLine" id="cb109-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb109-5" data-line-number="5"><span class="co"># compile pecan</span></a>
-<a class="sourceLine" id="cb109-6" data-line-number="6"><span class="bu">cd</span> pecan</a>
-<a class="sourceLine" id="cb109-7" data-line-number="7"><span class="fu">make</span></a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co"># download pecan</span></a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb108-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</a>
+<a class="sourceLine" id="cb108-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb108-5" data-line-number="5"><span class="co"># compile pecan</span></a>
+<a class="sourceLine" id="cb108-6" data-line-number="6"><span class="bu">cd</span> pecan</a>
+<a class="sourceLine" id="cb108-7" data-line-number="7"><span class="fu">make</span></a></code></pre></div>
 <p>For more information on the capabilities of the PEcAn Makefile, check out our section on <a href="developer-guide.html#pecan-make">Updating PEcAn</a>.</p>
 <p>Following will run a small script to setup some hooks to prevent people from using the pecan demo user account to check in any code.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="co"># prevent pecan user from checking in code</span></a>
-<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="ex">./scripts/create-hooks.sh</span></a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="co"># prevent pecan user from checking in code</span></a>
+<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="ex">./scripts/create-hooks.sh</span></a></code></pre></div>
 </div>
 <div id="pecan-testrun" class="section level3">
 <h3><span class="header-section-number">8.4.2</span> PEcAn Testrun</h3>
 <p>Do the run, this assumes you have <a href="workflow-modules.html#install-bety">installed the BETY database</a>, <a href="workflow-modules.html#site-information">sites</a> tar file and <a href="pecan-models.html#models-sipnet">SIPNET</a>.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="co"># create folder</span></a>
-<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="fu">mkdir</span> testrun.pecan</a>
-<a class="sourceLine" id="cb111-4" data-line-number="4"><span class="bu">cd</span> testrun.pecan</a>
-<a class="sourceLine" id="cb111-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb111-6" data-line-number="6"><span class="co"># copy example of pecan workflow and configuration file</span></a>
-<a class="sourceLine" id="cb111-7" data-line-number="7"><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</a>
-<a class="sourceLine" id="cb111-8" data-line-number="8"><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</a>
-<a class="sourceLine" id="cb111-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb111-10" data-line-number="10"><span class="co"># exectute workflow</span></a>
-<a class="sourceLine" id="cb111-11" data-line-number="11"><span class="fu">rm</span> -rf pecan</a>
-<a class="sourceLine" id="cb111-12" data-line-number="12"><span class="ex">./workflow.R</span> pecan.xml</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="co"># create folder</span></a>
+<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="fu">mkdir</span> testrun.pecan</a>
+<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="bu">cd</span> testrun.pecan</a>
+<a class="sourceLine" id="cb110-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb110-6" data-line-number="6"><span class="co"># copy example of pecan workflow and configuration file</span></a>
+<a class="sourceLine" id="cb110-7" data-line-number="7"><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</a>
+<a class="sourceLine" id="cb110-8" data-line-number="8"><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</a>
+<a class="sourceLine" id="cb110-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb110-10" data-line-number="10"><span class="co"># exectute workflow</span></a>
+<a class="sourceLine" id="cb110-11" data-line-number="11"><span class="fu">rm</span> -rf pecan</a>
+<a class="sourceLine" id="cb110-12" data-line-number="12"><span class="ex">./workflow.R</span> pecan.xml</a></code></pre></div>
 <p>NB: pecan.xml is configured for the virtual machine, you will need to change the <met> field from ‘/home/carya/’ to wherever you installed your ‘sites’, usually $HOME</p>
 
 </div>
