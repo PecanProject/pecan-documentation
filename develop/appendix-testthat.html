@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>26 FAQ | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="26 FAQ | The Predictive Ecosystem Analyzer" />
+  <title>29 Testing with the testthat package | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="29 Testing with the testthat package | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="26 FAQ | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="29 Testing with the testthat package | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="26 FAQ | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="29 Testing with the testthat package | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="miscellaneous.html"/>
-<link rel="next" href="pecan-project-used-in-courses.html"/>
+<link rel="prev" href="package-dependencies.html"/>
+<link rel="next" href="developer-devtools.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -517,17 +517,177 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="faq" class="section level1">
-<h1><span class="header-section-number">26</span> FAQ</h1>
+<div id="appendix-testthat" class="section level1">
+<h1><span class="header-section-number">29</span> Testing with the <code>testthat</code> package</h1>
+<p>Tests are found in <code>&lt;package&gt;/tests/testthat/</code> (for example, <code>base/utils/inst/tests/</code>)</p>
+<p>See attached file and
+<a href="http://r-pkgs.had.co.nz/tests.html" class="uri">http://r-pkgs.had.co.nz/tests.html</a>
+for details on how to use the testthat package.</p>
+<div id="list-of-expectations" class="section level2">
+<h2><span class="header-section-number">29.1</span> List of Expectations</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Full</th>
+<th>Abbreviation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>expect_that(x, is_true())</td>
+<td>expect_true(x)</td>
+</tr>
+<tr class="even">
+<td>expect_that(x, is_false())</td>
+<td>expect_false(x)</td>
+</tr>
+<tr class="odd">
+<td>expect_that(x, is_a(y))</td>
+<td>expect_is(x, y)</td>
+</tr>
+<tr class="even">
+<td>expect_that(x, equals(y))</td>
+<td>expect_equal(x, y)</td>
+</tr>
+<tr class="odd">
+<td>expect_that(x, is_equivalent_to(y))</td>
+<td>expect_equivalent(x, y)</td>
+</tr>
+<tr class="even">
+<td>expect_that(x, is_identical_to(y))</td>
+<td>expect_identical(x, y)</td>
+</tr>
+<tr class="odd">
+<td>expect_that(x, matches(y))</td>
+<td>expect_matches(x, y)</td>
+</tr>
+<tr class="even">
+<td>expect_that(x, prints_text(y))</td>
+<td>expect_output(x, y)</td>
+</tr>
+<tr class="odd">
+<td>expect_that(x, shows_message(y))</td>
+<td>expect_message(x, y)</td>
+</tr>
+<tr class="even">
+<td>expect_that(x, gives_warning(y))</td>
+<td>expect_warning(x, y)</td>
+</tr>
+<tr class="odd">
+<td>expect_that(x, throws_error(y))</td>
+<td>expect_error(x, y)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="basic-use-of-the-testthat-package" class="section level2">
+<h2><span class="header-section-number">29.2</span> Basic use of the <code>testthat</code> package</h2>
+<p>Create a file called <code>&lt;packagename&gt;/tests/testthat.R</code> with the following contents:</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
+<a class="sourceLine" id="cb381-2" data-line-number="2"><span class="kw">library</span>(mypackage)</a>
+<a class="sourceLine" id="cb381-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb381-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</a></code></pre></div>
+<p>Tests should be placed in <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>, and look like the following:</p>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" data-line-number="1"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
+<a class="sourceLine" id="cb382-2" data-line-number="2">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb382-3" data-line-number="3">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb382-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb382-5" data-line-number="5">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
+<a class="sourceLine" id="cb382-6" data-line-number="6">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb382-7" data-line-number="7">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
+<a class="sourceLine" id="cb382-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb382-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb382-10" data-line-number="10"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
+<a class="sourceLine" id="cb382-11" data-line-number="11">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb382-12" data-line-number="12">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb382-13" data-line-number="13">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb382-14" data-line-number="14">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
+<a class="sourceLine" id="cb382-15" data-line-number="15">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
+<a class="sourceLine" id="cb382-16" data-line-number="16">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
+<a class="sourceLine" id="cb382-17" data-line-number="17">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb382-18" data-line-number="18">})</a></code></pre></div>
+</div>
+<div id="data-for-tests" class="section level2">
+<h2><span class="header-section-number">29.3</span> Data for tests</h2>
+<p>Many of PEcAn’s functions require inputs that are provided as data.
+These can be in the <code>data</code> or the <code>inst/extdata</code> folders of a package.
+Data that are not package specific should be placed in the <code>PEcAn.all</code> (<code>base/all</code>) or
+<code>PEcAn.utils</code> (<code>base/utils</code>) packages.</p>
+<p>Some useful conventions:</p>
+</div>
+<div id="settings-1" class="section level2">
+<h2><span class="header-section-number">29.4</span> Settings</h2>
+<ul>
+<li>A generic settings can be found in the <code>PEcAn.all</code> package</li>
+</ul>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb383-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<ul>
+<li>database settings can be specified, and tests run only if a connection is available</li>
+</ul>
+<p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1">settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb384-2" data-line-number="2">                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb384-3" data-line-number="3">                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></a>
+<a class="sourceLine" id="cb384-4" data-line-number="4">                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></a>
+<a class="sourceLine" id="cb384-5" data-line-number="5"><span class="kw">test_that</span>(..., {</a>
+<a class="sourceLine" id="cb384-6" data-line-number="6">  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</a>
+<a class="sourceLine" id="cb384-7" data-line-number="7">  ## write tests here</a>
+<a class="sourceLine" id="cb384-8" data-line-number="8">})</a></code></pre></div>
+<ul>
+<li>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
+wiki</a></li>
+<li><p>examples can be found in the PEcAn.DB package (<code>base/db/tests/testthat/</code>).</p></li>
+<li><p>Model specific settings can go in the model-specific module, for
+example:</p></li>
+</ul>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb385-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<ul>
+<li>test-specific settings:
+<ul>
+<li><p>settings text can be specified inline:</p>
+<pre><code>settings.text &lt;- &quot;
+  &lt;pecan&gt;
+    &lt;nocheck&gt;nope&lt;/nocheck&gt; ## allows bypass of checks in the read.settings functions
+    &lt;pfts&gt;
+      &lt;pft&gt;
+        &lt;name&gt;ebifarm.pavi&lt;/name&gt;
+        &lt;outdir&gt;test/&lt;/outdir&gt;
+      &lt;/pft&gt;
+    &lt;/pfts&gt;
+    &lt;outdir&gt;test/&lt;/outdir&gt;
+    &lt;database&gt;
+      &lt;userid&gt;bety&lt;/userid&gt;
+      &lt;passwd&gt;bety&lt;/passwd&gt;
+      &lt;location&gt;localhost&lt;/location&gt;
+      &lt;name&gt;bety&lt;/name&gt;
+    &lt;/database&gt;
+  &lt;/pecan&gt;&quot;
+settings &lt;- read.settings(settings.text)</code></pre></li>
+<li><p>values in settings can be updated:</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</a>
+<a class="sourceLine" id="cb387-2" data-line-number="2">settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</a></code></pre></div></li>
+</ul></li>
+</ul>
+</div>
+<div id="helper-functions-for-unit-tests" class="section level2">
+<h2><span class="header-section-number">29.5</span> Helper functions for unit tests</h2>
+<ul>
+<li><code>PEcAn.utils::tryl</code> returns <code>FALSE</code> if function gives error</li>
+<li><code>PEcAn.utils::temp.settings</code> creates temporary settings file</li>
+<li><code>PEcAn.DB::db.exists</code> returns <code>TRUE</code> if connection to database is available</li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="miscellaneous.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pecan-project-used-in-courses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="package-dependencies.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="developer-devtools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -557,7 +717,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/04_appendix/01_faq.Rmd",
+"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/04_appendix/05-testthat.Rmd",
 "text": "Edit"
 },
 "history": {
