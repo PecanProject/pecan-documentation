@@ -49,7 +49,7 @@
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.6/datatables.js"></script>
+<script src="libs/datatables-binding-0.8/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
@@ -736,13 +736,16 @@ Stability not ensured as of 1.5.3.</p>
 <a class="sourceLine" id="cb121-4" data-line-number="4">      <span class="kw">&lt;constants&gt;</span></a>
 <a class="sourceLine" id="cb121-5" data-line-number="5">        <span class="kw">&lt;num&gt;</span>1<span class="kw">&lt;/num&gt;</span></a>
 <a class="sourceLine" id="cb121-6" data-line-number="6">      <span class="kw">&lt;/constants&gt;</span></a>
-<a class="sourceLine" id="cb121-7" data-line-number="7">    <span class="kw">&lt;/pft&gt;</span></a>
-<a class="sourceLine" id="cb121-8" data-line-number="8">  <span class="kw">&lt;/pfts&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb121-7" data-line-number="7">      <span class="kw">&lt;posterior.files&gt;</span>Path to a post.distns.*.Rdata or prior.distns.Rdata<span class="kw">&lt;/posterior.files&gt;</span></a>
+<a class="sourceLine" id="cb121-8" data-line-number="8">    <span class="kw">&lt;/pft&gt;</span></a>
+<a class="sourceLine" id="cb121-9" data-line-number="9">  <span class="kw">&lt;/pfts&gt;</span></a></code></pre></div>
 <ul>
 <li><code>name</code> : (required) the name of the PFT, which must <em>exactly</em> match the name in the PEcAn database.</li>
 <li><code>outdir</code>: (optional) Directory path in which PFT-specific output will be stored during meta-analysis and sensitivity analysis. If not specified (recommended), it will be written into <code>&lt;outdir&gt;/&lt;pftname&gt;</code>.</li>
 <li><code>contants</code>: (optional) this section contains information that will be written directly into the model specific configuration files. For example, some models like ED2 use PFT numbers instead of names for PFTs, and those numbers can be specified here. See documentation for model-specific code for details.</li>
+<li><code>posterior.files</code> (Optional) this tag helps to signal write.config functions to use specific posterior/prior files (such as HPDA or MA analysis) for generating samples without needing to access to the bety database.</li>
 </ul>
+<p>``</p>
 <p>This information is currently used by the following PEcAn workflow function:</p>
 <ul>
 <li><code>get.traits</code> - ??????</li>
