@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-10-10" />
+<meta name="date" content="2019-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,7 +52,7 @@
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.7/datatables.js"></script>
+<script src="libs/datatables-binding-0.8/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
@@ -1362,18 +1362,18 @@ Development of more, better tests is ongoing.</p>
 <li>Runs R package checks (the same ones you run locally with <code>make check</code> or <code>devtools::check(pkgname)</code>), skipping tests and documentation rebuild because we just did those in the previous steps.
 <ul>
 <li>Any ERROR in the check output will stop the build immediately.</li>
-<li>If there are no ERRORs, any WARNINGs or NOTEs are compared against a stored historic check result in <code>&lt;package&gt;/tests/Rcheck_reference.log</code>.</li>
+<li>If there are no ERRORs, any WARNINGs or NOTEs are compared against a stored historic check result in <code>&lt;package&gt;/tests/Rcheck_reference.log</code>. If the package has no stored reference result, all WARNINGs and NOTEs are considered newly added and reported as build failures.</li>
 <li>If all messages from the current built were also present in the reference result, the check passes. If any messages are newly added, a build failure is reported.</li>
 <li>Each line of the check log is considered a separate message, and the test requires exact matching, so a change from <code>Undocumented arguments in documentation object 'foo': 'x'</code> to <code>Undocumented arguments in documentation object 'foo': 'x', 'y'</code> will be counted as a new warning… and you should fix both of them while you’re at it!</li>
 <li>The idea here is to enforce good coding practice and catch likely errors in all new code while recognizing that we have a lot of legacy code whose warnings need to be fixed as we have time rather than all at once.</li>
 <li>As we fix historic warnings, we will revoke their grandfathered status by removing them from the stored check results, so that they will break the build if they reappear.</li>
-<li>If a check fails when you think it ought to be grandfathered, please fix it anyway. They all need to be cleaned up eventually, and it’s likely easier to fix the error than to figure out how to re-exclude it.</li>
+<li>If your PR reports a failure in pre-existing code that you think ought to be grandfathered, please fix it anyway. The failures all need to be cleaned up eventually, and it’s likely easier to fix the error than to figure out how to re-ignore it.</li>
 </ul></li>
 <li>Runs a simple PEcAn workflow from beginning to end (three years of SIPNET at Niwot Ridge using stored weather data, meta-analysis on fixed effects only, sensitivity analysis on NPP), and verifies that the models complete successfully.</li>
 <li>Checks whether any version-controlled files have been changed by the build and testing process, and marks a build failure if they have.
 <ul>
 <li>If your build fails at this step, the most common cause is that you forgot to Roxygenize before committing.</li>
-<li>Note that this only finds changes to files that have already been committed. If you created a <em>new</em> file and forgot to add it to the commit, the CI build will not be able to detect the problem.</li>
+<li>This step will also detect newly added files, e.g. tests improperly writing to the current working directory rather than <code>tempdir()</code> and then failing to clean up after themselves.</li>
 </ul></li>
 </ul>
 <p>If any of these steps reports an error, the build is marked as “broken” and stops before the next step. If they all pass, the Travis CI bot marks the build as successful and tells the GitHub bot that it’s OK to allow your changes to be merged… but the final decision belongs to the human reviewing your code and they might still ask you for other changes!</p>
@@ -1389,7 +1389,7 @@ Development of more, better tests is ongoing.</p>
 <p>All of the above descriptions apply to the build Travis generates when you push to the main <code>PecanProject/pecan</code> repository, either by directly pushing to a branch or by opening a pull request. If you like, you can also <a href="https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci">enable Travis builds</a> from your own PEcAn fork. This can be useful for several reasons:</p>
 <ul>
 <li>It lets your test whether your changes worked before you open a pull request.</li>
-<li>It often lets you get faster test results: The PEcAn project uses Travis CI’s free tier, which only allows a few simultaneous build jobs per repository. If many people are pushing code at the same time, your build might wait in line for a long time at PecanProject/pecan but start immediately at yourname/pecan.</li>
+<li>It often lets you get faster test results: The PEcAn project uses Travis CI’s free tier, which only allows a few simultaneous build jobs per repository. If many people are pushing code at the same time, your build might wait in line for a long time at <code>PecanProject/pecan</code> but start immediately at <code>yourname/pecan</code>.</li>
 <li>If you will be editing the documentation a lot and want to see rendered previews of your in-progress work (instead of waiting until it is merged into develop), you can clone the <a href="https://github.com/PecanProject/pecan-documentation">pecan-documentation</a> repository to your own GitHub account and let Travis update it for you.</li>
 </ul>
 
