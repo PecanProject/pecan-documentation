@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2019-12-19" />
+<meta name="date" content="2019-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,7 +52,7 @@
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.7/datatables.js"></script>
+<script src="libs/datatables-binding-0.8/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
@@ -558,7 +558,7 @@ Running <code>make clean</code> will force the next invocation of <code>make</co
 <ul>
 <li><p>Install, check, document, or test a specific package – <code>make .&lt;cmd&gt;/&lt;pkg-dir&gt;</code>; e.g. <code>make .install/utils</code> or <code>make .check/modules/rtm</code></p></li>
 <li><p>Force <code>make</code> to run, even if package has not changed – <code>make -B &lt;command&gt;</code></p></li>
-<li><p>Run <code>make</code> commands in parallel – <code>make -j&lt;ncores&gt;</code>; e.g. <code>make -j4 install</code> to install packages using four parallel processes.</p></li>
+<li><p>Run <code>make</code> commands in parallel – <code>make -j&lt;ncores&gt;</code>; e.g. <code>make -j4 install</code> to install packages using four parallel processes. Note that packages containing compiled code (e.g. PEcAn.RTM, PEcAn.BASGRA) might fail when <code>j</code> is greater than 1, because of limitations in the way R calls <code>make</code> internally while compiling them. See <a href="https://github.com/PecanProject/pecan/issues/1976">GitHub issue 1976</a> for more details.</p></li>
 </ul>
 <p>All instructions for the <code>make</code> build system are contained in the <code>Makefile</code> in the PEcAn root directory.
 For full documentation on <code>make</code>, see the man pages by running <code>man make</code> from a terminal.</p>
