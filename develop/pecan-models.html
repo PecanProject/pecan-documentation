@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 PEcAn Models | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="13 PEcAn Models | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 PEcAn Models | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-01-10" />
+<meta name="date" content="2020-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -317,6 +317,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.0.13" data-path="pecan-models.html"><a href="pecan-models.html#models-maespa"><i class="fa fa-check"></i><b>13.0.13</b> MAESPA</a></li>
 <li class="chapter" data-level="13.0.14" data-path="pecan-models.html"><a href="pecan-models.html#models-preles"><i class="fa fa-check"></i><b>13.0.14</b> PRELES</a></li>
 <li class="chapter" data-level="13.0.15" data-path="pecan-models.html"><a href="pecan-models.html#models-sipnet"><i class="fa fa-check"></i><b>13.0.15</b> SiPNET</a></li>
+<li class="chapter" data-level="13.0.16" data-path="pecan-models.html"><a href="pecan-models.html#models-stics"><i class="fa fa-check"></i><b>13.0.16</b> STICS</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html"><i class="fa fa-check"></i><b>14</b> Available Meteorological Drivers</a><ul>
 <li class="chapter" data-level="14.0.1" data-path="available-meteorological-drivers.html"><a href="available-meteorological-drivers.html#ameriflux"><i class="fa fa-check"></i><b>14.0.1</b> Ameriflux</a></li>
@@ -618,6 +619,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
+</tr>
+<tr class="even">
+<td><a href="pecan-models.html#models-stics">STICS</a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -1468,6 +1476,51 @@ make clean
 make
 sudo cp sipnet /usr/local/bin/sipnet.r136
 make clean</code></pre>
+<p><strong>VM</strong></p>
+
+</div>
+<div id="models-stics" class="section level3">
+<h3><span class="header-section-number">13.0.16</span> STICS</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Model Information</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Home Page</td>
+<td><a href="https://www6.paca.inrae.fr/stics/" class="uri">https://www6.paca.inrae.fr/stics/</a></td>
+</tr>
+<tr class="even">
+<td>Source Code</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>License</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Authors</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>PEcAn Integration</td>
+<td>Istem Fer</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Introduction</strong></p>
+<p>STICS (Simulateur mulTIdisciplinaire pour les Cultures Standard) is a crop model that has been developed since 1996 at INRA (French National Institute for Agronomic Research) in collaboration with other research (CIRAD, Irstea, Ecole des Mines de Paris, ESA, LSCE) or professional (ARVALIS, Terres Inovia, CTIFL, ITV, ITB, Agrotransferts, etc.) and teaching institutes or organizations.</p>
+<p><strong>PEcAn configuration file additions</strong></p>
+<p>Should list the model specific additions to the PEcAn file here</p>
+<p><strong>Model specific input files</strong></p>
+<p>List of inputs required by model, such as met, etc.</p>
+<p><strong>Model configuration files</strong></p>
+<p>STICS is configured using different XML files located in two fixed directories: config, plant and user defined workspace(s) directorie(s). A java app called JavaStics allows users to generate these files.</p>
+<p><strong>Installation notes</strong></p>
+<p>The software (JavaStics interface and STICS model) is available for download after a registration procedure (see procedure at <a href="http://www6.paca.inra.fr/stics_eng/" class="uri">http://www6.paca.inra.fr/stics_eng/</a> Download).</p>
 <p><strong>VM</strong></p>
 
 </div>
