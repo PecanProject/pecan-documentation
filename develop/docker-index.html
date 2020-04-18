@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-04-14" />
+<meta name="date" content="2020-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,14 +52,14 @@
 
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.13/datatables.js"></script>
+<script src="libs/datatables-binding-0.12/datatables.js"></script>
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
 <link href="libs/dt-ext-fixedcolumns-1.10.20/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
 <script src="libs/dt-ext-fixedcolumns-1.10.20/js/dataTables.fixedColumns.min.js"></script>
 <script src="libs/jszip-1.10.20/jszip.min.js"></script>
-<script src="libs/pdfmake-1.10.20/pdfmake.js"></script>
+<script src="libs/pdfmake-1.10.20/pdfmake.min.js"></script>
 <script src="libs/pdfmake-1.10.20/vfs_fonts.js"></script>
 <link href="libs/dt-ext-buttons-1.10.20/css/buttons.dataTables.min.css" rel="stylesheet" />
 <script src="libs/dt-ext-buttons-1.10.20/js/dataTables.buttons.min.js"></script>
@@ -1150,6 +1150,16 @@ services:
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
     depends_on: rabbitmq
     volumes: pecan:/data
+  dbsync:
+    image: pecan/shiny-dbsync:${PECAN_VERSION:-latest}
+    restart: unless-stopped
+    networks: pecan
+    depends_on: postgres
+    labels:
+    - traefik.enable=true
+    - traefik.backend=dbsync
+    - traefik.port=3838
+    - traefik.frontend.rule=${TRAEFIK_FRONTEND_RULE:-}PathPrefixStrip:/dbsync/
 networks:
   pecan: ~
 volumes:
