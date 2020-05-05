@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-04-26" />
+<meta name="date" content="2020-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -682,9 +682,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="installing-dependencies-let-the-machines-do-it" class="section level2">
 <h2><span class="header-section-number">29.6</span> Installing dependencies: Let the machines do it</h2>
-<p>In most cases you won’t need to think about how dependencies get installed – just declare them in your package’s DESCRIPTION and the installation will be handled automatically by R and devtools during the build process. In PEcAn packages, the rare cases where this isn’t enough will probably fall into one of two categories.</p>
-<p>First, some dependencies rely on non-R software that R does not know how to install automatically. For example, rjags relies on JAGS, which might be installed in a different place on every machine. If your dependency falls in this category, you will know (because your CI builds will keep failing until you figure out how to fix it), but the exact details of the fix will differ for every case.</p>
-<p>Second, some dependencies <em>will</em> install automatically, but they take a long time to compile or conflict with dependencies needed by other packages or are otherwise annoying to deal with. To save time during CI builds, PEcAn’s Travis configuration file includes a manually curated list of the most-annoying dependencies and installs them from pre-compiled binaries before starting the normal installation process. If you suspect you’re adding a dependency that will be “annoying”, please <em>do not</em> add it to the Travis binary-install list right away; instead, focus on getting your package to work right using the default automatic installation. Then, if needed to keep build times reasonable, submit a separate pull request to change the Travis configuration. This two-step procedure makes it much easier to understand which merges changed package code and which ones changed the testing configuration without changing package functionality, and also lets you focus on what the code is supposed to do instead of on installation details.</p>
+<p>In most cases you won’t need to think about how dependencies get installed – just declare them in your package’s DESCRIPTION and the installation will be handled automatically by R and devtools during the build process. The main exception is when a dependency relies on non-R software that R does not know how to install automatically. For example, rjags relies on JAGS, which might be installed in a different place on every machine. If your dependency falls in this category, you will know (because your CI builds will keep failing until you figure out how to fix it), but the exact details of the fix will differ for every case.</p>
 
 </div>
 </div>
