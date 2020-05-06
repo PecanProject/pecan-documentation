@@ -253,11 +253,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9" data-path="working-with-vm.html"><a href="working-with-vm.html"><i class="fa fa-check"></i><b>9</b> VM configuration and maintenance</a><ul>
 <li class="chapter" data-level="9.1" data-path="working-with-vm.html"><a href="working-with-vm.html#maintain-vm"><i class="fa fa-check"></i><b>9.1</b> Updating the VM</a></li>
 <li class="chapter" data-level="9.2" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm"><i class="fa fa-check"></i><b>9.2</b> Connecting to the VM via SSH</a></li>
-<li class="chapter" data-level="9.3" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm-bety"><i class="fa fa-check"></i><b>9.3</b> Connecting to bety on the VM via SSh</a><ul>
+<li class="chapter" data-level="9.3" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm-bety"><i class="fa fa-check"></i><b>9.3</b> Connecting to BETYdb on the VM via SSH</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="working-with-vm.html"><a href="working-with-vm.html#awsvm"><i class="fa fa-check"></i><b>9.3.1</b> Using Amazon Web Services for a VM (AWS)</a></li>
 <li class="chapter" data-level="9.3.2" data-path="working-with-vm.html"><a href="working-with-vm.html#createvm"><i class="fa fa-check"></i><b>9.3.2</b> Creating a Virtual Machine</a></li>
-<li class="chapter" data-level="9.3.3" data-path="working-with-vm.html"><a href="working-with-vm.html#vm-dektop-conversion"><i class="fa fa-check"></i><b>9.3.3</b> VM Desktop Conversion</a></li>
-<li class="chapter" data-level="9.3.4" data-path="working-with-vm.html"><a href="working-with-vm.html#install-rstudio"><i class="fa fa-check"></i><b>9.3.4</b> Install RStudio Desktop</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>10</b> PEcAn standard formats</a><ul>
@@ -1068,19 +1066,19 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 <div id="example-2-converting-paleon-data" class="section level6">
 <h6><span class="header-section-number">18.3.4.3.0.2</span> Example 2: Converting PalEON data</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb195-1" data-line-number="1">   <span class="kw">&lt;soil&gt;</span></a>
-<a class="sourceLine" id="cb195-2" data-line-number="2">     <span class="kw">&lt;id&gt;</span>1000012896<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb195-3" data-line-number="3">   <span class="kw">&lt;/soil&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb191-1" data-line-number="1">   <span class="kw">&lt;soil&gt;</span></a>
+<a class="sourceLine" id="cb191-2" data-line-number="2">     <span class="kw">&lt;id&gt;</span>1000012896<span class="kw">&lt;/id&gt;</span></a>
+<a class="sourceLine" id="cb191-3" data-line-number="3">   <span class="kw">&lt;/soil&gt;</span></a></code></pre></div>
 <p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 </div>
 <div id="example-3-extracting-soil-properties-from-gssurgo-database" class="section level6">
 <h6><span class="header-section-number">18.3.4.3.0.3</span> Example 3: Extracting soil properties from gSSURGO database</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the gSSURGO data product. This product needs no installation and it extract soil proeprties for the lower 48 states in U.S. In order to let the pecan know that you’re planning to use gSSURGO, you can the following XML tag under input in your pecan xml file.</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">&lt;inputs&gt;</span></a>
-<a class="sourceLine" id="cb196-2" data-line-number="2">   <span class="kw">&lt;soil&gt;</span></a>
-<a class="sourceLine" id="cb196-3" data-line-number="3">     <span class="kw">&lt;source&gt;</span>gSSURGO<span class="kw">&lt;/source&gt;</span></a>
-<a class="sourceLine" id="cb196-4" data-line-number="4">   <span class="kw">&lt;/soil&gt;</span></a>
-<a class="sourceLine" id="cb196-5" data-line-number="5"><span class="kw">&lt;/inputs&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">&lt;inputs&gt;</span></a>
+<a class="sourceLine" id="cb192-2" data-line-number="2">   <span class="kw">&lt;soil&gt;</span></a>
+<a class="sourceLine" id="cb192-3" data-line-number="3">     <span class="kw">&lt;source&gt;</span>gSSURGO<span class="kw">&lt;/source&gt;</span></a>
+<a class="sourceLine" id="cb192-4" data-line-number="4">   <span class="kw">&lt;/soil&gt;</span></a>
+<a class="sourceLine" id="cb192-5" data-line-number="5"><span class="kw">&lt;/inputs&gt;</span></a></code></pre></div>
 </div>
 </div>
 </div>
