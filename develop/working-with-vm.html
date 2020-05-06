@@ -253,11 +253,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9" data-path="working-with-vm.html"><a href="working-with-vm.html"><i class="fa fa-check"></i><b>9</b> VM configuration and maintenance</a><ul>
 <li class="chapter" data-level="9.1" data-path="working-with-vm.html"><a href="working-with-vm.html#maintain-vm"><i class="fa fa-check"></i><b>9.1</b> Updating the VM</a></li>
 <li class="chapter" data-level="9.2" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm"><i class="fa fa-check"></i><b>9.2</b> Connecting to the VM via SSH</a></li>
-<li class="chapter" data-level="9.3" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm-bety"><i class="fa fa-check"></i><b>9.3</b> Connecting to bety on the VM via SSh</a><ul>
+<li class="chapter" data-level="9.3" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm-bety"><i class="fa fa-check"></i><b>9.3</b> Connecting to BETYdb on the VM via SSH</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="working-with-vm.html"><a href="working-with-vm.html#awsvm"><i class="fa fa-check"></i><b>9.3.1</b> Using Amazon Web Services for a VM (AWS)</a></li>
 <li class="chapter" data-level="9.3.2" data-path="working-with-vm.html"><a href="working-with-vm.html#createvm"><i class="fa fa-check"></i><b>9.3.2</b> Creating a Virtual Machine</a></li>
-<li class="chapter" data-level="9.3.3" data-path="working-with-vm.html"><a href="working-with-vm.html#vm-dektop-conversion"><i class="fa fa-check"></i><b>9.3.3</b> VM Desktop Conversion</a></li>
-<li class="chapter" data-level="9.3.4" data-path="working-with-vm.html"><a href="working-with-vm.html#install-rstudio"><i class="fa fa-check"></i><b>9.3.4</b> Install RStudio Desktop</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>10</b> PEcAn standard formats</a><ul>
@@ -627,14 +625,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This will allow you to SSH into the VM with the simplified command, <code>ssh pecan-vm</code>.</p>
 </div>
 <div id="ssh-vm-bety" class="section level2">
-<h2><span class="header-section-number">9.3</span> Connecting to bety on the VM via SSh</h2>
-<p>Sometimes, you may want to develop code locally but connect to an instance of Bety on the VM.
-To do this, first open a new terminal and connect to the VM while enabling port forwarding (with the <code>-L</code> flag) and setting XXXX to any available port (more or less any 4 digit number – a reasonable choice is 3333).</p>
-<pre><code>ssh -L XXXX:localhost:5432 carya@localhost:6422</code></pre>
-<p>This makes port XXXX on the local machine match port 5432 on the VM.
-This means that connecting to <code>localhost:XXXX</code> will give you access to Bety on the VM.</p>
+<h2><span class="header-section-number">9.3</span> Connecting to BETYdb on the VM via SSH</h2>
+<p>Sometimes, you may want to develop code locally but connect to an instance of BETYdb on the VM.
+To do this, first open a new terminal and connect to the VM while enabling port forwarding (with the <code>-L</code> flag) and setting the port number. Using 5433 does not conflict with the postgres default port of 5432, the forwarded port will not conflict with a postgres database server running locally.</p>
+<pre><code>ssh -L 5433:localhost:5432 carya@localhost:6422</code></pre>
+<p>This makes port 5433 on the local machine match port 5432 on the VM.
+This means that connecting to <code>localhost:5433</code> will give you access to BETYdb on the VM.</p>
 <p>To test this on the command line, try the following command, which, if successful, will drop you into the <code>psql</code> console.</p>
-<pre><code>psql -d bety -U bety -h localhost -p XXXX</code></pre>
+<pre><code>psql -d bety -U bety -h localhost -p 5433</code></pre>
 <p>To test this in R, open a Postgres using the analogous parameters:</p>
 <pre><code>library(RPostgres)
 con &lt;- dbConnect(
@@ -643,10 +641,10 @@ con &lt;- dbConnect(
   password = &quot;bety&quot;,
   dbname = &quot;bety&quot;,
   host = &quot;localhost&quot;,
-  port = XXXX
+  port = 5433
   )
 dbListTables(con)   # This should return a vector of bety tables</code></pre>
-<p>Note that the same general approach will work on any Bety server where port forwarding is enabled.</p>
+<p>Note that the same general approach will work on any BETYdb server where port forwarding is enabled, but it requires ssh access.</p>
 <div id="awsvm" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> Using Amazon Web Services for a VM (AWS)</h3>
 <p>Login to <a href="http://console.aws.amazon.com/">Amazon Web Services (AWS)</a> and select the EC2 Dashboard. If this is your first time using AWS you will need to set up an account before you are able to access the EC2 Dashboard. Important: You will need a credit card number and access to a phone to be able to verify AWS account registration. AWS is free for one year.</p>
@@ -796,28 +794,6 @@ Congratulations! You just started a PEcAn server in the “cloud”!</li>
 <a class="sourceLine" id="cb106-2" data-line-number="2"><span class="fu">sudo</span> update-grub</a></code></pre></div>
 <p>Once all done, stop the virtual machine</p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="bu">history</span> -c <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></a></code></pre></div>
-</div>
-<div id="vm-dektop-conversion" class="section level3">
-<h3><span class="header-section-number">9.3.3</span> VM Desktop Conversion</h3>
-<div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="fu">sudo</span> apt-get install xfce4 xorg</a></code></pre></div>
-<p>For a more refined desktop environment, try</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="fu">sudo</span> apt-get install --no-install-recommends xubuntu-desktop </a></code></pre></div>
-<ul>
-<li>replace <code>xubuntu-</code> with <code>ubuntu-</code>, <code>lubuntu-</code>, or other preferred desktop enviornment</li>
-<li>the <code>--no-install-recommends</code> eliminates additional applications, removing it will add a word processor, a browser, and lots of other applications included in the default operating system.</li>
-</ul>
-<p>Reinstall Virtual Box additions for better integration adding X/mouse support</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
-<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
-<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a></code></pre></div>
-</div>
-<div id="install-rstudio" class="section level3">
-<h3><span class="header-section-number">9.3.4</span> Install RStudio Desktop</h3>
-<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="fu">wget</span> http://download1.rstudio.org/rstudio-0.97.551-amd64.deb</a>
-<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="ex">apt-get</span> install libjpeg621</a>
-<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="ex">dpkg</span> -i rstudio-*</a>
-<a class="sourceLine" id="cb111-4" data-line-number="4"><span class="fu">rm</span> rstudio-*</a></code></pre></div>
 
 </div>
 </div>

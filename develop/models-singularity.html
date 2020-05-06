@@ -253,11 +253,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9" data-path="working-with-vm.html"><a href="working-with-vm.html"><i class="fa fa-check"></i><b>9</b> VM configuration and maintenance</a><ul>
 <li class="chapter" data-level="9.1" data-path="working-with-vm.html"><a href="working-with-vm.html#maintain-vm"><i class="fa fa-check"></i><b>9.1</b> Updating the VM</a></li>
 <li class="chapter" data-level="9.2" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm"><i class="fa fa-check"></i><b>9.2</b> Connecting to the VM via SSH</a></li>
-<li class="chapter" data-level="9.3" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm-bety"><i class="fa fa-check"></i><b>9.3</b> Connecting to bety on the VM via SSh</a><ul>
+<li class="chapter" data-level="9.3" data-path="working-with-vm.html"><a href="working-with-vm.html#ssh-vm-bety"><i class="fa fa-check"></i><b>9.3</b> Connecting to BETYdb on the VM via SSH</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="working-with-vm.html"><a href="working-with-vm.html#awsvm"><i class="fa fa-check"></i><b>9.3.1</b> Using Amazon Web Services for a VM (AWS)</a></li>
 <li class="chapter" data-level="9.3.2" data-path="working-with-vm.html"><a href="working-with-vm.html#createvm"><i class="fa fa-check"></i><b>9.3.2</b> Creating a Virtual Machine</a></li>
-<li class="chapter" data-level="9.3.3" data-path="working-with-vm.html"><a href="working-with-vm.html#vm-dektop-conversion"><i class="fa fa-check"></i><b>9.3.3</b> VM Desktop Conversion</a></li>
-<li class="chapter" data-level="9.3.4" data-path="working-with-vm.html"><a href="working-with-vm.html#install-rstudio"><i class="fa fa-check"></i><b>9.3.4</b> Install RStudio Desktop</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>10</b> PEcAn standard formats</a><ul>
@@ -615,34 +613,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First make sure you have all the data files:</p>
 <details>
 <p><summary>bash script to install required files (click to expand)</summary></p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb392-1" data-line-number="1"><span class="co">#!/bin/bash</span></a>
-<a class="sourceLine" id="cb392-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb392-3" data-line-number="3"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> sites<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb392-4" data-line-number="4">  <span class="ex">curl</span> -s -o sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</a>
-<a class="sourceLine" id="cb392-5" data-line-number="5">  <span class="fu">tar</span> zxf sites.tgz</a>
-<a class="sourceLine" id="cb392-6" data-line-number="6">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/kooper/Projects/EBI#/data/sites#&quot;</span> sites/*/ED_MET_DRIVER_HEADER</a>
-<a class="sourceLine" id="cb392-7" data-line-number="7">  <span class="fu">rm</span> sites.tgz</a>
-<a class="sourceLine" id="cb392-8" data-line-number="8"><span class="kw">fi</span></a>
-<a class="sourceLine" id="cb392-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb392-10" data-line-number="10"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> inputs<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb392-11" data-line-number="11">  <span class="ex">curl</span> -s -o inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</a>
-<a class="sourceLine" id="cb392-12" data-line-number="12">  <span class="fu">tar</span> zxf inputs.tgz</a>
-<a class="sourceLine" id="cb392-13" data-line-number="13">  <span class="fu">rm</span> inputs.tgz</a>
-<a class="sourceLine" id="cb392-14" data-line-number="14"><span class="kw">fi</span></a>
-<a class="sourceLine" id="cb392-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb392-16" data-line-number="16"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> testrun.s83<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb392-17" data-line-number="17">  <span class="ex">curl</span> -s -o testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</a>
-<a class="sourceLine" id="cb392-18" data-line-number="18">  <span class="fu">unzip</span> -q testrun.s83.zip</a>
-<a class="sourceLine" id="cb392-19" data-line-number="19">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> testrun.s83/ED2IN</a>
-<a class="sourceLine" id="cb392-20" data-line-number="20">  <span class="fu">rm</span> testrun.s83.zip</a>
-<a class="sourceLine" id="cb392-21" data-line-number="21"><span class="kw">fi</span></a>
-<a class="sourceLine" id="cb392-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb392-23" data-line-number="23"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="va">${HOME}</span>/sites/Santarem_Km83<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb392-24" data-line-number="24">  <span class="ex">curl</span> -s -o Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb392-25" data-line-number="25">  <span class="fu">unzip</span> -q -d sites Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb392-26" data-line-number="26">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</a>
-<a class="sourceLine" id="cb392-27" data-line-number="27">  <span class="fu">rm</span> Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb392-28" data-line-number="28"><span class="kw">fi</span></a></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb388-1" data-line-number="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb388-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb388-3" data-line-number="3"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> sites<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb388-4" data-line-number="4">  <span class="ex">curl</span> -s -o sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</a>
+<a class="sourceLine" id="cb388-5" data-line-number="5">  <span class="fu">tar</span> zxf sites.tgz</a>
+<a class="sourceLine" id="cb388-6" data-line-number="6">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/kooper/Projects/EBI#/data/sites#&quot;</span> sites/*/ED_MET_DRIVER_HEADER</a>
+<a class="sourceLine" id="cb388-7" data-line-number="7">  <span class="fu">rm</span> sites.tgz</a>
+<a class="sourceLine" id="cb388-8" data-line-number="8"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb388-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb388-10" data-line-number="10"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> inputs<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb388-11" data-line-number="11">  <span class="ex">curl</span> -s -o inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</a>
+<a class="sourceLine" id="cb388-12" data-line-number="12">  <span class="fu">tar</span> zxf inputs.tgz</a>
+<a class="sourceLine" id="cb388-13" data-line-number="13">  <span class="fu">rm</span> inputs.tgz</a>
+<a class="sourceLine" id="cb388-14" data-line-number="14"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb388-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb388-16" data-line-number="16"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> testrun.s83<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb388-17" data-line-number="17">  <span class="ex">curl</span> -s -o testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</a>
+<a class="sourceLine" id="cb388-18" data-line-number="18">  <span class="fu">unzip</span> -q testrun.s83.zip</a>
+<a class="sourceLine" id="cb388-19" data-line-number="19">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> testrun.s83/ED2IN</a>
+<a class="sourceLine" id="cb388-20" data-line-number="20">  <span class="fu">rm</span> testrun.s83.zip</a>
+<a class="sourceLine" id="cb388-21" data-line-number="21"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb388-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb388-23" data-line-number="23"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="va">${HOME}</span>/sites/Santarem_Km83<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb388-24" data-line-number="24">  <span class="ex">curl</span> -s -o Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb388-25" data-line-number="25">  <span class="fu">unzip</span> -q -d sites Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb388-26" data-line-number="26">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</a>
+<a class="sourceLine" id="cb388-27" data-line-number="27">  <span class="fu">rm</span> Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb388-28" data-line-number="28"><span class="kw">fi</span></a></code></pre></div>
 </details>
 <p>Next edit the ED2IN file in testrun.s83</p>
 <details>
