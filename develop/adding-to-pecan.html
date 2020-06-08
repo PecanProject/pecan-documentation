@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-06-04" />
+<meta name="date" content="2020-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -929,13 +929,13 @@ end_date &lt;- End date of your data in &quot;y-m-d&quot;</code></pre>
 <div id="vegetation-data-1" class="section level4">
 <h4><span class="header-section-number">18.3.4.2</span> Vegetation Data</h4>
 <p>Vegetation data will be required to parameterize your model. In these examples we will go over how to produce a standard initial condition file.</p>
-<p>The main function to process cohort data is the <code>ic.process.R</code> function. As of now however, if you require pool data you will run a separate function, <code>pool_ic_list2netcdf.R</code>.</p>
+<p>The main function to process cohort data is the <code>ic_process.R</code> function. As of now however, if you require pool data you will run a separate function, <code>pool_ic_list2netcdf.R</code>.</p>
 <div id="example-1-processing-veg-data-from-data-in-hand." class="section level6">
 <h6><span class="header-section-number">18.3.4.2.0.1</span> Example 1: Processing Veg data from data in hand.</h6>
 <p>In the following example we will process vegetation data that you have in hand using PEcAn.</p>
 <p>First, you’ll need to create a input record in BETY that will have a file record and format record reflecting the location and format of your file. Instructions can be found in our <a href="adding-to-pecan.html#NewInput">How to Insert new Input Data</a> page.</p>
 <p>Once you have created an input record you must take note of the input id of your record. An easy way to take note of this is in the URL of the BETY webpage that shows your input record. In this example we use an input record with the id <code>1000013064</code> which can be found at this url: <a href="https://psql-pecan.bu.edu/bety/inputs/1000013064#" class="uri">https://psql-pecan.bu.edu/bety/inputs/1000013064#</a> . Note that this is the Boston University BETY database. If you are on a different machine, your url will be different.</p>
-<p>With the input id in hand you can now edit a pecan XML so that the PEcAn function <code>ic.process</code> will know where to look in order to process your data. The <code>inputs</code> section of your pecan XML will look like this. As of now ic.process is set up to work with the ED2 model so we will use ED2 settings and then grab the intermediary Rds data file that is created as the standard PEcAn file. For your Inputs section you will need to input your input id wherever you see the <code>useic</code> flag.</p>
+<p>With the input id in hand you can now edit a pecan XML so that the PEcAn function <code>ic_process</code> will know where to look in order to process your data. The <code>inputs</code> section of your pecan XML will look like this. As of now ic_process is set up to work with the ED2 model so we will use ED2 settings and then grab the intermediary Rds data file that is created as the standard PEcAn file. For your Inputs section you will need to input your input id wherever you see the <code>useic</code> flag.</p>
 <pre><code>&lt;inputs&gt;
       &lt;css&gt;
         &lt;source&gt;FFT&lt;/source&gt;
@@ -1028,10 +1028,10 @@ end_date &lt;- End date of your data in &quot;y-m-d&quot;</code></pre>
 <p>Once you edit your PEcAn.xml you can than create a settings object using PEcAn functions. Your <code>pecan.xml</code> must be in your working directory.</p>
 <pre><code>settings &lt;- PEcAn.settings::read.settings(&quot;pecan.xml&quot;)
 settings &lt;- PEcAn.settings::prepare.settings(settings, force=FALSE)</code></pre>
-<p>You can then execute the <code>ic.process</code> function to convert data into a standard Rds file:</p>
+<p>You can then execute the <code>ic_process</code> function to convert data into a standard Rds file:</p>
 <pre><code>input &lt;- settings$run$inputs
 dir &lt;- &quot;.&quot;
-ic.process(settings, input, dir, overwrite = FALSE)</code></pre>
+ic_process(settings, input, dir, overwrite = FALSE)</code></pre>
 <p>Note that the argument <code>dir</code> is set to the current directory. You will find the final ED2 file there. More importantly though you will find the <code>.Rds</code> file within the same directory.</p>
 </div>
 <div id="example-3-pool-initial-condition-files" class="section level6">
