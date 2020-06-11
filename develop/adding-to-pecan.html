@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-06-09" />
+<meta name="date" content="2020-06-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1067,19 +1067,19 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 <div id="example-2-converting-paleon-data" class="section level6">
 <h6><span class="header-section-number">18.3.4.3.0.2</span> Example 2: Converting PalEON data</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb191-1" data-line-number="1">   <span class="kw">&lt;soil&gt;</span></a>
-<a class="sourceLine" id="cb191-2" data-line-number="2">     <span class="kw">&lt;id&gt;</span>1000012896<span class="kw">&lt;/id&gt;</span></a>
-<a class="sourceLine" id="cb191-3" data-line-number="3">   <span class="kw">&lt;/soil&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb192-1" data-line-number="1">   <span class="kw">&lt;soil&gt;</span></a>
+<a class="sourceLine" id="cb192-2" data-line-number="2">     <span class="kw">&lt;id&gt;</span>1000012896<span class="kw">&lt;/id&gt;</span></a>
+<a class="sourceLine" id="cb192-3" data-line-number="3">   <span class="kw">&lt;/soil&gt;</span></a></code></pre></div>
 <p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 </div>
 <div id="example-3-extracting-soil-properties-from-gssurgo-database" class="section level6">
 <h6><span class="header-section-number">18.3.4.3.0.3</span> Example 3: Extracting soil properties from gSSURGO database</h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the gSSURGO data product. This product needs no installation and it extract soil proeprties for the lower 48 states in U.S. In order to let the pecan know that you’re planning to use gSSURGO, you can the following XML tag under input in your pecan xml file.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">&lt;inputs&gt;</span></a>
-<a class="sourceLine" id="cb192-2" data-line-number="2">   <span class="kw">&lt;soil&gt;</span></a>
-<a class="sourceLine" id="cb192-3" data-line-number="3">     <span class="kw">&lt;source&gt;</span>gSSURGO<span class="kw">&lt;/source&gt;</span></a>
-<a class="sourceLine" id="cb192-4" data-line-number="4">   <span class="kw">&lt;/soil&gt;</span></a>
-<a class="sourceLine" id="cb192-5" data-line-number="5"><span class="kw">&lt;/inputs&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">&lt;inputs&gt;</span></a>
+<a class="sourceLine" id="cb193-2" data-line-number="2">   <span class="kw">&lt;soil&gt;</span></a>
+<a class="sourceLine" id="cb193-3" data-line-number="3">     <span class="kw">&lt;source&gt;</span>gSSURGO<span class="kw">&lt;/source&gt;</span></a>
+<a class="sourceLine" id="cb193-4" data-line-number="4">   <span class="kw">&lt;/soil&gt;</span></a>
+<a class="sourceLine" id="cb193-5" data-line-number="5"><span class="kw">&lt;/inputs&gt;</span></a></code></pre></div>
 </div>
 </div>
 </div>
