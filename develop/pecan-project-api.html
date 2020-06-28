@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>27 Miscellaneous | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="27 Miscellaneous | The Predictive Ecosystem Analyzer" />
+  <title>15 PEcAn Project API | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="15 PEcAn Project API | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="27 Miscellaneous | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="15 PEcAn Project API | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="27 Miscellaneous | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="15 PEcAn Project API | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data-assimilation-with-dart.html"/>
-<link rel="next" href="faq.html"/>
+<link rel="prev" href="available-meteorological-drivers.html"/>
+<link rel="next" href="database-sync.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -626,72 +626,446 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="miscellaneous" class="section level1">
-<h1><span class="header-section-number">27</span> Miscellaneous</h1>
-<div id="todo" class="section level2">
-<h2><span class="header-section-number">27.1</span> TODO</h2>
+<div id="pecan-project-api" class="section level1">
+<h1><span class="header-section-number">15</span> PEcAn Project API</h1>
+<div id="introduction-3" class="section level2">
+<h2><span class="header-section-number">15.1</span> Introduction</h2>
+<div id="welcome-to-the-pecan-project-api-documentation." class="section level5">
+<h5><span class="header-section-number">15.1.0.0.1</span> Welcome to the PEcAn Project API Documentation.</h5>
+<p>The Predictive Ecosystem Analyser (PEcAn) Project is an open source framework initiated to meet the demands for more accessible, transparent &amp; repeatable modeling of ecosystems. PEcAn can be considered as an ecoinformatics toolbox combined with a set of workflows that wrap around ecosystem models that allow users to effectively perform data synthesis, propagation of uncertainty through a model &amp; ecological predictions in an integrated fashion using a diverse repository of data &amp; models.</p>
+<p>Our API allows users to remotely interact with the PEcAn servers and leverage the functionalities provided by the PEcAn Project. It has been designed to follow common RESTful API conventions. Most operations are performed using the HTTP methods: <code>GET</code> (retrieve) &amp; <code>POST</code> (create).</p>
+<p><em>Please note that the PEcAn Project API is currently under active development and is possible that any information in this document is subject to change.</em></p>
+</div>
+</div>
+<div id="authentication" class="section level2">
+<h2><span class="header-section-number">15.2</span> Authentication</h2>
+<p>Authentication to the PEcAn API occurs via <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic HTTP Auth</a>. The credentials for using the API are the same as those used to log into PEcAn &amp; BetyDB. Here is how you use basic HTTP auth with <code>curl</code>:</p>
+<pre><code>$ curl --user &#39;&lt;username&gt;:&lt;password&gt;&#39; &lt;api-endpoint&gt;</code></pre>
+<p>Authentication also depends on the PEcAn server that the user interacts with. Some servers, at the time of deployment have the <code>AUTH_REQ = FALSE</code>, meaning that such servers do not require user autertication for the usage of the PEcAn APIs. Regardless of the type of server, the endpoints defind under General section can be accessed without any authentication.</p>
+</div>
+<div id="restful-api-endpoints" class="section level2">
+<h2><span class="header-section-number">15.3</span> RESTful API Endpoints</h2>
+<p>This page contains the high-level overviews &amp; the functionalities offered by the different RESTful endpoints of the PEcAn API.</p>
+<p><strong>For the most up-to-date documentation, you can visit the <a href="https://petstore.swagger.io/?url=https://raw.githubusercontent.com/tezansahu/pecan/api_1/apps/api/pecanapi-spec.yml">PEcAn API Documentation</a>.</strong></p>
+<p>The currently implemented functionalities include:</p>
 <ul>
-<li>Add list of developers</li>
+<li><strong>General:</strong>
+<ul>
+<li><code>GET /api/ping</code>: Ping the server to check if it is live</li>
+<li><code>GET /api/status</code>: Obtain general information about PEcAn &amp; the details of the database host</li>
+</ul></li>
+<li><strong>Models:</strong>
+<ul>
+<li><code>GET /api/models/</code>: Retrieve the details of model(s) used by PEcAn</li>
+</ul></li>
+<li><strong>Workflows:</strong>
+<ul>
+<li><code>GET /api/workflows/</code>: Retrieve a list of PEcAn workflows</li>
+<li><code>POST /api/workflows/</code> *: Submit a new PEcAn workflow</li>
+<li><code>GET /api/workflows/{id}</code>: Obtain the details of a particular PEcAn workflow by supplying its ID</li>
+</ul></li>
+<li><strong>Runs:</strong>
+<ul>
+<li><code>GET /api/runs</code>: Get the list of all the runs for a specified PEcAn Workflow</li>
+<li><code>GET /api/runs/{id}</code>: Fetch the details of a specified PEcAn run</li>
+</ul></li>
+</ul>
+<p><em>* indicates that the particular API is under development &amp; may not be ready for use</em></p>
+</div>
+<div id="examples" class="section level2">
+<h2><span class="header-section-number">15.4</span> Examples:</h2>
+<div id="prerequisites-to-interact-with-the-pecan-api-server" class="section level4 tabset tabset-pills">
+<h4><span class="header-section-number">15.4.0.1</span> Prerequisites to interact with the PEcAn API Server</h4>
+<div id="r-packages" class="section level5">
+<h5><span class="header-section-number">15.4.0.1.1</span> R Packages</h5>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/httr/index.html">httr</a></li>
+<li><a href="https://cran.r-project.org/web/packages/jsonlite/index.html">jsonlite</a></li>
 </ul>
 </div>
-<div id="using-the-pecan-download.file-function" class="section level2">
-<h2><span class="header-section-number">27.2</span> Using the PEcAn download.file() function</h2>
-<p>download.file(url, destination_file, method) <br>
-<br></p>
-<p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
-<p><br></p>
-<p>Examples: <br>
-<em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
-<p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
-<p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
-<p><br></p>
-<p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as:
-firewall-type=1
-firewall-host=ftpgateway.sec.bnl.local
-firewall-port=21</p>
-<p>which then allows for direct connection through the firewall using a command like:</p>
-<pre><code>ncftpget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz</code></pre>
-<p>To allow the use of ncftpget from within the download.file() function you need to set your R profile download.ftp.method option in your options list. To see your current R options run options() from R cmd, which should look something like this:</p>
-<pre><code>&gt; options()
-$add.smooth
-[1] TRUE
+<div id="python-packages" class="section level5">
+<h5><span class="header-section-number">15.4.0.1.2</span> Python Packages</h5>
+<ul>
+<li><a href="https://requests.readthedocs.io/en/master/">requests</a></li>
+<li><a href="https://docs.python.org/3/library/json.html">json</a></li>
+</ul>
+</div>
+</div>
+<div id="section" class="section level4 unnumbered">
+<h4></h4>
+<p>Following are some example snippets to call the PEcAn API endpoints:</p>
+</div>
+<div id="get-apiping" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.1</span> <code>GET /api/ping</code></h3>
+<div id="r-snippet" class="section level4">
+<h4><span class="header-section-number">15.4.1.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;http://localhost:8000/api/ping&quot;</span>)</a>
+<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $request
+## [1] &quot;ping&quot;
 
-$bitmapType
-[1] &quot;cairo&quot;
+## $response
+## [1] &quot;pong&quot;</code></pre>
+</div>
+<div id="python-snippet" class="section level4">
+<h4><span class="header-section-number">15.4.1.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb156-1" data-line-number="1">response <span class="op">=</span> requests.get(<span class="st">&quot;http://localhost:8000/api/ping&quot;</span>)</a>
+<a class="sourceLine" id="cb156-2" data-line-number="2"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##  &quot;request&quot;: &quot;ping&quot;,
+##  &quot;response&quot;: &quot;pong&quot;
+## }</code></pre>
+</div>
+</div>
+<div id="section-1" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apistatus" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.2</span> <code>GET /api/status</code></h3>
+<div id="r-snippet-1" class="section level4">
+<h4><span class="header-section-number">15.4.2.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;http://localhost:8000/api/status&quot;</span>)</a>
+<a class="sourceLine" id="cb158-2" data-line-number="2"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $pecan_details$version
+## [1] &quot;1.7.0&quot;
 
-$browser
-[1] &quot;/usr/bin/xdg-open&quot;
+## $pecan_details$branch
+## [1] &quot;develop&quot;
 
-$browserNLdisabled
-[1] FALSE
+## $pecan_details$gitsha1
+## [1] &quot;unknown&quot;
 
-$CBoundsCheck
-[1] FALSE
+## $host_details$hostid
+## [1] 99
 
-$check.bounds
-[1] FALSE
+## $host_details$hostname
+## [1] &quot;&quot;
 
-$citation.bibtex.max
-[1] 1
+## $host_details$start
+## [1] 99000000000
 
-$continue
-[1] &quot;+ &quot;
+## $host_details$end
+## [1] 99999999999
 
-$contrasts
-        unordered           ordered
-&quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
-<p>In order to set your download.ftp.method option you need to add a line such as</p>
-<pre><code># set default FTP
-options(download.ftp.method = &quot;ncftpget&quot;)</code></pre>
-<p>In your ~/.Rprofile. On modex at BNL we have set the global option in /usr/lib64/R/etc/Rprofile.site.</p>
-<p>Once this is done you should be able to see the option set using this command in R:</p>
-<pre><code>&gt; options(&quot;download.ftp.method&quot;)
-$download.ftp.method
-[1] &quot;ncftpget&quot;</code></pre>
+## $host_details$sync_url
+## [1] &quot;&quot;
 
+## $host_details$sync_contact
+## [1] &quot;&quot;</code></pre>
+</div>
+<div id="python-snippet-1" class="section level4">
+<h4><span class="header-section-number">15.4.2.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb160-1" data-line-number="1">response <span class="op">=</span> requests.get(<span class="st">&quot;http://localhost:8000/api/status&quot;</span>)</a>
+<a class="sourceLine" id="cb160-2" data-line-number="2"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;pecan_details&quot;: {
+##     &quot;version&quot;: &quot;1.7.0&quot;,
+##     &quot;branch&quot;: &quot;develop&quot;,
+##     &quot;gitsha1&quot;: &quot;unknown&quot;
+##   },
+##   &quot;host_details&quot;: {
+##     &quot;hostid&quot;: 99,
+##     &quot;hostname&quot;: &quot;&quot;,
+##     &quot;start&quot;: 99000000000,
+##     &quot;end&quot;: 99999999999,
+##     &quot;sync_url&quot;: &quot;&quot;,
+##     &quot;sync_contact&quot;: &quot;&quot;
+##   }
+## }</code></pre>
+</div>
+</div>
+<div id="section-2" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apimodels" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.3</span> <code>GET /api/models/</code></h3>
+<div id="r-snippet-2" class="section level4">
+<h4><span class="header-section-number">15.4.3.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="co"># Get model(s) with `model_name` = SIPNET &amp; `revision` = ssr</span></a>
+<a class="sourceLine" id="cb162-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb162-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/models/?model_name=SIPNET&amp;revision=ssr&quot;</span>,</a>
+<a class="sourceLine" id="cb162-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb162-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb162-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $models
+##     model_id model_name revision modeltype_id model_type
+## 1 1000000022     SIPNET      ssr            3     SIPNET
+## ...</code></pre>
+</div>
+<div id="python-snippet-2" class="section level4">
+<h4><span class="header-section-number">15.4.3.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="co"># Get model(s) with `model_name` = SIPNET &amp; `revision` = ssr</span></a>
+<a class="sourceLine" id="cb164-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb164-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/models/?model_name=SIPNET&amp;revision=ssr&quot;</span>,</a>
+<a class="sourceLine" id="cb164-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb164-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb164-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;models&quot;: [
+##     {
+##       &quot;model_id&quot;: &quot;1000000022&quot;,
+##       &quot;model_name&quot;: &quot;SIPNET&quot;,
+##       &quot;revision&quot;: &quot;ssr&quot;,
+##       &quot;modeltype_id&quot;: 3,
+##       &quot;model_type&quot;: &quot;SIPNET&quot;
+##     },
+##     ...
+##   ]
+## }</code></pre>
+</div>
+</div>
+<div id="section-3" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apiworkflows" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.4</span> <code>GET /api/workflows/</code></h3>
+<div id="r-snippet-3" class="section level4">
+<h4><span class="header-section-number">15.4.4.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="co"># Get workflow(s) that use `model_id` = 1000000022 [SIPNET] &amp; `site_id` = 676 [Willow Creek (US-WCr)]</span></a>
+<a class="sourceLine" id="cb166-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb166-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/?model_id=1000000022&amp;site_id=676&quot;</span>,</a>
+<a class="sourceLine" id="cb166-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb166-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb166-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $workflows
+##   id              properties 
+##   &lt;S3: integer64&gt; &lt;list&gt;     
+## 1 1000009172      &lt;list [14]&gt;
+## ...
+
+## $count
+## [1] 5</code></pre>
+</div>
+<div id="python-snippet-3" class="section level4">
+<h4><span class="header-section-number">15.4.4.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb168"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="co"># Get workflow(s) that use `model_id` = 1000000022 [SIPNET] &amp; `site_id` = 676 [Willow Creek (US-WCr)]</span></a>
+<a class="sourceLine" id="cb168-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb168-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/workflows/?model_id=1000000022&amp;site_id=676&quot;</span>,</a>
+<a class="sourceLine" id="cb168-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb168-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb168-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;workflows&quot;: [
+##     {
+##       &quot;id&quot;: 1000009172,
+##       &quot;properties&quot;: {
+##         &quot;end&quot;: &quot;2004/12/31&quot;,
+##         &quot;pft&quot;: [
+##           &quot;soil.IF&quot;,
+##           &quot;temperate.deciduous.IF&quot;
+##         ],
+##        &quot;email&quot;: &quot;&quot;,
+##        &quot;notes&quot;: &quot;&quot;,
+##        &quot;start&quot;: &quot;2004/01/01&quot;,
+##        &quot;siteid&quot;: &quot;676&quot;,
+##        &quot;modelid&quot;: &quot;1000000022&quot;,
+##        &quot;hostname&quot;: &quot;test-pecan.bu.edu&quot;,
+##        &quot;sitename&quot;: &quot;WillowCreek(US-WCr)&quot;,
+##        &quot;input_met&quot;: &quot;AmerifluxLBL.SIPNET&quot;,
+##        &quot;pecan_edit&quot;: &quot;on&quot;,
+##        &quot;sitegroupid&quot;: &quot;1000000022&quot;,
+##        &quot;fluxusername&quot;: &quot;pecan&quot;,
+##        &quot;input_poolinitcond&quot;: &quot;-1&quot;
+##        }
+##     },
+##     ...
+##   ],
+##   &quot;count&quot;: 5
+## }</code></pre>
+</div>
+</div>
+<div id="section-4" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apiworkflowsid" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.5</span> <code>GET /api/workflows/{id}</code></h3>
+<div id="r-snippet-4" class="section level4">
+<h4><span class="header-section-number">15.4.5.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="co"># Get details of workflow with `id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb170-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb170-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb170-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb170-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb170-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $id
+## [1] &quot;1000009172&quot;
+
+## $properties
+## $properties$end
+## [1] &quot;2004/12/31&quot;
+
+## $properties$pft
+## $properties$pft[[1]]
+## [1] &quot;soil.IF&quot;
+
+## $properties$pft[[2]]
+## [1] &quot;temperate.deciduous.IF&quot;
+
+
+## $properties$email
+## [1] &quot;&quot;
+
+## $properties$notes
+## [1] &quot;&quot;
+
+## $properties$start
+## [1] &quot;2004/01/01&quot;
+
+## $properties$siteid
+## [1] &quot;676&quot;
+
+## $properties$modelid
+## [1] &quot;1000000022&quot;
+
+## $properties$hostname
+## [1] &quot;test-pecan.bu.edu&quot;
+
+## $properties$sitename
+## [1] &quot;WillowCreek(US-WCr)&quot;
+
+## $properties$input_met
+## [1] &quot;AmerifluxLBL.SIPNET&quot;
+
+## $properties$pecan_edit
+## [1] &quot;on&quot;
+
+## $properties$sitegroupid
+## [1] &quot;1000000022&quot;
+
+## $properties$fluxusername
+## [1] &quot;pecan&quot;
+
+## $properties$input_poolinitcond
+## [1] &quot;-1&quot;</code></pre>
+</div>
+<div id="python-snippet-4" class="section level4">
+<h4><span class="header-section-number">15.4.5.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="co"># Get details of workflow with `id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb172-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb172-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/workflows/1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb172-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb172-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb172-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;id&quot;: &quot;1000009172&quot;,
+##   &quot;properties&quot;: {
+##     &quot;end&quot;: &quot;2004/12/31&quot;,
+##     &quot;pft&quot;: [
+##       &quot;soil.IF&quot;,
+##       &quot;temperate.deciduous.IF&quot;
+##     ],
+##     &quot;email&quot;: &quot;&quot;,
+##     &quot;notes&quot;: &quot;&quot;,
+##     &quot;start&quot;: &quot;2004/01/01&quot;,
+##     &quot;siteid&quot;: &quot;676&quot;,
+##     &quot;modelid&quot;: &quot;1000000022&quot;,
+##     &quot;hostname&quot;: &quot;test-pecan.bu.edu&quot;,
+##     &quot;sitename&quot;: &quot;WillowCreek(US-WCr)&quot;,
+##     &quot;input_met&quot;: &quot;AmerifluxLBL.SIPNET&quot;,
+##     &quot;pecan_edit&quot;: &quot;on&quot;,
+##     &quot;sitegroupid&quot;: &quot;1000000022&quot;,
+##     &quot;fluxusername&quot;: &quot;pecan&quot;,
+##     &quot;input_poolinitcond&quot;: &quot;-1&quot;
+##   }
+## }</code></pre>
+</div>
+</div>
+<div id="section-5" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apiruns" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.6</span> <code>GET /api/runs/</code></h3>
+<div id="r-snippet-5" class="section level4">
+<h4><span class="header-section-number">15.4.6.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="co"># Get list of run belonging to the workflow with `workflow_id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb174-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb174-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/?workflow_id=1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb174-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb174-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb174-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $runs
+##    runtype  ensemble_id    workflow_id    id            model_id     site_id      parameter_list start_time        
+## finish_time    
+##  1 ensemble 1000017624     1000009172     1002042201    1000000022   796          ensemble=1     2005-01-01 
+## 00:00:00 2011-12-31 00:00:00
+##  ...
+
+## $count
+## [1] 50</code></pre>
+</div>
+<div id="python-snippet-5" class="section level4">
+<h4><span class="header-section-number">15.4.6.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="co"># Get list of run belonging to the workflow with `workflow_id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb176-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb176-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/runs/?workflow_id=1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb176-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb176-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb176-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;runs&quot;: [
+##     {
+##       &quot;runtype&quot;: &quot;ensemble&quot;,
+##       &quot;ensemble_id&quot;: 1000017624,
+##       &quot;workflow_id&quot;: 1000009172,
+##       &quot;id&quot;: 1002042201,
+##       &quot;model_id&quot;: 1000000022,
+##       &quot;site_id&quot;: 796,
+##       &quot;parameter_list&quot;: &quot;ensemble=1&quot;,
+##       &quot;start_time&quot;: &quot;2005-01-01&quot;,
+##       &quot;finish_time&quot;: &quot;2011-12-31&quot;
+##     },
+##     ...
+##   ]
+##   &quot;count&quot;: 50,
+##   &quot;next_page&quot;: &quot;http://localhost:8000/api/workflows/?workflow_id=1000009172&amp;offset=50&amp;limit=50&quot;
+## }</code></pre>
+</div>
+</div>
+<div id="section-6" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apirunsid" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.7</span> <code>GET /api/runs/{id}</code></h3>
+<div id="r-snippet-6" class="section level4">
+<h4><span class="header-section-number">15.4.7.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="co"># Get details of run belonging with `id` = &#39;1002042201&#39;</span></a>
+<a class="sourceLine" id="cb178-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb178-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/1002042201&quot;</span>,</a>
+<a class="sourceLine" id="cb178-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb178-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb178-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>##    runtype ensemble_id workflow_id         id   model_id site_id start_time finish_time parameter_list          
+## 1 ensemble  1000017624  1000009172 1002042201 1000000022     796 2005-01-01  2011-12-31     ensemble=1 
+##            created_at          updated_at          started_at         finished_at
+## 1 2018-04-11 22:20:31 2018-04-11 22:22:08 2018-04-11 18:21:57 2018-04-11 18:22:08</code></pre>
+</div>
+<div id="python-snippet-6" class="section level4">
+<h4><span class="header-section-number">15.4.7.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="co"># Get details of run with `id` = &#39;1002042201&#39;</span></a>
+<a class="sourceLine" id="cb180-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb180-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/runs/1002042201&quot;</span>,</a>
+<a class="sourceLine" id="cb180-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb180-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb180-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## [
+##   {
+##     &quot;runtype&quot;: &quot;ensemble&quot;,
+##     &quot;ensemble_id&quot;: 1000017624,
+##     &quot;workflow_id&quot;: 1000009172,
+##     &quot;id&quot;: 1002042201,
+##     &quot;model_id&quot;: 1000000022,
+##     &quot;site_id&quot;: 796,
+##     &quot;parameter_list&quot;: &quot;ensemble=1&quot;,
+##     &quot;start_time&quot;: &quot;2005-01-01&quot;,
+##     &quot;finish_time&quot;: &quot;2011-12-31&quot;
+##   }
+## ]</code></pre>
+</div>
+</div>
+<div id="section-7" class="section level3 unnumbered">
+<h3></h3>
+
+</div>
 </div>
 </div>
             </section>
@@ -699,8 +1073,8 @@ $download.ftp.method
           </div>
         </div>
       </div>
-<a href="data-assimilation-with-dart.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="faq.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="available-meteorological-drivers.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="database-sync.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -731,7 +1105,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/04_appendix/00_appendix.Rmd",
+"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/03_topical_pages/07_remote_access/01_pecan_api.Rmd",
 "text": "Edit"
 },
 "history": {
