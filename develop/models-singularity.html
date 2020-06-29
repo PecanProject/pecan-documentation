@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-06-28" />
+<meta name="date" content="2020-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -635,34 +635,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First make sure you have all the data files:</p>
 <details>
 <p><summary>bash script to install required files (click to expand)</summary></p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb419-1" data-line-number="1"><span class="co">#!/bin/bash</span></a>
-<a class="sourceLine" id="cb419-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb419-3" data-line-number="3"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> sites<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb419-4" data-line-number="4">  <span class="ex">curl</span> -s -o sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</a>
-<a class="sourceLine" id="cb419-5" data-line-number="5">  <span class="fu">tar</span> zxf sites.tgz</a>
-<a class="sourceLine" id="cb419-6" data-line-number="6">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/kooper/Projects/EBI#/data/sites#&quot;</span> sites/*/ED_MET_DRIVER_HEADER</a>
-<a class="sourceLine" id="cb419-7" data-line-number="7">  <span class="fu">rm</span> sites.tgz</a>
-<a class="sourceLine" id="cb419-8" data-line-number="8"><span class="kw">fi</span></a>
-<a class="sourceLine" id="cb419-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb419-10" data-line-number="10"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> inputs<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb419-11" data-line-number="11">  <span class="ex">curl</span> -s -o inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</a>
-<a class="sourceLine" id="cb419-12" data-line-number="12">  <span class="fu">tar</span> zxf inputs.tgz</a>
-<a class="sourceLine" id="cb419-13" data-line-number="13">  <span class="fu">rm</span> inputs.tgz</a>
-<a class="sourceLine" id="cb419-14" data-line-number="14"><span class="kw">fi</span></a>
-<a class="sourceLine" id="cb419-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb419-16" data-line-number="16"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> testrun.s83<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb419-17" data-line-number="17">  <span class="ex">curl</span> -s -o testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</a>
-<a class="sourceLine" id="cb419-18" data-line-number="18">  <span class="fu">unzip</span> -q testrun.s83.zip</a>
-<a class="sourceLine" id="cb419-19" data-line-number="19">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> testrun.s83/ED2IN</a>
-<a class="sourceLine" id="cb419-20" data-line-number="20">  <span class="fu">rm</span> testrun.s83.zip</a>
-<a class="sourceLine" id="cb419-21" data-line-number="21"><span class="kw">fi</span></a>
-<a class="sourceLine" id="cb419-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb419-23" data-line-number="23"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="va">${HOME}</span>/sites/Santarem_Km83<span class="bu"> ]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb419-24" data-line-number="24">  <span class="ex">curl</span> -s -o Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb419-25" data-line-number="25">  <span class="fu">unzip</span> -q -d sites Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb419-26" data-line-number="26">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</a>
-<a class="sourceLine" id="cb419-27" data-line-number="27">  <span class="fu">rm</span> Santarem_Km83.zip</a>
-<a class="sourceLine" id="cb419-28" data-line-number="28"><span class="kw">fi</span></a></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb420-1" data-line-number="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb420-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb420-3" data-line-number="3"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> sites<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb420-4" data-line-number="4">  <span class="ex">curl</span> -s -o sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</a>
+<a class="sourceLine" id="cb420-5" data-line-number="5">  <span class="fu">tar</span> zxf sites.tgz</a>
+<a class="sourceLine" id="cb420-6" data-line-number="6">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/kooper/Projects/EBI#/data/sites#&quot;</span> sites/*/ED_MET_DRIVER_HEADER</a>
+<a class="sourceLine" id="cb420-7" data-line-number="7">  <span class="fu">rm</span> sites.tgz</a>
+<a class="sourceLine" id="cb420-8" data-line-number="8"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb420-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb420-10" data-line-number="10"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> inputs<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb420-11" data-line-number="11">  <span class="ex">curl</span> -s -o inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</a>
+<a class="sourceLine" id="cb420-12" data-line-number="12">  <span class="fu">tar</span> zxf inputs.tgz</a>
+<a class="sourceLine" id="cb420-13" data-line-number="13">  <span class="fu">rm</span> inputs.tgz</a>
+<a class="sourceLine" id="cb420-14" data-line-number="14"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb420-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb420-16" data-line-number="16"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> testrun.s83<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb420-17" data-line-number="17">  <span class="ex">curl</span> -s -o testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</a>
+<a class="sourceLine" id="cb420-18" data-line-number="18">  <span class="fu">unzip</span> -q testrun.s83.zip</a>
+<a class="sourceLine" id="cb420-19" data-line-number="19">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> testrun.s83/ED2IN</a>
+<a class="sourceLine" id="cb420-20" data-line-number="20">  <span class="fu">rm</span> testrun.s83.zip</a>
+<a class="sourceLine" id="cb420-21" data-line-number="21"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb420-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb420-23" data-line-number="23"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="va">${HOME}</span>/sites/Santarem_Km83<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb420-24" data-line-number="24">  <span class="ex">curl</span> -s -o Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb420-25" data-line-number="25">  <span class="fu">unzip</span> -q -d sites Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb420-26" data-line-number="26">  <span class="fu">sed</span> -i -e <span class="st">&quot;s#/home/pecan#/data#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</a>
+<a class="sourceLine" id="cb420-27" data-line-number="27">  <span class="fu">rm</span> Santarem_Km83.zip</a>
+<a class="sourceLine" id="cb420-28" data-line-number="28"><span class="kw">fi</span></a></code></pre></div>
 </details>
 <p>Next edit the ED2IN file in testrun.s83</p>
 <details>
