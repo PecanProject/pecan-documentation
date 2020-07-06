@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-03" />
+<meta name="date" content="2020-07-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -646,7 +646,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="restful-api-endpoints" class="section level2">
 <h2><span class="header-section-number">15.3</span> RESTful API Endpoints</h2>
 <p>This page contains the high-level overviews &amp; the functionalities offered by the different RESTful endpoints of the PEcAn API.</p>
-<p><strong>For the most up-to-date documentation, you can visit the <a href="https://petstore.swagger.io/?url=https://raw.githubusercontent.com/tezansahu/pecan/api_1/apps/api/pecanapi-spec.yml">PEcAn API Documentation</a>.</strong></p>
+<p><strong>For the most up-to-date documentation, you can visit the <a href="http://pecan-dev.ncsa.illinois.edu/swagger/">PEcAn API Documentation</a>.</strong></p>
 <p>The currently implemented functionalities include:</p>
 <ul>
 <li><strong>General:</strong>
@@ -784,7 +784,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="co"># Get model(s) with `model_name` = SIPNET &amp; `revision` = ssr</span></a>
 <a class="sourceLine" id="cb162-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
 <a class="sourceLine" id="cb162-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/models/?model_name=SIPNET&amp;revision=ssr&quot;</span>,</a>
-<a class="sourceLine" id="cb162-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb162-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb162-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb162-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $models
@@ -824,7 +824,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="co"># Get workflow(s) that use `model_id` = 1000000022 [SIPNET] &amp; `site_id` = 676 [Willow Creek (US-WCr)]</span></a>
 <a class="sourceLine" id="cb166-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
 <a class="sourceLine" id="cb166-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/?model_id=1000000022&amp;site_id=676&quot;</span>,</a>
-<a class="sourceLine" id="cb166-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb166-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb166-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb166-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $workflows
@@ -884,7 +884,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="co"># Get details of workflow with `id` = &#39;1000009172&#39;</span></a>
 <a class="sourceLine" id="cb170-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
 <a class="sourceLine" id="cb170-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/1000009172&quot;</span>,</a>
-<a class="sourceLine" id="cb170-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb170-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb170-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb170-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $id
@@ -980,7 +980,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="co"># Get list of run belonging to the workflow with `workflow_id` = &#39;1000009172&#39;</span></a>
 <a class="sourceLine" id="cb174-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
 <a class="sourceLine" id="cb174-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/?workflow_id=1000009172&quot;</span>,</a>
-<a class="sourceLine" id="cb174-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb174-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb174-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb174-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $runs
@@ -1031,7 +1031,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="co"># Get details of run belonging with `id` = &#39;1002042201&#39;</span></a>
 <a class="sourceLine" id="cb178-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
 <a class="sourceLine" id="cb178-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/1002042201&quot;</span>,</a>
-<a class="sourceLine" id="cb178-4" data-line-number="4">         <span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb178-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb178-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb178-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>##    runtype ensemble_id workflow_id         id   model_id site_id start_time finish_time parameter_list          
