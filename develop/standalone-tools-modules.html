@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-08" />
+<meta name="date" content="2020-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -392,6 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1.2" data-path="standalone-tools-modules.html"><a href="standalone-tools-modules.html#output-1"><i class="fa fa-check"></i><b>17.1.2</b> Output</a></li>
 <li class="chapter" data-level="17.1.3" data-path="standalone-tools-modules.html"><a href="standalone-tools-modules.html#example"><i class="fa fa-check"></i><b>17.1.3</b> Example</a></li>
 </ul></li>
+<li class="chapter" data-level="17.2" data-path="standalone-tools-modules.html"><a href="standalone-tools-modules.html#remote-data-module"><i class="fa fa-check"></i><b>17.2</b> Remote data module</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="shiny.html"><a href="shiny.html"><i class="fa fa-check"></i><b>18</b> Shiny</a><ul>
 <li class="chapter" data-level="18.1" data-path="shiny.html"><a href="shiny.html#testing-the-shiny-server"><i class="fa fa-check"></i><b>18.1</b> Testing the Shiny Server</a></li>
@@ -819,6 +820,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Load the data</li>
 </ol>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">   data =<span class="st"> </span>PEcAn.benchmark<span class="op">::</span><span class="kw">load_data</span>(<span class="dt">data.path =</span> data.path, <span class="dt">format =</span> format)</a></code></pre></div>
+</div>
+</div>
+<div id="remote-data-module" class="section level2">
+<h2><span class="header-section-number">17.2</span> Remote data module</h2>
+<p>Remote data module retrieves remote sensing data from MODISTools and Google Earth Engine (with plans to support AppEEARS in near future). The downloaded data can be used for performing further analysis in PEcAn.</p>
+<div id="google-earth-engine" class="section level4">
+<h4><span class="header-section-number">17.2.0.1</span> Google Earth Engine</h4>
+<p><a href="https://earthengine.google.com/">Google Earth Engine</a> is a cloud-based platform for performing analysis on satellite data. It provides access to a <a href="https://developers.google.com/earth-engine/datasets">large data catalog</a> through an online JavaScript code editor and a Python API.</p>
+<p>Datasets currently available for use in PEcAn via Google Earth Engine are,</p>
+<ul>
+<li><a href="https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR">Sentinel-2 MSI</a> <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/gee2pecan_s2.py"><code>gee2pecan_s2()</code></a></li>
+<li><a href="https://developers.google.com/earth-engine/datasets/catalog/NASA_USDA_HSL_SMAP_soil_moisture">SMAP Global Soil Moisture Data</a> <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/gee2pecan_smap.py"><code>gee2pecan_smap()</code></a></li>
+<li><a href="https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C01_T1_SR">Landsat 8 Surface Reflectance</a> <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/gee2pecan_l8.py"><code>gee2pecan_l8()</code></a></li>
+</ul>
+<p>Processing functions currently available are,</p>
+<ul>
+<li><a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/satellitetools/biophys_xarray.py">SNAP</a></li>
+</ul>
+</div>
+<div id="set-up-instructions-first-time-and-one-time-only" class="section level4">
+<h4><span class="header-section-number">17.2.0.2</span> Set-Up instructions (first time and one time only):</h4>
+<ol style="list-style-type: decimal">
+<li><p><strong>Sign up for the Google Earth Engine</strong>. Follow the instructions <a href="https://earthengine.google.com/new_signup/">here</a> to sign up for using GEE. You need to have your own GEE account for using the GEE download functions in this module.</p></li>
+<li><strong>Install the Python dependencies</strong>. Using this module requires Python3 and the package manager pip to be installed in your system.
+To install the additional Python dependencies required,</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Navigate to <code>pecan/modules/data.remote/inst</code> If you are inside the pecan directory, this can be done by,</li>
+</ol>
+<div class="sourceCode" id="cb203"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="bu">cd</span> modules/data.remote/inst</a></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Use pip to install the dependencies.</li>
+</ol>
+<div class="sourceCode" id="cb204"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="ex">pip</span> install -r requirements.txt</a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Authenticate GEE</strong>. The GEE API needs to be authenticated using your credentials. The credentials will be stored locally on your system. This can be done by,</li>
+</ol>
+<div class="sourceCode" id="cb205"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co">#this will open a browser and ask you to sign in with the Google account registered for GEE</span></a>
+<a class="sourceLine" id="cb205-2" data-line-number="2"><span class="ex">earthengine</span> authenticate</a></code></pre></div>
+</div>
+<div id="usage-guide" class="section level4">
+<h4><span class="header-section-number">17.2.0.3</span> Usage guide:</h4>
+<p>This module contains GEE and other processing functions which retrieve data from a specific dataset and source. For example, <code>gee2pecan_s2()</code> downloads bands from Sentinel 2 using GEE and <code>bands2lai_snap()</code> uses the downloaded bands to compute LAI using the SNAP algorithm. These functions can be used independently but the recommended way is to use <code>remote_process()</code> which is a main function that controls all the individual functions to create an organized way of downloading and handling remote sensing data in PEcAn.</p>
+<p><strong>Input data</strong>: The input data must be the coordinates of the area of interest (point or polygon type) and the name of the site/AOI. These information must be provided in a GeoJSON file.</p>
+<p><strong>Output data</strong>: The output data returned by the functions are in the form of netCDF files.</p>
+<p><strong>scale</strong>: Some of the GEE functions require a pixel resolution argument. Information about how GEE handles scale can be found out <a href="https://developers.google.com/earth-engine/scale">here</a></p>
+</div>
+<div id="example-use" class="section level4">
+<h4><span class="header-section-number">17.2.0.4</span> Example use</h4>
+<p>This example will download Sentinel 2 bands for an area in Reykjavik(test file is included) for the time period 2018-01-01 to 2018-12-31 and then use the SNAP algorithm to compute Leaf Area Index.</p>
+<ol style="list-style-type: decimal">
+<li><p>Open a Python shell at <code>pecan/modules/data.remote/inst</code></p></li>
+<li>In the Python shell run the following,</li>
+</ol>
+<div class="sourceCode" id="cb206"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="co"># import remote_process</span></a>
+<a class="sourceLine" id="cb206-2" data-line-number="2"><span class="im">from</span> remote_process <span class="im">import</span> remote_process</a>
+<a class="sourceLine" id="cb206-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb206-4" data-line-number="4"><span class="co"># call remote_process </span></a>
+<a class="sourceLine" id="cb206-5" data-line-number="5">remote_process(</a>
+<a class="sourceLine" id="cb206-6" data-line-number="6">        geofile<span class="op">=</span><span class="st">&quot;./satellitetools/test.geojson&quot;</span>,</a>
+<a class="sourceLine" id="cb206-7" data-line-number="7">        outdir<span class="op">=</span><span class="st">&quot;./out&quot;</span>,</a>
+<a class="sourceLine" id="cb206-8" data-line-number="8">        start<span class="op">=</span><span class="st">&quot;2018-01-01&quot;</span>,</a>
+<a class="sourceLine" id="cb206-9" data-line-number="9">        end<span class="op">=</span><span class="st">&quot;2018-12-31&quot;</span>,</a>
+<a class="sourceLine" id="cb206-10" data-line-number="10">        source<span class="op">=</span><span class="st">&quot;gee&quot;</span>,</a>
+<a class="sourceLine" id="cb206-11" data-line-number="11">        collection<span class="op">=</span><span class="st">&quot;COPERNICUS/S2_SR&quot;</span>,</a>
+<a class="sourceLine" id="cb206-12" data-line-number="12">        scale<span class="op">=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb206-13" data-line-number="13">        qc<span class="op">=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb206-14" data-line-number="14">        algorithm<span class="op">=</span><span class="st">&quot;snap&quot;</span>,</a>
+<a class="sourceLine" id="cb206-15" data-line-number="15">        output<span class="op">=</span>{<span class="st">&quot;get_data&quot;</span>: <span class="st">&quot;bands&quot;</span>, <span class="st">&quot;process_data&quot;</span>: <span class="st">&quot;lai&quot;</span>},</a>
+<a class="sourceLine" id="cb206-16" data-line-number="16">        stage<span class="op">=</span>{<span class="st">&quot;get_data&quot;</span>: <span class="va">True</span>, <span class="st">&quot;process_data&quot;</span>: <span class="va">True</span>},</a>
+<a class="sourceLine" id="cb206-17" data-line-number="17">    )</a></code></pre></div>
+<p>The output netCDF files(bands and LAI) will be saved at <code>./out</code>
+More information about the function and its arguments can be found out by <code>help(remote_process)</code></p>
 
 </div>
 </div>
