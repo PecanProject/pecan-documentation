@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-10" />
+<meta name="date" content="2020-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -227,7 +227,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="developer-guide.html"><a href="developer-guide.html#pecan-git"><i class="fa fa-check"></i><b>8.2</b> Git and GitHub Workflow</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="developer-guide.html"><a href="developer-guide.html#using-git"><i class="fa fa-check"></i><b>8.2.1</b> Using Git</a></li>
-<li class="chapter" data-level="8.2.2" data-path="developer-guide.html"><a href="developer-guide.html#github-use-with-pecan"><i class="fa fa-check"></i><b>8.2.2</b> GitHub use with PEcAn</a></li>
+<li class="chapter" data-level="8.2.2" data-path="developer-guide.html"><a href="developer-guide.html#recommended-git-workflow"><i class="fa fa-check"></i><b>8.2.2</b> Recommended Git Workflow</a></li>
+<li class="chapter" data-level="8.2.3" data-path="developer-guide.html"><a href="developer-guide.html#useful-git-tools"><i class="fa fa-check"></i><b>8.2.3</b> Useful Git tools</a></li>
+<li class="chapter" data-level="8.2.4" data-path="developer-guide.html"><a href="developer-guide.html#advanced"><i class="fa fa-check"></i><b>8.2.4</b> Advanced</a></li>
+<li class="chapter" data-level="8.2.5" data-path="developer-guide.html"><a href="developer-guide.html#references"><i class="fa fa-check"></i><b>8.2.5</b> References</a></li>
+<li class="chapter" data-level="8.2.6" data-path="developer-guide.html"><a href="developer-guide.html#github-use-with-pecan"><i class="fa fa-check"></i><b>8.2.6</b> GitHub use with PEcAn</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="developer-guide.html"><a href="developer-guide.html#coding-practices"><i class="fa fa-check"></i><b>8.3</b> Coding Practices</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="developer-guide.html"><a href="developer-guide.html#developer-codestyle"><i class="fa fa-check"></i><b>8.3.1</b> Coding Style</a></li>
@@ -680,9 +684,9 @@ For full documentation on <code>make</code>, see the man pages by running <code>
 <p>This document describes the steps required to download PEcAn, make changes to code, and submit your changes.</p>
 <ul>
 <li>If you are new to GitHub or to PEcAn, start with the one-time set-up instructions under <a href="developer-guide.html#before-any-work-is-done">Before any work is done</a>. Also see the excellent tutorials and references in the <a href="developer-guide.html#git">Git</a>) section right below this list and at the bootom in <a href="developer-guide.html#references">References</a>.</li>
-<li>To make trivial changes, see <a href="developer-guide.html#quick-and-easy">Quick and Easy</a>.</li>
-<li>To make a few changes to the code, start with the <a href="developer-guide.html#basic-workflow">Basic Workflow</a>.</li>
-<li>To make substantial changes and/or if plan to contribute over time see <a href="developer-guide.html#recommended-workflow-a-new-branch-for-each-change">Recommended Workflow: A new branch for each change</a>.</li>
+<li>To make trivial changes, see [Quick and Easy].</li>
+<li>To make a few changes to the code, start with the [Basic Workflow].</li>
+<li>To make substantial changes and/or if plan to contribute over time see [Recommended Workflow: A new branch for each change].</li>
 </ul>
 <div id="git" class="section level4">
 <h4><span class="header-section-number">8.2.1.1</span> Git</h4>
@@ -704,6 +708,8 @@ There a few URL’s you can use to clone a project, using https, ssh and
 git. You can use either https or git to clone a repository and write to
 it. The git protocol is read-only.
 This document describes the steps required to download PEcAn, make changes to code, and submit your changes.</p>
+<p>If during above process you want to work on something else, commit all
+your code, create a new branch, and work on new branch.</p>
 </div>
 <div id="pecan-project-and-github" class="section level4">
 <h4><span class="header-section-number">8.2.1.2</span> PEcAn Project and Github</h4>
@@ -746,128 +752,155 @@ This document describes the steps required to download PEcAn, make changes to co
 </tbody>
 </table>
 </div>
-<div id="quick-and-easy" class="section level4">
-<h4><span class="header-section-number">8.2.1.5</span> Quick and Easy</h4>
+<div id="editing-files-on-github" class="section level4">
+<h4><span class="header-section-number">8.2.1.5</span> Editing files on GitHub</h4>
 <p>The <strong>easiest</strong> approach is to use GitHub’s browser based workflow. This is useful when your change is a few lines, if you are editing a wiki, or if the edit is trivial (and won’t break the code). The <a href="https://help.github.com/articles/github-flow-in-the-browser">GitHub documentation is here</a> but it is simple: finding the page or file you want to edit, click “edit” and then the GitHub web application will automatically forking and branch, then allow you to submit a pull request. However, it should be noted that unless you are a member of the PEcAn project that the “edit” button will not be active and you’ll want to follow the workflow described below for forking and then submitting a pull request.</p>
 </div>
-<div id="recommended-git-workflow" class="section level4">
-<h4><span class="header-section-number">8.2.1.6</span> Recommended Git Workflow</h4>
-<p><strong>Each feature should be in its own branch</strong> (for example each issue is a branch, names of branches are often the issue in a bug tracking system).</p>
-<p><strong>Commit and Push Frequency</strong> On your branch, commit <strong><em>at minimum once a day before you push changes:</em></strong> even better: every time you reach a stopping point and move to a new issue. best: any time that you have done work that you do not want to re-do. Remember, pushing changes to your branch is like saving a draft. Submit a pull request when you are done.</p>
 </div>
+<div id="recommended-git-workflow" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> Recommended Git Workflow</h3>
+<p>Summary: development should occur on a fork of the main repository.</p>
+<ol style="list-style-type: decimal">
+<li>Fork</li>
+<li>Create Branch</li>
+<li>Develop</li>
+<li>Push changes to your fork</li>
+<li>Create pull request from branch on your fork to develop branch on pecanproject/pecan</li>
+</ol>
+<p><strong>Each feature should be in its own branch</strong> (for example each issue is a branch, names of branches are often the issue in a bug tracking system).</p>
+<p><strong>Commit and Push Frequency</strong> On your branch, commit any time that you have done work that you do not want to re-do. Remember, pushing changes to your branch is like saving a draft. Submit a pull request when you are done.</p>
 <div id="before-any-work-is-done" class="section level4">
-<h4><span class="header-section-number">8.2.1.7</span> Before any work is done</h4>
-<p>The first step below only needs to be done once when you first start working on the PEcAn code. The steps below that need to be done to set up PEcAn on your computer, and would need to be repeated if you move to a new computer. If you are working from the PEcAn VM, you can skip the “git clone” since the PEcAn code is already installed.</p>
-<p>Most people will not be able to work in the PEcAn repository directly and will need to create a fork of the PEcAn source code in their own folder. To fork PEcAn into your own github space (<a href="https://help.github.com/articles/fork-a-repo">github help: “fork a repo”</a>). This forked repository will allow you to create branches and commit changes back to GitHub and create pull requests to the develop branch of PEcAn.</p>
-<p>The forked repository is the only way for external people to commit code back to PEcAn and BETY. The pull request will start a review process that will eventually result in the code being merged into the main copy of the codebase. See <a href="https://help.github.com/articles/fork-a-repo" class="uri">https://help.github.com/articles/fork-a-repo</a> for more information, especially on how to keep your fork up to date with respect to the original. (Rstudio users should also see <a href="Using-Git.md#git--rstudio">Git + Rstudio</a>, below)</p>
+<h4><span class="header-section-number">8.2.2.1</span> Before any work is done</h4>
+<p>The first step below only needs to be done once when you first start working on the PEcAn code. The steps below that need to be done to set up PEcAn on your computer, and would need to be repeated if you move to a new computer.</p>
+<p>All contributors should create a fork of the PEcAn source code in their own folder see <a href="https://help.github.com/articles/fork-a-repo">github help: “fork a repo”</a>). This forked repository will allow you to create branches and submit these changes back to GitHub using pull requests to the develop branch of PEcAn.</p>
+<p>The pull request will start a review process that will eventually result in the code being merged into the main copy of the codebase. See <a href="https://help.github.com/articles/fork-a-repo" class="uri">https://help.github.com/articles/fork-a-repo</a> for more information, especially on how to keep your fork up to date with respect to the original. (Rstudio users should also see <a href="Using-Git.md#git--rstudio">Git + Rstudio</a>, below).</p>
 <p>You can setup SSH keys to make it easier to commit cod back to GitHub. This might especially be true if you are working from a cluster, see <a href="https://help.github.com/articles/generating-ssh-keys">set up ssh keys</a></p>
+<p>There is a script in the scripts folder called <code>scripts/syncgit.sh</code> that will keep your fork in sync with the main pecanproject repository.</p>
 <ol style="list-style-type: decimal">
 <li>Introduce yourself to GIT</li>
 </ol>
-<p><code>git config --global user.name &quot;FULLNAME&quot;</code>
-<code>git config --global user.email you@yourdomain.example.com</code></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="fu">git</span> config --global user.name <span class="st">&quot;FULLNAME&quot;</span></a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="fu">git</span> config --global user.email you@yourdomain.example.com</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Fork PEcAn on GitHub. Go to the PEcAn source code and click on the Fork button in the upper right. This will create a copy of PEcAn in your personal space.</p></li>
 <li><p>Clone to your local machine via command line</p></li>
 </ol>
-<p><code>git clone git@github.com:&lt;username&gt;/pecan.git</code></p>
-<p>If this does not work, try the https method</p>
-<p><code>git clone https://github.com/PecanProject/pecan.git</code></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="fu">git</span> clone git@github.com:<span class="op">&lt;</span>username<span class="op">&gt;</span>/pecan.git</a></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
-<li>Define upstream repository</li>
+<li>Define <code>PEcAnProject/pecan</code> as upstream repository</li>
 </ol>
-<pre><code>cd pecan
-git remote add upstream git@github.com:PecanProject/pecan.git</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="bu">cd</span> pecan</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="fu">git</span> remote add upstream git@github.com:PecanProject/pecan.git</a></code></pre></div>
+<div id="hint-keeping-your-fork-in-sync" class="section level5">
+<h5><span class="header-section-number">8.2.2.1.1</span> Hint: Keeping your fork in sync</h5>
+<p>If you have used the instructions above, you can use the helper script called <a href="https://github.com/PecanProject/pecan/blob/master/scripts/syncgit.sh"><code>scripts/syncgit.sh</code></a> to keep the master and develop branches of your own fork in sync with the PEcAnProject/pecan repository.</p>
+<p>After following the above, your .git/config file will include the following:</p>
+<pre><code>...
+[remote &quot;origin&quot;]
+        url = git@github.com:&lt;username&gt;/pecan.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch &quot;develop&quot;]
+        remote = origin
+        merge = refs/heads/develop
+[remote &quot;upstream&quot;]
+        url = git@github.com:PecanProject/pecan.git
+        fetch = +refs/heads/*:refs/remotes/upstream/*</code></pre>
+<p>Then, you can run:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="ex">./scripts/syncgit.sh</span></a></code></pre></div>
+<p>Now the master and develop branches on your fork will be up to date.</p>
 </div>
-<div id="during-development" class="section level4">
-<h4><span class="header-section-number">8.2.1.8</span> During development:</h4>
-<ul>
-<li>commit often;</li>
-<li>each commit can address 0 or 1 issue; many commits can reference an issue</li>
-<li>ensure that all tests are passing before anything is pushed into develop.</li>
-</ul>
 </div>
-<div id="basic-workflow" class="section level4">
-<h4><span class="header-section-number">8.2.1.9</span> Basic Workflow</h4>
-<p>This workflow is for educational purposes only. Please use the Recommended Workflow if you plan on contributing to PEcAn. This workflow does not include creating branches, a feature we would like you to use.
-1. Get the latest code from the main repository</p>
-<p><code>git pull upstream develop</code></p>
+<div id="using-branching" class="section level4">
+<h4><span class="header-section-number">8.2.2.2</span> Using Branching</h4>
+<p>Ideally, a developer should create a new branch for each feature or bug fix</p>
+<ol style="list-style-type: decimal">
+<li>Make sure you start in the develop branch</li>
+</ol>
+<div class="sourceCode" id="cb81"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="fu">git</span> checkout develop</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Do some coding</p></li>
-<li><p>Commit after each chunk of code (multiple times a day)</p></li>
+<li>Make sure develop is up to date</li>
 </ol>
-<p><code>git commit -m &quot;&lt;some descriptive information about what was done; references/fixes gh-X&gt;&quot;</code></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="fu">git</span> pull upstream develop</a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Run the PEcAn MAKEFILE to compile code from the main directory.</li>
+</ol>
+<div class="sourceCode" id="cb83"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="fu">make</span></a></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
-<li>Push to YOUR Github (when a feature is working, a set of bugs are fixed, or you need to share progress with others)</li>
+<li>Create a new branch and switch to it</li>
 </ol>
-<p><code>git push origin develop</code></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="fu">git</span> checkout -b <span class="op">&lt;</span>branchname<span class="op">&gt;</span></a></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
-<li>Before submitting code back to the main repository, make sure that code compiles from the main directory.</li>
+<li>Work/commit/etc</li>
 </ol>
-<p><code>make</code></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="fu">git</span> add <span class="op">&lt;</span>file_that_was_changed.R<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="fu">git</span> commit -m <span class="st">&quot;&lt;some descriptive information about what was done&gt;&quot;</span></a></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
-<li>submit pull request with a reference to related issue;</li>
+<li>Make sure that code compiles and documentation updated. The make document command will run roxygenise.</li>
+</ol>
+<div class="sourceCode" id="cb86"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="fu">make</span> document</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="fu">make</span></a></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>Push this branch to your github space</li>
+</ol>
+<div class="sourceCode" id="cb87"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="fu">git</span> push origin <span class="op">&lt;</span>branchname<span class="op">&gt;</span></a></code></pre></div>
+<ol start="8" style="list-style-type: decimal">
+<li>submit pull request with [[link commits to issues|Using-Git#link-commits-to-issuess]];</li>
 </ol>
 <ul>
 <li>also see <a href="https://help.github.com/articles/using-pull-requests">github documentation</a></li>
 </ul>
 </div>
-<div id="recommended-workflow-a-new-branch-for-each-change" class="section level4">
-<h4><span class="header-section-number">8.2.1.10</span> Recommended Workflow: A new branch for each change</h4>
-<ol style="list-style-type: decimal">
-<li>Make sure you start in develop</li>
-</ol>
-<p><code>git checkout develop</code></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Make sure develop is up to date</li>
-</ol>
-<p><code>git pull upstream develop</code></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Run the PEcAn MAKEFILE to compile code from the main directory.</li>
-</ol>
-<p><code>make</code></p>
-<ol start="4" style="list-style-type: decimal">
-<li>Create a branch and switch to it</li>
-</ol>
-<p><code>git checkout -b &lt;branchname&gt;</code></p>
-<ol start="5" style="list-style-type: decimal">
-<li>Work/commit/etc</li>
-</ol>
-<p><code>git add &lt;file_that_was_changed.R&gt;</code></p>
-<p><code>git commit -m &quot;&lt;some descriptive information about what was done&gt;&quot;</code></p>
-<ol start="6" style="list-style-type: decimal">
-<li>Make sure that code compiles and documentation updated. The make document command will run roxygenise.</li>
-</ol>
-<p><code>make document</code>
-<code>make</code></p>
-<ol start="7" style="list-style-type: decimal">
-<li>Push this branch to your github space</li>
-</ol>
-<p><code>git push origin &lt;branchname&gt;</code></p>
-<ol start="8" style="list-style-type: decimal">
-<li>submit pull request with [[link commits to issues|Using-Git#link-commits-to-issuess]];</li>
-</ol>
-<ul>
-<li>also see <a href="https://github.com/PecanProject/bety/issues/57">explanation in this PecanProject/bety issue</a> and <a href="https://help.github.com/articles/using-pull-requests">github documentation</a></li>
-</ul>
-</div>
 <div id="after-pull-request-is-merged" class="section level4">
-<h4><span class="header-section-number">8.2.1.11</span> After pull request is merged</h4>
+<h4><span class="header-section-number">8.2.2.3</span> After pull request is merged</h4>
 <ol style="list-style-type: decimal">
 <li>Make sure you start in master</li>
 </ol>
-<p><code>git checkout develop</code></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="fu">git</span> checkout develop<span class="kw">`</span></a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>delete branch remotely</li>
 </ol>
-<p><code>git push origin --delete &lt;branchname&gt;</code></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="fu">git</span> push origin --delete <span class="op">&lt;</span>branchname<span class="op">&gt;</span><span class="kw">`</span></a></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>delete branch locally</li>
 </ol>
-<p><code>git branch -D &lt;branchname&gt;</code></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="fu">git</span> branch -D <span class="op">&lt;</span>branchname<span class="op">&gt;</span><span class="kw">`</span></a></code></pre></div>
 </div>
+<div id="link-commits-to-issues" class="section level4">
+<h4><span class="header-section-number">8.2.2.4</span> Link commits to issues</h4>
+<p>You can reference and close issues from comments, pull requests, and commit messages. This should be done when you commit code that is related to or will close/fix an existing issue.</p>
+<p>There are two ways to do this. One easy way is to include the following text in your commit message:</p>
+<ul>
+<li><a href="https://github.com/blog/1386-closing-issues-via-commit-messages"><strong>Github</strong></a></li>
+<li>to close: “closes gh-xxx” (or syn. close, closed, fixes, fix, fixed)<br />
+</li>
+<li>to reference: just the issue number (e.g. “gh-xxx”)</li>
+</ul>
+</div>
+</div>
+<div id="useful-git-tools" class="section level3">
+<h3><span class="header-section-number">8.2.3</span> Useful Git tools</h3>
+<div id="github-desktop" class="section level4">
+<h4><span class="header-section-number">8.2.3.1</span> GitHub Desktop</h4>
+<p>The easiest way to get working with GitHub is by installing the GitHub
+client. For instructions for your specific OS and download of the
+GitHub client, see <a href="https://help.github.com/articles/set-up-git" class="uri">https://help.github.com/articles/set-up-git</a>.
+This will help you set up an SSH key to push code back to GitHub. To
+check out a project you do not need to have an ssh key and you can use
+the https or git url to check out the code.</p>
+</div>
+<div id="git-rstudio" class="section level4">
+<h4><span class="header-section-number">8.2.3.2</span> Git + Rstudio</h4>
+<p>Rstudio is nicely integrated with many development tools, including git and GitHub.
+It is quite easy to check out source code from within the Rstudio program or browser.
+The Rstudio documentation includes useful overviews of <a href="http://www.rstudio.com/ide/docs/version_control/overview">version control</a>
+and <a href="http://www.rstudio.com/ide/docs/packages/overview">R package development</a>.</p>
+<p>Once you have git installed on your computer (see the <a href="http://www.rstudio.com/ide/docs/version_control/overview">Rstudio version control</a> documentation for instructions), you can use the following steps to install the PEcAn source code in Rstudio.</p>
+</div>
+</div>
+<div id="advanced" class="section level3">
+<h3><span class="header-section-number">8.2.4</span> Advanced</h3>
 <div id="fixing-a-release-branch" class="section level4">
-<h4><span class="header-section-number">8.2.1.12</span> Fixing a release Branch</h4>
+<h4><span class="header-section-number">8.2.4.1</span> Fixing a release Branch</h4>
 <p>If you would like to make changes to a release branch, you must follow a different workflow, as the release branch will not contain the latest code on develop and must remain seperate.</p>
 <ol style="list-style-type: decimal">
 <li>Fetch upstream remote branches</li>
@@ -894,43 +927,8 @@ git remote add upstream git@github.com:PecanProject/pecan.git</code></pre>
 <li><p>Make a pull request. It is essential that you compare your pull request to the remote release branch, NOT the develop branch.</p></li>
 </ol>
 </div>
-<div id="link-commits-to-issues" class="section level4">
-<h4><span class="header-section-number">8.2.1.13</span> Link commits to issues</h4>
-<p>You can reference and close issues from comments, pull requests, and commit messages. This should be done when you commit code that is related to or will close/fix an existing issue.</p>
-<p>There are two ways to do this. One easy way is to include the following text in your commit message:</p>
-<ul>
-<li><a href="https://github.com/blog/1386-closing-issues-via-commit-messages"><strong>Github</strong></a></li>
-<li>to close: “closes gh-xxx” (or syn. close, closed, fixes, fix, fixed)<br />
-</li>
-<li>to reference: just the issue number (e.g. “gh-xxx”)</li>
-</ul>
-</div>
-<div id="other-useful-git-commands" class="section level4">
-<h4><span class="header-section-number">8.2.1.14</span> Other Useful Git Commands:</h4>
-<ul>
-<li>GIT encourages branching “early and often”</li>
-<li>First pull from develop</li>
-<li>Branch before working on feature</li>
-<li>One branch per feature</li>
-<li>You can switch easily between branches</li>
-<li>Merge feature into main line when branch done</li>
-</ul>
-<p>If during above process you want to work on something else, commit all
-your code, create a new branch, and work on new branch.</p>
-<ul>
-<li>Delete a branch: <code>git branch -d &lt;name of branch&gt;</code></li>
-<li>To push a branch git: <code>push -u origin</code><name of branch>`</li>
-<li>To check out a branch:</li>
-</ul>
-<pre><code>git fetch origin
-git checkout --track origin/&lt;name of branch&gt;</code></pre>
-<ul>
-<li>Show graph of commits:</li>
-</ul>
-<p><code>git log --graph --oneline --all</code></p>
-</div>
 <div id="tags" class="section level4">
-<h4><span class="header-section-number">8.2.1.15</span> Tags</h4>
+<h4><span class="header-section-number">8.2.4.2</span> Tags</h4>
 <p>Git supports two types of tags: lightweight and annotated. For more information see the <a href="http://git-scm.com/book/ch2-6.html">Tagging Chapter in the Git documentation</a>.</p>
 <p>Lightweight tags are useful, but here we discuss the annotated tags that are used for marking stable versions, major releases, and versions associated with published results.</p>
 <p>The basic command is <code>git tag</code>. The <code>-a</code> flag means ‘annotated’ and <code>-m</code> is used before a message. Here is an example:</p>
@@ -941,67 +939,12 @@ git checkout --track origin/&lt;name of branch&gt;</code></pre>
 <p><code>git checkout v0.6</code></p>
 <p>To tag an earlier commit, just append the commit SHA to the command, e.g.</p>
 <p><code>git tag -a v0.99 -m &quot;last version before 1.0&quot; 9fceb02</code></p>
-<p><strong>Using GitHub</strong> The easiest way to get working with GitHub is by installing the GitHub
-client. For instructions for your specific OS and download of the
-GitHub client, see <a href="https://help.github.com/articles/set-up-git" class="uri">https://help.github.com/articles/set-up-git</a>.
-This will help you set up an SSH key to push code back to GitHub. To
-check out a project you do not need to have an ssh key and you can use
-the https or git url to check out the code.</p>
 </div>
-<div id="git-rstudio" class="section level4">
-<h4><span class="header-section-number">8.2.1.16</span> Git + Rstudio</h4>
-<p>Rstudio is nicely integrated with many development tools, including git and GitHub.
-It is quite easy to check out source code from within the Rstudio program or browser.
-The Rstudio documentation includes useful overviews of <a href="http://www.rstudio.com/ide/docs/version_control/overview">version control</a> and <a href="http://www.rstudio.com/ide/docs/packages/overview">R package development</a>.</p>
-<p>Once you have git installed on your computer (see the <a href="http://www.rstudio.com/ide/docs/version_control/overview">Rstudio version control</a> documentation for instructions), you can use the following steps to install the PEcAn source code in Rstudio.</p>
 </div>
-<div id="creating-a-read-only-version" class="section level4">
-<h4><span class="header-section-number">8.2.1.17</span> Creating a Read-only version:</h4>
-<p>This is a fast way to clone the repository that does not support contributing new changes (this can be done with further modification).</p>
-<ol style="list-style-type: decimal">
-<li>install Rstudio (www.rstudio.com)</li>
-<li>click (upper right) project</li>
-</ol>
-<ul>
-<li>create project</li>
-<li>version control</li>
-<li>Git - clone a project from a Git Repository</li>
-<li>paste <a href="https://www.github.com/PecanProject/pecan" class="uri">https://www.github.com/PecanProject/pecan</a></li>
-<li>choose working dir. for repo</li>
-</ul>
-</div>
-<div id="for-development" class="section level4">
-<h4><span class="header-section-number">8.2.1.18</span> For development:</h4>
-<ol style="list-style-type: decimal">
-<li>create account on github</li>
-<li>create a fork of the PEcAn repository to your own account <a href="https://www.github.com/pecanproject/pecan" class="uri">https://www.github.com/pecanproject/pecan</a></li>
-<li>install Rstudio (www.rstudio.com)</li>
-<li>generate an ssh key</li>
-</ol>
-<ul>
-<li>in Rstudio:
-<ul>
-<li><code>Tools -&gt; Options -&gt; Git/SVN -&gt; &quot;create RSA key&quot;</code></li>
-</ul></li>
-<li><code>View public key -&gt; ctrl+C to copy</code></li>
-<li>in GitHub</li>
-<li>go to <a href="https://github.com/settings/ssh">ssh settings</a></li>
-<li><code>-&gt; 'add ssh key' -&gt; ctrl+V to paste -&gt; 'add key'</code></li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Create project in Rstudio</li>
-</ol>
-<ul>
-<li><code>project (upper right) -&gt; create project -&gt; version control -&gt; Git - clone a project from a Git Repository</code></li>
-<li>paste repository url <code>git@github.com:&lt;username&gt;/pecan.git&gt;</code></li>
-<li>choose working dir. for repository</li>
-</ul>
-</div>
-<div id="references" class="section level4">
-<h4><span class="header-section-number">8.2.1.19</span> References</h4>
-</div>
+<div id="references" class="section level3">
+<h3><span class="header-section-number">8.2.5</span> References</h3>
 <div id="git-documentation" class="section level4">
-<h4><span class="header-section-number">8.2.1.20</span> Git Documentation</h4>
+<h4><span class="header-section-number">8.2.5.1</span> Git Documentation</h4>
 <ul>
 <li>Scott Chacon, ‘Pro Git book’,
 <a href="http://git-scm.com/book" class="uri">http://git-scm.com/book</a></li>
@@ -1015,7 +958,7 @@ The Rstudio documentation includes useful overviews of <a href="http://www.rstud
 </ul>
 </div>
 <div id="github-documentation" class="section level4">
-<h4><span class="header-section-number">8.2.1.21</span> GitHub Documentation</h4>
+<h4><span class="header-section-number">8.2.5.2</span> GitHub Documentation</h4>
 <p>When in doubt, the first step is to click the “Help” button at the top of the page.</p>
 <ul>
 <li><a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub Flow</a> by
@@ -1028,7 +971,7 @@ Scott Chacon (Git evangelist and Ruby developer working on GitHub.com)</li>
 </div>
 </div>
 <div id="github-use-with-pecan" class="section level3">
-<h3><span class="header-section-number">8.2.2</span> GitHub use with PEcAn</h3>
+<h3><span class="header-section-number">8.2.6</span> GitHub use with PEcAn</h3>
 <p>In this section, development topics are introduced and discussed. PEcAn code lives within the If you are looking for an issue to work on, take a look through issues labled <a href="https://github.com/PecanProject/pecan/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">“good first issue”</a>. To get started you will want to review</p>
 <p>We use GitHub to track development.</p>
 <p>To learn about GitHub, it is worth taking some time to read through the <a href="https://help.github.com/">FAQ</a>. When in doubt, the first step is to click the “Help” button at the top of the page.</p>
@@ -1036,10 +979,10 @@ Scott Chacon (Git evangelist and Ruby developer working on GitHub.com)</li>
 <li><strong>To address specific people</strong>, use a github feature called <span class="citation">@mentions</span> e.g. write <span class="citation">@dlebauer</span>, <span class="citation">@robkooper</span>, <span class="citation">@mdietze</span>, or <span class="citation">@serbinsh</span> … in the issue to alert the user as described in the <a href="https://help.github.com/articles/notifications">GitHub documentation on notifications</a></li>
 </ul>
 <div id="bugs-issues-features-etc." class="section level4">
-<h4><span class="header-section-number">8.2.2.1</span> Bugs, Issues, Features, etc.</h4>
+<h4><span class="header-section-number">8.2.6.1</span> Bugs, Issues, Features, etc.</h4>
 </div>
 <div id="reporting-a-bug" class="section level4">
-<h4><span class="header-section-number">8.2.2.2</span> Reporting a bug</h4>
+<h4><span class="header-section-number">8.2.6.2</span> Reporting a bug</h4>
 <ol style="list-style-type: decimal">
 <li>(For developers) work through debugging.</li>
 <li>Once you have identified a problem, that you can not resolve, you can write a bug report</li>
@@ -1049,7 +992,7 @@ Scott Chacon (Git evangelist and Ruby developer working on GitHub.com)</li>
 </ol>
 </div>
 <div id="required-content" class="section level4">
-<h4><span class="header-section-number">8.2.2.3</span> Required content</h4>
+<h4><span class="header-section-number">8.2.6.3</span> Required content</h4>
 <p>Note:</p>
 <ul>
 <li><strong>a bug is only a bug if it is reproducible</strong></li>
@@ -1077,7 +1020,7 @@ Scott Chacon (Git evangelist and Ruby developer working on GitHub.com)</li>
 </ul>
 </div>
 <div id="requesting-a-feature" class="section level4">
-<h4><span class="header-section-number">8.2.2.4</span> Requesting a feature</h4>
+<h4><span class="header-section-number">8.2.6.4</span> Requesting a feature</h4>
 <p>(from The Pragmatic Programmer, available as
 <a href="http://proquestcombo.safaribooksonline.com/0-201-61622-X/223">ebook</a>
 through UI libraries, hardcopy on David’s bookshelf)<br />
@@ -1101,7 +1044,7 @@ either lat/lon or polar stereographic.</li>
 </ol>
 </div>
 <div id="closing-an-issue" class="section level4">
-<h4><span class="header-section-number">8.2.2.5</span> Closing an issue</h4>
+<h4><span class="header-section-number">8.2.6.5</span> Closing an issue</h4>
 <ol style="list-style-type: decimal">
 <li>Definition of “Done”</li>
 </ol>
@@ -1127,7 +1070,7 @@ either lat/lon or polar stereographic.</li>
 </ol>
 </div>
 <div id="when-to-submit-an-issue" class="section level4">
-<h4><span class="header-section-number">8.2.2.6</span> When to submit an issue?</h4>
+<h4><span class="header-section-number">8.2.6.6</span> When to submit an issue?</h4>
 <p><strong>Ideally, non-trivial code changes will be linked to an issue and a commit.</strong></p>
 <p>This requires creating issues for each task, making small commits, and referencing the issue within your commit message. Issues can be created <a href="http://pecanproject.github.io/Report_an_issue.html">on GitHub</a>. These issues can be linked to commits by adding text such as <code>fixes gh-5</code>).</p>
 <p>Rationale: This workflow is a small upfront investment that reduces error and time spent re-creating and debugging errors. Associating issues and commits, makes it easier to identify why a change was made, and potential bugs that could arise when the code is changed. In addition, knowing which issue you are working on clarifies the scope and objectives of your current task.</p>
@@ -1219,12 +1162,12 @@ Extensions</a>.</p>
 <li>efficient way: (especially for large data sets) using the <code>data</code>
 function:</li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">data</span>(foo) <span class="co"># accesses data with, e.g. load(foo.RData), read(foo.csv), or source(foo.R) </span></a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">data</span>(foo) <span class="co"># accesses data with, e.g. load(foo.RData), read(foo.csv), or source(foo.R) </span></a></code></pre></div>
 <ul>
 <li>easy way: by adding the following line to the package DESCRIPTION:
 <em>note:</em> this should be used with caution or it can cause difficulty as discussed in redmine issue #1118</li>
 </ul>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">LazyData<span class="op">:</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">LazyData<span class="op">:</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
 <p>From the R help page:</p>
 <p>Currently, a limited number of data formats can be accessed using the <code>data</code> function by placing one of the following filetypes in a packages’ <code>data</code> directory:
 * files ending <code>.R</code> or <code>.r</code> are <code>source()</code>d in, with the R working
@@ -1236,8 +1179,8 @@ had been run <em>via</em> <code>utils::data</code>.)
 * files ending <code>.csv</code> or <code>.CSV</code> are read using <code>read.table(..., header = TRUE, sep = ';')</code>, and also result in a data frame.</p>
 <p>If your data does not fall in those 4 categories, or you can use the
 <code>system.file</code> function to get access to the data:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ed.trait.dictionary.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;PEcAn.utils&quot;</span>)</a>
-<a class="sourceLine" id="cb80-2" data-line-number="2">[<span class="dv">1</span>] <span class="st">&quot;/home/kooper/R/x86_64-pc-linux-gnu-library/2.15/PEcAn.utils/data/ed.trait.dictionary.csv&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ed.trait.dictionary.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;PEcAn.utils&quot;</span>)</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">[<span class="dv">1</span>] <span class="st">&quot;/home/kooper/R/x86_64-pc-linux-gnu-library/2.15/PEcAn.utils/data/ed.trait.dictionary.csv&quot;</span></a></code></pre></div>
 <p>The arguments are folder, filename(s) and then package. It will return
 the fully qualified path name to a file in a package, in this case it
 points to the trait data. This is almost the same as the data function,
@@ -1274,47 +1217,47 @@ For detailed instructions, see one of the following resources:</p>
 </ul>
 <p>Below is a complete template for a Roxygen documentation block.
 Note that roxygen lines start with <code>#'</code>:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="co">#&#39; Function title, in a few words</span></a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="co">#&#39; Function description, in 2-3 sentences.</span></a>
-<a class="sourceLine" id="cb81-4" data-line-number="4"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb81-5" data-line-number="5"><span class="co">#&#39; (Optional) Package details.</span></a>
-<a class="sourceLine" id="cb81-6" data-line-number="6"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb81-7" data-line-number="7"><span class="co">#&#39; @param argument_1 A description of the argument</span></a>
-<a class="sourceLine" id="cb81-8" data-line-number="8"><span class="co">#&#39; @param argument_2 Another argument to the function</span></a>
-<a class="sourceLine" id="cb81-9" data-line-number="9"><span class="co">#&#39; @return A description of what the function returns.</span></a>
-<a class="sourceLine" id="cb81-10" data-line-number="10"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb81-11" data-line-number="11"><span class="co">#&#39; @author Your name &lt;your_email@email.com&gt;</span></a>
-<a class="sourceLine" id="cb81-12" data-line-number="12"><span class="co">#&#39; @examples</span></a>
-<a class="sourceLine" id="cb81-13" data-line-number="13"><span class="co">#&#39; \dontrun{</span></a>
-<a class="sourceLine" id="cb81-14" data-line-number="14"><span class="co">#&#39;   # This example will NOT be run by R CMD check.</span></a>
-<a class="sourceLine" id="cb81-15" data-line-number="15"><span class="co">#&#39;   # Useful for long-running functions, or functions that</span></a>
-<a class="sourceLine" id="cb81-16" data-line-number="16"><span class="co">#&#39;   # depend on files or values that may not be accessible to R CMD check.</span></a>
-<a class="sourceLine" id="cb81-17" data-line-number="17"><span class="co">#&#39;   my_function(&quot;~/user/my_file&quot;)</span></a>
-<a class="sourceLine" id="cb81-18" data-line-number="18"><span class="co">#&#39;}</span></a>
-<a class="sourceLine" id="cb81-19" data-line-number="19"><span class="co"># # This example WILL be run by R CMD check</span></a>
-<a class="sourceLine" id="cb81-20" data-line-number="20"><span class="co">#&#39; my_function(1:10, argument_2 = 5)</span></a>
-<a class="sourceLine" id="cb81-21" data-line-number="21">## ^^ A few examples of the function&#39;s usage</a>
-<a class="sourceLine" id="cb81-22" data-line-number="22"><span class="co">#&#39; @export</span></a>
-<a class="sourceLine" id="cb81-23" data-line-number="23"><span class="co"># ^^ Whether or not the function will be &quot;exported&quot; (made available) to the user.</span></a>
-<a class="sourceLine" id="cb81-24" data-line-number="24"><span class="co"># If omitted, the function can only be used inside the package.</span></a>
-<a class="sourceLine" id="cb81-25" data-line-number="25">my_function &lt;-<span class="st"> </span><span class="cf">function</span>(argument_<span class="dv">1</span>, argument_<span class="dv">2</span>) {...}</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="co">#&#39; Function title, in a few words</span></a>
+<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb94-3" data-line-number="3"><span class="co">#&#39; Function description, in 2-3 sentences.</span></a>
+<a class="sourceLine" id="cb94-4" data-line-number="4"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb94-5" data-line-number="5"><span class="co">#&#39; (Optional) Package details.</span></a>
+<a class="sourceLine" id="cb94-6" data-line-number="6"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb94-7" data-line-number="7"><span class="co">#&#39; @param argument_1 A description of the argument</span></a>
+<a class="sourceLine" id="cb94-8" data-line-number="8"><span class="co">#&#39; @param argument_2 Another argument to the function</span></a>
+<a class="sourceLine" id="cb94-9" data-line-number="9"><span class="co">#&#39; @return A description of what the function returns.</span></a>
+<a class="sourceLine" id="cb94-10" data-line-number="10"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb94-11" data-line-number="11"><span class="co">#&#39; @author Your name &lt;your_email@email.com&gt;</span></a>
+<a class="sourceLine" id="cb94-12" data-line-number="12"><span class="co">#&#39; @examples</span></a>
+<a class="sourceLine" id="cb94-13" data-line-number="13"><span class="co">#&#39; \dontrun{</span></a>
+<a class="sourceLine" id="cb94-14" data-line-number="14"><span class="co">#&#39;   # This example will NOT be run by R CMD check.</span></a>
+<a class="sourceLine" id="cb94-15" data-line-number="15"><span class="co">#&#39;   # Useful for long-running functions, or functions that</span></a>
+<a class="sourceLine" id="cb94-16" data-line-number="16"><span class="co">#&#39;   # depend on files or values that may not be accessible to R CMD check.</span></a>
+<a class="sourceLine" id="cb94-17" data-line-number="17"><span class="co">#&#39;   my_function(&quot;~/user/my_file&quot;)</span></a>
+<a class="sourceLine" id="cb94-18" data-line-number="18"><span class="co">#&#39;}</span></a>
+<a class="sourceLine" id="cb94-19" data-line-number="19"><span class="co"># # This example WILL be run by R CMD check</span></a>
+<a class="sourceLine" id="cb94-20" data-line-number="20"><span class="co">#&#39; my_function(1:10, argument_2 = 5)</span></a>
+<a class="sourceLine" id="cb94-21" data-line-number="21">## ^^ A few examples of the function&#39;s usage</a>
+<a class="sourceLine" id="cb94-22" data-line-number="22"><span class="co">#&#39; @export</span></a>
+<a class="sourceLine" id="cb94-23" data-line-number="23"><span class="co"># ^^ Whether or not the function will be &quot;exported&quot; (made available) to the user.</span></a>
+<a class="sourceLine" id="cb94-24" data-line-number="24"><span class="co"># If omitted, the function can only be used inside the package.</span></a>
+<a class="sourceLine" id="cb94-25" data-line-number="25">my_function &lt;-<span class="st"> </span><span class="cf">function</span>(argument_<span class="dv">1</span>, argument_<span class="dv">2</span>) {...}</a></code></pre></div>
 <p>Here is a complete example from the <code>PEcAn.utils::days_in_year()</code> function:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="co">#&#39; Number of days in a year</span></a>
-<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="co">#&#39; Calculate number of days in a year based on whether it is a leap year or not.</span></a>
-<a class="sourceLine" id="cb82-4" data-line-number="4"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb82-5" data-line-number="5"><span class="co">#&#39; @param year Numeric year (can be a vector)</span></a>
-<a class="sourceLine" id="cb82-6" data-line-number="6"><span class="co">#&#39; @param leap_year Default = TRUE. If set to FALSE will always return 365</span></a>
-<a class="sourceLine" id="cb82-7" data-line-number="7"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb82-8" data-line-number="8"><span class="co">#&#39; @author Alexey Shiklomanov</span></a>
-<a class="sourceLine" id="cb82-9" data-line-number="9"><span class="co">#&#39; @return integer vector, all either 365 or 366</span></a>
-<a class="sourceLine" id="cb82-10" data-line-number="10"><span class="co">#&#39; @export</span></a>
-<a class="sourceLine" id="cb82-11" data-line-number="11"><span class="co">#&#39; @examples</span></a>
-<a class="sourceLine" id="cb82-12" data-line-number="12"><span class="co">#&#39; days_in_year(2010)  # Not a leap year -- returns 365</span></a>
-<a class="sourceLine" id="cb82-13" data-line-number="13"><span class="co">#&#39; days_in_year(2012)  # Leap year -- returns 366</span></a>
-<a class="sourceLine" id="cb82-14" data-line-number="14"><span class="co">#&#39; days_in_year(2000:2008)  # Function is vectorized over years</span></a>
-<a class="sourceLine" id="cb82-15" data-line-number="15">days_in_year &lt;-<span class="st"> </span><span class="cf">function</span>(year, <span class="dt">leap_year =</span> <span class="ot">TRUE</span>) {...}</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="co">#&#39; Number of days in a year</span></a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="co">#&#39; Calculate number of days in a year based on whether it is a leap year or not.</span></a>
+<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb95-5" data-line-number="5"><span class="co">#&#39; @param year Numeric year (can be a vector)</span></a>
+<a class="sourceLine" id="cb95-6" data-line-number="6"><span class="co">#&#39; @param leap_year Default = TRUE. If set to FALSE will always return 365</span></a>
+<a class="sourceLine" id="cb95-7" data-line-number="7"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb95-8" data-line-number="8"><span class="co">#&#39; @author Alexey Shiklomanov</span></a>
+<a class="sourceLine" id="cb95-9" data-line-number="9"><span class="co">#&#39; @return integer vector, all either 365 or 366</span></a>
+<a class="sourceLine" id="cb95-10" data-line-number="10"><span class="co">#&#39; @export</span></a>
+<a class="sourceLine" id="cb95-11" data-line-number="11"><span class="co">#&#39; @examples</span></a>
+<a class="sourceLine" id="cb95-12" data-line-number="12"><span class="co">#&#39; days_in_year(2010)  # Not a leap year -- returns 365</span></a>
+<a class="sourceLine" id="cb95-13" data-line-number="13"><span class="co">#&#39; days_in_year(2012)  # Leap year -- returns 366</span></a>
+<a class="sourceLine" id="cb95-14" data-line-number="14"><span class="co">#&#39; days_in_year(2000:2008)  # Function is vectorized over years</span></a>
+<a class="sourceLine" id="cb95-15" data-line-number="15">days_in_year &lt;-<span class="st"> </span><span class="cf">function</span>(year, <span class="dt">leap_year =</span> <span class="ot">TRUE</span>) {...}</a></code></pre></div>
 <p>To update documentation throughout PEcAn, run <code>make document</code> in the PEcAn root directory.
 <em>Make sure you do this before opening a pull request</em> –
 PEcAn’s automated testing (Travis) will check if any documentation is out of date and will throw an error like the following if it is:</p>
@@ -1364,33 +1307,33 @@ Below is a lightning introduction to unit testing with <code>testthat</code>.</l
 </ol>
 <p>Each package’s unit tests live in <code>.R</code> scripts in the folder <code>&lt;package&gt;/tests/testthat</code>.
 In addition, a <code>testthat</code>-enabled package has a file called <code>&lt;packagename&gt;/tests/testthat.R</code> with the following contents:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
-<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="kw">library</span>(<span class="op">&lt;</span>packagename<span class="op">&gt;</span>)</a>
-<a class="sourceLine" id="cb84-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"><span class="kw">library</span>(<span class="op">&lt;</span>packagename<span class="op">&gt;</span>)</a>
+<a class="sourceLine" id="cb97-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb97-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</a></code></pre></div>
 <p>Tests should be placed in <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>, and look like the following:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="kw">context</span>(<span class="st">&quot;Mathematical operators&quot;</span>)</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
-<a class="sourceLine" id="cb85-4" data-line-number="4">  sum1 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb85-5" data-line-number="5">  <span class="kw">expect_equal</span>(sum1, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb85-6" data-line-number="6">  sum2 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb85-7" data-line-number="7">  <span class="kw">expect_equal</span>(sum2, <span class="dv">-2</span>)</a>
-<a class="sourceLine" id="cb85-8" data-line-number="8">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb85-9" data-line-number="9">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
-<a class="sourceLine" id="cb85-10" data-line-number="10">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb85-11" data-line-number="11">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
-<a class="sourceLine" id="cb85-12" data-line-number="12">})</a>
-<a class="sourceLine" id="cb85-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb85-14" data-line-number="14"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
-<a class="sourceLine" id="cb85-15" data-line-number="15">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb85-16" data-line-number="16">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb85-17" data-line-number="17">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb85-18" data-line-number="18">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
-<a class="sourceLine" id="cb85-19" data-line-number="19">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
-<a class="sourceLine" id="cb85-20" data-line-number="20">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
-<a class="sourceLine" id="cb85-21" data-line-number="21">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
-<a class="sourceLine" id="cb85-22" data-line-number="22">})</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">context</span>(<span class="st">&quot;Mathematical operators&quot;</span>)</a>
+<a class="sourceLine" id="cb98-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb98-3" data-line-number="3"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
+<a class="sourceLine" id="cb98-4" data-line-number="4">  sum1 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb98-5" data-line-number="5">  <span class="kw">expect_equal</span>(sum1, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb98-6" data-line-number="6">  sum2 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb98-7" data-line-number="7">  <span class="kw">expect_equal</span>(sum2, <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb98-8" data-line-number="8">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb98-9" data-line-number="9">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
+<a class="sourceLine" id="cb98-10" data-line-number="10">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb98-11" data-line-number="11">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
+<a class="sourceLine" id="cb98-12" data-line-number="12">})</a>
+<a class="sourceLine" id="cb98-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb98-14" data-line-number="14"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
+<a class="sourceLine" id="cb98-15" data-line-number="15">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb98-16" data-line-number="16">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb98-17" data-line-number="17">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb98-18" data-line-number="18">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
+<a class="sourceLine" id="cb98-19" data-line-number="19">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
+<a class="sourceLine" id="cb98-20" data-line-number="20">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
+<a class="sourceLine" id="cb98-21" data-line-number="21">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb98-22" data-line-number="22">})</a></code></pre></div>
 </div>
 <div id="developer-testing-integration" class="section level3">
 <h3><span class="header-section-number">8.4.2</span> Integration testing</h3>
@@ -1501,39 +1444,39 @@ Development of more, better tests is ongoing.</p>
 <h2><span class="header-section-number">8.5</span> Download and Compile PEcAn</h2>
 <p>Set <code>R_LIBS_USER</code></p>
 <p><a href="http://cran.r-project.org/doc/manuals/r-devel/R-admin.html#Managing-libraries">CRAN Reference</a></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># point R to personal lib folder</span></a>
-<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</a>
-<a class="sourceLine" id="cb86-3" data-line-number="3"><span class="bu">source</span> ~/.profile</a>
-<a class="sourceLine" id="cb86-4" data-line-number="4"><span class="fu">mkdir</span> -p <span class="va">${R_LIBS_USER}</span></a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="co"># point R to personal lib folder</span></a>
+<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</a>
+<a class="sourceLine" id="cb99-3" data-line-number="3"><span class="bu">source</span> ~/.profile</a>
+<a class="sourceLine" id="cb99-4" data-line-number="4"><span class="fu">mkdir</span> -p <span class="va">${R_LIBS_USER}</span></a></code></pre></div>
 <div id="download-compile-and-install-pecan-from-github" class="section level3">
 <h3><span class="header-section-number">8.5.1</span> Download, compile and install PEcAn from GitHub</h3>
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="co"># download pecan</span></a>
-<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</a>
-<a class="sourceLine" id="cb87-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb87-5" data-line-number="5"><span class="co"># compile pecan</span></a>
-<a class="sourceLine" id="cb87-6" data-line-number="6"><span class="bu">cd</span> pecan</a>
-<a class="sourceLine" id="cb87-7" data-line-number="7"><span class="fu">make</span></a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="co"># download pecan</span></a>
+<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="co"># compile pecan</span></a>
+<a class="sourceLine" id="cb100-6" data-line-number="6"><span class="bu">cd</span> pecan</a>
+<a class="sourceLine" id="cb100-7" data-line-number="7"><span class="fu">make</span></a></code></pre></div>
 <p>For more information on the capabilities of the PEcAn Makefile, check out our section on <a href="developer-guide.html#pecan-make">Updating PEcAn</a>.</p>
 <p>Following will run a small script to setup some hooks to prevent people from using the pecan demo user account to check in any code.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="co"># prevent pecan user from checking in code</span></a>
-<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="ex">./scripts/create-hooks.sh</span></a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="co"># prevent pecan user from checking in code</span></a>
+<a class="sourceLine" id="cb101-2" data-line-number="2"><span class="ex">./scripts/create-hooks.sh</span></a></code></pre></div>
 </div>
 <div id="pecan-testrun" class="section level3">
 <h3><span class="header-section-number">8.5.2</span> PEcAn Testrun</h3>
 <p>Do the run, this assumes you have <a href="installation-details.html#install-bety">installed the BETY database</a>, <a href="installation-details.html#site-information">sites</a> tar file and <a href="pecan-models.html#models-sipnet">SIPNET</a>.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="co"># create folder</span></a>
-<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="bu">cd</span></a>
-<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="fu">mkdir</span> testrun.pecan</a>
-<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="bu">cd</span> testrun.pecan</a>
-<a class="sourceLine" id="cb89-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb89-6" data-line-number="6"><span class="co"># copy example of pecan workflow and configuration file</span></a>
-<a class="sourceLine" id="cb89-7" data-line-number="7"><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</a>
-<a class="sourceLine" id="cb89-8" data-line-number="8"><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</a>
-<a class="sourceLine" id="cb89-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb89-10" data-line-number="10"><span class="co"># exectute workflow</span></a>
-<a class="sourceLine" id="cb89-11" data-line-number="11"><span class="fu">rm</span> -rf pecan</a>
-<a class="sourceLine" id="cb89-12" data-line-number="12"><span class="ex">./workflow.R</span> pecan.xml</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="co"># create folder</span></a>
+<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="fu">mkdir</span> testrun.pecan</a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="bu">cd</span> testrun.pecan</a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb102-6" data-line-number="6"><span class="co"># copy example of pecan workflow and configuration file</span></a>
+<a class="sourceLine" id="cb102-7" data-line-number="7"><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</a>
+<a class="sourceLine" id="cb102-8" data-line-number="8"><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</a>
+<a class="sourceLine" id="cb102-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb102-10" data-line-number="10"><span class="co"># exectute workflow</span></a>
+<a class="sourceLine" id="cb102-11" data-line-number="11"><span class="fu">rm</span> -rf pecan</a>
+<a class="sourceLine" id="cb102-12" data-line-number="12"><span class="ex">./workflow.R</span> pecan.xml</a></code></pre></div>
 <p>NB: pecan.xml is configured for the virtual machine, you will need to change the <met> field from ‘/home/carya/’ to wherever you installed your ‘sites’, usually $HOME</p>
 
 </div>
