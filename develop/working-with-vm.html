@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-10" />
+<meta name="date" content="2020-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -227,7 +227,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="developer-guide.html"><a href="developer-guide.html#pecan-git"><i class="fa fa-check"></i><b>8.2</b> Git and GitHub Workflow</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="developer-guide.html"><a href="developer-guide.html#using-git"><i class="fa fa-check"></i><b>8.2.1</b> Using Git</a></li>
-<li class="chapter" data-level="8.2.2" data-path="developer-guide.html"><a href="developer-guide.html#github-use-with-pecan"><i class="fa fa-check"></i><b>8.2.2</b> GitHub use with PEcAn</a></li>
+<li class="chapter" data-level="8.2.2" data-path="developer-guide.html"><a href="developer-guide.html#recommended-git-workflow"><i class="fa fa-check"></i><b>8.2.2</b> Recommended Git Workflow</a></li>
+<li class="chapter" data-level="8.2.3" data-path="developer-guide.html"><a href="developer-guide.html#useful-git-tools"><i class="fa fa-check"></i><b>8.2.3</b> Useful Git tools</a></li>
+<li class="chapter" data-level="8.2.4" data-path="developer-guide.html"><a href="developer-guide.html#advanced"><i class="fa fa-check"></i><b>8.2.4</b> Advanced</a></li>
+<li class="chapter" data-level="8.2.5" data-path="developer-guide.html"><a href="developer-guide.html#references"><i class="fa fa-check"></i><b>8.2.5</b> References</a></li>
+<li class="chapter" data-level="8.2.6" data-path="developer-guide.html"><a href="developer-guide.html#github-use-with-pecan"><i class="fa fa-check"></i><b>8.2.6</b> GitHub use with PEcAn</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="developer-guide.html"><a href="developer-guide.html#coding-practices"><i class="fa fa-check"></i><b>8.3</b> Coding Practices</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="developer-guide.html"><a href="developer-guide.html#developer-codestyle"><i class="fa fa-check"></i><b>8.3.1</b> Coding Style</a></li>
@@ -637,7 +641,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ssh-vm" class="section level2">
 <h2><span class="header-section-number">9.2</span> Connecting to the VM via SSH</h2>
 <p>Once the VM is running anywhere on your machine, you can connect to it from a separate terminal via SSH as follows:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="fu">ssh</span> -p 6422 carya@localhost</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="fu">ssh</span> -p 6422 carya@localhost</a></code></pre></div>
 <p>You will be prompted for a password. Like everywhere else in PEcAn, the username is <code>carya</code> and the password is <code>illinois</code>. The same password is used for any system maintenance you wish to do on the VM via <code>sudo</code>.</p>
 <p>As a shortcut, you can add the following to your <code>~/.ssh/config</code> file (or create one if it does not exist).</p>
 <pre><code>Host pecan-vm
@@ -764,59 +768,59 @@ Congratulations! You just started a PEcAn server in the “cloud”!</li>
 # - PACKAGE  = openssh
 # ----------------------------------------------------------------------</code></pre>
 <p>To enable tunnels run the following on the host machine:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;ssh,tcp,,6422,,22&quot;</span></a>
-<a class="sourceLine" id="cb98-2" data-line-number="2"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;www,tcp,,6480,,80&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;ssh,tcp,,6422,,22&quot;</span></a>
+<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> --natpf1 <span class="st">&quot;www,tcp,,6480,,80&quot;</span></a></code></pre></div>
 <p>Make sure machine is up to date.</p>
 <p>UBUNTU</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="fu">sudo</span> apt-get -y dist-upgrade</a>
-<a class="sourceLine" id="cb99-3" data-line-number="3"><span class="fu">sudo</span> reboot</a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="fu">sudo</span> apt-get -y dist-upgrade</a>
+<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="fu">sudo</span> reboot</a></code></pre></div>
 <p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="fu">sudo</span> yum -y update</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="fu">sudo</span> reboot</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="fu">sudo</span> yum -y update</a>
+<a class="sourceLine" id="cb113-2" data-line-number="2"><span class="fu">sudo</span> reboot</a></code></pre></div>
 <p>Install compiler and other packages needed and install the tools.</p>
 <p>UBUNTU</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install build-essential linux-headers-server dkms</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="fu">sudo</span> apt-get -y install build-essential linux-headers-server dkms</a></code></pre></div>
 <p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="fu">sudo</span> yum -y groupinstall <span class="st">&quot;Development Tools&quot;</span></a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="fu">sudo</span> yum -y install wget</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="fu">sudo</span> yum -y groupinstall <span class="st">&quot;Development Tools&quot;</span></a>
+<a class="sourceLine" id="cb115-2" data-line-number="2"><span class="fu">sudo</span> yum -y install wget</a></code></pre></div>
 <p>Install Virtual Box additions for better integration</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
-<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
-<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a>
-<a class="sourceLine" id="cb103-4" data-line-number="4"><span class="fu">sudo</span> usermod -a -G vboxsf carya</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="fu">sudo</span> mount /dev/cdrom /mnt</a>
+<a class="sourceLine" id="cb116-2" data-line-number="2"><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</a>
+<a class="sourceLine" id="cb116-3" data-line-number="3"><span class="fu">sudo</span> umount /mnt</a>
+<a class="sourceLine" id="cb116-4" data-line-number="4"><span class="fu">sudo</span> usermod -a -G vboxsf carya</a></code></pre></div>
 <p><strong>Finishing up the machine</strong></p>
 <p><strong>Add a message to the login:</strong></p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
-<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="bu">export</span> <span class="va">PORT=$(</span> <span class="fu">hostname</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/pecan//&#39;</span> <span class="va">)</span></a>
-<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/motd <span class="op">&lt;&lt; EOF</span></a>
-<a class="sourceLine" id="cb104-4" data-line-number="4">PEcAn version 1.4.3</a>
-<a class="sourceLine" id="cb104-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb104-6" data-line-number="6">For more information about:</a>
-<a class="sourceLine" id="cb104-7" data-line-number="7">Pecan    - http://pecanproject.org</a>
-<a class="sourceLine" id="cb104-8" data-line-number="8">BETY     - http://www.betydb.org</a>
-<a class="sourceLine" id="cb104-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb104-10" data-line-number="10">For a list of all models currently navigate [here](../users_guide/basic_users_guide/models_table.md)</a>
-<a class="sourceLine" id="cb104-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb104-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb104-13" data-line-number="13">You can access this system using a webbrowser at</a>
-<a class="sourceLine" id="cb104-14" data-line-number="14"> http://&lt;hosting machine&gt;:<span class="va">${PORT}</span>80/</a>
-<a class="sourceLine" id="cb104-15" data-line-number="15">or using SSH at</a>
-<a class="sourceLine" id="cb104-16" data-line-number="16"> ssh -l carya -p <span class="va">${PORT}</span>22 &lt;hosting machine&gt;</a>
-<a class="sourceLine" id="cb104-17" data-line-number="17">where &lt;hosting machine&gt; is the machine where the VM runs on.</a>
-<a class="sourceLine" id="cb104-18" data-line-number="18"><span class="op">EOF</span></a>
-<a class="sourceLine" id="cb104-19" data-line-number="19"><span class="bu">exit</span></a></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="fu">sudo</span> -s</a>
+<a class="sourceLine" id="cb117-2" data-line-number="2"><span class="bu">export</span> <span class="va">PORT=$(</span> <span class="fu">hostname</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/pecan//&#39;</span> <span class="va">)</span></a>
+<a class="sourceLine" id="cb117-3" data-line-number="3"><span class="fu">cat</span> <span class="op">&gt;</span> /etc/motd <span class="op">&lt;&lt; EOF</span></a>
+<a class="sourceLine" id="cb117-4" data-line-number="4">PEcAn version 1.4.3</a>
+<a class="sourceLine" id="cb117-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb117-6" data-line-number="6">For more information about:</a>
+<a class="sourceLine" id="cb117-7" data-line-number="7">Pecan    - http://pecanproject.org</a>
+<a class="sourceLine" id="cb117-8" data-line-number="8">BETY     - http://www.betydb.org</a>
+<a class="sourceLine" id="cb117-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb117-10" data-line-number="10">For a list of all models currently navigate [here](../users_guide/basic_users_guide/models_table.md)</a>
+<a class="sourceLine" id="cb117-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb117-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb117-13" data-line-number="13">You can access this system using a webbrowser at</a>
+<a class="sourceLine" id="cb117-14" data-line-number="14"> http://&lt;hosting machine&gt;:<span class="va">${PORT}</span>80/</a>
+<a class="sourceLine" id="cb117-15" data-line-number="15">or using SSH at</a>
+<a class="sourceLine" id="cb117-16" data-line-number="16"> ssh -l carya -p <span class="va">${PORT}</span>22 &lt;hosting machine&gt;</a>
+<a class="sourceLine" id="cb117-17" data-line-number="17">where &lt;hosting machine&gt; is the machine where the VM runs on.</a>
+<a class="sourceLine" id="cb117-18" data-line-number="18"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb117-19" data-line-number="19"><span class="bu">exit</span></a></code></pre></div>
 <p><strong>Finishing up</strong></p>
 <p>Script to clean the VM and remove as much as possible history <a href="http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh">cleanvm.sh</a></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="fu">wget</span> -O ~/cleanvm.sh http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh</a>
-<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="fu">chmod</span> 755 ~/cleanvm.sh</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb118-1" data-line-number="1"><span class="fu">wget</span> -O ~/cleanvm.sh http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh</a>
+<a class="sourceLine" id="cb118-2" data-line-number="2"><span class="fu">chmod</span> 755 ~/cleanvm.sh</a></code></pre></div>
 <p>Make sure machine has SSH keys <a href="http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local">rc.local</a></p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="fu">sudo</span> wget -O /etc/rc.local http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local</a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="fu">sudo</span> wget -O /etc/rc.local http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local</a></code></pre></div>
 <p>Change the resolution of the console</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="fu">sudo</span> sed -i -e <span class="st">&#39;s/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1024x768/&#39;</span> /etc/default/grub</a>
-<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="fu">sudo</span> update-grub</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="fu">sudo</span> sed -i -e <span class="st">&#39;s/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1024x768/&#39;</span> /etc/default/grub</a>
+<a class="sourceLine" id="cb120-2" data-line-number="2"><span class="fu">sudo</span> update-grub</a></code></pre></div>
 <p>Once all done, stop the virtual machine</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="bu">history</span> -c <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="bu">history</span> -c <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></a></code></pre></div>
 
 </div>
 </div>
