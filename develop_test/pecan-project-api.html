@@ -369,16 +369,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="pecan-project-api.html#section-5"></a></li>
 <li class="chapter" data-level="15.4.7" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apisitessite_id"><i class="fa fa-check"></i><b>15.4.7</b> <code>GET /api/sites/{site_id}</code></a></li>
 <li><a href="pecan-project-api.html#section-6"></a></li>
-<li class="chapter" data-level="15.4.8" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflows"><i class="fa fa-check"></i><b>15.4.8</b> <code>GET /api/workflows/</code></a></li>
+<li class="chapter" data-level="15.4.8" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apipfts"><i class="fa fa-check"></i><b>15.4.8</b> <code>GET /api/pfts/</code></a></li>
 <li><a href="pecan-project-api.html#section-7"></a></li>
-<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#post-apiworkflows"><i class="fa fa-check"></i><b>15.4.9</b> <code>POST /api/workflows/</code></a></li>
+<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apipftspft_id"><i class="fa fa-check"></i><b>15.4.9</b> <code>GET /api/pfts/{pft_id}</code></a></li>
 <li><a href="pecan-project-api.html#section-8"></a></li>
-<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/workflows/{id}</code></a></li>
+<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflows"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-9"></a></li>
-<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.11</b> <code>GET /api/runs/</code></a></li>
+<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#post-apiworkflows"><i class="fa fa-check"></i><b>15.4.11</b> <code>POST /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-10"></a></li>
-<li class="chapter" data-level="15.4.12" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsid"><i class="fa fa-check"></i><b>15.4.12</b> <code>GET /api/runs/{id}</code></a></li>
+<li class="chapter" data-level="15.4.12" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.12</b> <code>GET /api/workflows/{id}</code></a></li>
 <li><a href="pecan-project-api.html#section-11"></a></li>
+<li class="chapter" data-level="15.4.13" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.13</b> <code>GET /api/runs/</code></a></li>
+<li><a href="pecan-project-api.html#section-12"></a></li>
+<li class="chapter" data-level="15.4.14" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsrun_id"><i class="fa fa-check"></i><b>15.4.14</b> <code>GET /api/runs/{run_id}</code></a></li>
+<li><a href="pecan-project-api.html#section-13"></a></li>
+<li class="chapter" data-level="15.4.15" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsrun_idgraphyeary_var"><i class="fa fa-check"></i><b>15.4.15</b> <code>GET /api/runs/{run_id}/graph/{year}/{y_var}</code></a></li>
+<li><a href="pecan-project-api.html#section-14"></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="database-sync.html"><a href="database-sync.html"><i class="fa fa-check"></i><b>16</b> Database synchronization</a><ul>
@@ -662,29 +668,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><strong>General:</strong>
 <ul>
-<li><code>GET /api/ping</code>: Ping the server to check if it is live</li>
-<li><code>GET /api/status</code>: Obtain general information about PEcAn &amp; the details of the database host</li>
+<li><a href="pecan-project-api.html#get-apiping"><code>GET /api/ping</code></a>: Ping the server to check if it is live</li>
+<li><a href="pecan-project-api.html#get-apistatus"><code>GET /api/status</code></a>: Obtain general information about PEcAn &amp; the details of the database host</li>
 </ul></li>
 <li><strong>Models:</strong>
 <ul>
-<li><code>GET /api/models/</code>: Search for model(s) using search pattern based on model name &amp; revision</li>
-<li><code>GET /api/models/{model_id}</code>: Fetch the details of specific model</li>
+<li><a href="pecan-project-api.html#get-apimodels"><code>GET /api/models/</code></a>: Search for model(s) using search pattern based on model name &amp; revision</li>
+<li><a href="pecan-project-api.html#get-apimodelsmodel_id"><code>GET /api/models/{model_id}</code></a>: Fetch the details of specific model</li>
 </ul></li>
 <li><strong>Sites:</strong>
 <ul>
-<li><code>GET /api/sites/</code>: Search for site(s) using search pattern based on site name</li>
-<li><code>GET /api/sites/{site_id}</code>: Fetch the details of specific site</li>
+<li><a href="pecan-project-api.html#get-apisites"><code>GET /api/sites/</code></a>: Search for site(s) using search pattern based on site name</li>
+<li><a href="pecan-project-api.html#get-apisitessite_id"><code>GET /api/sites/{site_id}</code></a>: Fetch the details of specific site</li>
+</ul></li>
+<li><strong>PFTs:</strong>
+<ul>
+<li><a href="pecan-project-api.html#get-apipfts"><code>GET /api/pfts/</code></a>: Search for PFT(s) using search pattern based on PFT name, PFT type &amp; Model type</li>
+<li><a href="pecan-project-api.html#get-apipftspft_id"><code>GET /api/pfts/{pft_id}</code></a>: Fetch the details of specific PFT</li>
 </ul></li>
 <li><strong>Workflows:</strong>
 <ul>
-<li><code>GET /api/workflows/</code>: Retrieve a list of PEcAn workflows</li>
-<li><code>POST /api/workflows/</code> *: Submit a new PEcAn workflow</li>
-<li><code>GET /api/workflows/{id}</code>: Obtain the details of a particular PEcAn workflow by supplying its ID</li>
+<li><a href="pecan-project-api.html#get-apiworkflows"><code>GET /api/workflows/</code></a>: Retrieve a list of PEcAn workflows</li>
+<li><a href="pecan-project-api.html#post-apiworkflows"><code>POST /api/workflows/</code></a>: Submit a new PEcAn workflow</li>
+<li><a href="pecan-project-api.html#get-apiworkflowsid"><code>GET /api/workflows/{id}</code></a>: Obtain the details of a particular PEcAn workflow by supplying its ID</li>
 </ul></li>
 <li><strong>Runs:</strong>
 <ul>
-<li><code>GET /api/runs</code>: Get the list of all the runs for a specified PEcAn Workflow</li>
-<li><code>GET /api/runs/{id}</code>: Fetch the details of a specified PEcAn run</li>
+<li><a href="pecan-project-api.html#get-apiruns"><code>GET /api/runs</code></a>: Get the list of all the runs</li>
+<li><a href="pecan-project-api.html#get-apirunsrun_id"><code>GET /api/runs/{run_id}</code></a>: Fetch the details of a specified PEcAn run</li>
+<li><a href="pecan-project-api.html#get-apirunsrun_idgraphyeary_var"><code>GET /api/runs/{run_id}/graph/{year}/{y_var}</code></a>: Plot the graph of desired output variables for a run</li>
 </ul></li>
 </ul>
 <p><em>* indicates that the particular API is under development &amp; may not be ready for use</em></p>
@@ -846,8 +858,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb179-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb179-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb179-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
-<pre><code>##     model_id model_name revision modeltype_id model_type
-## 1 1000000022     SIPNET      ssr            3     SIPNET</code></pre>
+<pre><code>## $modeltype_id
+## [1] 3
+
+## $model_type
+## [1] &quot;SIPNET&quot;
+
+## $model_id
+## [1] 1000000022
+
+## $model_name
+## [1] &quot;SIPNET&quot;
+
+## $revision
+## [1] &quot;ssr&quot;
+
+## $inputs
+##          input required
+## 1          met     TRUE
+## 2 poolinitcond    FALSE</code></pre>
 </div>
 <div id="python-snippet-3" class="section level4">
 <h4><span class="header-section-number">15.4.5.2</span> Python Snippet</h4>
@@ -857,15 +886,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb181-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
 <a class="sourceLine" id="cb181-5" data-line-number="5">           )</a>
 <a class="sourceLine" id="cb181-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
-<pre><code>## [
-##   {
-##     &quot;model_id&quot;: &quot;1000000022&quot;,
-##     &quot;model_name&quot;: &quot;SIPNET&quot;,
-##     &quot;revision&quot;: &quot;ssr&quot;,
-##     &quot;modeltype_id&quot;: 3,
-##     &quot;model_type&quot;: &quot;SIPNET&quot;
-##   }
-## ]</code></pre>
+<pre><code>## {
+##   &quot;model_id&quot;: &quot;1000000022&quot;,
+##   &quot;model_name&quot;: &quot;SIPNET&quot;,
+##   &quot;revision&quot;: &quot;ssr&quot;,
+##   &quot;modeltype_id&quot;: 3,
+##   &quot;model_type&quot;: &quot;SIPNET&quot;
+##   &quot;inputs&quot;: [
+##     {
+##       &quot;input&quot;: &quot;met&quot;,
+##       &quot;required&quot;: TRUE
+##     },
+##     {
+##       &quot;input&quot;: &quot;poolinitcond&quot;,
+##       &quot;required&quot;: FALSE
+##     }
+##   ]
+## }</code></pre>
 </div>
 </div>
 <div id="section-4" class="section level3 unnumbered">
@@ -940,10 +977,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb187-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb187-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb187-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
-<pre><code>##    id                       city     state country mat map soil notes soilnotes              sitename
-## 1 676 Park Falls Ranger District Wisconsin      US   4 815         MF           Willow Creek (US-WCr)
-##   greenhouse sand_pct clay_pct       time_zone
-## 1      FALSE    42.52    20.17 America/Chicago</code></pre>
+<pre><code>## $id
+## [1] 676
+
+## $city
+## [1] &quot;Park Falls Ranger District&quot;
+
+## $state
+## [1] &quot;Wisconsin&quot;
+
+## $country
+## [1] &quot;US&quot;
+
+## $mat
+## [1] 4
+
+## $map
+## [1] 815
+
+## $soil
+## [1] &quot;&quot;
+
+## $som
+## [1] &quot;NA&quot;
+
+## $notes
+## [1] &quot;MF&quot;
+
+## $soilnotes
+## [1] &quot;&quot;
+
+## $sitename
+## [1] &quot;Willow Creek (US-WCr)&quot;
+
+## $greenhouse
+[1] FALSE
+
+## $sand_pct
+## [1] 42.52
+
+## $clay_pct
+## [1] 20.17
+
+## $time_zone
+## [1] &quot;America/Chicago&quot;</code></pre>
 </div>
 <div id="python-snippet-5" class="section level4">
 <h4><span class="header-section-number">15.4.7.2</span> Python Snippet</h4>
@@ -953,39 +1030,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb189-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
 <a class="sourceLine" id="cb189-5" data-line-number="5">           )</a>
 <a class="sourceLine" id="cb189-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
-<pre><code>## [
-##   {
-##     &quot;id&quot;: 676,
-##     &quot;city&quot;: &quot;Park Falls Ranger District&quot;,
-##     &quot;state&quot;: &quot;Wisconsin&quot;,
-##     &quot;country&quot;: &quot;US&quot;,
-##     &quot;mat&quot;: 4,
-##     &quot;map&quot;: 815,
-##     &quot;soil&quot;: &quot;&quot;,
-##     &quot;notes&quot;: &quot;MF&quot;,
-##     &quot;soilnotes&quot;: &quot;&quot;,
-##     &quot;sitename&quot;: &quot;Willow Creek (US-WCr)&quot;,
-##     &quot;greenhouse&quot;: false,
-##     &quot;sand_pct&quot;: 42.52,
-##     &quot;clay_pct&quot;: 20.17,
-##     &quot;time_zone&quot;: &quot;America/Chicago&quot;
-##   }
-## ]</code></pre>
+<pre><code>## {
+##   &quot;id&quot;: 676,
+##   &quot;city&quot;: &quot;Park Falls Ranger District&quot;,
+##   &quot;state&quot;: &quot;Wisconsin&quot;,
+##   &quot;country&quot;: &quot;US&quot;,
+##   &quot;mat&quot;: 4,
+##   &quot;map&quot;: 815,
+##   &quot;soil&quot;: &quot;&quot;,
+##   &quot;notes&quot;: &quot;MF&quot;,
+##   &quot;soilnotes&quot;: &quot;&quot;,
+##   &quot;sitename&quot;: &quot;Willow Creek (US-WCr)&quot;,
+##   &quot;greenhouse&quot;: false,
+##   &quot;sand_pct&quot;: 42.52,
+##   &quot;clay_pct&quot;: 20.17,
+##   &quot;time_zone&quot;: &quot;America/Chicago&quot;
+##  }</code></pre>
 </div>
 </div>
 <div id="section-6" class="section level3 unnumbered">
 <h3></h3>
 </div>
-<div id="get-apiworkflows" class="section level3 tabset tabset-pills">
-<h3><span class="header-section-number">15.4.8</span> <code>GET /api/workflows/</code></h3>
+<div id="get-apipfts" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.8</span> <code>GET /api/pfts/</code></h3>
 <div id="r-snippet-6" class="section level4">
 <h4><span class="header-section-number">15.4.8.1</span> R Snippet</h4>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="co"># Get workflow(s) that use `model_id` = 1000000022 [SIPNET] &amp; `site_id` = 676 [Willow Creek (US-WCr)]</span></a>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="co"># Search pft(s) of &quot;plant&quot; type with `pft_name` containing &quot;temperate&quot; &amp; belonging to `model_type` &quot;SIPNET&quot;</span></a>
 <a class="sourceLine" id="cb191-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
-<a class="sourceLine" id="cb191-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/?model_id=1000000022&amp;site_id=676&quot;</span>,</a>
+<a class="sourceLine" id="cb191-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/pfts/?pft_name=temperate&amp;pft_type=plant&amp;model_type=sipnet&amp;ignore_case=TRUE&quot;</span>,</a>
 <a class="sourceLine" id="cb191-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
 <a class="sourceLine" id="cb191-5" data-line-number="5">       )</a>
 <a class="sourceLine" id="cb191-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $pfts
+##   model_type  pft_id          pft_name                       pft_type
+##   &lt;chr&gt;       &lt;S3: integer64&gt; &lt;chr&gt;                          &lt;chr&gt;   
+## 1 SIPNET              41      temperate.deciduous            plant   
+## 2 SIPNET      1000000105      temperate.deciduous.IF         plant   
+## 3 SIPNET      1000000107      temperate.deciduous_SDA        plant   
+## 4 SIPNET      1000000115      temperate.deciduous.ALL        plant   
+## 5 SIPNET      1000000118      temperate.deciduous.ALL.NORMAL plant   
+## 6 SIPNET      2000000017      tundra.deciduous.NGEE_Arctic   plant   
+## 7 SIPNET      2000000045      temperate.broadleaf.deciduous  plant
+
+## $count
+## [1] 7</code></pre>
+</div>
+<div id="python-snippet-6" class="section level4">
+<h4><span class="header-section-number">15.4.8.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb193"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="co"># Search pft(s) of &quot;plant&quot; type with `pft_name` containing &quot;temperate&quot; &amp; belonging to `model_type` &quot;SIPNET&quot;</span></a>
+<a class="sourceLine" id="cb193-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb193-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/pfts/?pft_name=temperate&amp;pft_type=plant&amp;model_type=sipnet&amp;ignore_case=TRUE&quot;</span>,</a>
+<a class="sourceLine" id="cb193-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb193-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb193-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;pfts&quot;: [
+##     {
+##       &quot;model_type&quot;: &quot;SIPNET&quot;,
+##       &quot;pft_id&quot;: 41,
+##       &quot;pft_name&quot;: &quot;temperate.deciduous&quot;,
+##       &quot;pft_type&quot;: &quot;plant&quot;
+##     },
+##     ...
+##   ],
+##   &quot;count&quot;: 7
+## }</code></pre>
+</div>
+</div>
+<div id="section-7" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apipftspft_id" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.9</span> <code>GET /api/pfts/{pft_id}</code></h3>
+<div id="r-snippet-7" class="section level4">
+<h4><span class="header-section-number">15.4.9.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="co"># Fetch the details of PEcAn PFT with id = 2000000045</span></a>
+<a class="sourceLine" id="cb195-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb195-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/pfts/2000000045&quot;</span>,</a>
+<a class="sourceLine" id="cb195-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb195-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb195-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $model_type
+## [1] &quot;SIPNET&quot;
+
+## $pft_id
+## [1] 2000000045
+
+## $pft_name
+## [1] &quot;temperate.broadleaf.deciduous&quot;
+
+## $definition
+## [1] &quot;SIPNET Temperate Deciduous PFT with priors on all parameters&quot;
+
+## $pft_type
+## [1] &quot;plant&quot; </code></pre>
+</div>
+<div id="python-snippet-7" class="section level4">
+<h4><span class="header-section-number">15.4.9.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb197"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="co"># Fetch the details of PEcAn PFT with id = 2000000045</span></a>
+<a class="sourceLine" id="cb197-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb197-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/pfts/2000000045&quot;</span>,</a>
+<a class="sourceLine" id="cb197-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb197-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb197-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;model_type&quot;: &quot;SIPNET&quot;,
+##   &quot;pft_id&quot;: 2000000045,
+##   &quot;pft_name&quot;: &quot;temperate.broadleaf.deciduous&quot;,
+##   &quot;definition&quot;: &quot;SIPNET Temperate Deciduous PFT with priors on all parameters&quot;,
+##   &quot;pft_type&quot;: &quot;plant&quot;
+## }</code></pre>
+</div>
+</div>
+<div id="section-8" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apiworkflows" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.10</span> <code>GET /api/workflows/</code></h3>
+<div id="r-snippet-8" class="section level4">
+<h4><span class="header-section-number">15.4.10.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="co"># Get workflow(s) that use `model_id` = 1000000022 [SIPNET] &amp; `site_id` = 676 [Willow Creek (US-WCr)]</span></a>
+<a class="sourceLine" id="cb199-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb199-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/?model_id=1000000022&amp;site_id=676&quot;</span>,</a>
+<a class="sourceLine" id="cb199-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb199-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb199-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $workflows
 ##   id              properties 
 ##   &lt;S3: integer64&gt; &lt;list&gt;     
@@ -995,14 +1164,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $count
 ## [1] 5</code></pre>
 </div>
-<div id="python-snippet-6" class="section level4">
-<h4><span class="header-section-number">15.4.8.2</span> Python Snippet</h4>
-<div class="sourceCode" id="cb193"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="co"># Get workflow(s) that use `model_id` = 1000000022 [SIPNET] &amp; `site_id` = 676 [Willow Creek (US-WCr)]</span></a>
-<a class="sourceLine" id="cb193-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
-<a class="sourceLine" id="cb193-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/workflows/?model_id=1000000022&amp;site_id=676&quot;</span>,</a>
-<a class="sourceLine" id="cb193-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
-<a class="sourceLine" id="cb193-5" data-line-number="5">           )</a>
-<a class="sourceLine" id="cb193-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<div id="python-snippet-8" class="section level4">
+<h4><span class="header-section-number">15.4.10.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb201"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># Get workflow(s) that use `model_id` = 1000000022 [SIPNET] &amp; `site_id` = 676 [Willow Creek (US-WCr)]</span></a>
+<a class="sourceLine" id="cb201-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb201-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/workflows/?model_id=1000000022&amp;site_id=676&quot;</span>,</a>
+<a class="sourceLine" id="cb201-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb201-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## {
 ##   &quot;workflows&quot;: [
 ##     {
@@ -1033,60 +1202,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## }</code></pre>
 </div>
 </div>
-<div id="section-7" class="section level3 unnumbered">
+<div id="section-9" class="section level3 unnumbered">
 <h3></h3>
 </div>
 <div id="post-apiworkflows" class="section level3 tabset tabset-pills">
-<h3><span class="header-section-number">15.4.9</span> <code>POST /api/workflows/</code></h3>
-<div id="r-snippet-7" class="section level4">
-<h4><span class="header-section-number">15.4.9.1</span> R Snippet</h4>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="co"># Submit a workflow in XML format for execution</span></a>
-<a class="sourceLine" id="cb195-2" data-line-number="2">xmlFile &lt;-<span class="st"> &quot;pecan/tests/api.sipnet.xml&quot;</span></a>
-<a class="sourceLine" id="cb195-3" data-line-number="3">xml_string &lt;-<span class="st"> </span><span class="kw">paste0</span>(xml2<span class="op">::</span><span class="kw">read_xml</span>(xmlFile))</a>
-<a class="sourceLine" id="cb195-4" data-line-number="4">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">POST</span>(</a>
-<a class="sourceLine" id="cb195-5" data-line-number="5">         <span class="st">&quot;http://localhost:8000/api/workflows/&quot;</span>,</a>
-<a class="sourceLine" id="cb195-6" data-line-number="6">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>),</a>
-<a class="sourceLine" id="cb195-7" data-line-number="7">         httr<span class="op">::</span><span class="kw">content_type</span>(<span class="st">&quot;application/xml&quot;</span>),</a>
-<a class="sourceLine" id="cb195-8" data-line-number="8">         <span class="dt">body =</span> xml_string</a>
-<a class="sourceLine" id="cb195-9" data-line-number="9">       )</a>
-<a class="sourceLine" id="cb195-10" data-line-number="10"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<h3><span class="header-section-number">15.4.11</span> <code>POST /api/workflows/</code></h3>
+<div id="r-snippet-9" class="section level4">
+<h4><span class="header-section-number">15.4.11.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="co"># Submit a workflow in XML format for execution</span></a>
+<a class="sourceLine" id="cb203-2" data-line-number="2">xmlFile &lt;-<span class="st"> &quot;pecan/tests/api.sipnet.xml&quot;</span></a>
+<a class="sourceLine" id="cb203-3" data-line-number="3">xml_string &lt;-<span class="st"> </span><span class="kw">paste0</span>(xml2<span class="op">::</span><span class="kw">read_xml</span>(xmlFile))</a>
+<a class="sourceLine" id="cb203-4" data-line-number="4">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">POST</span>(</a>
+<a class="sourceLine" id="cb203-5" data-line-number="5">         <span class="st">&quot;http://localhost:8000/api/workflows/&quot;</span>,</a>
+<a class="sourceLine" id="cb203-6" data-line-number="6">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>),</a>
+<a class="sourceLine" id="cb203-7" data-line-number="7">         httr<span class="op">::</span><span class="kw">content_type</span>(<span class="st">&quot;application/xml&quot;</span>),</a>
+<a class="sourceLine" id="cb203-8" data-line-number="8">         <span class="dt">body =</span> xml_string</a>
+<a class="sourceLine" id="cb203-9" data-line-number="9">       )</a>
+<a class="sourceLine" id="cb203-10" data-line-number="10"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $workflow_id
 ## [1] 99000000001
 
 ## $status
 ## [1] &quot;Submitted successfully&quot;</code></pre>
 </div>
-<div id="python-snippet-7" class="section level4">
-<h4><span class="header-section-number">15.4.9.2</span> Python Snippet</h4>
-<div class="sourceCode" id="cb197"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="co"># Submit a workflow in XML format for execution</span></a>
-<a class="sourceLine" id="cb197-2" data-line-number="2">xml_file <span class="op">=</span> <span class="st">&quot;pecan/tests/api.sipnet.xml&quot;</span></a>
-<a class="sourceLine" id="cb197-3" data-line-number="3">root <span class="op">=</span> xml.etree.ElementTree.parse(xml_file).getroot()</a>
-<a class="sourceLine" id="cb197-4" data-line-number="4">response <span class="op">=</span> requests.post(</a>
-<a class="sourceLine" id="cb197-5" data-line-number="5">             <span class="st">&quot;http://localhost:8000/api/workflows/&quot;</span>,</a>
-<a class="sourceLine" id="cb197-6" data-line-number="6">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>),</a>
-<a class="sourceLine" id="cb197-7" data-line-number="7">             headers <span class="op">=</span> {<span class="st">&#39;Content-Type&#39;</span>: <span class="st">&#39;application/xml&#39;</span>},</a>
-<a class="sourceLine" id="cb197-8" data-line-number="8">             data <span class="op">=</span> xml.etree.ElementTree.tostring(root, encoding<span class="op">=</span><span class="st">&#39;unicode&#39;</span>, method<span class="op">=</span><span class="st">&#39;xml&#39;</span>)</a>
-<a class="sourceLine" id="cb197-9" data-line-number="9">           )</a>
-<a class="sourceLine" id="cb197-10" data-line-number="10"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<div id="python-snippet-9" class="section level4">
+<h4><span class="header-section-number">15.4.11.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb205"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co"># Submit a workflow in XML format for execution</span></a>
+<a class="sourceLine" id="cb205-2" data-line-number="2">xml_file <span class="op">=</span> <span class="st">&quot;pecan/tests/api.sipnet.xml&quot;</span></a>
+<a class="sourceLine" id="cb205-3" data-line-number="3">root <span class="op">=</span> xml.etree.ElementTree.parse(xml_file).getroot()</a>
+<a class="sourceLine" id="cb205-4" data-line-number="4">response <span class="op">=</span> requests.post(</a>
+<a class="sourceLine" id="cb205-5" data-line-number="5">             <span class="st">&quot;http://localhost:8000/api/workflows/&quot;</span>,</a>
+<a class="sourceLine" id="cb205-6" data-line-number="6">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>),</a>
+<a class="sourceLine" id="cb205-7" data-line-number="7">             headers <span class="op">=</span> {<span class="st">&#39;Content-Type&#39;</span>: <span class="st">&#39;application/xml&#39;</span>},</a>
+<a class="sourceLine" id="cb205-8" data-line-number="8">             data <span class="op">=</span> xml.etree.ElementTree.tostring(root, encoding<span class="op">=</span><span class="st">&#39;unicode&#39;</span>, method<span class="op">=</span><span class="st">&#39;xml&#39;</span>)</a>
+<a class="sourceLine" id="cb205-9" data-line-number="9">           )</a>
+<a class="sourceLine" id="cb205-10" data-line-number="10"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## {
 ##   &quot;workflow_id&quot;: &quot;99000000001&quot;,
 ##   &quot;status&quot;: &quot;Submitted successfully&quot;
 ## }</code></pre>
 </div>
 </div>
-<div id="section-8" class="section level3 unnumbered">
+<div id="section-10" class="section level3 unnumbered">
 <h3></h3>
 </div>
 <div id="get-apiworkflowsid" class="section level3 tabset tabset-pills">
-<h3><span class="header-section-number">15.4.10</span> <code>GET /api/workflows/{id}</code></h3>
-<div id="r-snippet-8" class="section level4">
-<h4><span class="header-section-number">15.4.10.1</span> R Snippet</h4>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="co"># Get details of workflow with `id` = &#39;1000009172&#39;</span></a>
-<a class="sourceLine" id="cb199-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
-<a class="sourceLine" id="cb199-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/1000009172&quot;</span>,</a>
-<a class="sourceLine" id="cb199-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
-<a class="sourceLine" id="cb199-5" data-line-number="5">       )</a>
-<a class="sourceLine" id="cb199-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<h3><span class="header-section-number">15.4.12</span> <code>GET /api/workflows/{id}</code></h3>
+<div id="r-snippet-10" class="section level4">
+<h4><span class="header-section-number">15.4.12.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="co"># Get details of workflow with `id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb207-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb207-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/workflows/1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb207-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb207-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb207-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $id
 ## [1] &quot;1000009172&quot;
 
@@ -1138,14 +1307,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $properties$input_poolinitcond
 ## [1] &quot;-1&quot;</code></pre>
 </div>
-<div id="python-snippet-8" class="section level4">
-<h4><span class="header-section-number">15.4.10.2</span> Python Snippet</h4>
-<div class="sourceCode" id="cb201"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># Get details of workflow with `id` = &#39;1000009172&#39;</span></a>
-<a class="sourceLine" id="cb201-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
-<a class="sourceLine" id="cb201-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/workflows/1000009172&quot;</span>,</a>
-<a class="sourceLine" id="cb201-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
-<a class="sourceLine" id="cb201-5" data-line-number="5">           )</a>
-<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<div id="python-snippet-10" class="section level4">
+<h4><span class="header-section-number">15.4.12.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb209"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="co"># Get details of workflow with `id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb209-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb209-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/workflows/1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb209-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb209-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb209-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## {
 ##   &quot;id&quot;: &quot;1000009172&quot;,
 ##   &quot;properties&quot;: {
@@ -1170,19 +1339,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## }</code></pre>
 </div>
 </div>
-<div id="section-9" class="section level3 unnumbered">
+<div id="section-11" class="section level3 unnumbered">
 <h3></h3>
 </div>
 <div id="get-apiruns" class="section level3 tabset tabset-pills">
-<h3><span class="header-section-number">15.4.11</span> <code>GET /api/runs/</code></h3>
-<div id="r-snippet-9" class="section level4">
-<h4><span class="header-section-number">15.4.11.1</span> R Snippet</h4>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="co"># Get list of run belonging to the workflow with `workflow_id` = &#39;1000009172&#39;</span></a>
-<a class="sourceLine" id="cb203-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
-<a class="sourceLine" id="cb203-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/?workflow_id=1000009172&quot;</span>,</a>
-<a class="sourceLine" id="cb203-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
-<a class="sourceLine" id="cb203-5" data-line-number="5">       )</a>
-<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<h3><span class="header-section-number">15.4.13</span> <code>GET /api/runs/</code></h3>
+<div id="r-snippet-11" class="section level4">
+<h4><span class="header-section-number">15.4.13.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="co"># Get list of run belonging to the workflow with `workflow_id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb211-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb211-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/?workflow_id=1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb211-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb211-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb211-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
 <pre><code>## $runs
 ##    runtype  ensemble_id    workflow_id    id            model_id     site_id      parameter_list start_time        
 ## finish_time    
@@ -1193,14 +1362,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $count
 ## [1] 50</code></pre>
 </div>
-<div id="python-snippet-9" class="section level4">
-<h4><span class="header-section-number">15.4.11.2</span> Python Snippet</h4>
-<div class="sourceCode" id="cb205"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co"># Get list of run belonging to the workflow with `workflow_id` = &#39;1000009172&#39;</span></a>
-<a class="sourceLine" id="cb205-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
-<a class="sourceLine" id="cb205-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/runs/?workflow_id=1000009172&quot;</span>,</a>
-<a class="sourceLine" id="cb205-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
-<a class="sourceLine" id="cb205-5" data-line-number="5">           )</a>
-<a class="sourceLine" id="cb205-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<div id="python-snippet-11" class="section level4">
+<h4><span class="header-section-number">15.4.13.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb213"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="co"># Get list of run belonging to the workflow with `workflow_id` = &#39;1000009172&#39;</span></a>
+<a class="sourceLine" id="cb213-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb213-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/runs/?workflow_id=1000009172&quot;</span>,</a>
+<a class="sourceLine" id="cb213-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb213-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb213-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## {
 ##   &quot;runs&quot;: [
 ##     {
@@ -1221,48 +1390,136 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## }</code></pre>
 </div>
 </div>
-<div id="section-10" class="section level3 unnumbered">
+<div id="section-12" class="section level3 unnumbered">
 <h3></h3>
 </div>
-<div id="get-apirunsid" class="section level3 tabset tabset-pills">
-<h3><span class="header-section-number">15.4.12</span> <code>GET /api/runs/{id}</code></h3>
-<div id="r-snippet-10" class="section level4">
-<h4><span class="header-section-number">15.4.12.1</span> R Snippet</h4>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="co"># Get details of run belonging with `id` = &#39;1002042201&#39;</span></a>
-<a class="sourceLine" id="cb207-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
-<a class="sourceLine" id="cb207-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/1002042201&quot;</span>,</a>
-<a class="sourceLine" id="cb207-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
-<a class="sourceLine" id="cb207-5" data-line-number="5">       )</a>
-<a class="sourceLine" id="cb207-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
-<pre><code>##    runtype ensemble_id workflow_id         id   model_id site_id start_time finish_time parameter_list          
-## 1 ensemble  1000017624  1000009172 1002042201 1000000022     796 2005-01-01  2011-12-31     ensemble=1 
-##            created_at          updated_at          started_at         finished_at
-## 1 2018-04-11 22:20:31 2018-04-11 22:22:08 2018-04-11 18:21:57 2018-04-11 18:22:08</code></pre>
+<div id="get-apirunsrun_id" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.14</span> <code>GET /api/runs/{run_id}</code></h3>
+<div id="r-snippet-12" class="section level4">
+<h4><span class="header-section-number">15.4.14.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="co"># Get details of run belonging with `id` = &#39;99000000282&#39;</span></a>
+<a class="sourceLine" id="cb215-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb215-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/99000000282&quot;</span>,</a>
+<a class="sourceLine" id="cb215-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb215-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb215-6" data-line-number="6"><span class="kw">print</span>(jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">rawToChar</span>(res<span class="op">$</span>content)))</a></code></pre></div>
+<pre><code>## $runtype
+## [1] &quot;sensitivity analysis&quot;
+
+## $ensemble_id
+## [1] 99000000016
+
+## $workflow_id
+## [1] 99000000031
+
+## $id
+## [1] 99000000282
+
+## $model_id
+## [1] 1000000014
+
+## $site_id
+## [1] 772
+
+## $start_time
+## [1] &quot;2002-01-01&quot;
+
+## $finish_time
+## [1] &quot;2002-12-31&quot;
+
+## $parameter_list
+## [1] &quot;quantile=MEDIAN,trait=all,pft=temperate.coniferous&quot;
+
+## $started_at
+## [1] &quot;2020-07-22 07:02:40&quot;
+
+## $finished_at
+## [1] &quot;2020-07-22 07:02:57&quot;
+
+## $outputs
+## $outputs$logfile
+## [1] &quot;logfile.txt&quot;
+
+## $outputs$info
+## [1] &quot;README.txt&quot;
+
+## $outputs$years
+## $outputs$years$`2002`
+## $outputs$years$`2002`$data
+## [1] &quot;2002.nc&quot;
+
+## $outputs$years$`2002`$variables
+## $outputs$years$`2002`$variables$GPP
+## [1] &quot;Gross Primary Productivity&quot;
+
+## $outputs$years$`2002`$variables$NPP
+## [1] &quot;Net Primary Productivity&quot;
+
+## ...</code></pre>
 </div>
-<div id="python-snippet-10" class="section level4">
-<h4><span class="header-section-number">15.4.12.2</span> Python Snippet</h4>
-<div class="sourceCode" id="cb209"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="co"># Get details of run with `id` = &#39;1002042201&#39;</span></a>
-<a class="sourceLine" id="cb209-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
-<a class="sourceLine" id="cb209-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/runs/1002042201&quot;</span>,</a>
-<a class="sourceLine" id="cb209-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
-<a class="sourceLine" id="cb209-5" data-line-number="5">           )</a>
-<a class="sourceLine" id="cb209-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
-<pre><code>## [
-##   {
-##     &quot;runtype&quot;: &quot;ensemble&quot;,
-##     &quot;ensemble_id&quot;: 1000017624,
-##     &quot;workflow_id&quot;: 1000009172,
-##     &quot;id&quot;: 1002042201,
-##     &quot;model_id&quot;: 1000000022,
-##     &quot;site_id&quot;: 796,
-##     &quot;parameter_list&quot;: &quot;ensemble=1&quot;,
-##     &quot;start_time&quot;: &quot;2005-01-01&quot;,
-##     &quot;finish_time&quot;: &quot;2011-12-31&quot;
+<div id="python-snippet-12" class="section level4">
+<h4><span class="header-section-number">15.4.14.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="co"># Get details of run with `id` = &#39;1002042201&#39;</span></a>
+<a class="sourceLine" id="cb217-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb217-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/runs/1002042201&quot;</span>,</a>
+<a class="sourceLine" id="cb217-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb217-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb217-6" data-line-number="6"><span class="bu">print</span>(json.dumps(response.json(), indent<span class="op">=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## {
+##   &quot;runtype&quot;: &quot;ensemble&quot;,
+##   &quot;ensemble_id&quot;: 1000017624,
+##   &quot;workflow_id&quot;: 1000009172,
+##   &quot;id&quot;: 1002042201,
+##   &quot;model_id&quot;: 1000000022,
+##   &quot;site_id&quot;: 796,
+##   &quot;parameter_list&quot;: &quot;ensemble=1&quot;,
+##   &quot;start_time&quot;: &quot;2005-01-01&quot;,
+##   &quot;finish_time&quot;: &quot;2011-12-31&quot;,
+##   &quot;outputs&quot;: {
+##     &quot;logfile&quot;: &quot;logfile.txt&quot;,
+##     &quot;info&quot;: &quot;README.txt&quot;,
+##     &quot;years&quot;: {
+##       &quot;2002&quot;: {
+##         &quot;data&quot;: &quot;2002.nc&quot;,
+##         &quot;variables&quot;: {
+##           &quot;GPP&quot;: &quot;Gross Primary Productivity&quot;,
+##           &quot;NPP&quot;: &quot;Net Primary Productivity&quot;,
+##           ...
+##         }
+##       }
+##     }
 ##   }
-## ]</code></pre>
+## }</code></pre>
 </div>
 </div>
-<div id="section-11" class="section level3 unnumbered">
+<div id="section-13" class="section level3 unnumbered">
+<h3></h3>
+</div>
+<div id="get-apirunsrun_idgraphyeary_var" class="section level3 tabset tabset-pills">
+<h3><span class="header-section-number">15.4.15</span> <code>GET /api/runs/{run_id}/graph/{year}/{y_var}</code></h3>
+<div id="r-snippet-13" class="section level4">
+<h4><span class="header-section-number">15.4.15.1</span> R Snippet</h4>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="co"># Plot the Gross Primary Productivity vs Time for the run with ID `99000000282` for the year 2002</span></a>
+<a class="sourceLine" id="cb219-2" data-line-number="2">res &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(</a>
+<a class="sourceLine" id="cb219-3" data-line-number="3">         <span class="st">&quot;http://localhost:8000/api/runs/99000000282/graph/2002/GPP&quot;</span>,</a>
+<a class="sourceLine" id="cb219-4" data-line-number="4">         httr<span class="op">::</span><span class="kw">authenticate</span>(<span class="st">&quot;carya&quot;</span>, <span class="st">&quot;illinois&quot;</span>)</a>
+<a class="sourceLine" id="cb219-5" data-line-number="5">       )</a>
+<a class="sourceLine" id="cb219-6" data-line-number="6"><span class="kw">writeBin</span>(res<span class="op">$</span>content, <span class="st">&quot;test.png&quot;</span>)</a></code></pre></div>
+<p><img src="../../figures/run_output_plot.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="python-snippet-13" class="section level4">
+<h4><span class="header-section-number">15.4.15.2</span> Python Snippet</h4>
+<div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="co"># Plot the Gross Primary Productivity vs Time for the run with ID `99000000282` for the year 2002</span></a>
+<a class="sourceLine" id="cb220-2" data-line-number="2">response <span class="op">=</span> requests.get(</a>
+<a class="sourceLine" id="cb220-3" data-line-number="3">             <span class="st">&quot;http://localhost:8000/api/runs/99000000282/graph/2002/GPP&quot;</span>,</a>
+<a class="sourceLine" id="cb220-4" data-line-number="4">             auth<span class="op">=</span>HTTPBasicAuth(<span class="st">&#39;carya&#39;</span>, <span class="st">&#39;illinois&#39;</span>)</a>
+<a class="sourceLine" id="cb220-5" data-line-number="5">           )</a>
+<a class="sourceLine" id="cb220-6" data-line-number="6"><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;test.png&quot;</span>, <span class="st">&quot;wb&quot;</span>) <span class="im">as</span> <span class="bu">file</span>:</a>
+<a class="sourceLine" id="cb220-7" data-line-number="7">  <span class="bu">file</span>.write(response.content)</a></code></pre></div>
+<p><img src="../../figures/run_output_plot.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="section-14" class="section level3 unnumbered">
 <h3></h3>
 
 </div>
