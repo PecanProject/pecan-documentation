@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-19" />
+<meta name="date" content="2020-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -373,12 +373,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="pecan-project-api.html#section-6"></a></li>
 <li class="chapter" data-level="15.4.8" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflows"><i class="fa fa-check"></i><b>15.4.8</b> <code>GET /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-7"></a></li>
-<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.9</b> <code>GET /api/workflows/{id}</code></a></li>
+<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#post-apiworkflows"><i class="fa fa-check"></i><b>15.4.9</b> <code>POST /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-8"></a></li>
-<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/runs/</code></a></li>
+<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/workflows/{id}</code></a></li>
 <li><a href="pecan-project-api.html#section-9"></a></li>
-<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsid"><i class="fa fa-check"></i><b>15.4.11</b> <code>GET /api/runs/{id}</code></a></li>
+<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.11</b> <code>GET /api/runs/</code></a></li>
 <li><a href="pecan-project-api.html#section-10"></a></li>
+<li class="chapter" data-level="15.4.12" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsid"><i class="fa fa-check"></i><b>15.4.12</b> <code>GET /api/runs/{id}</code></a></li>
+<li><a href="pecan-project-api.html#section-11"></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="database-sync.html"><a href="database-sync.html"><i class="fa fa-check"></i><b>16</b> Database synchronization</a><ul>
@@ -670,16 +672,16 @@ PEcAn uses remote execution primarily to run ecosystem models.</p>
 <h2><span class="header-section-number">25.1</span> Basics of SSH</h2>
 <p>All of the PEcAn remote infrastructure depends on the system <code>ssh</code> utility, so it’s important to make sure this works before attempting the advanced remote execution functionality in PEcAn.</p>
 <p>To connect to a remote server interactively, the command is simply:</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb409-1" data-line-number="1"><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb413-1" data-line-number="1"><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
 <p>For instance, my connection to the BU shared computing cluster looks like:</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb410-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu</a></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb414-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu</a></code></pre></div>
 <p>It will prompt me for my BU password, and, if successful, will drop me into a login shell on the remote machine.</p>
 <p>Alternatively to the login shell, <code>ssh</code> can be used to execute arbitrary code, whose output will be returned exactly as it would if you ran the command locally.
 For example, the following:</p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb411-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</a></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb415-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</a></code></pre></div>
 <p>will run the <code>pwd</code> command, and return the path to my home directory on the BU SCC.
 The more advanced example below will run some simple R code on the BU SCC and return the output as if it was run locally.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb412-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript -e <span class="st">&quot;seq(1, 10)&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb416-1" data-line-number="1"><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript -e <span class="st">&quot;seq(1, 10)&quot;</span></a></code></pre></div>
 </div>
 <div id="ssh-authentication-password-vs.ssh-key" class="section level2">
 <h2><span class="header-section-number">25.2</span> SSH authentication – password vs. SSH key</h2>
@@ -699,25 +701,25 @@ Even simple password-protection can be tricky in scripts, since (by design) it i
 <p>A convenient and secure way to follow SSH security protocol, but prevent having to go through the full authentication process every time, is to use SSH tunnels (or “sockets”, which are effectively synonymous).
 Essentially, an SSH socket is a read- and write-protectected file that contains all of the information about an SSH connection.</p>
 <p>To create an SSH tunnel, use a command like the following:</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb413-1" data-line-number="1"><span class="fu">ssh</span> -n -N -f -o ControlMaster=yes -S /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb417-1" data-line-number="1"><span class="fu">ssh</span> -n -N -f -o ControlMaster=yes -S /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></a></code></pre></div>
 <p>If appropriate, this will prompt you for your password (if using password authentication), and then will drop you back to the command line (thanks to the <code>-N</code> flag, which runs SSH without executing a command, the <code>-f</code> flag, which pushes SSH into the background, and the <code>-n</code> flag, which prevents ssh from reading any input).
 It will also create the file <code>/path/to/socket/file</code>.</p>
 <p>To use this socket with another command, use the <code>-S /path/to/file</code> flag, pointing to the same tunnel file you just created.</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb414-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb418-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></a></code></pre></div>
 <p>This will let you access the server without any sort of authentication step.
 As before, if <code>&lt;optional command&gt;</code> is blank, you will be dropped into an interactive shell on the remote, or if it’s a command, that command will be executed and the output returned.</p>
 <p>To close a socket, use the following:</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb415-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</a></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb419-1" data-line-number="1"><span class="fu">ssh</span> -S /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</a></code></pre></div>
 <p>This will delete the socket file and close the connection.
 Alternatively, a scorched earth approach to closing the SSH tunnel if you don’t remember where you put the socket file is something like the following:</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb416-1" data-line-number="1"><span class="ex">pgrep</span> ssh   # See which processes will be killed</a>
-<a class="sourceLine" id="cb416-2" data-line-number="2"><span class="ex">pkill</span> ssh   # Kill those processes</a></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb420-1" data-line-number="1"><span class="ex">pgrep</span> ssh   # See which processes will be killed</a>
+<a class="sourceLine" id="cb420-2" data-line-number="2"><span class="ex">pkill</span> ssh   # Kill those processes</a></code></pre></div>
 <p>…which will kill all user processes called <code>ssh</code>.</p>
 <p>To automatically create tunnels following a specific pattern, you can add the following to your
 <code>~/.ssh/config</code></p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb417-1" data-line-number="1"><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb417-2" data-line-number="2"> <span class="ex">ControlMaster</span> auto</a>
-<a class="sourceLine" id="cb417-3" data-line-number="3"> <span class="ex">ControlPath</span> /tmp/%r@%h:%p</a></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb421-1" data-line-number="1"><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb421-2" data-line-number="2"> <span class="ex">ControlMaster</span> auto</a>
+<a class="sourceLine" id="cb421-3" data-line-number="3"> <span class="ex">ControlPath</span> /tmp/%r@%h:%p</a></code></pre></div>
 <p>For more information, see <code>man ssh</code>.</p>
 </div>
 <div id="ssh-tunnels-and-pecan" class="section level2">
@@ -727,9 +729,9 @@ If working from the web interface, the tunnel will be opened for you by some und
 The best way to do this is to create the tunnel first, outside of R, as described above.
 (In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>.
 To follow along, replace these with your own username and designated server, respectively).</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb418-1" data-line-number="1"><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</a></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb422-1" data-line-number="1"><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</a></code></pre></div>
 <p>Then, in R, create a <code>host</code> object, which is just a list containing the elements <code>name</code> (hostname) and <code>tunnel</code> (path to tunnel file).</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" data-line-number="1">my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" data-line-number="1">my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</a></code></pre></div>
 <p>This host object can then be used in any of the remote execution functions.</p>
 </div>
 <div id="basic-remote-execute-functions" class="section level2">

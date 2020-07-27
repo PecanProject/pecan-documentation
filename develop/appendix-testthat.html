@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-19" />
+<meta name="date" content="2020-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -373,12 +373,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="pecan-project-api.html#section-6"></a></li>
 <li class="chapter" data-level="15.4.8" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflows"><i class="fa fa-check"></i><b>15.4.8</b> <code>GET /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-7"></a></li>
-<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.9</b> <code>GET /api/workflows/{id}</code></a></li>
+<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#post-apiworkflows"><i class="fa fa-check"></i><b>15.4.9</b> <code>POST /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-8"></a></li>
-<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/runs/</code></a></li>
+<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/workflows/{id}</code></a></li>
 <li><a href="pecan-project-api.html#section-9"></a></li>
-<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsid"><i class="fa fa-check"></i><b>15.4.11</b> <code>GET /api/runs/{id}</code></a></li>
+<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.11</b> <code>GET /api/runs/</code></a></li>
 <li><a href="pecan-project-api.html#section-10"></a></li>
+<li class="chapter" data-level="15.4.12" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsid"><i class="fa fa-check"></i><b>15.4.12</b> <code>GET /api/runs/{id}</code></a></li>
+<li><a href="pecan-project-api.html#section-11"></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="database-sync.html"><a href="database-sync.html"><i class="fa fa-check"></i><b>16</b> Database synchronization</a><ul>
@@ -705,29 +707,29 @@ for details on how to use the testthat package.</p>
 <div id="basic-use-of-the-testthat-package" class="section level2">
 <h2><span class="header-section-number">31.2</span> Basic use of the <code>testthat</code> package</h2>
 <p>Create a file called <code>&lt;packagename&gt;/tests/testthat.R</code> with the following contents:</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
-<a class="sourceLine" id="cb439-2" data-line-number="2"><span class="kw">library</span>(mypackage)</a>
-<a class="sourceLine" id="cb439-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb439-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1"><span class="kw">library</span>(testthat)</a>
+<a class="sourceLine" id="cb443-2" data-line-number="2"><span class="kw">library</span>(mypackage)</a>
+<a class="sourceLine" id="cb443-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb443-4" data-line-number="4"><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</a></code></pre></div>
 <p>Tests should be placed in <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>, and look like the following:</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" data-line-number="1"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
-<a class="sourceLine" id="cb440-2" data-line-number="2">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb440-3" data-line-number="3">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</a>
-<a class="sourceLine" id="cb440-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb440-5" data-line-number="5">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
-<a class="sourceLine" id="cb440-6" data-line-number="6">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb440-7" data-line-number="7">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
-<a class="sourceLine" id="cb440-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb440-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb440-10" data-line-number="10"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
-<a class="sourceLine" id="cb440-11" data-line-number="11">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb440-12" data-line-number="12">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb440-13" data-line-number="13">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb440-14" data-line-number="14">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
-<a class="sourceLine" id="cb440-15" data-line-number="15">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
-<a class="sourceLine" id="cb440-16" data-line-number="16">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
-<a class="sourceLine" id="cb440-17" data-line-number="17">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
-<a class="sourceLine" id="cb440-18" data-line-number="18">})</a></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" data-line-number="1"><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</a>
+<a class="sourceLine" id="cb444-2" data-line-number="2">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb444-3" data-line-number="3">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb444-4" data-line-number="4">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb444-5" data-line-number="5">  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</a>
+<a class="sourceLine" id="cb444-6" data-line-number="6">  <span class="kw">set.seed</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb444-7" data-line-number="7">  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</a>
+<a class="sourceLine" id="cb444-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb444-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb444-10" data-line-number="10"><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</a>
+<a class="sourceLine" id="cb444-11" data-line-number="11">  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb444-12" data-line-number="12">  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb444-13" data-line-number="13">  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb444-14" data-line-number="14">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</a>
+<a class="sourceLine" id="cb444-15" data-line-number="15">  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</a>
+<a class="sourceLine" id="cb444-16" data-line-number="16">  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</a>
+<a class="sourceLine" id="cb444-17" data-line-number="17">  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb444-18" data-line-number="18">})</a></code></pre></div>
 </div>
 <div id="data-for-tests" class="section level2">
 <h2><span class="header-section-number">31.3</span> Data for tests</h2>
@@ -742,20 +744,20 @@ Data that are not package specific should be placed in the <code>PEcAn.all</code
 <ul>
 <li>A generic settings can be found in the <code>PEcAn.all</code> package</li>
 </ul>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
-<a class="sourceLine" id="cb441-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb445-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
 <ul>
 <li>database settings can be specified, and tests run only if a connection is available</li>
 </ul>
 <p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" data-line-number="1">settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </a>
-<a class="sourceLine" id="cb442-2" data-line-number="2">                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </a>
-<a class="sourceLine" id="cb442-3" data-line-number="3">                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></a>
-<a class="sourceLine" id="cb442-4" data-line-number="4">                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></a>
-<a class="sourceLine" id="cb442-5" data-line-number="5"><span class="kw">test_that</span>(..., {</a>
-<a class="sourceLine" id="cb442-6" data-line-number="6">  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</a>
-<a class="sourceLine" id="cb442-7" data-line-number="7">  ## write tests here</a>
-<a class="sourceLine" id="cb442-8" data-line-number="8">})</a></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" data-line-number="1">settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb446-2" data-line-number="2">                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </a>
+<a class="sourceLine" id="cb446-3" data-line-number="3">                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></a>
+<a class="sourceLine" id="cb446-4" data-line-number="4">                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></a>
+<a class="sourceLine" id="cb446-5" data-line-number="5"><span class="kw">test_that</span>(..., {</a>
+<a class="sourceLine" id="cb446-6" data-line-number="6">  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</a>
+<a class="sourceLine" id="cb446-7" data-line-number="7">  ## write tests here</a>
+<a class="sourceLine" id="cb446-8" data-line-number="8">})</a></code></pre></div>
 <ul>
 <li>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
 wiki</a></li>
@@ -763,8 +765,8 @@ wiki</a></li>
 <li><p>Model specific settings can go in the model-specific module, for
 example:</p></li>
 </ul>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
-<a class="sourceLine" id="cb443-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1">settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</a>
+<a class="sourceLine" id="cb447-2" data-line-number="2">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</a></code></pre></div>
 <ul>
 <li>test-specific settings:
 <ul>
@@ -788,8 +790,8 @@ example:</p></li>
   &lt;/pecan&gt;&quot;
 settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</a>
-<a class="sourceLine" id="cb445-2" data-line-number="2">settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</a></code></pre></div></li>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1">settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</a>
+<a class="sourceLine" id="cb449-2" data-line-number="2">settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> ## or any other settings</a></code></pre></div></li>
 </ul></li>
 </ul>
 </div>

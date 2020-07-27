@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-19" />
+<meta name="date" content="2020-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -373,12 +373,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="pecan-project-api.html#section-6"></a></li>
 <li class="chapter" data-level="15.4.8" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflows"><i class="fa fa-check"></i><b>15.4.8</b> <code>GET /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-7"></a></li>
-<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.9</b> <code>GET /api/workflows/{id}</code></a></li>
+<li class="chapter" data-level="15.4.9" data-path="pecan-project-api.html"><a href="pecan-project-api.html#post-apiworkflows"><i class="fa fa-check"></i><b>15.4.9</b> <code>POST /api/workflows/</code></a></li>
 <li><a href="pecan-project-api.html#section-8"></a></li>
-<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/runs/</code></a></li>
+<li class="chapter" data-level="15.4.10" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiworkflowsid"><i class="fa fa-check"></i><b>15.4.10</b> <code>GET /api/workflows/{id}</code></a></li>
 <li><a href="pecan-project-api.html#section-9"></a></li>
-<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsid"><i class="fa fa-check"></i><b>15.4.11</b> <code>GET /api/runs/{id}</code></a></li>
+<li class="chapter" data-level="15.4.11" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apiruns"><i class="fa fa-check"></i><b>15.4.11</b> <code>GET /api/runs/</code></a></li>
 <li><a href="pecan-project-api.html#section-10"></a></li>
+<li class="chapter" data-level="15.4.12" data-path="pecan-project-api.html"><a href="pecan-project-api.html#get-apirunsid"><i class="fa fa-check"></i><b>15.4.12</b> <code>GET /api/runs/{id}</code></a></li>
+<li><a href="pecan-project-api.html#section-11"></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="database-sync.html"><a href="database-sync.html"><i class="fa fa-check"></i><b>16</b> Database synchronization</a><ul>
@@ -680,15 +682,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">30.4</span> Importing Functions: Use Roxygen</h2>
 <p>PEcAn style is to import very few functions and instead use fully namespaced function calls (<code>pkg::fn()</code>) everywhere it’s practical to do so. In cases where double-colon notation would be especially burdensome, such as when importing custom binary operators like <code>%&gt;%</code>, it’s acceptable to import specific functions into the package namespace. Do this by using Roxygen comments of the form <code>#' @importFrom pkg function</code>, not by hand-editing the NAMESPACE file.</p>
 <p>If the import is only used in one or a few functions, use an <code>@importFrom</code> in the documentation for each function that uses it. If it is used all over the package, use a single <code>@importFrom</code> in the Roxygen documentation block for the whole package, which probably lives in a file called either <code>zzz.R</code> or <code>&lt;your_package_name&gt;-package.R</code>:</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1"><span class="co">#&#39; What your package does</span></a>
-<a class="sourceLine" id="cb437-2" data-line-number="2"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb437-3" data-line-number="3"><span class="co">#&#39; Longer description of the package goes here.</span></a>
-<a class="sourceLine" id="cb437-4" data-line-number="4"><span class="co">#&#39; Probably with links to other resources about it, citations, etc.</span></a>
-<a class="sourceLine" id="cb437-5" data-line-number="5"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb437-6" data-line-number="6"><span class="co">#&#39; @docType package</span></a>
-<a class="sourceLine" id="cb437-7" data-line-number="7"><span class="co">#&#39; @name PEcAn.yourpkg</span></a>
-<a class="sourceLine" id="cb437-8" data-line-number="8"><span class="co">#&#39; @importFrom magrittr %&gt;%</span></a>
-<a class="sourceLine" id="cb437-9" data-line-number="9"><span class="ot">NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" data-line-number="1"><span class="co">#&#39; What your package does</span></a>
+<a class="sourceLine" id="cb441-2" data-line-number="2"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb441-3" data-line-number="3"><span class="co">#&#39; Longer description of the package goes here.</span></a>
+<a class="sourceLine" id="cb441-4" data-line-number="4"><span class="co">#&#39; Probably with links to other resources about it, citations, etc.</span></a>
+<a class="sourceLine" id="cb441-5" data-line-number="5"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb441-6" data-line-number="6"><span class="co">#&#39; @docType package</span></a>
+<a class="sourceLine" id="cb441-7" data-line-number="7"><span class="co">#&#39; @name PEcAn.yourpkg</span></a>
+<a class="sourceLine" id="cb441-8" data-line-number="8"><span class="co">#&#39; @importFrom magrittr %&gt;%</span></a>
+<a class="sourceLine" id="cb441-9" data-line-number="9"><span class="ot">NULL</span></a></code></pre></div>
 <p>Roxygen will make sure there’s only one NAMESPACE entry per imported function no matter how many <code>importFrom</code> statements there are, but please pick a scheme (either import on every usage or once for the whole package), stick with it, and do not make function <code>x()</code> rely on an importFrom in the comments above function <code>y()</code>.</p>
 <p>Please do <em>not</em> import entire package namespaces (<code>#' @import pkg</code>); it increases the chance of function name collisions and makes it much harder to understand which package a given function was called from.</p>
 <p>A special note about importing functions from the <a href="https://tidyverse.org">tidyverse</a>: Be sure to import from the package(s) that actually contain the functions you want to use, e.g. <code>Imports: dplyr, magrittr, purrr</code> / <code>@importFrom magrittr %&gt;%</code> / <code>purrr::map(...)</code>, not <code>Imports: tidyverse</code> / <code>@importFrom tidyverse %&gt;%</code> / <code>tidyverse::map(...)</code>. The package named <code>tidyverse</code> is just a interactive shortcut that loads the whole collection of constituent packages; it doesn’t export any functions in its own namespace and therefore importing it into your package doesn’t make them available.</p>
@@ -699,13 +701,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The longer version requires that we make a distinction often glossed over: <em>Loading</em> a package makes it possible for <em>R</em> to find things in the package namespace and does any actions needed to make it ready for use (e.g. running its .onLoad method, loading DLLs if the package contains compiled code, etc). <em>Attaching</em> a package (usually by calling <code>library(&quot;somePackage&quot;)</code>) loads it if it wasn’t already loaded, and then adds it to the search path so that the <em>user</em> can find things in its namespace. As discussed in the “Declaring Dependancies” section above, dependencies listed in <code>Depends</code> will be attached when your package is attached, but they will be <em>neither attached nor loaded</em> when your package is loaded without being attached.</p>
 <p>Loading a dependency into the package namespace is undesirable because it makes it hard to understand our own code – if we need to use something from elsewhere, we’d prefer call it from its own namespace using <code>::</code> (which implicitly loads the dependency!) or explicitly import it with a Roxygen <code>@import</code> directive. But in a few cases this isn’t enough. The most common reason to need to explicitly load a dependency is that some packages <em>define</em> new S3 methods for generic functions defined in other packages, but do not <em>export</em> these methods directly. We would prefer that these packages did not do this, but sometimes we have to use them anyway. An <a href="https://github.com/PecanProject/pecan/issues/1368">example from PEcAn</a> is that PEcAn.MA needs to call <code>as.matrix</code> on objects of class <code>mcmc.list</code>. When the <code>coda</code> namespace is loaded, <code>as.matrix(some_mcmc.list)</code> can be correctly dispatched by <code>base::as.matrix</code> to the unexported method <code>coda:::as.matrix.mcmc.list</code>, but when <code>coda</code> is not loaded this dispatch will fail. Unfortunately coda does not export <code>as.matrix.mcmc.list</code> so we cannot call it directly or import it into the PEcAn.MA namespace, so instead we <a href="https://github.com/PecanProject/pecan/pull/1966/files#diff-e0b625a54a8654cc9b22d9c076e7a838R13">load the <code>coda</code> namespace</a> whenever PEcAn.MA is loaded.</p>
 <p>Attaching packages to the user’s search path is even more problematic because it makes it hard for the user to understand <em>how your package will affect their own code</em>. Packages attached by a function stay attached after the function exits, so they can cause name collisions far downstream of the function call, potentially in code that has nothing to do with your package. And worse, since names are looked up in reverse order of package loading, it can cause behavior that differs in strange ways depending on the order of lines that look independent of each other:</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" data-line-number="1"><span class="kw">library</span>(Hmisc)</a>
-<a class="sourceLine" id="cb438-2" data-line-number="2">x =<span class="st"> </span>...</a>
-<a class="sourceLine" id="cb438-3" data-line-number="3">y =<span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb438-4" data-line-number="4"><span class="kw">summarize</span>(x) <span class="co"># calls Hmisc::summarize</span></a>
-<a class="sourceLine" id="cb438-5" data-line-number="5">y2 &lt;-<span class="st"> </span>some_package_that_attaches_dplyr<span class="op">::</span><span class="kw">innocent.looking.function</span>(y)</a>
-<a class="sourceLine" id="cb438-6" data-line-number="6"><span class="co"># Loading required package: dplyr</span></a>
-<a class="sourceLine" id="cb438-7" data-line-number="7"><span class="kw">summarize</span>(x) <span class="co"># Looks identical to previous summarize, but calls dplyr::summarize!</span></a></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" data-line-number="1"><span class="kw">library</span>(Hmisc)</a>
+<a class="sourceLine" id="cb442-2" data-line-number="2">x =<span class="st"> </span>...</a>
+<a class="sourceLine" id="cb442-3" data-line-number="3">y =<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb442-4" data-line-number="4"><span class="kw">summarize</span>(x) <span class="co"># calls Hmisc::summarize</span></a>
+<a class="sourceLine" id="cb442-5" data-line-number="5">y2 &lt;-<span class="st"> </span>some_package_that_attaches_dplyr<span class="op">::</span><span class="kw">innocent.looking.function</span>(y)</a>
+<a class="sourceLine" id="cb442-6" data-line-number="6"><span class="co"># Loading required package: dplyr</span></a>
+<a class="sourceLine" id="cb442-7" data-line-number="7"><span class="kw">summarize</span>(x) <span class="co"># Looks identical to previous summarize, but calls dplyr::summarize!</span></a></code></pre></div>
 <p>This is not to say that users will <em>never</em> want your package to attach another one for them, just that it’s rare and that attaching dependencies is much more likely to cause bugs than to fix them and additionally doesn’t usually save the package author any work.</p>
 <p>One possible exception to the do-not-attach-packages rule is a case where your dependency ignores all good practice and wrongly assumes, without checking, that all of its own dependencies are attached; if its DESCRIPTION uses only <code>Depends</code> instead of <code>Imports</code>, this is often a warning sign. For example, a small-but-surprising number of packages depend on the <code>methods</code> package without proper checks (this is probably because most <em>but not all</em> R interpreters attach <code>methods</code> by default and therefore it’s easy for an author to forget it might ever be otherwise unless they happen to test with a but-not-all interpreter).</p>
 <p>If you find yourself with a dependency that does this, accept first that you are relying on a package that is broken, and you should either convince its maintainer to fix it or find a way to remove the dependency from PEcAn. But as a short-term workaround, it is sometimes possible for your code to attach the direct dependency so that it will behave right with regard to its secondary dependencies. If so, make sure the attachment happens every time your package is loaded (e.g. by calling <code>library(depname)</code> inside your package’s <code>.onLoad</code> method) and not just when your package is attached (e.g. by putting it in Depends).</p>
