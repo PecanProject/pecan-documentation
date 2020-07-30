@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-07-27" />
+<meta name="date" content="2020-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -650,37 +650,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Provides functions to simplify development</p>
 <p>Documentation:
 <a href="https://devtools.r-lib.org/">The R devtools package</a></p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" data-line-number="1"><span class="kw">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb460-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb460-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb460-4" data-line-number="4"><span class="kw">install</span>(<span class="st">&quot;pkg&quot;</span>)</a>
-<a class="sourceLine" id="cb460-5" data-line-number="5"><span class="kw">build</span>(<span class="st">&quot;pkg&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" data-line-number="1"><span class="kw">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb461-2" data-line-number="2"><span class="kw">document</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb461-3" data-line-number="3"><span class="kw">test</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb461-4" data-line-number="4"><span class="kw">install</span>(<span class="st">&quot;pkg&quot;</span>)</a>
+<a class="sourceLine" id="cb461-5" data-line-number="5"><span class="kw">build</span>(<span class="st">&quot;pkg&quot;</span>)</a></code></pre></div>
 <p>other tips for devtools (from the documentation):</p>
 <ul>
 <li>Adding the following to your <code>~/.Rprofile</code> will load devtools when
 running R in interactive mode:</li>
 </ul>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" data-line-number="1"><span class="co"># load devtools by default</span></a>
-<a class="sourceLine" id="cb461-2" data-line-number="2"><span class="cf">if</span> (<span class="kw">interactive</span>()) {</a>
-<a class="sourceLine" id="cb461-3" data-line-number="3">  <span class="kw">suppressMessages</span>(<span class="kw">require</span>(devtools))</a>
-<a class="sourceLine" id="cb461-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1"><span class="co"># load devtools by default</span></a>
+<a class="sourceLine" id="cb462-2" data-line-number="2"><span class="cf">if</span> (<span class="kw">interactive</span>()) {</a>
+<a class="sourceLine" id="cb462-3" data-line-number="3">  <span class="kw">suppressMessages</span>(<span class="kw">require</span>(devtools))</a>
+<a class="sourceLine" id="cb462-4" data-line-number="4">}</a></code></pre></div>
 <ul>
 <li>Adding the following to your .Rpackages will allow devtools to recognize package by folder name, rather than directory path</li>
 </ul>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1"><span class="co"># in this example, devhome is the pecan trunk directory </span></a>
-<a class="sourceLine" id="cb462-2" data-line-number="2">devhome &lt;-<span class="st"> &quot;/home/dlebauer/R-dev/pecandev/&quot;</span></a>
-<a class="sourceLine" id="cb462-3" data-line-number="3"><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb462-4" data-line-number="4">    <span class="dt">default =</span> <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb462-5" data-line-number="5">      <span class="kw">file.path</span>(devhome, x, x)</a>
-<a class="sourceLine" id="cb462-6" data-line-number="6">    }, </a>
-<a class="sourceLine" id="cb462-7" data-line-number="7">  <span class="st">&quot;utils&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb462-8" data-line-number="8">  <span class="st">&quot;common&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb462-9" data-line-number="9">  <span class="st">&quot;all&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb462-10" data-line-number="10">  <span class="st">&quot;ed&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb462-11" data-line-number="11">  <span class="st">&quot;uncertainty&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb462-12" data-line-number="12">  <span class="st">&quot;meta.analysis&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb462-13" data-line-number="13">  <span class="st">&quot;db&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb462-14" data-line-number="14">)</a></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" data-line-number="1"><span class="co"># in this example, devhome is the pecan trunk directory </span></a>
+<a class="sourceLine" id="cb463-2" data-line-number="2">devhome &lt;-<span class="st"> &quot;/home/dlebauer/R-dev/pecandev/&quot;</span></a>
+<a class="sourceLine" id="cb463-3" data-line-number="3"><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb463-4" data-line-number="4">    <span class="dt">default =</span> <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb463-5" data-line-number="5">      <span class="kw">file.path</span>(devhome, x, x)</a>
+<a class="sourceLine" id="cb463-6" data-line-number="6">    }, </a>
+<a class="sourceLine" id="cb463-7" data-line-number="7">  <span class="st">&quot;utils&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb463-8" data-line-number="8">  <span class="st">&quot;common&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb463-9" data-line-number="9">  <span class="st">&quot;all&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb463-10" data-line-number="10">  <span class="st">&quot;ed&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb463-11" data-line-number="11">  <span class="st">&quot;uncertainty&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb463-12" data-line-number="12">  <span class="st">&quot;meta.analysis&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb463-13" data-line-number="13">  <span class="st">&quot;db&quot;</span> =<span class="st"> </span><span class="kw">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb463-14" data-line-number="14">)</a></code></pre></div>
 <p>Now, devtools can take <code>pkg</code> as an argument instead of <code>/path/to/pkg/</code>,
 e.g. so you can use <code>build(&quot;pkg&quot;)</code> instead of <code>build(&quot;/path/to/pkg/&quot;)</code></p>
 
