@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-10-20" />
+<meta name="date" content="2020-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -755,6 +755,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - traefik:/config
   minio:
+    user: ${UID:-1001}:${GID:-1001}
     image: minio/minio:latest
     command: server /data
     restart: unless-stopped
@@ -769,6 +770,7 @@ services:
     - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefix:/minio/
     volumes: pecan:/data
   thredds:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/thredds:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -824,18 +826,21 @@ services:
     - traefik.website.frontend.whiteList.sourceRange=${TRAEFIK_IPFILTER:-172.16.0.0/12}
   rstudio:
     image: pecan/base:${PECAN_VERSION:-latest}
+    command: /work/rstudio.sh
     restart: unless-stopped
     networks: pecan
     depends_on:
     - rabbitmq
     - postgres
     environment:
+    - KEEP_ENV=RABBITMQ_URI FQDN NAME
     - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
     - FQDN=${PECAN_FQDN:-docker}
     - NAME=${PECAN_NAME:-docker}
     - USER=${PECAN_RSTUDIO_USER:-carya}
     - PASSWORD=${PECAN_RSTUDIO_PASS:-illinois}
-    entrypoint: /init
+    - USERID=${UID:-1001}
+    - GROUPID=${GID:-1001}
     volumes:
     - pecan:/data
     - rstudio:/home
@@ -848,6 +853,7 @@ services:
     - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefix:/
     - traefik.backend=docs
   web:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/web:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -860,6 +866,7 @@ services:
     - postgres
     - rabbitmq
     labels:
+    - traefik.port=8080
     - traefik.enable=true
     - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefix:/pecan/
     - traefik.backend=pecan
@@ -867,6 +874,7 @@ services:
     - pecan:/data
     - pecan:/var/www/html/pecan/data
   monitor:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/monitor:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -881,6 +889,7 @@ services:
     - traefik.backend=monitor
     volumes: pecan:/data
   executor:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/executor:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -892,6 +901,7 @@ services:
     - rabbitmq
     volumes: pecan:/data
   basgra:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-basgra-basgra_n_v1.0:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -899,6 +909,7 @@ services:
     depends_on: rabbitmq
     volumes: pecan:/data
   sipnet:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-sipnet-r136:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -906,6 +917,7 @@ services:
     depends_on: rabbitmq
     volumes: pecan:/data
   ed2:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-ed2-git:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -913,6 +925,7 @@ services:
     depends_on: rabbitmq
     volumes: pecan:/data
   maespa:
+    user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-maespa-git:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -931,6 +944,7 @@ services:
     - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefixStrip:/dbsync/
   api:
     image: pecan/api:${PECAN_VERSION:-latest}
+    user: ${UID:-1001}:${GID:-1001}
     networks: pecan
     environment:
     - PGHOST=${PGHOST:-postgres}
@@ -1102,6 +1116,7 @@ It is used by almost all of the services in the PEcAn stack, and is typically mo
 Among other things, <code>traefik</code> facilitates the setup of web access to each PEcAn service via common and easy-to-remember URLs.
 For instance, the following lines in the <code>web</code> service configure access to the PEcAn web interface via the URL <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> :</p>
 <pre><code>labels:
+- traefik.port=8080
 - traefik.enable=true
 - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefix:/pecan/
 - traefik.backend=pecan</code></pre>
@@ -1155,6 +1170,7 @@ For instance, the following lines in the <code>web</code> service configure acce
 We mainly use Minio to facilitate access to PEcAn data using a web browser without the need for CLI tools.</p>
 <p>Our current configuration is as follows:</p>
 <pre><code>minio:
+  user: ${UID:-1001}:${GID:-1001}
   image: minio/minio:latest
   command: server /data
   restart: unless-stopped
@@ -1188,6 +1204,7 @@ Specifically, this XML tells the data server to use the <code>datasetScan</code>
 For additional information about the syntax of this file, see the extensive <a href="https://www.unidata.ucar.edu/software/thredds/current/tds/reference/index.html">THREDDS documentation</a>.</p>
 <p>Our current configuration is as follows:</p>
 <pre><code>thredds:
+  user: ${UID:-1001}:${GID:-1001}
   image: pecan/thredds:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
@@ -1282,6 +1299,7 @@ However, note that certain features of the PEcAn web interface do link to the BE
 It is effectively a thin wrapper around a standard Apache web server container from Docker Hub that installs some additional dependencies and copies over the necessary files from the PEcAn source code.</p>
 <p>Our configuration is as follows:</p>
 <pre><code>web:
+  user: ${UID:-1001}:${GID:-1001}
   image: pecan/web:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
@@ -1294,6 +1312,7 @@ It is effectively a thin wrapper around a standard Apache web server container f
   - postgres
   - rabbitmq
   labels:
+  - traefik.port=8080
   - traefik.enable=true
   - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefix:/pecan/
   - traefik.backend=pecan
@@ -1309,6 +1328,7 @@ It is effectively a thin wrapper around a standard Apache web server container f
 However, it is <em>not</em> in charge of executing the models themselves – model binaries are located on their <a href="pecan-docker.html#pecan-dc-models">own dedicated Docker containers</a>, and model execution is coordinated by RabbitMQ.</p>
 <p>Our configuration is as follows:</p>
 <pre><code>executor:
+  user: ${UID:-1001}:${GID:-1001}
   image: pecan/executor:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
@@ -1331,6 +1351,7 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
 <p>This service is also responsible for registering any new models with PEcAn so users can select it and execute the model from the web interface.</p>
 <p>Our current configuration is as follows:</p>
 <pre><code>monitor:
+  user: ${UID:-1001}:${GID:-1001}
   image: pecan/monitor:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
@@ -1350,6 +1371,7 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
 <p>Additional models are added as additional services.
 In general, their configuration should be similar to the following configuration for SIPNET, which ships with PEcAn:</p>
 <pre><code>sipnet:
+  user: ${UID:-1001}:${GID:-1001}
   image: pecan/model-sipnet-r136:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
