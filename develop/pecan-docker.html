@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-10-21" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -591,7 +591,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="24.9" data-path="pecan-api.html"><a href="pecan-api.html"><i class="fa fa-check"></i><b>24.9</b> The PEcAn Docker API</a></li>
 <li class="chapter" data-level="24.10" data-path="rabbitmq.html"><a href="rabbitmq.html"><i class="fa fa-check"></i><b>24.10</b> RabbitMQ</a><ul>
-<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>sender.py</code></a></li>
+<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>PEcAn.remote::rabbitmq_post_message</code></a></li>
 <li class="chapter" data-level="24.10.2" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-receiver"><i class="fa fa-check"></i><b>24.10.2</b> Consumer – <code>receiver.py</code></a></li>
 <li class="chapter" data-level="24.10.3" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-web"><i class="fa fa-check"></i><b>24.10.3</b> RabbitMQ and the PEcAn web interface</a></li>
 <li class="chapter" data-level="24.10.4" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-xml"><i class="fa fa-check"></i><b>24.10.4</b> RabbitMQ in the PEcAn XML</a></li>
@@ -833,8 +833,10 @@ services:
     - rabbitmq
     - postgres
     environment:
-    - KEEP_ENV=RABBITMQ_URI FQDN NAME
+    - KEEP_ENV=RABBITMQ_URI RABBITMQ_PREFIX RABBITMQ_PORT FQDN NAME
     - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
+    - RABBITMQ_PREFIX=/rabbitmq
+    - RABBITMQ_PORT=15672
     - FQDN=${PECAN_FQDN:-docker}
     - NAME=${PECAN_NAME:-docker}
     - USER=${PECAN_RSTUDIO_USER:-carya}
@@ -895,6 +897,8 @@ services:
     networks: pecan
     environment:
     - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
+    - RABBITMQ_PREFIX=/rabbitmq
+    - RABBITMQ_PORT=15672
     - FQDN=${PECAN_FQDN:-docker}
     depends_on:
     - postgres
@@ -1334,6 +1338,8 @@ However, it is <em>not</em> in charge of executing the models themselves – mod
   networks: pecan
   environment:
   - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
+  - RABBITMQ_PREFIX=/rabbitmq
+  - RABBITMQ_PORT=15672
   - FQDN=${PECAN_FQDN:-docker}
   depends_on:
   - postgres

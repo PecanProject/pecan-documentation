@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-10-21" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -591,7 +591,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="24.9" data-path="pecan-api.html"><a href="pecan-api.html"><i class="fa fa-check"></i><b>24.9</b> The PEcAn Docker API</a></li>
 <li class="chapter" data-level="24.10" data-path="rabbitmq.html"><a href="rabbitmq.html"><i class="fa fa-check"></i><b>24.10</b> RabbitMQ</a><ul>
-<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>sender.py</code></a></li>
+<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>PEcAn.remote::rabbitmq_post_message</code></a></li>
 <li class="chapter" data-level="24.10.2" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-receiver"><i class="fa fa-check"></i><b>24.10.2</b> Consumer – <code>receiver.py</code></a></li>
 <li class="chapter" data-level="24.10.3" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-web"><i class="fa fa-check"></i><b>24.10.3</b> RabbitMQ and the PEcAn web interface</a></li>
 <li class="chapter" data-level="24.10.4" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-xml"><i class="fa fa-check"></i><b>24.10.4</b> RabbitMQ in the PEcAn XML</a></li>
@@ -671,9 +671,9 @@ If working from the web interface, the tunnel will be opened for you by some und
 The best way to do this is to create the tunnel first, outside of R, as described above.
 (In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>.
 To follow along, replace these with your own username and designated server, respectively).</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb461-1"><a href="ssh-tunnels-and-pecan.html#cb461-1"></a><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb459-1"><a href="ssh-tunnels-and-pecan.html#cb459-1"></a><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</span></code></pre></div>
 <p>Then, in R, create a <code>host</code> object, which is just a list containing the elements <code>name</code> (hostname) and <code>tunnel</code> (path to tunnel file).</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="ssh-tunnels-and-pecan.html#cb462-1"></a>my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="ssh-tunnels-and-pecan.html#cb460-1"></a>my_host &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="dt">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</span></code></pre></div>
 <p>This host object can then be used in any of the remote execution functions.</p>
 </div>
             </section>

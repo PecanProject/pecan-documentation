@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-10-21" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -591,7 +591,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="24.9" data-path="pecan-api.html"><a href="pecan-api.html"><i class="fa fa-check"></i><b>24.9</b> The PEcAn Docker API</a></li>
 <li class="chapter" data-level="24.10" data-path="rabbitmq.html"><a href="rabbitmq.html"><i class="fa fa-check"></i><b>24.10</b> RabbitMQ</a><ul>
-<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>sender.py</code></a></li>
+<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>PEcAn.remote::rabbitmq_post_message</code></a></li>
 <li class="chapter" data-level="24.10.2" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-receiver"><i class="fa fa-check"></i><b>24.10.2</b> Consumer – <code>receiver.py</code></a></li>
 <li class="chapter" data-level="24.10.3" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-web"><i class="fa fa-check"></i><b>24.10.3</b> RabbitMQ and the PEcAn web interface</a></li>
 <li class="chapter" data-level="24.10.4" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-xml"><i class="fa fa-check"></i><b>24.10.4</b> RabbitMQ in the PEcAn XML</a></li>
@@ -669,20 +669,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>A generic settings can be found in the <code>PEcAn.all</code> package</li>
 </ul>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="settings-1.html#cb484-1"></a>settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb484-2"><a href="settings-1.html#cb484-2"></a>settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="settings-1.html#cb482-1"></a>settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb482-2"><a href="settings-1.html#cb482-2"></a>settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>database settings can be specified, and tests run only if a connection is available</li>
 </ul>
 <p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="settings-1.html#cb485-1"></a>settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb485-2"><a href="settings-1.html#cb485-2"></a>                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb485-3"><a href="settings-1.html#cb485-3"></a>                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
-<span id="cb485-4"><a href="settings-1.html#cb485-4"></a>                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
-<span id="cb485-5"><a href="settings-1.html#cb485-5"></a><span class="kw">test_that</span>(..., {</span>
-<span id="cb485-6"><a href="settings-1.html#cb485-6"></a>  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</span>
-<span id="cb485-7"><a href="settings-1.html#cb485-7"></a>  <span class="co">## write tests here</span></span>
-<span id="cb485-8"><a href="settings-1.html#cb485-8"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="settings-1.html#cb483-1"></a>settings<span class="op">$</span>database &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb483-2"><a href="settings-1.html#cb483-2"></a>                          <span class="dt">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb483-3"><a href="settings-1.html#cb483-3"></a>                          <span class="dt">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
+<span id="cb483-4"><a href="settings-1.html#cb483-4"></a>                          <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
+<span id="cb483-5"><a href="settings-1.html#cb483-5"></a><span class="kw">test_that</span>(..., {</span>
+<span id="cb483-6"><a href="settings-1.html#cb483-6"></a>  <span class="kw">skip_if_not</span>(<span class="kw">db.exists</span>(settings<span class="op">$</span>database))</span>
+<span id="cb483-7"><a href="settings-1.html#cb483-7"></a>  <span class="co">## write tests here</span></span>
+<span id="cb483-8"><a href="settings-1.html#cb483-8"></a>})</span></code></pre></div>
 <ul>
 <li><p>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
 wiki</a></p></li>
@@ -690,8 +690,8 @@ wiki</a></p></li>
 <li><p>Model specific settings can go in the model-specific module, for
 example:</p></li>
 </ul>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="settings-1.html#cb486-1"></a>settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb486-2"><a href="settings-1.html#cb486-2"></a>settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="settings-1.html#cb484-1"></a>settings.xml &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb484-2"><a href="settings-1.html#cb484-2"></a>settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>test-specific settings:
 <ul>
@@ -715,8 +715,8 @@ example:</p></li>
   &lt;/pecan&gt;&quot;
 settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="settings-1.html#cb488-1"></a>settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</span>
-<span id="cb488-2"><a href="settings-1.html#cb488-2"></a>settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> <span class="co">## or any other settings</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="settings-1.html#cb486-1"></a>settings &lt;-<span class="st"> </span><span class="kw">read.settings</span>(settings.text)</span>
+<span id="cb486-2"><a href="settings-1.html#cb486-2"></a>settings<span class="op">$</span>outdir &lt;-<span class="st"> &quot;/tmp&quot;</span> <span class="co">## or any other settings</span></span></code></pre></div></li>
 </ul></li>
 </ul>
 </div>
