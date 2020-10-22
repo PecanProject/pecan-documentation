@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2020-10-21" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -591,7 +591,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="24.9" data-path="pecan-api.html"><a href="pecan-api.html"><i class="fa fa-check"></i><b>24.9</b> The PEcAn Docker API</a></li>
 <li class="chapter" data-level="24.10" data-path="rabbitmq.html"><a href="rabbitmq.html"><i class="fa fa-check"></i><b>24.10</b> RabbitMQ</a><ul>
-<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>sender.py</code></a></li>
+<li class="chapter" data-level="24.10.1" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-sender"><i class="fa fa-check"></i><b>24.10.1</b> Producer – <code>PEcAn.remote::rabbitmq_post_message</code></a></li>
 <li class="chapter" data-level="24.10.2" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-basics-receiver"><i class="fa fa-check"></i><b>24.10.2</b> Consumer – <code>receiver.py</code></a></li>
 <li class="chapter" data-level="24.10.3" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-web"><i class="fa fa-check"></i><b>24.10.3</b> RabbitMQ and the PEcAn web interface</a></li>
 <li class="chapter" data-level="24.10.4" data-path="rabbitmq.html"><a href="rabbitmq.html#rabbitmq-xml"><i class="fa fa-check"></i><b>24.10.4</b> RabbitMQ in the PEcAn XML</a></li>
@@ -667,29 +667,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="basic-use-of-the-testthat-package" class="section level2">
 <h2><span class="header-section-number">31.2</span> Basic use of the <code>testthat</code> package</h2>
 <p>Create a file called <code>&lt;packagename&gt;/tests/testthat.R</code> with the following contents:</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="basic-use-of-the-testthat-package.html#cb482-1"></a><span class="kw">library</span>(testthat)</span>
-<span id="cb482-2"><a href="basic-use-of-the-testthat-package.html#cb482-2"></a><span class="kw">library</span>(mypackage)</span>
-<span id="cb482-3"><a href="basic-use-of-the-testthat-package.html#cb482-3"></a></span>
-<span id="cb482-4"><a href="basic-use-of-the-testthat-package.html#cb482-4"></a><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="basic-use-of-the-testthat-package.html#cb480-1"></a><span class="kw">library</span>(testthat)</span>
+<span id="cb480-2"><a href="basic-use-of-the-testthat-package.html#cb480-2"></a><span class="kw">library</span>(mypackage)</span>
+<span id="cb480-3"><a href="basic-use-of-the-testthat-package.html#cb480-3"></a></span>
+<span id="cb480-4"><a href="basic-use-of-the-testthat-package.html#cb480-4"></a><span class="kw">test_check</span>(<span class="st">&quot;mypackage&quot;</span>)</span></code></pre></div>
 <p>Tests should be placed in <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>, and look like the following:</p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="basic-use-of-the-testthat-package.html#cb483-1"></a><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</span>
-<span id="cb483-2"><a href="basic-use-of-the-testthat-package.html#cb483-2"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</span>
-<span id="cb483-3"><a href="basic-use-of-the-testthat-package.html#cb483-3"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</span>
-<span id="cb483-4"><a href="basic-use-of-the-testthat-package.html#cb483-4"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</span>
-<span id="cb483-5"><a href="basic-use-of-the-testthat-package.html#cb483-5"></a>  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</span>
-<span id="cb483-6"><a href="basic-use-of-the-testthat-package.html#cb483-6"></a>  <span class="kw">set.seed</span>(<span class="dv">0</span>)</span>
-<span id="cb483-7"><a href="basic-use-of-the-testthat-package.html#cb483-7"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</span>
-<span id="cb483-8"><a href="basic-use-of-the-testthat-package.html#cb483-8"></a>})</span>
-<span id="cb483-9"><a href="basic-use-of-the-testthat-package.html#cb483-9"></a></span>
-<span id="cb483-10"><a href="basic-use-of-the-testthat-package.html#cb483-10"></a><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</span>
-<span id="cb483-11"><a href="basic-use-of-the-testthat-package.html#cb483-11"></a>  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb483-12"><a href="basic-use-of-the-testthat-package.html#cb483-12"></a>  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</span>
-<span id="cb483-13"><a href="basic-use-of-the-testthat-package.html#cb483-13"></a>  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</span>
-<span id="cb483-14"><a href="basic-use-of-the-testthat-package.html#cb483-14"></a>  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</span>
-<span id="cb483-15"><a href="basic-use-of-the-testthat-package.html#cb483-15"></a>  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</span>
-<span id="cb483-16"><a href="basic-use-of-the-testthat-package.html#cb483-16"></a>  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</span>
-<span id="cb483-17"><a href="basic-use-of-the-testthat-package.html#cb483-17"></a>  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb483-18"><a href="basic-use-of-the-testthat-package.html#cb483-18"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="basic-use-of-the-testthat-package.html#cb481-1"></a><span class="kw">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</span>
+<span id="cb481-2"><a href="basic-use-of-the-testthat-package.html#cb481-2"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dv">2</span>)</span>
+<span id="cb481-3"><a href="basic-use-of-the-testthat-package.html#cb481-3"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), <span class="dv">-2</span>)</span>
+<span id="cb481-4"><a href="basic-use-of-the-testthat-package.html#cb481-4"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="ot">NA</span>)</span>
+<span id="cb481-5"><a href="basic-use-of-the-testthat-package.html#cb481-5"></a>  <span class="kw">expect_error</span>(<span class="kw">sum</span>(<span class="st">&quot;cat&quot;</span>))</span>
+<span id="cb481-6"><a href="basic-use-of-the-testthat-package.html#cb481-6"></a>  <span class="kw">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb481-7"><a href="basic-use-of-the-testthat-package.html#cb481-7"></a>  <span class="kw">expect_equal</span>(<span class="kw">sum</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)), <span class="kw">sum</span>(<span class="kw">data.frame</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)))</span>
+<span id="cb481-8"><a href="basic-use-of-the-testthat-package.html#cb481-8"></a>})</span>
+<span id="cb481-9"><a href="basic-use-of-the-testthat-package.html#cb481-9"></a></span>
+<span id="cb481-10"><a href="basic-use-of-the-testthat-package.html#cb481-10"></a><span class="kw">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</span>
+<span id="cb481-11"><a href="basic-use-of-the-testthat-package.html#cb481-11"></a>  <span class="kw">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb481-12"><a href="basic-use-of-the-testthat-package.html#cb481-12"></a>  <span class="kw">expect_identical</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</span>
+<span id="cb481-13"><a href="basic-use-of-the-testthat-package.html#cb481-13"></a>  <span class="kw">expect_equivalent</span>(<span class="kw">numeric</span>(<span class="dv">1</span>), <span class="kw">integer</span>(<span class="dv">1</span>))</span>
+<span id="cb481-14"><a href="basic-use-of-the-testthat-package.html#cb481-14"></a>  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>))</span>
+<span id="cb481-15"><a href="basic-use-of-the-testthat-package.html#cb481-15"></a>  <span class="kw">expect_that</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="kw">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</span>
+<span id="cb481-16"><a href="basic-use-of-the-testthat-package.html#cb481-16"></a>  <span class="kw">expect_warning</span>(<span class="kw">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</span>
+<span id="cb481-17"><a href="basic-use-of-the-testthat-package.html#cb481-17"></a>  <span class="kw">expect_message</span>(<span class="kw">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb481-18"><a href="basic-use-of-the-testthat-package.html#cb481-18"></a>})</span></code></pre></div>
 </div>
             </section>
 
