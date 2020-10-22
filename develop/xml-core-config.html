@@ -977,7 +977,7 @@ The following provides a quick overview of XML tags related to remote execution.
 <span id="cb139-6"><a href="xml-core-config.html#cb139-6"></a>        <span class="kw">&lt;clearscratch&gt;</span>TRUE<span class="kw">&lt;/clearscratch&gt;</span></span>
 <span id="cb139-7"><a href="xml-core-config.html#cb139-7"></a>        <span class="kw">&lt;qsub&gt;</span>qsub -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash<span class="kw">&lt;/qsub&gt;</span></span>
 <span id="cb139-8"><a href="xml-core-config.html#cb139-8"></a>        <span class="kw">&lt;qsub.jobid&gt;</span>Your job ([0-9]+) .*<span class="kw">&lt;/qsub.jobid&gt;</span></span>
-<span id="cb139-9"><a href="xml-core-config.html#cb139-9"></a>        <span class="kw">&lt;qstat&gt;</span>qstat -j @JOBID@ <span class="er">&amp;</span>&gt; /dev/null || echo DONE<span class="kw">&lt;/qstat&gt;</span></span>
+<span id="cb139-9"><a href="xml-core-config.html#cb139-9"></a>        <span class="kw">&lt;qstat&gt;</span>&#39;qstat -j @JOBID@ <span class="dv">&amp;amp;</span>&gt; /dev/null || echo DONE&#39;<span class="kw">&lt;/qstat&gt;</span></span>
 <span id="cb139-10"><a href="xml-core-config.html#cb139-10"></a>        <span class="kw">&lt;job.sh&gt;</span>module load udunits R/R-3.0.0_gnu-4.4.6<span class="kw">&lt;/job.sh&gt;</span></span>
 <span id="cb139-11"><a href="xml-core-config.html#cb139-11"></a>        <span class="kw">&lt;modellauncher&gt;</span></span>
 <span id="cb139-12"><a href="xml-core-config.html#cb139-12"></a>      <span class="kw">&lt;binary&gt;</span>/usr/local/bin/modellauncher<span class="kw">&lt;/binary&gt;</span></span>
