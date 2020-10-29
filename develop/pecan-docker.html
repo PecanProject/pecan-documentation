@@ -291,6 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>11.2.5</b> (experimental) State Data Assimilation</a></li>
 <li class="chapter" data-level="11.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>11.2.6</b> (experimental) Brown Dog</a></li>
 <li class="chapter" data-level="11.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>11.2.7</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="11.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>11.2.8</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>12</b> PEcAn workflow (web/workflow.R)</a><ul>
@@ -429,7 +430,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1.2" data-path="LoadData.html"><a href="LoadData.html#output-1"><i class="fa fa-check"></i><b>17.1.2</b> Output</a></li>
 <li class="chapter" data-level="17.1.3" data-path="LoadData.html"><a href="LoadData.html#example"><i class="fa fa-check"></i><b>17.1.3</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="remote-data-module.html"><a href="remote-data-module.html"><i class="fa fa-check"></i><b>17.2</b> Remote data module</a></li>
+<li class="chapter" data-level="17.2" data-path="remote-data-module.html"><a href="remote-data-module.html"><i class="fa fa-check"></i><b>17.2</b> Remote data module</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="remote-data-module.html"><a href="remote-data-module.html#configuring-remote_process"><i class="fa fa-check"></i><b>17.2.1</b> Configuring <code>remote_process</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="shiny.html"><a href="shiny.html"><i class="fa fa-check"></i><b>18</b> Shiny</a><ul>
 <li class="chapter" data-level="18.1" data-path="testing-the-shiny-server.html"><a href="testing-the-shiny-server.html"><i class="fa fa-check"></i><b>18.1</b> Testing the Shiny Server</a></li>
@@ -1193,9 +1196,9 @@ From there, you can browse directories and download files.
 You can also upload files by clicking the red “+” in the bottom-right corner.</p>
 <p>Note that it is currently impossible to create or upload directories using the Minio interface (except in the <code>/data</code> root directory – those folders are called “buckets” in Minio).
 Therefore, the recommended way to perform any file management tasks other than individual file uploads is through the command line, e.g.</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb403-1"><a href="pecan-docker.html#cb403-1"></a><span class="ex">docker</span> run -it --rm --volumes pecan_pecan:/data --volumes /path/to/local/directory:/localdir ubuntu</span>
-<span id="cb403-2"><a href="pecan-docker.html#cb403-2"></a></span>
-<span id="cb403-3"><a href="pecan-docker.html#cb403-3"></a><span class="co"># Now, you can move files between `/data` and `/localdir`, create new directories, etc.</span></span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb410-1"><a href="pecan-docker.html#cb410-1"></a><span class="ex">docker</span> run -it --rm --volumes pecan_pecan:/data --volumes /path/to/local/directory:/localdir ubuntu</span>
+<span id="cb410-2"><a href="pecan-docker.html#cb410-2"></a></span>
+<span id="cb410-3"><a href="pecan-docker.html#cb410-3"></a><span class="co"># Now, you can move files between `/data` and `/localdir`, create new directories, etc.</span></span></code></pre></div>
 </div>
 <div id="pecan-dc-thredds" class="section level3">
 <h3><span class="header-section-number">24.4.7</span> <code>thredds</code></h3>
