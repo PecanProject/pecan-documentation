@@ -291,6 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>11.2.5</b> (experimental) State Data Assimilation</a></li>
 <li class="chapter" data-level="11.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>11.2.6</b> (experimental) Brown Dog</a></li>
 <li class="chapter" data-level="11.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>11.2.7</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="11.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>11.2.8</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>12</b> PEcAn workflow (web/workflow.R)</a><ul>
@@ -429,7 +430,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1.2" data-path="LoadData.html"><a href="LoadData.html#output-1"><i class="fa fa-check"></i><b>17.1.2</b> Output</a></li>
 <li class="chapter" data-level="17.1.3" data-path="LoadData.html"><a href="LoadData.html#example"><i class="fa fa-check"></i><b>17.1.3</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="remote-data-module.html"><a href="remote-data-module.html"><i class="fa fa-check"></i><b>17.2</b> Remote data module</a></li>
+<li class="chapter" data-level="17.2" data-path="remote-data-module.html"><a href="remote-data-module.html"><i class="fa fa-check"></i><b>17.2</b> Remote data module</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="remote-data-module.html"><a href="remote-data-module.html#configuring-remote_process"><i class="fa fa-check"></i><b>17.2.1</b> Configuring <code>remote_process</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="shiny.html"><a href="shiny.html"><i class="fa fa-check"></i><b>18</b> Shiny</a><ul>
 <li class="chapter" data-level="18.1" data-path="testing-the-shiny-server.html"><a href="testing-the-shiny-server.html"><i class="fa fa-check"></i><b>18.1</b> Testing the Shiny Server</a></li>
@@ -666,7 +669,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="remote-data-module" class="section level2">
 <h2><span class="header-section-number">17.2</span> Remote data module</h2>
-<p>Remote data module retrieves remote sensing data from MODISTools, Google Earth Engine and AppEEARS. The downloaded data can be used for performing further analysis in PEcAn.</p>
+<p>Remote data module retrieves remote sensing data from MODISTools, Google Earth Engine and AppEEARS. The downloaded data can be used while performing further analysis in PEcAn.</p>
 <div id="google-earth-engine" class="section level4">
 <h4><span class="header-section-number">17.2.0.1</span> Google Earth Engine</h4>
 <p><a href="https://earthengine.google.com/">Google Earth Engine</a> is a cloud-based platform for performing analysis on satellite data. It provides access to a <a href="https://developers.google.com/earth-engine/datasets">large data catalog</a> through an online JavaScript code editor and a Python API.</p>
@@ -680,93 +683,221 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="appeears" class="section level4">
 <h4><span class="header-section-number">17.2.0.2</span> AppEEARS</h4>
 <p><a href="https://lpdaacsvc.cr.usgs.gov/appeears/">AppEEARS (Application for Extracting and Exploring Analysis Ready Samples)</a> is an online tool which provides an easy to use interface for downloading analysis ready remote sensing data. <a href="https://lpdaacsvc.cr.usgs.gov/appeears/products">Products available on AppEEARS.</a> Note: AppEEARS uses a task based system for processing the data request, it is possible for a task to run for long hours before it gets completed. The module checks the task status after every 60 seconds and saves the files when the task gets completed.</p>
-<p>Processing functions currently available are,</p>
+</div>
+<div id="processing-functions-currently-available-are" class="section level4">
+<h4><span class="header-section-number">17.2.0.3</span> Processing functions currently available are,</h4>
 <ul>
 <li><a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/satellitetools/biophys_xarray.py">SNAP</a></li>
 </ul>
 </div>
 <div id="set-up-instructions-first-time-and-one-time-only" class="section level4">
-<h4><span class="header-section-number">17.2.0.3</span> Set-Up instructions (first time and one time only):</h4>
+<h4><span class="header-section-number">17.2.0.4</span> Set-Up instructions (first time and one time only):</h4>
 <ol style="list-style-type: decimal">
 <li><p><strong>Sign up for the Google Earth Engine</strong>. Follow the instructions <a href="https://earthengine.google.com/new_signup/">here</a> to sign up for using GEE. You need to have your own GEE account for using the GEE download functions in this module.</p></li>
 <li><p><strong>Sign up for NASA Earthdata</strong>. Using AppEEARS requires an Earthdata account visit this <a href="https://urs.earthdata.nasa.gov/users/new">page</a> to create your own account.</p></li>
-<li><p><strong>Install the Python dependencies</strong>. Using this module requires Python3 and the package manager pip to be installed in your system.
-To install the additional Python dependencies required,</p></li>
+<li><p><strong>Install the RpTools package</strong>. Python codes required by this module are stored in a Python package named “RpTools” using this requires Python3 and the package manager pip3 to be installed in your system.
+To install the package,</p></li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li>Navigate to <code>pecan/modules/data.remote/inst</code> If you are inside the pecan directory, this can be done by,</li>
+<li>Navigate to <code>pecan/modules/data.remote/inst/RpTools</code> If you are inside the pecan directory, this can be done by,</li>
 </ol>
-<div class="sourceCode" id="cb270"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb270-1"><a href="remote-data-module.html#cb270-1"></a><span class="bu">cd</span> modules/data.remote/inst</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb271-1"><a href="remote-data-module.html#cb271-1"></a><span class="bu">cd</span> modules/data.remote/inst/RpTools</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>Use pip to install the dependencies.</li>
+<li>Use pip3 to install the package. “-e” flag is used to install the package in an editable or develop mode, so that changes made to the code get updated in the package without reinstalling.</li>
 </ol>
-<div class="sourceCode" id="cb271"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb271-1"><a href="remote-data-module.html#cb271-1"></a><span class="ex">pip</span> install -r requirements.txt</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb272-1"><a href="remote-data-module.html#cb272-1"></a><span class="ex">pip3</span> install -e .</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li><strong>Authenticate GEE</strong>. The GEE API needs to be authenticated using your credentials. The credentials will be stored locally on your system. This can be done by,</li>
 </ol>
-<div class="sourceCode" id="cb272"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb272-1"><a href="remote-data-module.html#cb272-1"></a><span class="co">#this will open a browser and ask you to sign in with the Google account registered for GEE</span></span>
-<span id="cb272-2"><a href="remote-data-module.html#cb272-2"></a><span class="ex">earthengine</span> authenticate</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb273-1"><a href="remote-data-module.html#cb273-1"></a><span class="co">#this will open a browser and ask you to sign in with the Google account registered for GEE</span></span>
+<span id="cb273-2"><a href="remote-data-module.html#cb273-2"></a><span class="ex">earthengine</span> authenticate</span></code></pre></div>
+<p>Alternate way,</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb274-1"><a href="remote-data-module.html#cb274-1"></a><span class="ex">python3</span></span>
+<span id="cb274-2"><a href="remote-data-module.html#cb274-2"></a></span>
+<span id="cb274-3"><a href="remote-data-module.html#cb274-3"></a><span class="ex">import</span> ee</span>
+<span id="cb274-4"><a href="remote-data-module.html#cb274-4"></a><span class="ex">ee.Authenticate</span>()</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
-<li><strong>Save the Earthdata credentials (optional)</strong>. If you do not wish to enter your credentials every time you use AppEEARS, you may save your username and password inside a JSON file and then pass its file path as an argument in <code>remote_process</code></li>
+<li><strong>Save the Earthdata credentials</strong>. If you wish to use AppEEARS you will have to store your username and password inside a JSON file and then pass its file path as an argument in <code>remote_process</code></li>
 </ol>
 </div>
 <div id="usage-guide" class="section level4">
-<h4><span class="header-section-number">17.2.0.4</span> Usage guide:</h4>
-<p>This module contains GEE and other processing functions which retrieve data from a specific dataset and source. For example, <code>gee2pecan_s2()</code> downloads bands from Sentinel 2 using GEE and <code>bands2lai_snap()</code> uses the downloaded bands to compute LAI using the SNAP algorithm. These functions can be used independently but the recommended way is to use <code>remote_process()</code> which is a main function that controls all the individual functions to create an organized way of downloading and handling remote sensing data in PEcAn.</p>
-<p><strong>Input data</strong>: The input data must be the coordinates of the area of interest (point or polygon type) and the name of the site/AOI. These information must be provided in a GeoJSON file.</p>
-<p><strong>Output data</strong>: The output data returned by the GEE are in the form of netCDF files. When using AppEEARS, output is in the form of netCDF files if the AOI type is a polygon and in the form of csv files if the AOI type is a point.</p>
-<p><strong>scale</strong>: Some of the GEE functions require a pixel resolution argument. Information about how GEE handles scale can be found out <a href="https://developers.google.com/earth-engine/scale">here</a></p>
+<h4><span class="header-section-number">17.2.0.5</span> Usage guide:</h4>
+<p>This module is accesible using the R function <code>remote_process</code> which uses the Python package “RpTools” (located at <code>data.remote/inst/RpTools</code>) for downloading and processing data. RpTools has a function named <code>rp_control</code> which controls two other functions,</p>
+<ol style="list-style-type: decimal">
+<li><p><code>get_remote_data</code> which controls the scripts which are used for downloading data from the source. For example, <code>gee2pecan_s2</code> downloads bands from Sentinel 2 using GEE.</p></li>
+<li><p><code>process_remote_data</code> which controls the scripts responsible for processing the raw data. For example, <code>bands2lai_snap</code> uses the downloaded bands to compute LAI using the SNAP algorithm.</p></li>
+</ol>
+<div class="figure">
+<img src="03_topical_pages/11_images/remotemodule.png" alt="" />
+<p class="caption">Workflow of the module</p>
+</div>
+</div>
+<div id="configuring-remote_process" class="section level3">
+<h3><span class="header-section-number">17.2.1</span> Configuring <code>remote_process</code></h3>
+<p><code>remote_process</code> is configured using remote data tags in the <code>pecan.xml</code>. The required tags are described below,</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb275-1"><a href="remote-data-module.html#cb275-1"></a>  <span class="kw">&lt;remotedata&gt;</span></span>
+<span id="cb275-2"><a href="remote-data-module.html#cb275-2"></a>  <span class="kw">&lt;out_get_data&gt;</span>...<span class="kw">&lt;/out_get_data&gt;</span></span>
+<span id="cb275-3"><a href="remote-data-module.html#cb275-3"></a>  <span class="kw">&lt;source&gt;</span>...<span class="kw">&lt;/source&gt;</span></span>
+<span id="cb275-4"><a href="remote-data-module.html#cb275-4"></a>  <span class="kw">&lt;collection&gt;</span>...<span class="kw">&lt;/collection&gt;</span></span>
+<span id="cb275-5"><a href="remote-data-module.html#cb275-5"></a>  <span class="kw">&lt;scale&gt;</span>...<span class="kw">&lt;/scale&gt;</span></span>
+<span id="cb275-6"><a href="remote-data-module.html#cb275-6"></a>  <span class="kw">&lt;projection&gt;</span>...<span class="kw">&lt;/projection&gt;</span></span>
+<span id="cb275-7"><a href="remote-data-module.html#cb275-7"></a>  <span class="kw">&lt;qc&gt;</span>...<span class="kw">&lt;/qc&gt;</span></span>
+<span id="cb275-8"><a href="remote-data-module.html#cb275-8"></a>  <span class="kw">&lt;algorithm&gt;</span>...<span class="kw">&lt;/algorithm&gt;</span></span>
+<span id="cb275-9"><a href="remote-data-module.html#cb275-9"></a>  <span class="kw">&lt;credfile&gt;</span>...<span class="kw">&lt;/credfile&gt;</span></span>
+<span id="cb275-10"><a href="remote-data-module.html#cb275-10"></a>  <span class="kw">&lt;out_process_data&gt;</span>...<span class="kw">&lt;/out_process_data&gt;</span></span>
+<span id="cb275-11"><a href="remote-data-module.html#cb275-11"></a>  <span class="kw">&lt;overwrite&gt;</span>...<span class="kw">&lt;/overwrite&gt;</span></span>
+<span id="cb275-12"><a href="remote-data-module.html#cb275-12"></a>  <span class="kw">&lt;/remotedata&gt;</span></span></code></pre></div>
+<ul>
+<li><code>out_get_data</code>: (required) type of raw output requested, e.g, bands, smap</li>
+<li><code>source</code>: (required) source of remote data, e.g., gee or appeears</li>
+<li><code>collection</code>: (required) dataset or product name as it is provided on the source, e.g. “COPERNICUS/S2_SR” for gee or “SPL3SMP_E.003” for appeears</li>
+<li><code>scale</code>: (optional) pixel resolution required for some gee collections, recommended to use 10 for Sentinel 2 <strong>scale</strong> Information about how GEE handles scale can be found out <a href="https://developers.google.com/earth-engine/scale">here</a></li>
+<li><code>projection</code>: (optional) type of projection. Only required for appeears polygon AOI type</li>
+<li><code>qc</code>: (optional) quality control parameter, required for some gee collections</li>
+<li><code>overwrite</code>: (optional) if TRUE database checks will be skipped and existing data of same type will be replaced entirely. When processed data is requested, the raw data required for creating it will also be replaced. By default FALSE</li>
+</ul>
+<p>These tags are only required if processed data is requested:</p>
+<ul>
+<li><code>out_process_data</code>: (optional) type of processed output requested, e.g, lai</li>
+<li><code>algorithm</code>: (optional) algorithm used for processing data, currently only SNAP is implemented to estimate LAI from Sentinel-2 bands</li>
+<li><code>credfile</code>: (optional) absolute path to JSON file containing Earthdata username and password, only required for AppEEARS</li>
+</ul>
+<p>Additional information are taken from the registration files located at <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.remote/inst/registration">pecan/modules/data.remote/inst/registration</a>, each source has its own registration file. This is so because there isn’t a standardized way to retrieve all image collections from GEE and each image collection may require its own way of performing quality checks, etc whereas all of the products available on AppEEARS can be retrieved using its API in a standardized way.</p>
+<p>GEE registration file (register.GEE.xml) :</p>
+<ul>
+<li><code>collection</code>
+<ul>
+<li><code>original_name</code> original name of the image collection, e.g. COPERNICUS/S2_SR</li>
+<li><code>pecan_name</code> short form of original name using which the collection is represented in PEcAn, e.g. s2</li>
+</ul></li>
+<li><code>coord</code>
+<ul>
+<li><code>coord_type</code> coordinate type supported by the collection</li>
+</ul></li>
+<li><code>scale</code> the default value of the scale can be specified here</li>
+<li><code>qc</code> the default value of the qc parameter can be specified here</li>
+<li><code>raw_format</code> format details of the raw file
+<ul>
+<li><code>id</code> id of the format</li>
+<li><code>name</code> name of the format</li>
+<li><code>mimetype</code> MIME type</li>
+</ul></li>
+<li><code>pro_format</code> format details of the processed file when the collection is used to create a processed file
+<ul>
+<li><code>id</code> id of the format</li>
+<li><code>name</code> name of the format</li>
+<li><code>mimetype</code> MIME type</li>
+</ul></li>
+</ul>
+<p>AppEEARS registarion file (registrer.APPEEARS.xml) :</p>
+<ul>
+<li><code>coord</code>
+<ul>
+<li><code>coord_type</code> coordinate type supported by the product</li>
+</ul></li>
+<li><code>raw_format</code> format details of the output file
+<ul>
+<li><code>id</code> id of the format</li>
+<li><code>name</code> name of the format</li>
+<li><code>mimetype</code> MIME type</li>
+</ul></li>
+</ul>
+<p>Remaining input data:</p>
+<ul>
+<li>start date, end date: these are taken from the <code>run</code> tag in <code>pecan.xml</code></li>
+<li>outdir: from the <code>outdir</code> tag in <code>pecan.xml</code></li>
+<li>Area of interest: the coordinates and site name are found out from BETY using <code>siteid</code> present in the <code>run</code> tag. These are then used to create a GeoJSON file which is used by the download functions.</li>
+</ul>
+<p>The output data from the module are returned in the following tags:</p>
+<ul>
+<li><code>raw_id</code>: input id of the raw file</li>
+<li><code>raw_path</code>: absolute path to the raw file</li>
+<li><code>pro_id</code>: input id of the processed file</li>
+<li><code>pro_path</code>: absolute path to the processed file</li>
+</ul>
+<p><strong>Output files</strong>:</p>
+<p>The output files are of netCDF type and are stored in a directory inside the specified outdir with the following naming convention: <code>source_site_siteid</code></p>
+<p>The output files are created with the following naming convention: <code>source_collection_scale_projection_qc_site_siteid_TimeStampOfFileCreation</code></p>
+<p>Whenever a data product is requested the output files are stored in the inputs table of BETYdb. Subsequently when the same product is requested again with a different date range but with the same qc, scale, projection the previous file in the db would be extended. The DB would always contain only one file of the same type.
+As an example, if a file containing Sentinel 2 bands for start date: 2018-01-01, end date: 2018-06-30 exists in the DB and the same product is requested again for a different date range one of the following cases would happen,</p>
+<ol style="list-style-type: decimal">
+<li><p>New dates are ahead of the existing file: For example, if the requested dates are start: 2018-10-01, end: 2018-12-31 in this case the previous file will be extended forward meaning the effective start date of the file to be downloaded would be the day after the end date of the previous file record, i.e. 2018-07-01. The new and the previous file would be merged and the DB would now be having data for 2018-01-01 to 2018-12-31.</p></li>
+<li><p>New dates are preceding of the existing file: For example, if the requested dates are start: 2017-01-01, end: 2017-06-30 in this case the effective end date of the new download would be the day before the start date of the existing file, i.e., 2017-12-31. The new and the previous file would be merged and the file in the DB would now be having data for 2017-01-01 to 2018-06-30.</p></li>
+<li><p>New dates contain the date range of the existing file: For example, if the requested dates are start: 2016-01-01, end: 2019-06-30 here the existing file would be replaced entirely with the new file. A more efficient way of doing this could be to divide your request into two parts, i.e, first request for 2016-01-01 to 2018-01-01 and then for 2018-06-30 to 2019-06-30.</p></li>
+</ol>
+<p>When a processed data product such as SNAP-LAI is requested, the raw product (here Sentinel 2 bands) used to create it would also be stored in the DB. If the raw product required for creating the processed product already exists for the requested time period, the processed product would be created for the entire time period of the raw file. For example, if Sentinel 2 bands are present in the DB for 2017-01-01 to 2017-12-31 and SNAP-LAI is requested for 2017-03-01 to 2017-07-31, the output file would be containing LAI for 2017-01-01 to 2017-12-31.</p>
+<div id="creating-polygon-based-sites" class="section level4">
+<h4><span class="header-section-number">17.2.1.1</span> Creating Polygon based sites</h4>
+<p>A polygon site can be created in the BETYdb using the following way,</p>
+<pre><code>PEcAn.DB::db.query(&quot;insert into sites (country, sitename, geometry) values (&#39;country_name&#39;, &#39;site_name&#39;, ST_SetSRID(ST_MakePolygon(ST_GeomFromText(&#39;LINESTRING(lon lat elevation)&#39;)), crs));&quot;, con)</code></pre>
+<p>Example,</p>
+<pre><code>db.query(&quot;insert into sites (country, sitename, geometry) values (&#39;FI&#39;, &#39;Qvidja_ca6cm&#39;, ST_SetSRID(ST_MakePolygon(ST_GeomFromText(&#39;LINESTRING(22.388957339620813 60.287395608412218 14.503780364990234, 22.389600591651835 60.287182336733203 14.503780364990234,
+22.38705422266651  60.285516177775868 14.503780364990234,      
+22.386575219445195 60.285763643883932 14.503780364990234,
+22.388957339620813 60.287395608412218 14.503780364990234 )&#39;)), 4326));&quot;, con)</code></pre>
 </div>
 <div id="example-use-gee" class="section level4">
-<h4><span class="header-section-number">17.2.0.5</span> Example use (GEE)</h4>
-<p>This example will download Sentinel 2 bands for an area in Reykjavik(test file is included) for the time period 2018-01-01 to 2018-12-31 and then use the SNAP algorithm to compute Leaf Area Index.</p>
+<h4><span class="header-section-number">17.2.1.2</span> Example use (GEE)</h4>
+<p>This example will download Sentinel 2 bands and then use the SNAP algorithm to compute Leaf Area Index.</p>
 <ol style="list-style-type: decimal">
-<li><p>Open a Python shell at <code>pecan/modules/data.remote/inst</code></p></li>
-<li><p>In the Python shell run the following,</p></li>
+<li>Add remotedata tag to <code>pecan.xml</code> and configure it.</li>
 </ol>
-<div class="sourceCode" id="cb273"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb273-1"><a href="remote-data-module.html#cb273-1"></a><span class="co"># import remote_process</span></span>
-<span id="cb273-2"><a href="remote-data-module.html#cb273-2"></a><span class="im">from</span> remote_process <span class="im">import</span> remote_process</span>
-<span id="cb273-3"><a href="remote-data-module.html#cb273-3"></a></span>
-<span id="cb273-4"><a href="remote-data-module.html#cb273-4"></a><span class="co"># call remote_process </span></span>
-<span id="cb273-5"><a href="remote-data-module.html#cb273-5"></a>remote_process(</span>
-<span id="cb273-6"><a href="remote-data-module.html#cb273-6"></a>        geofile<span class="op">=</span><span class="st">&quot;./satellitetools/test.geojson&quot;</span>,</span>
-<span id="cb273-7"><a href="remote-data-module.html#cb273-7"></a>        outdir<span class="op">=</span><span class="st">&quot;./out&quot;</span>,</span>
-<span id="cb273-8"><a href="remote-data-module.html#cb273-8"></a>        start<span class="op">=</span><span class="st">&quot;2018-01-01&quot;</span>,</span>
-<span id="cb273-9"><a href="remote-data-module.html#cb273-9"></a>        end<span class="op">=</span><span class="st">&quot;2018-12-31&quot;</span>,</span>
-<span id="cb273-10"><a href="remote-data-module.html#cb273-10"></a>        source<span class="op">=</span><span class="st">&quot;gee&quot;</span>,</span>
-<span id="cb273-11"><a href="remote-data-module.html#cb273-11"></a>        collection<span class="op">=</span><span class="st">&quot;COPERNICUS/S2_SR&quot;</span>,</span>
-<span id="cb273-12"><a href="remote-data-module.html#cb273-12"></a>        scale<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb273-13"><a href="remote-data-module.html#cb273-13"></a>        qc<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb273-14"><a href="remote-data-module.html#cb273-14"></a>        algorithm<span class="op">=</span><span class="st">&quot;snap&quot;</span>,</span>
-<span id="cb273-15"><a href="remote-data-module.html#cb273-15"></a>        output<span class="op">=</span>{<span class="st">&quot;get_data&quot;</span>: <span class="st">&quot;bands&quot;</span>, <span class="st">&quot;process_data&quot;</span>: <span class="st">&quot;lai&quot;</span>},</span>
-<span id="cb273-16"><a href="remote-data-module.html#cb273-16"></a>        stage<span class="op">=</span>{<span class="st">&quot;get_data&quot;</span>: <span class="va">True</span>, <span class="st">&quot;process_data&quot;</span>: <span class="va">True</span>},</span>
-<span id="cb273-17"><a href="remote-data-module.html#cb273-17"></a>    )</span></code></pre></div>
-<p>The output netCDF files(bands and LAI) will be saved at <code>./out</code>
-More information about the function and its arguments can be found out by <code>help(remote_process)</code></p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb278-1"><a href="remote-data-module.html#cb278-1"></a>  <span class="kw">&lt;remotedata&gt;</span></span>
+<span id="cb278-2"><a href="remote-data-module.html#cb278-2"></a>  <span class="kw">&lt;out_get_data&gt;</span>bands<span class="kw">&lt;/out_get_data&gt;</span></span>
+<span id="cb278-3"><a href="remote-data-module.html#cb278-3"></a>  <span class="kw">&lt;source&gt;</span>gee<span class="kw">&lt;/source&gt;</span></span>
+<span id="cb278-4"><a href="remote-data-module.html#cb278-4"></a>  <span class="kw">&lt;collection&gt;</span>COPERNICUS/S2_SR<span class="kw">&lt;/collection&gt;</span></span>
+<span id="cb278-5"><a href="remote-data-module.html#cb278-5"></a>  <span class="kw">&lt;scale&gt;</span>10<span class="kw">&lt;/scale&gt;</span></span>
+<span id="cb278-6"><a href="remote-data-module.html#cb278-6"></a>  <span class="kw">&lt;qc&gt;</span>1<span class="kw">&lt;/qc&gt;</span></span>
+<span id="cb278-7"><a href="remote-data-module.html#cb278-7"></a>  <span class="kw">&lt;algorithm&gt;</span>snap<span class="kw">&lt;/algorithm&gt;</span></span>
+<span id="cb278-8"><a href="remote-data-module.html#cb278-8"></a>  <span class="kw">&lt;out_process_data&gt;</span>LAI<span class="kw">&lt;/out_process_data&gt;</span></span>
+<span id="cb278-9"><a href="remote-data-module.html#cb278-9"></a>  <span class="kw">&lt;/remotedata&gt;</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
+</ol>
+<pre><code>PEcAn.data.remote::remote_process(settings)</code></pre>
+<p>The output netCDF files(bands and LAI) will be saved at outdir and their records would be kept in the inputs table of BETYdb.</p>
 </div>
 <div id="example-use-appeears" class="section level4">
-<h4><span class="header-section-number">17.2.0.6</span> Example use (AppEEARS)</h4>
-<p>This example will download the layers of a SMAP product(SPL3SMP_E.003) for an area in Reykjavik(test file is included) for the time period 2018-01-01 to 2018-01-31</p>
+<h4><span class="header-section-number">17.2.1.3</span> Example use (AppEEARS)</h4>
+<p>This example will download the layers of a SMAP product(SPL3SMP_E.003)</p>
 <ol style="list-style-type: decimal">
-<li><p>Open a Python shell at <code>pecan/modules/data.remote/inst</code></p></li>
-<li><p>In the Python shell run the following,</p></li>
+<li>Add remotedata tag to <code>pecan.xml</code> and configure it.</li>
 </ol>
-<div class="sourceCode" id="cb274"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb274-1"><a href="remote-data-module.html#cb274-1"></a><span class="co"># import remote_process</span></span>
-<span id="cb274-2"><a href="remote-data-module.html#cb274-2"></a><span class="im">from</span> remote_process <span class="im">import</span> remote_process</span>
-<span id="cb274-3"><a href="remote-data-module.html#cb274-3"></a></span>
-<span id="cb274-4"><a href="remote-data-module.html#cb274-4"></a><span class="co"># call remote_process </span></span>
-<span id="cb274-5"><a href="remote-data-module.html#cb274-5"></a>remote_process(</span>
-<span id="cb274-6"><a href="remote-data-module.html#cb274-6"></a>        geofile<span class="op">=</span><span class="st">&quot;./satellitetools/test.geojson&quot;</span>,</span>
-<span id="cb274-7"><a href="remote-data-module.html#cb274-7"></a>        outdir<span class="op">=</span><span class="st">&quot;./out&quot;</span>,</span>
-<span id="cb274-8"><a href="remote-data-module.html#cb274-8"></a>        start<span class="op">=</span><span class="st">&quot;2018-01-01&quot;</span>,</span>
-<span id="cb274-9"><a href="remote-data-module.html#cb274-9"></a>        end<span class="op">=</span><span class="st">&quot;2018-01-31&quot;</span>,</span>
-<span id="cb274-10"><a href="remote-data-module.html#cb274-10"></a>        source<span class="op">=</span><span class="st">&quot;appeears&quot;</span>,</span>
-<span id="cb274-11"><a href="remote-data-module.html#cb274-11"></a>        collection<span class="op">=</span><span class="st">&quot;SPL3SMP_E.003&quot;</span>,</span>
-<span id="cb274-12"><a href="remote-data-module.html#cb274-12"></a>        projection<span class="op">=</span><span class="st">&quot;native&quot;</span>,</span>
-<span id="cb274-13"><a href="remote-data-module.html#cb274-13"></a>        stage<span class="op">=</span>{<span class="st">&quot;get_data&quot;</span>: <span class="va">True</span>, <span class="st">&quot;process_data&quot;</span>: <span class="va">False</span>},</span>
-<span id="cb274-14"><a href="remote-data-module.html#cb274-14"></a>    )</span></code></pre></div>
-<p>This will approximately take 20 minutes to complete and the output netCDF file will be saved at <code>./out</code></p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb280-1"><a href="remote-data-module.html#cb280-1"></a>  <span class="kw">&lt;remotedata&gt;</span></span>
+<span id="cb280-2"><a href="remote-data-module.html#cb280-2"></a>  <span class="kw">&lt;out_get_data&gt;</span>smap<span class="kw">&lt;/out_get_data&gt;</span></span>
+<span id="cb280-3"><a href="remote-data-module.html#cb280-3"></a>  <span class="kw">&lt;source&gt;</span>appeears<span class="kw">&lt;/source&gt;</span></span>
+<span id="cb280-4"><a href="remote-data-module.html#cb280-4"></a>  <span class="kw">&lt;collection&gt;</span>SPL3SMP_E.003<span class="kw">&lt;/collection&gt;</span></span>
+<span id="cb280-5"><a href="remote-data-module.html#cb280-5"></a>  <span class="kw">&lt;projection&gt;</span>native<span class="kw">&lt;/projection&gt;</span></span>
+<span id="cb280-6"><a href="remote-data-module.html#cb280-6"></a>  <span class="kw">&lt;algorithm&gt;&lt;/algorithm&gt;</span></span>
+<span id="cb280-7"><a href="remote-data-module.html#cb280-7"></a>  <span class="kw">&lt;credfile&gt;</span>path/to/jsonfile/containingcredentials<span class="kw">&lt;/credfile&gt;</span></span>
+<span id="cb280-8"><a href="remote-data-module.html#cb280-8"></a>  <span class="kw">&lt;/remotedata&gt;</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
+</ol>
+<pre><code>PEcAn.data.remote::remote_process(settings)</code></pre>
+<p>The output netCDF file will be saved at outdir and its record would be kept in the inputs table of BETYdb.</p>
+</div>
+<div id="adding-new-gee-image-collections" class="section level4">
+<h4><span class="header-section-number">17.2.1.4</span> Adding new GEE image collections</h4>
+<p>Once you have the Python script for downloading the collection from GEE, please do the following to integrate it with this module.</p>
+<ol style="list-style-type: decimal">
+<li><p>Make sure that the function and script names are same and named in the following way: <code>gee2pecan_pecancodeofimagecollection</code>
+<code>pecancodeofimagecollection</code> can be any name which you want to use for representing the collection is an easier way.
+Additionaly, ensure that the function accepts and uses the following arguments,</p>
+<ul>
+<li><code>geofile</code> - (str) GeoJSON file containing AOI information of the site</li>
+<li><code>outdir</code> - (str) path where the output file has to be saved</li>
+<li><code>start</code> - (str) start date in the form YYYY-MM-DD</li>
+<li><code>end</code> - (str) end date in the form YYYY-MM-DD</li>
+<li><code>scale</code> and <code>qc</code> if applicable.</li>
+</ul></li>
+<li><p>Make sure the output file is of netCDF type and follows the naming convention described above.</p></li>
+<li><p>Store the Python script at <code>pecan/modules/data.remote/inst/RpTools/RpTools</code></p></li>
+<li><p>Update the <code>register.GEE.xml</code> file.</p></li>
+</ol>
+<p>After performing these steps the script will be integrated with the remote data module and would be ready to use.</p>
 
+</div>
 </div>
 </div>
 <!-- </div> -->

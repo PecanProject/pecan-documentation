@@ -291,6 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>11.2.5</b> (experimental) State Data Assimilation</a></li>
 <li class="chapter" data-level="11.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>11.2.6</b> (experimental) Brown Dog</a></li>
 <li class="chapter" data-level="11.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>11.2.7</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="11.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>11.2.8</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>12</b> PEcAn workflow (web/workflow.R)</a><ul>
@@ -429,7 +430,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1.2" data-path="LoadData.html"><a href="LoadData.html#output-1"><i class="fa fa-check"></i><b>17.1.2</b> Output</a></li>
 <li class="chapter" data-level="17.1.3" data-path="LoadData.html"><a href="LoadData.html#example"><i class="fa fa-check"></i><b>17.1.3</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="remote-data-module.html"><a href="remote-data-module.html"><i class="fa fa-check"></i><b>17.2</b> Remote data module</a></li>
+<li class="chapter" data-level="17.2" data-path="remote-data-module.html"><a href="remote-data-module.html"><i class="fa fa-check"></i><b>17.2</b> Remote data module</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="remote-data-module.html"><a href="remote-data-module.html#configuring-remote_process"><i class="fa fa-check"></i><b>17.2.1</b> Configuring <code>remote_process</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="shiny.html"><a href="shiny.html"><i class="fa fa-check"></i><b>18</b> Shiny</a><ul>
 <li class="chapter" data-level="18.1" data-path="testing-the-shiny-server.html"><a href="testing-the-shiny-server.html"><i class="fa fa-check"></i><b>18.1</b> Testing the Shiny Server</a></li>
@@ -675,21 +678,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">24.5.1</span> Model information</h3>
 <p>Each model will have a small json file called model_info.json that is used to describe the model and used by the monitor service to register the model with PEcAn. This file will contain information about the model that is send as part of the heartbeat of the container to the monitor service. Below is an example of this file for the ED model. The required fields are <code>name</code>, <code>type</code>, <code>version</code> and <code>binary</code>. The fields <code>type</code> and <code>version</code> are used by PEcAn to send the messages to RabbitMQ. There is no need to specify the queue name explicitly. The queue name will be created by combining these two fields with an underscore. The field <code>binary</code> is used to point to the actual binary in the docker container.</p>
 <p>There are 2 special values that can be used, <code>@VERSION@</code> which will be replaced by the version that is passed in when building the container, and <code>@BINARY@</code> which will be replaced by the binary when building the docker image.</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb413-1"><a href="model-docker.html#cb413-1"></a><span class="fu">{</span></span>
-<span id="cb413-2"><a href="model-docker.html#cb413-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2.2&quot;</span><span class="fu">,</span></span>
-<span id="cb413-3"><a href="model-docker.html#cb413-3"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2&quot;</span><span class="fu">,</span></span>
-<span id="cb413-4"><a href="model-docker.html#cb413-4"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;@VERSION@&quot;</span><span class="fu">,</span></span>
-<span id="cb413-5"><a href="model-docker.html#cb413-5"></a>  <span class="dt">&quot;binary&quot;</span><span class="fu">:</span> <span class="st">&quot;@BINARY@&quot;</span><span class="fu">,</span></span>
-<span id="cb413-6"><a href="model-docker.html#cb413-6"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The Ecosystem Demography Biosphere Model (ED2) is an integrated terrestrial biosphere model incorporating hydrology, land-surface biophysics, vegetation dynamics, and soil carbon and nitrogen biogeochemistry&quot;</span><span class="fu">,</span></span>
-<span id="cb413-7"><a href="model-docker.html#cb413-7"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;Mike Dietze&quot;</span><span class="fu">,</span></span>
-<span id="cb413-8"><a href="model-docker.html#cb413-8"></a>  <span class="dt">&quot;contributors&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;David LeBauer&quot;</span><span class="ot">,</span> <span class="st">&quot;Xiaohui Feng&quot;</span><span class="ot">,</span> <span class="st">&quot;Dan Wang&quot;</span><span class="ot">,</span> <span class="st">&quot;Carl Davidson&quot;</span><span class="ot">,</span> <span class="st">&quot;Rob Kooper&quot;</span><span class="ot">,</span> <span class="st">&quot;Shawn Serbin&quot;</span><span class="ot">,</span> <span class="st">&quot;Alexey Shiklomanov&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb413-9"><a href="model-docker.html#cb413-9"></a>  <span class="dt">&quot;links&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb413-10"><a href="model-docker.html#cb413-10"></a>    <span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;https://github.com/EDmodel/ED2&quot;</span><span class="fu">,</span></span>
-<span id="cb413-11"><a href="model-docker.html#cb413-11"></a>    <span class="dt">&quot;issues&quot;</span><span class="fu">:</span> <span class="st">&quot;https://github.com/EDmodel/ED2/issues&quot;</span></span>
-<span id="cb413-12"><a href="model-docker.html#cb413-12"></a>  <span class="fu">},</span></span>
-<span id="cb413-13"><a href="model-docker.html#cb413-13"></a>  <span class="dt">&quot;inputs&quot;</span><span class="fu">:</span> <span class="fu">{},</span></span>
-<span id="cb413-14"><a href="model-docker.html#cb413-14"></a>  <span class="dt">&quot;citation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;Medvigy D., Wofsy S. C., Munger J. W., Hollinger D. Y., Moorcroft P. R. 2009. Mechanistic scaling of ecosystem function and dynamics in space and time: Ecosystem Demography model version 2. J. Geophys. Res. 114 (doi:10.1029/2008JG000812)&quot;</span><span class="ot">]</span></span>
-<span id="cb413-15"><a href="model-docker.html#cb413-15"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb420-1"><a href="model-docker.html#cb420-1"></a><span class="fu">{</span></span>
+<span id="cb420-2"><a href="model-docker.html#cb420-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2.2&quot;</span><span class="fu">,</span></span>
+<span id="cb420-3"><a href="model-docker.html#cb420-3"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;ED2&quot;</span><span class="fu">,</span></span>
+<span id="cb420-4"><a href="model-docker.html#cb420-4"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;@VERSION@&quot;</span><span class="fu">,</span></span>
+<span id="cb420-5"><a href="model-docker.html#cb420-5"></a>  <span class="dt">&quot;binary&quot;</span><span class="fu">:</span> <span class="st">&quot;@BINARY@&quot;</span><span class="fu">,</span></span>
+<span id="cb420-6"><a href="model-docker.html#cb420-6"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The Ecosystem Demography Biosphere Model (ED2) is an integrated terrestrial biosphere model incorporating hydrology, land-surface biophysics, vegetation dynamics, and soil carbon and nitrogen biogeochemistry&quot;</span><span class="fu">,</span></span>
+<span id="cb420-7"><a href="model-docker.html#cb420-7"></a>  <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;Mike Dietze&quot;</span><span class="fu">,</span></span>
+<span id="cb420-8"><a href="model-docker.html#cb420-8"></a>  <span class="dt">&quot;contributors&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;David LeBauer&quot;</span><span class="ot">,</span> <span class="st">&quot;Xiaohui Feng&quot;</span><span class="ot">,</span> <span class="st">&quot;Dan Wang&quot;</span><span class="ot">,</span> <span class="st">&quot;Carl Davidson&quot;</span><span class="ot">,</span> <span class="st">&quot;Rob Kooper&quot;</span><span class="ot">,</span> <span class="st">&quot;Shawn Serbin&quot;</span><span class="ot">,</span> <span class="st">&quot;Alexey Shiklomanov&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb420-9"><a href="model-docker.html#cb420-9"></a>  <span class="dt">&quot;links&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb420-10"><a href="model-docker.html#cb420-10"></a>    <span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;https://github.com/EDmodel/ED2&quot;</span><span class="fu">,</span></span>
+<span id="cb420-11"><a href="model-docker.html#cb420-11"></a>    <span class="dt">&quot;issues&quot;</span><span class="fu">:</span> <span class="st">&quot;https://github.com/EDmodel/ED2/issues&quot;</span></span>
+<span id="cb420-12"><a href="model-docker.html#cb420-12"></a>  <span class="fu">},</span></span>
+<span id="cb420-13"><a href="model-docker.html#cb420-13"></a>  <span class="dt">&quot;inputs&quot;</span><span class="fu">:</span> <span class="fu">{},</span></span>
+<span id="cb420-14"><a href="model-docker.html#cb420-14"></a>  <span class="dt">&quot;citation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;Medvigy D., Wofsy S. C., Munger J. W., Hollinger D. Y., Moorcroft P. R. 2009. Mechanistic scaling of ecosystem function and dynamics in space and time: Ecosystem Demography model version 2. J. Geophys. Res. 114 (doi:10.1029/2008JG000812)&quot;</span><span class="ot">]</span></span>
+<span id="cb420-15"><a href="model-docker.html#cb420-15"></a><span class="fu">}</span></span></code></pre></div>
 <p>Other fields that are recommended, but currently not used yet, are:</p>
 <ul>
 <li><code>description</code> : a longer description of the model.</li>
@@ -707,95 +710,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is important values for <code>type</code> and <code>version</code> are set correct. The PEcAn code will use these to register the model with the BETY database, which is then used by PEcAn to send out a message to a specfic worker queue, if you do not set these variables correctly your model executor will pick up messages for the wrong model.</p>
 <p>To build the docker image, we use a Dockerfile (see example below) and run the following command. This command will expect the Dockerfile to live in the model specific folder and the command is executed in the root pecan folder. It will copy the content of the pecan folder and make it available to the build process (in this example we do not need any additional files).</p>
 <p>Since we can have multiple different versions of a model be available for PEcAn we ar using the following naming schema <code>pecan/model-&lt;modeltype&gt;-&lt;version&gt;:&lt;pecan version</code>. For example the image below will be named pecan/model-ed2-git, since we do not specify the exact version it will be atomically be named <code>pecan/model-ed2-git:latest</code>.</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb414-1"><a href="model-docker.html#cb414-1"></a><span class="ex">docker</span> build \</span>
-<span id="cb414-2"><a href="model-docker.html#cb414-2"></a>    --tag pecan/model-ed2-git \</span>
-<span id="cb414-3"><a href="model-docker.html#cb414-3"></a>    --file models/ed/Dockerfile \</span>
-<span id="cb414-4"><a href="model-docker.html#cb414-4"></a>    .</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb421-1"><a href="model-docker.html#cb421-1"></a><span class="ex">docker</span> build \</span>
+<span id="cb421-2"><a href="model-docker.html#cb421-2"></a>    --tag pecan/model-ed2-git \</span>
+<span id="cb421-3"><a href="model-docker.html#cb421-3"></a>    --file models/ed/Dockerfile \</span>
+<span id="cb421-4"><a href="model-docker.html#cb421-4"></a>    .</span></code></pre></div>
 <p>Example of a Dockerfile, in this case to build the ED2 model.</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb415-1"><a href="model-docker.html#cb415-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-2"><a href="model-docker.html#cb415-2"></a><span class="co"># BUILD MODEL BINARY</span></span>
-<span id="cb415-3"><a href="model-docker.html#cb415-3"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-4"><a href="model-docker.html#cb415-4"></a><span class="kw">FROM</span> debian:stretch as model-binary</span>
-<span id="cb415-5"><a href="model-docker.html#cb415-5"></a></span>
-<span id="cb415-6"><a href="model-docker.html#cb415-6"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
-<span id="cb415-7"><a href="model-docker.html#cb415-7"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
-<span id="cb415-8"><a href="model-docker.html#cb415-8"></a></span>
-<span id="cb415-9"><a href="model-docker.html#cb415-9"></a><span class="co"># install dependencies</span></span>
-<span id="cb415-10"><a href="model-docker.html#cb415-10"></a><span class="kw">RUN</span> apt-get update \</span>
-<span id="cb415-11"><a href="model-docker.html#cb415-11"></a>    &amp;&amp; apt-get install -y --no-install-recommends \</span>
-<span id="cb415-12"><a href="model-docker.html#cb415-12"></a>       build-essential \</span>
-<span id="cb415-13"><a href="model-docker.html#cb415-13"></a>       curl \</span>
-<span id="cb415-14"><a href="model-docker.html#cb415-14"></a>       gfortran \</span>
-<span id="cb415-15"><a href="model-docker.html#cb415-15"></a>       git \</span>
-<span id="cb415-16"><a href="model-docker.html#cb415-16"></a>       libhdf5-dev \</span>
-<span id="cb415-17"><a href="model-docker.html#cb415-17"></a>       libopenmpi-dev \</span>
-<span id="cb415-18"><a href="model-docker.html#cb415-18"></a>    &amp;&amp; rm -rf /var/lib/apt/lists/*</span>
-<span id="cb415-19"><a href="model-docker.html#cb415-19"></a></span>
-<span id="cb415-20"><a href="model-docker.html#cb415-20"></a><span class="co"># download, unzip and build ed2</span></span>
-<span id="cb415-21"><a href="model-docker.html#cb415-21"></a><span class="kw">WORKDIR</span> /src</span>
-<span id="cb415-22"><a href="model-docker.html#cb415-22"></a><span class="kw">RUN</span> git -c http.sslVerify=false clone https://github.com/EDmodel/ED2.git \</span>
-<span id="cb415-23"><a href="model-docker.html#cb415-23"></a>    &amp;&amp; cd ED2/ED/build \</span>
-<span id="cb415-24"><a href="model-docker.html#cb415-24"></a>    &amp;&amp; curl -o make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.Linux \</span>
-<span id="cb415-25"><a href="model-docker.html#cb415-25"></a>    &amp;&amp; if [ <span class="st">&quot;${MODEL_VERSION}&quot;</span> != <span class="st">&quot;git&quot;</span> ]; then git checkout ${MODEL_VERSION}; fi \</span>
-<span id="cb415-26"><a href="model-docker.html#cb415-26"></a>    &amp;&amp; ./install.sh -g -p VM</span>
-<span id="cb415-27"><a href="model-docker.html#cb415-27"></a></span>
-<span id="cb415-28"><a href="model-docker.html#cb415-28"></a><span class="co">########################################################################</span></span>
-<span id="cb415-29"><a href="model-docker.html#cb415-29"></a></span>
-<span id="cb415-30"><a href="model-docker.html#cb415-30"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-31"><a href="model-docker.html#cb415-31"></a><span class="co"># BUILD PECAN FOR MODEL</span></span>
-<span id="cb415-32"><a href="model-docker.html#cb415-32"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-33"><a href="model-docker.html#cb415-33"></a><span class="kw">FROM</span> pecan/models:latest</span>
-<span id="cb415-34"><a href="model-docker.html#cb415-34"></a></span>
-<span id="cb415-35"><a href="model-docker.html#cb415-35"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-36"><a href="model-docker.html#cb415-36"></a><span class="co"># INSTALL MODEL SPECIFIC PIECES</span></span>
-<span id="cb415-37"><a href="model-docker.html#cb415-37"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-38"><a href="model-docker.html#cb415-38"></a></span>
-<span id="cb415-39"><a href="model-docker.html#cb415-39"></a><span class="kw">RUN</span> apt-get update \</span>
-<span id="cb415-40"><a href="model-docker.html#cb415-40"></a>    &amp;&amp; apt-get install -y --no-install-recommends \</span>
-<span id="cb415-41"><a href="model-docker.html#cb415-41"></a>       libgfortran3 \</span>
-<span id="cb415-42"><a href="model-docker.html#cb415-42"></a>       libopenmpi2 \</span>
-<span id="cb415-43"><a href="model-docker.html#cb415-43"></a>    &amp;&amp; rm -rf /var/lib/apt/lists/*</span>
-<span id="cb415-44"><a href="model-docker.html#cb415-44"></a></span>
-<span id="cb415-45"><a href="model-docker.html#cb415-45"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-46"><a href="model-docker.html#cb415-46"></a><span class="co"># SETUP FOR SPECIFIC MODEL</span></span>
-<span id="cb415-47"><a href="model-docker.html#cb415-47"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb415-48"><a href="model-docker.html#cb415-48"></a></span>
-<span id="cb415-49"><a href="model-docker.html#cb415-49"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
-<span id="cb415-50"><a href="model-docker.html#cb415-50"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
-<span id="cb415-51"><a href="model-docker.html#cb415-51"></a></span>
-<span id="cb415-52"><a href="model-docker.html#cb415-52"></a><span class="co"># Setup model_info file</span></span>
-<span id="cb415-53"><a href="model-docker.html#cb415-53"></a><span class="kw">COPY</span> models/ed/model_info.json /work/model.json</span>
-<span id="cb415-54"><a href="model-docker.html#cb415-54"></a><span class="kw">RUN</span> sed -i -e <span class="st">&quot;s/@VERSION@/${MODEL_VERSION}/g&quot;</span> \</span>
-<span id="cb415-55"><a href="model-docker.html#cb415-55"></a>           -e <span class="st">&quot;s#@BINARY@#/usr/local/bin/ed2.${MODEL_VERSION}#g&quot;</span> /work/model.json</span>
-<span id="cb415-56"><a href="model-docker.html#cb415-56"></a></span>
-<span id="cb415-57"><a href="model-docker.html#cb415-57"></a><span class="co"># COPY model binary</span></span>
-<span id="cb415-58"><a href="model-docker.html#cb415-58"></a><span class="kw">COPY</span> --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/ed2.${MODEL_VERSION}</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb422-1"><a href="model-docker.html#cb422-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-2"><a href="model-docker.html#cb422-2"></a><span class="co"># BUILD MODEL BINARY</span></span>
+<span id="cb422-3"><a href="model-docker.html#cb422-3"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-4"><a href="model-docker.html#cb422-4"></a><span class="kw">FROM</span> debian:stretch as model-binary</span>
+<span id="cb422-5"><a href="model-docker.html#cb422-5"></a></span>
+<span id="cb422-6"><a href="model-docker.html#cb422-6"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
+<span id="cb422-7"><a href="model-docker.html#cb422-7"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
+<span id="cb422-8"><a href="model-docker.html#cb422-8"></a></span>
+<span id="cb422-9"><a href="model-docker.html#cb422-9"></a><span class="co"># install dependencies</span></span>
+<span id="cb422-10"><a href="model-docker.html#cb422-10"></a><span class="kw">RUN</span> apt-get update \</span>
+<span id="cb422-11"><a href="model-docker.html#cb422-11"></a>    &amp;&amp; apt-get install -y --no-install-recommends \</span>
+<span id="cb422-12"><a href="model-docker.html#cb422-12"></a>       build-essential \</span>
+<span id="cb422-13"><a href="model-docker.html#cb422-13"></a>       curl \</span>
+<span id="cb422-14"><a href="model-docker.html#cb422-14"></a>       gfortran \</span>
+<span id="cb422-15"><a href="model-docker.html#cb422-15"></a>       git \</span>
+<span id="cb422-16"><a href="model-docker.html#cb422-16"></a>       libhdf5-dev \</span>
+<span id="cb422-17"><a href="model-docker.html#cb422-17"></a>       libopenmpi-dev \</span>
+<span id="cb422-18"><a href="model-docker.html#cb422-18"></a>    &amp;&amp; rm -rf /var/lib/apt/lists/*</span>
+<span id="cb422-19"><a href="model-docker.html#cb422-19"></a></span>
+<span id="cb422-20"><a href="model-docker.html#cb422-20"></a><span class="co"># download, unzip and build ed2</span></span>
+<span id="cb422-21"><a href="model-docker.html#cb422-21"></a><span class="kw">WORKDIR</span> /src</span>
+<span id="cb422-22"><a href="model-docker.html#cb422-22"></a><span class="kw">RUN</span> git -c http.sslVerify=false clone https://github.com/EDmodel/ED2.git \</span>
+<span id="cb422-23"><a href="model-docker.html#cb422-23"></a>    &amp;&amp; cd ED2/ED/build \</span>
+<span id="cb422-24"><a href="model-docker.html#cb422-24"></a>    &amp;&amp; curl -o make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.Linux \</span>
+<span id="cb422-25"><a href="model-docker.html#cb422-25"></a>    &amp;&amp; if [ <span class="st">&quot;${MODEL_VERSION}&quot;</span> != <span class="st">&quot;git&quot;</span> ]; then git checkout ${MODEL_VERSION}; fi \</span>
+<span id="cb422-26"><a href="model-docker.html#cb422-26"></a>    &amp;&amp; ./install.sh -g -p VM</span>
+<span id="cb422-27"><a href="model-docker.html#cb422-27"></a></span>
+<span id="cb422-28"><a href="model-docker.html#cb422-28"></a><span class="co">########################################################################</span></span>
+<span id="cb422-29"><a href="model-docker.html#cb422-29"></a></span>
+<span id="cb422-30"><a href="model-docker.html#cb422-30"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-31"><a href="model-docker.html#cb422-31"></a><span class="co"># BUILD PECAN FOR MODEL</span></span>
+<span id="cb422-32"><a href="model-docker.html#cb422-32"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-33"><a href="model-docker.html#cb422-33"></a><span class="kw">FROM</span> pecan/models:latest</span>
+<span id="cb422-34"><a href="model-docker.html#cb422-34"></a></span>
+<span id="cb422-35"><a href="model-docker.html#cb422-35"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-36"><a href="model-docker.html#cb422-36"></a><span class="co"># INSTALL MODEL SPECIFIC PIECES</span></span>
+<span id="cb422-37"><a href="model-docker.html#cb422-37"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-38"><a href="model-docker.html#cb422-38"></a></span>
+<span id="cb422-39"><a href="model-docker.html#cb422-39"></a><span class="kw">RUN</span> apt-get update \</span>
+<span id="cb422-40"><a href="model-docker.html#cb422-40"></a>    &amp;&amp; apt-get install -y --no-install-recommends \</span>
+<span id="cb422-41"><a href="model-docker.html#cb422-41"></a>       libgfortran3 \</span>
+<span id="cb422-42"><a href="model-docker.html#cb422-42"></a>       libopenmpi2 \</span>
+<span id="cb422-43"><a href="model-docker.html#cb422-43"></a>    &amp;&amp; rm -rf /var/lib/apt/lists/*</span>
+<span id="cb422-44"><a href="model-docker.html#cb422-44"></a></span>
+<span id="cb422-45"><a href="model-docker.html#cb422-45"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-46"><a href="model-docker.html#cb422-46"></a><span class="co"># SETUP FOR SPECIFIC MODEL</span></span>
+<span id="cb422-47"><a href="model-docker.html#cb422-47"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb422-48"><a href="model-docker.html#cb422-48"></a></span>
+<span id="cb422-49"><a href="model-docker.html#cb422-49"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
+<span id="cb422-50"><a href="model-docker.html#cb422-50"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
+<span id="cb422-51"><a href="model-docker.html#cb422-51"></a></span>
+<span id="cb422-52"><a href="model-docker.html#cb422-52"></a><span class="co"># Setup model_info file</span></span>
+<span id="cb422-53"><a href="model-docker.html#cb422-53"></a><span class="kw">COPY</span> models/ed/model_info.json /work/model.json</span>
+<span id="cb422-54"><a href="model-docker.html#cb422-54"></a><span class="kw">RUN</span> sed -i -e <span class="st">&quot;s/@VERSION@/${MODEL_VERSION}/g&quot;</span> \</span>
+<span id="cb422-55"><a href="model-docker.html#cb422-55"></a>           -e <span class="st">&quot;s#@BINARY@#/usr/local/bin/ed2.${MODEL_VERSION}#g&quot;</span> /work/model.json</span>
+<span id="cb422-56"><a href="model-docker.html#cb422-56"></a></span>
+<span id="cb422-57"><a href="model-docker.html#cb422-57"></a><span class="co"># COPY model binary</span></span>
+<span id="cb422-58"><a href="model-docker.html#cb422-58"></a><span class="kw">COPY</span> --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/ed2.${MODEL_VERSION}</span></code></pre></div>
 <p><strong>WARNING</strong>: Dockerfile environment variables set via <code>ENV</code> are assigned <em>all at once</em>; <em>they do not evaluate successively, left to right</em>.
 Consider the following block:</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb416-1"><a href="model-docker.html#cb416-1"></a><span class="co"># Don&#39;t do this!</span></span>
-<span id="cb416-2"><a href="model-docker.html#cb416-2"></a><span class="kw">ENV</span> MODEL_TYPE=<span class="st">&quot;SIPNET&quot;</span> \</span>
-<span id="cb416-3"><a href="model-docker.html#cb416-3"></a>    MODEL_VERSION=136 \</span>
-<span id="cb416-4"><a href="model-docker.html#cb416-4"></a>    MODEL_TYPE_VERSION=${MODEL_TYPE}_${MODEL_VERSION}   <span class="co"># &lt;- Doesn&#39;t know about MODEL_TYPE or MODEL_VERSION!</span></span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb423-1"><a href="model-docker.html#cb423-1"></a><span class="co"># Don&#39;t do this!</span></span>
+<span id="cb423-2"><a href="model-docker.html#cb423-2"></a><span class="kw">ENV</span> MODEL_TYPE=<span class="st">&quot;SIPNET&quot;</span> \</span>
+<span id="cb423-3"><a href="model-docker.html#cb423-3"></a>    MODEL_VERSION=136 \</span>
+<span id="cb423-4"><a href="model-docker.html#cb423-4"></a>    MODEL_TYPE_VERSION=${MODEL_TYPE}_${MODEL_VERSION}   <span class="co"># &lt;- Doesn&#39;t know about MODEL_TYPE or MODEL_VERSION!</span></span></code></pre></div>
 <p>In this block, the expansion for setting <code>MODEL_TYPE_VERSION</code> <em>is not aware</em> of the current values of <code>MODEL_TYPE</code> or <code>MODEL_VERSION</code>, and will therefore be set incorrectly to just <code>_</code> (unless they have been set previously, in which case it will be aware only of their earlier values).
 As such, <strong>variables depending on other variables must be set in a separate, subsequent <code>ENV</code> statement than the variables they depend on</strong>.</p>
 <p>Once the model has build and is working we can add it to the PEcAn stack and be able to use this model in the web interface. There are two methods to start this new model. First, we can add it to the <code>docker-compose.yml</code> file and start the container using <code>docker-compose -p pecan -d up</code>.</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb417-1"><a href="model-docker.html#cb417-1"></a><span class="at">  </span><span class="fu">sipnet</span><span class="kw">:</span></span>
-<span id="cb417-2"><a href="model-docker.html#cb417-2"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> pecan/model-ed2-git</span></span>
-<span id="cb417-3"><a href="model-docker.html#cb417-3"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
-<span id="cb417-4"><a href="model-docker.html#cb417-4"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan</span></span>
-<span id="cb417-5"><a href="model-docker.html#cb417-5"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
-<span id="cb417-6"><a href="model-docker.html#cb417-6"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan:/data</span></span>
-<span id="cb417-7"><a href="model-docker.html#cb417-7"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
-<span id="cb417-8"><a href="model-docker.html#cb417-8"></a><span class="at">       </span><span class="kw">-</span><span class="at"> rabbitmq</span></span>
-<span id="cb417-9"><a href="model-docker.html#cb417-9"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> unless-stopped</span></span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb424-1"><a href="model-docker.html#cb424-1"></a><span class="at">  </span><span class="fu">sipnet</span><span class="kw">:</span></span>
+<span id="cb424-2"><a href="model-docker.html#cb424-2"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> pecan/model-ed2-git</span></span>
+<span id="cb424-3"><a href="model-docker.html#cb424-3"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb424-4"><a href="model-docker.html#cb424-4"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan</span></span>
+<span id="cb424-5"><a href="model-docker.html#cb424-5"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb424-6"><a href="model-docker.html#cb424-6"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan:/data</span></span>
+<span id="cb424-7"><a href="model-docker.html#cb424-7"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb424-8"><a href="model-docker.html#cb424-8"></a><span class="at">       </span><span class="kw">-</span><span class="at"> rabbitmq</span></span>
+<span id="cb424-9"><a href="model-docker.html#cb424-9"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> unless-stopped</span></span></code></pre></div>
 <p>Alternatively we can start the container manually using the following command.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb418-1"><a href="model-docker.html#cb418-1"></a><span class="ex">docker</span> run \</span>
-<span id="cb418-2"><a href="model-docker.html#cb418-2"></a>    --detach \</span>
-<span id="cb418-3"><a href="model-docker.html#cb418-3"></a>    --rm \</span>
-<span id="cb418-4"><a href="model-docker.html#cb418-4"></a>    --name pecan-ed2-git \</span>
-<span id="cb418-5"><a href="model-docker.html#cb418-5"></a>    --networks pecan_pecan \</span>
-<span id="cb418-6"><a href="model-docker.html#cb418-6"></a>    --volume pecan_pecan:/data</span>
-<span id="cb418-7"><a href="model-docker.html#cb418-7"></a>    <span class="ex">pecan/model-ed2-git</span></span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb425-1"><a href="model-docker.html#cb425-1"></a><span class="ex">docker</span> run \</span>
+<span id="cb425-2"><a href="model-docker.html#cb425-2"></a>    --detach \</span>
+<span id="cb425-3"><a href="model-docker.html#cb425-3"></a>    --rm \</span>
+<span id="cb425-4"><a href="model-docker.html#cb425-4"></a>    --name pecan-ed2-git \</span>
+<span id="cb425-5"><a href="model-docker.html#cb425-5"></a>    --networks pecan_pecan \</span>
+<span id="cb425-6"><a href="model-docker.html#cb425-6"></a>    --volume pecan_pecan:/data</span>
+<span id="cb425-7"><a href="model-docker.html#cb425-7"></a>    <span class="ex">pecan/model-ed2-git</span></span></code></pre></div>
 </div>
 <div id="common-docker-problems" class="section level3">
 <h3><span class="header-section-number">24.5.3</span> Common problems</h3>
@@ -819,19 +822,19 @@ Step 9/9 : COPY --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/
 Successfully built 07ac841be457
 Successfully tagged pecan/pecan-ed2:latest</code></pre>
 <p>At this point we have created a docker image with the binary and all PEcAn code that is needed to run the model. Some models (especially those build as native code) might be missing additional packages that need to be installed in the docker image. To see if all libraries are installed for the binary.</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb420-1"><a href="model-docker.html#cb420-1"></a><span class="op">&gt;</span> <span class="ex">docker</span> run -ti --rm pecan/pecan-ed2 /bin/bash</span>
-<span id="cb420-2"><a href="model-docker.html#cb420-2"></a><span class="ex">root@8a95ee8b6b47</span>:/work# ldd /usr/local/bin/ed2.git  <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;not found&quot;</span></span>
-<span id="cb420-3"><a href="model-docker.html#cb420-3"></a>    <span class="ex">libmpi_usempif08.so.40</span> =<span class="op">&gt;</span> not found</span>
-<span id="cb420-4"><a href="model-docker.html#cb420-4"></a>    <span class="ex">libmpi_usempi_ignore_tkr.so.40</span> =<span class="op">&gt;</span> not found</span>
-<span id="cb420-5"><a href="model-docker.html#cb420-5"></a>    <span class="ex">libmpi_mpifh.so.40</span> =<span class="op">&gt;</span> not found</span>
-<span id="cb420-6"><a href="model-docker.html#cb420-6"></a>    <span class="ex">libmpi.so.40</span> =<span class="op">&gt;</span> not found</span>
-<span id="cb420-7"><a href="model-docker.html#cb420-7"></a>    <span class="ex">libgfortran.so.5</span> =<span class="op">&gt;</span> not found</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb427-1"><a href="model-docker.html#cb427-1"></a><span class="op">&gt;</span> <span class="ex">docker</span> run -ti --rm pecan/pecan-ed2 /bin/bash</span>
+<span id="cb427-2"><a href="model-docker.html#cb427-2"></a><span class="ex">root@8a95ee8b6b47</span>:/work# ldd /usr/local/bin/ed2.git  <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;not found&quot;</span></span>
+<span id="cb427-3"><a href="model-docker.html#cb427-3"></a>    <span class="ex">libmpi_usempif08.so.40</span> =<span class="op">&gt;</span> not found</span>
+<span id="cb427-4"><a href="model-docker.html#cb427-4"></a>    <span class="ex">libmpi_usempi_ignore_tkr.so.40</span> =<span class="op">&gt;</span> not found</span>
+<span id="cb427-5"><a href="model-docker.html#cb427-5"></a>    <span class="ex">libmpi_mpifh.so.40</span> =<span class="op">&gt;</span> not found</span>
+<span id="cb427-6"><a href="model-docker.html#cb427-6"></a>    <span class="ex">libmpi.so.40</span> =<span class="op">&gt;</span> not found</span>
+<span id="cb427-7"><a href="model-docker.html#cb427-7"></a>    <span class="ex">libgfortran.so.5</span> =<span class="op">&gt;</span> not found</span></code></pre></div>
 <p>Start the build container again (this is the number before the line FROM pecan/executor:latest, 7f23c6302130 in the example), and find the missing libraries listed above (for example libmpi_usempif08.so.40):</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb421-1"><a href="model-docker.html#cb421-1"></a><span class="op">&gt;</span> <span class="ex">docker</span> run --rm -ti 7f23c6302130</span>
-<span id="cb421-2"><a href="model-docker.html#cb421-2"></a><span class="ex">root@e716c63c031f</span>:/src# dpkg -S libmpi_usempif08.so.40</span>
-<span id="cb421-3"><a href="model-docker.html#cb421-3"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_usempif08.so.40.10.1</span>
-<span id="cb421-4"><a href="model-docker.html#cb421-4"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40.10.1</span>
-<span id="cb421-5"><a href="model-docker.html#cb421-5"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb428-1"><a href="model-docker.html#cb428-1"></a><span class="op">&gt;</span> <span class="ex">docker</span> run --rm -ti 7f23c6302130</span>
+<span id="cb428-2"><a href="model-docker.html#cb428-2"></a><span class="ex">root@e716c63c031f</span>:/src# dpkg -S libmpi_usempif08.so.40</span>
+<span id="cb428-3"><a href="model-docker.html#cb428-3"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_usempif08.so.40.10.1</span>
+<span id="cb428-4"><a href="model-docker.html#cb428-4"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40.10.1</span>
+<span id="cb428-5"><a href="model-docker.html#cb428-5"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40</span></code></pre></div>
 <p>This shows the pages is libopenmpi3 that needs to be installed, do this for all missing packages, modify the Dockerfile and rebuild. Next time you run the ldd command there should be no more packages being listed.</p>
 
 </div>
