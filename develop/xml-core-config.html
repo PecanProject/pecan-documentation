@@ -895,7 +895,8 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <span id="cb135-16"><a href="xml-core-config.html#cb135-16"></a>    <span class="kw">&lt;/inputs&gt;</span></span>
 <span id="cb135-17"><a href="xml-core-config.html#cb135-17"></a>    <span class="kw">&lt;start.date&gt;</span>2004/01/01<span class="kw">&lt;/start.date&gt;</span></span>
 <span id="cb135-18"><a href="xml-core-config.html#cb135-18"></a>    <span class="kw">&lt;end.date&gt;</span>2004/12/31<span class="kw">&lt;/end.date&gt;</span></span>
-<span id="cb135-19"><a href="xml-core-config.html#cb135-19"></a>  <span class="kw">&lt;/run&gt;</span></span></code></pre></div>
+<span id="cb135-19"><a href="xml-core-config.html#cb135-19"></a>    <span class="kw">&lt;stop_on_error&gt;</span>TRUE<span class="kw">&lt;/stop_on_error&gt;</span></span>
+<span id="cb135-20"><a href="xml-core-config.html#cb135-20"></a>  <span class="kw">&lt;/run&gt;</span></span></code></pre></div>
 <div id="xml-run-site" class="section level4">
 <h4><span class="header-section-number">11.1.8.1</span> <code>site</code>: Where to run the model</h4>
 <p>This contains the following tags:</p>
@@ -958,7 +959,8 @@ PEcAn tries to detect and throw informative errors when dates are out of bounds 
 <h4><span class="header-section-number">11.1.8.4</span> Other tags</h4>
 <p>The following tags are optional run settings that apply to any model:</p>
 <ul>
-<li><code>jobtemplate</code>: the template used when creating a <code>job.sh</code> file, which is used to launch the actual model. Each model has its own default template in the <code>inst</code> folder of the corresponding R package (for instance, here is the one for <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/template.job">ED2</a>). The following variables can be used: <code>@SITE_LAT@</code>, <code>@SITE_LON@</code>, <code>@SITE_MET@</code>, <code>@START_DATE@</code>, <code>@END_DATE@</code>, <code>@OUTDIR@</code>, <code>@RUNDIR@</code> which all come variables in the <code>pecan.xml</code> file. The following two command can be used to copy and clean the results from a scratch folder (specified as scratch in the run section below, for example local disk vs network disk) : <code>@SCRATCH_COPY@</code>, <code>@SCRATCH_CLEAR@</code>.</li>
+<li><p><code>jobtemplate</code>: the template used when creating a <code>job.sh</code> file, which is used to launch the actual model. Each model has its own default template in the <code>inst</code> folder of the corresponding R package (for instance, here is the one for <a href="https://github.com/PecanProject/pecan/blob/master/models/ed/inst/template.job">ED2</a>). The following variables can be used: <code>@SITE_LAT@</code>, <code>@SITE_LON@</code>, <code>@SITE_MET@</code>, <code>@START_DATE@</code>, <code>@END_DATE@</code>, <code>@OUTDIR@</code>, <code>@RUNDIR@</code> which all come variables in the <code>pecan.xml</code> file. The following two command can be used to copy and clean the results from a scratch folder (specified as scratch in the run section below, for example local disk vs network disk) : <code>@SCRATCH_COPY@</code>, <code>@SCRATCH_CLEAR@</code>.</p></li>
+<li><p><code>stop_on_error</code>: (logical) Whether the workflow should immediately terminate if <em>any</em> of the model runs fail. If unset, this defaults to <code>TRUE</code> unless you are running an ensemble simulation (and ensemble size is greater than 1).</p></li>
 </ul>
 <p>Some models also have model-specific tags, which are described in the <a href="pecan-models.html#pecan-models">PEcAn Models</a> section.</p>
 </div>
