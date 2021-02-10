@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-02-09" />
+<meta name="date" content="2021-02-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -674,15 +674,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>PROBLEM</strong>: Packages fail to install while building <code>pecan/depends</code> and/or <code>pecan/base</code> with an error like the following:</p>
 <pre><code>Installing package into ‘/usr/local/lib/R/site-library’
 (as ‘lib’ is unspecified)
-Warning: unable to access index for repository https://mran.microsoft.com/snapshot/2018-09-01/src/contrib:
- cannot open URL &#39;https://mran.microsoft.com/snapshot/2018-09-01/src/contrib/PACKAGES&#39;
+Warning: unable to access index for repository &lt;URL&gt;:
+ cannot open URL &#39;&lt;URL&gt;&#39;
 Warning message:
 package ‘&lt;PACKAGE&gt;’ is not available (for R version 3.5.1)</code></pre>
-<p><strong>CAUSE</strong>: This can sometimes happen if there are problems with Microsoft’s CRAN snapshots, which are the default repository for the <code>rocker/tidyverse</code> containers.
+<p><strong>CAUSE</strong>: This can sometimes happen if there are problems with the RStudio Package manager, which is the default repository for the <code>rocker/tidyverse</code> containers.
 See GitHub issues <a href="https://github.com/rocker-org/rocker-versioned/issues/102">rocker-org/rocker-versioned#102</a> and <a href="https://github.com/rocker-org/rocker-versioned/issues/58">#58</a>.</p>
-<p><strong>SOLUTION</strong>: Add the following line to the <code>depends</code> and/or <code>base</code> Dockerfiles <em>before</em> (i.e. above) any commands that install R packages (e.g. <code>Rscript -e "install.packages(...)"</code>):</p>
+<p><strong>WORKAROUND</strong>: Add the following line to the <code>depends</code> and/or <code>base</code> Dockerfiles <em>before</em> (i.e. above) any commands that install R packages (e.g. <code>Rscript -e "install.packages(...)"</code>):</p>
 <pre><code>RUN echo &quot;options(repos = c(CRAN = &#39;https://cran.rstudio.org&#39;))&quot; &gt;&gt; /usr/local/lib/R/etc/Rprofile.site</code></pre>
-<p>This will set the default repository to the more reliable (albeit, more up-to-date; beware of breaking package changes!) RStudio CRAN mirror.
+<p>This will set the default repository to the more reliable (<strong>albeit, more up-to-date; beware of breaking package changes!</strong>) RStudio CRAN mirror.
 Then, build the image as usual.</p>
 
 </div>

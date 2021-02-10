@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-02-09" />
+<meta name="date" content="2021-02-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -674,8 +674,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Next the following packages need to be installed, otherwise it
 will fall back on the older versions install site-library</p>
 <pre><code>install.packages(c(&#39;udunits2&#39;, &#39;lubridate&#39;), 
-   configure.args=c(udunits2=&#39;--with-udunits2-lib=/project/earth/packages/udunits-2.1.24/lib --with-udunits2-include=/project/earth/packages/udunits-2.1.24/include&#39;),
-   repos=&#39;http://cran.us.r-project.org&#39;)</code></pre>
+   configure.args=c(udunits2=&#39;--with-udunits2-lib=/project/earth/packages/udunits-2.1.24/lib --with-udunits2-include=/project/earth/packages/udunits-2.1.24/include&#39;))</code></pre>
 <p>Finally to install support for both ED and SIPNET:</p>
 <pre><code>devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;base/utils&#39;)
 devtools::install_github(&quot;pecanproject/pecan&quot;, subdir = &#39;models/sipnet&#39;)
