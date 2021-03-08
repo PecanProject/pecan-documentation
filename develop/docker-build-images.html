@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="model-docker.html"/>
 <link rel="next" href="docker-troubleshooting.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -792,9 +793,9 @@ The following instructions provide details on how to build each image individual
 For more details, see <code>docker build --help</code> or the <a href="https://docs.docker.com/engine/reference/commandline/build/">online Docker build documentation</a>.</p>
 <p>First, in a terminal window, navigate (<code>cd</code>) into the PEcAn source code root directory.
 From there, the general syntax for building an image looks like the following:</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb429-1"><a href="docker-build-images.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build -t pecan/<span class="op">&lt;</span>image name<span class="op">&gt;</span>:<span class="op">&lt;</span>image version<span class="op">&gt;</span> -f docker/base/Dockerfile.<span class="op">&lt;</span>image name<span class="op">&gt;</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb429-1"><a href="docker-build-images.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pecan/<span class="op">&lt;</span>image name<span class="op">&gt;</span>:<span class="op">&lt;</span>image version<span class="op">&gt;</span> -f docker/base/Dockerfile.<span class="op">&lt;</span>image name<span class="op">&gt;</span> .</span></code></pre></div>
 <p>For instance, to build a local version of the <code>pecan/depends:latest</code> image, you would run:</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb430-1"><a href="docker-build-images.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build -t pecan/depends:latest -f docker/depends/Dockerfile .</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb430-1"><a href="docker-build-images.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pecan/depends:latest <span class="at">-f</span> docker/depends/Dockerfile .</span></code></pre></div>
 <p>The breakdown of this command is as follows:</p>
 <ul>
 <li><p><code>docker build</code> – This is the core command.

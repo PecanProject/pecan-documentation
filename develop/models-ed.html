@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="models-dalec.html"/>
 <link rel="next" href="models-gday.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -985,21 +986,21 @@ However, if you would like ED2 to run with all 17 PFTs (NOTE: using ED2’s inte
 <div id="tacc-lonestar" class="section level4" number="13.4.6.3">
 <h4><span class="header-section-number">13.4.6.3</span> TACC lonestar</h4>
 <div class="sourceCode" id="cb160"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb160-1"><a href="models-ed.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load hdf5</span>
-<span id="cb160-2"><a href="models-ed.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
+<span id="cb160-2"><a href="models-ed.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
 <span id="cb160-3"><a href="models-ed.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
 <span id="cb160-4"><a href="models-ed.html#cb160-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
 <span id="cb160-5"><a href="models-ed.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED.r82/ED/build/bin</span>
-<span id="cb160-6"><a href="models-ed.html#cb160-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> -o include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</span>
+<span id="cb160-6"><a href="models-ed.html#cb160-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</span>
 <span id="cb160-7"><a href="models-ed.html#cb160-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=lonestar</span></code></pre></div>
 </div>
 <div id="tacc-stampede" class="section level4" number="13.4.6.4">
 <h4><span class="header-section-number">13.4.6.4</span> TACC stampede</h4>
 <div class="sourceCode" id="cb161"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb161-1"><a href="models-ed.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load hdf5</span>
-<span id="cb161-2"><a href="models-ed.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> -o ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
+<span id="cb161-2"><a href="models-ed.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
 <span id="cb161-3"><a href="models-ed.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
 <span id="cb161-4"><a href="models-ed.html#cb161-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
 <span id="cb161-5"><a href="models-ed.html#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED.r82/ED/build/bin</span>
-<span id="cb161-6"><a href="models-ed.html#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> -o include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</span>
+<span id="cb161-6"><a href="models-ed.html#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</span>
 <span id="cb161-7"><a href="models-ed.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=stampede</span></code></pre></div>
 
 </div>

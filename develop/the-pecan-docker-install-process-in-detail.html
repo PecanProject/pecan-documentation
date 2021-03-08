@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="docker-quickstart.html"/>
 <link rel="next" href="pecan-docker.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -783,7 +784,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="pecan-docker-quickstart-init-db" class="section level4" number="24.3.2.1">
 <h4><span class="header-section-number">24.3.2.1</span> Initialize the PEcAn database</h4>
 <p>The commands described in this section will set up the PEcAn database (BETY) and pre-load it with some common “default” data.</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb392-1"><a href="the-pecan-docker-install-process-in-detail.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> -p pecan up -d postgres</span>
+<div class="sourceCode" id="cb392"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb392-1"><a href="the-pecan-docker-install-process-in-detail.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> <span class="at">-p</span> pecan up <span class="at">-d</span> postgres</span>
 <span id="cb392-2"><a href="the-pecan-docker-install-process-in-detail.html#cb392-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb392-3"><a href="the-pecan-docker-install-process-in-detail.html#cb392-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If you have a custom docker-compose file:</span></span>
 <span id="cb392-4"><a href="the-pecan-docker-install-process-in-detail.html#cb392-4" aria-hidden="true" tabindex="-1"></a><span class="co"># docker-compose -f /path/to/my-docker-compose.yml -p pecan up -d postgres</span></span></code></pre></div>
@@ -799,7 +800,7 @@ As a side effect, the above command will also create blank data <a href="https:/
 Because our project is called <code>pecan</code> and <code>docker-compose.yml</code> describes a network called <code>pecan</code>, the resulting network is called <code>pecan_pecan</code>.
 This is relevant to the following commands, which will actually initialize and populate the BETY database.</p>
 <p>Assuming the above has run successfully, next run the following:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb393-1"><a href="the-pecan-docker-install-process-in-detail.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run --rm --network pecan_pecan pecan/db</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb393-1"><a href="the-pecan-docker-install-process-in-detail.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">--network</span> pecan_pecan pecan/db</span></code></pre></div>
 <p>The breakdown of this command is as follows: {#docker-run-init}</p>
 <ul>
 <li><code>docker run</code> – This says we will be running a container.</li>
@@ -832,7 +833,7 @@ docker-compose run --rm bety user carya illinois &quot;Carya Demo User&quot; car
 <div id="pecan-docker-quickstart-init-data" class="section level4" number="24.3.2.3">
 <h4><span class="header-section-number">24.3.2.3</span> Add example data (first time only)</h4>
 <p>The following command will add some initial data to the PEcAn stack and register the data with the database.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb396-1"><a href="the-pecan-docker-install-process-in-detail.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data --env FQDN=docker pecan/data:develop</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb396-1"><a href="the-pecan-docker-install-process-in-detail.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-ti</span> <span class="at">--rm</span> <span class="at">--network</span> pecan_pecan <span class="at">--volume</span> pecan_pecan:/data <span class="at">--env</span> FQDN=docker pecan/data:develop</span></code></pre></div>
 <p>The breakdown of this command is as follows:</p>
 <ul>
 <li><code>docker run</code> – This says we will be running a specific command inside the target Docker container. See <code>docker run --help</code> and the <a href="https://docs.docker.com/engine/reference/run/">Docker run reference</a> for more information.</li>
@@ -856,7 +857,7 @@ docker-compose run --rm bety user carya illinois &quot;Carya Demo User&quot; car
 <div id="start-pecan" class="section level4" number="24.3.2.4">
 <h4><span class="header-section-number">24.3.2.4</span> Start PEcAn</h4>
 <p>If you already completed the above steps, you can start the full stack by just running the following:</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb397-1"><a href="the-pecan-docker-install-process-in-detail.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> -p pecan up -d</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb397-1"><a href="the-pecan-docker-install-process-in-detail.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> <span class="at">-p</span> pecan up <span class="at">-d</span></span></code></pre></div>
 <p>This will build and start all containers required to run PEcAn.
 With the <code>-d</code> flag, this will run all of these containers quietly in the background, and show a nice architecture diagram with the name and status of each container while they are starting.
 Once this is done you have a working instance of PEcAn.</p>
@@ -874,18 +875,18 @@ Once this is done you have a working instance of PEcAn.</p>
 <div id="curl-model-runs" class="section level4" number="24.3.2.5">
 <h4><span class="header-section-number">24.3.2.5</span> Start model runs using curl</h4>
 <p>To test PEcAn you can use the following <code>curl</code> statement, or use the webpage to submit a request (if you run these commands on a remote machine replace localhost with the actual hostname):</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb398-1"><a href="the-pecan-docker-install-process-in-detail.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> -v -X POST <span class="kw">\</span></span>
-<span id="cb398-2"><a href="the-pecan-docker-install-process-in-detail.html#cb398-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;hostname=docker&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-3"><a href="the-pecan-docker-install-process-in-detail.html#cb398-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;modelid=5000000002&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-4"><a href="the-pecan-docker-install-process-in-detail.html#cb398-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;sitegroupid=1&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-5"><a href="the-pecan-docker-install-process-in-detail.html#cb398-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;siteid=772&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-6"><a href="the-pecan-docker-install-process-in-detail.html#cb398-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-7"><a href="the-pecan-docker-install-process-in-detail.html#cb398-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-8"><a href="the-pecan-docker-install-process-in-detail.html#cb398-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;start=2004/01/01&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-9"><a href="the-pecan-docker-install-process-in-detail.html#cb398-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;end=2004/12/31&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-10"><a href="the-pecan-docker-install-process-in-detail.html#cb398-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;input_met=5000000005&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-11"><a href="the-pecan-docker-install-process-in-detail.html#cb398-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;email=&#39;</span> <span class="kw">\</span></span>
-<span id="cb398-12"><a href="the-pecan-docker-install-process-in-detail.html#cb398-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;notes=&#39;</span> <span class="kw">\</span></span>
+<div class="sourceCode" id="cb398"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb398-1"><a href="the-pecan-docker-install-process-in-detail.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-v</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
+<span id="cb398-2"><a href="the-pecan-docker-install-process-in-detail.html#cb398-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;hostname=docker&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-3"><a href="the-pecan-docker-install-process-in-detail.html#cb398-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;modelid=5000000002&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-4"><a href="the-pecan-docker-install-process-in-detail.html#cb398-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;sitegroupid=1&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-5"><a href="the-pecan-docker-install-process-in-detail.html#cb398-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;siteid=772&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-6"><a href="the-pecan-docker-install-process-in-detail.html#cb398-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-7"><a href="the-pecan-docker-install-process-in-detail.html#cb398-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-8"><a href="the-pecan-docker-install-process-in-detail.html#cb398-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;start=2004/01/01&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-9"><a href="the-pecan-docker-install-process-in-detail.html#cb398-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;end=2004/12/31&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-10"><a href="the-pecan-docker-install-process-in-detail.html#cb398-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;input_met=5000000005&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-11"><a href="the-pecan-docker-install-process-in-detail.html#cb398-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;email=&#39;</span> <span class="dt">\</span></span>
+<span id="cb398-12"><a href="the-pecan-docker-install-process-in-detail.html#cb398-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;notes=&#39;</span> <span class="dt">\</span></span>
 <span id="cb398-13"><a href="the-pecan-docker-install-process-in-detail.html#cb398-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;http://localhost:8000/pecan/04-runpecan.php&#39;</span></span></code></pre></div>
 <p>This should return some text with in there <code>Location:</code> this is shows the workflow id, you can prepend <a href="http://localhost:8000/pecan/" class="uri">http://localhost:8000/pecan/</a> to the front of this, for example: <a href="http://localhost:8000/pecan/05-running.php?workflowid=99000000001" class="uri">http://localhost:8000/pecan/05-running.php?workflowid=99000000001</a>. Here you will be able to see the progress of the workflow.</p>
 <p>To see what is happening behind the scenes you can use look at the log file of the specific docker containers, once of interest are <code>pecan_executor_1</code> this is the container that will execute a single workflow and <code>pecan_sipnet_1</code> which executes the sipnet mode. To see the logs you use <code>docker logs pecan_executor_1</code> Following is an example output:</p>
@@ -909,16 +910,16 @@ Error: Relation `formats` does not exist</code></pre>
 <pre><code>docker run -ti --rm --network pecan_pecan pecan/bety:latest /bin/bash</code></pre>
 <p>…and then running the following commands, which emulate the functionality of the <code>entrypoint.sh</code> with the <code>initialize</code> argument.</p>
 <div class="sourceCode" id="cb402"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb402-1"><a href="the-pecan-docker-install-process-in-detail.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the bety role in the postgresql database</span></span>
-<span id="cb402-2"><a href="the-pecan-docker-install-process-in-detail.html#cb402-2" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE ROLE bety WITH LOGIN CREATEDB NOSUPERUSER NOCREATEROLE PASSWORD &#39;bety&#39;&quot;</span></span>
+<span id="cb402-2"><a href="the-pecan-docker-install-process-in-detail.html#cb402-2" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-h</span> postgres <span class="at">-p</span> 5432 <span class="at">-U</span> postgres <span class="at">-c</span> <span class="st">&quot;CREATE ROLE bety WITH LOGIN CREATEDB NOSUPERUSER NOCREATEROLE PASSWORD &#39;bety&#39;&quot;</span></span>
 <span id="cb402-3"><a href="the-pecan-docker-install-process-in-detail.html#cb402-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb402-4"><a href="the-pecan-docker-install-process-in-detail.html#cb402-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the bety database itself, and set to be owned by role bety</span></span>
-<span id="cb402-5"><a href="the-pecan-docker-install-process-in-detail.html#cb402-5" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> -h postgres -p 5432 -U postgres -c <span class="st">&quot;CREATE DATABASE bety WITH OWNER bety&quot;</span></span>
+<span id="cb402-5"><a href="the-pecan-docker-install-process-in-detail.html#cb402-5" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-h</span> postgres <span class="at">-p</span> 5432 <span class="at">-U</span> postgres <span class="at">-c</span> <span class="st">&quot;CREATE DATABASE bety WITH OWNER bety&quot;</span></span>
 <span id="cb402-6"><a href="the-pecan-docker-install-process-in-detail.html#cb402-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb402-7"><a href="the-pecan-docker-install-process-in-detail.html#cb402-7" aria-hidden="true" tabindex="-1"></a><span class="co"># If either of these fail with a &quot;role/database bety already exists&quot;,</span></span>
 <span id="cb402-8"><a href="the-pecan-docker-install-process-in-detail.html#cb402-8" aria-hidden="true" tabindex="-1"></a><span class="co"># that&#39;s fine. You can safely proceed to the next command.</span></span>
 <span id="cb402-9"><a href="the-pecan-docker-install-process-in-detail.html#cb402-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb402-10"><a href="the-pecan-docker-install-process-in-detail.html#cb402-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the actual bety database tables and values</span></span>
-<span id="cb402-11"><a href="the-pecan-docker-install-process-in-detail.html#cb402-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./script/load.bety.sh</span> -a <span class="st">&quot;postgres&quot;</span> -d <span class="st">&quot;bety&quot;</span> -p <span class="st">&quot;-h postgres -p 5432&quot;</span> -o bety -c -u -g -m <span class="va">${LOCAL_SERVER}</span> -r 0 -w https://ebi-forecast.igb.illinois.edu/pecan/dump/all/bety.tar.gz</span></code></pre></div>
+<span id="cb402-11"><a href="the-pecan-docker-install-process-in-detail.html#cb402-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./script/load.bety.sh</span> <span class="at">-a</span> <span class="st">&quot;postgres&quot;</span> <span class="at">-d</span> <span class="st">&quot;bety&quot;</span> <span class="at">-p</span> <span class="st">&quot;-h postgres -p 5432&quot;</span> <span class="at">-o</span> bety <span class="at">-c</span> <span class="at">-u</span> <span class="at">-g</span> <span class="at">-m</span> <span class="va">${LOCAL_SERVER}</span> <span class="at">-r</span> 0 <span class="at">-w</span> https://ebi-forecast.igb.illinois.edu/pecan/dump/all/bety.tar.gz</span></code></pre></div>
 
 </div>
 </div>

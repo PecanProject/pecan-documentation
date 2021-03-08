@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="maintain-vm.html"/>
 <link rel="next" href="ssh-vm-bety.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -748,7 +749,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ssh-vm" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Connecting to the VM via SSH</h2>
 <p>Once the VM is running anywhere on your machine, you can connect to it from a separate terminal via SSH as follows:</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb105-1"><a href="ssh-vm.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> -p 6422 carya@localhost</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb105-1"><a href="ssh-vm.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 6422 carya@localhost</span></code></pre></div>
 <p>You will be prompted for a password. Like everywhere else in PEcAn, the username is <code>carya</code> and the password is <code>illinois</code>. The same password is used for any system maintenance you wish to do on the VM via <code>sudo</code>.</p>
 <p>As a shortcut, you can add the following to your <code>~/.ssh/config</code> file (or create one if it does not exist).</p>
 <pre><code>Host pecan-vm

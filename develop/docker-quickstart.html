@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="docker-intro.html"/>
 <link rel="next" href="the-pecan-docker-install-process-in-detail.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -751,28 +752,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb390-2"><a href="docker-quickstart.html#cb390-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pecan</span>
 <span id="cb390-3"><a href="docker-quickstart.html#cb390-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-4"><a href="docker-quickstart.html#cb390-4" aria-hidden="true" tabindex="-1"></a><span class="co"># start database</span></span>
-<span id="cb390-5"><a href="docker-quickstart.html#cb390-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> -p pecan up -d postgres</span>
+<span id="cb390-5"><a href="docker-quickstart.html#cb390-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> <span class="at">-p</span> pecan up <span class="at">-d</span> postgres</span>
 <span id="cb390-6"><a href="docker-quickstart.html#cb390-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-7"><a href="docker-quickstart.html#cb390-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add example data (first time only)</span></span>
-<span id="cb390-8"><a href="docker-quickstart.html#cb390-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> run --rm bety initialize</span>
-<span id="cb390-9"><a href="docker-quickstart.html#cb390-9" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run -ti --rm --network pecan_pecan --volume pecan_pecan:/data --env FQDN=docker pecan/data:develop</span>
+<span id="cb390-8"><a href="docker-quickstart.html#cb390-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> run <span class="at">--rm</span> bety initialize</span>
+<span id="cb390-9"><a href="docker-quickstart.html#cb390-9" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-ti</span> <span class="at">--rm</span> <span class="at">--network</span> pecan_pecan <span class="at">--volume</span> pecan_pecan:/data <span class="at">--env</span> FQDN=docker pecan/data:develop</span>
 <span id="cb390-10"><a href="docker-quickstart.html#cb390-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-11"><a href="docker-quickstart.html#cb390-11" aria-hidden="true" tabindex="-1"></a><span class="co"># start PEcAn</span></span>
-<span id="cb390-12"><a href="docker-quickstart.html#cb390-12" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> -p pecan up -d</span>
+<span id="cb390-12"><a href="docker-quickstart.html#cb390-12" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> <span class="at">-p</span> pecan up <span class="at">-d</span></span>
 <span id="cb390-13"><a href="docker-quickstart.html#cb390-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-14"><a href="docker-quickstart.html#cb390-14" aria-hidden="true" tabindex="-1"></a><span class="co"># run a model</span></span>
-<span id="cb390-15"><a href="docker-quickstart.html#cb390-15" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> -v -X POST <span class="kw">\</span></span>
-<span id="cb390-16"><a href="docker-quickstart.html#cb390-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;hostname=docker&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-17"><a href="docker-quickstart.html#cb390-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;modelid=5000000002&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-18"><a href="docker-quickstart.html#cb390-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;sitegroupid=1&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-19"><a href="docker-quickstart.html#cb390-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;siteid=772&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-20"><a href="docker-quickstart.html#cb390-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-21"><a href="docker-quickstart.html#cb390-21" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-22"><a href="docker-quickstart.html#cb390-22" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;start=2004/01/01&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-23"><a href="docker-quickstart.html#cb390-23" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;end=2004/12/31&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-24"><a href="docker-quickstart.html#cb390-24" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;input_met=5000000005&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-25"><a href="docker-quickstart.html#cb390-25" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;email=&#39;</span> <span class="kw">\</span></span>
-<span id="cb390-26"><a href="docker-quickstart.html#cb390-26" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-F</span> <span class="st">&#39;notes=&#39;</span> <span class="kw">\</span></span>
+<span id="cb390-15"><a href="docker-quickstart.html#cb390-15" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-v</span> <span class="at">-X</span> POST <span class="dt">\</span></span>
+<span id="cb390-16"><a href="docker-quickstart.html#cb390-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;hostname=docker&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-17"><a href="docker-quickstart.html#cb390-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;modelid=5000000002&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-18"><a href="docker-quickstart.html#cb390-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;sitegroupid=1&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-19"><a href="docker-quickstart.html#cb390-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;siteid=772&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-20"><a href="docker-quickstart.html#cb390-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;sitename=Niwot Ridge Forest/LTER NWT1 (US-NR1)&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-21"><a href="docker-quickstart.html#cb390-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;pft[]=temperate.coniferous&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-22"><a href="docker-quickstart.html#cb390-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;start=2004/01/01&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-23"><a href="docker-quickstart.html#cb390-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;end=2004/12/31&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-24"><a href="docker-quickstart.html#cb390-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;input_met=5000000005&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-25"><a href="docker-quickstart.html#cb390-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;email=&#39;</span> <span class="dt">\</span></span>
+<span id="cb390-26"><a href="docker-quickstart.html#cb390-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">-F</span> <span class="st">&#39;notes=&#39;</span> <span class="dt">\</span></span>
 <span id="cb390-27"><a href="docker-quickstart.html#cb390-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;http://localhost:8000/pecan/04-runpecan.php&#39;</span></span></code></pre></div>
 </div>
             </section>
