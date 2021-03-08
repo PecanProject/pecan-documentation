@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="the-pecan-docker-install-process-in-detail.html"/>
 <link rel="next" href="model-docker.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -1274,7 +1275,7 @@ From there, you can browse directories and download files.
 You can also upload files by clicking the red “+” in the bottom-right corner.</p>
 <p>Note that it is currently impossible to create or upload directories using the Minio interface (except in the <code>/data</code> root directory – those folders are called “buckets” in Minio).
 Therefore, the recommended way to perform any file management tasks other than individual file uploads is through the command line, e.g.</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb410-1"><a href="pecan-docker.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run -it --rm --volumes pecan_pecan:/data --volumes /path/to/local/directory:/localdir ubuntu</span>
+<div class="sourceCode" id="cb410"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb410-1"><a href="pecan-docker.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">--rm</span> <span class="at">--volumes</span> pecan_pecan:/data <span class="at">--volumes</span> /path/to/local/directory:/localdir ubuntu</span>
 <span id="cb410-2"><a href="pecan-docker.html#cb410-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb410-3"><a href="pecan-docker.html#cb410-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, you can move files between `/data` and `/localdir`, create new directories, etc.</span></span></code></pre></div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="ssh-tunneling.html"/>
 <link rel="next" href="basic-remote-execute-functions.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -752,7 +753,7 @@ If working from the web interface, the tunnel will be opened for you by some und
 The best way to do this is to create the tunnel first, outside of R, as described above.
 (In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>.
 To follow along, replace these with your own username and designated server, respectively).</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb466-1"><a href="ssh-tunnels-and-pecan.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> -nNf -o ControlMaster=yes -S /tmp/testpecan ashiklom@test-pecan.bu.edu</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb466-1"><a href="ssh-tunnels-and-pecan.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-nNf</span> <span class="at">-o</span> ControlMaster=yes <span class="at">-S</span> /tmp/testpecan ashiklom@test-pecan.bu.edu</span></code></pre></div>
 <p>Then, in R, create a <code>host</code> object, which is just a list containing the elements <code>name</code> (hostname) and <code>tunnel</code> (path to tunnel file).</p>
 <div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="ssh-tunnels-and-pecan.html#cb467-1" aria-hidden="true" tabindex="-1"></a>my_host <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="at">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</span></code></pre></div>
 <p>This host object can then be used in any of the remote execution functions.</p>

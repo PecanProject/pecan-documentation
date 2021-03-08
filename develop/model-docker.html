@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="pecan-docker.html"/>
 <link rel="next" href="docker-build-images.html"/>
-<script src="assets/header-attrs-2.7/header-attrs.js"></script>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -76,6 +76,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -788,10 +789,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is important values for <code>type</code> and <code>version</code> are set correct. The PEcAn code will use these to register the model with the BETY database, which is then used by PEcAn to send out a message to a specfic worker queue, if you do not set these variables correctly your model executor will pick up messages for the wrong model.</p>
 <p>To build the docker image, we use a Dockerfile (see example below) and run the following command. This command will expect the Dockerfile to live in the model specific folder and the command is executed in the root pecan folder. It will copy the content of the pecan folder and make it available to the build process (in this example we do not need any additional files).</p>
 <p>Since we can have multiple different versions of a model be available for PEcAn we ar using the following naming schema <code>pecan/model-&lt;modeltype&gt;-&lt;version&gt;:&lt;pecan version</code>. For example the image below will be named pecan/model-ed2-git, since we do not specify the exact version it will be atomically be named <code>pecan/model-ed2-git:latest</code>.</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb421-1"><a href="model-docker.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="kw">\</span></span>
-<span id="cb421-2"><a href="model-docker.html#cb421-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--tag</span> pecan/model-ed2-git <span class="kw">\</span></span>
-<span id="cb421-3"><a href="model-docker.html#cb421-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--file</span> models/ed/Dockerfile <span class="kw">\</span></span>
-<span id="cb421-4"><a href="model-docker.html#cb421-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.</span></span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb421-1"><a href="model-docker.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="dt">\</span></span>
+<span id="cb421-2"><a href="model-docker.html#cb421-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--tag</span> pecan/model-ed2-git <span class="dt">\</span></span>
+<span id="cb421-3"><a href="model-docker.html#cb421-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--file</span> models/ed/Dockerfile <span class="dt">\</span></span>
+<span id="cb421-4"><a href="model-docker.html#cb421-4" aria-hidden="true" tabindex="-1"></a>    .</span></code></pre></div>
 <p>Example of a Dockerfile, in this case to build the ED2 model.</p>
 <div class="sourceCode" id="cb422"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb422-1"><a href="model-docker.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
 <span id="cb422-2"><a href="model-docker.html#cb422-2" aria-hidden="true" tabindex="-1"></a><span class="co"># BUILD MODEL BINARY</span></span>
@@ -870,12 +871,12 @@ As such, <strong>variables depending on other variables must be set in a separat
 <span id="cb424-8"><a href="model-docker.html#cb424-8" aria-hidden="true" tabindex="-1"></a><span class="at">       </span><span class="kw">-</span><span class="at"> rabbitmq</span></span>
 <span id="cb424-9"><a href="model-docker.html#cb424-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> unless-stopped</span></span></code></pre></div>
 <p>Alternatively we can start the container manually using the following command.</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb425-1"><a href="model-docker.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="kw">\</span></span>
-<span id="cb425-2"><a href="model-docker.html#cb425-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--detach</span> <span class="kw">\</span></span>
-<span id="cb425-3"><a href="model-docker.html#cb425-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--rm</span> <span class="kw">\</span></span>
-<span id="cb425-4"><a href="model-docker.html#cb425-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--name</span> pecan-ed2-git <span class="kw">\</span></span>
-<span id="cb425-5"><a href="model-docker.html#cb425-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--networks</span> pecan_pecan <span class="kw">\</span></span>
-<span id="cb425-6"><a href="model-docker.html#cb425-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--volume</span> pecan_pecan:/data</span>
+<div class="sourceCode" id="cb425"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb425-1"><a href="model-docker.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="dt">\</span></span>
+<span id="cb425-2"><a href="model-docker.html#cb425-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--detach</span> <span class="dt">\</span></span>
+<span id="cb425-3"><a href="model-docker.html#cb425-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--rm</span> <span class="dt">\</span></span>
+<span id="cb425-4"><a href="model-docker.html#cb425-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--name</span> pecan-ed2-git <span class="dt">\</span></span>
+<span id="cb425-5"><a href="model-docker.html#cb425-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--networks</span> pecan_pecan <span class="dt">\</span></span>
+<span id="cb425-6"><a href="model-docker.html#cb425-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--volume</span> pecan_pecan:/data</span>
 <span id="cb425-7"><a href="model-docker.html#cb425-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">pecan/model-ed2-git</span></span></code></pre></div>
 </div>
 <div id="common-docker-problems" class="section level3" number="24.5.3">
@@ -900,19 +901,19 @@ Step 9/9 : COPY --from=model-binary /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/
 Successfully built 07ac841be457
 Successfully tagged pecan/pecan-ed2:latest</code></pre>
 <p>At this point we have created a docker image with the binary and all PEcAn code that is needed to run the model. Some models (especially those build as native code) might be missing additional packages that need to be installed in the docker image. To see if all libraries are installed for the binary.</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb427-1"><a href="model-docker.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="ex">docker</span> run -ti --rm pecan/pecan-ed2 /bin/bash</span>
-<span id="cb427-2"><a href="model-docker.html#cb427-2" aria-hidden="true" tabindex="-1"></a><span class="ex">root@8a95ee8b6b47</span>:/work# ldd /usr/local/bin/ed2.git  <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;not found&quot;</span></span>
+<div class="sourceCode" id="cb427"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb427-1"><a href="model-docker.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">run</span> <span class="at">-ti</span> <span class="at">--rm</span> pecan/pecan-ed2 /bin/bash</span>
+<span id="cb427-2"><a href="model-docker.html#cb427-2" aria-hidden="true" tabindex="-1"></a><span class="ex">root@8a95ee8b6b47:/work#</span> ldd /usr/local/bin/ed2.git  <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;not found&quot;</span></span>
 <span id="cb427-3"><a href="model-docker.html#cb427-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">libmpi_usempif08.so.40</span> =<span class="op">&gt;</span> not found</span>
 <span id="cb427-4"><a href="model-docker.html#cb427-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">libmpi_usempi_ignore_tkr.so.40</span> =<span class="op">&gt;</span> not found</span>
 <span id="cb427-5"><a href="model-docker.html#cb427-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">libmpi_mpifh.so.40</span> =<span class="op">&gt;</span> not found</span>
 <span id="cb427-6"><a href="model-docker.html#cb427-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">libmpi.so.40</span> =<span class="op">&gt;</span> not found</span>
 <span id="cb427-7"><a href="model-docker.html#cb427-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">libgfortran.so.5</span> =<span class="op">&gt;</span> not found</span></code></pre></div>
 <p>Start the build container again (this is the number before the line FROM pecan/executor:latest, 7f23c6302130 in the example), and find the missing libraries listed above (for example libmpi_usempif08.so.40):</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb428-1"><a href="model-docker.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="ex">docker</span> run --rm -ti 7f23c6302130</span>
-<span id="cb428-2"><a href="model-docker.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="ex">root@e716c63c031f</span>:/src# dpkg -S libmpi_usempif08.so.40</span>
-<span id="cb428-3"><a href="model-docker.html#cb428-3" aria-hidden="true" tabindex="-1"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_usempif08.so.40.10.1</span>
-<span id="cb428-4"><a href="model-docker.html#cb428-4" aria-hidden="true" tabindex="-1"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40.10.1</span>
-<span id="cb428-5"><a href="model-docker.html#cb428-5" aria-hidden="true" tabindex="-1"></a><span class="ex">libopenmpi3</span>:amd64: /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb428-1"><a href="model-docker.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">run</span> <span class="at">--rm</span> <span class="at">-ti</span> 7f23c6302130</span>
+<span id="cb428-2"><a href="model-docker.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="ex">root@e716c63c031f:/src#</span> dpkg <span class="at">-S</span> libmpi_usempif08.so.40</span>
+<span id="cb428-3"><a href="model-docker.html#cb428-3" aria-hidden="true" tabindex="-1"></a><span class="ex">libopenmpi3:amd64:</span> /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_usempif08.so.40.10.1</span>
+<span id="cb428-4"><a href="model-docker.html#cb428-4" aria-hidden="true" tabindex="-1"></a><span class="ex">libopenmpi3:amd64:</span> /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40.10.1</span>
+<span id="cb428-5"><a href="model-docker.html#cb428-5" aria-hidden="true" tabindex="-1"></a><span class="ex">libopenmpi3:amd64:</span> /usr/lib/x86_64-linux-gnu/libmpi_usempif08.so.40</span></code></pre></div>
 <p>This shows the pages is libopenmpi3 that needs to be installed, do this for all missing packages, modify the Dockerfile and rebuild. Next time you run the ldd command there should be no more packages being listed.</p>
 
 </div>
