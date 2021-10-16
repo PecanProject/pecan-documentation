@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -898,16 +898,6 @@ services:
     - traefik.enable=true
     - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefix:/bety/
     - traefik.backend=bety
-  rstudio-nginx:
-    image: pecan/rstudio-nginx:${PECAN_VERSION:-latest}
-    networks: pecan
-    depends_on: rstudio
-    labels:
-    - traefik.enable=true
-    - traefik.backend=rstudio
-    - traefik.port=80
-    - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefix:/rstudio
-    - traefik.website.frontend.whiteList.sourceRange=${TRAEFIK_IPFILTER:-172.16.0.0/12}
   rstudio:
     image: pecan/base:${PECAN_VERSION:-latest}
     command: /work/rstudio.sh
@@ -930,6 +920,11 @@ services:
     volumes:
     - pecan:/data
     - rstudio:/home
+    labels:
+    - traefik.enable=true
+    - traefik.backend=rstudio
+    - traefik.port=80
+    - traefik.frontend.rule=${TRAEFIK_HOST:-}PathPrefixStrip:/rstudio
   docs:
     image: pecan/docs:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -964,7 +959,6 @@ services:
     image: pecan/monitor:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
-    ports: 9999:9999
     environment:
     - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
     - FQDN=${PECAN_FQDN:-docker}
@@ -1006,7 +1000,7 @@ services:
     volumes: pecan:/data
   ed2:
     user: ${UID:-1001}:${GID:-1001}
-    image: pecan/model-ed2-git:${PECAN_VERSION:-latest}
+    image: pecan/model-ed2-2.2.0:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
@@ -1056,7 +1050,6 @@ volumes:
   postgres: ~
   rabbitmq: ~
   pecan: ~
-  portainer: ~
   rstudio: ~</code></pre>
 <p>There are two ways you can override different values in the docker-compose.yml file. The first method is to create a file called <code>.env</code> that is placed in the same folder as the docker-compose.yml file. This file can override some of configuration variables used by docker-compose. For example the following is an example of the env file</p>
 <pre><code># This file will override the configation options in the docker-compose
@@ -1445,7 +1438,6 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
   image: pecan/monitor:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
-  ports: 9999:9999
   environment:
   - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
   - FQDN=${PECAN_FQDN:-docker}
