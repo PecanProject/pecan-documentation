@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.2 AmerifluxLBL | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="14.2 AmerifluxLBL | The Predictive Ecosystem Analyzer" />
+  <title>34 SiBCASA | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="34 SiBCASA | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.2 AmerifluxLBL | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="34 SiBCASA | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.2 AmerifluxLBL | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="34 SiBCASA | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ameriflux.html"/>
-<link rel="next" href="fluxnet2015.html"/>
+<link rel="prev" href="models-singularity.html"/>
+
 <script src="assets/header-attrs-2.6/header-attrs.js"></script>
 <script src="assets/jquery-3.5.1/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -749,20 +749,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="amerifluxlbl" class="section level2" number="14.2">
-<h2><span class="header-section-number">14.2</span> AmerifluxLBL</h2>
-<p>Scale: site</p>
-<p>Resolution: 30 or 60 min</p>
-<p>Availability: varies by site <a href="http:\/\/ameriflux.lbl.gov\/data\/data-availability\/" class="uri">http:\/\/ameriflux.lbl.gov\/data\/data-availability\/</a></p>
-<p>Notes: new Lawrence Berkeley Lab server</p>
+<div id="sibcasa" class="section level1" number="34">
+<h1><span class="header-section-number">34</span> SiBCASA</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Model Information</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Home Page</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Source Code</td>
+<td>Contact Kevin Schaefer at (kevin.schaefer[at]nsidc.org</td>
+</tr>
+<tr class="odd">
+<td>License</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Authors</td>
+<td>Kevin Shaefer</td>
+</tr>
+<tr class="odd">
+<td>PEcAn Integration</td>
+<td>Tony Gardella, Yasin Elshorbany</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Introduction</strong></p>
+<p>SiBCASA was created from the combination of the Carnegie-Ames_Stanford Approach (CASA) and the Simple Biosphere(SiB) model.They have added other features, including dynamic allocation of GPP for the growth and maintance of leaves, roots, and wood andd explicit calculation of autotrophic respiration.</p>
+<p>Schaefer, Kevin, et al. “The combined Simple Biosphere/Carnegie-Ames-Stanford Approach (SiBCASA) Model.” J. Geophys. Res 113: G03034.</p>
+<p><strong>PEcAn configuration file additions</strong></p>
+<p><strong>Model specific input files</strong></p>
+<p>Software libraries-<br />
+PGI 16.5 or later
+<a href="https://www.pgroup.com/products/community.htm" class="uri">https://www.pgroup.com/products/community.htm</a></p>
+<p>NETCDF 3.6.0</p>
+<p>Input -
+Driver data: Made to use CRUNCEP data by default.
+Param File
+Initial Condition File</p>
+<p><strong>Model configuration files</strong>
+The namel_sibdrv is the namelist file that controls input and output file locations.</p>
+<p><strong>Installation notes</strong>
+Update $PATH to the netcdf library version 3.6 (compiled with the same PGI Fortran compiler) in:
+PEcAn/sim_setup/Makefile &amp;
+PEcAn/SiB/sibcasa_arctic4/Makefile</p>
+<p>Change paths in:
+Line 379: /SiB/sibcasa_ arctic4/read_ti.F90
+Line 260, 273, 286: /SiB/sibcasa_ arctic4/sibdrv_read_ncep2.F90
+Update $PATH variables in: /SiB/sibcasa_arctic4/sibmerg.in
+IMPORTANT: update “fmt_type=‘sing_proc’” even if running on parallel computing system, since the file names will otherwise be incompatible with the outputted data..check</p>
+<p>Compile code: in ~/SiB/sibcasa_arctic4/
+<code>Make clean</code>
+<code>Make</code></p>
+<p><strong>VM</strong>
+Currently Not Avialable on the VM</p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="ameriflux.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fluxnet2015.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="models-singularity.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -793,7 +849,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/03_topical_pages/06_data/01_meteorology.Rmd",
+"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/06_reference/02_models/sibcasa.Rmd",
 "text": "Edit"
 },
 "history": {
