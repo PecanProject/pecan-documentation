@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>20.1 Cookies and pecan web pages | The Predictive Ecosystem Analyzer</title>
   <meta name="description" content="20.1 Cookies and pecan web pages | The Predictive Ecosystem Analyzer" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="20.1 Cookies and pecan web pages | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-10-24" />
+<meta name="date" content="2021-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,9 +32,10 @@
   
   
 <link rel="prev" href="troubleshooting-and-debugging-pecan.html"/>
-<link rel="next" href="warning-mkdir-function-mkdir-no-such-file-or-directory.html"/>
-<script src="assets/header-attrs-2.6/header-attrs.js"></script>
-<script src="assets/jquery-3.5.1/jquery.min.js"></script>
+<link rel="next" href="warning-mkdir-function.mkdir-no-such-file-or-directory.html"/>
+<script src="assets/header-attrs-2.11/header-attrs.js"></script>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,10 +51,11 @@
 
 
 
-
-<script src="assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.17/datatables.js"></script>
+<script src="assets/datatables-binding-0.19/datatables.js"></script>
 <link href="assets/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="assets/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="assets/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
@@ -137,6 +139,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -178,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.2" data-path="othervignettes.html"><a href="othervignettes.html#data-assimilation-concepts"><i class="fa fa-check"></i><b>5.5.2</b> Data Assimilation Concepts</a></li>
 <li class="chapter" data-level="5.5.3" data-path="othervignettes.html"><a href="othervignettes.html#parameter-data-assimilation"><i class="fa fa-check"></i><b>5.5.3</b> Parameter Data Assimilation</a></li>
 <li class="chapter" data-level="5.5.4" data-path="othervignettes.html"><a href="othervignettes.html#state-variable-data-assimilation"><i class="fa fa-check"></i><b>5.5.4</b> State-Variable Data Assimilation</a></li>
-<li class="chapter" data-level="5.5.5" data-path="othervignettes.html"><a href="othervignettes.html#pecan-testing-the-sensitivity-analysis-against-observations"><i class="fa fa-check"></i><b>5.5.5</b> PEcAn: Testing the Sensitivity Analysis Against Observations"</a></li>
+<li class="chapter" data-level="5.5.5" data-path="othervignettes.html"><a href="othervignettes.html#pecan-testing-the-sensitivity-analysis-against-observations"><i class="fa fa-check"></i><b>5.5.5</b> PEcAn: Testing the Sensitivity Analysis Against Observations”</a></li>
 </ul></li>
 <li class="chapter" data-level="5.6" data-path="advanced-user.html"><a href="advanced-user.html"><i class="fa fa-check"></i><b>5.6</b> Advanced User Guide</a>
 <ul>
@@ -202,16 +205,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="web-model-config.html"><a href="web-model-config.html#met-workflow"><i class="fa fa-check"></i><b>6.2.2</b> Met workflow</a></li>
 <li class="chapter" data-level="6.2.3" data-path="web-model-config.html"><a href="web-model-config.html#troubleshooting-meteorological-conversions"><i class="fa fa-check"></i><b>6.2.3</b> Troubleshooting meteorological conversions</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><i class="fa fa-check"></i><b>6.3</b> Selecting Plant Functional Types (PFTs) and other parameter groupings.</a>
+<li class="chapter" data-level="6.3" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><i class="fa fa-check"></i><b>6.3</b> Selecting Plant Functional Types (PFTs) and other parameter groupings.</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#using-existing-pfts"><i class="fa fa-check"></i><b>6.3.1</b> Using existing PFTs</a></li>
-<li class="chapter" data-level="6.3.2" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#creating-new-pfts"><i class="fa fa-check"></i><b>6.3.2</b> Creating new PFTs</a></li>
-<li class="chapter" data-level="6.3.3" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#choosing-initial-vegetation"><i class="fa fa-check"></i><b>6.3.3</b> Choosing initial vegetation</a></li>
-<li class="chapter" data-level="6.3.4" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#us-fia"><i class="fa fa-check"></i><b>6.3.4</b> US FIA</a></li>
-<li class="chapter" data-level="6.3.5" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#spin-up"><i class="fa fa-check"></i><b>6.3.5</b> Spin up</a></li>
-<li class="chapter" data-level="6.3.6" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#selecting-a-soils-product"><i class="fa fa-check"></i><b>6.3.6</b> Selecting a soils product</a></li>
-<li class="chapter" data-level="6.3.7" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#soil-texture-depth-and-physical-parameters"><i class="fa fa-check"></i><b>6.3.7</b> Soil texture, depth, and physical parameters</a></li>
-<li class="chapter" data-level="6.3.8" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings-.html#other-model-inputs"><i class="fa fa-check"></i><b>6.3.8</b> Other model inputs</a></li>
+<li class="chapter" data-level="6.3.1" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#using-existing-pfts"><i class="fa fa-check"></i><b>6.3.1</b> Using existing PFTs</a></li>
+<li class="chapter" data-level="6.3.2" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#creating-new-pfts"><i class="fa fa-check"></i><b>6.3.2</b> Creating new PFTs</a></li>
+<li class="chapter" data-level="6.3.3" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#choosing-initial-vegetation"><i class="fa fa-check"></i><b>6.3.3</b> Choosing initial vegetation</a></li>
+<li class="chapter" data-level="6.3.4" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#us-fia"><i class="fa fa-check"></i><b>6.3.4</b> US FIA</a></li>
+<li class="chapter" data-level="6.3.5" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#spin-up"><i class="fa fa-check"></i><b>6.3.5</b> Spin up</a></li>
+<li class="chapter" data-level="6.3.6" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#selecting-a-soils-product"><i class="fa fa-check"></i><b>6.3.6</b> Selecting a soils product</a></li>
+<li class="chapter" data-level="6.3.7" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#soil-texture-depth-and-physical-parameters"><i class="fa fa-check"></i><b>6.3.7</b> Soil texture, depth, and physical parameters</a></li>
+<li class="chapter" data-level="6.3.8" data-path="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html"><a href="selecting-plant-functional-types-pfts-and-other-parameter-groupings..html#other-model-inputs"><i class="fa fa-check"></i><b>6.3.8</b> Other model inputs</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="intermediate-user.html"><a href="intermediate-user.html"><i class="fa fa-check"></i><b>7</b> More on the PEcAn Web Interface</a>
@@ -522,8 +525,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html"><i class="fa fa-check"></i><b>20</b> Troubleshooting and Debugging PEcAn</a>
 <ul>
 <li class="chapter" data-level="20.1" data-path="cookies-and-pecan-web-pages.html"><a href="cookies-and-pecan-web-pages.html"><i class="fa fa-check"></i><b>20.1</b> Cookies and pecan web pages</a></li>
-<li class="chapter" data-level="20.2" data-path="warning-mkdir-function-mkdir-no-such-file-or-directory.html"><a href="warning-mkdir-function-mkdir-no-such-file-or-directory.html"><i class="fa fa-check"></i><b>20.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
-<li class="chapter" data-level="20.3" data-path="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config-xml-in-ed.html"><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config-xml-in-ed.html"><i class="fa fa-check"></i><b>20.3</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
+<li class="chapter" data-level="20.2" data-path="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><i class="fa fa-check"></i><b>20.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
+<li class="chapter" data-level="20.3" data-path="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><i class="fa fa-check"></i><b>20.3</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
 <li class="chapter" data-level="20.4" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>20.4</b> Debugging</a>
 <ul>
 <li class="chapter" data-level="20.4.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>20.4.1</b> Using <code>tests/workflow.R</code></a></li>
@@ -679,7 +682,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25" data-path="pecan-remote.html"><a href="pecan-remote.html"><i class="fa fa-check"></i><b>25</b> Remote execution with PEcAn</a>
 <ul>
 <li class="chapter" data-level="25.1" data-path="basics-of-ssh.html"><a href="basics-of-ssh.html"><i class="fa fa-check"></i><b>25.1</b> Basics of SSH</a></li>
-<li class="chapter" data-level="25.2" data-path="ssh-authentication-password-vs-ssh-key.html"><a href="ssh-authentication-password-vs-ssh-key.html"><i class="fa fa-check"></i><b>25.2</b> SSH authentication – password vs. SSH key</a></li>
+<li class="chapter" data-level="25.2" data-path="ssh-authentication-password-vs.-ssh-key.html"><a href="ssh-authentication-password-vs.-ssh-key.html"><i class="fa fa-check"></i><b>25.2</b> SSH authentication – password vs. SSH key</a></li>
 <li class="chapter" data-level="25.3" data-path="ssh-tunneling.html"><a href="ssh-tunneling.html"><i class="fa fa-check"></i><b>25.3</b> SSH tunneling</a></li>
 <li class="chapter" data-level="25.4" data-path="ssh-tunnels-and-pecan.html"><a href="ssh-tunnels-and-pecan.html"><i class="fa fa-check"></i><b>25.4</b> SSH tunnels and PEcAn</a></li>
 <li class="chapter" data-level="25.5" data-path="basic-remote-execute-functions.html"><a href="basic-remote-execute-functions.html"><i class="fa fa-check"></i><b>25.5</b> Basic remote execute functions</a></li>
@@ -687,14 +690,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.7" data-path="xml-configuration.html"><a href="xml-configuration.html"><i class="fa fa-check"></i><b>25.7</b> XML configuration</a></li>
 <li class="chapter" data-level="25.8" data-path="configuration-for-pecan-web-interface.html"><a href="configuration-for-pecan-web-interface.html"><i class="fa fa-check"></i><b>25.8</b> Configuration for PEcAn web interface</a></li>
 <li class="chapter" data-level="25.9" data-path="running-pecan-code-for-remotely.html"><a href="running-pecan-code-for-remotely.html"><i class="fa fa-check"></i><b>25.9</b> Running PEcAn code for remotely</a></li>
-<li class="chapter" data-level="25.10" data-path="special-case-geo-bu-edu.html"><a href="special-case-geo-bu-edu.html"><i class="fa fa-check"></i><b>25.10</b> Special case: <code>geo.bu.edu</code></a></li>
+<li class="chapter" data-level="25.10" data-path="special-case-geo.bu.html"><a href="special-case-geo.bu.html"><i class="fa fa-check"></i><b>25.10</b> Special case: <code>geo.bu.edu</code></a></li>
 </ul></li>
 <li class="chapter" data-level="26" data-path="data-assimilation-with-dart.html"><a href="data-assimilation-with-dart.html"><i class="fa fa-check"></i><b>26</b> Data assimilation with DART</a></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
 <li class="chapter" data-level="27" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>27</b> Miscellaneous</a>
 <ul>
 <li class="chapter" data-level="27.1" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>27.1</b> TODO</a></li>
-<li class="chapter" data-level="27.2" data-path="using-the-pecan-download-file-function.html"><a href="using-the-pecan-download-file-function.html"><i class="fa fa-check"></i><b>27.2</b> Using the PEcAn download.file() function</a></li>
+<li class="chapter" data-level="27.2" data-path="using-the-pecan-download.file-function.html"><a href="using-the-pecan-download.file-function.html"><i class="fa fa-check"></i><b>27.2</b> Using the PEcAn download.file() function</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>28</b> FAQ</a></li>
 <li class="chapter" data-level="29" data-path="pecan-project-used-in-courses.html"><a href="pecan-project-used-in-courses.html"><i class="fa fa-check"></i><b>29</b> PEcAn Project Used in Courses</a>
@@ -730,7 +733,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="31.5" data-path="helper-functions-for-unit-tests.html"><a href="helper-functions-for-unit-tests.html"><i class="fa fa-check"></i><b>31.5</b> Helper functions for unit tests</a></li>
 </ul></li>
 <li class="chapter" data-level="32" data-path="developer-devtools.html"><a href="developer-devtools.html"><i class="fa fa-check"></i><b>32</b> <code>devtools</code> package</a></li>
-<li class="chapter" data-level="33" data-path="models-singularity.html"><a href="models-singularity.html"><i class="fa fa-check"></i><b>33</b> <code>singularity</code></a></li>
+<li class="chapter" data-level="33" data-path="models_singularity.html"><a href="models_singularity.html"><i class="fa fa-check"></i><b>33</b> <code>singularity</code></a></li>
 <li class="chapter" data-level="34" data-path="sibcasa.html"><a href="sibcasa.html"><i class="fa fa-check"></i><b>34</b> SiBCASA</a></li>
 </ul>
 
@@ -759,11 +762,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="troubleshooting-and-debugging-pecan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="warning-mkdir-function-mkdir-no-such-file-or-directory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
 <script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -782,6 +784,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -802,6 +805,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },
