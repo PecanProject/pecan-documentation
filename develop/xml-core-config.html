@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-11-06" />
+<meta name="date" content="2021-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -789,7 +789,7 @@ If no <code>outdir</code> is specified, PEcAn defaults to the working directory 
 <h3><span class="header-section-number">11.1.4</span> <code>database</code>: PEcAn database settings</h3>
 <div id="xml-bety" class="section level4" number="11.1.4.1">
 <h4><span class="header-section-number">11.1.4.1</span> <code>bety</code>: PEcAn database (Bety) configuration</h4>
-<p>The <code>bety</code> tag defines the driver to use to connect to the database (the only driver we support, and the default, is <code>PostgreSQL</code>) and parameters required to connect to the database. Note that connection parameters are passed <em>exactly</em> as entered to the underlying R database driver, and any invalid or extra parameters will result in an error.</p>
+<p>The <code>bety</code> tag defines the driver to use to connect to the database (we support <code>PostgreSQL</code>, which is the default, and <code>Postgres</code>) and parameters required to connect to the database. Note that connection parameters are passed <em>exactly</em> as entered to the underlying R database driver, and any invalid or extra parameters will result in an error.</p>
 <p>In other words, this configuration…</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb127-1"><a href="xml-core-config.html#cb127-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">database</span>&gt;</span>
 <span id="cb127-2"><a href="xml-core-config.html#cb127-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
@@ -799,19 +799,21 @@ If no <code>outdir</code> is specified, PEcAn defaults to the working directory 
 <span id="cb127-6"><a href="xml-core-config.html#cb127-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">host</span>&gt;postgres&lt;/<span class="kw">host</span>&gt;</span>
 <span id="cb127-7"><a href="xml-core-config.html#cb127-7" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">dbname</span>&gt;bety&lt;/<span class="kw">dbname</span>&gt;</span>
 <span id="cb127-8"><a href="xml-core-config.html#cb127-8" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">driver</span>&gt;PostgreSQL&lt;/<span class="kw">driver</span>&gt;</span>
-<span id="cb127-9"><a href="xml-core-config.html#cb127-9" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">write</span>&gt;true&lt;/<span class="kw">write</span>&gt;</span>
-<span id="cb127-10"><a href="xml-core-config.html#cb127-10" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">bety</span>&gt;</span>
-<span id="cb127-11"><a href="xml-core-config.html#cb127-11" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb127-12"><a href="xml-core-config.html#cb127-12" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">database</span>&gt;</span></code></pre></div>
-<p>…will be translated into R code like the following:</p>
+<span id="cb127-9"><a href="xml-core-config.html#cb127-9" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">port</span>&gt;5432&lt;/<span class="kw">port</span>&gt;</span>
+<span id="cb127-10"><a href="xml-core-config.html#cb127-10" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">write</span>&gt;true&lt;/<span class="kw">write</span>&gt;</span>
+<span id="cb127-11"><a href="xml-core-config.html#cb127-11" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">bety</span>&gt;</span>
+<span id="cb127-12"><a href="xml-core-config.html#cb127-12" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb127-13"><a href="xml-core-config.html#cb127-13" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">database</span>&gt;</span></code></pre></div>
+<p>…will be translated (by way of <code>PEcAn.DB::db.open(settings$database$bety)</code>) into R code like the following:</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="xml-core-config.html#cb128-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
-<span id="cb128-2"><a href="xml-core-config.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  DBI<span class="sc">::</span><span class="fu">dbDriver</span>(<span class="st">&quot;PostgreSQL&quot;</span>),</span>
+<span id="cb128-2"><a href="xml-core-config.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">drv =</span> RPostgreSQL<span class="sc">::</span><span class="fu">PostgreSQL</span>(),</span>
 <span id="cb128-3"><a href="xml-core-config.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">&quot;bety&quot;</span>,</span>
 <span id="cb128-4"><a href="xml-core-config.html#cb128-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>,</span>
 <span id="cb128-5"><a href="xml-core-config.html#cb128-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">&quot;bety&quot;</span>,</span>
 <span id="cb128-6"><a href="xml-core-config.html#cb128-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">&quot;postgres&quot;</span>,</span>
-<span id="cb128-7"><a href="xml-core-config.html#cb128-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">write =</span> <span class="cn">TRUE</span></span>
-<span id="cb128-8"><a href="xml-core-config.html#cb128-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb128-7"><a href="xml-core-config.html#cb128-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">port =</span> <span class="st">&quot;5432&quot;</span>,</span>
+<span id="cb128-8"><a href="xml-core-config.html#cb128-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">write =</span> <span class="cn">TRUE</span></span>
+<span id="cb128-9"><a href="xml-core-config.html#cb128-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Common parameters are described as follows:</p>
 <ul>
 <li><code>driver</code>: The driver to use to connect to the database. This should always be set to <code>PostgreSQL</code>, unless you absolutely know what you’re doing.</li>
