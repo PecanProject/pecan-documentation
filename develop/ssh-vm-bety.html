@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-11-06" />
+<meta name="date" content="2021-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -762,15 +762,16 @@ This means that connecting to <code>localhost:5433</code> will give you access t
 <p>To test this on the command line, try the following command, which, if successful, will drop you into the <code>psql</code> console.</p>
 <pre><code>psql -d bety -U bety -h localhost -p 5433</code></pre>
 <p>To test this in R, open a Postgres using the analogous parameters:</p>
-<pre><code>library(RPostgres)
+<pre><code>library(DBI)
+library(RPostgres)
 con &lt;- dbConnect(
-  Postgres(),
+  drv = Postgres(),
   user = &quot;bety&quot;,
   password = &quot;bety&quot;,
   dbname = &quot;bety&quot;,
   host = &quot;localhost&quot;,
   port = 5433
-  )
+)
 dbListTables(con)   # This should return a vector of bety tables</code></pre>
 <p>Note that the same general approach will work on any BETYdb server where port forwarding is enabled, but it requires ssh access.</p>
 <div id="awsvm" class="section level3" number="9.3.1">

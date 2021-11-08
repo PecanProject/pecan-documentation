@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-11-06" />
+<meta name="date" content="2021-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -833,18 +833,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Using the information returned as the object <code>raw.file</code> you will then convert the raw files into a standard file.</p>
 <p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
 <pre><code>
-bety &lt;- dplyr::src_postgres(dbname   = &#39;bety&#39;, 
-                            host =&#39;localhost&#39;, 
-                            user     = &quot;bety&quot;, 
-                            password = &quot;bety&quot;)
-                            
-con &lt;- bety$con</code></pre>
+con &lt;- PEcAn.DB::db.open(
+  params = list(
+    driver = RPostgres::Postgres(),
+    dbname   = &#39;bety&#39;,
+    host =&#39;localhost&#39;,
+    user     = &quot;bety&quot;,
+    password = &quot;bety&quot;)
+)
+</code></pre>
 <p>Next you will set up the arguments for the function</p>
 <pre><code>in.path &lt;- &#39;.&#39;
 in.prefix &lt;- raw.file$dbfile.name
 outfolder &lt;- &#39;.&#39;
 format.id &lt;- 5000000002
-format &lt;- PEcAn.DB::query.format.vars(format.id=format.id,bety = bety)
+format &lt;- PEcAn.DB::query.format.vars(format.id=format.id,bety = con)
 lon &lt;- -105.54
 lat &lt;- 40.03
 format$time_zone &lt;- &quot;America/Chicago&quot;</code></pre>
@@ -865,18 +868,20 @@ format$time_zone &lt;- &quot;America/Chicago&quot;</code></pre>
 <p>Update BETY with file record, format record and input record according to this page <a href="NewInput.html#NewInput">How to Insert new Input Data</a></p>
 <p>If your data is in a csv format you can use the <code>met2CF.csv</code>function to convert your data into a PEcAn standard file.</p>
 <p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
-<pre><code>bety &lt;- dplyr::src_postgres(dbname   = &#39;bety&#39;, 
-                            host =&#39;localhost&#39;, 
-                            user     = &quot;bety&quot;, 
-                            password = &quot;bety&quot;)
-                            
-con &lt;- bety$con</code></pre>
+<pre><code>con &lt;- PEcAn.DB::db.open(
+  params = list(
+    driver = RPostgres::Postgres(),
+    dbname = &#39;bety&#39;,
+    host =&#39;localhost&#39;,
+    user = &quot;bety&quot;,
+    password = &quot;bety&quot;)
+)</code></pre>
 <p>Prepare the arguments you need to execute the met2CF.csv function</p>
 <pre><code>in.path &lt;- &#39;path/where/the/raw/file/lives&#39;
 in.prefix &lt;- &#39;prefix_of_the_raw_file&#39;
 outfolder &lt;- &#39;path/to/where/you/want/to/output/thecsv/&#39;
 format.id &lt;- formatid of the format your created
-format &lt;- PEcAn.DB::query.format.vars(format.id=format.id,bety = bety)
+format &lt;- PEcAn.DB::query.format.vars(format.id=format.id, bety = con)
 lon &lt;- longitude of your site
 lat &lt;- latitude of your site
 format$time_zone &lt;- time zone of your site

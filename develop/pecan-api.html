@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2021-11-06" />
+<meta name="date" content="2021-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -772,7 +772,7 @@ What follows is a lightning introduction.</p>
 <p>Set your PEcAn database user ID, and create a database connection object, which will be used for database operations throughout the workflow.</p>
 <div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="pecan-api.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">pecanapi.user_id =</span> <span class="dv">99000000002</span>)</span>
 <span id="cb442-2"><a href="pecan-api.html#cb442-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
-<span id="cb442-3"><a href="pecan-api.html#cb442-3" aria-hidden="true" tabindex="-1"></a>  RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
+<span id="cb442-3"><a href="pecan-api.html#cb442-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">drv =</span> RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
 <span id="cb442-4"><a href="pecan-api.html#cb442-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">&quot;bety&quot;</span>,</span>
 <span id="cb442-5"><a href="pecan-api.html#cb442-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>,</span>
 <span id="cb442-6"><a href="pecan-api.html#cb442-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>,</span>
