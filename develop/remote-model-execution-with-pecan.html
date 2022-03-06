@@ -24,7 +24,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-03-05" />
+<meta name="date" content="2022-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -754,7 +754,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="remote-model-execution-with-pecan" class="section level2 hasAnchor" number="25.6">
 <h2><span class="header-section-number">25.6</span> Remote model execution with PEcAn<a href="remote-model-execution-with-pecan.html#remote-model-execution-with-pecan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The workhorse of remote model execution is the <code>PEcAn.remote::start.model.runs</code> function, which distributes execution of each run in a list of runs (e.g. multiple runs in an ensemble) to the local machine or a remote based on the configuration in the PEcAn settings.</p>
+<p>The workhorse of remote model execution is the <code>PEcAn.workflow::start_model_runs</code> function, which distributes execution of each run in a list of runs (e.g. multiple runs in an ensemble) to the local machine or a remote based on the configuration in the PEcAn settings.</p>
 <p>Broadly, there are three major types of model execution:</p>
 <ul>
 <li>Serialized (<code>PEcAn.remote::start_serial</code>) – This runs models one at a time, directly on the local machine or remote (i.e. same as calling the executables one at a time for each run).</li>
