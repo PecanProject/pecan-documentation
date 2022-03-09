@@ -757,20 +757,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>A generic settings can be found in the <code>PEcAn.all</code> package</li>
 </ul>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="settings-1.html#cb489-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb489-2"><a href="settings-1.html#cb489-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="settings-1.html#cb492-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb492-2"><a href="settings-1.html#cb492-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>database settings can be specified, and tests run only if a connection is available</li>
 </ul>
 <p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="settings-1.html#cb490-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb490-2"><a href="settings-1.html#cb490-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb490-3"><a href="settings-1.html#cb490-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
-<span id="cb490-4"><a href="settings-1.html#cb490-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
-<span id="cb490-5"><a href="settings-1.html#cb490-5" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(..., {</span>
-<span id="cb490-6"><a href="settings-1.html#cb490-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skip_if_not</span>(<span class="fu">db.exists</span>(settings<span class="sc">$</span>database))</span>
-<span id="cb490-7"><a href="settings-1.html#cb490-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write tests here</span></span>
-<span id="cb490-8"><a href="settings-1.html#cb490-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="settings-1.html#cb493-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb493-2"><a href="settings-1.html#cb493-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb493-3"><a href="settings-1.html#cb493-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
+<span id="cb493-4"><a href="settings-1.html#cb493-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
+<span id="cb493-5"><a href="settings-1.html#cb493-5" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(..., {</span>
+<span id="cb493-6"><a href="settings-1.html#cb493-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skip_if_not</span>(<span class="fu">db.exists</span>(settings<span class="sc">$</span>database))</span>
+<span id="cb493-7"><a href="settings-1.html#cb493-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write tests here</span></span>
+<span id="cb493-8"><a href="settings-1.html#cb493-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <ul>
 <li><p>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
 wiki</a></p></li>
@@ -778,8 +778,8 @@ wiki</a></p></li>
 <li><p>Model specific settings can go in the model-specific module, for
 example:</p></li>
 </ul>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="settings-1.html#cb491-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb491-2"><a href="settings-1.html#cb491-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="settings-1.html#cb494-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb494-2"><a href="settings-1.html#cb494-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>test-specific settings:
 <ul>
@@ -803,8 +803,8 @@ example:</p></li>
   &lt;/pecan&gt;&quot;
 settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="settings-1.html#cb493-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.text)</span>
-<span id="cb493-2"><a href="settings-1.html#cb493-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>outdir <span class="ot">&lt;-</span> <span class="st">&quot;/tmp&quot;</span> <span class="do">## or any other settings</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="settings-1.html#cb496-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.text)</span>
+<span id="cb496-2"><a href="settings-1.html#cb496-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>outdir <span class="ot">&lt;-</span> <span class="st">&quot;/tmp&quot;</span> <span class="do">## or any other settings</span></span></code></pre></div></li>
 </ul></li>
 </ul>
 </div>

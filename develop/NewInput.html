@@ -1040,19 +1040,19 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 <div id="example-2-converting-paleon-data" class="section level6 hasAnchor" number="19.3.4.3.0.2">
 <h6><span class="header-section-number">19.3.4.3.0.2</span> Example 2: Converting PalEON data<a href="NewInput.html#example-2-converting-paleon-data" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb300-1"><a href="NewInput.html#cb300-1" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
-<span id="cb300-2"><a href="NewInput.html#cb300-2" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">id</span>&gt;1000012896&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb300-3"><a href="NewInput.html#cb300-3" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb303-1"><a href="NewInput.html#cb303-1" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
+<span id="cb303-2"><a href="NewInput.html#cb303-2" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">id</span>&gt;1000012896&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb303-3"><a href="NewInput.html#cb303-3" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span></code></pre></div>
 <p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 </div>
 <div id="example-3-extracting-soil-properties-from-gssurgo-database" class="section level6 hasAnchor" number="19.3.4.3.0.3">
 <h6><span class="header-section-number">19.3.4.3.0.3</span> Example 3: Extracting soil properties from gSSURGO database<a href="NewInput.html#example-3-extracting-soil-properties-from-gssurgo-database" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the gSSURGO data product. This product needs no installation and it extract soil proeprties for the lower 48 states in U.S. In order to let the pecan know that you’re planning to use gSSURGO, you can the following XML tag under input in your pecan xml file.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb301-1"><a href="NewInput.html#cb301-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
-<span id="cb301-2"><a href="NewInput.html#cb301-2" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
-<span id="cb301-3"><a href="NewInput.html#cb301-3" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">source</span>&gt;gSSURGO&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb301-4"><a href="NewInput.html#cb301-4" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span>
-<span id="cb301-5"><a href="NewInput.html#cb301-5" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb304-1"><a href="NewInput.html#cb304-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
+<span id="cb304-2"><a href="NewInput.html#cb304-2" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
+<span id="cb304-3"><a href="NewInput.html#cb304-3" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">source</span>&gt;gSSURGO&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb304-4"><a href="NewInput.html#cb304-4" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span>
+<span id="cb304-5"><a href="NewInput.html#cb304-5" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
 </div>
 </div>
 </div>
