@@ -754,32 +754,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="remote-data-module" class="section level2 hasAnchor" number="17.2">
 <h2><span class="header-section-number">17.2</span> Remote data module<a href="remote-data-module.html#remote-data-module" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Remote data module retrieves remote sensing data from MODISTools, Google Earth Engine and AppEEARS. The downloaded data can be used while performing further analysis in PEcAn.</p>
+<p>Remote data module retrieves remote sensing data from MODISTools, Google Earth Engine and AppEEARS, as well as from the NASA’s Land Processes Distributed Active Archive Center (LP DAAC) data server. For currently available R functions see <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.remote/R">here</a>, and for the Python functions see <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.remote/inst/RpTools/RpTools">RpTools</a>. The downloaded data can be used while performing further analyses in PEcAn.</p>
 <div id="google-earth-engine" class="section level4 hasAnchor" number="17.2.0.1">
 <h4><span class="header-section-number">17.2.0.1</span> Google Earth Engine<a href="remote-data-module.html#google-earth-engine" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><a href="https://earthengine.google.com/">Google Earth Engine</a> is a cloud-based platform for performing analysis on satellite data. It provides access to a <a href="https://developers.google.com/earth-engine/datasets">large data catalog</a> through an online JavaScript code editor and a Python API.</p>
 <p>Datasets currently available for use in PEcAn via Google Earth Engine are,</p>
 <ul>
-<li><a href="https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR">Sentinel-2 MSI</a> <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/gee2pecan_s2.py"><code>gee2pecan_s2()</code></a></li>
+<li><a href="https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR">Sentinel-2 MSI</a> <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/gee2pecan_s2.py"><code>gee2pecan_s2()</code></a>. It is possible to estimate Leaf Area Index (LAI) from Sentinel-2 data using the <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/RpTools/RpTools/biophys_xarray.py">ESA SNAP algorithm</a>.</li>
 <li><a href="https://developers.google.com/earth-engine/datasets/catalog/NASA_USDA_HSL_SMAP_soil_moisture">SMAP Global Soil Moisture Data</a> <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/gee2pecan_smap.py"><code>gee2pecan_smap()</code></a></li>
 <li><a href="https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C01_T1_SR">Landsat 8 Surface Reflectance</a> <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/gee2pecan_l8.py"><code>gee2pecan_l8()</code></a></li>
+<li><a href="https://glad.umd.edu/dataset/gedi">Global Forest Canopy Height, 2019</a> <a href=""><code>gee2pecan_gedi()</code></a></li>
 </ul>
 </div>
 <div id="appeears" class="section level4 hasAnchor" number="17.2.0.2">
 <h4><span class="header-section-number">17.2.0.2</span> AppEEARS<a href="remote-data-module.html#appeears" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><a href="https://lpdaacsvc.cr.usgs.gov/appeears/">AppEEARS (Application for Extracting and Exploring Analysis Ready Samples)</a> is an online tool which provides an easy to use interface for downloading analysis ready remote sensing data. <a href="https://lpdaacsvc.cr.usgs.gov/appeears/products">Products available on AppEEARS.</a> Note: AppEEARS uses a task based system for processing the data request, it is possible for a task to run for long hours before it gets completed. The module checks the task status after every 60 seconds and saves the files when the task gets completed.</p>
 </div>
-<div id="processing-functions-currently-available-are" class="section level4 hasAnchor" number="17.2.0.3">
-<h4><span class="header-section-number">17.2.0.3</span> Processing functions currently available are,<a href="remote-data-module.html#processing-functions-currently-available-are" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<ul>
-<li><a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.remote/inst/satellitetools/biophys_xarray.py">SNAP</a></li>
-</ul>
+<div id="lp-daac-data-pool" class="section level4 hasAnchor" number="17.2.0.3">
+<h4><span class="header-section-number">17.2.0.3</span> LP DAAC Data Pool<a href="remote-data-module.html#lp-daac-data-pool" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><a href="https://e4ftl01.cr.usgs.gov/?_ga=2.115816526.913836401.1640174993-1625967605.1640174993">LP DAAC (Land Processes Distributed Active Archive Center) Data Pool</a> is a NASA Earthdata login-enabled server located at the USGS Earth Resources Observation and Science (EROS) Center that archives and distributes land data products. Similar to AppEEARS, using this source also requires an Earthdata account (see below). Currently <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.remote/inst/RpTools/RpTools/lpdaacdatapool2pecan.py">this pipeline</a> is implemented and tested only for the GEDI dataset. For more information about the data you are downloading, including documentation and how to properly cite the data, please visit <a href="https://lpdaac.usgs.gov/" class="uri">https://lpdaac.usgs.gov/</a>.</p>
 </div>
 <div id="set-up-instructions-first-time-and-one-time-only" class="section level4 hasAnchor" number="17.2.0.4">
 <h4><span class="header-section-number">17.2.0.4</span> Set-Up instructions (first time and one time only):<a href="remote-data-module.html#set-up-instructions-first-time-and-one-time-only" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
 <li><p><strong>Sign up for the Google Earth Engine</strong>. Follow the instructions <a href="https://earthengine.google.com/new_signup/">here</a> to sign up for using GEE. You need to have your own GEE account for using the GEE download functions in this module.</p></li>
-<li><p><strong>Sign up for NASA Earthdata</strong>. Using AppEEARS requires an Earthdata account visit this <a href="https://urs.earthdata.nasa.gov/users/new">page</a> to create your own account.</p></li>
+<li><p><strong>Sign up for NASA Earthdata</strong>. Using AppEEARS and LP DAAC Data Pool requires an Earthdata account visit this <a href="https://urs.earthdata.nasa.gov/users/new">page</a> to create your own account.</p></li>
 <li><p><strong>Install the RpTools package</strong>. Python codes required by this module are stored in a Python package named “RpTools” using this requires Python3 and the package manager pip3 to be installed in your system.
 To install the package,</p></li>
 </ol>
@@ -802,7 +801,7 @@ To install the package,</p></li>
 <span id="cb274-3"><a href="remote-data-module.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> ee</span>
 <span id="cb274-4"><a href="remote-data-module.html#cb274-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ee.Authenticate()</span></span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
-<li><strong>Save the Earthdata credentials</strong>. If you wish to use AppEEARS you will have to store your username and password inside a JSON file and then pass its file path as an argument in <code>remote_process</code></li>
+<li><strong>Save the Earthdata credentials</strong>. If you wish to use AppEEARS or LP DAAC data pool you will have to store your username and password inside a JSON file and then pass its file path as an argument in <code>remote_process</code></li>
 </ol>
 </div>
 <div id="usage-guide" class="section level4 hasAnchor" number="17.2.0.5">
@@ -841,11 +840,18 @@ To install the package,</p></li>
 <li><code>qc</code>: (optional) quality control parameter, required for some gee collections</li>
 <li><code>overwrite</code>: (optional) if TRUE database checks will be skipped and existing data of same type will be replaced entirely. When processed data is requested, the raw data required for creating it will also be replaced. By default FALSE</li>
 </ul>
-<p>These tags are only required if processed data is requested:</p>
+<p>If you don’t want to enter your Earthdata credentials everytime you use AppEEARS or LP DAAC use the following tag too:</p>
+<ul>
+<li><code>credfile</code>: (optional) absolute path to JSON file containing Earthdata username and password, only required when using AppEEARS and LP DAAC data pool. The contents of this file could be as simple as the following:</li>
+</ul>
+<pre><code>{
+  &quot;username&quot;: &quot;yourEARTHDATAusername&quot;,
+  &quot;password&quot;: &quot;yourEARTHDATApassword&quot;
+}</code></pre>
+<p>These tags are only required if processed data (i.e. further processing after downloading the data) is requested:</p>
 <ul>
 <li><code>out_process_data</code>: (optional) type of processed output requested, e.g, lai</li>
 <li><code>algorithm</code>: (optional) algorithm used for processing data, currently only SNAP is implemented to estimate LAI from Sentinel-2 bands</li>
-<li><code>credfile</code>: (optional) absolute path to JSON file containing Earthdata username and password, only required for AppEEARS</li>
 </ul>
 <p>Additional information are taken from the registration files located at <a href="https://github.com/PecanProject/pecan/tree/develop/modules/data.remote/inst/registration">pecan/modules/data.remote/inst/registration</a>, each source has its own registration file. This is so because there isn’t a standardized way to retrieve all image collections from GEE and each image collection may require its own way of performing quality checks, etc whereas all of the products available on AppEEARS can be retrieved using its API in a standardized way.</p>
 <p>GEE registration file (register.GEE.xml) :</p>
@@ -874,7 +880,7 @@ To install the package,</p></li>
 <li><code>mimetype</code> MIME type</li>
 </ul></li>
 </ul>
-<p>AppEEARS registarion file (registrer.APPEEARS.xml) :</p>
+<p>AppEEARS and LP DAAC Data Pool registration files (register.APPEEARS.xml and register.LPDAACDATAPOOL.xml) :</p>
 <ul>
 <li><code>coord</code>
 <ul>
@@ -927,15 +933,15 @@ As an example, if a file containing Sentinel 2 bands for start date: 2018-01-01,
 <ol style="list-style-type: decimal">
 <li>Add remotedata tag to <code>pecan.xml</code> and configure it.</li>
 </ol>
-<div class="sourceCode" id="cb278"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb278-1"><a href="remote-data-module.html#cb278-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
-<span id="cb278-2"><a href="remote-data-module.html#cb278-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;bands&lt;/<span class="kw">out_get_data</span>&gt;</span>
-<span id="cb278-3"><a href="remote-data-module.html#cb278-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;gee&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb278-4"><a href="remote-data-module.html#cb278-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;COPERNICUS/S2_SR&lt;/<span class="kw">collection</span>&gt;</span>
-<span id="cb278-5"><a href="remote-data-module.html#cb278-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;10&lt;/<span class="kw">scale</span>&gt;</span>
-<span id="cb278-6"><a href="remote-data-module.html#cb278-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;1&lt;/<span class="kw">qc</span>&gt;</span>
-<span id="cb278-7"><a href="remote-data-module.html#cb278-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;snap&lt;/<span class="kw">algorithm</span>&gt;</span>
-<span id="cb278-8"><a href="remote-data-module.html#cb278-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;LAI&lt;/<span class="kw">out_process_data</span>&gt;</span>
-<span id="cb278-9"><a href="remote-data-module.html#cb278-9" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb279-1"><a href="remote-data-module.html#cb279-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb279-2"><a href="remote-data-module.html#cb279-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;bands&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb279-3"><a href="remote-data-module.html#cb279-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;gee&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb279-4"><a href="remote-data-module.html#cb279-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;COPERNICUS/S2_SR&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb279-5"><a href="remote-data-module.html#cb279-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;10&lt;/<span class="kw">scale</span>&gt;</span>
+<span id="cb279-6"><a href="remote-data-module.html#cb279-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;1&lt;/<span class="kw">qc</span>&gt;</span>
+<span id="cb279-7"><a href="remote-data-module.html#cb279-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;snap&lt;/<span class="kw">algorithm</span>&gt;</span>
+<span id="cb279-8"><a href="remote-data-module.html#cb279-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;LAI&lt;/<span class="kw">out_process_data</span>&gt;</span>
+<span id="cb279-9"><a href="remote-data-module.html#cb279-9" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
 </ol>
@@ -948,22 +954,35 @@ As an example, if a file containing Sentinel 2 bands for start date: 2018-01-01,
 <ol style="list-style-type: decimal">
 <li>Add remotedata tag to <code>pecan.xml</code> and configure it.</li>
 </ol>
-<div class="sourceCode" id="cb280"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb280-1"><a href="remote-data-module.html#cb280-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
-<span id="cb280-2"><a href="remote-data-module.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;smap&lt;/<span class="kw">out_get_data</span>&gt;</span>
-<span id="cb280-3"><a href="remote-data-module.html#cb280-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;appeears&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb280-4"><a href="remote-data-module.html#cb280-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;SPL3SMP_E.003&lt;/<span class="kw">collection</span>&gt;</span>
-<span id="cb280-5"><a href="remote-data-module.html#cb280-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;native&lt;/<span class="kw">projection</span>&gt;</span>
-<span id="cb280-6"><a href="remote-data-module.html#cb280-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;&lt;/<span class="kw">algorithm</span>&gt;</span>
-<span id="cb280-7"><a href="remote-data-module.html#cb280-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;path/to/jsonfile/containingcredentials&lt;/<span class="kw">credfile</span>&gt;</span>
-<span id="cb280-8"><a href="remote-data-module.html#cb280-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb281-1"><a href="remote-data-module.html#cb281-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb281-2"><a href="remote-data-module.html#cb281-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;smap&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb281-3"><a href="remote-data-module.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;appeears&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb281-4"><a href="remote-data-module.html#cb281-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;SPL3SMP_E.003&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb281-5"><a href="remote-data-module.html#cb281-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;native&lt;/<span class="kw">projection</span>&gt;</span>
+<span id="cb281-6"><a href="remote-data-module.html#cb281-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;&lt;/<span class="kw">algorithm</span>&gt;</span>
+<span id="cb281-7"><a href="remote-data-module.html#cb281-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;path/to/jsonfile/containingcredentials&lt;/<span class="kw">credfile</span>&gt;</span>
+<span id="cb281-8"><a href="remote-data-module.html#cb281-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
 </ol>
 <pre><code>PEcAn.data.remote::remote_process(settings)</code></pre>
 <p>The output netCDF file will be saved at outdir and its record would be kept in the inputs table of BETYdb.</p>
 </div>
-<div id="adding-new-gee-image-collections" class="section level4 hasAnchor" number="17.2.1.4">
-<h4><span class="header-section-number">17.2.1.4</span> Adding new GEE image collections<a href="remote-data-module.html#adding-new-gee-image-collections" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="example-use-gedi-lp-daac-data-pool" class="section level4 hasAnchor" number="17.2.1.4">
+<h4><span class="header-section-number">17.2.1.4</span> Example use GEDI (LP DAAC data pool)<a href="remote-data-module.html#example-use-gedi-lp-daac-data-pool" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb283"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb283-1"><a href="remote-data-module.html#cb283-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb283-2"><a href="remote-data-module.html#cb283-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;gedi&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb283-3"><a href="remote-data-module.html#cb283-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;lpdaacdatapool&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb283-4"><a href="remote-data-module.html#cb283-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;GEDI02_B.002&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb283-5"><a href="remote-data-module.html#cb283-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;path/to/jsonfile/containingcredentials&lt;/<span class="kw">credfile</span>&gt;</span>
+<span id="cb283-6"><a href="remote-data-module.html#cb283-6" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
+</ol>
+<pre><code>PEcAn.data.remote::remote_process(settings)</code></pre>
+</div>
+<div id="adding-new-gee-image-collections" class="section level4 hasAnchor" number="17.2.1.5">
+<h4><span class="header-section-number">17.2.1.5</span> Adding new GEE image collections<a href="remote-data-module.html#adding-new-gee-image-collections" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Once you have the Python script for downloading the collection from GEE, please do the following to integrate it with this module.</p>
 <ol style="list-style-type: decimal">
 <li><p>Make sure that the function and script names are same and named in the following way: <code>gee2pecan_pecancodeofimagecollection</code>

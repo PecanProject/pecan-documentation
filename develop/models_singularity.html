@@ -763,34 +763,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>
 bash script to install required files (click to expand)
 </summary>
-<div class="sourceCode" id="cb497"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb497-1"><a href="models_singularity.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb497-2"><a href="models_singularity.html#cb497-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb497-3"><a href="models_singularity.html#cb497-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> sites <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb497-4"><a href="models_singularity.html#cb497-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</span>
-<span id="cb497-5"><a href="models_singularity.html#cb497-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar</span> zxf sites.tgz</span>
-<span id="cb497-6"><a href="models_singularity.html#cb497-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/kooper/Projects/EBI#/data/sites#&quot;</span> sites/<span class="pp">*</span>/ED_MET_DRIVER_HEADER</span>
-<span id="cb497-7"><a href="models_singularity.html#cb497-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> sites.tgz</span>
-<span id="cb497-8"><a href="models_singularity.html#cb497-8" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb497-9"><a href="models_singularity.html#cb497-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb497-10"><a href="models_singularity.html#cb497-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> inputs <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb497-11"><a href="models_singularity.html#cb497-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</span>
-<span id="cb497-12"><a href="models_singularity.html#cb497-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar</span> zxf inputs.tgz</span>
-<span id="cb497-13"><a href="models_singularity.html#cb497-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> inputs.tgz</span>
-<span id="cb497-14"><a href="models_singularity.html#cb497-14" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb497-15"><a href="models_singularity.html#cb497-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb497-16"><a href="models_singularity.html#cb497-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> testrun.s83 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb497-17"><a href="models_singularity.html#cb497-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</span>
-<span id="cb497-18"><a href="models_singularity.html#cb497-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unzip</span> <span class="at">-q</span> testrun.s83.zip</span>
-<span id="cb497-19"><a href="models_singularity.html#cb497-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#/data#&quot;</span> testrun.s83/ED2IN</span>
-<span id="cb497-20"><a href="models_singularity.html#cb497-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> testrun.s83.zip</span>
-<span id="cb497-21"><a href="models_singularity.html#cb497-21" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb497-22"><a href="models_singularity.html#cb497-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb497-23"><a href="models_singularity.html#cb497-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="va">${HOME}</span>/sites/Santarem_Km83 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb497-24"><a href="models_singularity.html#cb497-24" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</span>
-<span id="cb497-25"><a href="models_singularity.html#cb497-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unzip</span> <span class="at">-q</span> <span class="at">-d</span> sites Santarem_Km83.zip</span>
-<span id="cb497-26"><a href="models_singularity.html#cb497-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#/data#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</span>
-<span id="cb497-27"><a href="models_singularity.html#cb497-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> Santarem_Km83.zip</span>
-<span id="cb497-28"><a href="models_singularity.html#cb497-28" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb500-1"><a href="models_singularity.html#cb500-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb500-2"><a href="models_singularity.html#cb500-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb500-3"><a href="models_singularity.html#cb500-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> sites <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb500-4"><a href="models_singularity.html#cb500-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</span>
+<span id="cb500-5"><a href="models_singularity.html#cb500-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar</span> zxf sites.tgz</span>
+<span id="cb500-6"><a href="models_singularity.html#cb500-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/kooper/Projects/EBI#/data/sites#&quot;</span> sites/<span class="pp">*</span>/ED_MET_DRIVER_HEADER</span>
+<span id="cb500-7"><a href="models_singularity.html#cb500-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> sites.tgz</span>
+<span id="cb500-8"><a href="models_singularity.html#cb500-8" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb500-9"><a href="models_singularity.html#cb500-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb500-10"><a href="models_singularity.html#cb500-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> inputs <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb500-11"><a href="models_singularity.html#cb500-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</span>
+<span id="cb500-12"><a href="models_singularity.html#cb500-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar</span> zxf inputs.tgz</span>
+<span id="cb500-13"><a href="models_singularity.html#cb500-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> inputs.tgz</span>
+<span id="cb500-14"><a href="models_singularity.html#cb500-14" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb500-15"><a href="models_singularity.html#cb500-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb500-16"><a href="models_singularity.html#cb500-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> testrun.s83 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb500-17"><a href="models_singularity.html#cb500-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</span>
+<span id="cb500-18"><a href="models_singularity.html#cb500-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unzip</span> <span class="at">-q</span> testrun.s83.zip</span>
+<span id="cb500-19"><a href="models_singularity.html#cb500-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#/data#&quot;</span> testrun.s83/ED2IN</span>
+<span id="cb500-20"><a href="models_singularity.html#cb500-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> testrun.s83.zip</span>
+<span id="cb500-21"><a href="models_singularity.html#cb500-21" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb500-22"><a href="models_singularity.html#cb500-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb500-23"><a href="models_singularity.html#cb500-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="va">${HOME}</span>/sites/Santarem_Km83 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb500-24"><a href="models_singularity.html#cb500-24" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-s</span> <span class="at">-o</span> Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</span>
+<span id="cb500-25"><a href="models_singularity.html#cb500-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unzip</span> <span class="at">-q</span> <span class="at">-d</span> sites Santarem_Km83.zip</span>
+<span id="cb500-26"><a href="models_singularity.html#cb500-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#/data#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</span>
+<span id="cb500-27"><a href="models_singularity.html#cb500-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> Santarem_Km83.zip</span>
+<span id="cb500-28"><a href="models_singularity.html#cb500-28" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
 </details>
 <p>Next edit the ED2IN file in testrun.s83</p>
 <details>
