@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-03-30" />
+<meta name="date" content="2022-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -752,7 +752,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="workflow-input-initial" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> Initial Conditions<a href="workflow-input-initial.html#workflow-input-initial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>(TODO: Under construction)</p>
+<p>To convert initial condition data into the PEcAn Standard and then into the model formats we follow three main steps:</p>
+<ol style="list-style-type: decimal">
+<li>Downloading vegetation info
+-converting the vegetation info into .rd file format</li>
+<li>Creating ensemble members based on veg file
+-resamples veg file to create ensmeble members</li>
+<li>Converting ensemble members to model specific format</li>
+</ol>
+<p>Common Questions regarding IC Data:</p>
+<p>How do I know if my data product is supported by ic_process workflow?
+-The current data products supported by ic_process are: NEON, FIA, and BADM. That said you if your vegetation files are registered with BETY and abide by the BETY formats and column names you will be able to use ic_process to create ensemble members and convert the ensemble members to model specific format. See section 6.3.3 for more info.
+Can I use ic_process outside of the PEcAn workflow?
+-Short answer is yes, ic_process can be called as a function all by itself outside of do_conversions.
+What about soil initial conditions?
+-Please reference section 6.3.6 for more info.</p>
+<p>ic_process workflow:</p>
+<p>Required inputs for ic_process are: settings object with </pft> and </poolinitcond> sections (see pecan.xml section for more info), dir or location where you would to store the output files, input object that contains all info from settings<span class="math inline">\(run\)</span>inputs$poolinitcond, and the overwrite setting the default is overwrite = FALSE.</p>
+<p>get_veg_module()
+This function will either download your vegetation info from: NEON_veg, FIA, BADM sources or query BETY for existing veg files previously downloaded. The input and dbfile ids of your veg file are then added to a list getveg.id.</p>
+<p>ens_veg_module()
+This function will create ensemble member ncdf files by resampling the veg file supplied in getveg.id.</p>
+<p>put_veg_module()
+This function will convert the ensemble member ncdf files into model specific format. Currently the supported models are ED2 and SIPNET.</p>
 </div>
             </section>
 

@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-03-30" />
+<meta name="date" content="2022-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -969,7 +969,7 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <span id="cb135-5"><a href="xml-core-config.html#cb135-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">met.end</span>&gt;2004/12/31&lt;/<span class="kw">met.end</span>&gt;</span>
 <span id="cb135-6"><a href="xml-core-config.html#cb135-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">site.pft</span>&gt;</span>
 <span id="cb135-7"><a href="xml-core-config.html#cb135-7" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">pft.name</span>&gt;temperate.needleleaf.evergreen&lt;/<span class="kw">pft.name</span>&gt;</span>
-<span id="cb135-8"><a href="xml-core-config.html#cb135-8" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">pft.name</span>&gt;temperate.needleleaf.evergreen.test&lt;/<span class="kw">pft.name</span>&gt;</span>
+<span id="cb135-8"><a href="xml-core-config.html#cb135-8" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">pft.name</span>&gt;temperate.needleleaf.evergreen.test&lt;/<span class="kw">pft.ame</span>&gt;</span>
 <span id="cb135-9"><a href="xml-core-config.html#cb135-9" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">site.pft</span>&gt;</span>
 <span id="cb135-10"><a href="xml-core-config.html#cb135-10" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">site</span>&gt;</span>
 <span id="cb135-11"><a href="xml-core-config.html#cb135-11" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">inputs</span>&gt;</span>
@@ -977,11 +977,19 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <span id="cb135-13"><a href="xml-core-config.html#cb135-13" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;CRUNCEP&lt;/<span class="kw">source</span>&gt;</span>
 <span id="cb135-14"><a href="xml-core-config.html#cb135-14" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;SIPNET&lt;/<span class="kw">output</span>&gt;</span>
 <span id="cb135-15"><a href="xml-core-config.html#cb135-15" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">met</span>&gt;</span>
-<span id="cb135-16"><a href="xml-core-config.html#cb135-16" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">inputs</span>&gt;</span>
-<span id="cb135-17"><a href="xml-core-config.html#cb135-17" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
-<span id="cb135-18"><a href="xml-core-config.html#cb135-18" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">end.date</span>&gt;2004/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
-<span id="cb135-19"><a href="xml-core-config.html#cb135-19" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">stop_on_error</span>&gt;TRUE&lt;/<span class="kw">stop_on_error</span>&gt;</span>
-<span id="cb135-20"><a href="xml-core-config.html#cb135-20" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">run</span>&gt;</span></code></pre></div>
+<span id="cb135-16"><a href="xml-core-config.html#cb135-16" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">poolinitcond</span>&gt;</span>
+<span id="cb135-17"><a href="xml-core-config.html#cb135-17" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;NEON_veg&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb135-18"><a href="xml-core-config.html#cb135-18" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;poolinitcond&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb135-19"><a href="xml-core-config.html#cb135-19" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">ensemble</span>&gt;100&lt;/<span class="kw">ensemble</span>&gt;</span>
+<span id="cb135-20"><a href="xml-core-config.html#cb135-20" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">startdate</span>&gt;2019-01-01&lt;/<span class="kw">startdate</span>&gt;</span>
+<span id="cb135-21"><a href="xml-core-config.html#cb135-21" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">enddate</span>&gt;2019-12-31&lt;/<span class="kw">enddate</span>&gt;</span>
+<span id="cb135-22"><a href="xml-core-config.html#cb135-22" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">storedir</span>&gt;/projectnb/dietzelab/neon_store&lt;/<span class="kw">storedir</span>&gt;</span>
+<span id="cb135-23"><a href="xml-core-config.html#cb135-23" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">poolinitcond</span>&gt;</span>
+<span id="cb135-24"><a href="xml-core-config.html#cb135-24" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">inputs</span>&gt;</span>
+<span id="cb135-25"><a href="xml-core-config.html#cb135-25" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
+<span id="cb135-26"><a href="xml-core-config.html#cb135-26" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">end.date</span>&gt;2004/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
+<span id="cb135-27"><a href="xml-core-config.html#cb135-27" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">stop_on_error</span>&gt;TRUE&lt;/<span class="kw">stop_on_error</span>&gt;</span>
+<span id="cb135-28"><a href="xml-core-config.html#cb135-28" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">run</span>&gt;</span></code></pre></div>
 <div id="xml-run-site" class="section level4 hasAnchor" number="11.1.8.1">
 <h4><span class="header-section-number">11.1.8.1</span> <code>site</code>: Where to run the model<a href="xml-core-config.html#xml-run-site" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>This contains the following tags:</p>
@@ -1020,8 +1028,18 @@ Exact requirements differ from model to model, but common inputs include meteoro
 </div>
 <div id="xml-run-inputs-veg" class="section level5 hasAnchor" number="11.1.8.2.3">
 <h5><span class="header-section-number">11.1.8.2.3</span> (Experimental) <code>veg</code>: Vegetation initial conditions<a href="xml-core-config.html#xml-run-inputs-veg" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>(Under construction. Follow developments in the <code>PEcAn.data.land</code> package, located in <code>modules/data.land</code> in the source code).
-##### <code>pft.site</code> Multi-site site / PFT mapping</p>
+</div>
+<div id="xml-run-inputs-poolinitcond" class="section level5 hasAnchor" number="11.1.8.2.4">
+<h5><span class="header-section-number">11.1.8.2.4</span> <code>poolinitcond</code>: initial condition inputs<a href="xml-core-config.html#xml-run-inputs-poolinitcond" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li><code>source</code>: Data source of initial condition .rd veg files ex: NEON_veg, FIA.</li>
+<li><code>output</code>: This tag can only must match the cooresponding tag in the modeltypes_formats table that matches with your model type ex for SIPNET model tag is poolinitcond.</li>
+<li><code>ensemble</code>: Number of initial conditions ensemble member files ex: 30.</li>
+</ul>
+<p>(Under construction. Follow developments in the <code>PEcAn.data.land</code> package, located in <code>modules/data.land</code> in the source code).</p>
+</div>
+<div id="pft.site-multi-site-site-pft-mapping" class="section level5 hasAnchor" number="11.1.8.2.5">
+<h5><span class="header-section-number">11.1.8.2.5</span> <code>pft.site</code> Multi-site site / PFT mapping<a href="xml-core-config.html#pft.site-multi-site-site-pft-mapping" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>When performing multi-site runs, it is not uncommon to find that different sites need to be run with different PFTs, rather than running all PFTs at all sites. If you’re interested to use a specific PFT for your site/sites you can use the following tag to tell PEcAn which PFT needs to be used for what site.</p>
 <pre><code>&lt;pft.site&gt;
   &lt;path&gt;site_pft.csv&lt;/path&gt;
