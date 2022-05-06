@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-04-20" />
+<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -755,37 +755,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Provides functions to simplify development</p>
 <p>Documentation:
 <a href="https://devtools.r-lib.org/">The R devtools package</a></p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="developer-devtools.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb497-2"><a href="developer-devtools.html#cb497-2" aria-hidden="true" tabindex="-1"></a><span class="fu">document</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb497-3"><a href="developer-devtools.html#cb497-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb497-4"><a href="developer-devtools.html#cb497-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb497-5"><a href="developer-devtools.html#cb497-5" aria-hidden="true" tabindex="-1"></a><span class="fu">build</span>(<span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="developer-devtools.html#cb498-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb498-2"><a href="developer-devtools.html#cb498-2" aria-hidden="true" tabindex="-1"></a><span class="fu">document</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb498-3"><a href="developer-devtools.html#cb498-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb498-4"><a href="developer-devtools.html#cb498-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb498-5"><a href="developer-devtools.html#cb498-5" aria-hidden="true" tabindex="-1"></a><span class="fu">build</span>(<span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
 <p>other tips for devtools (from the documentation):</p>
 <ul>
 <li>Adding the following to your <code>~/.Rprofile</code> will load devtools when
 running R in interactive mode:</li>
 </ul>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="developer-devtools.html#cb498-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load devtools by default</span></span>
-<span id="cb498-2"><a href="developer-devtools.html#cb498-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
-<span id="cb498-3"><a href="developer-devtools.html#cb498-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">suppressMessages</span>(<span class="fu">require</span>(devtools))</span>
-<span id="cb498-4"><a href="developer-devtools.html#cb498-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="developer-devtools.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load devtools by default</span></span>
+<span id="cb499-2"><a href="developer-devtools.html#cb499-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb499-3"><a href="developer-devtools.html#cb499-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">suppressMessages</span>(<span class="fu">require</span>(devtools))</span>
+<span id="cb499-4"><a href="developer-devtools.html#cb499-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ul>
 <li>Adding the following to your .Rpackages will allow devtools to recognize package by folder name, rather than directory path</li>
 </ul>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="developer-devtools.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in this example, devhome is the pecan trunk directory </span></span>
-<span id="cb499-2"><a href="developer-devtools.html#cb499-2" aria-hidden="true" tabindex="-1"></a>devhome <span class="ot">&lt;-</span> <span class="st">&quot;/home/dlebauer/R-dev/pecandev/&quot;</span></span>
-<span id="cb499-3"><a href="developer-devtools.html#cb499-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb499-4"><a href="developer-devtools.html#cb499-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">default =</span> <span class="cf">function</span>(x) {</span>
-<span id="cb499-5"><a href="developer-devtools.html#cb499-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">file.path</span>(devhome, x, x)</span>
-<span id="cb499-6"><a href="developer-devtools.html#cb499-6" aria-hidden="true" tabindex="-1"></a>    }, </span>
-<span id="cb499-7"><a href="developer-devtools.html#cb499-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;utils&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb499-8"><a href="developer-devtools.html#cb499-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;common&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb499-9"><a href="developer-devtools.html#cb499-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb499-10"><a href="developer-devtools.html#cb499-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ed&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb499-11"><a href="developer-devtools.html#cb499-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;uncertainty&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb499-12"><a href="developer-devtools.html#cb499-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;meta.analysis&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb499-13"><a href="developer-devtools.html#cb499-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;db&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb499-14"><a href="developer-devtools.html#cb499-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="developer-devtools.html#cb500-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in this example, devhome is the pecan trunk directory </span></span>
+<span id="cb500-2"><a href="developer-devtools.html#cb500-2" aria-hidden="true" tabindex="-1"></a>devhome <span class="ot">&lt;-</span> <span class="st">&quot;/home/dlebauer/R-dev/pecandev/&quot;</span></span>
+<span id="cb500-3"><a href="developer-devtools.html#cb500-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb500-4"><a href="developer-devtools.html#cb500-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">default =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb500-5"><a href="developer-devtools.html#cb500-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">file.path</span>(devhome, x, x)</span>
+<span id="cb500-6"><a href="developer-devtools.html#cb500-6" aria-hidden="true" tabindex="-1"></a>    }, </span>
+<span id="cb500-7"><a href="developer-devtools.html#cb500-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;utils&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb500-8"><a href="developer-devtools.html#cb500-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;common&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb500-9"><a href="developer-devtools.html#cb500-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb500-10"><a href="developer-devtools.html#cb500-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ed&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb500-11"><a href="developer-devtools.html#cb500-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;uncertainty&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb500-12"><a href="developer-devtools.html#cb500-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;meta.analysis&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb500-13"><a href="developer-devtools.html#cb500-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;db&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb500-14"><a href="developer-devtools.html#cb500-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now, devtools can take <code>pkg</code> as an argument instead of <code>/path/to/pkg/</code>,
 e.g. so you can use <code>build("pkg")</code> instead of <code>build("/path/to/pkg/")</code></p>
 

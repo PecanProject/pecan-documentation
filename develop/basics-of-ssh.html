@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-04-20" />
+<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -754,16 +754,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">25.1</span> Basics of SSH<a href="basics-of-ssh.html#basics-of-ssh" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>All of the PEcAn remote infrastructure depends on the system <code>ssh</code> utility, so it’s important to make sure this works before attempting the advanced remote execution functionality in PEcAn.</p>
 <p>To connect to a remote server interactively, the command is simply:</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb460-1"><a href="basics-of-ssh.html#cb460-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb461-1"><a href="basics-of-ssh.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></span></code></pre></div>
 <p>For instance, my connection to the BU shared computing cluster looks like:</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb461-1"><a href="basics-of-ssh.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb462-1"><a href="basics-of-ssh.html#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu</span></code></pre></div>
 <p>It will prompt me for my BU password, and, if successful, will drop me into a login shell on the remote machine.</p>
 <p>Alternatively to the login shell, <code>ssh</code> can be used to execute arbitrary code, whose output will be returned exactly as it would if you ran the command locally.
 For example, the following:</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb462-1"><a href="basics-of-ssh.html#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb463-1"><a href="basics-of-ssh.html#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</span></code></pre></div>
 <p>will run the <code>pwd</code> command, and return the path to my home directory on the BU SCC.
 The more advanced example below will run some simple R code on the BU SCC and return the output as if it was run locally.</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb463-1"><a href="basics-of-ssh.html#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript <span class="at">-e</span> <span class="st">&quot;seq(1, 10)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb464-1"><a href="basics-of-ssh.html#cb464-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript <span class="at">-e</span> <span class="st">&quot;seq(1, 10)&quot;</span></span></code></pre></div>
 </div>
             </section>
 
