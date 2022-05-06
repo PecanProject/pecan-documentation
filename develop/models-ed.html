@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-04-20" />
+<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -806,23 +806,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>phenol.end</code></p></li>
 <li><p><code>all_pfts</code> – (Logical) If false or missing (default), only run ED2 with the PFTs configured via PEcAn (i.e. in the <code>&lt;pfts&gt;</code> section of the XML). If <code>true</code>, run with all 17 of ED2’s PFTs, using ED2’s internal default parameters for all PFTs not configured through PEcAn. See <a href="models-ed.html#models-ed-pft-configuration">below</a> for more details.</p></li>
 <li><p><code>ed2in_tags</code> – Named list of additional tags in the ED2IN to be modified. These modifications override any of those set by other parts of the PEcAn workflow. These tags must be in all caps. Any tags that are not already in the ED2IN file will be added; this makes this an effective way to run newer versions of ED2 that have new ED2IN parameters without having to provide an entire new ED2IN. For example:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb154-1"><a href="models-ed.html#cb154-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">model</span>&gt;</span>
-<span id="cb154-2"><a href="models-ed.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">ed2in_tags</span>&gt;</span>
-<span id="cb154-3"><a href="models-ed.html#cb154-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">IOOUTPUT</span>&gt;0&lt;/<span class="kw">IOOUTPUT</span>&gt;</span>
-<span id="cb154-4"><a href="models-ed.html#cb154-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">PLANT_HYDRO_SCHEME</span>&gt;0&lt;/<span class="kw">PLANT_HYDRO_SCHEME</span>&gt;</span>
-<span id="cb154-5"><a href="models-ed.html#cb154-5" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">ISTOMATA_SCHEME</span>&gt;0&lt;/<span class="kw">ISTOMATA_SCHEME</span>&gt;</span>
-<span id="cb154-6"><a href="models-ed.html#cb154-6" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">ISTRUCT_GROWTH_SCHEME</span>&gt;0&lt;/<span class="kw">ISTRUCT_GROWTH_SCHEME</span>&gt;</span>
-<span id="cb154-7"><a href="models-ed.html#cb154-7" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">TRAIT_PLASTICITY_SCHEME</span>&gt;0&lt;/<span class="kw">TRAIT_PLASTICITY_SCHEME</span>&gt;</span>
-<span id="cb154-8"><a href="models-ed.html#cb154-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">ed2in_tags</span>&gt;</span>
-<span id="cb154-9"><a href="models-ed.html#cb154-9" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">model</span>&gt;</span></code></pre></div></li>
+<div class="sourceCode" id="cb155"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb155-1"><a href="models-ed.html#cb155-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">model</span>&gt;</span>
+<span id="cb155-2"><a href="models-ed.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">ed2in_tags</span>&gt;</span>
+<span id="cb155-3"><a href="models-ed.html#cb155-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">IOOUTPUT</span>&gt;0&lt;/<span class="kw">IOOUTPUT</span>&gt;</span>
+<span id="cb155-4"><a href="models-ed.html#cb155-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">PLANT_HYDRO_SCHEME</span>&gt;0&lt;/<span class="kw">PLANT_HYDRO_SCHEME</span>&gt;</span>
+<span id="cb155-5"><a href="models-ed.html#cb155-5" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">ISTOMATA_SCHEME</span>&gt;0&lt;/<span class="kw">ISTOMATA_SCHEME</span>&gt;</span>
+<span id="cb155-6"><a href="models-ed.html#cb155-6" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">ISTRUCT_GROWTH_SCHEME</span>&gt;0&lt;/<span class="kw">ISTRUCT_GROWTH_SCHEME</span>&gt;</span>
+<span id="cb155-7"><a href="models-ed.html#cb155-7" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">TRAIT_PLASTICITY_SCHEME</span>&gt;0&lt;/<span class="kw">TRAIT_PLASTICITY_SCHEME</span>&gt;</span>
+<span id="cb155-8"><a href="models-ed.html#cb155-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">ed2in_tags</span>&gt;</span>
+<span id="cb155-9"><a href="models-ed.html#cb155-9" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">model</span>&gt;</span></code></pre></div></li>
 <li><p><code>barebones_ed2in</code> – Whether or not to try to annotate the ED2IN file with comments. If “true”, skip all comments and only write the tags themselves. If “false” (default), try to transfer comments from the template file into the target file.</p></li>
 <li><p><code>jobtemplate</code></p></li>
 <li><p><code>prerun</code> – String of commands to be added to the <code>job.sh</code> model execution script before the model is run. Multiple commands should be separated by proper <code>bash</code> syntax – i.e. either with <code>&amp;&amp;</code> or <code>;</code>.</p>
 <ul>
 <li><p>One common use of this argument is to load modules on some HPC systems – for instance:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb155-1"><a href="models-ed.html#cb155-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">prerun</span>&gt;module load git hdf5&lt;/<span class="kw">prerun</span>&gt;</span></code></pre></div></li>
+<div class="sourceCode" id="cb156"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb156-1"><a href="models-ed.html#cb156-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">prerun</span>&gt;module load git hdf5&lt;/<span class="kw">prerun</span>&gt;</span></code></pre></div></li>
 <li><p>If your particular version of ED is failing early during execution with a mysterious “Segmentation fault”, that may indicate that its process is exceeding its stack limit. In this case, you may need to remove the stack limit restriction with a <code>prerun</code> command like the following:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb156-1"><a href="models-ed.html#cb156-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">prerun</span>&gt;ulimit -s unlimited&lt;/<span class="kw">prerun</span>&gt;</span></code></pre></div></li>
+<div class="sourceCode" id="cb157"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb157-1"><a href="models-ed.html#cb157-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">prerun</span>&gt;ulimit -s unlimited&lt;/<span class="kw">prerun</span>&gt;</span></code></pre></div></li>
 </ul></li>
 <li><p><code>postrun</code> – Same as <code>&lt;prerun&gt;</code>, but for commands to be run <em>after</em> model execution.</p></li>
 <li><p><code>binary</code> – The full path to the ED2 binary on the target machine.</p></li>
@@ -886,10 +886,10 @@ The configuration process proceeds as follows:</p>
 <p>First, the mappings between PEcAn PFT names and ED2 PFT numbers are determined according to the following logic:</p>
 <ul>
 <li><p>If the PFT has a <code>&lt;ed2_pft_number&gt;</code> XML tag, that number is used. For example:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb157-1"><a href="models-ed.html#cb157-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">pft</span>&gt;</span>
-<span id="cb157-2"><a href="models-ed.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">name</span>&gt;umbs.early_hardwood&lt;/<span class="kw">name</span>&gt;</span>
-<span id="cb157-3"><a href="models-ed.html#cb157-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">ed2_pft_number</span>&gt;9&lt;/<span class="kw">ed2_pft_number</span>&gt;</span>
-<span id="cb157-4"><a href="models-ed.html#cb157-4" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">pft</span>&gt;</span></code></pre></div></li>
+<div class="sourceCode" id="cb158"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb158-1"><a href="models-ed.html#cb158-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">pft</span>&gt;</span>
+<span id="cb158-2"><a href="models-ed.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">name</span>&gt;umbs.early_hardwood&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb158-3"><a href="models-ed.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">ed2_pft_number</span>&gt;9&lt;/<span class="kw">ed2_pft_number</span>&gt;</span>
+<span id="cb158-4"><a href="models-ed.html#cb158-4" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">pft</span>&gt;</span></code></pre></div></li>
 <li><p>If <code>&lt;ed2_pft_number&gt;</code> is not provided, the code tries to cross-reference the PFT <code>name</code> against the <code>pftmapping.csv</code> data provided with the <code>PEcAn.ED2</code> package. If the name is not matched (perfectly!), the function will exit with an error.</p></li>
 </ul>
 <p>Second, the PFT number from the previous step is used to write that PFT’s parameters to the <code>config.xml</code>.
@@ -898,12 +898,12 @@ The order of precedence for parameters is as follows (from highest to lowest):</
 <li><p><strong>Explicit user overrides</strong>.
 These are specified via a <code>&lt;constants&gt;</code> tag in the PFT definition in the <code>pecan.xml</code>.
 For example:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb158-1"><a href="models-ed.html#cb158-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">pft</span>&gt;</span>
-<span id="cb158-2"><a href="models-ed.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">name</span>&gt;umbs.early_hardwood&lt;/<span class="kw">name</span>&gt;</span>
-<span id="cb158-3"><a href="models-ed.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">constants</span>&gt;</span>
-<span id="cb158-4"><a href="models-ed.html#cb158-4" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">sla</span>&gt;36.3&lt;/<span class="kw">sla</span>&gt;</span>
-<span id="cb158-5"><a href="models-ed.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">constants</span>&gt;</span>
-<span id="cb158-6"><a href="models-ed.html#cb158-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">pft</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb159-1"><a href="models-ed.html#cb159-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">pft</span>&gt;</span>
+<span id="cb159-2"><a href="models-ed.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">name</span>&gt;umbs.early_hardwood&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb159-3"><a href="models-ed.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">constants</span>&gt;</span>
+<span id="cb159-4"><a href="models-ed.html#cb159-4" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">sla</span>&gt;36.3&lt;/<span class="kw">sla</span>&gt;</span>
+<span id="cb159-5"><a href="models-ed.html#cb159-5" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">constants</span>&gt;</span>
+<span id="cb159-6"><a href="models-ed.html#cb159-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">pft</span>&gt;</span></code></pre></div>
 <p>Note that these values are passed through <a href="https://pecanproject.github.io/models/ed/docs/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>, so they should generally be given in PEcAn’s default units rather than ED2’s.</p></li>
 <li><p><strong>Samples from the PEcAn meta analysis</strong>.
 These are also converted via <a href="https://pecanproject.github.io/models/ed/docs/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>.</p></li>
@@ -918,9 +918,9 @@ Again, the best way to know which parameters ED2 is actually using is to check t
 By default, PEcAn will set this field to only include the PFTs specified by the user.
 This is the recommended behavior because it ensures that all PFTs in ED2 were parameterized (one way or another, at least partially) through PEcAn.
 However, if you would like ED2 to run with all 17 PFTs (NOTE: using ED2’s internal defaults for all PFTs not specified by the user!), you can set the <code>&lt;all_pfts&gt;</code> XML tag (in the <code>&lt;model&gt;</code> section) to <code>true</code>:</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb159-1"><a href="models-ed.html#cb159-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">model</span>&gt;</span>
-<span id="cb159-2"><a href="models-ed.html#cb159-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">all_pfts</span>&gt;true&lt;/<span class="kw">all_pfts</span>&gt;</span>
-<span id="cb159-3"><a href="models-ed.html#cb159-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">model</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb160-1"><a href="models-ed.html#cb160-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">model</span>&gt;</span>
+<span id="cb160-2"><a href="models-ed.html#cb160-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">all_pfts</span>&gt;true&lt;/<span class="kw">all_pfts</span>&gt;</span>
+<span id="cb160-3"><a href="models-ed.html#cb160-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">model</span>&gt;</span></code></pre></div>
 </div>
 <div id="model-specific-input-files-1" class="section level3 hasAnchor" number="13.4.4">
 <h3><span class="header-section-number">13.4.4</span> Model specific input files<a href="models-ed.html#model-specific-input-files-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -989,23 +989,23 @@ However, if you would like ED2 to run with all 17 PFTs (NOTE: using ED2’s inte
 </div>
 <div id="tacc-lonestar" class="section level4 hasAnchor" number="13.4.6.3">
 <h4><span class="header-section-number">13.4.6.3</span> TACC lonestar<a href="models-ed.html#tacc-lonestar" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb160"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb160-1"><a href="models-ed.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load hdf5</span>
-<span id="cb160-2"><a href="models-ed.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
-<span id="cb160-3"><a href="models-ed.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
-<span id="cb160-4"><a href="models-ed.html#cb160-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
-<span id="cb160-5"><a href="models-ed.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED.r82/ED/build/bin</span>
-<span id="cb160-6"><a href="models-ed.html#cb160-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</span>
-<span id="cb160-7"><a href="models-ed.html#cb160-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=lonestar</span></code></pre></div>
-</div>
-<div id="tacc-stampede" class="section level4 hasAnchor" number="13.4.6.4">
-<h4><span class="header-section-number">13.4.6.4</span> TACC stampede<a href="models-ed.html#tacc-stampede" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb161"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb161-1"><a href="models-ed.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load hdf5</span>
 <span id="cb161-2"><a href="models-ed.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
 <span id="cb161-3"><a href="models-ed.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
 <span id="cb161-4"><a href="models-ed.html#cb161-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
 <span id="cb161-5"><a href="models-ed.html#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED.r82/ED/build/bin</span>
-<span id="cb161-6"><a href="models-ed.html#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</span>
-<span id="cb161-7"><a href="models-ed.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=stampede</span></code></pre></div>
+<span id="cb161-6"><a href="models-ed.html#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.lonestar http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.lonestar</span>
+<span id="cb161-7"><a href="models-ed.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=lonestar</span></code></pre></div>
+</div>
+<div id="tacc-stampede" class="section level4 hasAnchor" number="13.4.6.4">
+<h4><span class="header-section-number">13.4.6.4</span> TACC stampede<a href="models-ed.html#tacc-stampede" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb162"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb162-1"><a href="models-ed.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load hdf5</span>
+<span id="cb162-2"><a href="models-ed.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
+<span id="cb162-3"><a href="models-ed.html#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
+<span id="cb162-4"><a href="models-ed.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
+<span id="cb162-5"><a href="models-ed.html#cb162-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED.r82/ED/build/bin</span>
+<span id="cb162-6"><a href="models-ed.html#cb162-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.stampede http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.stampede</span>
+<span id="cb162-7"><a href="models-ed.html#cb162-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=stampede</span></code></pre></div>
 
 </div>
 </div>

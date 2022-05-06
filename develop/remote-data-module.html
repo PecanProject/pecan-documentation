@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-04-20" />
+<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -783,21 +783,21 @@ To install the package,</p></li>
 <ol style="list-style-type: lower-alpha">
 <li>Navigate to <code>pecan/modules/data.remote/inst/RpTools</code> If you are inside the pecan directory, this can be done by,</li>
 </ol>
-<div class="sourceCode" id="cb271"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb271-1"><a href="remote-data-module.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> modules/data.remote/inst/RpTools</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb272-1"><a href="remote-data-module.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> modules/data.remote/inst/RpTools</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Use pip3 to install the package. “-e” flag is used to install the package in an editable or develop mode, so that changes made to the code get updated in the package without reinstalling.</li>
 </ol>
-<div class="sourceCode" id="cb272"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb272-1"><a href="remote-data-module.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install <span class="at">-e</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb273-1"><a href="remote-data-module.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install <span class="at">-e</span> .</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li><strong>Authenticate GEE</strong>. The GEE API needs to be authenticated using your credentials. The credentials will be stored locally on your system. This can be done by,</li>
 </ol>
-<div class="sourceCode" id="cb273"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb273-1"><a href="remote-data-module.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="co">#this will open a browser and ask you to sign in with the Google account registered for GEE</span></span>
-<span id="cb273-2"><a href="remote-data-module.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="ex">earthengine</span> authenticate</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb274-1"><a href="remote-data-module.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co">#this will open a browser and ask you to sign in with the Google account registered for GEE</span></span>
+<span id="cb274-2"><a href="remote-data-module.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="ex">earthengine</span> authenticate</span></code></pre></div>
 <p>Alternate way,</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb274-1"><a href="remote-data-module.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span></span>
-<span id="cb274-2"><a href="remote-data-module.html#cb274-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb274-3"><a href="remote-data-module.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> ee</span>
-<span id="cb274-4"><a href="remote-data-module.html#cb274-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ee.Authenticate()</span></span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb275-1"><a href="remote-data-module.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span></span>
+<span id="cb275-2"><a href="remote-data-module.html#cb275-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-3"><a href="remote-data-module.html#cb275-3" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> ee</span>
+<span id="cb275-4"><a href="remote-data-module.html#cb275-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ee.Authenticate()</span></span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li><strong>Save the Earthdata credentials</strong>. If you wish to use AppEEARS or LP DAAC data pool you will have to store your username and password inside a JSON file and then pass its file path as an argument in <code>remote_process</code></li>
 </ol>
@@ -817,18 +817,18 @@ To install the package,</p></li>
 <div id="configuring-remote_process" class="section level3 hasAnchor" number="17.2.1">
 <h3><span class="header-section-number">17.2.1</span> Configuring <code>remote_process</code><a href="remote-data-module.html#configuring-remote_process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>remote_process</code> is configured using remote data tags in the <code>pecan.xml</code>. The required tags are described below,</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb275-1"><a href="remote-data-module.html#cb275-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
-<span id="cb275-2"><a href="remote-data-module.html#cb275-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;...&lt;/<span class="kw">out_get_data</span>&gt;</span>
-<span id="cb275-3"><a href="remote-data-module.html#cb275-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;...&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb275-4"><a href="remote-data-module.html#cb275-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;...&lt;/<span class="kw">collection</span>&gt;</span>
-<span id="cb275-5"><a href="remote-data-module.html#cb275-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;...&lt;/<span class="kw">scale</span>&gt;</span>
-<span id="cb275-6"><a href="remote-data-module.html#cb275-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;...&lt;/<span class="kw">projection</span>&gt;</span>
-<span id="cb275-7"><a href="remote-data-module.html#cb275-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;...&lt;/<span class="kw">qc</span>&gt;</span>
-<span id="cb275-8"><a href="remote-data-module.html#cb275-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;...&lt;/<span class="kw">algorithm</span>&gt;</span>
-<span id="cb275-9"><a href="remote-data-module.html#cb275-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;...&lt;/<span class="kw">credfile</span>&gt;</span>
-<span id="cb275-10"><a href="remote-data-module.html#cb275-10" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;...&lt;/<span class="kw">out_process_data</span>&gt;</span>
-<span id="cb275-11"><a href="remote-data-module.html#cb275-11" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">overwrite</span>&gt;...&lt;/<span class="kw">overwrite</span>&gt;</span>
-<span id="cb275-12"><a href="remote-data-module.html#cb275-12" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb276-1"><a href="remote-data-module.html#cb276-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb276-2"><a href="remote-data-module.html#cb276-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;...&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb276-3"><a href="remote-data-module.html#cb276-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;...&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb276-4"><a href="remote-data-module.html#cb276-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;...&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb276-5"><a href="remote-data-module.html#cb276-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;...&lt;/<span class="kw">scale</span>&gt;</span>
+<span id="cb276-6"><a href="remote-data-module.html#cb276-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;...&lt;/<span class="kw">projection</span>&gt;</span>
+<span id="cb276-7"><a href="remote-data-module.html#cb276-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;...&lt;/<span class="kw">qc</span>&gt;</span>
+<span id="cb276-8"><a href="remote-data-module.html#cb276-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;...&lt;/<span class="kw">algorithm</span>&gt;</span>
+<span id="cb276-9"><a href="remote-data-module.html#cb276-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;...&lt;/<span class="kw">credfile</span>&gt;</span>
+<span id="cb276-10"><a href="remote-data-module.html#cb276-10" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;...&lt;/<span class="kw">out_process_data</span>&gt;</span>
+<span id="cb276-11"><a href="remote-data-module.html#cb276-11" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">overwrite</span>&gt;...&lt;/<span class="kw">overwrite</span>&gt;</span>
+<span id="cb276-12"><a href="remote-data-module.html#cb276-12" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
 <ul>
 <li><code>out_get_data</code>: (required) type of raw output requested, e.g, bands, smap</li>
 <li><code>source</code>: (required) source of remote data, e.g., gee or appeears</li>
@@ -931,15 +931,15 @@ As an example, if a file containing Sentinel 2 bands for start date: 2018-01-01,
 <ol style="list-style-type: decimal">
 <li>Add remotedata tag to <code>pecan.xml</code> and configure it.</li>
 </ol>
-<div class="sourceCode" id="cb279"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb279-1"><a href="remote-data-module.html#cb279-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
-<span id="cb279-2"><a href="remote-data-module.html#cb279-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;bands&lt;/<span class="kw">out_get_data</span>&gt;</span>
-<span id="cb279-3"><a href="remote-data-module.html#cb279-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;gee&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb279-4"><a href="remote-data-module.html#cb279-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;COPERNICUS/S2_SR&lt;/<span class="kw">collection</span>&gt;</span>
-<span id="cb279-5"><a href="remote-data-module.html#cb279-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;10&lt;/<span class="kw">scale</span>&gt;</span>
-<span id="cb279-6"><a href="remote-data-module.html#cb279-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;1&lt;/<span class="kw">qc</span>&gt;</span>
-<span id="cb279-7"><a href="remote-data-module.html#cb279-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;snap&lt;/<span class="kw">algorithm</span>&gt;</span>
-<span id="cb279-8"><a href="remote-data-module.html#cb279-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;LAI&lt;/<span class="kw">out_process_data</span>&gt;</span>
-<span id="cb279-9"><a href="remote-data-module.html#cb279-9" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb280-1"><a href="remote-data-module.html#cb280-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb280-2"><a href="remote-data-module.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;bands&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb280-3"><a href="remote-data-module.html#cb280-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;gee&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb280-4"><a href="remote-data-module.html#cb280-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;COPERNICUS/S2_SR&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb280-5"><a href="remote-data-module.html#cb280-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;10&lt;/<span class="kw">scale</span>&gt;</span>
+<span id="cb280-6"><a href="remote-data-module.html#cb280-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;1&lt;/<span class="kw">qc</span>&gt;</span>
+<span id="cb280-7"><a href="remote-data-module.html#cb280-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;snap&lt;/<span class="kw">algorithm</span>&gt;</span>
+<span id="cb280-8"><a href="remote-data-module.html#cb280-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;LAI&lt;/<span class="kw">out_process_data</span>&gt;</span>
+<span id="cb280-9"><a href="remote-data-module.html#cb280-9" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
 </ol>
@@ -952,14 +952,14 @@ As an example, if a file containing Sentinel 2 bands for start date: 2018-01-01,
 <ol style="list-style-type: decimal">
 <li>Add remotedata tag to <code>pecan.xml</code> and configure it.</li>
 </ol>
-<div class="sourceCode" id="cb281"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb281-1"><a href="remote-data-module.html#cb281-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
-<span id="cb281-2"><a href="remote-data-module.html#cb281-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;smap&lt;/<span class="kw">out_get_data</span>&gt;</span>
-<span id="cb281-3"><a href="remote-data-module.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;appeears&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb281-4"><a href="remote-data-module.html#cb281-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;SPL3SMP_E.003&lt;/<span class="kw">collection</span>&gt;</span>
-<span id="cb281-5"><a href="remote-data-module.html#cb281-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;native&lt;/<span class="kw">projection</span>&gt;</span>
-<span id="cb281-6"><a href="remote-data-module.html#cb281-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;&lt;/<span class="kw">algorithm</span>&gt;</span>
-<span id="cb281-7"><a href="remote-data-module.html#cb281-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;path/to/jsonfile/containingcredentials&lt;/<span class="kw">credfile</span>&gt;</span>
-<span id="cb281-8"><a href="remote-data-module.html#cb281-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb282-1"><a href="remote-data-module.html#cb282-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb282-2"><a href="remote-data-module.html#cb282-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;smap&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb282-3"><a href="remote-data-module.html#cb282-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;appeears&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb282-4"><a href="remote-data-module.html#cb282-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;SPL3SMP_E.003&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb282-5"><a href="remote-data-module.html#cb282-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;native&lt;/<span class="kw">projection</span>&gt;</span>
+<span id="cb282-6"><a href="remote-data-module.html#cb282-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;&lt;/<span class="kw">algorithm</span>&gt;</span>
+<span id="cb282-7"><a href="remote-data-module.html#cb282-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;path/to/jsonfile/containingcredentials&lt;/<span class="kw">credfile</span>&gt;</span>
+<span id="cb282-8"><a href="remote-data-module.html#cb282-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
 </ol>
@@ -968,12 +968,12 @@ As an example, if a file containing Sentinel 2 bands for start date: 2018-01-01,
 </div>
 <div id="example-use-gedi-lp-daac-data-pool" class="section level4 hasAnchor" number="17.2.1.4">
 <h4><span class="header-section-number">17.2.1.4</span> Example use GEDI (LP DAAC data pool)<a href="remote-data-module.html#example-use-gedi-lp-daac-data-pool" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb283"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb283-1"><a href="remote-data-module.html#cb283-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
-<span id="cb283-2"><a href="remote-data-module.html#cb283-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;gedi&lt;/<span class="kw">out_get_data</span>&gt;</span>
-<span id="cb283-3"><a href="remote-data-module.html#cb283-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;lpdaacdatapool&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb283-4"><a href="remote-data-module.html#cb283-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;GEDI02_B.002&lt;/<span class="kw">collection</span>&gt;</span>
-<span id="cb283-5"><a href="remote-data-module.html#cb283-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;path/to/jsonfile/containingcredentials&lt;/<span class="kw">credfile</span>&gt;</span>
-<span id="cb283-6"><a href="remote-data-module.html#cb283-6" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb284-1"><a href="remote-data-module.html#cb284-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb284-2"><a href="remote-data-module.html#cb284-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;gedi&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb284-3"><a href="remote-data-module.html#cb284-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;lpdaacdatapool&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb284-4"><a href="remote-data-module.html#cb284-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;GEDI02_B.002&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb284-5"><a href="remote-data-module.html#cb284-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;path/to/jsonfile/containingcredentials&lt;/<span class="kw">credfile</span>&gt;</span>
+<span id="cb284-6"><a href="remote-data-module.html#cb284-6" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Store the contents of <code>pecan.xml</code> in a variable named <code>settings</code> and pass it to <code>remote_process</code>.</li>
 </ol>
