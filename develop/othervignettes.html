@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-05-17" />
+<meta name="date" content="2022-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -990,7 +990,7 @@ You could query for diffent kinds of formats that exist in bety or <a href="http
 <span id="cb34-10"><a href="othervignettes.html#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bias.fit)</span>
 <span id="cb34-11"><a href="othervignettes.html#cb34-11" aria-hidden="true" tabindex="-1"></a>RMSE <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((pmean<span class="sc">-</span>dat<span class="sc">$</span>Photo)<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb34-12"><a href="othervignettes.html#cb34-12" aria-hidden="true" tabindex="-1"></a>RMSE</span>
-<span id="cb34-13"><a href="othervignettes.html#cb34-13" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span>RMSE<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">var</span>(dat<span class="sc">$</span>Photo)</span>
+<span id="cb34-13"><a href="othervignettes.html#cb34-13" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span>RMSE<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>stats<span class="sc">::</span><span class="fu">var</span>(dat<span class="sc">$</span>Photo)</span>
 <span id="cb34-14"><a href="othervignettes.html#cb34-14" aria-hidden="true" tabindex="-1"></a>R2</span>
 <span id="cb34-15"><a href="othervignettes.html#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(bias.fit)</span></code></pre></div>
 <p>In the final set of plots we look at the actual A-Ci and A-Q curves themselves. Here we’ve added two interval estimates around the curves. The CI captures the uncertainty in the <em>parameters</em> and will asympotically shrink with more and more data. The PI (predictive interval) includes the parameter and residual error. If our fit is good then 95% PI should thus encompass at least 95% of the observations. That said, as with any statistical model we want to look for systematic deviations in the residuals from either the mean or the range of the PI.</p>
