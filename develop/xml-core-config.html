@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -924,21 +924,21 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 </ul>
 <p>This information is currently used by the following PEcAn workflow function:</p>
 <ul>
-<li><code>PEcAn.&lt;MODEL&gt;::write.config.&lt;MODEL&gt;</code> – Write model-specific configuration files {#pecan-write-configs}</li>
+<li><code>PEcAn.&lt;MODEL&gt;::write.config.&lt;MODEL&gt;</code> – Write <a href="#pecan-write-configs">model-specific configuration files</a></li>
 <li><code>PEcAn.workflow::start_model_runs</code> – Begin model run execution</li>
 </ul>
 <div id="xml-model-specific" class="section level4 hasAnchor" number="11.1.7.1">
 <h4><span class="header-section-number">11.1.7.1</span> Model-specific configuration<a href="xml-core-config.html#xml-model-specific" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>See the following:</p>
 <ul>
-<li>[ED2][ED2 Configuration]</li>
-<li>[SIPNET][SIPNET Configuration]</li>
-<li>[BIOCRO][BioCro Configuration]</li>
+<li><a href="models-ed.html#models-ed">ED2 Configuration</a></li>
+<li><a href="models-sipnet.html#models-sipnet">SIPNET Configuration</a></li>
+<li><a href="models-biocro.html#models-biocro">BIOCRO Configuration</a></li>
 </ul>
 </div>
 <div id="xml-ed" class="section level4 hasAnchor" number="11.1.7.2">
 <h4><span class="header-section-number">11.1.7.2</span> ED2 specific tags<a href="xml-core-config.html#xml-ed" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Following variables are ED specific and are used in the <a href="ED2-Configuration">ED2 Configuration</a>.</p>
+<p>Following variables are ED specific and are used in the <a href="models-ed.html#models-ed">ED2 Configuration</a>.</p>
 <p>Starting at 1.3.7 the tags for inputs have moved to <code>&lt;run&gt;&lt;inputs&gt;</code>. This includes, veg, soil, psscss, inputs.</p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb134-1"><a href="xml-core-config.html#cb134-1" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">edin</span>&gt;/home/carya/runs/PEcAn_4/ED2IN.template&lt;/<span class="kw">edin</span>&gt;</span>
 <span id="cb134-2"><a href="xml-core-config.html#cb134-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">config.header</span>&gt;</span>
@@ -998,7 +998,7 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <li><code>name</code> – The name of the site, as a string.</li>
 <li><code>lat</code>, <code>lon</code> – The latitude and longitude coordinates of the site, as decimals.</li>
 <li><code>met.start</code>, <code>met.end</code> – ???</li>
-<li><code>&lt;site.pft&gt;</code> (optional) If this tag is found under the site tag, then PEcAn automatically makes sure that only PFTs defined under this tag is used for generating parameter’s samples. Following shows an exmaple of how this tag can be added to the PEcAn xml :</li>
+<li><code>&lt;site.pft&gt;</code> (optional) If this tag is found under the site tag, then PEcAn automatically makes sure that only PFTs defined under this tag is used for generating parameter’s samples. Following shows an example of how this tag can be added to the PEcAn xml :</li>
 </ul>
 <div class="sourceCode" id="cb136"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb136-1"><a href="xml-core-config.html#cb136-1" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">site.pft</span>&gt;</span>
 <span id="cb136-2"><a href="xml-core-config.html#cb136-2" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">pft.name</span>&gt;temperate.needleleaf.evergreen&lt;/<span class="kw">pft.name</span>&gt;</span>
@@ -1095,8 +1095,9 @@ The following provides a quick overview of XML tags related to remote execution.
 <p>The <code>host</code> section has the following tags:</p>
 <ul>
 <li><code>name</code>: [optional] name of host server where model is located and executed, if not specified localhost is assumed.</li>
-<li><code>rundir</code>: [optional/required] location where all the configuration files are written. For localhost this is optional (<code>&lt;outdir&gt;/run</code> is the default), for any other host this is required.</li>
-<li><code>outdir</code>: [optional/required] location where all the outputs of the model are written. For localhost this is optional (<code>&lt;outdir&gt;/out</code> is the default), for any other host this is required.</li>
+<li><code>folder</code>: [required] The location to store files on the remote machine. For localhost this is optional (<code>&lt;outdir&gt;</code> is the default), for any other host this is required.</li>
+<li><code>rundir</code>: [optional] location where all the configuration files are written. If not specified, this will be generated starting at the path specified in <code>folder</code>.</li>
+<li><code>outdir</code>: [optional] location where all the outputs of the model are written. If not specified, this will be generated starting at the path specified in <code>folder</code>.</li>
 <li><code>scratchdir</code>: [optional] location where output is written. If specified the output from the model is written to this folder and copied to the outdir when the model is finished, this could significantly speed up the model execution (by using local or ram disk).</li>
 <li><code>clearscratch</code>: [optional] if set to TRUE the scratchfolder is cleaned up after copying the results to the outdir, otherwise the folder will be left. The default is to clean up after copying.</li>
 <li><code>qsub</code>: [optional] the command to submit a job to the queuing system. There are 3 parameters you can use when specifying the qsub command, you can add additional values for your specific setup (for example -l walltime to specify the walltime, etc). You can specify <span class="citation">@NAME</span>@ the pretty name, <span class="citation">@STDOUT</span>@ where to write stdout and <span class="citation">@STDERR</span>@, where to write stderr. You can specify an empty element (<code>&lt;qsub/&gt;</code>) in which case it will use the default value is <code>qsub -V -N @NAME@ -o @STDOUT@ -e @STDERR@ -s /bin/bash</code>.</li>
@@ -1106,9 +1107,10 @@ The following provides a quick overview of XML tags related to remote execution.
 <li><code>modellauncher</code>: [optional] this is an experimental section that will allow you to submit all the runs as a single job to a HPC system.</li>
 </ul>
 <p>The <code>modellauncher</code> section if specified will group all runs together and only submit a single job to the HPC cluster. This single job will leverage of a MPI program that will execute a single run. Some HPC systems will place a limit on the number of jobs that can be executed in parallel, this will only submit a single job (using multiple nodes). In case there is no limit on the number of jobs, a single PEcAn run could potentially submit a lot of jobs resulting in the full cluster running jobs for a single PEcAn run, preventing others from executing on the cluster.</p>
-<p>The <code>modellauncher</code> has 2 arguements:
+<p>The <code>modellauncher</code> has 3 arguments:
 * <code>binary</code> : [required] The full path to the binary modellauncher. Source code for this file can be found in <code>pecan/contrib/modellauncher</code>](<a href="https://github.com/PecanProject/pecan/tree/develop/contrib/modellauncher" class="uri">https://github.com/PecanProject/pecan/tree/develop/contrib/modellauncher</a>).
-* <code>qsub.extra</code> : [optional] Additional flags to pass to qsub besides those specified in the <code>qsub</code> tag in host. This option can be used to specify that the MPI environment needs to be used and the number of nodes that should be used.</p>
+* <code>qsub.extra</code> : [optional] Additional flags to pass to qsub besides those specified in the <code>qsub</code> tag in host. This option can be used to specify that the MPI environment needs to be used and the number of nodes that should be used.
+* <code>mpirun</code>: [optional] Additional commands to be added to the front of <code>launcher.sh</code>. Default is <code>mpirun &lt;path to binary&gt; &lt;path to joblist.txt&gt;</code>. Edit this to, for example, load necessary modules to run <code>mpirun</code>.</p>
 </div>
 </div>
             </section>
