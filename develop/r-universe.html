@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-07-26" />
+<meta name="date" content="2022-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -764,7 +764,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-4"><a href="r-universe.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">CRAN =</span> <span class="st">&#39;https://cloud.r-project.org&#39;</span>))</span>
 <span id="cb16-5"><a href="r-universe.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and install PEcAn.all in R</span></span>
 <span id="cb16-6"><a href="r-universe.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;PEcAn.all&#39;</span>)</span></code></pre></div>
-<p>However, functionality will be limited without a connection to a BETYdb instance. <a href="osinstall.html#install-bety">Instructions to install BETY</a>.</p>
+<p>If you are planning on working on PEcAn development with a local install, consider adding the above <code>options()</code> to a project-level .Rprofile as well. For example, by using <code>usethis::edit_r_profile("project")</code>. This will allow <code>devtools</code> to install dependencies from r-universe, for example <code>devtools::install_deps("models/ed")</code> should work when “<a href="https://pecanproject.r-universe.dev" class="uri">https://pecanproject.r-universe.dev</a>” is set as a repo.</p>
+<p><strong>NOTE:</strong> functionality of a local install will be limited without a connection to a BETYdb instance. <a href="osinstall.html#install-bety">Instructions to install BETY</a>.</p>
 </div>
             </section>
 
