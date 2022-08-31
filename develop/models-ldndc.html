@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.3 Installation From r-universe | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="4.3 Installation From r-universe | The Predictive Ecosystem Analyzer" />
+  <title>13.6 LDNDC | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="13.6 LDNDC | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.3 Installation From r-universe | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="13.6 LDNDC | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.3 Installation From r-universe | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="13.6 LDNDC | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="install-docker.html"/>
-<link rel="next" href="install-native.html"/>
+<link rel="prev" href="models-gday.html"/>
+<link rel="next" href="models-linkages.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -761,25 +761,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-universe" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Installation From r-universe<a href="r-universe.html#r-universe" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><code>PEcAn.all</code> and all it’s dependencies can be installed from <a href="https://pecanproject.r-universe.dev/">r-universe</a> with the following code:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r-universe.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enable repository from pecanproject</span></span>
-<span id="cb16-2"><a href="r-universe.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(</span>
-<span id="cb16-3"><a href="r-universe.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pecanproject =</span> <span class="st">&#39;https://pecanproject.r-universe.dev&#39;</span>,</span>
-<span id="cb16-4"><a href="r-universe.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">CRAN =</span> <span class="st">&#39;https://cloud.r-project.org&#39;</span>))</span>
-<span id="cb16-5"><a href="r-universe.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and install PEcAn.all in R</span></span>
-<span id="cb16-6"><a href="r-universe.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;PEcAn.all&#39;</span>)</span></code></pre></div>
-<p>If you are planning on working on PEcAn development with a local install, consider adding the above <code>options()</code> to a project-level .Rprofile as well. For example, by using <code>usethis::edit_r_profile("project")</code>. This will allow <code>devtools</code> to install dependencies from r-universe, for example <code>devtools::install_deps("models/ed")</code> should work when “<a href="https://pecanproject.r-universe.dev" class="uri">https://pecanproject.r-universe.dev</a>” is set as a repo.</p>
-<p><strong>NOTE:</strong> functionality of a local install will be limited without a connection to a BETYdb instance. <a href="osinstall.html#install-bety">Instructions to install BETY</a>.</p>
+<div id="models-ldndc" class="section level2 hasAnchor" number="13.6">
+<h2><span class="header-section-number">13.6</span> LDNDC<a href="models-ldndc.html#models-ldndc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model Information</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Home Page</td>
+<td><a href="https://ldndc.imk-ifu.kit.edu/about/model.php" class="uri">https://ldndc.imk-ifu.kit.edu/about/model.php</a></td>
+</tr>
+<tr class="even">
+<td>Source Code</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>License</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Authors</td>
+<td>Prof. Dr. Klaus Butterbach-Bahl, Dr. Edwin Haas, …</td>
+</tr>
+<tr class="odd">
+<td>PEcAn Integration</td>
+<td>Henri Kajasilta</td>
+</tr>
+</tbody>
+</table>
+<div id="introduction-3" class="section level3 hasAnchor" number="13.6.1">
+<h3><span class="header-section-number">13.6.1</span> Introduction<a href="models-ldndc.html#introduction-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>LandscapeDNDC is designed to simulate biosphere/hydrosphere processes of forest, arable and grassland ecosystems. It is modularly designed and therefore allows for various model selections to be plugged in. Most up-to-date information from LDNDC can be found here, as well as the authors, users guide and documentation of the model: <a href="https://ldndc.imk-ifu.kit.edu/index.php" class="uri">https://ldndc.imk-ifu.kit.edu/index.php</a></p>
+<p><strong>PEcAn configuration file additions</strong></p>
+<p>The following sections of the PEcAn XML are relevant or have influence at the moment:</p>
+<p><code>ensemble</code>
+<code>variable</code>: Options are only LAI and GPP</p>
+<p><code>model</code>
+<code>id</code>: Corresponding the id of LDNDC in BETY</p>
+<p><code>run</code>
+<code>inputs</code>
+<code>start_date</code>: Start date of the simulation
+<code>end_date</code>: End date of the simulation</p>
+</div>
+<div id="model-specific-input-files-2" class="section level3 hasAnchor" number="13.6.2">
+<h3><span class="header-section-number">13.6.2</span> Model specific input files<a href="models-ldndc.html#model-specific-input-files-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>LDNDC takes several files as an input, and can also generate multiple output files. These ńotes regarding input files are written from the PEcAn integration point of view, and detailed information about input files can be found from the user guide, which is available via the above links.</p>
+<p>Input files:</p>
+<p><code>Project</code> — Contains essential information in order to set-up the simulation run. For example, the file contains information of other files which will be used in the simulations as well as the time period when the simulations are taking a place.</p>
+<p><code>Setup</code> — Defines which modules are used.</p>
+<p><code>Climate</code> — Met data that is used in simulations.</p>
+<p><code>Speciesparameters</code> — Species used in the simulations should be defined here and the file holds the approppriate information of the used species.</p>
+<p><code>Siteparameters</code> — Works similarly as species parameters, but in the site features point of view.</p>
+<p><code>Event</code> — Holds information about the events, which are essential in arable simulations.</p>
+<p><code>Site</code> — Specific information about the site.</p>
+<p><code>Airchemistry</code> — Information about the airchemistry.</p>
+<div id="model-configuration-files-2" class="section level4 hasAnchor" number="13.6.2.1">
+<h4><span class="header-section-number">13.6.2.1</span> Model configuration files<a href="models-ldndc.html#model-configuration-files-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Due to the amount of different input files, there are several templates which are used in model configuration.
+Templates are located at <code>models/ldndc/inst/</code> and are copied to the simulation’s run directory before the model run.</p>
+<ul>
+<li><p><strong>project.ldndc</strong> : Project file is populated in <code>write.configs.LDNDC</code> based on the inputs of the PEcAn run. In addition to having the correct input files that are used in the simulation, the project file is filled in with the simulation time period and the directory paths regarding other input files that are read during the simulation. The file also sets the path for output files. These other input files are found from the same directory as the project file when starting the model run, and the output file is created among the other outputs of the simulation. At the moment, simulations are executed half-hourly.</p></li>
+<li><p><strong>template.job</strong> : Will be filled in with the information that model execution requires in PEcAn. Calls for example models binary and executes the <code>project.ldndc</code> file.</p></li>
+<li><p><strong>events_template.xml</strong> : Has three events (plant, manure and cut), which are filled in in <code>write.configs.LDNDC</code>. Events should be generated based on some event file, but such implementation has not been applied yet. This template is only meant for testing for now.</p></li>
+<li><p><strong>speciesparameter_template.xml</strong> : Has one replacable section. This section is filled in within <code>write.configs.LDNDC</code>, and is currently just hard-coded values for perennial grass species. This will be one of the key files, because the used pfts and corresponding pft values are written here. At this stage, it is hard-coded to only have one pft, but it should be generated based on the trait values that are available from BETY database.</p></li>
+<li><p><strong>siteparameters.xml</strong> : Some default value for siteparameters.</p></li>
+<li><p><strong>site.xml</strong> : Some default values for site.</p></li>
+<li><p><strong>airchemistry.txt</strong> : Some default data for airchemistry.</p></li>
+<li><p><strong>climate.txt</strong> : This file is created from the netcdf file. A symbolic link will be created into the run directory for it.</p></li>
+<li><p><strong>setup.xml</strong> : Contains information which modules the model simulation is using. Default settings should fit for most of the purposes and these are currently hard-coded.</p></li>
+</ul>
+</div>
+</div>
+<div id="installation-notes-2" class="section level3 hasAnchor" number="13.6.3">
+<h3><span class="header-section-number">13.6.3</span> Installation notes<a href="models-ldndc.html#installation-notes-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Obtaining LDNDC program requires credentials, which the user is able to request from the developers of the model. With the credentials, the pre-compiled LDNDC program can be downloaded here: <a href="https://ldndc.imk-ifu.kit.edu/download/download-model.php" class="uri">https://ldndc.imk-ifu.kit.edu/download/download-model.php</a></p>
+<p>After obtaining the necessary files, the user should execute the install script that is found from the ldndc-‘<em>version-number</em>’ directory. With linux, executing would happen with command <code>sh install.sh</code>. Succesfull installation will create a <code>.ldndc</code> directory to the user’s home directory. Running the simulations happens by calling the ldndc executable (found from the <code>/bin</code> directory) and giving the path file to the project file that contains the specs of the simulation. Instructions in detail and how to play with these setups are explained more broadly in the user guide.</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="install-docker.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="install-native.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="models-gday.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="models-linkages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -810,7 +884,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/02_demos_tutorials_workflows/01_install_pecan.Rmd",
+"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/03_topical_pages/05_models/ldndc.Rmd",
 "text": "Edit"
 },
 "history": {
