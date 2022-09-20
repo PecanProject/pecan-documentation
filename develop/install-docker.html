@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2022-09-18" />
+<meta name="date" content="2022-09-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -776,15 +776,15 @@ Refer to the Docker documentation for debugging.</p>
 <p>NOTE: Depending on how Docker is installed and configured, you may have to run this command as <code>sudo</code>.
 Try running the command without <code>sudo</code> first.
 If that fails, but running as <code>sudo</code> succeeds, see <a href="https://docs.docker.com/install/linux/linux-postinstall/">these instructions</a> for steps to use Docker as a non-root user.</p></li>
-<li><p><strong>Install docker-compose</strong>. If you are running this on a Mac or Windows this might be already installed. On Linux you will need to install this it separately; see <a href="https://docs.docker.com/compose/install/" class="uri">https://docs.docker.com/compose/install/</a>.</p>
-<p>To see if docker-compose is successfully installed, use the following shell command:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="install-docker.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> <span class="at">-v</span></span></code></pre></div>
-<p>This should print the current version of docker-compose. We have tested the instruction below with versions of docker-compose 1.22 and above.</p></li>
-<li><p><strong>Download the PEcAn docker-compose file</strong>. It is located in the root directory of the <a href="https://github.com/pecanproject/pecan">PEcAn source code</a>. For reference, here are direct links to the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker-compose.yml">latest stable version</a> and the <a href="https://raw.githubusercontent.com/PecanProject/pecan/develop/docker-compose.yml">bleeding edge development version</a>. (To download the files, you should be able to right click the link and select “Save link as”.) Make sure the file is saved as <code>docker-compose.yml</code> in a directory called <code>pecan</code>.</p></li>
-<li><p><strong>Initialize the PEcAn database and data images</strong>. Navigate to the directory you saved <code>docker-compose.yml</code> to and use the following <code>docker-compose</code> commands to download all the data PEcAn needs to start working. For more on how they work, see our <a href="the-pecan-docker-install-process-in-detail.html#pecan-docker-quickstart-init">Docker topical pages</a>.</p>
+<li><p><strong>Install docker compose</strong>. If you are running this on a Mac or Windows this might be already installed. On Linux you will need to install this it separately; see <a href="https://docs.docker.com/compose/install/" class="uri">https://docs.docker.com/compose/install/</a>.</p>
+<p>To see if docker compose is successfully installed, use the following shell command:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="install-docker.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose version</span></code></pre></div>
+<p>This should print the current version of docker-compose. We have tested the instruction below with versions of docker compose 1.22 and above.</p></li>
+<li><p><strong>Download the PEcAn docker compose file</strong>. It is located in the root directory of the <a href="https://github.com/pecanproject/pecan">PEcAn source code</a>. For reference, here are direct links to the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker-compose.yml">latest stable version</a> and the <a href="https://raw.githubusercontent.com/PecanProject/pecan/develop/docker-compose.yml">bleeding edge development version</a>. (To download the files, you should be able to right click the link and select “Save link as”.) Make sure the file is saved as <code>docker-compose.yml</code> in a directory called <code>pecan</code>.</p></li>
+<li><p><strong>Initialize the PEcAn database and data images</strong>. The following <code>docker compose</code> commands are used to download all the data PEcAn needs to start working. For more on how they work, see our <a href="the-pecan-docker-install-process-in-detail.html#pecan-docker-quickstart-init">Docker topical pages</a>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Create and start the PEcAn database container (without any data)</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="install-docker.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span> postgres</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="install-docker.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span> postgres</span></code></pre></div>
 <p>If this is successful, the end of the output should look like the following:</p>
 <pre><code>Creating pecan-postgres-1 ... done</code></pre></li>
 <li><p>“Initialize” the data for the PEcAn database.</p>
@@ -792,13 +792,13 @@ If that fails, but running as <code>sudo</code> succeeds, see <a href="https://d
 <p>This should produce a lot of output describing the database operations happening under the hood.
 Some of these will look like errors, but <em>this is normal</em>.
 This command succeeded if the output ends with the following (the syntax for creating a new user for accessing BetyDB):</p>
-<pre><code>docker-compose run bety user &#39;login&#39; &#39;password&#39; &#39;full name&#39; &#39;email&#39; 1 1</code></pre></li>
+<pre><code>docker compose run bety user &#39;login&#39; &#39;password&#39; &#39;full name&#39; &#39;email&#39; 1 1</code></pre></li>
 <li><p>Add a user to BetyDB using the example syntax provided as the last line of the output of the previous step:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="install-docker.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># guest user</span></span>
-<span id="cb11-2"><a href="install-docker.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> run <span class="at">--rm</span> bety user guestuser guestuser <span class="st">&quot;Guest User&quot;</span> guestuser@example.com 4 4</span>
+<span id="cb11-2"><a href="install-docker.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> bety user guestuser guestuser <span class="st">&quot;Guest User&quot;</span> guestuser@example.com 4 4</span>
 <span id="cb11-3"><a href="install-docker.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="install-docker.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># example user</span></span>
-<span id="cb11-5"><a href="install-docker.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> run <span class="at">--rm</span> bety user carya illinois <span class="st">&quot;Carya Demo User&quot;</span> carya@example.com 1 1</span></code></pre></div></li>
+<span id="cb11-5"><a href="install-docker.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> bety user carya illinois <span class="st">&quot;Carya Demo User&quot;</span> carya@example.com 1 1</span></code></pre></div></li>
 <li><p>Download and configure the core PEcAn database files.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="install-docker.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-ti</span> <span class="at">--rm</span> <span class="at">--network</span> pecan_pecan <span class="at">--volume</span> pecan_pecan:/data <span class="at">--env</span> FQDN=docker pecan/data:develop</span></code></pre></div>
 <p>This will produce a lot of output describing file operations.
@@ -814,7 +814,7 @@ PECAN_VERSION=develop
 <p>Setting <code>PECAN_VERSION=develop</code> indicates that you want to run the bleeding-edge <code>develop</code> branch, meaning it may have bugs. To go ahead with the stable version you may set <code>PECAN_VERSION=latest</code> or <code>PECAN_VERSION=&lt;release-number&gt;</code> (For example <code>1.7.0</code>). You can look at the list of all the <a href="https://github.com/pecanproject/pecan/releases">releases</a> of PEcAn to see what options are availble.</p></li>
 </ol></li>
 <li><p><strong>Start the PEcAn stack</strong>. Assuming all of the steps above completed successfully, start the full stack by running the following shell command:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="install-docker.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="install-docker.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span></span></code></pre></div>
 <p>If all of the containers started successfully, you should be able to access the various components from a browser via the following URLs (if you run these commands on a remote machine replace localhost with the actual hostname).</p>
 <ul>
 <li>PEcAn documentation and home page – <a href="http://pecan.localhost" class="uri">http://pecan.localhost</a></li>
