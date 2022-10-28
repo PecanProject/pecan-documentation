@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>15.14 ICOS Ecosystem Archive | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="15.14 ICOS Ecosystem Archive | The Predictive Ecosystem Analyzer" />
+  <title>9 dplyr | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="9 dplyr | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="15.14 ICOS Ecosystem Archive | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="9 dplyr | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="15.14 ICOS Ecosystem Archive | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="9 dplyr | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="icos-drought-2018.html"/>
-<link rel="next" href="download-gfdl.html"/>
+<link rel="prev" href="coding-practices.html"/>
+<link rel="next" href="developer-testing.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -764,21 +764,166 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="icos-ecosystem-archive" class="section level2 hasAnchor" number="15.14">
-<h2><span class="header-section-number">15.14</span> ICOS Ecosystem Archive<a href="icos-ecosystem-archive.html#icos-ecosystem-archive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Scale: site</p>
-<p>Resolution: 30 min</p>
-<p>Availability: Varies by <a href="https://meta.icos-cp.eu/collections/q4V7P1VLZevIrnlsW6SJO1Rz">site</a></p>
-<p>Notes: To use this option, set <code>source</code> as <code>ICOS</code> and a <code>product</code> tag containing <code>etc</code> in <code>pecan.xml</code></p>
+<div id="dplyr" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> dplyr<a href="dplyr.html#dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>When running <code>devtools::check()</code> a common warning relating to <code>dplyr</code> code is “no visible binding for global variable ‘x’”</p>
+<p>In <a href="https://dplyr.tidyverse.org/articles/programming.html#data-masking">data-masking</a> situations (e.g. <code>mutate()</code>, <code>filter()</code>), you can eliminate this warning by using the <code>.data</code> pronoun. For example, instead of <code>df %&gt;% mutate(newvar = oldvar + 2)</code>, use <code>df %&gt;% mutate(newvar = .data$oldvar + 2)</code>.</p>
+<p>In <a href="https://dplyr.tidyverse.org/articles/programming.html#data-masking">tidy-select</a> situations (e.g. <code>select()</code>, <code>rename()</code>), you can eliminate this warning by using strings instead of naked column names. For example, instead of <code>df %&gt;% select(y)</code> use <code>df %&gt;% select("y")</code>. Using <code>.data</code> inside of <code>select()</code> is <a href="https://tidyselect.r-lib.org/news/index.html#lifecycle-changes-1-2-0">deprecated as of tidyselect v1.2.0</a></p>
 
+<div id="developer-logging" class="section level3 hasAnchor" number="9.0.1">
+<h3><span class="header-section-number">9.0.1</span> Logging<a href="dplyr.html#developer-logging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>During development we often add many print statements to check to see how the code is doing, what is happening, what intermediate results there are etc. When done with the development it would be nice to turn this additional code off, but have the ability to quickly turn it back on if we discover a problem. This is where logging comes into play. Logging allows us to use “rules” to say what information should be shown. For example when I am working on the code to create graphs, I do not have to see any debugging information about the SQL command being sent, however trying to figure out what goes wrong during a SQL statement it would be nice to show the SQL statements without adding any additional code.</p>
+<p>PEcAn provides a set of <code>logger.*</code> functions that should be used in place of base R’s <code>stop</code>, <code>warn</code>, <code>print</code>, and similar functions. The <code>logger</code> functions make it easier to print to a system log file, and to control the level of output produced by PEcAn.</p>
+<ul>
+<li>The file <a href="https://github.com/PecanProject/pecan/blob/develop/base/logger/tests/testthat/test.logger.R">test.logger.R</a> provides descriptive examples</li>
+<li>This query provides an current overview of <a href="https://github.com/PecanProject/pecan/search?q=logger&amp;ref=cmdform">functions that use logging</a></li>
+<li>Logger functions and their corresponding levels (in order of increasing level):</li>
+<li><code>logger.debug</code> (<code>"DEBUG"</code>) – Low-level diagnostic messages that are hidden by default. Good examples of this are expanded file paths and raw results from database queries or other analyses.</li>
+<li><code>logger.info</code> (<code>"INFO"</code>) – Informational messages that regular users may want to see, but which do not indicate anything unexpected. Good examples of this are progress updates updates for long-running processes, or brief summaries of queries or analyses.</li>
+<li><code>logger.warn</code> (<code>"WARN"</code>) – Warning messages about issues that may lead to unexpected but valid results. Good examples of this are interactions between arguments that lead to some arguments being ignored or removal of missing or extreme values.</li>
+<li><code>logger.error</code> (<code>"ERROR"</code>) – Error messages from which PEcAn has some capacity to recover. Unless you have a very good reason, we recommend avoiding this in favor of either <code>logger.severe</code> to actually stop execution or <code>logger.warn</code> to more explicitly indicate that the problem is not fatal.</li>
+<li><code>logger.severe</code> – Catastrophic errors that warrant immediate termination of the workflow. This is the only function that actually stops R’s execution (via <code>stop</code>).</li>
+<li>The <code>logger.setLevel</code> function sets the level at which a message will be printed. For instance, <code>logger.setLevel("WARN")</code> will suppress <code>logger.info</code> and <code>logger.debug</code> messages, but will print <code>logger.warn</code> and <code>logger.error</code> messages. <code>logger.setLevel("OFF")</code> suppresses all logger messages.</li>
+<li>To print all messages to console, use <code>logger.setUseConsole(TRUE)</code></li>
+</ul>
+
+</div>
+<div id="developer-packagedata" class="section level3 hasAnchor" number="9.0.2">
+<h3><span class="header-section-number">9.0.2</span> Package Data<a href="dplyr.html#developer-packagedata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="summary" class="section level4 hasAnchor" number="9.0.2.1">
+<h4><span class="header-section-number">9.0.2.1</span> Summary:<a href="dplyr.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Files with the following extensions will be read by R as data:</p>
+<ul>
+<li>plain R code in .R and .r files are sourced using <code>source()</code></li>
+<li>text tables in .tab, .txt, .csv files are read using <code>read()</code>
+** objects in R image files: .RData, .rda are loaded using <code>load()</code></li>
+<li>capitalization matters</li>
+<li>all objects in foo.RData are loaded into environment</li>
+<li>pro: easiset way to store objects in R format</li>
+<li>con: format is application (R) specific</li>
+</ul>
+<p>Details are in <code>?data</code>, which is mostly a copy of <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Data-in-packages">Data section of
+Writing R
+Extensions</a>.</p>
+</div>
+<div id="accessing-data" class="section level4 hasAnchor" number="9.0.2.2">
+<h4><span class="header-section-number">9.0.2.2</span> Accessing data<a href="dplyr.html#accessing-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Data in the [data] directory will be accessed in the following ways,</p>
+<ul>
+<li>efficient way: (especially for large data sets) using the <code>data</code>
+function:</li>
+</ul>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="dplyr.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(foo) <span class="co"># accesses data with, e.g. load(foo.RData), read(foo.csv), or source(foo.R) </span></span></code></pre></div>
+<ul>
+<li>easy way: by adding the following line to the package DESCRIPTION:
+<em>note:</em> this should be used with caution or it can cause difficulty as discussed in redmine issue #1118</li>
+</ul>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="dplyr.html#cb94-1" aria-hidden="true" tabindex="-1"></a>LazyData<span class="sc">:</span> <span class="cn">TRUE</span></span></code></pre></div>
+<p>From the R help page:</p>
+<p>Currently, a limited number of data formats can be accessed using the <code>data</code> function by placing one of the following filetypes in a packages’ <code>data</code> directory:
+* files ending <code>.R</code> or <code>.r</code> are <code>source()</code>d in, with the R working
+directory changed temporarily to the directory containing the respective
+file. (<code>data</code> ensures that the <code>utils</code> package is attached, in case it
+had been run <em>via</em> <code>utils::data</code>.)
+* files ending <code>.RData</code> or <code>.rda</code> are <code>load()</code>ed.
+* files ending <code>.tab</code>, <code>.txt</code> or <code>.TXT</code> are read using <code>read.table(..., header = TRUE)</code>, and hence result in a data frame.
+* files ending <code>.csv</code> or <code>.CSV</code> are read using <code>read.table(..., header = TRUE, sep = ';')</code>, and also result in a data frame.</p>
+<p>If your data does not fall in those 4 categories, or you can use the
+<code>system.file</code> function to get access to the data:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="dplyr.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ed.trait.dictionary.csv&quot;</span>, <span class="at">package=</span><span class="st">&quot;PEcAn.utils&quot;</span>)</span>
+<span id="cb95-2"><a href="dplyr.html#cb95-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;/home/kooper/R/x86_64-pc-linux-gnu-library/2.15/PEcAn.utils/data/ed.trait.dictionary.csv&quot;</span></span></code></pre></div>
+<p>The arguments are folder, filename(s) and then package. It will return
+the fully qualified path name to a file in a package, in this case it
+points to the trait data. This is almost the same as the data function,
+however we can now use any function to read the file, such as read.csv
+instead of read.csv2 which seems to be the default of data. This also
+allows us to store arbitrary files in the data folder, such as the the
+bug file and load it when we need it.</p>
+<div id="examples-of-data-in-pecan-packages" class="section level5 hasAnchor" number="9.0.2.2.1">
+<h5><span class="header-section-number">9.0.2.2.1</span> Examples of data in PEcAn packages<a href="dplyr.html#examples-of-data-in-pecan-packages" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>outputs: [/modules/uncertainties/data/output.RData]</li>
+<li>parameter samples [/modules/uncertainties/data/samples.RData]</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div id="developer-roxygen" class="section level3 hasAnchor" number="9.0.3">
+<h3><span class="header-section-number">9.0.3</span> Documenting functions using <code>roxygen2</code><a href="dplyr.html#developer-roxygen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is the standard method for documenting R functions in PEcAn.
+For detailed instructions, see one of the following resources:</p>
+<ul>
+<li><code>roxygen2</code> <a href="https://roxygen2.r-lib.org/">pacakge documentation</a>
+<ul>
+<li><a href="https://roxygen2.r-lib.org/articles/rd.html">Formatting overview</a></li>
+<li><a href="https://blog.rstudio.com/2017/02/01/roxygen2-6-0-0/">Markdown formatting</a></li>
+<li><a href="https://roxygen2.r-lib.org/articles/namespace.html">Namespaces</a> (e.g. when to use <code>@export</code>)</li>
+</ul></li>
+<li>From “R packages” by Hadley Wickham:
+<ul>
+<li><a href="http://r-pkgs.had.co.nz/man.html">Object Documentation</a></li>
+<li><a href="http://r-pkgs.had.co.nz/description.html">Package Metadata</a></li>
+</ul></li>
+</ul>
+<p>Below is a complete template for a Roxygen documentation block.
+Note that roxygen lines start with <code>#'</code>:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="dplyr.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Function title, in a few words</span></span>
+<span id="cb96-2"><a href="dplyr.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb96-3"><a href="dplyr.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Function description, in 2-3 sentences.</span></span>
+<span id="cb96-4"><a href="dplyr.html#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb96-5"><a href="dplyr.html#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; (Optional) Package details.</span></span>
+<span id="cb96-6"><a href="dplyr.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb96-7"><a href="dplyr.html#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param argument_1 A description of the argument</span></span>
+<span id="cb96-8"><a href="dplyr.html#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param argument_2 Another argument to the function</span></span>
+<span id="cb96-9"><a href="dplyr.html#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return A description of what the function returns.</span></span>
+<span id="cb96-10"><a href="dplyr.html#cb96-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb96-11"><a href="dplyr.html#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @author Your name &lt;your_email@email.com&gt;</span></span>
+<span id="cb96-12"><a href="dplyr.html#cb96-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb96-13"><a href="dplyr.html#cb96-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; \dontrun{</span></span>
+<span id="cb96-14"><a href="dplyr.html#cb96-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   # This example will NOT be run by R CMD check.</span></span>
+<span id="cb96-15"><a href="dplyr.html#cb96-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   # Useful for long-running functions, or functions that</span></span>
+<span id="cb96-16"><a href="dplyr.html#cb96-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   # depend on files or values that may not be accessible to R CMD check.</span></span>
+<span id="cb96-17"><a href="dplyr.html#cb96-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   my_function(&quot;~/user/my_file&quot;)</span></span>
+<span id="cb96-18"><a href="dplyr.html#cb96-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;}</span></span>
+<span id="cb96-19"><a href="dplyr.html#cb96-19" aria-hidden="true" tabindex="-1"></a><span class="co"># # This example WILL be run by R CMD check</span></span>
+<span id="cb96-20"><a href="dplyr.html#cb96-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; my_function(1:10, argument_2 = 5)</span></span>
+<span id="cb96-21"><a href="dplyr.html#cb96-21" aria-hidden="true" tabindex="-1"></a><span class="do">## ^^ A few examples of the function&#39;s usage</span></span>
+<span id="cb96-22"><a href="dplyr.html#cb96-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb96-23"><a href="dplyr.html#cb96-23" aria-hidden="true" tabindex="-1"></a><span class="co"># ^^ Whether or not the function will be &quot;exported&quot; (made available) to the user.</span></span>
+<span id="cb96-24"><a href="dplyr.html#cb96-24" aria-hidden="true" tabindex="-1"></a><span class="co"># If omitted, the function can only be used inside the package.</span></span>
+<span id="cb96-25"><a href="dplyr.html#cb96-25" aria-hidden="true" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>(argument_1, argument_2) {...}</span></code></pre></div>
+<p>Here is a complete example from the <code>PEcAn.utils::days_in_year()</code> function:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="dplyr.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Number of days in a year</span></span>
+<span id="cb97-2"><a href="dplyr.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb97-3"><a href="dplyr.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Calculate number of days in a year based on whether it is a leap year or not.</span></span>
+<span id="cb97-4"><a href="dplyr.html#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb97-5"><a href="dplyr.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param year Numeric year (can be a vector)</span></span>
+<span id="cb97-6"><a href="dplyr.html#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param leap_year Default = TRUE. If set to FALSE will always return 365</span></span>
+<span id="cb97-7"><a href="dplyr.html#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb97-8"><a href="dplyr.html#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @author Alexey Shiklomanov</span></span>
+<span id="cb97-9"><a href="dplyr.html#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return integer vector, all either 365 or 366</span></span>
+<span id="cb97-10"><a href="dplyr.html#cb97-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb97-11"><a href="dplyr.html#cb97-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb97-12"><a href="dplyr.html#cb97-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; days_in_year(2010)  # Not a leap year -- returns 365</span></span>
+<span id="cb97-13"><a href="dplyr.html#cb97-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; days_in_year(2012)  # Leap year -- returns 366</span></span>
+<span id="cb97-14"><a href="dplyr.html#cb97-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; days_in_year(2000:2008)  # Function is vectorized over years</span></span>
+<span id="cb97-15"><a href="dplyr.html#cb97-15" aria-hidden="true" tabindex="-1"></a>days_in_year <span class="ot">&lt;-</span> <span class="cf">function</span>(year, <span class="at">leap_year =</span> <span class="cn">TRUE</span>) {...}</span></code></pre></div>
+<p>To update documentation throughout PEcAn, run <code>make document</code> in the PEcAn root directory.
+<em>Make sure you do this before opening a pull request</em> –
+PEcAn’s automated testing (Travis) will check if any documentation is out of date and will throw an error like the following if it is:</p>
+<pre><code>These files were changed by the build process:
+{...}</code></pre>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="icos-drought-2018.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="download-gfdl.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="coding-practices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="developer-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -809,7 +954,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/03_topical_pages/06_data/01_meteorology.Rmd",
+"link": "https://github.com/tonygardella/pecan/edit/release/vtonydoc/book_source/02_demos_tutorials_workflows/05_developer_workflows/03_coding_practices/01-coding-style.Rmd",
 "text": "Edit"
 },
 "history": {
