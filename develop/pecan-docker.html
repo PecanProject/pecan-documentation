@@ -899,6 +899,7 @@ services:
     depends_on: postgres
     labels:
     - traefik.enable=true
+    - traefik.http.services.bety.loadbalancer.server.port=8000
     - traefik.http.routers.bety.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/bety/`)
   rstudio:
     image: pecan/base:${PECAN_VERSION:-latest}
@@ -1349,6 +1350,7 @@ However, note that certain features of the PEcAn web interface do link to the BE
   depends_on: postgres
   labels:
   - traefik.enable=true
+  - traefik.http.services.bety.loadbalancer.server.port=8000
   - traefik.http.routers.bety.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/bety/`)</code></pre>
 <p>The BETY container Dockerfile is located in the root directory of the <a href="https://github.com/PecanProject/bety">BETY GitHub repository</a> (<a href="https://github.com/PecanProject/bety/blob/master/Dockerfile">direct link</a>).</p>
 </div>
