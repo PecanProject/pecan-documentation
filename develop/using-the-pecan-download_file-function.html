@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>28.2 Using the PEcAn download.file() function | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="28.2 Using the PEcAn download.file() function | The Predictive Ecosystem Analyzer" />
+  <title>28.2 Using the PEcAn download_file() function | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="28.2 Using the PEcAn download_file() function | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="28.2 Using the PEcAn download.file() function | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="28.2 Using the PEcAn download_file() function | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="28.2 Using the PEcAn download.file() function | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="28.2 Using the PEcAn download_file() function | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-02-16" />
+<meta name="date" content="2023-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -709,7 +709,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="28" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>28</b> Miscellaneous</a>
 <ul>
 <li class="chapter" data-level="28.1" data-path="todo.html"><a href="todo.html"><i class="fa fa-check"></i><b>28.1</b> TODO</a></li>
-<li class="chapter" data-level="28.2" data-path="using-the-pecan-download.file-function.html"><a href="using-the-pecan-download.file-function.html"><i class="fa fa-check"></i><b>28.2</b> Using the PEcAn download.file() function</a></li>
+<li class="chapter" data-level="28.2" data-path="using-the-pecan-download_file-function.html"><a href="using-the-pecan-download_file-function.html"><i class="fa fa-check"></i><b>28.2</b> Using the PEcAn download_file() function</a></li>
 </ul></li>
 <li class="chapter" data-level="29" data-path="faq.html"><a href="faq.html"><i class="fa fa-check"></i><b>29</b> FAQ</a></li>
 <li class="chapter" data-level="30" data-path="pecan-project-used-in-courses.html"><a href="pecan-project-used-in-courses.html"><i class="fa fa-check"></i><b>30</b> PEcAn Project Used in Courses</a>
@@ -764,19 +764,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="using-the-pecan-download.file-function" class="section level2 hasAnchor" number="28.2">
-<h2><span class="header-section-number">28.2</span> Using the PEcAn download.file() function<a href="using-the-pecan-download.file-function.html#using-the-pecan-download.file-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>download.file(url, destination_file, method) <br>
+<div id="using-the-pecan-download_file-function" class="section level2 hasAnchor" number="28.2">
+<h2><span class="header-section-number">28.2</span> Using the PEcAn download_file() function<a href="using-the-pecan-download_file-function.html#using-the-pecan-download_file-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>download_file(url, destination_file, method) <br>
 <br></p>
 <p>This custom PEcAn function works together with the base R function download.file (<a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html</a>). However, it provides expanded functionality to generalize the use for a broad range of environments. This is because some computing environments are behind a firewall or proxy, including FTP firewalls. This may require the use of a custom FTP program and/or initial proxy server authentication to retrieve the files needed by PEcAn (e.g. meteorology drivers, other inputs) to run certain model simulations or tools. For example, the Brookhaven National Laboratory (BNL) requires an initial connection to a FTP proxy before downloading files via FTP protocol. As a result, the computers running PEcAn behind the BNL firewall (e.g. <a href="https://modex.bnl.gov" class="uri">https://modex.bnl.gov</a>) use the ncftp cleint (<a href="http://www.ncftp.com/" class="uri">http://www.ncftp.com/</a>) to download files for PEcAn because the base options with R::base download.file() such as curl, libcurl which don’t have the functionality to provide credentials for a proxy or even those such as wget which do but don’t easily allow for connecting through a proxy server before downloading files. The current option for use in these instances is <strong>ncftp</strong>, specifically <strong>ncftpget</strong></p>
 <p><br></p>
 <p>Examples: <br>
 <em>HTTP</em> <br></p>
-<pre><code>download.file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
+<pre><code>download_file(&quot;http://lib.stat.cmu.edu/datasets/csb/ch11b.txt&quot;,&quot;~/test.download.txt&quot;) </code></pre>
 <p><em>FTP</em></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
+<pre><code>download_file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;)</code></pre>
 <p><em>customizing to use ncftp when running behind an FTP firewall (requires ncftp to be installed and availible)</em> <br></p>
-<pre><code>download.file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
+<pre><code>download_file(&quot;ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel/pres.sfc.2000.nc&quot;, &quot;~/pres.sfc.2000.nc&quot;, method=&quot;&quot;ncftpget&quot;)</code></pre>
 <p><br></p>
 <p>On modex.bnl.gov, the ncftp firewall configuration file (e.g. ~/.ncftp/firewall) is configured as:
 firewall-type=1
