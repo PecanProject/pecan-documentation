@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-03-08" />
+<meta name="date" content="2023-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -324,9 +324,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.3" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-parameter-data-assimilation"><i class="fa fa-check"></i><b>12.2.3</b> Parameter Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.4" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-multi-settings"><i class="fa fa-check"></i><b>12.2.4</b> Multi-Settings</a></li>
 <li class="chapter" data-level="12.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>12.2.5</b> (experimental) State Data Assimilation</a></li>
-<li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.6</b> (experimental) Brown Dog</a></li>
-<li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.7</b> (experimental) Benchmarking</a></li>
-<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.8</b> Remote data module</a></li>
+<li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-variables"><i class="fa fa-check"></i><b>12.2.6</b> State Variables for State Data Assimilation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-observation-preparation"><i class="fa fa-check"></i><b>12.2.7</b> Observation Preparation for State Data Assimilation</a></li>
+<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Brown Dog</a></li>
+<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.9</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="12.2.10" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.10</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>13</b> PEcAn workflow (web/workflow.R)</a>
@@ -1052,19 +1054,19 @@ soil2netcdf(soil.data,&quot;soil.nc&quot;)</code></pre>
 <div id="example-2-converting-paleon-data" class="section level6 hasAnchor" number="20.3.4.3.0.2">
 <h6><span class="header-section-number">20.3.4.3.0.2</span> Example 2: Converting PalEON data<a href="NewInput.html#example-2-converting-paleon-data" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb306-1"><a href="NewInput.html#cb306-1" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
-<span id="cb306-2"><a href="NewInput.html#cb306-2" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">id</span>&gt;1000012896&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb306-3"><a href="NewInput.html#cb306-3" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb308-1"><a href="NewInput.html#cb308-1" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
+<span id="cb308-2"><a href="NewInput.html#cb308-2" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">id</span>&gt;1000012896&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb308-3"><a href="NewInput.html#cb308-3" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span></code></pre></div>
 <p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 </div>
 <div id="example-3-extracting-soil-properties-from-gssurgo-database" class="section level6 hasAnchor" number="20.3.4.3.0.3">
 <h6><span class="header-section-number">20.3.4.3.0.3</span> Example 3: Extracting soil properties from gSSURGO database<a href="NewInput.html#example-3-extracting-soil-properties-from-gssurgo-database" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the gSSURGO data product. This product needs no installation and it extract soil proeprties for the lower 48 states in U.S. In order to let the pecan know that you’re planning to use gSSURGO, you can the following XML tag under input in your pecan xml file.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb307-1"><a href="NewInput.html#cb307-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
-<span id="cb307-2"><a href="NewInput.html#cb307-2" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
-<span id="cb307-3"><a href="NewInput.html#cb307-3" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">source</span>&gt;gSSURGO&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb307-4"><a href="NewInput.html#cb307-4" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span>
-<span id="cb307-5"><a href="NewInput.html#cb307-5" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb309-1"><a href="NewInput.html#cb309-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
+<span id="cb309-2"><a href="NewInput.html#cb309-2" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
+<span id="cb309-3"><a href="NewInput.html#cb309-3" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">source</span>&gt;gSSURGO&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb309-4"><a href="NewInput.html#cb309-4" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span>
+<span id="cb309-5"><a href="NewInput.html#cb309-5" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
 </div>
 </div>
 </div>

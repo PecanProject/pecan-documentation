@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-03-08" />
+<meta name="date" content="2023-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -324,9 +324,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.3" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-parameter-data-assimilation"><i class="fa fa-check"></i><b>12.2.3</b> Parameter Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.4" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-multi-settings"><i class="fa fa-check"></i><b>12.2.4</b> Multi-Settings</a></li>
 <li class="chapter" data-level="12.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>12.2.5</b> (experimental) State Data Assimilation</a></li>
-<li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.6</b> (experimental) Brown Dog</a></li>
-<li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.7</b> (experimental) Benchmarking</a></li>
-<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.8</b> Remote data module</a></li>
+<li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-variables"><i class="fa fa-check"></i><b>12.2.6</b> State Variables for State Data Assimilation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-observation-preparation"><i class="fa fa-check"></i><b>12.2.7</b> Observation Preparation for State Data Assimilation</a></li>
+<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Brown Dog</a></li>
+<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.9</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="12.2.10" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.10</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>13</b> PEcAn workflow (web/workflow.R)</a>
@@ -768,15 +770,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">31.4</span> Importing Functions: Use Roxygen<a href="importing-functions-use-roxygen.html#importing-functions-use-roxygen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>PEcAn style is to import very few functions and instead use fully namespaced function calls (<code>pkg::fn()</code>) everywhere it’s practical to do so. In cases where double-colon notation would be especially burdensome, such as when importing custom binary operators like <code>%&gt;%</code>, it’s acceptable to import specific functions into the package namespace. Do this by using Roxygen comments of the form <code>#' @importFrom pkg function</code>, not by hand-editing the NAMESPACE file.</p>
 <p>If the import is only used in one or a few functions, use an <code>@importFrom</code> in the documentation for each function that uses it. If it is used all over the package, use a single <code>@importFrom</code> in the Roxygen documentation block for the whole package, which probably lives in a file called either <code>zzz.R</code> or <code>&lt;your_package_name&gt;-package.R</code>:</p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="importing-functions-use-roxygen.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; What your package does</span></span>
-<span id="cb491-2"><a href="importing-functions-use-roxygen.html#cb491-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb491-3"><a href="importing-functions-use-roxygen.html#cb491-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Longer description of the package goes here.</span></span>
-<span id="cb491-4"><a href="importing-functions-use-roxygen.html#cb491-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Probably with links to other resources about it, citations, etc.</span></span>
-<span id="cb491-5"><a href="importing-functions-use-roxygen.html#cb491-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb491-6"><a href="importing-functions-use-roxygen.html#cb491-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @docType package</span></span>
-<span id="cb491-7"><a href="importing-functions-use-roxygen.html#cb491-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @name PEcAn.yourpkg</span></span>
-<span id="cb491-8"><a href="importing-functions-use-roxygen.html#cb491-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom magrittr %&gt;%</span></span>
-<span id="cb491-9"><a href="importing-functions-use-roxygen.html#cb491-9" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="importing-functions-use-roxygen.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; What your package does</span></span>
+<span id="cb493-2"><a href="importing-functions-use-roxygen.html#cb493-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb493-3"><a href="importing-functions-use-roxygen.html#cb493-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Longer description of the package goes here.</span></span>
+<span id="cb493-4"><a href="importing-functions-use-roxygen.html#cb493-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Probably with links to other resources about it, citations, etc.</span></span>
+<span id="cb493-5"><a href="importing-functions-use-roxygen.html#cb493-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb493-6"><a href="importing-functions-use-roxygen.html#cb493-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @docType package</span></span>
+<span id="cb493-7"><a href="importing-functions-use-roxygen.html#cb493-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @name PEcAn.yourpkg</span></span>
+<span id="cb493-8"><a href="importing-functions-use-roxygen.html#cb493-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom magrittr %&gt;%</span></span>
+<span id="cb493-9"><a href="importing-functions-use-roxygen.html#cb493-9" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span></span></code></pre></div>
 <p>Roxygen will make sure there’s only one NAMESPACE entry per imported function no matter how many <code>importFrom</code> statements there are, but please pick a scheme (either import on every usage or once for the whole package), stick with it, and do not make function <code>x()</code> rely on an importFrom in the comments above function <code>y()</code>.</p>
 <p>Please do <em>not</em> import entire package namespaces (<code>#' @import pkg</code>); it increases the chance of function name collisions and makes it much harder to understand which package a given function was called from.</p>
 <p>A special note about importing functions from the <a href="https://tidyverse.org">tidyverse</a>: Be sure to import from the package(s) that actually contain the functions you want to use, e.g. <code>Imports: dplyr, magrittr, purrr</code> / <code>@importFrom magrittr %&gt;%</code> / <code>purrr::map(...)</code>, not <code>Imports: tidyverse</code> / <code>@importFrom tidyverse %&gt;%</code> / <code>tidyverse::map(...)</code>. The package named <code>tidyverse</code> is just a interactive shortcut that loads the whole collection of constituent packages; it doesn’t export any functions in its own namespace and therefore importing it into your package doesn’t make them available.</p>
