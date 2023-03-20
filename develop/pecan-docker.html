@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-03-16" />
+<meta name="date" content="2023-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -823,7 +823,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
 <pre><code>version: &#39;3.2&#39;
 services:
   traefik:
-    image: traefik:v2.5
+    image: traefik:v2.9
     command:
     - --log.level=INFO
     - --api=true
@@ -845,32 +845,6 @@ services:
     - traefik.http.routers.traefik.entrypoints=web
     - traefik.http.routers.traefik.rule=Host(`traefik.pecan.localhost`)
     - traefik.http.routers.traefik.service=api@internal
-  minio:
-    user: ${UID:-1001}:${GID:-1001}
-    image: minio/minio:latest
-    command: server /data
-    restart: unless-stopped
-    networks: pecan
-    environment:
-    - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-carya}
-    - MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-illinois}
-    labels:
-    - traefik.enable=true
-    - traefik.http.services.minio.loadbalancer.server.port=9000
-    - traefik.http.routers.minio.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp;
-      PathPrefix(`/minio/`)
-    volumes: pecan:/data
-  thredds:
-    user: ${UID:-1001}:${GID:-1001}
-    image: pecan/thredds:${PECAN_VERSION:-latest}
-    restart: unless-stopped
-    networks: pecan
-    volumes: pecan:/data
-    labels:
-    - traefik.enable=true
-    - traefik.http.services.thredds.loadbalancer.server.port=8080
-    - traefik.http.routers.thredds.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp;
-      PathPrefix(`/thredds/`)
   rabbitmq:
     image: rabbitmq:3.8-management
     restart: unless-stopped
@@ -1213,7 +1187,7 @@ For instance, the following lines in the <code>web</code> service configure acce
 <p>(Further details in the works…)</p>
 <p>The traefik service configuration looks like this:</p>
 <pre><code>traefik:
-  image: traefik:v2.5
+  image: traefik:v2.9
   command:
   - --log.level=INFO
   - --api=true
@@ -1248,20 +1222,7 @@ For instance, the following lines in the <code>web</code> service configure acce
 <p><a href="https://github.com/minio/minio">Minio</a> is a service that provides access to the a folder on disk through a variety of protocols, including S3 buckets and web-based access.
 We mainly use Minio to facilitate access to PEcAn data using a web browser without the need for CLI tools.</p>
 <p>Our current configuration is as follows:</p>
-<pre><code>minio:
-  user: ${UID:-1001}:${GID:-1001}
-  image: minio/minio:latest
-  command: server /data
-  restart: unless-stopped
-  networks: pecan
-  environment:
-  - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-carya}
-  - MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-illinois}
-  labels:
-  - traefik.enable=true
-  - traefik.http.services.minio.loadbalancer.server.port=9000
-  - traefik.http.routers.minio.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/minio/`)
-  volumes: pecan:/data</code></pre>
+<pre><code>NA: ~</code></pre>
 <p>The Minio interface is accessible by browsing to <code>minio.pecan.localhost</code>.
 From there, you can browse directories and download files.
 You can also upload files by clicking the red “+” in the bottom-right corner.</p>
@@ -1281,17 +1242,7 @@ Specific output files can also be accessed from the command line via commands li
 Specifically, this XML tells the data server to use the <code>datasetScan</code> tool to serve all files within the <code>/data/workflows</code> directory, with the additional <code>filter</code> that only files ending in <code>.nc</code> are served.
 For additional information about the syntax of this file, see the extensive <a href="https://www.unidata.ucar.edu/software/thredds/current/tds/reference/index.html">THREDDS documentation</a>.</p>
 <p>Our current configuration is as follows:</p>
-<pre><code>thredds:
-  user: ${UID:-1001}:${GID:-1001}
-  image: pecan/thredds:${PECAN_VERSION:-latest}
-  restart: unless-stopped
-  networks: pecan
-  volumes: pecan:/data
-  labels:
-  - traefik.enable=true
-  - traefik.http.services.thredds.loadbalancer.server.port=8080
-  - traefik.http.routers.thredds.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp;
-    PathPrefix(`/thredds/`)</code></pre>
+<pre><code>NA: ~</code></pre>
 </div>
 <div id="pecan-dc-postgres" class="section level3 hasAnchor" number="25.4.8">
 <h3><span class="header-section-number">25.4.8</span> <code>postgres</code><a href="pecan-docker.html#pecan-dc-postgres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
