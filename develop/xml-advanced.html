@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-06-14" />
+<meta name="date" content="2023-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -942,83 +942,101 @@ PEcAn.settings::write.settings(settings, outputfile = &quot;pecan.CHECKED.xml&qu
 <h3><span class="header-section-number">12.2.5</span> (experimental) State Data Assimilation<a href="xml-advanced.html#xml-state-data-assimilation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following tags can be used for state data assimilation. More detailed information can be found here: <a href="settings-configured-analyses.html#sda">State Data Assimilation Documentation</a></p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb152-1"><a href="xml-advanced.html#cb152-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">state.data.assimilation</span>&gt;</span>
-<span id="cb152-2"><a href="xml-advanced.html#cb152-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">process.variance</span>&gt;FALSE&lt;/<span class="kw">process.variance</span>&gt;</span>
+<span id="cb152-2"><a href="xml-advanced.html#cb152-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">process.variance</span>&gt;TRUE&lt;/<span class="kw">process.variance</span>&gt;</span>
 <span id="cb152-3"><a href="xml-advanced.html#cb152-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">sample.parameters</span>&gt;FALSE&lt;/<span class="kw">sample.parameters</span>&gt;</span>
-<span id="cb152-4"><a href="xml-advanced.html#cb152-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">state.variables</span>&gt;</span>
-<span id="cb152-5"><a href="xml-advanced.html#cb152-5" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
-<span id="cb152-6"><a href="xml-advanced.html#cb152-6" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">variable.name</span>&gt;AbvGrndWood&lt;/<span class="kw">variable.name</span>&gt;</span>
-<span id="cb152-7"><a href="xml-advanced.html#cb152-7" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">unit</span>&gt;MgC/ha&lt;/<span class="kw">unit</span>&gt;</span>
-<span id="cb152-8"><a href="xml-advanced.html#cb152-8" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
-<span id="cb152-9"><a href="xml-advanced.html#cb152-9" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">max_value</span>&gt;9999&lt;/<span class="kw">max_value</span>&gt;</span>
-<span id="cb152-10"><a href="xml-advanced.html#cb152-10" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">variable</span>&gt;</span>
-<span id="cb152-11"><a href="xml-advanced.html#cb152-11" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
-<span id="cb152-12"><a href="xml-advanced.html#cb152-12" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">variable.name</span>&gt;LAI&lt;/<span class="kw">variable.name</span>&gt;</span>
-<span id="cb152-13"><a href="xml-advanced.html#cb152-13" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">unit</span>&gt;&lt;/<span class="kw">unit</span>&gt;</span>
-<span id="cb152-14"><a href="xml-advanced.html#cb152-14" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
-<span id="cb152-15"><a href="xml-advanced.html#cb152-15" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">max_value</span>&gt;9999&lt;/<span class="kw">max_value</span>&gt;</span>
-<span id="cb152-16"><a href="xml-advanced.html#cb152-16" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">variable</span>&gt;</span>
-<span id="cb152-17"><a href="xml-advanced.html#cb152-17" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
-<span id="cb152-18"><a href="xml-advanced.html#cb152-18" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">variable.name</span>&gt;SoilMoistFrac&lt;/<span class="kw">variable.name</span>&gt;</span>
-<span id="cb152-19"><a href="xml-advanced.html#cb152-19" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">unit</span>&gt;&lt;/<span class="kw">unit</span>&gt;</span>
-<span id="cb152-20"><a href="xml-advanced.html#cb152-20" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
-<span id="cb152-21"><a href="xml-advanced.html#cb152-21" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">max_value</span>&gt;100&lt;/<span class="kw">max_value</span>&gt;</span>
-<span id="cb152-22"><a href="xml-advanced.html#cb152-22" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">variable</span>&gt;</span>
-<span id="cb152-23"><a href="xml-advanced.html#cb152-23" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
-<span id="cb152-24"><a href="xml-advanced.html#cb152-24" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">variable.name</span>&gt;TotSoilCarb&lt;/<span class="kw">variable.name</span>&gt;</span>
-<span id="cb152-25"><a href="xml-advanced.html#cb152-25" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">unit</span>&gt;kg/m^2&lt;/<span class="kw">unit</span>&gt;</span>
-<span id="cb152-26"><a href="xml-advanced.html#cb152-26" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
-<span id="cb152-27"><a href="xml-advanced.html#cb152-27" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">max_value</span>&gt;9999&lt;/<span class="kw">max_value</span>&gt;</span>
-<span id="cb152-28"><a href="xml-advanced.html#cb152-28" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">variable</span>&gt;</span>
-<span id="cb152-29"><a href="xml-advanced.html#cb152-29" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">state.variables</span>&gt;</span>
-<span id="cb152-30"><a href="xml-advanced.html#cb152-30" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">Obs_Prep</span>&gt;</span>
-<span id="cb152-31"><a href="xml-advanced.html#cb152-31" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">Landtrendr_AGB</span>&gt;</span>
-<span id="cb152-32"><a href="xml-advanced.html#cb152-32" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">AGB_input_dir</span>&gt;/projectnb/dietzelab/dongchen/Multi-site/download_500_sites/AGB&lt;/<span class="kw">AGB_input_dir</span>&gt;</span>
-<span id="cb152-33"><a href="xml-advanced.html#cb152-33" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">allow_download</span>&gt;TRUE&lt;/<span class="kw">allow_download</span>&gt;</span>
-<span id="cb152-34"><a href="xml-advanced.html#cb152-34" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">export_csv</span>&gt;TRUE&lt;/<span class="kw">export_csv</span>&gt;</span>
-<span id="cb152-35"><a href="xml-advanced.html#cb152-35" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">timestep</span>&gt;</span>
-<span id="cb152-36"><a href="xml-advanced.html#cb152-36" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">unit</span>&gt;year&lt;/<span class="kw">unit</span>&gt;</span>
-<span id="cb152-37"><a href="xml-advanced.html#cb152-37" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
-<span id="cb152-38"><a href="xml-advanced.html#cb152-38" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">timestep</span>&gt;</span>
-<span id="cb152-39"><a href="xml-advanced.html#cb152-39" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">Landtrendr_AGB</span>&gt;</span>
-<span id="cb152-40"><a href="xml-advanced.html#cb152-40" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">MODIS_LAI</span>&gt;</span>
-<span id="cb152-41"><a href="xml-advanced.html#cb152-41" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">search_window</span>&gt;30&lt;/<span class="kw">search_window</span>&gt;</span>
-<span id="cb152-42"><a href="xml-advanced.html#cb152-42" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">export_csv</span>&gt;TRUE&lt;/<span class="kw">export_csv</span>&gt;</span>
-<span id="cb152-43"><a href="xml-advanced.html#cb152-43" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">run_parallel</span>&gt;TRUE&lt;/<span class="kw">run_parallel</span>&gt;</span>
+<span id="cb152-4"><a href="xml-advanced.html#cb152-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">adjustment</span>&gt;TRUE&lt;/<span class="kw">adjustment</span>&gt;</span>
+<span id="cb152-5"><a href="xml-advanced.html#cb152-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">censored.data</span>&gt;FALSE&lt;/<span class="kw">censored.data</span>&gt;</span>
+<span id="cb152-6"><a href="xml-advanced.html#cb152-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">FullYearNC</span>&gt;TRUE&lt;/<span class="kw">FullYearNC</span>&gt;</span>
+<span id="cb152-7"><a href="xml-advanced.html#cb152-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">NC.Overwrite</span>&gt;FALSE&lt;/<span class="kw">NC.Overwrite</span>&gt;</span>
+<span id="cb152-8"><a href="xml-advanced.html#cb152-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">NC.Prefix</span>&gt;sipnet.out&lt;/<span class="kw">NC.Prefix</span>&gt;</span>
+<span id="cb152-9"><a href="xml-advanced.html#cb152-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">q.type</span>&gt;SINGLE&lt;/<span class="kw">q.type</span>&gt;</span>
+<span id="cb152-10"><a href="xml-advanced.html#cb152-10" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">Localization.FUN</span>&gt;Local.support&lt;/<span class="kw">Localization.FUN</span>&gt;</span>
+<span id="cb152-11"><a href="xml-advanced.html#cb152-11" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scalef</span>&gt;1&lt;/<span class="kw">scalef</span>&gt;</span>
+<span id="cb152-12"><a href="xml-advanced.html#cb152-12" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">chains</span>&gt;5&lt;/<span class="kw">chains</span>&gt;</span>
+<span id="cb152-13"><a href="xml-advanced.html#cb152-13" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">state.variables</span>&gt;</span>
+<span id="cb152-14"><a href="xml-advanced.html#cb152-14" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
+<span id="cb152-15"><a href="xml-advanced.html#cb152-15" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">variable.name</span>&gt;AbvGrndWood&lt;/<span class="kw">variable.name</span>&gt;</span>
+<span id="cb152-16"><a href="xml-advanced.html#cb152-16" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">unit</span>&gt;MgC/ha&lt;/<span class="kw">unit</span>&gt;</span>
+<span id="cb152-17"><a href="xml-advanced.html#cb152-17" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
+<span id="cb152-18"><a href="xml-advanced.html#cb152-18" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">max_value</span>&gt;9999&lt;/<span class="kw">max_value</span>&gt;</span>
+<span id="cb152-19"><a href="xml-advanced.html#cb152-19" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">variable</span>&gt;</span>
+<span id="cb152-20"><a href="xml-advanced.html#cb152-20" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
+<span id="cb152-21"><a href="xml-advanced.html#cb152-21" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">variable.name</span>&gt;LAI&lt;/<span class="kw">variable.name</span>&gt;</span>
+<span id="cb152-22"><a href="xml-advanced.html#cb152-22" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">unit</span>&gt;&lt;/<span class="kw">unit</span>&gt;</span>
+<span id="cb152-23"><a href="xml-advanced.html#cb152-23" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
+<span id="cb152-24"><a href="xml-advanced.html#cb152-24" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">max_value</span>&gt;9999&lt;/<span class="kw">max_value</span>&gt;</span>
+<span id="cb152-25"><a href="xml-advanced.html#cb152-25" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">variable</span>&gt;</span>
+<span id="cb152-26"><a href="xml-advanced.html#cb152-26" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
+<span id="cb152-27"><a href="xml-advanced.html#cb152-27" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">variable.name</span>&gt;SoilMoistFrac&lt;/<span class="kw">variable.name</span>&gt;</span>
+<span id="cb152-28"><a href="xml-advanced.html#cb152-28" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">unit</span>&gt;&lt;/<span class="kw">unit</span>&gt;</span>
+<span id="cb152-29"><a href="xml-advanced.html#cb152-29" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
+<span id="cb152-30"><a href="xml-advanced.html#cb152-30" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">max_value</span>&gt;100&lt;/<span class="kw">max_value</span>&gt;</span>
+<span id="cb152-31"><a href="xml-advanced.html#cb152-31" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">variable</span>&gt;</span>
+<span id="cb152-32"><a href="xml-advanced.html#cb152-32" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;</span>
+<span id="cb152-33"><a href="xml-advanced.html#cb152-33" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">variable.name</span>&gt;TotSoilCarb&lt;/<span class="kw">variable.name</span>&gt;</span>
+<span id="cb152-34"><a href="xml-advanced.html#cb152-34" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">unit</span>&gt;kg/m^2&lt;/<span class="kw">unit</span>&gt;</span>
+<span id="cb152-35"><a href="xml-advanced.html#cb152-35" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">min_value</span>&gt;0&lt;/<span class="kw">min_value</span>&gt;</span>
+<span id="cb152-36"><a href="xml-advanced.html#cb152-36" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">max_value</span>&gt;9999&lt;/<span class="kw">max_value</span>&gt;</span>
+<span id="cb152-37"><a href="xml-advanced.html#cb152-37" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">variable</span>&gt;</span>
+<span id="cb152-38"><a href="xml-advanced.html#cb152-38" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">state.variables</span>&gt;</span>
+<span id="cb152-39"><a href="xml-advanced.html#cb152-39" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">Obs_Prep</span>&gt;</span>
+<span id="cb152-40"><a href="xml-advanced.html#cb152-40" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">Landtrendr_AGB</span>&gt;</span>
+<span id="cb152-41"><a href="xml-advanced.html#cb152-41" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">AGB_input_dir</span>&gt;/projectnb/dietzelab/dongchen/Multi-site/download_500_sites/AGB&lt;/<span class="kw">AGB_input_dir</span>&gt;</span>
+<span id="cb152-42"><a href="xml-advanced.html#cb152-42" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">allow_download</span>&gt;TRUE&lt;/<span class="kw">allow_download</span>&gt;</span>
+<span id="cb152-43"><a href="xml-advanced.html#cb152-43" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">export_csv</span>&gt;TRUE&lt;/<span class="kw">export_csv</span>&gt;</span>
 <span id="cb152-44"><a href="xml-advanced.html#cb152-44" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">timestep</span>&gt;</span>
 <span id="cb152-45"><a href="xml-advanced.html#cb152-45" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">unit</span>&gt;year&lt;/<span class="kw">unit</span>&gt;</span>
 <span id="cb152-46"><a href="xml-advanced.html#cb152-46" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
 <span id="cb152-47"><a href="xml-advanced.html#cb152-47" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">timestep</span>&gt;</span>
-<span id="cb152-48"><a href="xml-advanced.html#cb152-48" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">MODIS_LAI</span>&gt;</span>
-<span id="cb152-49"><a href="xml-advanced.html#cb152-49" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">SMAP_SMP</span>&gt;</span>
+<span id="cb152-48"><a href="xml-advanced.html#cb152-48" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">Landtrendr_AGB</span>&gt;</span>
+<span id="cb152-49"><a href="xml-advanced.html#cb152-49" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">MODIS_LAI</span>&gt;</span>
 <span id="cb152-50"><a href="xml-advanced.html#cb152-50" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">search_window</span>&gt;30&lt;/<span class="kw">search_window</span>&gt;</span>
 <span id="cb152-51"><a href="xml-advanced.html#cb152-51" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">export_csv</span>&gt;TRUE&lt;/<span class="kw">export_csv</span>&gt;</span>
-<span id="cb152-52"><a href="xml-advanced.html#cb152-52" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">update_csv</span>&gt;FALSE&lt;/<span class="kw">update_csv</span>&gt;</span>
+<span id="cb152-52"><a href="xml-advanced.html#cb152-52" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">run_parallel</span>&gt;TRUE&lt;/<span class="kw">run_parallel</span>&gt;</span>
 <span id="cb152-53"><a href="xml-advanced.html#cb152-53" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">timestep</span>&gt;</span>
 <span id="cb152-54"><a href="xml-advanced.html#cb152-54" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">unit</span>&gt;year&lt;/<span class="kw">unit</span>&gt;</span>
 <span id="cb152-55"><a href="xml-advanced.html#cb152-55" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
 <span id="cb152-56"><a href="xml-advanced.html#cb152-56" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">timestep</span>&gt;</span>
-<span id="cb152-57"><a href="xml-advanced.html#cb152-57" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">SMAP_SMP</span>&gt;</span>
-<span id="cb152-58"><a href="xml-advanced.html#cb152-58" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">Soilgrids_SoilC</span>&gt;</span>
-<span id="cb152-59"><a href="xml-advanced.html#cb152-59" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">timestep</span>&gt;</span>
-<span id="cb152-60"><a href="xml-advanced.html#cb152-60" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">unit</span>&gt;year&lt;/<span class="kw">unit</span>&gt;</span>
-<span id="cb152-61"><a href="xml-advanced.html#cb152-61" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
-<span id="cb152-62"><a href="xml-advanced.html#cb152-62" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">timestep</span>&gt;</span>
-<span id="cb152-63"><a href="xml-advanced.html#cb152-63" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">Soilgrids_SoilC</span>&gt;</span>
-<span id="cb152-64"><a href="xml-advanced.html#cb152-64" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">outdir</span>&gt;/projectnb/dietzelab/dongchen/All_NEON_SDA/test_OBS&lt;/<span class="kw">outdir</span>&gt;</span>
-<span id="cb152-65"><a href="xml-advanced.html#cb152-65" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">start.date</span>&gt;2012-07-15&lt;/<span class="kw">start.date</span>&gt;</span>
-<span id="cb152-66"><a href="xml-advanced.html#cb152-66" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">end.date</span>&gt;2021-07-15&lt;/<span class="kw">end.date</span>&gt;</span>
-<span id="cb152-67"><a href="xml-advanced.html#cb152-67" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">Obs_Prep</span>&gt;</span>
-<span id="cb152-68"><a href="xml-advanced.html#cb152-68" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">spin.up</span>&gt;</span>
-<span id="cb152-69"><a href="xml-advanced.html#cb152-69" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
-<span id="cb152-70"><a href="xml-advanced.html#cb152-70" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">end.date</span>&gt;2006/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
-<span id="cb152-71"><a href="xml-advanced.html#cb152-71" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">spin.up</span>&gt;</span>
-<span id="cb152-72"><a href="xml-advanced.html#cb152-72" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">forecast.time.step</span>&gt;1&lt;/<span class="kw">forecast.time.step</span>&gt;</span>
-<span id="cb152-73"><a href="xml-advanced.html#cb152-73" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
-<span id="cb152-74"><a href="xml-advanced.html#cb152-74" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">end.date</span>&gt;2006/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
-<span id="cb152-75"><a href="xml-advanced.html#cb152-75" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">state.data.assimilation</span>&gt;</span></code></pre></div>
+<span id="cb152-57"><a href="xml-advanced.html#cb152-57" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">MODIS_LAI</span>&gt;</span>
+<span id="cb152-58"><a href="xml-advanced.html#cb152-58" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">SMAP_SMP</span>&gt;</span>
+<span id="cb152-59"><a href="xml-advanced.html#cb152-59" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">search_window</span>&gt;30&lt;/<span class="kw">search_window</span>&gt;</span>
+<span id="cb152-60"><a href="xml-advanced.html#cb152-60" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">export_csv</span>&gt;TRUE&lt;/<span class="kw">export_csv</span>&gt;</span>
+<span id="cb152-61"><a href="xml-advanced.html#cb152-61" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">update_csv</span>&gt;FALSE&lt;/<span class="kw">update_csv</span>&gt;</span>
+<span id="cb152-62"><a href="xml-advanced.html#cb152-62" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">timestep</span>&gt;</span>
+<span id="cb152-63"><a href="xml-advanced.html#cb152-63" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">unit</span>&gt;year&lt;/<span class="kw">unit</span>&gt;</span>
+<span id="cb152-64"><a href="xml-advanced.html#cb152-64" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
+<span id="cb152-65"><a href="xml-advanced.html#cb152-65" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">timestep</span>&gt;</span>
+<span id="cb152-66"><a href="xml-advanced.html#cb152-66" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">SMAP_SMP</span>&gt;</span>
+<span id="cb152-67"><a href="xml-advanced.html#cb152-67" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">Soilgrids_SoilC</span>&gt;</span>
+<span id="cb152-68"><a href="xml-advanced.html#cb152-68" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">timestep</span>&gt;</span>
+<span id="cb152-69"><a href="xml-advanced.html#cb152-69" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">unit</span>&gt;year&lt;/<span class="kw">unit</span>&gt;</span>
+<span id="cb152-70"><a href="xml-advanced.html#cb152-70" aria-hidden="true" tabindex="-1"></a>     &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
+<span id="cb152-71"><a href="xml-advanced.html#cb152-71" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">timestep</span>&gt;</span>
+<span id="cb152-72"><a href="xml-advanced.html#cb152-72" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">Soilgrids_SoilC</span>&gt;</span>
+<span id="cb152-73"><a href="xml-advanced.html#cb152-73" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">outdir</span>&gt;/projectnb/dietzelab/dongchen/All_NEON_SDA/test_OBS&lt;/<span class="kw">outdir</span>&gt;</span>
+<span id="cb152-74"><a href="xml-advanced.html#cb152-74" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">start.date</span>&gt;2012-07-15&lt;/<span class="kw">start.date</span>&gt;</span>
+<span id="cb152-75"><a href="xml-advanced.html#cb152-75" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">end.date</span>&gt;2021-07-15&lt;/<span class="kw">end.date</span>&gt;</span>
+<span id="cb152-76"><a href="xml-advanced.html#cb152-76" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">Obs_Prep</span>&gt;</span>
+<span id="cb152-77"><a href="xml-advanced.html#cb152-77" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">spin.up</span>&gt;</span>
+<span id="cb152-78"><a href="xml-advanced.html#cb152-78" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
+<span id="cb152-79"><a href="xml-advanced.html#cb152-79" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">end.date</span>&gt;2006/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
+<span id="cb152-80"><a href="xml-advanced.html#cb152-80" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">spin.up</span>&gt;</span>
+<span id="cb152-81"><a href="xml-advanced.html#cb152-81" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">forecast.time.step</span>&gt;1&lt;/<span class="kw">forecast.time.step</span>&gt;</span>
+<span id="cb152-82"><a href="xml-advanced.html#cb152-82" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
+<span id="cb152-83"><a href="xml-advanced.html#cb152-83" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">end.date</span>&gt;2006/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
+<span id="cb152-84"><a href="xml-advanced.html#cb152-84" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">state.data.assimilation</span>&gt;</span></code></pre></div>
 <ul>
 <li><strong>process.variance</strong> : [optional] TRUE/FLASE flag for if process variance should be estimated (TRUE) or not (FALSE). If TRUE, a generalized ensemble filter will be used. If FALSE, an ensemble Kalman filter will be used. Default is FALSE.</li>
 <li><strong>sample.parameters</strong> : [optional] TRUE/FLASE flag for if parameters should be sampled for each ensemble member or not. This allows for more spread in the intial conditions of the forecast.</li>
+<li><strong>adjustment</strong> : [optional] Bool variable decide if you want to adjust analysis results by the likelihood.</li>
+<li><strong>censored.data</strong> : [optional] Bool variable decide if you want to do MCMC sampling for the forecast ensemble space, the default is FALSE.</li>
+<li><strong>FullYearNC</strong> : [optional] Bool variable decide if you want to generate the full-year netcdf file when there is a overlap in time, the default is TRUE.</li>
+<li><strong>NC.Overwrite</strong> : [optional] Bool variable decide if you want to overwrite the previous netcdf file when there is a overlap in time, the default is FALSE.</li>
+<li><strong>NC.Prefix</strong> : [optional] The prefix for the generation of the full-year netcdf file, the default is sipnet.out.</li>
+<li><strong>q.type</strong> : [optional] The type of process variance that will be estimated, the default is SINGLE.</li>
+<li><strong>Localization.FUN</strong> : [optional] The localization function name for the localization operation, the default is Local.support.</li>
+<li><strong>scalef</strong> : [optional] The scale parameter used for the localization operation, the smaller the value is, the sites are more isolated.</li>
+<li><strong>chains</strong> : [optional] The number of chains needed to be estimated during the MCMC sampling process.</li>
 <li><strong><em>NOTE:</em></strong> If TRUE, you must also assign a vector of trait names to pick.trait.params within the sda.enkf function.</li>
 <li><strong>state.variable</strong> : [required] State variable that is to be assimilated (in PEcAn standard format, with pre-specified variable name, unit, and range). Four variables can be assimilated so far: including Aboveground biomass (AbvGrndWood), LAI, SoilMoistFrac, and Soil carbon (TotSoilCarb).</li>
 <li><strong>Obs_Prep</strong> : [required] This section will be handled through the SDA_Obs_Assembler function, if you want to proceed with this function, this section is required.</li>
