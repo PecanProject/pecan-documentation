@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-11-23" />
+<meta name="date" content="2023-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1228,9 +1228,9 @@ From there, you can browse directories and download files.
 You can also upload files by clicking the red “+” in the bottom-right corner.</p>
 <p>Note that it is currently impossible to create or upload directories using the Minio interface (except in the <code>/data</code> root directory – those folders are called “buckets” in Minio).
 Therefore, the recommended way to perform any file management tasks other than individual file uploads is through the command line, e.g.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb418-1"><a href="pecan-docker.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">--rm</span> <span class="at">--volumes</span> pecan_pecan:/data <span class="at">--volumes</span> /path/to/local/directory:/localdir ubuntu</span>
-<span id="cb418-2"><a href="pecan-docker.html#cb418-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb418-3"><a href="pecan-docker.html#cb418-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, you can move files between `/data` and `/localdir`, create new directories, etc.</span></span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb421-1"><a href="pecan-docker.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">--rm</span> <span class="at">--volumes</span> pecan_pecan:/data <span class="at">--volumes</span> /path/to/local/directory:/localdir ubuntu</span>
+<span id="cb421-2"><a href="pecan-docker.html#cb421-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-3"><a href="pecan-docker.html#cb421-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, you can move files between `/data` and `/localdir`, create new directories, etc.</span></span></code></pre></div>
 </div>
 <div id="pecan-dc-thredds" class="section level3 hasAnchor" number="25.4.7">
 <h3><span class="header-section-number">25.4.7</span> <code>thredds</code><a href="pecan-docker.html#pecan-dc-thredds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
