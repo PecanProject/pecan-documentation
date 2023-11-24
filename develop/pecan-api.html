@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-11-23" />
+<meta name="date" content="2023-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -775,52 +775,52 @@ What follows is a lightning introduction.</p>
 <div id="installation" class="section level4 hasAnchor" number="25.9.0.1">
 <h4><span class="header-section-number">25.9.0.1</span> Installation<a href="pecan-api.html#installation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The package can be installed directly from GitHub via <code>devtools::install_github</code>:</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="pecan-api.html#cb448-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pecanproject/pecan/api@develop&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="pecan-api.html#cb451-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pecanproject/pecan/api@develop&quot;</span>)</span></code></pre></div>
 </div>
 <div id="creating-and-submitting-a-workflow" class="section level4 hasAnchor" number="25.9.0.2">
 <h4><span class="header-section-number">25.9.0.2</span> Creating and submitting a workflow<a href="pecan-api.html#creating-and-submitting-a-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>With <code>pecanapi</code>, creating a workflow, submitting it to RabbitMQ, monitoring its progress, and processing its output can all be accomplished via an R script.</p>
 <p>Start by loading the package (and the <code>magrittr</code> package, for the <code>%&gt;%</code> pipe operator).</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="pecan-api.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pecanapi)</span>
-<span id="cb449-2"><a href="pecan-api.html#cb449-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="pecan-api.html#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pecanapi)</span>
+<span id="cb452-2"><a href="pecan-api.html#cb452-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
 <p>Set your PEcAn database user ID, and create a database connection object, which will be used for database operations throughout the workflow.</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="pecan-api.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">pecanapi.user_id =</span> <span class="dv">99000000002</span>)</span>
-<span id="cb450-2"><a href="pecan-api.html#cb450-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
-<span id="cb450-3"><a href="pecan-api.html#cb450-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">drv =</span> RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
-<span id="cb450-4"><a href="pecan-api.html#cb450-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">&quot;bety&quot;</span>,</span>
-<span id="cb450-5"><a href="pecan-api.html#cb450-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>,</span>
-<span id="cb450-6"><a href="pecan-api.html#cb450-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>,</span>
-<span id="cb450-7"><a href="pecan-api.html#cb450-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">port =</span> <span class="dv">5432</span></span>
-<span id="cb450-8"><a href="pecan-api.html#cb450-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="pecan-api.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">pecanapi.user_id =</span> <span class="dv">99000000002</span>)</span>
+<span id="cb453-2"><a href="pecan-api.html#cb453-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
+<span id="cb453-3"><a href="pecan-api.html#cb453-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">drv =</span> RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
+<span id="cb453-4"><a href="pecan-api.html#cb453-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">&quot;bety&quot;</span>,</span>
+<span id="cb453-5"><a href="pecan-api.html#cb453-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>,</span>
+<span id="cb453-6"><a href="pecan-api.html#cb453-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>,</span>
+<span id="cb453-7"><a href="pecan-api.html#cb453-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">port =</span> <span class="dv">5432</span></span>
+<span id="cb453-8"><a href="pecan-api.html#cb453-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Find model and site IDs for the site and model you want to run.</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="pecan-api.html#cb451-1" aria-hidden="true" tabindex="-1"></a>model_id <span class="ot">&lt;-</span> <span class="fu">get_model_id</span>(con, <span class="st">&quot;SIPNET&quot;</span>, <span class="st">&quot;136&quot;</span>)</span>
-<span id="cb451-2"><a href="pecan-api.html#cb451-2" aria-hidden="true" tabindex="-1"></a>all_umbs <span class="ot">&lt;-</span> <span class="fu">search_sites</span>(con, <span class="st">&quot;umbs%disturbance&quot;</span>)</span>
-<span id="cb451-3"><a href="pecan-api.html#cb451-3" aria-hidden="true" tabindex="-1"></a>site_id <span class="ot">&lt;-</span> <span class="fu">subset</span>(all_umbs, <span class="sc">!</span><span class="fu">is.na</span>(mat))[[<span class="st">&quot;id&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="pecan-api.html#cb454-1" aria-hidden="true" tabindex="-1"></a>model_id <span class="ot">&lt;-</span> <span class="fu">get_model_id</span>(con, <span class="st">&quot;SIPNET&quot;</span>, <span class="st">&quot;136&quot;</span>)</span>
+<span id="cb454-2"><a href="pecan-api.html#cb454-2" aria-hidden="true" tabindex="-1"></a>all_umbs <span class="ot">&lt;-</span> <span class="fu">search_sites</span>(con, <span class="st">&quot;umbs%disturbance&quot;</span>)</span>
+<span id="cb454-3"><a href="pecan-api.html#cb454-3" aria-hidden="true" tabindex="-1"></a>site_id <span class="ot">&lt;-</span> <span class="fu">subset</span>(all_umbs, <span class="sc">!</span><span class="fu">is.na</span>(mat))[[<span class="st">&quot;id&quot;</span>]]</span></code></pre></div>
 <p>Insert a new workflow into the PEcAn database, and extract its ID.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="pecan-api.html#cb452-1" aria-hidden="true" tabindex="-1"></a>workflow <span class="ot">&lt;-</span> <span class="fu">insert_new_workflow</span>(con, site_id, model_id,</span>
-<span id="cb452-2"><a href="pecan-api.html#cb452-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">start_date =</span> <span class="st">&quot;2004-01-01&quot;</span>,</span>
-<span id="cb452-3"><a href="pecan-api.html#cb452-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">end_date =</span> <span class="st">&quot;2004-12-31&quot;</span>)</span>
-<span id="cb452-4"><a href="pecan-api.html#cb452-4" aria-hidden="true" tabindex="-1"></a>workflow_id <span class="ot">&lt;-</span> workflow[[<span class="st">&quot;id&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="pecan-api.html#cb455-1" aria-hidden="true" tabindex="-1"></a>workflow <span class="ot">&lt;-</span> <span class="fu">insert_new_workflow</span>(con, site_id, model_id,</span>
+<span id="cb455-2"><a href="pecan-api.html#cb455-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">start_date =</span> <span class="st">&quot;2004-01-01&quot;</span>,</span>
+<span id="cb455-3"><a href="pecan-api.html#cb455-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">end_date =</span> <span class="st">&quot;2004-12-31&quot;</span>)</span>
+<span id="cb455-4"><a href="pecan-api.html#cb455-4" aria-hidden="true" tabindex="-1"></a>workflow_id <span class="ot">&lt;-</span> workflow[[<span class="st">&quot;id&quot;</span>]]</span></code></pre></div>
 <p>Pull all of this information together into a settings list object.</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="pecan-api.html#cb453-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb453-2"><a href="pecan-api.html#cb453-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_workflow</span>(workflow) <span class="sc">%&gt;%</span></span>
-<span id="cb453-3"><a href="pecan-api.html#cb453-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_database</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb453-4"><a href="pecan-api.html#cb453-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_pft</span>(<span class="st">&quot;temperate.deciduous&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb453-5"><a href="pecan-api.html#cb453-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_rabbitmq</span>(<span class="at">con =</span> con) <span class="sc">%&gt;%</span></span>
-<span id="cb453-6"><a href="pecan-api.html#cb453-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modifyList</span>(<span class="fu">list</span>(</span>
-<span id="cb453-7"><a href="pecan-api.html#cb453-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meta.analysis =</span> <span class="fu">list</span>(<span class="at">iter =</span> <span class="dv">3000</span>, <span class="at">random.effects =</span> <span class="fu">list</span>(<span class="at">on =</span> <span class="cn">FALSE</span>, <span class="at">use_ghs =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb453-8"><a href="pecan-api.html#cb453-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">run =</span> <span class="fu">list</span>(<span class="at">inputs =</span> <span class="fu">list</span>(<span class="at">met =</span> <span class="fu">list</span>(<span class="at">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="at">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="at">method =</span> <span class="st">&quot;ncss&quot;</span>))),</span>
-<span id="cb453-9"><a href="pecan-api.html#cb453-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ensemble =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">variable =</span> <span class="st">&quot;NPP&quot;</span>)</span>
-<span id="cb453-10"><a href="pecan-api.html#cb453-10" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="pecan-api.html#cb456-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb456-2"><a href="pecan-api.html#cb456-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_workflow</span>(workflow) <span class="sc">%&gt;%</span></span>
+<span id="cb456-3"><a href="pecan-api.html#cb456-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_database</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb456-4"><a href="pecan-api.html#cb456-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_pft</span>(<span class="st">&quot;temperate.deciduous&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb456-5"><a href="pecan-api.html#cb456-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_rabbitmq</span>(<span class="at">con =</span> con) <span class="sc">%&gt;%</span></span>
+<span id="cb456-6"><a href="pecan-api.html#cb456-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modifyList</span>(<span class="fu">list</span>(</span>
+<span id="cb456-7"><a href="pecan-api.html#cb456-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meta.analysis =</span> <span class="fu">list</span>(<span class="at">iter =</span> <span class="dv">3000</span>, <span class="at">random.effects =</span> <span class="fu">list</span>(<span class="at">on =</span> <span class="cn">FALSE</span>, <span class="at">use_ghs =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb456-8"><a href="pecan-api.html#cb456-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">run =</span> <span class="fu">list</span>(<span class="at">inputs =</span> <span class="fu">list</span>(<span class="at">met =</span> <span class="fu">list</span>(<span class="at">source =</span> <span class="st">&quot;CRUNCEP&quot;</span>, <span class="at">output =</span> <span class="st">&quot;SIPNET&quot;</span>, <span class="at">method =</span> <span class="st">&quot;ncss&quot;</span>))),</span>
+<span id="cb456-9"><a href="pecan-api.html#cb456-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ensemble =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">variable =</span> <span class="st">&quot;NPP&quot;</span>)</span>
+<span id="cb456-10"><a href="pecan-api.html#cb456-10" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
 <p>Submit the workflow via RabbitMQ, and monitor its progress in the R process.</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="pecan-api.html#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="fu">submit_workflow</span>(settings)</span>
-<span id="cb454-2"><a href="pecan-api.html#cb454-2" aria-hidden="true" tabindex="-1"></a><span class="fu">watch_workflow</span>(workflow_id)</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="pecan-api.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="fu">submit_workflow</span>(settings)</span>
+<span id="cb457-2"><a href="pecan-api.html#cb457-2" aria-hidden="true" tabindex="-1"></a><span class="fu">watch_workflow</span>(workflow_id)</span></code></pre></div>
 <p>Use THREDDS to access and analyze the output.</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="pecan-api.html#cb455-1" aria-hidden="true" tabindex="-1"></a>sipnet_out <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">nc_open</span>(<span class="fu">run_dap</span>(workflow_id, <span class="st">&quot;2004.nc&quot;</span>))</span>
-<span id="cb455-2"><a href="pecan-api.html#cb455-2" aria-hidden="true" tabindex="-1"></a>gpp <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">ncvar_get</span>(sipnet_out, <span class="st">&quot;GPP&quot;</span>)</span>
-<span id="cb455-3"><a href="pecan-api.html#cb455-3" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">ncvar_get</span>(sipnet_out, <span class="st">&quot;time&quot;</span>)</span>
-<span id="cb455-4"><a href="pecan-api.html#cb455-4" aria-hidden="true" tabindex="-1"></a>ncdf4<span class="sc">::</span><span class="fu">nc_close</span>(sipnet_out)</span>
-<span id="cb455-5"><a href="pecan-api.html#cb455-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(time, gpp, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="pecan-api.html#cb458-1" aria-hidden="true" tabindex="-1"></a>sipnet_out <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">nc_open</span>(<span class="fu">run_dap</span>(workflow_id, <span class="st">&quot;2004.nc&quot;</span>))</span>
+<span id="cb458-2"><a href="pecan-api.html#cb458-2" aria-hidden="true" tabindex="-1"></a>gpp <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">ncvar_get</span>(sipnet_out, <span class="st">&quot;GPP&quot;</span>)</span>
+<span id="cb458-3"><a href="pecan-api.html#cb458-3" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> ncdf4<span class="sc">::</span><span class="fu">ncvar_get</span>(sipnet_out, <span class="st">&quot;time&quot;</span>)</span>
+<span id="cb458-4"><a href="pecan-api.html#cb458-4" aria-hidden="true" tabindex="-1"></a>ncdf4<span class="sc">::</span><span class="fu">nc_close</span>(sipnet_out)</span>
+<span id="cb458-5"><a href="pecan-api.html#cb458-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(time, gpp, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>

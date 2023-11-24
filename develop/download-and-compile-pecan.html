@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-11-23" />
+<meta name="date" content="2023-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -770,39 +770,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.2</span> Download and Compile PEcAn<a href="download-and-compile-pecan.html#download-and-compile-pecan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Set <code>R_LIBS_USER</code></p>
 <p><a href="http://cran.r-project.org/doc/manuals/r-devel/R-admin.html#Managing-libraries">CRAN Reference</a></p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb101-1"><a href="download-and-compile-pecan.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># point R to personal lib folder</span></span>
-<span id="cb101-2"><a href="download-and-compile-pecan.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</span>
-<span id="cb101-3"><a href="download-and-compile-pecan.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.profile</span>
-<span id="cb101-4"><a href="download-and-compile-pecan.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${R_LIBS_USER}</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="download-and-compile-pecan.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># point R to personal lib folder</span></span>
+<span id="cb104-2"><a href="download-and-compile-pecan.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&#39;export R_LIBS_USER=${HOME}/R/library&#39;</span> <span class="op">&gt;&gt;</span> ~/.profile</span>
+<span id="cb104-3"><a href="download-and-compile-pecan.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.profile</span>
+<span id="cb104-4"><a href="download-and-compile-pecan.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${R_LIBS_USER}</span></span></code></pre></div>
 <div id="download-compile-and-install-pecan-from-github" class="section level3 hasAnchor" number="9.2.1">
 <h3><span class="header-section-number">9.2.1</span> Download, compile and install PEcAn from GitHub<a href="download-and-compile-pecan.html#download-compile-and-install-pecan-from-github" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb102-1"><a href="download-and-compile-pecan.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download pecan</span></span>
-<span id="cb102-2"><a href="download-and-compile-pecan.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb102-3"><a href="download-and-compile-pecan.html#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</span>
-<span id="cb102-4"><a href="download-and-compile-pecan.html#cb102-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-5"><a href="download-and-compile-pecan.html#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="co"># compile pecan</span></span>
-<span id="cb102-6"><a href="download-and-compile-pecan.html#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pecan</span>
-<span id="cb102-7"><a href="download-and-compile-pecan.html#cb102-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb105-1"><a href="download-and-compile-pecan.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download pecan</span></span>
+<span id="cb105-2"><a href="download-and-compile-pecan.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb105-3"><a href="download-and-compile-pecan.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/PecanProject/pecan.git</span>
+<span id="cb105-4"><a href="download-and-compile-pecan.html#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="download-and-compile-pecan.html#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="co"># compile pecan</span></span>
+<span id="cb105-6"><a href="download-and-compile-pecan.html#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pecan</span>
+<span id="cb105-7"><a href="download-and-compile-pecan.html#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
 <p>For more information on the capabilities of the PEcAn Makefile, check out our section on <a href="updatebety.html#pecan-make">Updating PEcAn</a>.</p>
 <p>Following will run a small script to setup some hooks to prevent people from using the pecan demo user account to check in any code.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb103-1"><a href="download-and-compile-pecan.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prevent pecan user from checking in code</span></span>
-<span id="cb103-2"><a href="download-and-compile-pecan.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/create-hooks.sh</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb106-1"><a href="download-and-compile-pecan.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prevent pecan user from checking in code</span></span>
+<span id="cb106-2"><a href="download-and-compile-pecan.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/create-hooks.sh</span></span></code></pre></div>
 </div>
 <div id="pecan-testrun" class="section level3 hasAnchor" number="9.2.2">
 <h3><span class="header-section-number">9.2.2</span> PEcAn Testrun<a href="download-and-compile-pecan.html#pecan-testrun" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Do the run, this assumes you have <a href="osinstall.html#install-bety">installed the BETY database</a>, <a href="osinstall.html#site-information">sites</a> tar file and <a href="models-sipnet.html#models-sipnet">SIPNET</a>.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="download-and-compile-pecan.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create folder</span></span>
-<span id="cb104-2"><a href="download-and-compile-pecan.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb104-3"><a href="download-and-compile-pecan.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> testrun.pecan</span>
-<span id="cb104-4"><a href="download-and-compile-pecan.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.pecan</span>
-<span id="cb104-5"><a href="download-and-compile-pecan.html#cb104-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-6"><a href="download-and-compile-pecan.html#cb104-6" aria-hidden="true" tabindex="-1"></a><span class="co"># copy example of pecan workflow and configuration file</span></span>
-<span id="cb104-7"><a href="download-and-compile-pecan.html#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</span>
-<span id="cb104-8"><a href="download-and-compile-pecan.html#cb104-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</span>
-<span id="cb104-9"><a href="download-and-compile-pecan.html#cb104-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-10"><a href="download-and-compile-pecan.html#cb104-10" aria-hidden="true" tabindex="-1"></a><span class="co"># exectute workflow</span></span>
-<span id="cb104-11"><a href="download-and-compile-pecan.html#cb104-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> pecan</span>
-<span id="cb104-12"><a href="download-and-compile-pecan.html#cb104-12" aria-hidden="true" tabindex="-1"></a><span class="ex">./workflow.R</span> pecan.xml</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb107-1"><a href="download-and-compile-pecan.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create folder</span></span>
+<span id="cb107-2"><a href="download-and-compile-pecan.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb107-3"><a href="download-and-compile-pecan.html#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> testrun.pecan</span>
+<span id="cb107-4"><a href="download-and-compile-pecan.html#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.pecan</span>
+<span id="cb107-5"><a href="download-and-compile-pecan.html#cb107-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-6"><a href="download-and-compile-pecan.html#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="co"># copy example of pecan workflow and configuration file</span></span>
+<span id="cb107-7"><a href="download-and-compile-pecan.html#cb107-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../pecan/tests/pecan32.sipnet.xml pecan.xml</span>
+<span id="cb107-8"><a href="download-and-compile-pecan.html#cb107-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../pecan/scripts/workflow.R workflow.R</span>
+<span id="cb107-9"><a href="download-and-compile-pecan.html#cb107-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-10"><a href="download-and-compile-pecan.html#cb107-10" aria-hidden="true" tabindex="-1"></a><span class="co"># exectute workflow</span></span>
+<span id="cb107-11"><a href="download-and-compile-pecan.html#cb107-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> pecan</span>
+<span id="cb107-12"><a href="download-and-compile-pecan.html#cb107-12" aria-hidden="true" tabindex="-1"></a><span class="ex">./workflow.R</span> pecan.xml</span></code></pre></div>
 <p>NB: pecan.xml is configured for the virtual machine, you will need to change the <met> field from ‘/home/carya/’ to wherever you installed your ‘sites’, usually $HOME</p>
 
 </div>

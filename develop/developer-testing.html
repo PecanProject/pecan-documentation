@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2023-11-23" />
+<meta name="date" content="2023-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -807,33 +807,33 @@ Below is a lightning introduction to unit testing with <code>testthat</code>.</l
 </ol>
 <p>Each package’s unit tests live in <code>.R</code> scripts in the folder <code>&lt;package&gt;/tests/testthat</code>.
 In addition, a <code>testthat</code>-enabled package has a file called <code>&lt;packagename&gt;/tests/testthat.R</code> with the following contents:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="developer-testing.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(testthat)</span>
-<span id="cb99-2"><a href="developer-testing.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="sc">&lt;</span>packagename<span class="sc">&gt;</span>)</span>
-<span id="cb99-3"><a href="developer-testing.html#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-4"><a href="developer-testing.html#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="fu">test_check</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="developer-testing.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(testthat)</span>
+<span id="cb102-2"><a href="developer-testing.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="sc">&lt;</span>packagename<span class="sc">&gt;</span>)</span>
+<span id="cb102-3"><a href="developer-testing.html#cb102-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-4"><a href="developer-testing.html#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="fu">test_check</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
 <p>Tests should be placed in <code>&lt;packagename&gt;/tests/testthat/test-&lt;sourcefilename&gt;.R</code>, and look like the following:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="developer-testing.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">context</span>(<span class="st">&quot;Mathematical operators&quot;</span>)</span>
-<span id="cb100-2"><a href="developer-testing.html#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-3"><a href="developer-testing.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</span>
-<span id="cb100-4"><a href="developer-testing.html#cb100-4" aria-hidden="true" tabindex="-1"></a>  sum1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb100-5"><a href="developer-testing.html#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(sum1, <span class="dv">2</span>)</span>
-<span id="cb100-6"><a href="developer-testing.html#cb100-6" aria-hidden="true" tabindex="-1"></a>  sum2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb100-7"><a href="developer-testing.html#cb100-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(sum2, <span class="sc">-</span><span class="dv">2</span>)</span>
-<span id="cb100-8"><a href="developer-testing.html#cb100-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">sum</span>(<span class="dv">1</span>,<span class="cn">NA</span>), <span class="cn">NA</span>)</span>
-<span id="cb100-9"><a href="developer-testing.html#cb100-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_error</span>(<span class="fu">sum</span>(<span class="st">&quot;cat&quot;</span>))</span>
-<span id="cb100-10"><a href="developer-testing.html#cb100-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
-<span id="cb100-11"><a href="developer-testing.html#cb100-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">sum</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)), <span class="fu">sum</span>(<span class="fu">data.frame</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)))</span>
-<span id="cb100-12"><a href="developer-testing.html#cb100-12" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb100-13"><a href="developer-testing.html#cb100-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-14"><a href="developer-testing.html#cb100-14" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</span>
-<span id="cb100-15"><a href="developer-testing.html#cb100-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb100-16"><a href="developer-testing.html#cb100-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_identical</span>(<span class="fu">numeric</span>(<span class="dv">1</span>), <span class="fu">integer</span>(<span class="dv">1</span>))</span>
-<span id="cb100-17"><a href="developer-testing.html#cb100-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equivalent</span>(<span class="fu">numeric</span>(<span class="dv">1</span>), <span class="fu">integer</span>(<span class="dv">1</span>))</span>
-<span id="cb100-18"><a href="developer-testing.html#cb100-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_warning</span>(<span class="fu">mean</span>(<span class="st">&#39;1&#39;</span>))</span>
-<span id="cb100-19"><a href="developer-testing.html#cb100-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_that</span>(<span class="fu">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="fu">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</span>
-<span id="cb100-20"><a href="developer-testing.html#cb100-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_warning</span>(<span class="fu">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</span>
-<span id="cb100-21"><a href="developer-testing.html#cb100-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_message</span>(<span class="fu">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb100-22"><a href="developer-testing.html#cb100-22" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="developer-testing.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">context</span>(<span class="st">&quot;Mathematical operators&quot;</span>)</span>
+<span id="cb103-2"><a href="developer-testing.html#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-3"><a href="developer-testing.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;mathematical operators plus and minus work as expected&quot;</span>,{</span>
+<span id="cb103-4"><a href="developer-testing.html#cb103-4" aria-hidden="true" tabindex="-1"></a>  sum1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb103-5"><a href="developer-testing.html#cb103-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(sum1, <span class="dv">2</span>)</span>
+<span id="cb103-6"><a href="developer-testing.html#cb103-6" aria-hidden="true" tabindex="-1"></a>  sum2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb103-7"><a href="developer-testing.html#cb103-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(sum2, <span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb103-8"><a href="developer-testing.html#cb103-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">sum</span>(<span class="dv">1</span>,<span class="cn">NA</span>), <span class="cn">NA</span>)</span>
+<span id="cb103-9"><a href="developer-testing.html#cb103-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_error</span>(<span class="fu">sum</span>(<span class="st">&quot;cat&quot;</span>))</span>
+<span id="cb103-10"><a href="developer-testing.html#cb103-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb103-11"><a href="developer-testing.html#cb103-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">sum</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)), <span class="fu">sum</span>(<span class="fu">data.frame</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)))</span>
+<span id="cb103-12"><a href="developer-testing.html#cb103-12" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb103-13"><a href="developer-testing.html#cb103-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-14"><a href="developer-testing.html#cb103-14" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">&quot;different testing functions work, giving excuse to demonstrate&quot;</span>,{</span>
+<span id="cb103-15"><a href="developer-testing.html#cb103-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_identical</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb103-16"><a href="developer-testing.html#cb103-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_identical</span>(<span class="fu">numeric</span>(<span class="dv">1</span>), <span class="fu">integer</span>(<span class="dv">1</span>))</span>
+<span id="cb103-17"><a href="developer-testing.html#cb103-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equivalent</span>(<span class="fu">numeric</span>(<span class="dv">1</span>), <span class="fu">integer</span>(<span class="dv">1</span>))</span>
+<span id="cb103-18"><a href="developer-testing.html#cb103-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_warning</span>(<span class="fu">mean</span>(<span class="st">&#39;1&#39;</span>))</span>
+<span id="cb103-19"><a href="developer-testing.html#cb103-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_that</span>(<span class="fu">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="fu">gives_warning</span>(<span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>))</span>
+<span id="cb103-20"><a href="developer-testing.html#cb103-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_warning</span>(<span class="fu">mean</span>(<span class="st">&#39;1&#39;</span>), <span class="st">&quot;argument is not numeric or logical: returning NA&quot;</span>)</span>
+<span id="cb103-21"><a href="developer-testing.html#cb103-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_message</span>(<span class="fu">message</span>(<span class="st">&quot;a&quot;</span>), <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb103-22"><a href="developer-testing.html#cb103-22" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 </div>
 <div id="developer-testing-integration" class="section level3 hasAnchor" number="9.1.2">
 <h3><span class="header-section-number">9.1.2</span> Integration testing<a href="developer-testing.html#developer-testing-integration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
