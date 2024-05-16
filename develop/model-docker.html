@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-05-10" />
+<meta name="date" content="2024-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -819,64 +819,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb432-3"><a href="model-docker.html#cb432-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--file</span> models/ed/Dockerfile <span class="dt">\</span></span>
 <span id="cb432-4"><a href="model-docker.html#cb432-4" aria-hidden="true" tabindex="-1"></a>    .</span></code></pre></div>
 <p>Example of a Dockerfile, in this case to build the ED2 model.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb433-1"><a href="model-docker.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-2"><a href="model-docker.html#cb433-2" aria-hidden="true" tabindex="-1"></a><span class="co"># BUILD MODEL BINARY</span></span>
-<span id="cb433-3"><a href="model-docker.html#cb433-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-4"><a href="model-docker.html#cb433-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> debian:stretch as model-binary</span>
-<span id="cb433-5"><a href="model-docker.html#cb433-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-6"><a href="model-docker.html#cb433-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
-<span id="cb433-7"><a href="model-docker.html#cb433-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
-<span id="cb433-8"><a href="model-docker.html#cb433-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-9"><a href="model-docker.html#cb433-9" aria-hidden="true" tabindex="-1"></a><span class="co"># install dependencies</span></span>
-<span id="cb433-10"><a href="model-docker.html#cb433-10" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="dt">\</span></span>
-<span id="cb433-11"><a href="model-docker.html#cb433-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="at">--no-install-recommends</span> <span class="dt">\</span></span>
-<span id="cb433-12"><a href="model-docker.html#cb433-12" aria-hidden="true" tabindex="-1"></a>       build-essential <span class="dt">\</span></span>
-<span id="cb433-13"><a href="model-docker.html#cb433-13" aria-hidden="true" tabindex="-1"></a>       curl <span class="dt">\</span></span>
-<span id="cb433-14"><a href="model-docker.html#cb433-14" aria-hidden="true" tabindex="-1"></a>       gfortran <span class="dt">\</span></span>
-<span id="cb433-15"><a href="model-docker.html#cb433-15" aria-hidden="true" tabindex="-1"></a>       git <span class="dt">\</span></span>
-<span id="cb433-16"><a href="model-docker.html#cb433-16" aria-hidden="true" tabindex="-1"></a>       libhdf5-dev <span class="dt">\</span></span>
-<span id="cb433-17"><a href="model-docker.html#cb433-17" aria-hidden="true" tabindex="-1"></a>       libopenmpi-dev <span class="dt">\</span></span>
-<span id="cb433-18"><a href="model-docker.html#cb433-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
-<span id="cb433-19"><a href="model-docker.html#cb433-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-20"><a href="model-docker.html#cb433-20" aria-hidden="true" tabindex="-1"></a><span class="co"># download, unzip and build ed2</span></span>
-<span id="cb433-21"><a href="model-docker.html#cb433-21" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /src</span>
-<span id="cb433-22"><a href="model-docker.html#cb433-22" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">git</span> <span class="at">-c</span> http.sslVerify=false clone https://github.com/EDmodel/ED2.git <span class="dt">\</span></span>
-<span id="cb433-23"><a href="model-docker.html#cb433-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> ED2/ED/build <span class="dt">\</span></span>
-<span id="cb433-24"><a href="model-docker.html#cb433-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">curl</span> <span class="at">-o</span> make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.Linux <span class="dt">\</span></span>
-<span id="cb433-25"><a href="model-docker.html#cb433-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="cf">if</span> <span class="bu">[</span> <span class="st">&quot;</span><span class="va">${MODEL_VERSION}</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;git&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span> <span class="fu">git</span> checkout <span class="va">${MODEL_VERSION}</span><span class="kw">;</span> <span class="cf">fi</span> <span class="dt">\</span></span>
-<span id="cb433-26"><a href="model-docker.html#cb433-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">./install.sh</span> <span class="at">-g</span> <span class="at">-p</span> VM</span>
-<span id="cb433-27"><a href="model-docker.html#cb433-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-28"><a href="model-docker.html#cb433-28" aria-hidden="true" tabindex="-1"></a><span class="co">########################################################################</span></span>
-<span id="cb433-29"><a href="model-docker.html#cb433-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-30"><a href="model-docker.html#cb433-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-31"><a href="model-docker.html#cb433-31" aria-hidden="true" tabindex="-1"></a><span class="co"># BUILD PECAN FOR MODEL</span></span>
-<span id="cb433-32"><a href="model-docker.html#cb433-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-33"><a href="model-docker.html#cb433-33" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> pecan/models:latest</span>
-<span id="cb433-34"><a href="model-docker.html#cb433-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-35"><a href="model-docker.html#cb433-35" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-36"><a href="model-docker.html#cb433-36" aria-hidden="true" tabindex="-1"></a><span class="co"># INSTALL MODEL SPECIFIC PIECES</span></span>
-<span id="cb433-37"><a href="model-docker.html#cb433-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-38"><a href="model-docker.html#cb433-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-39"><a href="model-docker.html#cb433-39" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="dt">\</span></span>
-<span id="cb433-40"><a href="model-docker.html#cb433-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="at">--no-install-recommends</span> <span class="dt">\</span></span>
-<span id="cb433-41"><a href="model-docker.html#cb433-41" aria-hidden="true" tabindex="-1"></a>       libgfortran3 <span class="dt">\</span></span>
-<span id="cb433-42"><a href="model-docker.html#cb433-42" aria-hidden="true" tabindex="-1"></a>       libopenmpi2 <span class="dt">\</span></span>
-<span id="cb433-43"><a href="model-docker.html#cb433-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
-<span id="cb433-44"><a href="model-docker.html#cb433-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-45"><a href="model-docker.html#cb433-45" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-46"><a href="model-docker.html#cb433-46" aria-hidden="true" tabindex="-1"></a><span class="co"># SETUP FOR SPECIFIC MODEL</span></span>
-<span id="cb433-47"><a href="model-docker.html#cb433-47" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb433-48"><a href="model-docker.html#cb433-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-49"><a href="model-docker.html#cb433-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
-<span id="cb433-50"><a href="model-docker.html#cb433-50" aria-hidden="true" tabindex="-1"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
-<span id="cb433-51"><a href="model-docker.html#cb433-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-52"><a href="model-docker.html#cb433-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup model_info file</span></span>
-<span id="cb433-53"><a href="model-docker.html#cb433-53" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> models/ed/model_info.json /work/model.json</span>
-<span id="cb433-54"><a href="model-docker.html#cb433-54" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s/@VERSION@/</span><span class="va">${MODEL_VERSION}</span><span class="st">/g&quot;</span> <span class="dt">\</span></span>
-<span id="cb433-55"><a href="model-docker.html#cb433-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">-e</span> <span class="st">&quot;s#@BINARY@#/usr/local/bin/ed2.</span><span class="va">${MODEL_VERSION}</span><span class="st">#g&quot;</span> /work/model.json</span>
-<span id="cb433-56"><a href="model-docker.html#cb433-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb433-57"><a href="model-docker.html#cb433-57" aria-hidden="true" tabindex="-1"></a><span class="co"># COPY model binary</span></span>
-<span id="cb433-58"><a href="model-docker.html#cb433-58" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=model-binary</span> /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/ed2.${MODEL_VERSION}</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb433-1"><a href="model-docker.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ARG</span> IMAGE_VERSION=<span class="st">&quot;latest&quot;</span></span>
+<span id="cb433-2"><a href="model-docker.html#cb433-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-3"><a href="model-docker.html#cb433-3" aria-hidden="true" tabindex="-1"></a><span class="co"># BUILD MODEL BINARY</span></span>
+<span id="cb433-4"><a href="model-docker.html#cb433-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-5"><a href="model-docker.html#cb433-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> pecan/models:${IMAGE_VERSION} as model-binary</span>
+<span id="cb433-6"><a href="model-docker.html#cb433-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-7"><a href="model-docker.html#cb433-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
+<span id="cb433-8"><a href="model-docker.html#cb433-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
+<span id="cb433-9"><a href="model-docker.html#cb433-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-10"><a href="model-docker.html#cb433-10" aria-hidden="true" tabindex="-1"></a><span class="co"># install dependencies</span></span>
+<span id="cb433-11"><a href="model-docker.html#cb433-11" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="dt">\</span></span>
+<span id="cb433-12"><a href="model-docker.html#cb433-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="at">--no-install-recommends</span> <span class="dt">\</span></span>
+<span id="cb433-13"><a href="model-docker.html#cb433-13" aria-hidden="true" tabindex="-1"></a>       build-essential <span class="dt">\</span></span>
+<span id="cb433-14"><a href="model-docker.html#cb433-14" aria-hidden="true" tabindex="-1"></a>       curl <span class="dt">\</span></span>
+<span id="cb433-15"><a href="model-docker.html#cb433-15" aria-hidden="true" tabindex="-1"></a>       gfortran <span class="dt">\</span></span>
+<span id="cb433-16"><a href="model-docker.html#cb433-16" aria-hidden="true" tabindex="-1"></a>       git <span class="dt">\</span></span>
+<span id="cb433-17"><a href="model-docker.html#cb433-17" aria-hidden="true" tabindex="-1"></a>       libhdf5-dev <span class="dt">\</span></span>
+<span id="cb433-18"><a href="model-docker.html#cb433-18" aria-hidden="true" tabindex="-1"></a>       libopenmpi-dev <span class="dt">\</span></span>
+<span id="cb433-19"><a href="model-docker.html#cb433-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb433-20"><a href="model-docker.html#cb433-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-21"><a href="model-docker.html#cb433-21" aria-hidden="true" tabindex="-1"></a><span class="co"># download, unzip and build ed2</span></span>
+<span id="cb433-22"><a href="model-docker.html#cb433-22" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /src</span>
+<span id="cb433-23"><a href="model-docker.html#cb433-23" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">git</span> <span class="at">-c</span> http.sslVerify=false clone https://github.com/EDmodel/ED2.git <span class="dt">\</span></span>
+<span id="cb433-24"><a href="model-docker.html#cb433-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> ED2/ED/build <span class="dt">\</span></span>
+<span id="cb433-25"><a href="model-docker.html#cb433-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">curl</span> <span class="at">-o</span> make/include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.Linux <span class="dt">\</span></span>
+<span id="cb433-26"><a href="model-docker.html#cb433-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="cf">if</span> <span class="bu">[</span> <span class="st">&quot;</span><span class="va">${MODEL_VERSION}</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;git&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span> <span class="fu">git</span> checkout <span class="va">${MODEL_VERSION}</span><span class="kw">;</span> <span class="cf">fi</span> <span class="dt">\</span></span>
+<span id="cb433-27"><a href="model-docker.html#cb433-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">./install.sh</span> <span class="at">-g</span> <span class="at">-p</span> VM</span>
+<span id="cb433-28"><a href="model-docker.html#cb433-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-29"><a href="model-docker.html#cb433-29" aria-hidden="true" tabindex="-1"></a><span class="co">########################################################################</span></span>
+<span id="cb433-30"><a href="model-docker.html#cb433-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-31"><a href="model-docker.html#cb433-31" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-32"><a href="model-docker.html#cb433-32" aria-hidden="true" tabindex="-1"></a><span class="co"># BUILD PECAN FOR MODEL</span></span>
+<span id="cb433-33"><a href="model-docker.html#cb433-33" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-34"><a href="model-docker.html#cb433-34" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> pecan/models:latest</span>
+<span id="cb433-35"><a href="model-docker.html#cb433-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-36"><a href="model-docker.html#cb433-36" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-37"><a href="model-docker.html#cb433-37" aria-hidden="true" tabindex="-1"></a><span class="co"># INSTALL MODEL SPECIFIC PIECES</span></span>
+<span id="cb433-38"><a href="model-docker.html#cb433-38" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-39"><a href="model-docker.html#cb433-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-40"><a href="model-docker.html#cb433-40" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="dt">\</span></span>
+<span id="cb433-41"><a href="model-docker.html#cb433-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="at">--no-install-recommends</span> <span class="dt">\</span></span>
+<span id="cb433-42"><a href="model-docker.html#cb433-42" aria-hidden="true" tabindex="-1"></a>       libgfortran3 <span class="dt">\</span></span>
+<span id="cb433-43"><a href="model-docker.html#cb433-43" aria-hidden="true" tabindex="-1"></a>       libopenmpi2 <span class="dt">\</span></span>
+<span id="cb433-44"><a href="model-docker.html#cb433-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb433-45"><a href="model-docker.html#cb433-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-46"><a href="model-docker.html#cb433-46" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-47"><a href="model-docker.html#cb433-47" aria-hidden="true" tabindex="-1"></a><span class="co"># SETUP FOR SPECIFIC MODEL</span></span>
+<span id="cb433-48"><a href="model-docker.html#cb433-48" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb433-49"><a href="model-docker.html#cb433-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-50"><a href="model-docker.html#cb433-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variables that can be used to set control the docker build</span></span>
+<span id="cb433-51"><a href="model-docker.html#cb433-51" aria-hidden="true" tabindex="-1"></a><span class="kw">ARG</span> MODEL_VERSION=git</span>
+<span id="cb433-52"><a href="model-docker.html#cb433-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-53"><a href="model-docker.html#cb433-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup model_info file</span></span>
+<span id="cb433-54"><a href="model-docker.html#cb433-54" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> models/ed/model_info.json /work/model.json</span>
+<span id="cb433-55"><a href="model-docker.html#cb433-55" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s/@VERSION@/</span><span class="va">${MODEL_VERSION}</span><span class="st">/g&quot;</span> <span class="dt">\</span></span>
+<span id="cb433-56"><a href="model-docker.html#cb433-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">-e</span> <span class="st">&quot;s#@BINARY@#/usr/local/bin/ed2.</span><span class="va">${MODEL_VERSION}</span><span class="st">#g&quot;</span> /work/model.json</span>
+<span id="cb433-57"><a href="model-docker.html#cb433-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-58"><a href="model-docker.html#cb433-58" aria-hidden="true" tabindex="-1"></a><span class="co"># COPY model binary</span></span>
+<span id="cb433-59"><a href="model-docker.html#cb433-59" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=model-binary</span> /src/ED2/ED/build/ed_2.1-opt /usr/local/bin/ed2.${MODEL_VERSION}</span></code></pre></div>
 <p><strong>WARNING</strong>: Dockerfile environment variables set via <code>ENV</code> are assigned <em>all at once</em>; <em>they do not evaluate successively, left to right</em>.
 Consider the following block:</p>
 <div class="sourceCode" id="cb434"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><span id="cb434-1"><a href="model-docker.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don&#39;t do this!</span></span>
