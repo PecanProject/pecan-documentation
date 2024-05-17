@@ -809,51 +809,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <div id="introduction-3" class="section level3 hasAnchor" number="14.6.1">
 <h3><span class="header-section-number">14.6.1</span> Introduction<a href="models-ldndc.html#introduction-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>LandscapeDNDC is designed to simulate biosphere/hydrosphere processes of forest, arable and grassland ecosystems. It is modularly designed and therefore allows for various model selections to be plugged in. Most up-to-date information from LDNDC can be found here, as well as the authors, users guide and documentation of the model: <a href="https://ldndc.imk-ifu.kit.edu/index.php" class="uri">https://ldndc.imk-ifu.kit.edu/index.php</a></p>
+<p>LandscapeDNDC is designed to simulate biosphere/hydrosphere processes of forest, arable and grassland ecosystems. The design of LDNDC allows different models/modules to be plugged in, allowing the simulations for different ecosystems. The most up-to-date information on LDNDC can be found here, as well as the authors, users guide and documentation of the model: <a href="https://ldndc.imk-ifu.kit.edu/index.php" class="uri">https://ldndc.imk-ifu.kit.edu/index.php</a></p>
+<p>Please note! The PEcAn setups here are written for the LDNDC version that has been downloaded on 2022-10-19. Some of the newer versions of LDNDC may have differences in the names of variables and parameters.</p>
 <p><strong>PEcAn configuration file additions</strong></p>
-<p>The following sections of the PEcAn XML are relevant or have influence at the moment:</p>
+<p>The following sections of the PEcAn XML are relevant or have influence at this development stage:</p>
 <p><code>ensemble</code>
-<code>variable</code>: Options are only LAI and GPP</p>
+<code>variable</code>: LAI, GPP, NPP, NEE, Respirations (<em>AutoResp</em>, <em>HeteroResp</em>, <em>TotalResp</em>), biomass of harvesting (<em>harvest_carbon_flux</em>), AGB and BGB (<em>below_ground_carbon_content</em>).</p>
 <p><code>model</code>
-<code>id</code>: Corresponding the id of LDNDC in BETY</p>
+<code>id</code>: Corresponding the id of LDNDC in BETY.</p>
 <p><code>run</code>
 <code>inputs</code>
 <code>start_date</code>: Start date of the simulation
 <code>end_date</code>: End date of the simulation</p>
+<p>Paths to meteorological drivers, events and initial conditions. Paths to airchemistry and groundwater files, may also be included, but are not required.</p>
 </div>
 <div id="model-specific-input-files-2" class="section level3 hasAnchor" number="14.6.2">
 <h3><span class="header-section-number">14.6.2</span> Model specific input files<a href="models-ldndc.html#model-specific-input-files-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>LDNDC takes several files as an input, and can also generate multiple output files. These ńotes regarding input files are written from the PEcAn integration point of view, and detailed information about input files can be found from the user guide, which is available via the above links.</p>
+<p>LDNDC takes multiple input files, and can also generate multiple output files. These notes on input files are written from the PEcAn integration point of view, and detailed information on input files can be found in the user guide, which is available via the links above.</p>
 <p>Input files:</p>
-<p><code>Project</code> — Contains essential information in order to set-up the simulation run. For example, the file contains information of other files which will be used in the simulations as well as the time period when the simulations are taking a place.</p>
+<p><code>Project</code> — Contains essential information in order to set up the simulation run. For example, the file contains paths to other files that will be used in the simulations, as well as the time period in which the simulations will take place.</p>
 <p><code>Setup</code> — Defines which modules are used.</p>
 <p><code>Climate</code> — Met data that is used in simulations.</p>
-<p><code>Speciesparameters</code> — Species used in the simulations should be defined here and the file holds the approppriate information of the used species.</p>
-<p><code>Siteparameters</code> — Works similarly as species parameters, but in the site features point of view.</p>
+<p><code>Speciesparameters</code> — Species used in the simulations should be defined here and the file contains the parametrization for the species.</p>
+<p><code>Siteparameters</code> — Works similarly to speciesparameters, but from the point of view of site parametrization.</p>
 <p><code>Event</code> — Holds information about the events, which are essential in arable simulations.</p>
-<p><code>Site</code> — Specific information about the site.</p>
-<p><code>Airchemistry</code> — Information about the airchemistry.</p>
+<p><code>Site</code> — Specific information about the site (e.g. carbon and nitrogen contents, hydrological characteristics).</p>
+<p><code>Airchemistry</code> — Information about the air chemistry.</p>
 <div id="model-configuration-files-2" class="section level4 hasAnchor" number="14.6.2.1">
 <h4><span class="header-section-number">14.6.2.1</span> Model configuration files<a href="models-ldndc.html#model-configuration-files-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Due to the amount of different input files, there are several templates which are used in model configuration.
-Templates are located at <code>models/ldndc/inst/</code> and are copied to the simulation’s run directory before the model run.</p>
+<p>Due to the number of different input files, there are several templates that are used in the model configuration.
+The templates are located in <code>models/ldndc/inst/</code>. These templates wll be populated with parametrizations and initial conditions when configurations are written. The drivers and events on the other hand should be informed by giving a path to the driver/event file in pecan.xml.</p>
+<p>Many configurations for the model are (less surprisingly) written in <code>write.configs.LDNDC</code>. This is the file that may need to be modified in order to make the model to run appropriately in terms of the simulated species. Currently, there are a few crop species that the workflow recognizes (triticale, barley and oat), a couple of grass species (timothy and meadow) and one forest species (pipy). However, if other species options are needed, it is relatively easy to modify the code in configurations and add them so that the workflow can handle them. Also, the path for running the model binary is created in <code>write.configs.LDNDC</code> and will likely need some changes depending on the location of the model binaries/configurations on the user’s server.</p>
 <ul>
-<li><p><strong>project.ldndc</strong> : Project file is populated in <code>write.configs.LDNDC</code> based on the inputs of the PEcAn run. In addition to having the correct input files that are used in the simulation, the project file is filled in with the simulation time period and the directory paths regarding other input files that are read during the simulation. The file also sets the path for output files. These other input files are found from the same directory as the project file when starting the model run, and the output file is created among the other outputs of the simulation. At the moment, simulations are executed half-hourly.</p></li>
-<li><p><strong>template.job</strong> : Will be filled in with the information that model execution requires in PEcAn. Calls for example models binary and executes the <code>project.ldndc</code> file.</p></li>
-<li><p><strong>events_template.xml</strong> : Has three events (plant, manure and cut), which are filled in in <code>write.configs.LDNDC</code>. Events should be generated based on some event file, but such implementation has not been applied yet. This template is only meant for testing for now.</p></li>
-<li><p><strong>speciesparameter_template.xml</strong> : Has one replacable section. This section is filled in within <code>write.configs.LDNDC</code>, and is currently just hard-coded values for perennial grass species. This will be one of the key files, because the used pfts and corresponding pft values are written here. At this stage, it is hard-coded to only have one pft, but it should be generated based on the trait values that are available from BETY database.</p></li>
-<li><p><strong>siteparameters.xml</strong> : Some default value for siteparameters.</p></li>
-<li><p><strong>site.xml</strong> : Some default values for site.</p></li>
-<li><p><strong>airchemistry.txt</strong> : Some default data for airchemistry.</p></li>
-<li><p><strong>climate.txt</strong> : This file is created from the netcdf file. A symbolic link will be created into the run directory for it.</p></li>
-<li><p><strong>setup.xml</strong> : Contains information which modules the model simulation is using. Default settings should fit for most of the purposes and these are currently hard-coded.</p></li>
+<li><p><strong>project.ldndc</strong> : The project file is populated in <code>write.configs.LDNDC</code> based on the input from the PEcAn settings. In addition to containing the correct names for the input files used in the simulation, the project file contains the start and end points for the simulation period. The file also specifies the path where the output files will be written. The other input files should be in the same directory as the project file when the model run is started. The output directory is created amongst the other outputs of the simulation. Simulations are run half-hourly by default and this is hard coded in the <code>write.configs.LDNDC</code> file.</p></li>
+<li><p><strong>template.job</strong> : Will be filled in with the information needed to run the model in PEcAn. For example, calls the model binary and executes the <code>project.ldndc</code> file.</p></li>
+<li><p><strong>speciesparameter_template.xml</strong> : Has a replaceable section. This section is filled in within <code>write.configs.LDNDC</code>. This file uses the given prior values for the species. Currently, there are a few species hard coded in <code>write.configs.LDNDC</code>. See the comment above.</p></li>
+<li><p><strong>siteparameters.xml</strong> : This file is populated by given site(parameter) prior values.</p></li>
+<li><p><strong>site.xml</strong> : This file is written based on the given initial condition file (netcdf). If no path is given in <em>poolinitcond</em>, then some default mineral clay soil settings will be written to this file. However, it is strongly recommended that some initial conditions based on the simulated site are provided. Variables that can be found from the initial conditions, but are not required:</p>
+<ul>
+<li><em>For each layer</em>
+<ul>
+<li>pH (-),</li>
+<li>volume_fraction_of_water_in_soil_at_field_capacity (m3 m-3),</li>
+<li>volume_fraction_of_condensed_water_in_soil_at_wilting_point (m3 m-3),</li>
+<li>soil_nitrogen_content (kg kg-1),</li>
+<li>soil_carbon_content (kg kg-1),</li>
+<li>mass_fraction_of_clay_in_soil (kg kg-1),</li>
+<li>mass_fraction_of_sand_in_soil (kg kg-1),</li>
+<li>mass_fraction_of_silt_in_soil (kg kg-1),</li>
+<li>soil_density (kg m-3),</li>
+<li>soil_hydraulic_conductivity_at_saturation (m s-1),</li>
+<li>stratum = (-) [number of how many stratums a soil layer has]</li>
+</ul></li>
+<li><em>Single value</em>
+<ul>
+<li>c2n_humus (ratio), [is written in siteparameter file]</li>
+<li>AGB = (kg m-2), [is written in events file]</li>
+<li>fractional_cover (%) [is written in events file]</li>
+</ul></li>
+<li><em>Model specific</em>
+<ul>
+<li>history (soil use history, e.g. arable)</li>
+<li>soil_type (e.g. ORMA, SALO)</li>
+</ul></li>
+</ul></li>
+<li><p><strong>setup.xml</strong> : Contains information about which modules the model simulation is using. Default settings should be suitable for most of the purposes and are currently hard-coded. The setups differ for agricultural and forest sites.</p></li>
 </ul>
 </div>
 </div>
 <div id="installation-notes-2" class="section level3 hasAnchor" number="14.6.3">
 <h3><span class="header-section-number">14.6.3</span> Installation notes<a href="models-ldndc.html#installation-notes-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Obtaining LDNDC program requires credentials, which the user is able to request from the developers of the model. With the credentials, the pre-compiled LDNDC program can be downloaded here: <a href="https://ldndc.imk-ifu.kit.edu/download/download-model.php" class="uri">https://ldndc.imk-ifu.kit.edu/download/download-model.php</a></p>
-<p>After obtaining the necessary files, the user should execute the install script that is found from the ldndc-‘<em>version-number</em>’ directory. With linux, executing would happen with command <code>sh install.sh</code>. Succesfull installation will create a <code>.ldndc</code> directory to the user’s home directory. Running the simulations happens by calling the ldndc executable (found from the <code>/bin</code> directory) and giving the path file to the project file that contains the specs of the simulation. Instructions in detail and how to play with these setups are explained more broadly in the user guide.</p>
+<p>In order to obtain the LDNDC model, the credentials are required. The user can request them from the developers of the model. With the credentials, the pre-compiled LDNDC program can be downloaded here: <a href="https://ldndc.imk-ifu.kit.edu/download/download-model.php" class="uri">https://ldndc.imk-ifu.kit.edu/download/download-model.php</a></p>
+<p>Once the necessary files have been obtained, the user should execute the installation script found in the ldndc-‘<em>version-number</em>’ directory. On linux, executing would happen with the command <code>sh install.sh</code>. A successful installation will create a <code>.ldndc</code> directory in the user’s home directory. (Note, that this <code>.ldndc</code> directory path will be used in <code>write.configs.LDNDC</code>.) Running the simulations is done by calling the ldndc executable (found in the <code>/bin</code> directory) and giving the path to the project file containing the specs of the simulation. Detailed instructions and how to play with these setups can be found in the user guide.</p>
 
 </div>
 </div>
