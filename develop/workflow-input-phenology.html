@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.3 DALEC | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="14.3 DALEC | The Predictive Ecosystem Analyzer" />
+  <title>13.6 Input phenological Data | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="13.6 Input phenological Data | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.3 DALEC | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="13.6 Input phenological Data | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.3 DALEC | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="13.6 Input phenological Data | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="models-clm.html"/>
-<link rel="next" href="models-ed.html"/>
+<link rel="prev" href="workflow-met.html"/>
+<link rel="next" href="workflow-traits.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -776,65 +776,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="models-dalec" class="section level2 hasAnchor" number="14.3">
-<h2><span class="header-section-number">14.3</span> DALEC<a href="models-dalec.html#models-dalec" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<table>
-<thead>
-<tr class="header">
-<th>Model Information</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Home Page</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Source Code</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>License</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Authors</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PEcAn Integration</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
-<p><strong>PEcAn configuration file additions</strong></p>
-<p>Should list the model specific additions to the PEcAn file here</p>
-<p><strong>Model specific input files</strong></p>
-<p>List of inputs required by model, such as met, etc.</p>
-<p><strong>Model configuration files</strong></p>
-<p>MODEL is configured using 3 files which are placed in the run folder, as well as a symbolic link to the met file.</p>
-<ul>
-<li><strong>file1</strong> : template for this file is located at models/MODEL/inst/file1 and is not modified.<br />
-</li>
-<li><strong>file2</strong> : template for this file is located at models/MODEL/inst/file2 and is not modified.<br />
-</li>
-<li><strong>file3</strong> : template for this file is in models/MODEL/inst/file3 or it is specified in the &lt;model&gt; section as &lt;template&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
-</ul>
-<p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p><strong>VM</strong></p>
-
+<div id="workflow-input-phenology" class="section level2 hasAnchor" number="13.6">
+<h2><span class="header-section-number">13.6</span> Input phenological Data<a href="workflow-input-phenology.html#workflow-input-phenology" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To enable the use of MODIS phenology data (MODIS Land Cover Dynamics (MCD12Q2)) to update the phenological parameters (leaf-on date) and (leaf-off date) at each restart timepoint:
+1. Generate the phenological parameter CSV file by running <code>PEcAn.data.remote::extract_phenology_MODIS</code>.
+2. Provide the generated phenological parameter CSV file to <code>settings$run$inputs$leaf_phenology$path</code>.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="models-clm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="models-ed.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="workflow-met.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="workflow-traits.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -865,7 +819,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/PecanProject/pecan/edit/develop/book_source/03_topical_pages/05_models/dalec.Rmd",
+"link": "https://github.com/PecanProject/pecan/edit/develop/book_source/03_topical_pages/04_R_workflow.Rmd",
 "text": "Edit"
 },
 "history": {
