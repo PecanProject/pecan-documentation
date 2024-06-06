@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-06-05" />
+<meta name="date" content="2024-06-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -926,7 +926,30 @@ Note that roxygen lines start with <code>#'</code>:</p>
 PEcAn’s automated testing (Travis) will check if any documentation is out of date and will throw an error like the following if it is:</p>
 <pre><code>These files were changed by the build process:
 {...}</code></pre>
+<div id="updating-to-a-new-roxygen-version" class="section level4 hasAnchor" number="9.0.3.1">
+<h4><span class="header-section-number">9.0.3.1</span> Updating to a new Roxygen version<a href="dplyr.html#updating-to-a-new-roxygen-version" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For consistency across packages and machines, all PEcAn developers need to compile documentation with the same version of Roxygen. Roxygen itself will check for this and refuse to rebuild a package that was last touched by a newer version of Roxygen, but the warning it gives is very quiet and easy to miss. We take a louder approach by hardcoding the expected Roxygen version into PEcAn’s Makefile and throwing a build failure if the installed Roxygen is not an exact match.</p>
+<p>When it is time for everyone to update to a newer Roxygen, follow the same procedure we used when updating from 7.2.3 to 7.3.1, replacing version strings as appropriate:</p>
+<ul>
+<li>Before starting, work with the team to merge/close as many existing PRs as feasible – this process touches a lot of files and is likely to create merge conflicts in other PRs.</li>
+<li>Edit the Makefile to change <code>EXPECTED_ROXYGEN_VERSION := 7.2.3</code> to <code>EXPECTED_ROXYGEN_VERSION := 7.3.1</code>.</li>
+<li>Run <code>make clean &amp;&amp; make document</code> to be sure Roxygen has been run on all packages.</li>
+<li>Check the console output for warnings from Roxygen, and fix them as needed. New versions often get pickier about formatting issues that used to be considered minor.</li>
+<li>Run <code>./scripts/generate_dependencies.R</code> to update the version of Roxygen recorded as a Docker dependency.</li>
+<li>Grep the PEcAn folder for the string <code>7.3.1</code> to make sure no references were missed.
+<ul>
+<li>e.g. this time I found a remaining <code>RoxygenNote: 7.2.3</code> in models/cable/DESCRIPTION – Make currently skips cable, so I redocumented it manually.</li>
+</ul></li>
+<li>Review all changes.
+<ul>
+<li>The changes should mostly just consist of updated <code>RoxygenNote:</code> lines in all the DESCRIPTION files.</li>
+<li>In all cases but extra-double-specially if any NAMESPACE files change, make sure you understand what happened rather than blindly committing the changes. Usually the new version is an improvement, but this is the time to check.</li>
+</ul></li>
+<li>Once all looks good, commit and push.</li>
+<li>Make a loud announcement, e.g. on Slack, to tell all developers to update roxygen2 on their machines as soon as the PR is merged.</li>
+</ul>
 
+</div>
 </div>
 </div>
             </section>
