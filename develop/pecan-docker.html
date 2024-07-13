@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-07-12" />
+<meta name="date" content="2024-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -991,7 +991,7 @@ services:
     volumes: pecan:/data
   sipnet:
     user: ${UID:-1001}:${GID:-1001}
-    image: pecan/model-sipnet-r136:${PECAN_VERSION:-latest}
+    image: pecan/model-sipnet-git:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
@@ -1033,8 +1033,9 @@ services:
     - traefik.http.routers.dbsync.middlewares=dbsync-stripprefix
     - traefik.http.middlewares.dbsync-stripprefix.stripprefix.prefixes=/monitor
   api:
-    image: pecan/api:${PECAN_VERSION:-latest}
     user: ${UID:-1001}:${GID:-1001}
+    image: pecan/api:${PECAN_VERSION:-latest}
+    restart: unless-stopped
     networks: pecan
     environment:
     - PGHOST=${PGHOST:-postgres}
@@ -1392,7 +1393,7 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
 In general, their configuration should be similar to the following configuration for SIPNET, which ships with PEcAn:</p>
 <pre><code>sipnet:
   user: ${UID:-1001}:${GID:-1001}
-  image: pecan/model-sipnet-r136:${PECAN_VERSION:-latest}
+  image: pecan/model-sipnet-git:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
   environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}

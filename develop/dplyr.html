@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-07-12" />
+<meta name="date" content="2024-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -936,7 +936,7 @@ PEcAn’s automated testing (Travis) will check if any documentation is out of d
 <li>Run <code>make clean &amp;&amp; make document</code> to be sure Roxygen has been run on all packages.</li>
 <li>Check the console output for warnings from Roxygen, and fix them as needed. New versions often get pickier about formatting issues that used to be considered minor.</li>
 <li>Run <code>./scripts/generate_dependencies.R</code> to update the version of Roxygen recorded as a Docker dependency.</li>
-<li>Grep the PEcAn folder for the string <code>7.3.1</code> to make sure no references were missed.
+<li>Grep the PEcAn folder for the string <code>7.2.3</code> to make sure no references were missed.
 <ul>
 <li>e.g. this time I found a remaining <code>RoxygenNote: 7.2.3</code> in models/cable/DESCRIPTION – Make currently skips cable, so I redocumented it manually.</li>
 </ul></li>
