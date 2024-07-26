@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-07-25" />
+<meta name="date" content="2024-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -979,6 +979,14 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     depends_on:
     - postgres
     - rabbitmq
+    volumes: pecan:/data
+  fates:
+    user: ${UID:-1001}:${GID:-1001}
+    image: ghcr.io/noresmhub/ctsm-api:latest
+    restart: unless-stopped
+    networks: pecan
+    environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
+    depends_on: rabbitmq
     volumes: pecan:/data
   basgra:
     user: ${UID:-1001}:${GID:-1001}
