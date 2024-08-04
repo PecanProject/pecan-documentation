@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-08-02" />
+<meta name="date" content="2024-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -881,6 +881,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - SECRET_KEY_BASE=${BETY_SECRET_KEY:-notasecret}
     - RAILS_RELATIVE_URL_ROOT=/bety
     - LOCAL_SERVER=${BETY_LOCAL_SERVER:-99}
+    volumes: bety:/home/bety/log
     depends_on: postgres
     labels:
     - traefik.enable=true
@@ -1063,6 +1064,7 @@ networks:
 volumes:
   traefik: ~
   postgres: ~
+  bety: ~
   rabbitmq: ~
   pecan: ~
   rstudio: ~</code></pre>
@@ -1318,6 +1320,7 @@ However, note that certain features of the PEcAn web interface do link to the BE
   - SECRET_KEY_BASE=${BETY_SECRET_KEY:-notasecret}
   - RAILS_RELATIVE_URL_ROOT=/bety
   - LOCAL_SERVER=${BETY_LOCAL_SERVER:-99}
+  volumes: bety:/home/bety/log
   depends_on: postgres
   labels:
   - traefik.enable=true
