@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-04" />
+<meta name="date" content="2024-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -230,9 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html"><i class="fa fa-check"></i><b>7.1</b> Additional web configuration</a>
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-web-setup"><i class="fa fa-check"></i><b>7.1.1</b> Web interface setup</a></li>
-<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#browndog"><i class="fa fa-check"></i><b>7.1.2</b> Brown Dog</a></li>
-<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.3</b> Advanced Setup</a></li>
-<li class="chapter" data-level="7.1.4" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.4</b> Editing model configurations</a></li>
+<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.2</b> Advanced Setup</a></li>
+<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.3</b> Editing model configurations</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html"><i class="fa fa-check"></i><b>7.2</b> Settings-configured analyses</a>
 <ul>
@@ -331,9 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>12.2.5</b> (experimental) State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-variables"><i class="fa fa-check"></i><b>12.2.6</b> State Variables for State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-observation-preparation"><i class="fa fa-check"></i><b>12.2.7</b> Observation Preparation for State Data Assimilation</a></li>
-<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Brown Dog</a></li>
-<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.9</b> (experimental) Benchmarking</a></li>
-<li class="chapter" data-level="12.2.10" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.10</b> Remote data module</a></li>
+<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.9</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>13</b> PEcAn workflow (web/workflow.R)</a>
@@ -809,7 +807,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Create a connection to the BETY database. This can be done using R function</li>
 </ol>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="LoadData.html#cb273-1" aria-hidden="true" tabindex="-1"></a>bety <span class="ot">=</span> PEcAn.DB<span class="sc">::</span><span class="fu">betyConnect</span>(<span class="at">php.config =</span> <span class="st">&quot;pecan/web/config.php&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="LoadData.html#cb272-1" aria-hidden="true" tabindex="-1"></a>bety <span class="ot">=</span> PEcAn.DB<span class="sc">::</span><span class="fu">betyConnect</span>(<span class="at">php.config =</span> <span class="st">&quot;pecan/web/config.php&quot;</span>)</span></code></pre></div>
 <p>where the complete path to the <code>config.php</code> is specified. See <a href="https://github.com/PecanProject/pecan/blob/master/web/config.example.php">here</a> for an example <code>config.php</code> file.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Look up the inputs record for the data in BETY.</li>
@@ -822,9 +820,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>In R run</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="LoadData.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb274-2"><a href="LoadData.html#cb274-2" aria-hidden="true" tabindex="-1"></a>input_name <span class="ot">=</span> <span class="st">&quot;AmerifluxLBL_site_0-758&quot;</span> <span class="co">#copied directly from online</span></span>
-<span id="cb274-3"><a href="LoadData.html#cb274-3" aria-hidden="true" tabindex="-1"></a>input.id <span class="ot">=</span> <span class="fu">tbl</span>(bety,<span class="st">&quot;inputs&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> input_name) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="LoadData.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb273-2"><a href="LoadData.html#cb273-2" aria-hidden="true" tabindex="-1"></a>input_name <span class="ot">=</span> <span class="st">&quot;AmerifluxLBL_site_0-758&quot;</span> <span class="co">#copied directly from online</span></span>
+<span id="cb273-3"><a href="LoadData.html#cb273-3" aria-hidden="true" tabindex="-1"></a>input.id <span class="ot">=</span> <span class="fu">tbl</span>(bety,<span class="st">&quot;inputs&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> input_name) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Additional arguments to <code>query.format.vars</code> are optional</p>
 <ol style="list-style-type: decimal">
@@ -833,38 +831,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol></li>
 <li><p>In R run</p></li>
 </ol>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="LoadData.html#cb275-1" aria-hidden="true" tabindex="-1"></a>   format <span class="ot">=</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.format.vars</span>(bety, input.id)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="LoadData.html#cb274-1" aria-hidden="true" tabindex="-1"></a>   format <span class="ot">=</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.format.vars</span>(bety, input.id)</span></code></pre></div>
 <p>Examine the resulting R list object to make sure it returned the correct information.</p>
 <p>The example format contains the following objects:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="LoadData.html#cb276-1" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>file_name</span>
-<span id="cb276-2"><a href="LoadData.html#cb276-2" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;AMERIFLUX_BASE_HH&quot;</span></span>
-<span id="cb276-3"><a href="LoadData.html#cb276-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-4"><a href="LoadData.html#cb276-4" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>mimetype</span>
-<span id="cb276-5"><a href="LoadData.html#cb276-5" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;csv&quot;</span></span>
-<span id="cb276-6"><a href="LoadData.html#cb276-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-7"><a href="LoadData.html#cb276-7" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>skip</span>
-<span id="cb276-8"><a href="LoadData.html#cb276-8" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">2</span></span>
-<span id="cb276-9"><a href="LoadData.html#cb276-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-10"><a href="LoadData.html#cb276-10" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>header</span>
-<span id="cb276-11"><a href="LoadData.html#cb276-11" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">1</span></span>
-<span id="cb276-12"><a href="LoadData.html#cb276-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-13"><a href="LoadData.html#cb276-13" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>na.strings</span>
-<span id="cb276-14"><a href="LoadData.html#cb276-14" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;-9999&quot;</span> <span class="st">&quot;-6999&quot;</span> <span class="st">&quot;9999&quot;</span>  <span class="st">&quot;NA&quot;</span>   </span>
-<span id="cb276-15"><a href="LoadData.html#cb276-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-16"><a href="LoadData.html#cb276-16" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>time.row</span>
-<span id="cb276-17"><a href="LoadData.html#cb276-17" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">4</span></span>
-<span id="cb276-18"><a href="LoadData.html#cb276-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-19"><a href="LoadData.html#cb276-19" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>site</span>
-<span id="cb276-20"><a href="LoadData.html#cb276-20" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">758</span></span>
-<span id="cb276-21"><a href="LoadData.html#cb276-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-22"><a href="LoadData.html#cb276-22" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>lat</span>
-<span id="cb276-23"><a href="LoadData.html#cb276-23" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="fl">42.5378</span></span>
-<span id="cb276-24"><a href="LoadData.html#cb276-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-25"><a href="LoadData.html#cb276-25" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>lon</span>
-<span id="cb276-26"><a href="LoadData.html#cb276-26" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="sc">-</span><span class="fl">72.1715</span></span>
-<span id="cb276-27"><a href="LoadData.html#cb276-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-28"><a href="LoadData.html#cb276-28" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>time_zone</span>
-<span id="cb276-29"><a href="LoadData.html#cb276-29" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;America/New_York&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="LoadData.html#cb275-1" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>file_name</span>
+<span id="cb275-2"><a href="LoadData.html#cb275-2" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;AMERIFLUX_BASE_HH&quot;</span></span>
+<span id="cb275-3"><a href="LoadData.html#cb275-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-4"><a href="LoadData.html#cb275-4" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>mimetype</span>
+<span id="cb275-5"><a href="LoadData.html#cb275-5" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;csv&quot;</span></span>
+<span id="cb275-6"><a href="LoadData.html#cb275-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-7"><a href="LoadData.html#cb275-7" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>skip</span>
+<span id="cb275-8"><a href="LoadData.html#cb275-8" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">2</span></span>
+<span id="cb275-9"><a href="LoadData.html#cb275-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-10"><a href="LoadData.html#cb275-10" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>header</span>
+<span id="cb275-11"><a href="LoadData.html#cb275-11" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">1</span></span>
+<span id="cb275-12"><a href="LoadData.html#cb275-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-13"><a href="LoadData.html#cb275-13" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>na.strings</span>
+<span id="cb275-14"><a href="LoadData.html#cb275-14" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;-9999&quot;</span> <span class="st">&quot;-6999&quot;</span> <span class="st">&quot;9999&quot;</span>  <span class="st">&quot;NA&quot;</span>   </span>
+<span id="cb275-15"><a href="LoadData.html#cb275-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-16"><a href="LoadData.html#cb275-16" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>time.row</span>
+<span id="cb275-17"><a href="LoadData.html#cb275-17" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">4</span></span>
+<span id="cb275-18"><a href="LoadData.html#cb275-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-19"><a href="LoadData.html#cb275-19" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>site</span>
+<span id="cb275-20"><a href="LoadData.html#cb275-20" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="dv">758</span></span>
+<span id="cb275-21"><a href="LoadData.html#cb275-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-22"><a href="LoadData.html#cb275-22" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>lat</span>
+<span id="cb275-23"><a href="LoadData.html#cb275-23" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="fl">42.5378</span></span>
+<span id="cb275-24"><a href="LoadData.html#cb275-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-25"><a href="LoadData.html#cb275-25" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>lon</span>
+<span id="cb275-26"><a href="LoadData.html#cb275-26" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="sc">-</span><span class="fl">72.1715</span></span>
+<span id="cb275-27"><a href="LoadData.html#cb275-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb275-28"><a href="LoadData.html#cb275-28" aria-hidden="true" tabindex="-1"></a>   <span class="sc">$</span>time_zone</span>
+<span id="cb275-29"><a href="LoadData.html#cb275-29" aria-hidden="true" tabindex="-1"></a>   [<span class="dv">1</span>] <span class="st">&quot;America/New_York&quot;</span></span></code></pre></div>
 <p>The first 4 rows of the table <code>format$vars</code> looks like this:</p>
 <table style="width:100%;">
 <colgroup>
@@ -953,14 +951,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="5" style="list-style-type: decimal">
 <li>Get the path to the data</li>
 </ol>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="LoadData.html#cb277-1" aria-hidden="true" tabindex="-1"></a>   data.path <span class="ot">=</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.file.path</span>(</span>
-<span id="cb277-2"><a href="LoadData.html#cb277-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">input.id =</span> input.id, </span>
-<span id="cb277-3"><a href="LoadData.html#cb277-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">host_name =</span> PEcAn.remote<span class="sc">::</span><span class="fu">fqdn</span>(), </span>
-<span id="cb277-4"><a href="LoadData.html#cb277-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">con =</span> bety)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="LoadData.html#cb276-1" aria-hidden="true" tabindex="-1"></a>   data.path <span class="ot">=</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.file.path</span>(</span>
+<span id="cb276-2"><a href="LoadData.html#cb276-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">input.id =</span> input.id, </span>
+<span id="cb276-3"><a href="LoadData.html#cb276-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">host_name =</span> PEcAn.remote<span class="sc">::</span><span class="fu">fqdn</span>(), </span>
+<span id="cb276-4"><a href="LoadData.html#cb276-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">con =</span> bety)</span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Load the data</li>
 </ol>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="LoadData.html#cb278-1" aria-hidden="true" tabindex="-1"></a>   data <span class="ot">=</span> PEcAn.benchmark<span class="sc">::</span><span class="fu">load_data</span>(<span class="at">data.path =</span> data.path, <span class="at">format =</span> format)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="LoadData.html#cb277-1" aria-hidden="true" tabindex="-1"></a>   data <span class="ot">=</span> PEcAn.benchmark<span class="sc">::</span><span class="fu">load_data</span>(<span class="at">data.path =</span> data.path, <span class="at">format =</span> format)</span></code></pre></div>
 </div>
 </div>
             </section>

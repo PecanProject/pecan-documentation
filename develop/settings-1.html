@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-04" />
+<meta name="date" content="2024-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -230,9 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html"><i class="fa fa-check"></i><b>7.1</b> Additional web configuration</a>
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-web-setup"><i class="fa fa-check"></i><b>7.1.1</b> Web interface setup</a></li>
-<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#browndog"><i class="fa fa-check"></i><b>7.1.2</b> Brown Dog</a></li>
-<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.3</b> Advanced Setup</a></li>
-<li class="chapter" data-level="7.1.4" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.4</b> Editing model configurations</a></li>
+<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.2</b> Advanced Setup</a></li>
+<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.3</b> Editing model configurations</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html"><i class="fa fa-check"></i><b>7.2</b> Settings-configured analyses</a>
 <ul>
@@ -331,9 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>12.2.5</b> (experimental) State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-variables"><i class="fa fa-check"></i><b>12.2.6</b> State Variables for State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-observation-preparation"><i class="fa fa-check"></i><b>12.2.7</b> Observation Preparation for State Data Assimilation</a></li>
-<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Brown Dog</a></li>
-<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.9</b> (experimental) Benchmarking</a></li>
-<li class="chapter" data-level="12.2.10" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.10</b> Remote data module</a></li>
+<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.9</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>13</b> PEcAn workflow (web/workflow.R)</a>
@@ -781,20 +779,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>A generic settings can be found in the <code>PEcAn.all</code> package</li>
 </ul>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="settings-1.html#cb500-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb500-2"><a href="settings-1.html#cb500-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="settings-1.html#cb499-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb499-2"><a href="settings-1.html#cb499-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>database settings can be specified, and tests run only if a connection is available</li>
 </ul>
 <p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="settings-1.html#cb501-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb501-2"><a href="settings-1.html#cb501-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb501-3"><a href="settings-1.html#cb501-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
-<span id="cb501-4"><a href="settings-1.html#cb501-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
-<span id="cb501-5"><a href="settings-1.html#cb501-5" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(..., {</span>
-<span id="cb501-6"><a href="settings-1.html#cb501-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skip_if_not</span>(<span class="fu">db.exists</span>(settings<span class="sc">$</span>database))</span>
-<span id="cb501-7"><a href="settings-1.html#cb501-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write tests here</span></span>
-<span id="cb501-8"><a href="settings-1.html#cb501-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="settings-1.html#cb500-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb500-2"><a href="settings-1.html#cb500-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb500-3"><a href="settings-1.html#cb500-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
+<span id="cb500-4"><a href="settings-1.html#cb500-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
+<span id="cb500-5"><a href="settings-1.html#cb500-5" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(..., {</span>
+<span id="cb500-6"><a href="settings-1.html#cb500-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skip_if_not</span>(<span class="fu">db.exists</span>(settings<span class="sc">$</span>database))</span>
+<span id="cb500-7"><a href="settings-1.html#cb500-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write tests here</span></span>
+<span id="cb500-8"><a href="settings-1.html#cb500-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <ul>
 <li><p>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
 wiki</a></p></li>
@@ -802,8 +800,8 @@ wiki</a></p></li>
 <li><p>Model specific settings can go in the model-specific module, for
 example:</p></li>
 </ul>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="settings-1.html#cb502-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb502-2"><a href="settings-1.html#cb502-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="settings-1.html#cb501-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb501-2"><a href="settings-1.html#cb501-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>test-specific settings:
 <ul>
@@ -827,8 +825,8 @@ example:</p></li>
   &lt;/pecan&gt;&quot;
 settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="settings-1.html#cb504-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.text)</span>
-<span id="cb504-2"><a href="settings-1.html#cb504-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>outdir <span class="ot">&lt;-</span> <span class="st">&quot;/tmp&quot;</span> <span class="do">## or any other settings</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="settings-1.html#cb503-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.text)</span>
+<span id="cb503-2"><a href="settings-1.html#cb503-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>outdir <span class="ot">&lt;-</span> <span class="st">&quot;/tmp&quot;</span> <span class="do">## or any other settings</span></span></code></pre></div></li>
 </ul></li>
 </ul>
 </div>

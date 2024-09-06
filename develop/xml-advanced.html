@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-04" />
+<meta name="date" content="2024-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -230,9 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html"><i class="fa fa-check"></i><b>7.1</b> Additional web configuration</a>
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-web-setup"><i class="fa fa-check"></i><b>7.1.1</b> Web interface setup</a></li>
-<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#browndog"><i class="fa fa-check"></i><b>7.1.2</b> Brown Dog</a></li>
-<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.3</b> Advanced Setup</a></li>
-<li class="chapter" data-level="7.1.4" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.4</b> Editing model configurations</a></li>
+<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.2</b> Advanced Setup</a></li>
+<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.3</b> Editing model configurations</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html"><i class="fa fa-check"></i><b>7.2</b> Settings-configured analyses</a>
 <ul>
@@ -331,9 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>12.2.5</b> (experimental) State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-variables"><i class="fa fa-check"></i><b>12.2.6</b> State Variables for State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-observation-preparation"><i class="fa fa-check"></i><b>12.2.7</b> Observation Preparation for State Data Assimilation</a></li>
-<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Brown Dog</a></li>
-<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.9</b> (experimental) Benchmarking</a></li>
-<li class="chapter" data-level="12.2.10" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.10</b> Remote data module</a></li>
+<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.9</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>13</b> PEcAn workflow (web/workflow.R)</a>
@@ -1165,44 +1163,25 @@ Other than that, the output directory, and start and end date need to be set wit
 * <strong>update_csv</strong> : [optional] This tag is used for SMAP preparation function only, which decide if we want to update the CSV file. Normally, we will only set it to be TRUE if we redownload the SMAP_GEE csv file from Google Earth Engine, the tutorial can be found in the SMAP_SMP_prep function itself. The default value is FALSE.
 * <strong>run_parallel</strong> : [optional] This tag defines if you want to proceed the MODIS LAI function parallely, the default value is FALSE.</p>
 </div>
-<div id="xml-browndog" class="section level3 hasAnchor" number="12.2.8">
-<h3><span class="header-section-number">12.2.8</span> (experimental) Brown Dog<a href="xml-advanced.html#xml-browndog" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This section describes how to connect to <a href="http://browndog.ncsa.illinois.edu">Brown Dog</a>. This facilitates processing and conversions of data.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb158-1"><a href="xml-advanced.html#cb158-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">browndog</span>&gt;</span>
-<span id="cb158-2"><a href="xml-advanced.html#cb158-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">url</span>&gt;...&lt;/<span class="kw">url</span>&gt;</span>
-<span id="cb158-3"><a href="xml-advanced.html#cb158-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">username</span>&gt;...&lt;/<span class="kw">username</span>&gt;</span>
-<span id="cb158-4"><a href="xml-advanced.html#cb158-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">password</span>&gt;...&lt;/<span class="kw">password</span>&gt;</span>
-<span id="cb158-5"><a href="xml-advanced.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">browndog</span>&gt;</span></code></pre></div>
-<ul>
-<li><code>url</code>: (required) endpoint for Brown Dog to be used.</li>
-<li><code>username</code>: (optional) username to be used with the endpoint for Brown Dog.</li>
-<li><code>password</code>: (optional) password to be used with the endpoint for Brown Dog.</li>
-</ul>
-<p>This information is currently used by the following R functions:</p>
-<ul>
-<li><code>PEcAn.data.atmosphere::met.process</code> – Generic function for processing meteorological input data.</li>
-<li><code>PEcAn.benchmark::load_data</code> – Generic, versatile function for loading data in various formats.</li>
-</ul>
-</div>
-<div id="xml-benchmarking" class="section level3 hasAnchor" number="12.2.9">
-<h3><span class="header-section-number">12.2.9</span> (experimental) Benchmarking<a href="xml-advanced.html#xml-benchmarking" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="xml-benchmarking" class="section level3 hasAnchor" number="12.2.8">
+<h3><span class="header-section-number">12.2.8</span> (experimental) Benchmarking<a href="xml-advanced.html#xml-benchmarking" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Coming soon…</p>
 </div>
-<div id="xml-remote_process" class="section level3 hasAnchor" number="12.2.10">
-<h3><span class="header-section-number">12.2.10</span> Remote data module<a href="xml-advanced.html#xml-remote_process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="xml-remote_process" class="section level3 hasAnchor" number="12.2.9">
+<h3><span class="header-section-number">12.2.9</span> Remote data module<a href="xml-advanced.html#xml-remote_process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This section describes the tags required for configuring <code>remote_process</code>.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb159-1"><a href="xml-advanced.html#cb159-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
-<span id="cb159-2"><a href="xml-advanced.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;...&lt;/<span class="kw">out_get_data</span>&gt;</span>
-<span id="cb159-3"><a href="xml-advanced.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;...&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb159-4"><a href="xml-advanced.html#cb159-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;...&lt;/<span class="kw">collection</span>&gt;</span>
-<span id="cb159-5"><a href="xml-advanced.html#cb159-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;...&lt;/<span class="kw">scale</span>&gt;</span>
-<span id="cb159-6"><a href="xml-advanced.html#cb159-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;...&lt;/<span class="kw">projection</span>&gt;</span>
-<span id="cb159-7"><a href="xml-advanced.html#cb159-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;...&lt;/<span class="kw">qc</span>&gt;</span>
-<span id="cb159-8"><a href="xml-advanced.html#cb159-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;...&lt;/<span class="kw">algorithm</span>&gt;</span>
-<span id="cb159-9"><a href="xml-advanced.html#cb159-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;...&lt;/<span class="kw">credfile</span>&gt;</span>
-<span id="cb159-10"><a href="xml-advanced.html#cb159-10" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;...&lt;/<span class="kw">out_process_data</span>&gt;</span>
-<span id="cb159-11"><a href="xml-advanced.html#cb159-11" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">overwrite</span>&gt;...&lt;/<span class="kw">overwrite</span>&gt;</span>
-<span id="cb159-12"><a href="xml-advanced.html#cb159-12" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb158-1"><a href="xml-advanced.html#cb158-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">remotedata</span>&gt;</span>
+<span id="cb158-2"><a href="xml-advanced.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_get_data</span>&gt;...&lt;/<span class="kw">out_get_data</span>&gt;</span>
+<span id="cb158-3"><a href="xml-advanced.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;...&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb158-4"><a href="xml-advanced.html#cb158-4" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">collection</span>&gt;...&lt;/<span class="kw">collection</span>&gt;</span>
+<span id="cb158-5"><a href="xml-advanced.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">scale</span>&gt;...&lt;/<span class="kw">scale</span>&gt;</span>
+<span id="cb158-6"><a href="xml-advanced.html#cb158-6" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">projection</span>&gt;...&lt;/<span class="kw">projection</span>&gt;</span>
+<span id="cb158-7"><a href="xml-advanced.html#cb158-7" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">qc</span>&gt;...&lt;/<span class="kw">qc</span>&gt;</span>
+<span id="cb158-8"><a href="xml-advanced.html#cb158-8" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">algorithm</span>&gt;...&lt;/<span class="kw">algorithm</span>&gt;</span>
+<span id="cb158-9"><a href="xml-advanced.html#cb158-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">credfile</span>&gt;...&lt;/<span class="kw">credfile</span>&gt;</span>
+<span id="cb158-10"><a href="xml-advanced.html#cb158-10" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">out_process_data</span>&gt;...&lt;/<span class="kw">out_process_data</span>&gt;</span>
+<span id="cb158-11"><a href="xml-advanced.html#cb158-11" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">overwrite</span>&gt;...&lt;/<span class="kw">overwrite</span>&gt;</span>
+<span id="cb158-12"><a href="xml-advanced.html#cb158-12" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">remotedata</span>&gt;</span></code></pre></div>
 <ul>
 <li><code>out_get_data</code>: (required) type of raw output requested, e.g, bands, smap</li>
 <li><code>source</code>: (required) source of remote data, e.g., gee or AppEEARS</li>

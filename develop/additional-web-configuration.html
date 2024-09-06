@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-04" />
+<meta name="date" content="2024-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -230,9 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html"><i class="fa fa-check"></i><b>7.1</b> Additional web configuration</a>
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-web-setup"><i class="fa fa-check"></i><b>7.1.1</b> Web interface setup</a></li>
-<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#browndog"><i class="fa fa-check"></i><b>7.1.2</b> Brown Dog</a></li>
-<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.3</b> Advanced Setup</a></li>
-<li class="chapter" data-level="7.1.4" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.4</b> Editing model configurations</a></li>
+<li class="chapter" data-level="7.1.2" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-advanced-setup"><i class="fa fa-check"></i><b>7.1.2</b> Advanced Setup</a></li>
+<li class="chapter" data-level="7.1.3" data-path="additional-web-configuration.html"><a href="additional-web-configuration.html#intermediate-model-config"><i class="fa fa-check"></i><b>7.1.3</b> Editing model configurations</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="settings-configured-analyses.html"><a href="settings-configured-analyses.html"><i class="fa fa-check"></i><b>7.2</b> Settings-configured analyses</a>
 <ul>
@@ -331,9 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.5" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-data-assimilation"><i class="fa fa-check"></i><b>12.2.5</b> (experimental) State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.6" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-state-variables"><i class="fa fa-check"></i><b>12.2.6</b> State Variables for State Data Assimilation</a></li>
 <li class="chapter" data-level="12.2.7" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-observation-preparation"><i class="fa fa-check"></i><b>12.2.7</b> Observation Preparation for State Data Assimilation</a></li>
-<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-browndog"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Brown Dog</a></li>
-<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.9</b> (experimental) Benchmarking</a></li>
-<li class="chapter" data-level="12.2.10" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.10</b> Remote data module</a></li>
+<li class="chapter" data-level="12.2.8" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-benchmarking"><i class="fa fa-check"></i><b>12.2.8</b> (experimental) Benchmarking</a></li>
+<li class="chapter" data-level="12.2.9" data-path="xml-advanced.html"><a href="xml-advanced.html#xml-remote_process"><i class="fa fa-check"></i><b>12.2.9</b> Remote data module</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>13</b> PEcAn workflow (web/workflow.R)</a>
@@ -781,7 +779,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Additional settings for web configuration:</p>
 <ul>
 <li><span id="intermediate-web-setup">Web interface setup</span></li>
-<li><span id="browndog">Brown Dog</span></li>
 <li><span id="intermediate-advanced-setup">Advanced setup</span>
 <ul>
 <li>[Sensitivity analysis] (TODO)</li>
@@ -796,7 +793,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The list of configuration available</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Database configuration</strong> : BETYdb(Biofuel Ecophysiological Traits and Yields database) configuration details, can be edited according to need.</p></li>
-<li><p><strong>Browndog configuration</strong> : Browndog configuration details, Used to connect browndog. Its included by default in VM.</p></li>
 <li><p><strong>FIA Database</strong> : FIA(Forest Inventory and Analysis) Database configuration details, Can be used to add additional data to models.</p></li>
 <li><p><strong>Google MapKey</strong> : Google Map key, used to access the google map by PEcAn.</p></li>
 <li><p><strong>Change Password</strong> : A small infomation to change the VM user password. (if using Docker image it won’t work)</p></li>
@@ -804,18 +800,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Still work on the adding other editing feature going on, this page will be updated as new configuration will be available.</p>
 </div>
-<div id="browndog" class="section level3 hasAnchor" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Brown Dog<a href="additional-web-configuration.html#browndog" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The Browndog service provides PEcAn with access to large and diverse sets of data at the click of a button in the format that PEcAn needs. By clicking the checkbox you will be using the Browndog Service to process data.</p>
-<p>For more information regarding meteorological data check out <a href="met-drivers.html#met-drivers">Available Meteorological Drivers</a>.</p>
-<p>More information can be found at the <a href="http://browndog.ncsa.illinois.edu/">Browndog website</a>.</p>
-</div>
-<div id="intermediate-advanced-setup" class="section level3 hasAnchor" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Advanced Setup<a href="additional-web-configuration.html#intermediate-advanced-setup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="intermediate-advanced-setup" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Advanced Setup<a href="additional-web-configuration.html#intermediate-advanced-setup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>(TODO: Under construction…)</p>
 </div>
-<div id="intermediate-model-config" class="section level3 hasAnchor" number="7.1.4">
-<h3><span class="header-section-number">7.1.4</span> Editing model configurations<a href="additional-web-configuration.html#intermediate-model-config" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="intermediate-model-config" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Editing model configurations<a href="additional-web-configuration.html#intermediate-model-config" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>(TODO: Under construction…)</p>
 
 </div>
