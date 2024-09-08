@@ -865,11 +865,21 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.routers.rabbitmq.entrypoints=web
     - traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.pecan.localhost`)
     volumes: rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmqctl ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
   postgres:
     image: mdillon/postgis:9.5
     restart: unless-stopped
     networks: pecan
     volumes: postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
   bety:
     image: pecan/bety:${BETY_VERSION:-latest}
     restart: unless-stopped
@@ -880,19 +890,29 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - RAILS_RELATIVE_URL_ROOT=/bety
     - LOCAL_SERVER=${BETY_LOCAL_SERVER:-99}
     volumes: bety:/home/bety/log
-    depends_on: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
     labels:
     - traefik.enable=true
     - traefik.http.services.bety.loadbalancer.server.port=8000
     - traefik.http.routers.bety.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/bety/`)
+    healthcheck:
+      test: curl --silent --fail http://localhost:8000/${RAILS_RELATIVE_URL_ROOT}
+        &gt; /dev/null || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
   rstudio:
     image: pecan/base:${PECAN_VERSION:-latest}
     command: /work/rstudio.sh
     restart: unless-stopped
     networks: pecan
     depends_on:
-    - rabbitmq
-    - postgres
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     environment:
     - KEEP_ENV=RABBITMQ_URI RABBITMQ_PREFIX RABBITMQ_PORT FQDN NAME
     - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
@@ -928,6 +948,11 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.enable=true
     - traefik.http.services.docs.loadbalancer.server.port=80
     - traefik.http.routers.docs.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/`)
+    healthcheck:
+      test: curl --silent --fail http://localhost/ &gt; /dev/null || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
   pecan:
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/web:${PECAN_VERSION:-latest}
@@ -939,8 +964,10 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - NAME=${PECAN_NAME:-docker}
     - SECRET_KEY_BASE=${BETY_SECRET_KEY:-thisisnotasecret}
     depends_on:
-    - postgres
-    - rabbitmq
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     labels:
     - traefik.enable=true
     - traefik.http.services.pecan.loadbalancer.server.port=8080
@@ -949,6 +976,11 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     volumes:
     - pecan:/data
     - pecan:/var/www/html/pecan/data
+    healthcheck:
+      test: curl --silent --fail http://localhost/pecan/ &gt; /dev/null || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
   monitor:
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/monitor:${PECAN_VERSION:-latest}
@@ -957,7 +989,11 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     environment:
     - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
     - FQDN=${PECAN_FQDN:-docker}
-    depends_on: rabbitmq
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     labels:
     - traefik.enable=true
     - traefik.http.routers.monitor.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp;
@@ -965,6 +1001,12 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.routers.monitor.middlewares=monitor-stripprefix
     - traefik.http.middlewares.monitor-stripprefix.stripprefix.prefixes=/monitor
     volumes: pecan:/data
+    healthcheck:
+      test: curl --silent --fail http://localhost:9999/monitor/ &gt; /dev/null || exit
+        1
+      interval: 10s
+      timeout: 5s
+      retries: 5
   executor:
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/executor:${PECAN_VERSION:-latest}
@@ -976,8 +1018,10 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - RABBITMQ_PORT=15672
     - FQDN=${PECAN_FQDN:-docker}
     depends_on:
-    - postgres
-    - rabbitmq
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     volumes: pecan:/data
   fates:
     user: ${UID:-1001}:${GID:-1001}
@@ -985,7 +1029,9 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
-    depends_on: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     volumes: pecan:/data
   basgra:
     user: ${UID:-1001}:${GID:-1001}
@@ -993,7 +1039,9 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
-    depends_on: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     volumes: pecan:/data
   sipnet:
     user: ${UID:-1001}:${GID:-1001}
@@ -1001,7 +1049,9 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
-    depends_on: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     volumes: pecan:/data
   ed2:
     user: ${UID:-1001}:${GID:-1001}
@@ -1009,7 +1059,9 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
-    depends_on: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     volumes: pecan:/data
   maespa:
     user: ${UID:-1001}:${GID:-1001}
@@ -1017,7 +1069,9 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
-    depends_on: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     volumes: pecan:/data
   biocro:
     user: ${UID:-1001}:${GID:-1001}
@@ -1025,19 +1079,28 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
-    depends_on: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     volumes: pecan:/data
   dbsync:
     image: pecan/shiny-dbsync:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
-    depends_on: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
     labels:
     - traefik.enable=true
     - traefik.http.routers.dbsync.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp;
       PathPrefix(`/dbsync/`)
     - traefik.http.routers.dbsync.middlewares=dbsync-stripprefix
     - traefik.http.middlewares.dbsync-stripprefix.stripprefix.prefixes=/monitor
+    healthcheck:
+      test: curl --silent --fail http://localhost/dbsync/ &gt; /dev/null || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
   api:
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/api:${PECAN_VERSION:-latest}
@@ -1055,8 +1118,15 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.enable=true
     - traefik.http.routers.api.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/api/`)
     - traefik.http.services.api.loadbalancer.server.port=8000
-    depends_on: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
     volumes: pecan:/data/
+    healthcheck:
+      test: curl --silent --fail http://localhost/api/ping &gt; /dev/null || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
 networks:
   pecan: ~
 volumes:
@@ -1270,7 +1340,12 @@ Our configuration is fairly straightforward:</p>
   image: mdillon/postgis:9.5
   restart: unless-stopped
   networks: pecan
-  volumes: postgres:/var/lib/postgresql/data</code></pre>
+  volumes: postgres:/var/lib/postgresql/data
+  healthcheck:
+    test: pg_isready -U postgres
+    interval: 10s
+    timeout: 5s
+    retries: 5</code></pre>
 <p>Some additional details about our configuration:</p>
 <ul>
 <li><p><code>image</code> – This pulls a container with PostgreSQL + PostGIS pre-installed.
@@ -1298,7 +1373,12 @@ In PEcAn, RabbitMQ functions as a task manager and scheduler, coordinating the e
   - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
   - traefik.http.routers.rabbitmq.entrypoints=web
   - traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.pecan.localhost`)
-  volumes: rabbitmq:/var/lib/rabbitmq</code></pre>
+  volumes: rabbitmq:/var/lib/rabbitmq
+  healthcheck:
+    test: rabbitmqctl ping
+    interval: 10s
+    timeout: 5s
+    retries: 5</code></pre>
 <p>Note that the <code>traefik.http.routers.rabbitmq.rule</code> indicates that browsing to <a href="http://rabbitmq.pecan.localhost/" class="uri">http://rabbitmq.pecan.localhost/</a> leads to the RabbitMQ management console.</p>
 <p>By default, the RabbitMQ management console has username/password <code>guest/guest</code>, which is highly insecure.
 For production instances of PEcAn, we highly recommend changing these credentials to something more secure, and removing access to the RabbitMQ management console via Traefik.</p>
@@ -1319,11 +1399,19 @@ However, note that certain features of the PEcAn web interface do link to the BE
   - RAILS_RELATIVE_URL_ROOT=/bety
   - LOCAL_SERVER=${BETY_LOCAL_SERVER:-99}
   volumes: bety:/home/bety/log
-  depends_on: postgres
+  depends_on:
+    postgres:
+      condition: service_healthy
   labels:
   - traefik.enable=true
   - traefik.http.services.bety.loadbalancer.server.port=8000
-  - traefik.http.routers.bety.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/bety/`)</code></pre>
+  - traefik.http.routers.bety.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/bety/`)
+  healthcheck:
+    test: curl --silent --fail http://localhost:8000/${RAILS_RELATIVE_URL_ROOT} &gt;
+      /dev/null || exit 1
+    interval: 10s
+    timeout: 5s
+    retries: 5</code></pre>
 <p>The BETY container Dockerfile is located in the root directory of the <a href="https://github.com/PecanProject/bety">BETY GitHub repository</a> (<a href="https://github.com/PecanProject/bety/blob/master/Dockerfile">direct link</a>).</p>
 </div>
 <div id="pecan-dc-docs" class="section level3 hasAnchor" number="25.4.11">
@@ -1337,7 +1425,12 @@ However, note that certain features of the PEcAn web interface do link to the BE
   labels:
   - traefik.enable=true
   - traefik.http.services.docs.loadbalancer.server.port=80
-  - traefik.http.routers.docs.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/`)</code></pre>
+  - traefik.http.routers.docs.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/`)
+  healthcheck:
+    test: curl --silent --fail http://localhost/ &gt; /dev/null || exit 1
+    interval: 10s
+    timeout: 5s
+    retries: 5</code></pre>
 </div>
 <div id="pecan-dc-web" class="section level3 hasAnchor" number="25.4.12">
 <h3><span class="header-section-number">25.4.12</span> <code>web</code><a href="pecan-docker.html#pecan-dc-web" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1364,8 +1457,10 @@ However, it is <em>not</em> in charge of executing the models themselves – mod
   - RABBITMQ_PORT=15672
   - FQDN=${PECAN_FQDN:-docker}
   depends_on:
-  - postgres
-  - rabbitmq
+    postgres:
+      condition: service_healthy
+    rabbitmq:
+      condition: service_healthy
   volumes: pecan:/data</code></pre>
 <p>Its Dockerfile is ships with the PEcAn source code, in <a href="https://github.com/PecanProject/pecan/blob/develop/docker/executor/Dockerfile"><code>docker/executor/Dockerfile</code></a>.
 Its image is built on top of the <code>pecan/base</code> image (<a href="https://github.com/PecanProject/pecan/blob/develop/docker/base/Dockerfile"><code>docker/base/Dockerfile</code></a>), which contains the actual PEcAn source.
@@ -1386,14 +1481,24 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
   environment:
   - RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
   - FQDN=${PECAN_FQDN:-docker}
-  depends_on: rabbitmq
+  depends_on:
+    postgres:
+      condition: service_healthy
+    rabbitmq:
+      condition: service_healthy
   labels:
   - traefik.enable=true
   - traefik.http.routers.monitor.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp;
     PathPrefix(`/monitor/`)
   - traefik.http.routers.monitor.middlewares=monitor-stripprefix
   - traefik.http.middlewares.monitor-stripprefix.stripprefix.prefixes=/monitor
-  volumes: pecan:/data</code></pre>
+  volumes: pecan:/data
+  healthcheck:
+    test: curl --silent --fail http://localhost:9999/monitor/ &gt; /dev/null || exit
+      1
+    interval: 10s
+    timeout: 5s
+    retries: 5</code></pre>
 </div>
 <div id="pecan-dc-models" class="section level3 hasAnchor" number="25.4.15">
 <h3><span class="header-section-number">25.4.15</span> Model-specific containers<a href="pecan-docker.html#pecan-dc-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1405,7 +1510,9 @@ In general, their configuration should be similar to the following configuration
   restart: unless-stopped
   networks: pecan
   environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
-  depends_on: rabbitmq
+  depends_on:
+    rabbitmq:
+      condition: service_healthy
   volumes: pecan:/data</code></pre>
 <p>The PEcAn source contains Dockerfiles for ED2 (<a href="https://github.com/PecanProject/pecan/blob/develop/models/ed/Dockerfile."><code>models/ed/Dockerfile</code></a>) and SIPNET (<a href="https://github.com/PecanProject/pecan/blob/develop/models/sipnet/Dockerfile"><code>models/sipnet/Dockerfile</code></a>) that can serve as references.
 For additional tips on constructing a Dockerfile for your model, see <a href="model-docker.html#model-docker">Dockerfiles for Models</a>.</p>
