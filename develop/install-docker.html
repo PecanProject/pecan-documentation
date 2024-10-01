@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-08" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,12 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>11</b> PEcAn standard formats</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="defining-new-input-formats.html"><a href="defining-new-input-formats.html"><i class="fa fa-check"></i><b>11.1</b> Defining new input formats</a></li>
-<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a>
+<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a></li>
+<li class="chapter" data-level="11.3" data-path="input-standards.html"><a href="input-standards.html"><i class="fa fa-check"></i><b>11.3</b> Input Standards</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="time-standard.html"><a href="time-standard.html#input-standards"><i class="fa fa-check"></i><b>11.2.1</b> Input Standards</a></li>
-<li class="chapter" data-level="11.2.2" data-path="time-standard.html"><a href="time-standard.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.2.2</b> Soils and Vegetation Inputs</a></li>
-<li class="chapter" data-level="11.2.3" data-path="time-standard.html"><a href="time-standard.html#OutputStandards"><i class="fa fa-check"></i><b>11.2.3</b> Output Standards</a></li>
+<li class="chapter" data-level="11.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-standards"><i class="fa fa-check"></i><b>11.3.1</b> Meteorology Standards</a></li>
+<li class="chapter" data-level="11.3.2" data-path="input-standards.html"><a href="input-standards.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.3.2</b> Soils and Vegetation Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="11.4" data-path="input-standards.html"><a href="input-standards.html#OutputStandards"><i class="fa fa-check"></i><b>11.4</b> Output Standards</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="pecanXML.html"><a href="pecanXML.html"><i class="fa fa-check"></i><b>12</b> The PEcAn XML</a>
 <ul>
@@ -793,7 +794,7 @@ If that fails, but running as <code>sudo</code> succeeds, see <a href="https://d
 <p>To see if docker compose is successfully installed, use the following shell command:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="install-docker.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose version</span></code></pre></div>
 <p>This should print the current version of docker-compose. We have tested the instruction below with versions of docker compose 1.22 and above.</p></li>
-<li><p><strong>Download the PEcAn docker compose file</strong>. It is located in the root directory of the <a href="https://github.com/pecanproject/pecan">PEcAn source code</a>. For reference, here are direct links to the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/docker-compose.yml">latest stable version</a> and the <a href="https://raw.githubusercontent.com/PecanProject/pecan/develop/docker-compose.yml">bleeding edge development version</a>. (To download the files, you should be able to right click the link and select “Save link as”.) Make sure the file is saved as <code>docker-compose.yml</code> in a directory called <code>pecan</code>.</p></li>
+<li><p><strong>Download the PEcAn docker compose file</strong>. It is located in the root directory of the <a href="https://github.com/pecanproject/pecan">PEcAn source code</a>. For reference, here are direct links to the <a href="https://raw.githubusercontent.com/PecanProject/pecan/main/docker-compose.yml">latest stable version</a> and the <a href="https://raw.githubusercontent.com/PecanProject/pecan/develop/docker-compose.yml">bleeding edge development version</a>. (To download the files, you should be able to right click the link and select “Save link as”.) Make sure the file is saved as <code>docker-compose.yml</code> in a directory called <code>pecan</code>.</p></li>
 <li><p><strong>Initialize the PEcAn database and data images</strong>. The following <code>docker compose</code> commands are used to download all the data PEcAn needs to start working. For more on how they work, see our <a href="the-pecan-docker-install-process-in-detail.html#pecan-docker-quickstart-init">Docker topical pages</a>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Create and start the PEcAn database container (without any data)</p>

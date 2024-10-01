@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-08" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,12 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>11</b> PEcAn standard formats</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="defining-new-input-formats.html"><a href="defining-new-input-formats.html"><i class="fa fa-check"></i><b>11.1</b> Defining new input formats</a></li>
-<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a>
+<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a></li>
+<li class="chapter" data-level="11.3" data-path="input-standards.html"><a href="input-standards.html"><i class="fa fa-check"></i><b>11.3</b> Input Standards</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="time-standard.html"><a href="time-standard.html#input-standards"><i class="fa fa-check"></i><b>11.2.1</b> Input Standards</a></li>
-<li class="chapter" data-level="11.2.2" data-path="time-standard.html"><a href="time-standard.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.2.2</b> Soils and Vegetation Inputs</a></li>
-<li class="chapter" data-level="11.2.3" data-path="time-standard.html"><a href="time-standard.html#OutputStandards"><i class="fa fa-check"></i><b>11.2.3</b> Output Standards</a></li>
+<li class="chapter" data-level="11.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-standards"><i class="fa fa-check"></i><b>11.3.1</b> Meteorology Standards</a></li>
+<li class="chapter" data-level="11.3.2" data-path="input-standards.html"><a href="input-standards.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.3.2</b> Soils and Vegetation Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="11.4" data-path="input-standards.html"><a href="input-standards.html#OutputStandards"><i class="fa fa-check"></i><b>11.4</b> Output Standards</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="pecanXML.html"><a href="pecanXML.html"><i class="fa fa-check"></i><b>12</b> The PEcAn XML</a>
 <ul>
@@ -778,16 +779,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">26.1</span> Basics of SSH<a href="basics-of-ssh.html#basics-of-ssh" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>All of the PEcAn remote infrastructure depends on the system <code>ssh</code> utility, so it’s important to make sure this works before attempting the advanced remote execution functionality in PEcAn.</p>
 <p>To connect to a remote server interactively, the command is simply:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb467-1"><a href="basics-of-ssh.html#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb475-1"><a href="basics-of-ssh.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></span></code></pre></div>
 <p>For instance, my connection to the BU shared computing cluster looks like:</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb468-1"><a href="basics-of-ssh.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu</span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb476-1"><a href="basics-of-ssh.html#cb476-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu</span></code></pre></div>
 <p>It will prompt me for my BU password, and, if successful, will drop me into a login shell on the remote machine.</p>
 <p>Alternatively to the login shell, <code>ssh</code> can be used to execute arbitrary code, whose output will be returned exactly as it would if you ran the command locally.
 For example, the following:</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb469-1"><a href="basics-of-ssh.html#cb469-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb477-1"><a href="basics-of-ssh.html#cb477-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu pwd</span></code></pre></div>
 <p>will run the <code>pwd</code> command, and return the path to my home directory on the BU SCC.
 The more advanced example below will run some simple R code on the BU SCC and return the output as if it was run locally.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb470-1"><a href="basics-of-ssh.html#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript <span class="at">-e</span> <span class="st">&quot;seq(1, 10)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb478-1"><a href="basics-of-ssh.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> ashiklom@geo.bu.edu Rscript <span class="at">-e</span> <span class="st">&quot;seq(1, 10)&quot;</span></span></code></pre></div>
 </div>
             </section>
 

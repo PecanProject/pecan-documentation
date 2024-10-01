@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-08" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,12 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>11</b> PEcAn standard formats</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="defining-new-input-formats.html"><a href="defining-new-input-formats.html"><i class="fa fa-check"></i><b>11.1</b> Defining new input formats</a></li>
-<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a>
+<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a></li>
+<li class="chapter" data-level="11.3" data-path="input-standards.html"><a href="input-standards.html"><i class="fa fa-check"></i><b>11.3</b> Input Standards</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="time-standard.html"><a href="time-standard.html#input-standards"><i class="fa fa-check"></i><b>11.2.1</b> Input Standards</a></li>
-<li class="chapter" data-level="11.2.2" data-path="time-standard.html"><a href="time-standard.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.2.2</b> Soils and Vegetation Inputs</a></li>
-<li class="chapter" data-level="11.2.3" data-path="time-standard.html"><a href="time-standard.html#OutputStandards"><i class="fa fa-check"></i><b>11.2.3</b> Output Standards</a></li>
+<li class="chapter" data-level="11.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-standards"><i class="fa fa-check"></i><b>11.3.1</b> Meteorology Standards</a></li>
+<li class="chapter" data-level="11.3.2" data-path="input-standards.html"><a href="input-standards.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.3.2</b> Soils and Vegetation Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="11.4" data-path="input-standards.html"><a href="input-standards.html#OutputStandards"><i class="fa fa-check"></i><b>11.4</b> Output Standards</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="pecanXML.html"><a href="pecanXML.html"><i class="fa fa-check"></i><b>12</b> The PEcAn XML</a>
 <ul>
@@ -779,37 +780,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Provides functions to simplify development</p>
 <p>Documentation:
 <a href="https://devtools.r-lib.org/">The R devtools package</a></p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="developer-devtools.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb504-2"><a href="developer-devtools.html#cb504-2" aria-hidden="true" tabindex="-1"></a><span class="fu">document</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb504-3"><a href="developer-devtools.html#cb504-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb504-4"><a href="developer-devtools.html#cb504-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install</span>(<span class="st">&quot;pkg&quot;</span>)</span>
-<span id="cb504-5"><a href="developer-devtools.html#cb504-5" aria-hidden="true" tabindex="-1"></a><span class="fu">build</span>(<span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="developer-devtools.html#cb512-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load_all</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb512-2"><a href="developer-devtools.html#cb512-2" aria-hidden="true" tabindex="-1"></a><span class="fu">document</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb512-3"><a href="developer-devtools.html#cb512-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb512-4"><a href="developer-devtools.html#cb512-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install</span>(<span class="st">&quot;pkg&quot;</span>)</span>
+<span id="cb512-5"><a href="developer-devtools.html#cb512-5" aria-hidden="true" tabindex="-1"></a><span class="fu">build</span>(<span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
 <p>other tips for devtools (from the documentation):</p>
 <ul>
 <li>Adding the following to your <code>~/.Rprofile</code> will load devtools when
 running R in interactive mode:</li>
 </ul>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="developer-devtools.html#cb505-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load devtools by default</span></span>
-<span id="cb505-2"><a href="developer-devtools.html#cb505-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
-<span id="cb505-3"><a href="developer-devtools.html#cb505-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">suppressMessages</span>(<span class="fu">require</span>(devtools))</span>
-<span id="cb505-4"><a href="developer-devtools.html#cb505-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="developer-devtools.html#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load devtools by default</span></span>
+<span id="cb513-2"><a href="developer-devtools.html#cb513-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb513-3"><a href="developer-devtools.html#cb513-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">suppressMessages</span>(<span class="fu">require</span>(devtools))</span>
+<span id="cb513-4"><a href="developer-devtools.html#cb513-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ul>
 <li>Adding the following to your .Rpackages will allow devtools to recognize package by folder name, rather than directory path</li>
 </ul>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="developer-devtools.html#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in this example, devhome is the pecan trunk directory </span></span>
-<span id="cb506-2"><a href="developer-devtools.html#cb506-2" aria-hidden="true" tabindex="-1"></a>devhome <span class="ot">&lt;-</span> <span class="st">&quot;/home/dlebauer/R-dev/pecandev/&quot;</span></span>
-<span id="cb506-3"><a href="developer-devtools.html#cb506-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb506-4"><a href="developer-devtools.html#cb506-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">default =</span> <span class="cf">function</span>(x) {</span>
-<span id="cb506-5"><a href="developer-devtools.html#cb506-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">file.path</span>(devhome, x, x)</span>
-<span id="cb506-6"><a href="developer-devtools.html#cb506-6" aria-hidden="true" tabindex="-1"></a>    }, </span>
-<span id="cb506-7"><a href="developer-devtools.html#cb506-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;utils&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb506-8"><a href="developer-devtools.html#cb506-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;common&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb506-9"><a href="developer-devtools.html#cb506-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb506-10"><a href="developer-devtools.html#cb506-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ed&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb506-11"><a href="developer-devtools.html#cb506-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;uncertainty&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb506-12"><a href="developer-devtools.html#cb506-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;meta.analysis&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb506-13"><a href="developer-devtools.html#cb506-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;db&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb506-14"><a href="developer-devtools.html#cb506-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="developer-devtools.html#cb514-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in this example, devhome is the pecan trunk directory </span></span>
+<span id="cb514-2"><a href="developer-devtools.html#cb514-2" aria-hidden="true" tabindex="-1"></a>devhome <span class="ot">&lt;-</span> <span class="st">&quot;/home/dlebauer/R-dev/pecandev/&quot;</span></span>
+<span id="cb514-3"><a href="developer-devtools.html#cb514-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb514-4"><a href="developer-devtools.html#cb514-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">default =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb514-5"><a href="developer-devtools.html#cb514-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">file.path</span>(devhome, x, x)</span>
+<span id="cb514-6"><a href="developer-devtools.html#cb514-6" aria-hidden="true" tabindex="-1"></a>    }, </span>
+<span id="cb514-7"><a href="developer-devtools.html#cb514-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;utils&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/utils&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb514-8"><a href="developer-devtools.html#cb514-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;common&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/common&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb514-9"><a href="developer-devtools.html#cb514-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/all&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb514-10"><a href="developer-devtools.html#cb514-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ed&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;pecandev/models/ed&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb514-11"><a href="developer-devtools.html#cb514-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;uncertainty&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/uncertainty&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb514-12"><a href="developer-devtools.html#cb514-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;meta.analysis&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;modules/meta.analysis&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb514-13"><a href="developer-devtools.html#cb514-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;db&quot;</span> <span class="ot">=</span> <span class="fu">paste</span>(devhome, <span class="st">&quot;db&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb514-14"><a href="developer-devtools.html#cb514-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now, devtools can take <code>pkg</code> as an argument instead of <code>/path/to/pkg/</code>,
 e.g. so you can use <code>build("pkg")</code> instead of <code>build("/path/to/pkg/")</code></p>
 

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.3 Connecting to BETYdb on the VM via SSH | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="10.3 Connecting to BETYdb on the VM via SSH | The Predictive Ecosystem Analyzer" />
+  <title>11.3 Input Standards | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="11.3 Input Standards | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.3 Connecting to BETYdb on the VM via SSH | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="11.3 Input Standards | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.3 Connecting to BETYdb on the VM via SSH | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="11.3 Input Standards | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ssh-vm.html"/>
-<link rel="next" href="pecan-standards.html"/>
+<link rel="prev" href="time-standard.html"/>
+<link rel="next" href="OutputStandards.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -775,188 +775,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ssh-vm-bety" class="section level2 hasAnchor" number="10.3">
-<h2><span class="header-section-number">10.3</span> Connecting to BETYdb on the VM via SSH<a href="ssh-vm-bety.html#ssh-vm-bety" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Sometimes, you may want to develop code locally but connect to an instance of BETYdb on the VM.
-To do this, first open a new terminal and connect to the VM while enabling port forwarding (with the <code>-L</code> flag) and setting the port number. Using 5433 does not conflict with the postgres default port of 5432, the forwarded port will not conflict with a postgres database server running locally.</p>
-<pre><code>ssh -L 5433:localhost:5432 carya@localhost:6422</code></pre>
-<p>This makes port 5433 on the local machine match port 5432 on the VM.
-This means that connecting to <code>localhost:5433</code> will give you access to BETYdb on the VM.</p>
-<p>To test this on the command line, try the following command, which, if successful, will drop you into the <code>psql</code> console.</p>
-<pre><code>psql -d bety -U bety -h localhost -p 5433</code></pre>
-<p>To test this in R, open a Postgres using the analogous parameters:</p>
-<pre><code>library(DBI)
-library(RPostgres)
-con &lt;- dbConnect(
-  drv = Postgres(),
-  user = &quot;bety&quot;,
-  password = &quot;bety&quot;,
-  dbname = &quot;bety&quot;,
-  host = &quot;localhost&quot;,
-  port = 5433
-)
-dbListTables(con)   # This should return a vector of bety tables</code></pre>
-<p>Note that the same general approach will work on any BETYdb server where port forwarding is enabled, but it requires ssh access.</p>
-<div id="awsvm" class="section level3 hasAnchor" number="10.3.1">
-<h3><span class="header-section-number">10.3.1</span> Using Amazon Web Services for a VM (AWS)<a href="ssh-vm-bety.html#awsvm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Login to <a href="http://console.aws.amazon.com/">Amazon Web Services (AWS)</a> and select the EC2 Dashboard. If this is your first time using AWS you will need to set up an account before you are able to access the EC2 Dashboard. Important: You will need a credit card number and access to a phone to be able to verify AWS account registration. AWS is free for one year.</p>
-<ol style="list-style-type: decimal">
-<li>Choose AMI</li>
-</ol>
-<ul>
-<li>On the top right next to your name, make sure the location setting is on U.S. East (N. Virginia), not U.S. West (Oregon)</li>
-<li>On the left click, click on EC2 (Virtual servers), then click on “AMIs”, also on the left</li>
-<li>In the search window toggle to change “Owned by me” to “Public images”</li>
-<li>Type “pecan” into the search window</li>
-<li>Click on the toggle button on the left next to PEcAn1.4.6</li>
-<li>Click on the “Launch” button at the top</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Choose an Instance Type</li>
-</ol>
-<ul>
-<li>Select what type of machine you want to run. For this demo the default, t2.micro, will be adequate. Be aware that different machine types incur very different costs, from 1.3 cents/hour to over $5/hr <a href="https://aws.amazon.com/ec2/pricing/" class="uri">https://aws.amazon.com/ec2/pricing/</a><br />
-</li>
-<li>Select t2.micro, then click “Next: Configure Instance Details”</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>Configure Instance Details</li>
-</ol>
-<ul>
-<li>The defaults are OK. Click “Next: Add Storage”</li>
-</ul>
-<ol start="4" style="list-style-type: decimal">
-<li>Add Storage</li>
-</ol>
-<ul>
-<li>The defaults are OK. Click “Next: Tag Instance”</li>
-</ul>
-<ol start="5" style="list-style-type: decimal">
-<li>Tag Instance</li>
-</ol>
-<ul>
-<li>You can name your instance if you want. Click “Next: Configure Security Group”</li>
-</ul>
-<ol start="6" style="list-style-type: decimal">
-<li>Configure Security Group</li>
-</ol>
-<ul>
-<li>You will need to add two new rules:</li>
-<li>Click “Add Rule” then select “HTTP” from the pull down menu. This rule allows you to access the webserver on PEcAn.</li>
-<li>Click “Add Rule”, leave the pull down on “Custom TCP Rule”, and then change the Port Range from 0 to 8787. Set “Source” to Anywhere. This rule allows you to access RStudio Server on PEcAn.</li>
-<li>Click “Review and Launch” . You will then see this pop-up:</li>
-</ul>
-<p><img src="figures/pic2.jpg" width="100%" style="display: block; margin: auto;" /></p>
-<p>Select the default drive volume type and click Next</p>
-<ol start="7" style="list-style-type: decimal">
-<li>Review and Launch</li>
-</ol>
-<ul>
-<li>Review the settings and then click “Launch”, which will pop up a select/create Key Pair window.</li>
-</ul>
-<ol start="8" style="list-style-type: decimal">
-<li>Key Pair</li>
-</ol>
-<ul>
-<li>Select “Create a new key pair” and give it a name. You won’t actually need this key unless you need to SSH into your PEcAn server, but AWS requires you to create one. Click on “Download Key Pair” then on “Launch Instances”. Next click on “View Instances” at the bottom of the following page.</li>
-</ul>
-<p><img src="figures/pic3.jpg" width="100%" style="display: block; margin: auto;" /></p>
-<ol start="9" style="list-style-type: decimal">
-<li>Instances</li>
-</ol>
-<ul>
-<li>You will see the status of your PEcAn VM, which will take a minute to boot up. Wait until the Instance State reads “running”. The most important piece of information here is the Public IP, which is the URL you will need in order to access your PEcAn instance from within your web browser (see Demo 1 below).</li>
-<li>Be aware that it often takes ~1 hr for AWS instances to become fully operational, so if you get an error when you put the Public IP in you web browser, most of the time you just need to wait a bit longer.
-Congratulations! You just started a PEcAn server in the “cloud”!</li>
-</ul>
-<ol start="10" style="list-style-type: decimal">
-<li>When you are done using PEcAn, you will want to return to the “Instances” menu to turn off your VM.</li>
-</ol>
-<ul>
-<li>To STOP the instance (which will turn the machine off but keep your work), select your PEcAn instance and click Actions &gt; Instance state &gt; Stop. Be aware that a stopped instance will still accrue a small storage cost on AWS. To restart this instance at any point in the future you do not want to repeat all the steps above, but instead you just need to select your instance and then click Actions &gt; Instance state &gt; Start</li>
-<li>To TERMINATE the instance (which will DELETE your PEcAn machine), select your instance and click Actions &gt; Instance state &gt; Terminate. Terminated instances will not incur costs. In most cases you will also want to go to the Volumes menu and delete the storage associated with your PEcAn VM.Remember, AWS is free for one year, but will automatically charge a fee in second year if account is not cancelled.</li>
-</ul>
+<div id="input-standards" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Input Standards<a href="input-standards.html#input-standards" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="meteorology-standards" class="section level3 hasAnchor" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Meteorology Standards<a href="input-standards.html#meteorology-standards" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dimensions" class="section level4 hasAnchor" number="11.3.1.1">
+<h4><span class="header-section-number">11.3.1.1</span> Dimensions:<a href="input-standards.html#dimensions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">CF standard-name</th>
+<th align="left">units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">time</td>
+<td align="left">days since 1700-01-01 00:00:00 UTC</td>
+</tr>
+<tr class="even">
+<td align="left">longitude</td>
+<td align="left">degrees_east</td>
+</tr>
+<tr class="odd">
+<td align="left">latitude</td>
+<td align="left">degrees_north</td>
+</tr>
+</tbody>
+</table>
+<p>General Note: dates in the database should be date-time (preferably with timezone), and datetime passed around in PEcAn should be of type POSIXct.</p>
 </div>
-<div id="createvm" class="section level3 hasAnchor" number="10.3.2">
-<h3><span class="header-section-number">10.3.2</span> Creating a Virtual Machine<a href="ssh-vm-bety.html#createvm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>First create virtual machine</p>
-<pre><code># ----------------------------------------------------------------------
-# CREATE VM USING FOLLOWING:
-# - VM NAME  = PEcAn
-# - CPU      = 2
-# - MEMORY   = 2GB 
-# - DISK     = 100GB
-# - HOSTNAME = pecan
-# - FULLNAME = PEcAn Demo User
-# - USERNAME = xxxxxxx
-# - PASSWORD = yyyyyyy
-# - PACKAGE  = openssh
-# ----------------------------------------------------------------------</code></pre>
-<p>To enable tunnels run the following on the host machine:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb116-1"><a href="ssh-vm-bety.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> <span class="at">--natpf1</span> <span class="st">&quot;ssh,tcp,,6422,,22&quot;</span></span>
-<span id="cb116-2"><a href="ssh-vm-bety.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="ex">VBoxManage</span> modifyvm <span class="st">&quot;PEcAn&quot;</span> <span class="at">--natpf1</span> <span class="st">&quot;www,tcp,,6480,,80&quot;</span></span></code></pre></div>
-<p>Make sure machine is up to date.</p>
-<p>UBUNTU</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb117-1"><a href="ssh-vm-bety.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb117-2"><a href="ssh-vm-bety.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get <span class="at">-y</span> dist-upgrade</span>
-<span id="cb117-3"><a href="ssh-vm-bety.html#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code></pre></div>
-<p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb118-1"><a href="ssh-vm-bety.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum <span class="at">-y</span> update</span>
-<span id="cb118-2"><a href="ssh-vm-bety.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code></pre></div>
-<p>Install compiler and other packages needed and install the tools.</p>
-<p>UBUNTU</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb119-1"><a href="ssh-vm-bety.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get <span class="at">-y</span> install build-essential linux-headers-server dkms</span></code></pre></div>
-<p>CENTOS/REDHAT</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb120-1"><a href="ssh-vm-bety.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum <span class="at">-y</span> groupinstall <span class="st">&quot;Development Tools&quot;</span></span>
-<span id="cb120-2"><a href="ssh-vm-bety.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum <span class="at">-y</span> install wget</span></code></pre></div>
-<p>Install Virtual Box additions for better integration</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb121-1"><a href="ssh-vm-bety.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/cdrom /mnt</span>
-<span id="cb121-2"><a href="ssh-vm-bety.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /mnt/VBoxLinuxAdditions.run</span>
-<span id="cb121-3"><a href="ssh-vm-bety.html#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> umount /mnt</span>
-<span id="cb121-4"><a href="ssh-vm-bety.html#cb121-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-a</span> <span class="at">-G</span> vboxsf carya</span></code></pre></div>
-<p><strong>Finishing up the machine</strong></p>
-<p><strong>Add a message to the login:</strong></p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb122-1"><a href="ssh-vm-bety.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-s</span></span>
-<span id="cb122-2"><a href="ssh-vm-bety.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PORT</span><span class="op">=</span><span class="va">$(</span> <span class="fu">hostname</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/pecan//&#39;</span> <span class="va">)</span></span>
-<span id="cb122-3"><a href="ssh-vm-bety.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> /etc/motd <span class="op">&lt;&lt; EOF</span></span>
-<span id="cb122-4"><a href="ssh-vm-bety.html#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="st">PEcAn version 1.4.3</span></span>
-<span id="cb122-5"><a href="ssh-vm-bety.html#cb122-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-6"><a href="ssh-vm-bety.html#cb122-6" aria-hidden="true" tabindex="-1"></a><span class="st">For more information about:</span></span>
-<span id="cb122-7"><a href="ssh-vm-bety.html#cb122-7" aria-hidden="true" tabindex="-1"></a><span class="st">Pecan    - http://pecanproject.org</span></span>
-<span id="cb122-8"><a href="ssh-vm-bety.html#cb122-8" aria-hidden="true" tabindex="-1"></a><span class="st">BETY     - http://www.betydb.org</span></span>
-<span id="cb122-9"><a href="ssh-vm-bety.html#cb122-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-10"><a href="ssh-vm-bety.html#cb122-10" aria-hidden="true" tabindex="-1"></a><span class="st">For a list of all models currently navigate [here](../users_guide/basic_users_guide/models_table.md)</span></span>
-<span id="cb122-11"><a href="ssh-vm-bety.html#cb122-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-12"><a href="ssh-vm-bety.html#cb122-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-13"><a href="ssh-vm-bety.html#cb122-13" aria-hidden="true" tabindex="-1"></a><span class="st">You can access this system using a webbrowser at</span></span>
-<span id="cb122-14"><a href="ssh-vm-bety.html#cb122-14" aria-hidden="true" tabindex="-1"></a><span class="st"> http://&lt;hosting machine&gt;:</span><span class="va">${PORT}</span><span class="st">80/</span></span>
-<span id="cb122-15"><a href="ssh-vm-bety.html#cb122-15" aria-hidden="true" tabindex="-1"></a><span class="st">or using SSH at</span></span>
-<span id="cb122-16"><a href="ssh-vm-bety.html#cb122-16" aria-hidden="true" tabindex="-1"></a><span class="st"> ssh -l carya -p </span><span class="va">${PORT}</span><span class="st">22 &lt;hosting machine&gt;</span></span>
-<span id="cb122-17"><a href="ssh-vm-bety.html#cb122-17" aria-hidden="true" tabindex="-1"></a><span class="st">where &lt;hosting machine&gt; is the machine where the VM runs on.</span></span>
-<span id="cb122-18"><a href="ssh-vm-bety.html#cb122-18" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
-<span id="cb122-19"><a href="ssh-vm-bety.html#cb122-19" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
-<p><strong>Finishing up</strong></p>
-<p>Script to clean the VM and remove as much as possible history <a href="http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh">cleanvm.sh</a></p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb123-1"><a href="ssh-vm-bety.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ~/cleanvm.sh http://isda.ncsa.uiuc.edu/~kooper/EBI/cleanvm.sh</span>
-<span id="cb123-2"><a href="ssh-vm-bety.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 ~/cleanvm.sh</span></code></pre></div>
-<p>Make sure machine has SSH keys <a href="http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local">rc.local</a></p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb124-1"><a href="ssh-vm-bety.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> wget <span class="at">-O</span> /etc/rc.local http://isda.ncsa.illinois.edu/~kooper/EBI/rc.local</span></code></pre></div>
-<p>Change the resolution of the console</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb125-1"><a href="ssh-vm-bety.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sed <span class="at">-i</span> <span class="at">-e</span> <span class="st">&#39;s/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1024x768/&#39;</span> /etc/default/grub</span>
-<span id="cb125-2"><a href="ssh-vm-bety.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-grub</span></code></pre></div>
-<p>Once all done, stop the virtual machine</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb126-1"><a href="ssh-vm-bety.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> <span class="at">-c</span> <span class="kw">&amp;&amp;</span> <span class="va">${HOME}</span><span class="ex">/cleanvm.sh</span></span></code></pre></div>
-
+<div id="variable-names-should-be-standard_name" class="section level4 hasAnchor" number="11.3.1.2">
+<h4><span class="header-section-number">11.3.1.2</span> Variable names should be <code>standard_name</code><a href="input-standards.html#variable-names-should-be-standard_name" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2e8fe2802ecd6679565d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2e8fe2802ecd6679565d">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","Buttons"],"data":[["&lt;b&gt;air_temperature&lt;/b&gt;","air_temperature_max","air_temperature_min","&lt;b&gt;air_pressure&lt;/b&gt;","mole_fraction_of_carbon_dioxide_in_air","moisture_content_of_soil_layer","soil_temperature ","relative_humidity","&lt;b&gt;specific_humidity&lt;/b&gt;","water_vapor_saturation_deficit","&lt;b&gt;surface_downwelling_longwave_flux_in_air&lt;/b&gt;","&lt;b&gt;surface_downwelling_shortwave_flux_in_air&lt;/b&gt;","surface_downwelling_photosynthetic_photon_flux_in_air","&lt;b&gt;precipitation_flux&lt;/b&gt;","  ","wind_speed","&lt;b&gt;eastward_wind&lt;/b&gt;","&lt;b&gt;northward_wind&lt;/b&gt;"],["K","K","K","Pa","mol/mol","kg m-2","K","%","1","Pa","W m-2","W m-2","mol m-2 s-1","kg m-2 s-1","degrees","m/s","m/s","m/s"],["airT","","","air_pressure","","","soilT","relative_humidity","specific_humidity","VPD","same","solar_radiation","PAR","cccc","wind_direction","Wspd","eastward_wind","northward_wind"],["tasAdjust","tasmaxAdjust","tasminAdjust","","","","","rhurs","NA","","rldsAdjust","rsdsAdjust","","prAdjust","","","",""],["tair","NA","NA","","","","","NA","qair","","lwdown","swdown","","rain","","","",""],["air","tmax","tmin","","","","","rhum","shum","","dlwrf","dswrf","","acpc","","","",""],["TA(C)","","","PRESS (KPa)","CO2","","TS1(NOT DONE)","RH","CALC(RH)","VPD(NOT DONE)","Rgl","Rg","PAR(NOT DONE)","PREC","WD","WS","CALC(WS+WD)","CALC(WS+WD)"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>CF standard-name<\/th>\n      <th>units<\/th>\n      <th>BETY<\/th>\n      <th>Isimip<\/th>\n      <th>CRUNCEP<\/th>\n      <th>NARR<\/th>\n      <th>Ameriflux<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","scrollX":true,"fixedColumns":true,"buttons":["copy","csv","excel","pdf","print"],"escape":false,"columnDefs":[],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li>preferred variables indicated in bold</li>
+<li>wind_direction has no CF equivalent and should not be converted, instead the met2CF functions should convert wind_direction and wind_speed to eastward_wind and northward_wind</li>
+<li>standard_name is CF-convention standard names</li>
+<li>units can be converted by udunits, so these can vary (e.g. the time denominator may change with time frequency of inputs)</li>
+<li>soil moisture for the full column, rather than a layer, is soil_moisture_content</li>
+<li>The list of PEcAn standard variable names, units and dimensions are provided in a table in the <span id="OutputStandards">Output Standards</span> section and maintained in the file: <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv">base/utils/data/standard_vars.csv</a>.</li>
+</ul>
+<p>For example, in the <a href="https://www.betydb.org/inputs/280">MsTMIP-CRUNCEP</a> data, the variable <code>rain</code> should be <code>precipitation_rate</code>.
+We want to standardize the units as well as part of the <code>met2CF.&lt;product&gt;</code> step. I believe we want to use the CF “canonical” units but retain the MsTMIP units any time CF is ambiguous about the units.</p>
+<p>The key is to process each type of met data (site, reanalysis, forecast, climate scenario, etc) to the exact same standard. This way every operation after that (extract, gap fill, downscale, convert to a model, etc) will always have the exact same inputs. This will make everything else much simpler to code and allow us to avoid a lot of unnecessary data checking, tests, etc being repeated in every downstream function.</p>
 </div>
 </div>
-<!-- </div> -->
+<div id="soils-and-vegetation-inputs" class="section level3 hasAnchor" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> Soils and Vegetation Inputs<a href="input-standards.html#soils-and-vegetation-inputs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="soil-data" class="section level4 hasAnchor" number="11.3.2.1">
+<h4><span class="header-section-number">11.3.2.1</span> Soil Data<a href="input-standards.html#soil-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>See the <a href="NewInput.html#soil-data-1">Soil Data</a> section on more into on creating a standard soil data file.</p>
+</div>
+<div id="vegetation-data" class="section level4 hasAnchor" number="11.3.2.2">
+<h4><span class="header-section-number">11.3.2.2</span> Vegetation Data<a href="input-standards.html#vegetation-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>See the <a href="NewInput.html#vegetation-data-1">Vegetation Data</a> section on more info on creating a standard vegetation data file</p>
+</div>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="ssh-vm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pecan-standards.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="time-standard.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="OutputStandards.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -987,7 +871,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/PecanProject/pecan/edit/develop/book_source/03_topical_pages/01_advanced_vm.Rmd",
+"link": "https://github.com/PecanProject/pecan/edit/develop/book_source/03_topical_pages/02_pecan_standards.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-08" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,12 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>11</b> PEcAn standard formats</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="defining-new-input-formats.html"><a href="defining-new-input-formats.html"><i class="fa fa-check"></i><b>11.1</b> Defining new input formats</a></li>
-<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a>
+<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a></li>
+<li class="chapter" data-level="11.3" data-path="input-standards.html"><a href="input-standards.html"><i class="fa fa-check"></i><b>11.3</b> Input Standards</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="time-standard.html"><a href="time-standard.html#input-standards"><i class="fa fa-check"></i><b>11.2.1</b> Input Standards</a></li>
-<li class="chapter" data-level="11.2.2" data-path="time-standard.html"><a href="time-standard.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.2.2</b> Soils and Vegetation Inputs</a></li>
-<li class="chapter" data-level="11.2.3" data-path="time-standard.html"><a href="time-standard.html#OutputStandards"><i class="fa fa-check"></i><b>11.2.3</b> Output Standards</a></li>
+<li class="chapter" data-level="11.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-standards"><i class="fa fa-check"></i><b>11.3.1</b> Meteorology Standards</a></li>
+<li class="chapter" data-level="11.3.2" data-path="input-standards.html"><a href="input-standards.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.3.2</b> Soils and Vegetation Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="11.4" data-path="input-standards.html"><a href="input-standards.html#OutputStandards"><i class="fa fa-check"></i><b>11.4</b> Output Standards</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="pecanXML.html"><a href="pecanXML.html"><i class="fa fa-check"></i><b>12</b> The PEcAn XML</a>
 <ul>
@@ -825,7 +826,7 @@ your code, create a new branch, and work on new branch.</p>
 <p>In short, there are three main branches you must be aware of:</p>
 <ul>
 <li><strong>develop</strong> - Main Branch containing the latest code. This is the main branch you will make changes to.</li>
-<li><strong>master</strong> - Branch containing the latest stable code. DO NOT MAKE CHANGES TO THIS BRANCH.</li>
+<li><strong>main</strong> - Branch containing the latest stable code. DO NOT MAKE CHANGES TO THIS BRANCH.</li>
 <li><strong>release/vX.X.X</strong> - Named branches containing code specific to a release. Only make changes to this branch if you are fixing a bug on a release branch.</li>
 </ul>
 </div>
@@ -892,7 +893,7 @@ your code, create a new branch, and work on new branch.</p>
 <span id="cb83-2"><a href="pecan-git.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream git@github.com:PecanProject/pecan.git</span></code></pre></div>
 <div id="hint-keeping-your-fork-in-sync" class="section level5 hasAnchor" number="8.2.2.1.1">
 <h5><span class="header-section-number">8.2.2.1.1</span> Hint: Keeping your fork in sync<a href="pecan-git.html#hint-keeping-your-fork-in-sync" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>If you have used the instructions above, you can use the helper script called <a href="https://github.com/PecanProject/pecan/blob/master/scripts/syncgit.sh"><code>scripts/syncgit.sh</code></a> to keep the master and develop branches of your own fork in sync with the PEcAnProject/pecan repository.</p>
+<p>If you have used the instructions above, you can use the helper script called <a href="https://github.com/PecanProject/pecan/blob/main/scripts/syncgit.sh"><code>scripts/syncgit.sh</code></a> to keep the main and develop branches of your own fork in sync with the PEcAnProject/pecan repository.</p>
 <p>After following the above, your .git/config file will include the following:</p>
 <pre><code>...
 [remote &quot;origin&quot;]
@@ -906,7 +907,7 @@ your code, create a new branch, and work on new branch.</p>
         fetch = +refs/heads/*:refs/remotes/upstream/*</code></pre>
 <p>Then, you can run:</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb85-1"><a href="pecan-git.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/syncgit.sh</span></span></code></pre></div>
-<p>Now the master and develop branches on your fork will be up to date.</p>
+<p>Now the main and develop branches on your fork will be up to date.</p>
 </div>
 </div>
 <div id="using-branching" class="section level4 hasAnchor" number="8.2.2.2">
@@ -952,7 +953,7 @@ your code, create a new branch, and work on new branch.</p>
 <div id="after-pull-request-is-merged" class="section level4 hasAnchor" number="8.2.2.3">
 <h4><span class="header-section-number">8.2.2.3</span> After pull request is merged<a href="pecan-git.html#after-pull-request-is-merged" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
-<li>Make sure you start in master</li>
+<li>Make sure you start in main</li>
 </ol>
 <div class="sourceCode" id="cb93"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb93-1"><a href="pecan-git.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout develop<span class="kw">`</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">

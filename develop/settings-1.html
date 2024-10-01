@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-08" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,12 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>11</b> PEcAn standard formats</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="defining-new-input-formats.html"><a href="defining-new-input-formats.html"><i class="fa fa-check"></i><b>11.1</b> Defining new input formats</a></li>
-<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a>
+<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a></li>
+<li class="chapter" data-level="11.3" data-path="input-standards.html"><a href="input-standards.html"><i class="fa fa-check"></i><b>11.3</b> Input Standards</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="time-standard.html"><a href="time-standard.html#input-standards"><i class="fa fa-check"></i><b>11.2.1</b> Input Standards</a></li>
-<li class="chapter" data-level="11.2.2" data-path="time-standard.html"><a href="time-standard.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.2.2</b> Soils and Vegetation Inputs</a></li>
-<li class="chapter" data-level="11.2.3" data-path="time-standard.html"><a href="time-standard.html#OutputStandards"><i class="fa fa-check"></i><b>11.2.3</b> Output Standards</a></li>
+<li class="chapter" data-level="11.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-standards"><i class="fa fa-check"></i><b>11.3.1</b> Meteorology Standards</a></li>
+<li class="chapter" data-level="11.3.2" data-path="input-standards.html"><a href="input-standards.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.3.2</b> Soils and Vegetation Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="11.4" data-path="input-standards.html"><a href="input-standards.html#OutputStandards"><i class="fa fa-check"></i><b>11.4</b> Output Standards</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="pecanXML.html"><a href="pecanXML.html"><i class="fa fa-check"></i><b>12</b> The PEcAn XML</a>
 <ul>
@@ -779,20 +780,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>A generic settings can be found in the <code>PEcAn.all</code> package</li>
 </ul>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="settings-1.html#cb499-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb499-2"><a href="settings-1.html#cb499-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="settings-1.html#cb507-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb507-2"><a href="settings-1.html#cb507-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>database settings can be specified, and tests run only if a connection is available</li>
 </ul>
 <p>We currently use the following database to run tests against; tests that require access to a database should check <code>db.exists()</code> and be skipped if it returns FALSE to avoid failed tests on systems that do not have the database installed.</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="settings-1.html#cb500-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb500-2"><a href="settings-1.html#cb500-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
-<span id="cb500-3"><a href="settings-1.html#cb500-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
-<span id="cb500-4"><a href="settings-1.html#cb500-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
-<span id="cb500-5"><a href="settings-1.html#cb500-5" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(..., {</span>
-<span id="cb500-6"><a href="settings-1.html#cb500-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skip_if_not</span>(<span class="fu">db.exists</span>(settings<span class="sc">$</span>database))</span>
-<span id="cb500-7"><a href="settings-1.html#cb500-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write tests here</span></span>
-<span id="cb500-8"><a href="settings-1.html#cb500-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="settings-1.html#cb508-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">userid =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb508-2"><a href="settings-1.html#cb508-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">passwd =</span> <span class="st">&quot;bety&quot;</span>, </span>
+<span id="cb508-3"><a href="settings-1.html#cb508-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name =</span> <span class="st">&quot;bety&quot;</span>,     <span class="co"># database name </span></span>
+<span id="cb508-4"><a href="settings-1.html#cb508-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span> <span class="co"># server name)</span></span>
+<span id="cb508-5"><a href="settings-1.html#cb508-5" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(..., {</span>
+<span id="cb508-6"><a href="settings-1.html#cb508-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skip_if_not</span>(<span class="fu">db.exists</span>(settings<span class="sc">$</span>database))</span>
+<span id="cb508-7"><a href="settings-1.html#cb508-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## write tests here</span></span>
+<span id="cb508-8"><a href="settings-1.html#cb508-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <ul>
 <li><p>instructions for installing this are available on the <a href="VM-Creation.md">VM creation
 wiki</a></p></li>
@@ -800,8 +801,8 @@ wiki</a></p></li>
 <li><p>Model specific settings can go in the model-specific module, for
 example:</p></li>
 </ul>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="settings-1.html#cb501-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
-<span id="cb501-2"><a href="settings-1.html#cb501-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="settings-1.html#cb509-1" aria-hidden="true" tabindex="-1"></a>settings.xml <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/pecan.biocro.xml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;PEcAn.BIOCRO&quot;</span>)</span>
+<span id="cb509-2"><a href="settings-1.html#cb509-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.xml)</span></code></pre></div>
 <ul>
 <li>test-specific settings:
 <ul>
@@ -825,8 +826,8 @@ example:</p></li>
   &lt;/pecan&gt;&quot;
 settings &lt;- read.settings(settings.text)</code></pre></li>
 <li><p>values in settings can be updated:</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="settings-1.html#cb503-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.text)</span>
-<span id="cb503-2"><a href="settings-1.html#cb503-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>outdir <span class="ot">&lt;-</span> <span class="st">&quot;/tmp&quot;</span> <span class="do">## or any other settings</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="settings-1.html#cb511-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> <span class="fu">read.settings</span>(settings.text)</span>
+<span id="cb511-2"><a href="settings-1.html#cb511-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>outdir <span class="ot">&lt;-</span> <span class="st">&quot;/tmp&quot;</span> <span class="do">## or any other settings</span></span></code></pre></div></li>
 </ul></li>
 </ul>
 </div>

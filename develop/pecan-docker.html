@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-08" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,12 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>11</b> PEcAn standard formats</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="defining-new-input-formats.html"><a href="defining-new-input-formats.html"><i class="fa fa-check"></i><b>11.1</b> Defining new input formats</a></li>
-<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a>
+<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a></li>
+<li class="chapter" data-level="11.3" data-path="input-standards.html"><a href="input-standards.html"><i class="fa fa-check"></i><b>11.3</b> Input Standards</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="time-standard.html"><a href="time-standard.html#input-standards"><i class="fa fa-check"></i><b>11.2.1</b> Input Standards</a></li>
-<li class="chapter" data-level="11.2.2" data-path="time-standard.html"><a href="time-standard.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.2.2</b> Soils and Vegetation Inputs</a></li>
-<li class="chapter" data-level="11.2.3" data-path="time-standard.html"><a href="time-standard.html#OutputStandards"><i class="fa fa-check"></i><b>11.2.3</b> Output Standards</a></li>
+<li class="chapter" data-level="11.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-standards"><i class="fa fa-check"></i><b>11.3.1</b> Meteorology Standards</a></li>
+<li class="chapter" data-level="11.3.2" data-path="input-standards.html"><a href="input-standards.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.3.2</b> Soils and Vegetation Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="11.4" data-path="input-standards.html"><a href="input-standards.html#OutputStandards"><i class="fa fa-check"></i><b>11.4</b> Output Standards</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="pecanXML.html"><a href="pecanXML.html"><i class="fa fa-check"></i><b>12</b> The PEcAn XML</a>
 <ul>
@@ -830,6 +831,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
 <p>For reference, the complete <code>docker-compose</code> file is as follows:</p>
 <pre><code>services:
   traefik:
+    hostname: traefik
     image: traefik:v2.9
     command:
     - --log.level=INFO
@@ -853,6 +855,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.routers.traefik.rule=Host(`traefik.pecan.localhost`)
     - traefik.http.routers.traefik.service=api@internal
   rabbitmq:
+    hostname: rabbitmq
     image: rabbitmq:3.8-management
     restart: unless-stopped
     networks: pecan
@@ -871,6 +874,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
       timeout: 5s
       retries: 5
   postgres:
+    hostname: postgres
     image: mdillon/postgis:9.5
     restart: unless-stopped
     networks: pecan
@@ -881,6 +885,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
       timeout: 5s
       retries: 5
   bety:
+    hostname: bety
     image: pecan/bety:${BETY_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -898,12 +903,13 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.services.bety.loadbalancer.server.port=8000
     - traefik.http.routers.bety.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/bety/`)
     healthcheck:
-      test: curl --silent --fail http://localhost:8000/${RAILS_RELATIVE_URL_ROOT}
+      test: curl --silent --fail http://localhost:8000/$${RAILS_RELATIVE_URL_ROOT}
         &gt; /dev/null || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
   rstudio:
+    hostname: rstudio
     image: pecan/base:${PECAN_VERSION:-latest}
     command: /work/rstudio.sh
     restart: unless-stopped
@@ -941,6 +947,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.routers.rstudio-local.service=rstudio-local
     - traefik.http.services.rstudio-local.loadbalancer.server.port=8787
   docs:
+    hostname: docs
     image: pecan/docs:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -954,6 +961,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
       timeout: 5s
       retries: 5
   pecan:
+    hostname: pecan-web
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/web:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -977,11 +985,12 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - pecan:/data
     - pecan:/var/www/html/pecan/data
     healthcheck:
-      test: curl --silent --fail http://localhost/pecan/ &gt; /dev/null || exit 1
+      test: curl --silent --fail http://localhost:8080/pecan &gt; /dev/null || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
   monitor:
+    hostname: monitor
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/monitor:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1002,12 +1011,12 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.middlewares.monitor-stripprefix.stripprefix.prefixes=/monitor
     volumes: pecan:/data
     healthcheck:
-      test: curl --silent --fail http://localhost:9999/monitor/ &gt; /dev/null || exit
-        1
+      test: curl --silent --fail http://localhost:9999 &gt; /dev/null || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
   executor:
+    hostname: executor
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/executor:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1024,6 +1033,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data
   fates:
+    hostname: fates
     user: ${UID:-1001}:${GID:-1001}
     image: ghcr.io/noresmhub/ctsm-api:latest
     restart: unless-stopped
@@ -1034,6 +1044,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data
   basgra:
+    hostname: basgra
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-basgra-basgra_n_v1.0:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1044,6 +1055,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data
   sipnet:
+    hostname: sipnet-git
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-sipnet-git:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1054,6 +1066,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data
   ed2:
+    hostname: ed2-2_2_0
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-ed2-2.2.0:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1064,6 +1077,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data
   maespa:
+    hostname: maespa-git
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-maespa-git:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1074,6 +1088,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data
   biocro:
+    hostname: biocro-0_95
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-biocro-0.95:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1084,6 +1099,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data
   dbsync:
+    hostname: dbsync
     image: pecan/shiny-dbsync:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -1097,11 +1113,12 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.routers.dbsync.middlewares=dbsync-stripprefix
     - traefik.http.middlewares.dbsync-stripprefix.stripprefix.prefixes=/monitor
     healthcheck:
-      test: curl --silent --fail http://localhost/dbsync/ &gt; /dev/null || exit 1
+      test: curl --silent --fail http://localhost:3838 &gt; /dev/null || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
   api:
+    hostname: api
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/api:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1123,7 +1140,8 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
         condition: service_healthy
     volumes: pecan:/data/
     healthcheck:
-      test: curl --silent --fail http://localhost/api/ping &gt; /dev/null || exit 1
+      test: curl --silent --fail http://localhost:8000/api/ping &gt; /dev/null || exit
+        1
       interval: 10s
       timeout: 5s
       retries: 5
@@ -1275,6 +1293,7 @@ For instance, the following lines in the <code>web</code> service configure acce
 <p>(Further details in the works…)</p>
 <p>The traefik service configuration looks like this:</p>
 <pre><code>traefik:
+  hostname: traefik
   image: traefik:v2.9
   command:
   - --log.level=INFO
@@ -1316,9 +1335,9 @@ From there, you can browse directories and download files.
 You can also upload files by clicking the red “+” in the bottom-right corner.</p>
 <p>Note that it is currently impossible to create or upload directories using the Minio interface (except in the <code>/data</code> root directory – those folders are called “buckets” in Minio).
 Therefore, the recommended way to perform any file management tasks other than individual file uploads is through the command line, e.g.</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb420-1"><a href="pecan-docker.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">--rm</span> <span class="at">--volumes</span> pecan_pecan:/data <span class="at">--volumes</span> /path/to/local/directory:/localdir ubuntu</span>
-<span id="cb420-2"><a href="pecan-docker.html#cb420-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb420-3"><a href="pecan-docker.html#cb420-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, you can move files between `/data` and `/localdir`, create new directories, etc.</span></span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb428-1"><a href="pecan-docker.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">--rm</span> <span class="at">--volumes</span> pecan_pecan:/data <span class="at">--volumes</span> /path/to/local/directory:/localdir ubuntu</span>
+<span id="cb428-2"><a href="pecan-docker.html#cb428-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb428-3"><a href="pecan-docker.html#cb428-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, you can move files between `/data` and `/localdir`, create new directories, etc.</span></span></code></pre></div>
 </div>
 <div id="pecan-dc-thredds" class="section level3 hasAnchor" number="25.4.7">
 <h3><span class="header-section-number">25.4.7</span> <code>thredds</code><a href="pecan-docker.html#pecan-dc-thredds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1337,6 +1356,7 @@ For additional information about the syntax of this file, see the extensive <a h
 <p>This service provides a working PostGIS database.
 Our configuration is fairly straightforward:</p>
 <pre><code>postgres:
+  hostname: postgres
   image: mdillon/postgis:9.5
   restart: unless-stopped
   networks: pecan
@@ -1362,6 +1382,7 @@ As mentioned above, the hostname of this service is just its name, i.e. <code>p
 In PEcAn, RabbitMQ functions as a task manager and scheduler, coordinating the execution of different tasks (such as running models and analyzing results) associated with the PEcAn workflow.</p>
 <p>Our configuration is as follows:</p>
 <pre><code>rabbitmq:
+  hostname: rabbitmq
   image: rabbitmq:3.8-management
   restart: unless-stopped
   networks: pecan
@@ -1390,6 +1411,7 @@ Unlike the <code>postgres</code> service, which contains all the data needed to 
 However, note that certain features of the PEcAn web interface do link to the BETY web interface and will not work if this container is not running.</p>
 <p>Our configuration is as follows:</p>
 <pre><code>bety:
+  hostname: bety
   image: pecan/bety:${BETY_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
@@ -1407,7 +1429,7 @@ However, note that certain features of the PEcAn web interface do link to the BE
   - traefik.http.services.bety.loadbalancer.server.port=8000
   - traefik.http.routers.bety.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp; PathPrefix(`/bety/`)
   healthcheck:
-    test: curl --silent --fail http://localhost:8000/${RAILS_RELATIVE_URL_ROOT} &gt;
+    test: curl --silent --fail http://localhost:8000/$${RAILS_RELATIVE_URL_ROOT} &gt;
       /dev/null || exit 1
     interval: 10s
     timeout: 5s
@@ -1419,6 +1441,7 @@ However, note that certain features of the PEcAn web interface do link to the BE
 <p>This service will show the documentation for the version of PEcAn running as well as a homepage with links to all relevant endpoints. You can access this at <a href="http://pecan.localhost/" class="uri">http://pecan.localhost/</a>. You can find the documentation for PEcAn at <a href="http://pecan.localhost/docs/pecan/" class="uri">http://pecan.localhost/docs/pecan/</a>.</p>
 <p>Our current configuration is as follows:</p>
 <pre><code>docs:
+  hostname: docs
   image: pecan/docs:${PECAN_VERSION:-latest}
   restart: unless-stopped
   networks: pecan
@@ -1447,6 +1470,7 @@ It is effectively a thin wrapper around a standard Apache web server container f
 However, it is <em>not</em> in charge of executing the models themselves – model binaries are located on their <a href="pecan-docker.html#pecan-dc-models">own dedicated Docker containers</a>, and model execution is coordinated by RabbitMQ.</p>
 <p>Our configuration is as follows:</p>
 <pre><code>executor:
+  hostname: executor
   user: ${UID:-1001}:${GID:-1001}
   image: pecan/executor:${PECAN_VERSION:-latest}
   restart: unless-stopped
@@ -1474,6 +1498,7 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
 <p>This service is also responsible for registering any new models with PEcAn so users can select it and execute the model from the web interface.</p>
 <p>Our current configuration is as follows:</p>
 <pre><code>monitor:
+  hostname: monitor
   user: ${UID:-1001}:${GID:-1001}
   image: pecan/monitor:${PECAN_VERSION:-latest}
   restart: unless-stopped
@@ -1494,8 +1519,7 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
   - traefik.http.middlewares.monitor-stripprefix.stripprefix.prefixes=/monitor
   volumes: pecan:/data
   healthcheck:
-    test: curl --silent --fail http://localhost:9999/monitor/ &gt; /dev/null || exit
-      1
+    test: curl --silent --fail http://localhost:9999 &gt; /dev/null || exit 1
     interval: 10s
     timeout: 5s
     retries: 5</code></pre>
@@ -1505,6 +1529,7 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
 <p>Additional models are added as additional services.
 In general, their configuration should be similar to the following configuration for SIPNET, which ships with PEcAn:</p>
 <pre><code>sipnet:
+  hostname: sipnet-git
   user: ${UID:-1001}:${GID:-1001}
   image: pecan/model-sipnet-git:${PECAN_VERSION:-latest}
   restart: unless-stopped

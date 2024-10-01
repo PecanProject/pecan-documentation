@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2024-09-08" />
+<meta name="date" content="2024-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,12 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="pecan-standards.html"><a href="pecan-standards.html"><i class="fa fa-check"></i><b>11</b> PEcAn standard formats</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="defining-new-input-formats.html"><a href="defining-new-input-formats.html"><i class="fa fa-check"></i><b>11.1</b> Defining new input formats</a></li>
-<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a>
+<li class="chapter" data-level="11.2" data-path="time-standard.html"><a href="time-standard.html"><i class="fa fa-check"></i><b>11.2</b> Time Standard</a></li>
+<li class="chapter" data-level="11.3" data-path="input-standards.html"><a href="input-standards.html"><i class="fa fa-check"></i><b>11.3</b> Input Standards</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="time-standard.html"><a href="time-standard.html#input-standards"><i class="fa fa-check"></i><b>11.2.1</b> Input Standards</a></li>
-<li class="chapter" data-level="11.2.2" data-path="time-standard.html"><a href="time-standard.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.2.2</b> Soils and Vegetation Inputs</a></li>
-<li class="chapter" data-level="11.2.3" data-path="time-standard.html"><a href="time-standard.html#OutputStandards"><i class="fa fa-check"></i><b>11.2.3</b> Output Standards</a></li>
+<li class="chapter" data-level="11.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-standards"><i class="fa fa-check"></i><b>11.3.1</b> Meteorology Standards</a></li>
+<li class="chapter" data-level="11.3.2" data-path="input-standards.html"><a href="input-standards.html#soils-and-vegetation-inputs"><i class="fa fa-check"></i><b>11.3.2</b> Soils and Vegetation Inputs</a></li>
 </ul></li>
+<li class="chapter" data-level="11.4" data-path="input-standards.html"><a href="input-standards.html#OutputStandards"><i class="fa fa-check"></i><b>11.4</b> Output Standards</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="pecanXML.html"><a href="pecanXML.html"><i class="fa fa-check"></i><b>12</b> The PEcAn XML</a>
 <ul>
@@ -1148,99 +1149,160 @@ Then, proceed with the following:</p>
 </div>
 <div id="macosx" class="section level3 hasAnchor" number="24.5.3">
 <h3><span class="header-section-number">24.5.3</span> Mac OSX<a href="osinstall.html#macosx" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>These are specific notes for installing PEcAn on Mac OSX and will be referenced from the main <a href="Installing-PEcAn">installing PEcAn</a> page. You will at least need to install the build environment and Postgres sections. If you want to access the database/PEcAn using a web browser you will need to install Apache. To access the database using the BETY interface, you will need to have Ruby installed.</p>
-<p>This document also contains information on how to install the Rstudio server edition as well as any other packages that can be helpful.</p>
+<p>These are specific notes for installing PEcAn on Mac OSX and referenced from the <a href="Installing-PEcAn">installing PEcAn</a> page.</p>
+<p>Build environment and Postgres sections are required to install and use PEcAn.</p>
+<p>Optional software includes Apache, Rails, and Rstudio. Apache is required to run the BETYdb UI and the web-based version of PEcAn - both are optional. Rails is requred to use the BETYdb web interface. Rstudio is a commonly used IDE for R.</p>
 <div id="install-build-environment-2" class="section level4 hasAnchor" number="24.5.3.1">
 <h4><span class="header-section-number">24.5.3.1</span> Install build environment<a href="osinstall.html#install-build-environment-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb352"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb352-1"><a href="osinstall.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install R</span></span>
-<span id="cb352-2"><a href="osinstall.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="co"># download from http://cran.r-project.org/bin/macosx/</span></span>
-<span id="cb352-3"><a href="osinstall.html#cb352-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-4"><a href="osinstall.html#cb352-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install gfortran </span></span>
-<span id="cb352-5"><a href="osinstall.html#cb352-5" aria-hidden="true" tabindex="-1"></a><span class="co"># download from http://cran.r-project.org/bin/macosx/tools/</span></span>
-<span id="cb352-6"><a href="osinstall.html#cb352-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-7"><a href="osinstall.html#cb352-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install OpenMPI</span></span>
-<span id="cb352-8"><a href="osinstall.html#cb352-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> openmpi-1.6.3.tar.gz http://www.open-mpi.org/software/ompi/v1.6/downloads/openmpi-1.6.3.tar.gz</span>
-<span id="cb352-9"><a href="osinstall.html#cb352-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf openmpi-1.6.3.tar.gz</span>
-<span id="cb352-10"><a href="osinstall.html#cb352-10" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> openmpi-1.6.3</span>
-<span id="cb352-11"><a href="osinstall.html#cb352-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span> <span class="at">--prefix</span><span class="op">=</span>/usr/local</span>
-<span id="cb352-12"><a href="osinstall.html#cb352-12" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span>
-<span id="cb352-13"><a href="osinstall.html#cb352-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span>
-<span id="cb352-14"><a href="osinstall.html#cb352-14" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
-<span id="cb352-15"><a href="osinstall.html#cb352-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-16"><a href="osinstall.html#cb352-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install szip</span></span>
-<span id="cb352-17"><a href="osinstall.html#cb352-17" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> szip-2.1-MacOSX-intel.tar.gz ftp://ftp.hdfgroup.org/lib-external/szip/2.1/bin/szip-2.1-MacOSX-intel.tar.gz</span>
-<span id="cb352-18"><a href="osinstall.html#cb352-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf szip-2.1-MacOSX-intel.tar.gz</span>
-<span id="cb352-19"><a href="osinstall.html#cb352-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv szip-2.1-MacOSX-intel /usr/local/szip</span>
-<span id="cb352-20"><a href="osinstall.html#cb352-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-21"><a href="osinstall.html#cb352-21" aria-hidden="true" tabindex="-1"></a><span class="co"># install HDF5</span></span>
-<span id="cb352-22"><a href="osinstall.html#cb352-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-23"><a href="osinstall.html#cb352-23" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> hdf5-1.8.11.tar.gz http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.11.tar.gz</span>
-<span id="cb352-24"><a href="osinstall.html#cb352-24" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf hdf5-1.8.11.tar.gz</span>
-<span id="cb352-25"><a href="osinstall.html#cb352-25" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> hdf5-1.8.11</span>
-<span id="cb352-26"><a href="osinstall.html#cb352-26" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&#39;s/-O3/-O0/g&#39;</span> config/gnu-flags </span>
-<span id="cb352-27"><a href="osinstall.html#cb352-27" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span> <span class="at">--prefix</span><span class="op">=</span>/usr/local/hdf5 <span class="at">--enable-fortran</span> <span class="at">--enable-cxx</span> <span class="at">--with-szlib</span><span class="op">=</span>/usr/local/szip</span>
-<span id="cb352-28"><a href="osinstall.html#cb352-28" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
-<span id="cb352-29"><a href="osinstall.html#cb352-29" aria-hidden="true" tabindex="-1"></a><span class="co"># make check</span></span>
-<span id="cb352-30"><a href="osinstall.html#cb352-30" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span>
-<span id="cb352-31"><a href="osinstall.html#cb352-31" aria-hidden="true" tabindex="-1"></a><span class="co"># sudo make check-install</span></span>
-<span id="cb352-32"><a href="osinstall.html#cb352-32" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code></pre></div>
+<div id="option-1-download-and-install" class="section level5 hasAnchor" number="24.5.3.1.1">
+<h5><span class="header-section-number">24.5.3.1.1</span> Option 1: Download and install<a href="osinstall.html#option-1-download-and-install" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>R: download from <a href="http://cran.r-project.org/bin/macosx/" class="uri">http://cran.r-project.org/bin/macosx/</a></p>
+<p>gfortran: download from <a href="http://cran.r-project.org/bin/macosx/tools/" class="uri">http://cran.r-project.org/bin/macosx/tools/</a></p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb352-1"><a href="osinstall.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install OpenMPI</span></span>
+<span id="cb352-2"><a href="osinstall.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> openmpi-1.6.3.tar.gz http://www.open-mpi.org/software/ompi/v1.6/downloads/openmpi-1.6.3.tar.gz</span>
+<span id="cb352-3"><a href="osinstall.html#cb352-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf openmpi-1.6.3.tar.gz</span>
+<span id="cb352-4"><a href="osinstall.html#cb352-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> openmpi-1.6.3</span>
+<span id="cb352-5"><a href="osinstall.html#cb352-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span> <span class="at">--prefix</span><span class="op">=</span>/usr/local</span>
+<span id="cb352-6"><a href="osinstall.html#cb352-6" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span>
+<span id="cb352-7"><a href="osinstall.html#cb352-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span>
+<span id="cb352-8"><a href="osinstall.html#cb352-8" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb352-9"><a href="osinstall.html#cb352-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb352-10"><a href="osinstall.html#cb352-10" aria-hidden="true" tabindex="-1"></a><span class="co"># install szip</span></span>
+<span id="cb352-11"><a href="osinstall.html#cb352-11" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> szip-2.1-MacOSX-intel.tar.gz ftp://ftp.hdfgroup.org/lib-external/szip/2.1/bin/szip-2.1-MacOSX-intel.tar.gz</span>
+<span id="cb352-12"><a href="osinstall.html#cb352-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf szip-2.1-MacOSX-intel.tar.gz</span>
+<span id="cb352-13"><a href="osinstall.html#cb352-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv szip-2.1-MacOSX-intel /usr/local/szip</span>
+<span id="cb352-14"><a href="osinstall.html#cb352-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb352-15"><a href="osinstall.html#cb352-15" aria-hidden="true" tabindex="-1"></a><span class="co"># install HDF5</span></span>
+<span id="cb352-16"><a href="osinstall.html#cb352-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb352-17"><a href="osinstall.html#cb352-17" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> hdf5-1.8.11.tar.gz http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.11.tar.gz</span>
+<span id="cb352-18"><a href="osinstall.html#cb352-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf hdf5-1.8.11.tar.gz</span>
+<span id="cb352-19"><a href="osinstall.html#cb352-19" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> hdf5-1.8.11</span>
+<span id="cb352-20"><a href="osinstall.html#cb352-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&#39;s/-O3/-O0/g&#39;</span> config/gnu-flags </span>
+<span id="cb352-21"><a href="osinstall.html#cb352-21" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span> <span class="at">--prefix</span><span class="op">=</span>/usr/local/hdf5 <span class="at">--enable-fortran</span> <span class="at">--enable-cxx</span> <span class="at">--with-szlib</span><span class="op">=</span>/usr/local/szip</span>
+<span id="cb352-22"><a href="osinstall.html#cb352-22" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
+<span id="cb352-23"><a href="osinstall.html#cb352-23" aria-hidden="true" tabindex="-1"></a><span class="co"># make check</span></span>
+<span id="cb352-24"><a href="osinstall.html#cb352-24" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span>
+<span id="cb352-25"><a href="osinstall.html#cb352-25" aria-hidden="true" tabindex="-1"></a><span class="co"># sudo make check-install</span></span>
+<span id="cb352-26"><a href="osinstall.html#cb352-26" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code></pre></div>
 </div>
-<div id="install-postgres-1" class="section level4 hasAnchor" number="24.5.3.2">
-<h4><span class="header-section-number">24.5.3.2</span> Install Postgres<a href="osinstall.html#install-postgres-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For those on a Mac I use the following app for postgresql which has
-postgis already installed (<a href="http://postgresapp.com/" class="uri">http://postgresapp.com/</a>)</p>
-<p>To get postgis run the following commands in psql:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb353-1"><a href="osinstall.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co">##### Enable PostGIS (includes raster)</span></span>
-<span id="cb353-2"><a href="osinstall.html#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> EXTENSION postgis<span class="kw">;</span></span>
-<span id="cb353-3"><a href="osinstall.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="co">##### Enable Topology</span></span>
-<span id="cb353-4"><a href="osinstall.html#cb353-4" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> EXTENSION postgis_topology<span class="kw">;</span></span>
-<span id="cb353-5"><a href="osinstall.html#cb353-5" aria-hidden="true" tabindex="-1"></a><span class="co">##### fuzzy matching needed for Tiger</span></span>
-<span id="cb353-6"><a href="osinstall.html#cb353-6" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> EXTENSION fuzzystrmatch<span class="kw">;</span></span>
-<span id="cb353-7"><a href="osinstall.html#cb353-7" aria-hidden="true" tabindex="-1"></a><span class="co">##### Enable US Tiger Geocoder</span></span>
-<span id="cb353-8"><a href="osinstall.html#cb353-8" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> EXTENSION postgis_tiger_geocoder<span class="kw">;</span></span></code></pre></div>
-<p>To check your postgis run the following command again in psql: <code>SELECT PostGIS_full_version();</code></p>
+<div id="option-2-homebrew" class="section level5 hasAnchor" number="24.5.3.1.2">
+<h5><span class="header-section-number">24.5.3.1.2</span> Option 2: Homebrew<a href="osinstall.html#option-2-homebrew" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb353"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb353-1"><a href="osinstall.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R</span></span>
+<span id="cb353-2"><a href="osinstall.html#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> r</span>
+<span id="cb353-3"><a href="osinstall.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gfortran</span></span>
+<span id="cb353-4"><a href="osinstall.html#cb353-4" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install gcc</span>
+<span id="cb353-5"><a href="osinstall.html#cb353-5" aria-hidden="true" tabindex="-1"></a><span class="co"># OpenMPI</span></span>
+<span id="cb353-6"><a href="osinstall.html#cb353-6" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install open-mpi</span>
+<span id="cb353-7"><a href="osinstall.html#cb353-7" aria-hidden="true" tabindex="-1"></a><span class="co"># szip</span></span>
+<span id="cb353-8"><a href="osinstall.html#cb353-8" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install szip</span>
+<span id="cb353-9"><a href="osinstall.html#cb353-9" aria-hidden="true" tabindex="-1"></a><span class="co"># HDF5</span></span>
+<span id="cb353-10"><a href="osinstall.html#cb353-10" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install hdf5 </span>
+<span id="cb353-11"><a href="osinstall.html#cb353-11" aria-hidden="true" tabindex="-1"></a><span class="co">## homebrew should configure hdf5 with fortran and cxx, otherwise:</span></span>
+<span id="cb353-12"><a href="osinstall.html#cb353-12" aria-hidden="true" tabindex="-1"></a><span class="co">## brew install hdf5 --with-fortran --with-cxx</span></span></code></pre></div>
 </div>
-<div id="additional-installs" class="section level4 hasAnchor" number="24.5.3.3">
-<h4><span class="header-section-number">24.5.3.3</span> Additional installs<a href="osinstall.html#additional-installs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div id="install-jags" class="section level5 hasAnchor" number="24.5.3.3.1">
-<h5><span class="header-section-number">24.5.3.3.1</span> Install JAGS<a href="osinstall.html#install-jags" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Download JAGS from <a href="http://sourceforge.net/projects/mcmc-jags/files/JAGS/3.x/Mac%20OS%20X/JAGS-Mavericks-3.4.0.dmg/download" class="uri">http://sourceforge.net/projects/mcmc-jags/files/JAGS/3.x/Mac%20OS%20X/JAGS-Mavericks-3.4.0.dmg/download</a></p>
 </div>
-<div id="install-udunits" class="section level5 hasAnchor" number="24.5.3.3.2">
-<h5><span class="header-section-number">24.5.3.3.2</span> Install udunits<a href="osinstall.html#install-udunits" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Installing udunits-2 on MacOSX is done from source.</p>
+<div id="install-postgres-and-postgis" class="section level4 hasAnchor" number="24.5.3.2">
+<h4><span class="header-section-number">24.5.3.2</span> Install Postgres and PostGIS<a href="osinstall.html#install-postgres-and-postgis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="option-1" class="section level5 hasAnchor" number="24.5.3.2.1">
+<h5><span class="header-section-number">24.5.3.2.1</span> Option 1:<a href="osinstall.html#option-1" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>For MacOS, the Postgres.app provides Postgres with PostGIS
+already installed (<a href="http://postgresapp.com/" class="uri">http://postgresapp.com/</a>).</p>
+<p>To run Postgres:
+* Open Postgres.app.
+* In the menu bar, click the elephant icon and select “Open psql”.</p>
+</div>
+<div id="option-2-install-using-homebrew" class="section level5 hasAnchor" number="24.5.3.2.2">
+<h5><span class="header-section-number">24.5.3.2.2</span> Option 2: install using homebrew:<a href="osinstall.html#option-2-install-using-homebrew" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb354"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb354-1"><a href="osinstall.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="co"># optional: remove existing postgres installations with:</span></span>
+<span id="cb354-2"><a href="osinstall.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="co"># brew uninstall --force postgresql</span></span>
+<span id="cb354-3"><a href="osinstall.html#cb354-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-4"><a href="osinstall.html#cb354-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install Postgres, fixed at v12 (officially supported by BETYdb):</span></span>
+<span id="cb354-5"><a href="osinstall.html#cb354-5" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install postgres@12</span>
+<span id="cb354-6"><a href="osinstall.html#cb354-6" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> pin postgres@12</span>
+<span id="cb354-7"><a href="osinstall.html#cb354-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-8"><a href="osinstall.html#cb354-8" aria-hidden="true" tabindex="-1"></a><span class="co"># PostGIS</span></span>
+<span id="cb354-9"><a href="osinstall.html#cb354-9" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install postgis</span>
+<span id="cb354-10"><a href="osinstall.html#cb354-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-11"><a href="osinstall.html#cb354-11" aria-hidden="true" tabindex="-1"></a><span class="co"># to run Postgres:</span></span>
+<span id="cb354-12"><a href="osinstall.html#cb354-12" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> services start postgresql</span></code></pre></div>
+</div>
+</div>
+<div id="enable-postgis" class="section level4 hasAnchor" number="24.5.3.3">
+<h4><span class="header-section-number">24.5.3.3</span> Enable PostGIS<a href="osinstall.html#enable-postgis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To enable PostGIS, you should start Postgres:</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb355-1"><a href="osinstall.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> postgres</span></code></pre></div>
+<p>And then run the following commands:</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb356-1"><a href="osinstall.html#cb356-1" aria-hidden="true" tabindex="-1"></a>##### <span class="kw">Enable</span> PostGIS (includes raster)</span>
+<span id="cb356-2"><a href="osinstall.html#cb356-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> EXTENSION postgis;</span>
+<span id="cb356-3"><a href="osinstall.html#cb356-3" aria-hidden="true" tabindex="-1"></a>##### <span class="kw">Enable</span> Topology</span>
+<span id="cb356-4"><a href="osinstall.html#cb356-4" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> EXTENSION postgis_topology;</span>
+<span id="cb356-5"><a href="osinstall.html#cb356-5" aria-hidden="true" tabindex="-1"></a>##### fuzzy matching <span class="kw">needed</span> <span class="cf">for</span> Tiger</span>
+<span id="cb356-6"><a href="osinstall.html#cb356-6" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> EXTENSION fuzzystrmatch;</span>
+<span id="cb356-7"><a href="osinstall.html#cb356-7" aria-hidden="true" tabindex="-1"></a>##### <span class="kw">Enable</span> US Tiger Geocoder</span>
+<span id="cb356-8"><a href="osinstall.html#cb356-8" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> EXTENSION postgis_tiger_geocoder;</span></code></pre></div>
+<p>To check your postgis run the following command again in psql:</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb357-1"><a href="osinstall.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> PostGIS_full_version();`</span></code></pre></div>
+</div>
+<div id="additional-installs" class="section level4 hasAnchor" number="24.5.3.4">
+<h4><span class="header-section-number">24.5.3.4</span> Additional installs<a href="osinstall.html#additional-installs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="install-jags" class="section level5 hasAnchor" number="24.5.3.4.1">
+<h5><span class="header-section-number">24.5.3.4.1</span> Install JAGS<a href="osinstall.html#install-jags" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="option-1-using-homebrew" class="section level5 hasAnchor" number="24.5.3.4.2">
+<h5><span class="header-section-number">24.5.3.4.2</span> Option 1: using homebrew<a href="osinstall.html#option-1-using-homebrew" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb358"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb358-1"><a href="osinstall.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install jags</span></code></pre></div>
+</div>
+<div id="option-2-download" class="section level5 hasAnchor" number="24.5.3.4.3">
+<h5><span class="header-section-number">24.5.3.4.3</span> Option 2: Download<a href="osinstall.html#option-2-download" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Download JAGS from <a href="http://sourceforge.net/projects/mcmc-jags/files/JAGS/3.x/Mac%20OS%20X/JAGS-Mavericks-3.4.0.dmg/download" class="uri">http://sourceforge.net/projects/mcmc-jags/files/JAGS/3.x/Mac%20OS%20X/JAGS-Mavericks-3.4.0.dmg/download</a>.</p>
+</div>
+<div id="install-udunits" class="section level5 hasAnchor" number="24.5.3.4.4">
+<h5><span class="header-section-number">24.5.3.4.4</span> Install udunits<a href="osinstall.html#install-udunits" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="option-1-install-using-homebrew" class="section level5 hasAnchor" number="24.5.3.4.5">
+<h5><span class="header-section-number">24.5.3.4.5</span> Option 1: Install using homebrew:<a href="osinstall.html#option-1-install-using-homebrew" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb359"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb359-1"><a href="osinstall.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install udunits</span></code></pre></div>
+</div>
+<div id="option-2-install-udunits-2-on-macosx-is-done-from-source." class="section level5 hasAnchor" number="24.5.3.4.6">
+<h5><span class="header-section-number">24.5.3.4.6</span> Option 2: Install udunits-2 on MacOSX is done from source.<a href="osinstall.html#option-2-install-udunits-2-on-macosx-is-done-from-source." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <ul>
 <li>download most recent <a href="http://www.unidata.ucar.edu/downloads/udunits/index.jsp">version of Udunits here</a></li>
 <li>instructions for <a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html#Obtain">compiling from source</a></li>
 </ul>
-<div class="sourceCode" id="cb354"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb354-1"><a href="osinstall.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> udunits-2.1.24.tar.gz ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.24.tar.gz</span>
-<span id="cb354-2"><a href="osinstall.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf udunits-2.1.24.tar.gz</span>
-<span id="cb354-3"><a href="osinstall.html#cb354-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> udunits-2.1.24</span>
-<span id="cb354-4"><a href="osinstall.html#cb354-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span></span>
-<span id="cb354-5"><a href="osinstall.html#cb354-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
-<span id="cb354-6"><a href="osinstall.html#cb354-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb360-1"><a href="osinstall.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> udunits-2.1.24.tar.gz ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.24.tar.gz</span>
+<span id="cb360-2"><a href="osinstall.html#cb360-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf udunits-2.1.24.tar.gz</span>
+<span id="cb360-3"><a href="osinstall.html#cb360-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> udunits-2.1.24</span>
+<span id="cb360-4"><a href="osinstall.html#cb360-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span></span>
+<span id="cb360-5"><a href="osinstall.html#cb360-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
+<span id="cb360-6"><a href="osinstall.html#cb360-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code></pre></div>
 </div>
 </div>
-<div id="apache-configuration" class="section level4 hasAnchor" number="24.5.3.4">
-<h4><span class="header-section-number">24.5.3.4</span> Apache Configuration<a href="osinstall.html#apache-configuration" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="apache-configuration-optional" class="section level4 hasAnchor" number="24.5.3.5">
+<h4><span class="header-section-number">24.5.3.5</span> Apache Configuration (Optional)<a href="osinstall.html#apache-configuration-optional" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Mac does not support pdo/postgresql by default. The easiest way to install is use: <a href="http://php-osx.liip.ch/" class="uri">http://php-osx.liip.ch/</a></p>
 <p>To enable pecan to run from your webserver.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb355-1"><a href="osinstall.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/others/pecan.conf <span class="op">&lt;&lt; EOF</span></span>
-<span id="cb355-2"><a href="osinstall.html#cb355-2" aria-hidden="true" tabindex="-1"></a><span class="st">Alias /pecan </span><span class="va">${PWD}</span><span class="st">/pecan/web</span></span>
-<span id="cb355-3"><a href="osinstall.html#cb355-3" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;Directory </span><span class="va">${PWD}</span><span class="st">/pecan/web&gt;</span></span>
-<span id="cb355-4"><a href="osinstall.html#cb355-4" aria-hidden="true" tabindex="-1"></a><span class="st">  DirectoryIndex index.php</span></span>
-<span id="cb355-5"><a href="osinstall.html#cb355-5" aria-hidden="true" tabindex="-1"></a><span class="st">  Options +All</span></span>
-<span id="cb355-6"><a href="osinstall.html#cb355-6" aria-hidden="true" tabindex="-1"></a><span class="st">  Require all granted</span></span>
-<span id="cb355-7"><a href="osinstall.html#cb355-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/Directory&gt;</span></span>
-<span id="cb355-8"><a href="osinstall.html#cb355-8" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb361-1"><a href="osinstall.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/others/pecan.conf <span class="op">&lt;&lt; EOF</span></span>
+<span id="cb361-2"><a href="osinstall.html#cb361-2" aria-hidden="true" tabindex="-1"></a><span class="st">Alias /pecan </span><span class="va">${PWD}</span><span class="st">/pecan/web</span></span>
+<span id="cb361-3"><a href="osinstall.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;Directory </span><span class="va">${PWD}</span><span class="st">/pecan/web&gt;</span></span>
+<span id="cb361-4"><a href="osinstall.html#cb361-4" aria-hidden="true" tabindex="-1"></a><span class="st">  DirectoryIndex index.php</span></span>
+<span id="cb361-5"><a href="osinstall.html#cb361-5" aria-hidden="true" tabindex="-1"></a><span class="st">  Options +All</span></span>
+<span id="cb361-6"><a href="osinstall.html#cb361-6" aria-hidden="true" tabindex="-1"></a><span class="st">  Require all granted</span></span>
+<span id="cb361-7"><a href="osinstall.html#cb361-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/Directory&gt;</span></span>
+<span id="cb361-8"><a href="osinstall.html#cb361-8" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div>
 </div>
-<div id="ruby" class="section level4 hasAnchor" number="24.5.3.5">
-<h4><span class="header-section-number">24.5.3.5</span> Ruby<a href="osinstall.html#ruby" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>The default version of ruby should work. Or use <a href="https://jewelrybox.unfiniti.com/">JewelryBox</a>.</p>
+<div id="ruby-optional" class="section level4 hasAnchor" number="24.5.3.6">
+<h4><span class="header-section-number">24.5.3.6</span> Ruby (Optional)<a href="osinstall.html#ruby-optional" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><em>Note: it is recommended that BETYdb be run using Docker because the application uses unsupported versions of Ruby and Rails.</em></p>
+<p>The BETYdb application requires Ruby version 2.7.7, as specified in <a href="https://github.com/PecanProject/bety/blob/develop/.ruby-version">PecanProject/bety/.ruby-version</a>.</p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb362-1"><a href="osinstall.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install rbenv</span>
+<span id="cb362-2"><a href="osinstall.html#cb362-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rbenv</span> init</span>
+<span id="cb362-3"><a href="osinstall.html#cb362-3" aria-hidden="true" tabindex="-1"></a><span class="ex">rbenv</span> install 2.7.7 </span></code></pre></div>
 </div>
-<div id="rstudio-server-2" class="section level4 hasAnchor" number="24.5.3.6">
-<h4><span class="header-section-number">24.5.3.6</span> Rstudio Server<a href="osinstall.html#rstudio-server-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For the mac you can download <a href="http://www.rstudio.com/">Rstudio Desktop</a>.</p>
+<div id="rstudio-optional" class="section level4 hasAnchor" number="24.5.3.7">
+<h4><span class="header-section-number">24.5.3.7</span> Rstudio (Optional)<a href="osinstall.html#rstudio-optional" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For MacOS, you can download <a href="http://www.rstudio.com/">Rstudio Desktop</a>.</p>
+<p>Or using homebrew:</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb363-1"><a href="osinstall.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> rstudio</span></code></pre></div>
 
 </div>
 </div>
@@ -1252,27 +1314,27 @@ postgis already installed (<a href="http://postgresapp.com/" class="uri">http://
 <div id="install-database-data" class="section level4 hasAnchor" number="24.5.4.1">
 <h4><span class="header-section-number">24.5.4.1</span> Install Database + Data<a href="osinstall.html#install-database-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li><em>note</em> To install BETYdb without PEcAn, first download the <a href="https://raw.githubusercontent.com/PecanProject/pecan/master/scripts/load.bety.sh"><code>load.bety.sh</code> script</a></li>
+<li><em>note</em> To install BETYdb without PEcAn, first download the <a href="https://raw.githubusercontent.com/PecanProject/pecan/main/scripts/load.bety.sh"><code>load.bety.sh</code> script</a></li>
 </ul>
-<div class="sourceCode" id="cb356"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb356-1"><a href="osinstall.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install database (code assumes password is bety)</span></span>
-<span id="cb356-2"><a href="osinstall.html#cb356-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres createuser <span class="at">-d</span> <span class="at">-l</span> <span class="at">-P</span> <span class="at">-R</span> <span class="at">-S</span> bety</span>
-<span id="cb356-3"><a href="osinstall.html#cb356-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres createdb <span class="at">-O</span> bety bety</span>
-<span id="cb356-4"><a href="osinstall.html#cb356-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-c</span> YES <span class="at">-u</span> YES <span class="at">-r</span> 0</span>
-<span id="cb356-5"><a href="osinstall.html#cb356-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-r</span> 1</span>
-<span id="cb356-6"><a href="osinstall.html#cb356-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-r</span> 2</span>
-<span id="cb356-7"><a href="osinstall.html#cb356-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb356-8"><a href="osinstall.html#cb356-8" aria-hidden="true" tabindex="-1"></a><span class="co"># configure for PEcAn web app (change password if needed)</span></span>
-<span id="cb356-9"><a href="osinstall.html#cb356-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> web/config.example.php web/config.php </span>
-<span id="cb356-10"><a href="osinstall.html#cb356-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb356-11"><a href="osinstall.html#cb356-11" aria-hidden="true" tabindex="-1"></a><span class="co"># add models to database (VM only)</span></span>
-<span id="cb356-12"><a href="osinstall.html#cb356-12" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/add.models.sh</span></span>
-<span id="cb356-13"><a href="osinstall.html#cb356-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb356-14"><a href="osinstall.html#cb356-14" aria-hidden="true" tabindex="-1"></a><span class="co"># add data to database</span></span>
-<span id="cb356-15"><a href="osinstall.html#cb356-15" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/add.data.sh</span></span>
-<span id="cb356-16"><a href="osinstall.html#cb356-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb356-17"><a href="osinstall.html#cb356-17" aria-hidden="true" tabindex="-1"></a><span class="co"># create outputs folder</span></span>
-<span id="cb356-18"><a href="osinstall.html#cb356-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ~/output</span>
-<span id="cb356-19"><a href="osinstall.html#cb356-19" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 777 ~/output</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb364-1"><a href="osinstall.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install database (code assumes password is bety)</span></span>
+<span id="cb364-2"><a href="osinstall.html#cb364-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres createuser <span class="at">-d</span> <span class="at">-l</span> <span class="at">-P</span> <span class="at">-R</span> <span class="at">-S</span> bety</span>
+<span id="cb364-3"><a href="osinstall.html#cb364-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres createdb <span class="at">-O</span> bety bety</span>
+<span id="cb364-4"><a href="osinstall.html#cb364-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-c</span> YES <span class="at">-u</span> YES <span class="at">-r</span> 0</span>
+<span id="cb364-5"><a href="osinstall.html#cb364-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-r</span> 1</span>
+<span id="cb364-6"><a href="osinstall.html#cb364-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-r</span> 2</span>
+<span id="cb364-7"><a href="osinstall.html#cb364-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb364-8"><a href="osinstall.html#cb364-8" aria-hidden="true" tabindex="-1"></a><span class="co"># configure for PEcAn web app (change password if needed)</span></span>
+<span id="cb364-9"><a href="osinstall.html#cb364-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> web/config.example.php web/config.php </span>
+<span id="cb364-10"><a href="osinstall.html#cb364-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb364-11"><a href="osinstall.html#cb364-11" aria-hidden="true" tabindex="-1"></a><span class="co"># add models to database (VM only)</span></span>
+<span id="cb364-12"><a href="osinstall.html#cb364-12" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/add.models.sh</span></span>
+<span id="cb364-13"><a href="osinstall.html#cb364-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb364-14"><a href="osinstall.html#cb364-14" aria-hidden="true" tabindex="-1"></a><span class="co"># add data to database</span></span>
+<span id="cb364-15"><a href="osinstall.html#cb364-15" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/add.data.sh</span></span>
+<span id="cb364-16"><a href="osinstall.html#cb364-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb364-17"><a href="osinstall.html#cb364-17" aria-hidden="true" tabindex="-1"></a><span class="co"># create outputs folder</span></span>
+<span id="cb364-18"><a href="osinstall.html#cb364-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ~/output</span>
+<span id="cb364-19"><a href="osinstall.html#cb364-19" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 777 ~/output</span></code></pre></div>
 </div>
 <div id="installing-betydb-web-application" class="section level4 hasAnchor" number="24.5.4.2">
 <h4><span class="header-section-number">24.5.4.2</span> Installing BETYdb Web Application<a href="osinstall.html#installing-betydb-web-application" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1285,45 +1347,45 @@ postgis already installed (<a href="http://postgresapp.com/" class="uri">http://
 <h5><span class="header-section-number">24.5.4.2.2</span> RUBY version<a href="osinstall.html#ruby-version" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>The RUBY version requires a few extra packages to be installed first.</p>
 <p>Next we install the web app.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb357-1"><a href="osinstall.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install bety</span></span>
-<span id="cb357-2"><a href="osinstall.html#cb357-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb357-3"><a href="osinstall.html#cb357-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/PecanProject/bety.git</span>
-<span id="cb357-4"><a href="osinstall.html#cb357-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb357-5"><a href="osinstall.html#cb357-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install gems</span></span>
-<span id="cb357-6"><a href="osinstall.html#cb357-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bety</span>
-<span id="cb357-7"><a href="osinstall.html#cb357-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gem2.0 install bundler</span>
-<span id="cb357-8"><a href="osinstall.html#cb357-8" aria-hidden="true" tabindex="-1"></a><span class="ex">bundle</span> install <span class="at">--without</span> development:test:javascript_testing:debug</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb365-1"><a href="osinstall.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install bety</span></span>
+<span id="cb365-2"><a href="osinstall.html#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb365-3"><a href="osinstall.html#cb365-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/PecanProject/bety.git</span>
+<span id="cb365-4"><a href="osinstall.html#cb365-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb365-5"><a href="osinstall.html#cb365-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install gems</span></span>
+<span id="cb365-6"><a href="osinstall.html#cb365-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bety</span>
+<span id="cb365-7"><a href="osinstall.html#cb365-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gem2.0 install bundler</span>
+<span id="cb365-8"><a href="osinstall.html#cb365-8" aria-hidden="true" tabindex="-1"></a><span class="ex">bundle</span> install <span class="at">--without</span> development:test:javascript_testing:debug</span></code></pre></div>
 <p>and configure BETY</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb358-1"><a href="osinstall.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create folders for upload folders</span></span>
-<span id="cb358-2"><a href="osinstall.html#cb358-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> paperclip/files paperclip/file_names</span>
-<span id="cb358-3"><a href="osinstall.html#cb358-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 777 paperclip/files paperclip/file_names</span>
-<span id="cb358-4"><a href="osinstall.html#cb358-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb358-5"><a href="osinstall.html#cb358-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create folder for log files</span></span>
-<span id="cb358-6"><a href="osinstall.html#cb358-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> log</span>
-<span id="cb358-7"><a href="osinstall.html#cb358-7" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> log/production.log</span>
-<span id="cb358-8"><a href="osinstall.html#cb358-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 0666 log/production.log</span>
-<span id="cb358-9"><a href="osinstall.html#cb358-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb358-10"><a href="osinstall.html#cb358-10" aria-hidden="true" tabindex="-1"></a><span class="co"># fix configuration for vm</span></span>
-<span id="cb358-11"><a href="osinstall.html#cb358-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> config/additional_environment_vm.rb config/additional_environment.rb</span>
-<span id="cb358-12"><a href="osinstall.html#cb358-12" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> go+w public/javascripts/cache/</span>
-<span id="cb358-13"><a href="osinstall.html#cb358-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb358-14"><a href="osinstall.html#cb358-14" aria-hidden="true" tabindex="-1"></a><span class="co"># setup bety database configuration</span></span>
-<span id="cb358-15"><a href="osinstall.html#cb358-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> config/database.yml <span class="op">&lt;&lt; EOF</span></span>
-<span id="cb358-16"><a href="osinstall.html#cb358-16" aria-hidden="true" tabindex="-1"></a><span class="st">production:</span></span>
-<span id="cb358-17"><a href="osinstall.html#cb358-17" aria-hidden="true" tabindex="-1"></a><span class="st">  adapter: postgis</span></span>
-<span id="cb358-18"><a href="osinstall.html#cb358-18" aria-hidden="true" tabindex="-1"></a><span class="st">  encoding: utf-8</span></span>
-<span id="cb358-19"><a href="osinstall.html#cb358-19" aria-hidden="true" tabindex="-1"></a><span class="st">  reconnect: false</span></span>
-<span id="cb358-20"><a href="osinstall.html#cb358-20" aria-hidden="true" tabindex="-1"></a><span class="st">  database: bety</span></span>
-<span id="cb358-21"><a href="osinstall.html#cb358-21" aria-hidden="true" tabindex="-1"></a><span class="st">  pool: 5</span></span>
-<span id="cb358-22"><a href="osinstall.html#cb358-22" aria-hidden="true" tabindex="-1"></a><span class="st">  username: bety</span></span>
-<span id="cb358-23"><a href="osinstall.html#cb358-23" aria-hidden="true" tabindex="-1"></a><span class="st">  password: bety</span></span>
-<span id="cb358-24"><a href="osinstall.html#cb358-24" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
-<span id="cb358-25"><a href="osinstall.html#cb358-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb358-26"><a href="osinstall.html#cb358-26" aria-hidden="true" tabindex="-1"></a><span class="co"># setup login tokens</span></span>
-<span id="cb358-27"><a href="osinstall.html#cb358-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> config/initializers/site_keys.rb <span class="op">&lt;&lt; EOF</span></span>
-<span id="cb358-28"><a href="osinstall.html#cb358-28" aria-hidden="true" tabindex="-1"></a><span class="st">REST_AUTH_SITE_KEY         = &#39;thisisnotasecret&#39;</span></span>
-<span id="cb358-29"><a href="osinstall.html#cb358-29" aria-hidden="true" tabindex="-1"></a><span class="st">REST_AUTH_DIGEST_STRETCHES = 10</span></span>
-<span id="cb358-30"><a href="osinstall.html#cb358-30" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb366-1"><a href="osinstall.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create folders for upload folders</span></span>
+<span id="cb366-2"><a href="osinstall.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> paperclip/files paperclip/file_names</span>
+<span id="cb366-3"><a href="osinstall.html#cb366-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 777 paperclip/files paperclip/file_names</span>
+<span id="cb366-4"><a href="osinstall.html#cb366-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb366-5"><a href="osinstall.html#cb366-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create folder for log files</span></span>
+<span id="cb366-6"><a href="osinstall.html#cb366-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> log</span>
+<span id="cb366-7"><a href="osinstall.html#cb366-7" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> log/production.log</span>
+<span id="cb366-8"><a href="osinstall.html#cb366-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 0666 log/production.log</span>
+<span id="cb366-9"><a href="osinstall.html#cb366-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb366-10"><a href="osinstall.html#cb366-10" aria-hidden="true" tabindex="-1"></a><span class="co"># fix configuration for vm</span></span>
+<span id="cb366-11"><a href="osinstall.html#cb366-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> config/additional_environment_vm.rb config/additional_environment.rb</span>
+<span id="cb366-12"><a href="osinstall.html#cb366-12" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> go+w public/javascripts/cache/</span>
+<span id="cb366-13"><a href="osinstall.html#cb366-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb366-14"><a href="osinstall.html#cb366-14" aria-hidden="true" tabindex="-1"></a><span class="co"># setup bety database configuration</span></span>
+<span id="cb366-15"><a href="osinstall.html#cb366-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> config/database.yml <span class="op">&lt;&lt; EOF</span></span>
+<span id="cb366-16"><a href="osinstall.html#cb366-16" aria-hidden="true" tabindex="-1"></a><span class="st">production:</span></span>
+<span id="cb366-17"><a href="osinstall.html#cb366-17" aria-hidden="true" tabindex="-1"></a><span class="st">  adapter: postgis</span></span>
+<span id="cb366-18"><a href="osinstall.html#cb366-18" aria-hidden="true" tabindex="-1"></a><span class="st">  encoding: utf-8</span></span>
+<span id="cb366-19"><a href="osinstall.html#cb366-19" aria-hidden="true" tabindex="-1"></a><span class="st">  reconnect: false</span></span>
+<span id="cb366-20"><a href="osinstall.html#cb366-20" aria-hidden="true" tabindex="-1"></a><span class="st">  database: bety</span></span>
+<span id="cb366-21"><a href="osinstall.html#cb366-21" aria-hidden="true" tabindex="-1"></a><span class="st">  pool: 5</span></span>
+<span id="cb366-22"><a href="osinstall.html#cb366-22" aria-hidden="true" tabindex="-1"></a><span class="st">  username: bety</span></span>
+<span id="cb366-23"><a href="osinstall.html#cb366-23" aria-hidden="true" tabindex="-1"></a><span class="st">  password: bety</span></span>
+<span id="cb366-24"><a href="osinstall.html#cb366-24" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb366-25"><a href="osinstall.html#cb366-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb366-26"><a href="osinstall.html#cb366-26" aria-hidden="true" tabindex="-1"></a><span class="co"># setup login tokens</span></span>
+<span id="cb366-27"><a href="osinstall.html#cb366-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> config/initializers/site_keys.rb <span class="op">&lt;&lt; EOF</span></span>
+<span id="cb366-28"><a href="osinstall.html#cb366-28" aria-hidden="true" tabindex="-1"></a><span class="st">REST_AUTH_SITE_KEY         = &#39;thisisnotasecret&#39;</span></span>
+<span id="cb366-29"><a href="osinstall.html#cb366-29" aria-hidden="true" tabindex="-1"></a><span class="st">REST_AUTH_DIGEST_STRETCHES = 10</span></span>
+<span id="cb366-30"><a href="osinstall.html#cb366-30" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div>
 
 </div>
 </div>
@@ -1349,10 +1411,10 @@ Also, some model downloads require permissions before downloading, making them u
 
 <div id="inst-biocro" class="section level4 hasAnchor" number="24.5.5.1">
 <h4><span class="header-section-number">24.5.5.1</span> BioCro<a href="osinstall.html#inst-biocro" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="osinstall.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Version 0.951</span></span>
-<span id="cb359-2"><a href="osinstall.html#cb359-2" aria-hidden="true" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro@0.951&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span>
-<span id="cb359-3"><a href="osinstall.html#cb359-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Version 1.x </span></span>
-<span id="cb359-4"><a href="osinstall.html#cb359-4" aria-hidden="true" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro-dev@26e0125b&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="osinstall.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Version 0.951</span></span>
+<span id="cb367-2"><a href="osinstall.html#cb367-2" aria-hidden="true" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro@0.951&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span>
+<span id="cb367-3"><a href="osinstall.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Version 1.x </span></span>
+<span id="cb367-4"><a href="osinstall.html#cb367-4" aria-hidden="true" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro-dev@26e0125b&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span></code></pre></div>
 <p><em>BioCro Developers:</em> request access from <a href="https://github.com/dlebauer"><span class="citation">@dlebauer</span> on GitHub</a></p>
 
 </div>
@@ -1360,54 +1422,54 @@ Also, some model downloads require permissions before downloading, making them u
 <h4><span class="header-section-number">24.5.5.2</span> CLM 4.5<a href="osinstall.html#inst-clm45" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The version of CLM installed on PEcAn is the ORNL branch provided by Dan Ricciuto. This version includes Dan’s point-level CLM processing scripts</p>
 <p>Download the code (~300M compressed), input data (1.7GB compressed and expands to 14 GB), and a few misc inputs.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb360-1"><a href="osinstall.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> models</span>
-<span id="cb360-2"><a href="osinstall.html#cb360-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> models</span>
-<span id="cb360-3"><a href="osinstall.html#cb360-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm4_5_1_r085.tar.gz</span>
-<span id="cb360-4"><a href="osinstall.html#cb360-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/ccsm_inputdata.tar.gz</span>
-<span id="cb360-5"><a href="osinstall.html#cb360-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> clm4_5<span class="pp">*</span></span>
-<span id="cb360-6"><a href="osinstall.html#cb360-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> ccsm_inputdata.tar.gz</span>
-<span id="cb360-7"><a href="osinstall.html#cb360-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-8"><a href="osinstall.html#cb360-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Parameter file:</span></span>
-<span id="cb360-9"><a href="osinstall.html#cb360-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</span>
-<span id="cb360-10"><a href="osinstall.html#cb360-10" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span>  /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</span>
-<span id="cb360-11"><a href="osinstall.html#cb360-11" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c130821.nc</span>
-<span id="cb360-12"><a href="osinstall.html#cb360-12" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c140423.nc</span>
-<span id="cb360-13"><a href="osinstall.html#cb360-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-14"><a href="osinstall.html#cb360-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Domain file:</span></span>
-<span id="cb360-15"><a href="osinstall.html#cb360-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/share/domains/domain.clm/</span>
-<span id="cb360-16"><a href="osinstall.html#cb360-16" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/domain.lnd.1x1pt_US-UMB_navy.nc</span>
-<span id="cb360-17"><a href="osinstall.html#cb360-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-18"><a href="osinstall.html#cb360-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Aggregated met data file:</span></span>
-<span id="cb360-19"><a href="osinstall.html#cb360-19" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/CLM1PT_data/1x1pt_US-UMB</span>
-<span id="cb360-20"><a href="osinstall.html#cb360-20" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/all_hourly.nc </span>
-<span id="cb360-21"><a href="osinstall.html#cb360-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-22"><a href="osinstall.html#cb360-22" aria-hidden="true" tabindex="-1"></a><span class="co">## lightning database</span></span>
-<span id="cb360-23"><a href="osinstall.html#cb360-23" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/NASA_LIS/</span>
-<span id="cb360-24"><a href="osinstall.html#cb360-24" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clmforc.Li_2012_climo1995-2011.T62.lnfm_Total_c140423.nc</span>
-<span id="cb360-25"><a href="osinstall.html#cb360-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-26"><a href="osinstall.html#cb360-26" aria-hidden="true" tabindex="-1"></a><span class="co">## surface data</span></span>
-<span id="cb360-27"><a href="osinstall.html#cb360-27" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata</span>
-<span id="cb360-28"><a href="osinstall.html#cb360-28" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_360x720cru_simyr1850_c130927.nc</span>
-<span id="cb360-29"><a href="osinstall.html#cb360-29" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata_map</span>
-<span id="cb360-30"><a href="osinstall.html#cb360-30" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new</span>
-<span id="cb360-31"><a href="osinstall.html#cb360-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb368-1"><a href="osinstall.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> models</span>
+<span id="cb368-2"><a href="osinstall.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> models</span>
+<span id="cb368-3"><a href="osinstall.html#cb368-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm4_5_1_r085.tar.gz</span>
+<span id="cb368-4"><a href="osinstall.html#cb368-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/ccsm_inputdata.tar.gz</span>
+<span id="cb368-5"><a href="osinstall.html#cb368-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> clm4_5<span class="pp">*</span></span>
+<span id="cb368-6"><a href="osinstall.html#cb368-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> ccsm_inputdata.tar.gz</span>
+<span id="cb368-7"><a href="osinstall.html#cb368-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb368-8"><a href="osinstall.html#cb368-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Parameter file:</span></span>
+<span id="cb368-9"><a href="osinstall.html#cb368-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</span>
+<span id="cb368-10"><a href="osinstall.html#cb368-10" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span>  /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</span>
+<span id="cb368-11"><a href="osinstall.html#cb368-11" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c130821.nc</span>
+<span id="cb368-12"><a href="osinstall.html#cb368-12" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c140423.nc</span>
+<span id="cb368-13"><a href="osinstall.html#cb368-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb368-14"><a href="osinstall.html#cb368-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Domain file:</span></span>
+<span id="cb368-15"><a href="osinstall.html#cb368-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/share/domains/domain.clm/</span>
+<span id="cb368-16"><a href="osinstall.html#cb368-16" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/domain.lnd.1x1pt_US-UMB_navy.nc</span>
+<span id="cb368-17"><a href="osinstall.html#cb368-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb368-18"><a href="osinstall.html#cb368-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Aggregated met data file:</span></span>
+<span id="cb368-19"><a href="osinstall.html#cb368-19" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/CLM1PT_data/1x1pt_US-UMB</span>
+<span id="cb368-20"><a href="osinstall.html#cb368-20" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/all_hourly.nc </span>
+<span id="cb368-21"><a href="osinstall.html#cb368-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb368-22"><a href="osinstall.html#cb368-22" aria-hidden="true" tabindex="-1"></a><span class="co">## lightning database</span></span>
+<span id="cb368-23"><a href="osinstall.html#cb368-23" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/NASA_LIS/</span>
+<span id="cb368-24"><a href="osinstall.html#cb368-24" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clmforc.Li_2012_climo1995-2011.T62.lnfm_Total_c140423.nc</span>
+<span id="cb368-25"><a href="osinstall.html#cb368-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb368-26"><a href="osinstall.html#cb368-26" aria-hidden="true" tabindex="-1"></a><span class="co">## surface data</span></span>
+<span id="cb368-27"><a href="osinstall.html#cb368-27" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata</span>
+<span id="cb368-28"><a href="osinstall.html#cb368-28" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_360x720cru_simyr1850_c130927.nc</span>
+<span id="cb368-29"><a href="osinstall.html#cb368-29" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata_map</span>
+<span id="cb368-30"><a href="osinstall.html#cb368-30" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new</span>
+<span id="cb368-31"><a href="osinstall.html#cb368-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc</span></code></pre></div>
 <p>Required libraries</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb361-1"><a href="osinstall.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install mercurial csh tcsh subversion cmake</span>
-<span id="cb361-2"><a href="osinstall.html#cb361-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb361-3"><a href="osinstall.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /usr/bin/make /usr/bin/gmake</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb369-1"><a href="osinstall.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install mercurial csh tcsh subversion cmake</span>
+<span id="cb369-2"><a href="osinstall.html#cb369-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb369-3"><a href="osinstall.html#cb369-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /usr/bin/make /usr/bin/gmake</span></code></pre></div>
 <p>Compile and build default inputs</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb362-1"><a href="osinstall.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/carya/models/clm4_5_1_r085/scripts</span>
-<span id="cb362-2"><a href="osinstall.html#cb362-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> runCLM.py <span class="at">--site</span> US-UMB ––compset I1850CLM45CN <span class="at">--mach</span> ubuntu <span class="at">--ccsm_input</span> /home/carya/models/ccsm_inputdata <span class="at">--tstep</span> 1 <span class="at">--nopointdata</span> <span class="at">--coldstart</span> <span class="at">--cpl_bypass</span> <span class="at">--clean_build</span></span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb370-1"><a href="osinstall.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/carya/models/clm4_5_1_r085/scripts</span>
+<span id="cb370-2"><a href="osinstall.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> runCLM.py <span class="at">--site</span> US-UMB ––compset I1850CLM45CN <span class="at">--mach</span> ubuntu <span class="at">--ccsm_input</span> /home/carya/models/ccsm_inputdata <span class="at">--tstep</span> 1 <span class="at">--nopointdata</span> <span class="at">--coldstart</span> <span class="at">--cpl_bypass</span> <span class="at">--clean_build</span></span></code></pre></div>
 <div id="clm-test-run" class="section level5 hasAnchor" number="24.5.5.2.1">
 <h5><span class="header-section-number">24.5.5.2.1</span> CLM Test Run<a href="osinstall.html#clm-test-run" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>You will see a new directory in scripts: US-UMB_I1850CLM45CN
 Enter this directory and run (you shouldn’t have to do this normally, but there is a bug with the python script and doing this ensures all files get to the right place):</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb363-1"><a href="osinstall.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./US-UMB_I1850CLM45CN.build</span></span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb371-1"><a href="osinstall.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./US-UMB_I1850CLM45CN.build</span></span></code></pre></div>
 <p>Next you are ready to go to the run directory:</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb364-1"><a href="osinstall.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/carya/models/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/run</span></span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb372-1"><a href="osinstall.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/carya/models/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/run</span></span></code></pre></div>
 <p>Open to edit file: datm.streams.txt.CLM1PT.CLM_USRDAT and check file paths such that all paths start with /home/carya/models/ccsm_inputdata</p>
 <p>From this directory, launch the executable that resides in the bld directory:</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb365-1"><a href="osinstall.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/carya/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/bld/cesm.exe</span></span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb373-1"><a href="osinstall.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/carya/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/bld/cesm.exe</span></span></code></pre></div>
 <p>not sure this was the right location, but wherever the executable is</p>
 <p>You should begin to see output files that look like this:
 US-UMB_I1850CLM45CN.clm2.h0.yyyy-mm.nc (yyyy is year, mm is month)
@@ -1418,79 +1480,79 @@ These are netcdf files containing monthly averages of lots of variables.</p>
 </div>
 <div id="inst-dalec" class="section level4 hasAnchor" number="24.5.5.3">
 <h4><span class="header-section-number">24.5.5.3</span> DALEC<a href="osinstall.html#inst-dalec" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb366"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb366-1"><a href="osinstall.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb366-2"><a href="osinstall.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> dalec_EnKF_pub.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/dalec_EnKF_pub.tgz</span>
-<span id="cb366-3"><a href="osinstall.html#cb366-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf dalec_EnKF_pub.tgz</span>
-<span id="cb366-4"><a href="osinstall.html#cb366-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> dalec_EnKF_pub.tgz</span>
-<span id="cb366-5"><a href="osinstall.html#cb366-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb366-6"><a href="osinstall.html#cb366-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> dalec_EnKF_pub</span>
-<span id="cb366-7"><a href="osinstall.html#cb366-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> dalec_EnKF</span>
-<span id="cb366-8"><a href="osinstall.html#cb366-8" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> dalec_seqMH</span>
-<span id="cb366-9"><a href="osinstall.html#cb366-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp dalec_EnKF dalec_seqMH /usr/local/bin</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb374-1"><a href="osinstall.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb374-2"><a href="osinstall.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> dalec_EnKF_pub.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/dalec_EnKF_pub.tgz</span>
+<span id="cb374-3"><a href="osinstall.html#cb374-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf dalec_EnKF_pub.tgz</span>
+<span id="cb374-4"><a href="osinstall.html#cb374-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> dalec_EnKF_pub.tgz</span>
+<span id="cb374-5"><a href="osinstall.html#cb374-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb374-6"><a href="osinstall.html#cb374-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> dalec_EnKF_pub</span>
+<span id="cb374-7"><a href="osinstall.html#cb374-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> dalec_EnKF</span>
+<span id="cb374-8"><a href="osinstall.html#cb374-8" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> dalec_seqMH</span>
+<span id="cb374-9"><a href="osinstall.html#cb374-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp dalec_EnKF dalec_seqMH /usr/local/bin</span></code></pre></div>
 
 </div>
 <div id="inst-ed2" class="section level4 hasAnchor" number="24.5.5.4">
 <h4><span class="header-section-number">24.5.5.4</span> ED2<a href="osinstall.html#inst-ed2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div id="ed2.2-r46-used-in-pecan-manuscript" class="section level5 hasAnchor" number="24.5.5.4.1">
 <h5><span class="header-section-number">24.5.5.4.1</span> ED2.2 r46 (used in PEcAn manuscript)<a href="osinstall.html#ed2.2-r46-used-in-pecan-manuscript" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb367"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb367-1"><a href="osinstall.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb367-2"><a href="osinstall.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get version r46 with a few patches for ubuntu</span></span>
-<span id="cb367-3"><a href="osinstall.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb367-4"><a href="osinstall.html#cb367-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r46.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r46.tgz</span>
-<span id="cb367-5"><a href="osinstall.html#cb367-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r46.tgz</span>
-<span id="cb367-6"><a href="osinstall.html#cb367-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r46.tgz</span>
-<span id="cb367-7"><a href="osinstall.html#cb367-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb367-8"><a href="osinstall.html#cb367-8" aria-hidden="true" tabindex="-1"></a><span class="co"># configure and compile ed</span></span>
-<span id="cb367-9"><a href="osinstall.html#cb367-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/ED.r46/ED/build/bin</span>
-<span id="cb367-10"><a href="osinstall.html#cb367-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
-<span id="cb367-11"><a href="osinstall.html#cb367-11" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
-<span id="cb367-12"><a href="osinstall.html#cb367-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r46</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb375-1"><a href="osinstall.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb375-2"><a href="osinstall.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get version r46 with a few patches for ubuntu</span></span>
+<span id="cb375-3"><a href="osinstall.html#cb375-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb375-4"><a href="osinstall.html#cb375-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r46.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r46.tgz</span>
+<span id="cb375-5"><a href="osinstall.html#cb375-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r46.tgz</span>
+<span id="cb375-6"><a href="osinstall.html#cb375-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r46.tgz</span>
+<span id="cb375-7"><a href="osinstall.html#cb375-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb375-8"><a href="osinstall.html#cb375-8" aria-hidden="true" tabindex="-1"></a><span class="co"># configure and compile ed</span></span>
+<span id="cb375-9"><a href="osinstall.html#cb375-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/ED.r46/ED/build/bin</span>
+<span id="cb375-10"><a href="osinstall.html#cb375-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
+<span id="cb375-11"><a href="osinstall.html#cb375-11" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
+<span id="cb375-12"><a href="osinstall.html#cb375-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r46</span></code></pre></div>
 <p>Perform a test run using pre configured ED settings for ED2.2 r46</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb368-1"><a href="osinstall.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
-<span id="cb368-2"><a href="osinstall.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample run</span></span>
-<span id="cb368-3"><a href="osinstall.html#cb368-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb368-4"><a href="osinstall.html#cb368-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> testrun.ed.r46</span>
-<span id="cb368-5"><a href="osinstall.html#cb368-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.ed.r46</span>
-<span id="cb368-6"><a href="osinstall.html#cb368-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r46</span>
-<span id="cb368-7"><a href="osinstall.html#cb368-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</span>
-<span id="cb368-8"><a href="osinstall.html#cb368-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r46.xml</span>
-<span id="cb368-9"><a href="osinstall.html#cb368-9" aria-hidden="true" tabindex="-1"></a><span class="co"># execute test run</span></span>
-<span id="cb368-10"><a href="osinstall.html#cb368-10" aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> ed2.r46</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb376-1"><a href="osinstall.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb376-2"><a href="osinstall.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample run</span></span>
+<span id="cb376-3"><a href="osinstall.html#cb376-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb376-4"><a href="osinstall.html#cb376-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> testrun.ed.r46</span>
+<span id="cb376-5"><a href="osinstall.html#cb376-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.ed.r46</span>
+<span id="cb376-6"><a href="osinstall.html#cb376-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r46</span>
+<span id="cb376-7"><a href="osinstall.html#cb376-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</span>
+<span id="cb376-8"><a href="osinstall.html#cb376-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r46.xml</span>
+<span id="cb376-9"><a href="osinstall.html#cb376-9" aria-hidden="true" tabindex="-1"></a><span class="co"># execute test run</span></span>
+<span id="cb376-10"><a href="osinstall.html#cb376-10" aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> ed2.r46</span></code></pre></div>
 </div>
 <div id="ed-2.2-r82" class="section level5 hasAnchor" number="24.5.5.4.2">
 <h5><span class="header-section-number">24.5.5.4.2</span> ED 2.2 r82<a href="osinstall.html#ed-2.2-r82" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb369"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb369-1"><a href="osinstall.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb369-2"><a href="osinstall.html#cb369-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
-<span id="cb369-3"><a href="osinstall.html#cb369-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
-<span id="cb369-4"><a href="osinstall.html#cb369-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
-<span id="cb369-5"><a href="osinstall.html#cb369-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb369-6"><a href="osinstall.html#cb369-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED.r82</span>
-<span id="cb369-7"><a href="osinstall.html#cb369-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.patch http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.patch</span>
-<span id="cb369-8"><a href="osinstall.html#cb369-8" aria-hidden="true" tabindex="-1"></a><span class="fu">patch</span> <span class="at">-p1</span> <span class="op">&lt;</span> ED.r82.patch</span>
-<span id="cb369-9"><a href="osinstall.html#cb369-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED/build/bin</span>
-<span id="cb369-10"><a href="osinstall.html#cb369-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
-<span id="cb369-11"><a href="osinstall.html#cb369-11" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
-<span id="cb369-12"><a href="osinstall.html#cb369-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r82</span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb377-1"><a href="osinstall.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb377-2"><a href="osinstall.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
+<span id="cb377-3"><a href="osinstall.html#cb377-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
+<span id="cb377-4"><a href="osinstall.html#cb377-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
+<span id="cb377-5"><a href="osinstall.html#cb377-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb377-6"><a href="osinstall.html#cb377-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED.r82</span>
+<span id="cb377-7"><a href="osinstall.html#cb377-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.patch http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.patch</span>
+<span id="cb377-8"><a href="osinstall.html#cb377-8" aria-hidden="true" tabindex="-1"></a><span class="fu">patch</span> <span class="at">-p1</span> <span class="op">&lt;</span> ED.r82.patch</span>
+<span id="cb377-9"><a href="osinstall.html#cb377-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED/build/bin</span>
+<span id="cb377-10"><a href="osinstall.html#cb377-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
+<span id="cb377-11"><a href="osinstall.html#cb377-11" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
+<span id="cb377-12"><a href="osinstall.html#cb377-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r82</span></code></pre></div>
 <p>Perform a test run using pre configured ED settings for ED2.2 r82</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb370-1"><a href="osinstall.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb370-2"><a href="osinstall.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> testrun.ed.r82</span>
-<span id="cb370-3"><a href="osinstall.html#cb370-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.ed.r82</span>
-<span id="cb370-4"><a href="osinstall.html#cb370-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r82</span>
-<span id="cb370-5"><a href="osinstall.html#cb370-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</span>
-<span id="cb370-6"><a href="osinstall.html#cb370-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r82.xml</span>
-<span id="cb370-7"><a href="osinstall.html#cb370-7" aria-hidden="true" tabindex="-1"></a><span class="co"># execute test run</span></span>
-<span id="cb370-8"><a href="osinstall.html#cb370-8" aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> ed2.r82</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb378-1"><a href="osinstall.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb378-2"><a href="osinstall.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> testrun.ed.r82</span>
+<span id="cb378-3"><a href="osinstall.html#cb378-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.ed.r82</span>
+<span id="cb378-4"><a href="osinstall.html#cb378-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r82</span>
+<span id="cb378-5"><a href="osinstall.html#cb378-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</span>
+<span id="cb378-6"><a href="osinstall.html#cb378-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r82.xml</span>
+<span id="cb378-7"><a href="osinstall.html#cb378-7" aria-hidden="true" tabindex="-1"></a><span class="co"># execute test run</span></span>
+<span id="cb378-8"><a href="osinstall.html#cb378-8" aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> ed2.r82</span></code></pre></div>
 </div>
 <div id="ed-2.2-bleeding-edge" class="section level5 hasAnchor" number="24.5.5.4.3">
 <h5><span class="header-section-number">24.5.5.4.3</span> ED 2.2 bleeding edge<a href="osinstall.html#ed-2.2-bleeding-edge" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb371"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb371-1"><a href="osinstall.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb371-2"><a href="osinstall.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/EDmodel/ED2.git</span>
-<span id="cb371-3"><a href="osinstall.html#cb371-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb371-4"><a href="osinstall.html#cb371-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED2/ED/build/bin</span>
-<span id="cb371-5"><a href="osinstall.html#cb371-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
-<span id="cb371-6"><a href="osinstall.html#cb371-6" aria-hidden="true" tabindex="-1"></a><span class="ex">./generate_deps.sh</span></span>
-<span id="cb371-7"><a href="osinstall.html#cb371-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
-<span id="cb371-8"><a href="osinstall.html#cb371-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.git</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb379-1"><a href="osinstall.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb379-2"><a href="osinstall.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/EDmodel/ED2.git</span>
+<span id="cb379-3"><a href="osinstall.html#cb379-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb379-4"><a href="osinstall.html#cb379-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ED2/ED/build/bin</span>
+<span id="cb379-5"><a href="osinstall.html#cb379-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
+<span id="cb379-6"><a href="osinstall.html#cb379-6" aria-hidden="true" tabindex="-1"></a><span class="ex">./generate_deps.sh</span></span>
+<span id="cb379-7"><a href="osinstall.html#cb379-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
+<span id="cb379-8"><a href="osinstall.html#cb379-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.git</span></code></pre></div>
 
 </div>
 </div>
@@ -1525,13 +1587,13 @@ cd ed-clm/cime/scripts/</code></pre>
 <div id="inst-gday" class="section level4 hasAnchor" number="24.5.5.6">
 <h4><span class="header-section-number">24.5.5.6</span> GDAY<a href="osinstall.html#inst-gday" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Navigate to a directory you would like to store GDAY and run the following:</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb376-1"><a href="osinstall.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/mdekauwe/GDAY.git</span>
-<span id="cb376-2"><a href="osinstall.html#cb376-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb376-3"><a href="osinstall.html#cb376-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> GDAY</span>
-<span id="cb376-4"><a href="osinstall.html#cb376-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb376-5"><a href="osinstall.html#cb376-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> src</span>
-<span id="cb376-6"><a href="osinstall.html#cb376-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb376-7"><a href="osinstall.html#cb376-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb384-1"><a href="osinstall.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/mdekauwe/GDAY.git</span>
+<span id="cb384-2"><a href="osinstall.html#cb384-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb384-3"><a href="osinstall.html#cb384-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> GDAY</span>
+<span id="cb384-4"><a href="osinstall.html#cb384-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb384-5"><a href="osinstall.html#cb384-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> src</span>
+<span id="cb384-6"><a href="osinstall.html#cb384-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb384-7"><a href="osinstall.html#cb384-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
 <p><code>gday</code> is your executable.</p>
 
 </div>
@@ -1544,28 +1606,28 @@ Model requires registration to download. Not to be put on PEcAn VM
 Getting Started documentation: <a href="https://jules.jchmr.org/content/getting-started" class="uri">https://jules.jchmr.org/content/getting-started</a>
 Registration: <a href="http://jules-lsm.github.io/access_req/JULES_access.html" class="uri">http://jules-lsm.github.io/access_req/JULES_access.html</a></p>
 <p>FCM:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb377-1"><a href="osinstall.html#cb377-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">https://github.com/metomi/fcm/</span></span>
-<span id="cb377-2"><a href="osinstall.html#cb377-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://github.com/metomi/fcm/archive/2015.05.0.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb385-1"><a href="osinstall.html#cb385-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">https://github.com/metomi/fcm/</span></span>
+<span id="cb385-2"><a href="osinstall.html#cb385-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://github.com/metomi/fcm/archive/2015.05.0.tar.gz</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>edit makefile</li>
 </ol>
-<div class="sourceCode" id="cb378"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb378-1"><a href="osinstall.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> etc/fcm-make/make.cfg</span>
-<span id="cb378-2"><a href="osinstall.html#cb378-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb378-3"><a href="osinstall.html#cb378-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> JULES_NETCDF = actual instead of dummy</span>
-<span id="cb378-4"><a href="osinstall.html#cb378-4" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> path <span class="er">(</span><span class="ex">e.g.</span> /usr/<span class="kw">)</span> <span class="ex">and</span> lib_path /lib64 to netCDF libraries</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb386-1"><a href="osinstall.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> etc/fcm-make/make.cfg</span>
+<span id="cb386-2"><a href="osinstall.html#cb386-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb386-3"><a href="osinstall.html#cb386-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> JULES_NETCDF = actual instead of dummy</span>
+<span id="cb386-4"><a href="osinstall.html#cb386-4" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> path <span class="er">(</span><span class="ex">e.g.</span> /usr/<span class="kw">)</span> <span class="ex">and</span> lib_path /lib64 to netCDF libraries</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>compile JULES</li>
 </ol>
-<div class="sourceCode" id="cb379"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb379-1"><a href="osinstall.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> etc/fcm-make/</span>
-<span id="cb379-2"><a href="osinstall.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="ex">{path.to.fcm}/fcm</span> make <span class="at">-f</span> etc/fcm-make/make.cfg <span class="at">--new</span></span></code></pre></div>
-<div class="sourceCode" id="cb380"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb380-1"><a href="osinstall.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="ex">UBUNTU</span> VERSION: installed without having to add any perl libraries</span>
-<span id="cb380-2"><a href="osinstall.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="co">#perl stuff that I had to install on pecan2 not PEcAN VM</span></span>
-<span id="cb380-3"><a href="osinstall.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install perl-Digest-SHA</span>
-<span id="cb380-4"><a href="osinstall.html#cb380-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install perl-Time-modules</span>
-<span id="cb380-5"><a href="osinstall.html#cb380-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install cpan</span>
-<span id="cb380-6"><a href="osinstall.html#cb380-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> http://cpanmin.us <span class="kw">|</span> <span class="fu">perl</span> <span class="at">-</span> <span class="at">--sudo</span> App::cpanminus</span>
-<span id="cb380-7"><a href="osinstall.html#cb380-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cpanm Time/Piece.pm</span>
-<span id="cb380-8"><a href="osinstall.html#cb380-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cpanm IO/Uncompress/Gunzip.pm</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb387-1"><a href="osinstall.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> etc/fcm-make/</span>
+<span id="cb387-2"><a href="osinstall.html#cb387-2" aria-hidden="true" tabindex="-1"></a><span class="ex">{path.to.fcm}/fcm</span> make <span class="at">-f</span> etc/fcm-make/make.cfg <span class="at">--new</span></span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb388-1"><a href="osinstall.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="ex">UBUNTU</span> VERSION: installed without having to add any perl libraries</span>
+<span id="cb388-2"><a href="osinstall.html#cb388-2" aria-hidden="true" tabindex="-1"></a><span class="co">#perl stuff that I had to install on pecan2 not PEcAN VM</span></span>
+<span id="cb388-3"><a href="osinstall.html#cb388-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install perl-Digest-SHA</span>
+<span id="cb388-4"><a href="osinstall.html#cb388-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install perl-Time-modules</span>
+<span id="cb388-5"><a href="osinstall.html#cb388-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install cpan</span>
+<span id="cb388-6"><a href="osinstall.html#cb388-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> http://cpanmin.us <span class="kw">|</span> <span class="fu">perl</span> <span class="at">-</span> <span class="at">--sudo</span> App::cpanminus</span>
+<span id="cb388-7"><a href="osinstall.html#cb388-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cpanm Time/Piece.pm</span>
+<span id="cb388-8"><a href="osinstall.html#cb388-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cpanm IO/Uncompress/Gunzip.pm</span></code></pre></div>
 <p>Executable is under build/bin/jules.exe</p>
 <p>Example rundir: examples/point_loobos</p>
 
@@ -1574,17 +1636,17 @@ Registration: <a href="http://jules-lsm.github.io/access_req/JULES_access.html" 
 <h4><span class="header-section-number">24.5.5.8</span> LINKAGES<a href="osinstall.html#inst-linkages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div id="r-installation" class="section level5 hasAnchor" number="24.5.5.8.1">
 <h5><span class="header-section-number">24.5.5.8.1</span> R Installation<a href="osinstall.html#r-installation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="osinstall.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Public</span></span>
-<span id="cb381-2"><a href="osinstall.html#cb381-2" aria-hidden="true" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;araiho/linkages_package&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="osinstall.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Public</span></span>
+<span id="cb389-2"><a href="osinstall.html#cb389-2" aria-hidden="true" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;araiho/linkages_package&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span></code></pre></div>
 </div>
 <div id="fortran-version" class="section level5 hasAnchor" number="24.5.5.8.2">
 <h5><span class="header-section-number">24.5.5.8.2</span> FORTRAN VERSION<a href="osinstall.html#fortran-version" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="osinstall.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co">#FORTRAN VERSION</span></span>
-<span id="cb382-2"><a href="osinstall.html#cb382-2" aria-hidden="true" tabindex="-1"></a>cd</span>
-<span id="cb382-3"><a href="osinstall.html#cb382-3" aria-hidden="true" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>araiho<span class="sc">/</span>Linkages.git</span>
-<span id="cb382-4"><a href="osinstall.html#cb382-4" aria-hidden="true" tabindex="-1"></a>cd Linkages</span>
-<span id="cb382-5"><a href="osinstall.html#cb382-5" aria-hidden="true" tabindex="-1"></a>gfortran <span class="sc">-</span>o linkages linkages.f</span>
-<span id="cb382-6"><a href="osinstall.html#cb382-6" aria-hidden="true" tabindex="-1"></a>sudo cp linkages <span class="sc">/</span>usr<span class="sc">/</span>local<span class="sc">/</span>bin<span class="sc">/</span>linkages.git</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="osinstall.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="co">#FORTRAN VERSION</span></span>
+<span id="cb390-2"><a href="osinstall.html#cb390-2" aria-hidden="true" tabindex="-1"></a>cd</span>
+<span id="cb390-3"><a href="osinstall.html#cb390-3" aria-hidden="true" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>araiho<span class="sc">/</span>Linkages.git</span>
+<span id="cb390-4"><a href="osinstall.html#cb390-4" aria-hidden="true" tabindex="-1"></a>cd Linkages</span>
+<span id="cb390-5"><a href="osinstall.html#cb390-5" aria-hidden="true" tabindex="-1"></a>gfortran <span class="sc">-</span>o linkages linkages.f</span>
+<span id="cb390-6"><a href="osinstall.html#cb390-6" aria-hidden="true" tabindex="-1"></a>sudo cp linkages <span class="sc">/</span>usr<span class="sc">/</span>local<span class="sc">/</span>bin<span class="sc">/</span>linkages.git</span></code></pre></div>
 
 </div>
 </div>
@@ -1597,47 +1659,47 @@ Registration: <a href="http://jules-lsm.github.io/access_req/JULES_access.html" 
 <div id="inst-maespa" class="section level4 hasAnchor" number="24.5.5.10">
 <h4><span class="header-section-number">24.5.5.10</span> MAESPA<a href="osinstall.html#inst-maespa" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Navigate to a directory you would like store MAESPA and run the following:</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb383-1"><a href="osinstall.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://bitbucket.org/remkoduursma/maespa.git</span>
-<span id="cb383-2"><a href="osinstall.html#cb383-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb383-3"><a href="osinstall.html#cb383-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> maespa</span>
-<span id="cb383-4"><a href="osinstall.html#cb383-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb383-5"><a href="osinstall.html#cb383-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb391-1"><a href="osinstall.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://bitbucket.org/remkoduursma/maespa.git</span>
+<span id="cb391-2"><a href="osinstall.html#cb391-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb391-3"><a href="osinstall.html#cb391-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> maespa</span>
+<span id="cb391-4"><a href="osinstall.html#cb391-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb391-5"><a href="osinstall.html#cb391-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
 <p><code>maespa.out</code> is your executable. Example input files can be found in the <code>inpufiles</code> directory. Executing measpa.out from within one of the example directories will produce output.</p>
 <p>MAESPA developers have also developed a wrapper package called Maeswrap. The usual R package installation method <code>install.packages</code> may present issues with downloading an unpacking a dependency package called <code>rgl</code>. Here are a couple of solutions:</p>
 <div id="solution-1" class="section level5 hasAnchor" number="24.5.5.10.1">
 <h5><span class="header-section-number">24.5.5.10.1</span> Solution 1<a href="osinstall.html#solution-1" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb384"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb384-1"><a href="osinstall.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="co">### From the Command Line</span></span>
-<span id="cb384-2"><a href="osinstall.html#cb384-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install r-cran-rgl</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb392-1"><a href="osinstall.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="co">### From the Command Line</span></span>
+<span id="cb392-2"><a href="osinstall.html#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install r-cran-rgl</span></code></pre></div>
 <p>then from within R</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="osinstall.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="osinstall.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</span></code></pre></div>
 </div>
 <div id="solution-2" class="section level5 hasAnchor" number="24.5.5.10.2">
 <h5><span class="header-section-number">24.5.5.10.2</span> Solution 2<a href="osinstall.html#solution-2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb386"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb386-1"><a href="osinstall.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="co">### From the Command line </span></span>
-<span id="cb386-2"><a href="osinstall.html#cb386-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libglu1-mesa-dev</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb394-1"><a href="osinstall.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="co">### From the Command line </span></span>
+<span id="cb394-2"><a href="osinstall.html#cb394-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libglu1-mesa-dev</span></code></pre></div>
 <p>then from within R</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="osinstall.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="osinstall.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
 <div id="sipnet-inst-sipnet" class="section level4 hasAnchor" number="24.5.5.11">
 <h4><span class="header-section-number">24.5.5.11</span> SIPNET {inst-sipnet}<a href="osinstall.html#sipnet-inst-sipnet" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb388"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb388-1"><a href="osinstall.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb388-2"><a href="osinstall.html#cb388-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_unk.tar.gz</span>
-<span id="cb388-3"><a href="osinstall.html#cb388-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf sipnet_unk.tar.gz</span>
-<span id="cb388-4"><a href="osinstall.html#cb388-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> sipnet_unk.tar.gz</span>
-<span id="cb388-5"><a href="osinstall.html#cb388-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb388-6"><a href="osinstall.html#cb388-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> sipnet_unk</span>
-<span id="cb388-7"><a href="osinstall.html#cb388-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
-<span id="cb388-8"><a href="osinstall.html#cb388-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp sipnet /usr/local/bin/sipnet.runk</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb396-1"><a href="osinstall.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb396-2"><a href="osinstall.html#cb396-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_unk.tar.gz</span>
+<span id="cb396-3"><a href="osinstall.html#cb396-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf sipnet_unk.tar.gz</span>
+<span id="cb396-4"><a href="osinstall.html#cb396-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> sipnet_unk.tar.gz</span>
+<span id="cb396-5"><a href="osinstall.html#cb396-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb396-6"><a href="osinstall.html#cb396-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> sipnet_unk</span>
+<span id="cb396-7"><a href="osinstall.html#cb396-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
+<span id="cb396-8"><a href="osinstall.html#cb396-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp sipnet /usr/local/bin/sipnet.runk</span></code></pre></div>
 <div id="sipnet-testrun" class="section level5 hasAnchor" number="24.5.5.11.1">
 <h5><span class="header-section-number">24.5.5.11.1</span> SIPNET testrun<a href="osinstall.html#sipnet-testrun" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<div class="sourceCode" id="cb389"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb389-1"><a href="osinstall.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb389-2"><a href="osinstall.html#cb389-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.sipnet.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.sipnet.tar.gz</span>
-<span id="cb389-3"><a href="osinstall.html#cb389-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf testrun.sipnet.tar.gz</span>
-<span id="cb389-4"><a href="osinstall.html#cb389-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testrun.sipnet.tar.gz</span>
-<span id="cb389-5"><a href="osinstall.html#cb389-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.sipnet</span>
-<span id="cb389-6"><a href="osinstall.html#cb389-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sipnet.runk</span></span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb397-1"><a href="osinstall.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb397-2"><a href="osinstall.html#cb397-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.sipnet.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.sipnet.tar.gz</span>
+<span id="cb397-3"><a href="osinstall.html#cb397-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf testrun.sipnet.tar.gz</span>
+<span id="cb397-4"><a href="osinstall.html#cb397-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testrun.sipnet.tar.gz</span>
+<span id="cb397-5"><a href="osinstall.html#cb397-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> testrun.sipnet</span>
+<span id="cb397-6"><a href="osinstall.html#cb397-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sipnet.runk</span></span></code></pre></div>
 
 </div>
 </div>
@@ -1648,64 +1710,64 @@ Registration: <a href="http://jules-lsm.github.io/access_req/JULES_access.html" 
 <div id="site-information" class="section level4 hasAnchor" number="24.5.6.1">
 <h4><span class="header-section-number">24.5.6.1</span> Site Information<a href="osinstall.html#site-information" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>These are large-ish files that contain data used with ED2 and SIPNET</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb390-1"><a href="osinstall.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> sites</span>
-<span id="cb390-2"><a href="osinstall.html#cb390-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</span>
-<span id="cb390-3"><a href="osinstall.html#cb390-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf sites.tgz</span>
-<span id="cb390-4"><a href="osinstall.html#cb390-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/kooper/Projects/EBI#</span><span class="va">${PWD}</span><span class="st">#&quot;</span> sites/<span class="pp">*</span>/ED_MET_DRIVER_HEADER</span>
-<span id="cb390-5"><a href="osinstall.html#cb390-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> sites.tgz</span>
-<span id="cb390-6"><a href="osinstall.html#cb390-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb390-7"><a href="osinstall.html#cb390-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> inputs</span>
-<span id="cb390-8"><a href="osinstall.html#cb390-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</span>
-<span id="cb390-9"><a href="osinstall.html#cb390-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf inputs.tgz</span>
-<span id="cb390-10"><a href="osinstall.html#cb390-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> inputs.tgz</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb398-1"><a href="osinstall.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> sites</span>
+<span id="cb398-2"><a href="osinstall.html#cb398-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</span>
+<span id="cb398-3"><a href="osinstall.html#cb398-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf sites.tgz</span>
+<span id="cb398-4"><a href="osinstall.html#cb398-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/kooper/Projects/EBI#</span><span class="va">${PWD}</span><span class="st">#&quot;</span> sites/<span class="pp">*</span>/ED_MET_DRIVER_HEADER</span>
+<span id="cb398-5"><a href="osinstall.html#cb398-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> sites.tgz</span>
+<span id="cb398-6"><a href="osinstall.html#cb398-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-7"><a href="osinstall.html#cb398-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> inputs</span>
+<span id="cb398-8"><a href="osinstall.html#cb398-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</span>
+<span id="cb398-9"><a href="osinstall.html#cb398-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf inputs.tgz</span>
+<span id="cb398-10"><a href="osinstall.html#cb398-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> inputs.tgz</span></code></pre></div>
 </div>
 <div id="fia-database" class="section level4 hasAnchor" number="24.5.6.2">
 <h4><span class="header-section-number">24.5.6.2</span> FIA database<a href="osinstall.html#fia-database" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>FIA database is large and will add an extra 10GB to the installation.</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb391-1"><a href="osinstall.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download and install database</span></span>
-<span id="cb391-2"><a href="osinstall.html#cb391-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> fia5data.psql.gz http://isda.ncsa.illinois.edu/~kooper/EBI/fia5data.psql.gz</span>
-<span id="cb391-3"><a href="osinstall.html#cb391-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dropdb</span> <span class="at">--if-exists</span> fia5data</span>
-<span id="cb391-4"><a href="osinstall.html#cb391-4" aria-hidden="true" tabindex="-1"></a><span class="ex">createdb</span> <span class="at">-O</span> bety fia5data</span>
-<span id="cb391-5"><a href="osinstall.html#cb391-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> fia5data.psql.gz</span>
-<span id="cb391-6"><a href="osinstall.html#cb391-6" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> bety <span class="at">-d</span> fia5data <span class="op">&lt;</span> fia5data.psql</span>
-<span id="cb391-7"><a href="osinstall.html#cb391-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> fia5data.psql</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb399-1"><a href="osinstall.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download and install database</span></span>
+<span id="cb399-2"><a href="osinstall.html#cb399-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> fia5data.psql.gz http://isda.ncsa.illinois.edu/~kooper/EBI/fia5data.psql.gz</span>
+<span id="cb399-3"><a href="osinstall.html#cb399-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dropdb</span> <span class="at">--if-exists</span> fia5data</span>
+<span id="cb399-4"><a href="osinstall.html#cb399-4" aria-hidden="true" tabindex="-1"></a><span class="ex">createdb</span> <span class="at">-O</span> bety fia5data</span>
+<span id="cb399-5"><a href="osinstall.html#cb399-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> fia5data.psql.gz</span>
+<span id="cb399-6"><a href="osinstall.html#cb399-6" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> bety <span class="at">-d</span> fia5data <span class="op">&lt;</span> fia5data.psql</span>
+<span id="cb399-7"><a href="osinstall.html#cb399-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> fia5data.psql</span></code></pre></div>
 </div>
 <div id="flux-camp" class="section level4 hasAnchor" number="24.5.6.3">
 <h4><span class="header-section-number">24.5.6.3</span> Flux Camp<a href="osinstall.html#flux-camp" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Following will install the data for flux camp (as well as the demo script for PEcAn).</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb392-1"><a href="osinstall.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb392-2"><a href="osinstall.html#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> plot.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/plot.tgz</span>
-<span id="cb392-3"><a href="osinstall.html#cb392-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf plot.tgz</span>
-<span id="cb392-4"><a href="osinstall.html#cb392-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> plot.tgz</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb400-1"><a href="osinstall.html#cb400-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb400-2"><a href="osinstall.html#cb400-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> plot.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/plot.tgz</span>
+<span id="cb400-3"><a href="osinstall.html#cb400-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf plot.tgz</span>
+<span id="cb400-4"><a href="osinstall.html#cb400-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> plot.tgz</span></code></pre></div>
 </div>
 <div id="harvard-for-ed-tutorial" class="section level4 hasAnchor" number="24.5.6.4">
 <h4><span class="header-section-number">24.5.6.4</span> Harvard for ED tutorial<a href="osinstall.html#harvard-for-ed-tutorial" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Add datasets and runs</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb393-1"><a href="osinstall.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</span>
-<span id="cb393-2"><a href="osinstall.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-d</span> sites Santarem_Km83.zip</span>
-<span id="cb393-3"><a href="osinstall.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</span>
-<span id="cb393-4"><a href="osinstall.html#cb393-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> Santarem_Km83.zip</span>
-<span id="cb393-5"><a href="osinstall.html#cb393-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-6"><a href="osinstall.html#cb393-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</span>
-<span id="cb393-7"><a href="osinstall.html#cb393-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> testrun.s83.zip</span>
-<span id="cb393-8"><a href="osinstall.html#cb393-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.s83/ED2IN</span>
-<span id="cb393-9"><a href="osinstall.html#cb393-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testrun.s83.zip</span>
-<span id="cb393-10"><a href="osinstall.html#cb393-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-11"><a href="osinstall.html#cb393-11" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ed2ws.harvard.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ed2ws.harvard.tgz</span>
-<span id="cb393-12"><a href="osinstall.html#cb393-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ed2ws.harvard.tgz</span>
-<span id="cb393-13"><a href="osinstall.html#cb393-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ed2ws.harvard/analy ed2ws.harvard/histo</span>
-<span id="cb393-14"><a href="osinstall.html#cb393-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#g&quot;</span> ed2ws.harvard/input_harvard/met_driver/HF_MET_HEADER ed2ws.harvard/ED2IN ed2ws.harvard/<span class="pp">*</span>.r</span>
-<span id="cb393-15"><a href="osinstall.html#cb393-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ed2ws.harvard.tgz</span>
-<span id="cb393-16"><a href="osinstall.html#cb393-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-17"><a href="osinstall.html#cb393-17" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.PDG.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.PDG.zip</span>
-<span id="cb393-18"><a href="osinstall.html#cb393-18" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> testrun.PDG.zip</span>
-<span id="cb393-19"><a href="osinstall.html#cb393-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.PDG/Met/PDG_MET_DRIVER testrun.PDG/Template/ED2IN</span>
-<span id="cb393-20"><a href="osinstall.html#cb393-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&#39;s#/n/scratch2/moorcroft_lab/kzhang/PDG/WFire_Pecan/##&#39;</span> testrun.PDG/Template/ED2IN</span>
-<span id="cb393-21"><a href="osinstall.html#cb393-21" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testrun.PDG.zip</span>
-<span id="cb393-22"><a href="osinstall.html#cb393-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-23"><a href="osinstall.html#cb393-23" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> create_met_driver.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/create_met_driver.tar.gz</span>
-<span id="cb393-24"><a href="osinstall.html#cb393-24" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf create_met_driver.tar.gz</span>
-<span id="cb393-25"><a href="osinstall.html#cb393-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> create_met_driver.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb401-1"><a href="osinstall.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</span>
+<span id="cb401-2"><a href="osinstall.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-d</span> sites Santarem_Km83.zip</span>
+<span id="cb401-3"><a href="osinstall.html#cb401-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</span>
+<span id="cb401-4"><a href="osinstall.html#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> Santarem_Km83.zip</span>
+<span id="cb401-5"><a href="osinstall.html#cb401-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-6"><a href="osinstall.html#cb401-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</span>
+<span id="cb401-7"><a href="osinstall.html#cb401-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> testrun.s83.zip</span>
+<span id="cb401-8"><a href="osinstall.html#cb401-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.s83/ED2IN</span>
+<span id="cb401-9"><a href="osinstall.html#cb401-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testrun.s83.zip</span>
+<span id="cb401-10"><a href="osinstall.html#cb401-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-11"><a href="osinstall.html#cb401-11" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ed2ws.harvard.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ed2ws.harvard.tgz</span>
+<span id="cb401-12"><a href="osinstall.html#cb401-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf ed2ws.harvard.tgz</span>
+<span id="cb401-13"><a href="osinstall.html#cb401-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ed2ws.harvard/analy ed2ws.harvard/histo</span>
+<span id="cb401-14"><a href="osinstall.html#cb401-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#g&quot;</span> ed2ws.harvard/input_harvard/met_driver/HF_MET_HEADER ed2ws.harvard/ED2IN ed2ws.harvard/<span class="pp">*</span>.r</span>
+<span id="cb401-15"><a href="osinstall.html#cb401-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ed2ws.harvard.tgz</span>
+<span id="cb401-16"><a href="osinstall.html#cb401-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-17"><a href="osinstall.html#cb401-17" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.PDG.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.PDG.zip</span>
+<span id="cb401-18"><a href="osinstall.html#cb401-18" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> testrun.PDG.zip</span>
+<span id="cb401-19"><a href="osinstall.html#cb401-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.PDG/Met/PDG_MET_DRIVER testrun.PDG/Template/ED2IN</span>
+<span id="cb401-20"><a href="osinstall.html#cb401-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&#39;s#/n/scratch2/moorcroft_lab/kzhang/PDG/WFire_Pecan/##&#39;</span> testrun.PDG/Template/ED2IN</span>
+<span id="cb401-21"><a href="osinstall.html#cb401-21" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testrun.PDG.zip</span>
+<span id="cb401-22"><a href="osinstall.html#cb401-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-23"><a href="osinstall.html#cb401-23" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> create_met_driver.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/create_met_driver.tar.gz</span>
+<span id="cb401-24"><a href="osinstall.html#cb401-24" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> zxf create_met_driver.tar.gz</span>
+<span id="cb401-25"><a href="osinstall.html#cb401-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> create_met_driver.tar.gz</span></code></pre></div>
 
 </div>
 </div>
