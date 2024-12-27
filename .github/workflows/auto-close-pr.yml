@@ -4,19 +4,24 @@ on:
   pull_request:
     types:
       - opened
+permissions:
+  pull-requests: write
 jobs:
   close-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Check out code
         uses: actions/checkout@v3
       - name: Install GitHub CLI
-        uses: heyValdemars/gh-install@v1.1.0
-        with:
-          gh-version: latest
-      - name: Close PR with GH CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+      - name: Authenticate with GH CLI
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+      - name: Close PR
         run: >
           gh pr close "${{ github.event.pull_request.number }}" \
-            --repo ${{ github.repository }} \
-            --comment "Thank you for your interest in contributing to PEcAn documentation! \n  This repository is automatically maintained and synchronized from the book_source/ directory of the [pecanproject/pecan](https://github.com/pecanproject/pecan) repository. \n Please submit your pull request there instead: \n 👉 [pecanproject/pecan](https://github.com/pecanproject/pecan) \n We appreciate your effort and understanding!" \
+            --repo "${{ github.repository }}" \
+            --comment "Thank you for your interest in contributing to PEcAn documentation!\n\nThis repository is automatically maintained and synchronized from the book_source/ directory of the [pecanproject/pecan](https://github.com/pecanproject/pecan) repository.\n\nPlease submit your pull request there instead:\n[pecanproject/pecan](https://github.com/pecanproject/pecan)\n\nWe appreciate your effort and understanding!" \
             --delete-branch
