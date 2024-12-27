@@ -8,16 +8,24 @@ jobs:
   close-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Close Pull Request
-        uses: peter-evans/close-pull@v3.0.1
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install GitHub CLI
+        uses: heyValdemars/gh-install@v1.1.0
         with:
-          comment: >
-            Thank you for your interest in contributing to PEcAn documentation!
+          gh-version: latest
 
-            This repository is **automatically maintained** and synchronized from the `book_source/` directory of the [pecanproject/pecan](https://github.com/pecanproject/pecan) repository.
+      - name: Close PR with GH CLI
+        run: |
+          gh pr close "${{ github.event.pull_request.number }}" \
+            --repo ${{ github.repository }} \
+            --comment "Thank you for your interest in contributing to PEcAn documentation!
 
-            Please submit your pull request there instead:
-            👉 [pecanproject/pecan](https://github.com/pecanproject/pecan)
+This repository is automatically maintained and synchronized from the book_source/ directory of the [pecanproject/pecan](https://github.com/pecanproject/pecan) repository.
 
-            We appreciate your effort and understanding!
-          delete-branch: true
+Please submit your pull request there instead:
+👉 [pecanproject/pecan](https://github.com/pecanproject/pecan)
+
+We appreciate your effort and understanding!" \
+            --delete-branch
