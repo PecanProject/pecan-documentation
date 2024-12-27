@@ -1,0 +1,22 @@
+name: Auto Close Pull Requests
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  close-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close Pull Request
+        uses: peter-evans/close-pull-request@v2
+        with:
+          comment: |
+            Thank you for your interest in contributing to PEcAn documentation!
+
+            This repository is **automatically maintained** and synchronized from the `book_source/` directory of the [pecanproject/pecan](https://github.com/pecanproject/pecan) repository.
+
+            Please submit your pull request there instead:
+            👉 [pecanproject/pecan](https://github.com/pecanproject/pecan)
+
+            We appreciate your effort and understanding!
