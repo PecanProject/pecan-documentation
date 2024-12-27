@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close Pull Request
-        uses: peter-evans/close-pull-request@v2
+        uses: peter-evans/close-pull@v3.0.1
         with:
           comment: |
             Thank you for your interest in contributing to PEcAn documentation!
@@ -20,3 +20,4 @@ jobs:
             👉 [pecanproject/pecan](https://github.com/pecanproject/pecan)
 
             We appreciate your effort and understanding!
+          delete-branch: true
