@@ -1,9 +1,13 @@
 # PEcAn Documentation Auto-build Repository
 
-## :warning: Notice: Contributions Should Be Made in [pecanproject/pecan](https://github.com/pecanproject/pecan)
+### :warning: This repository is **automatically maintained**. :warning:
 
-- This repository is **automatically maintained**. The content here is compiled from the source repository via **GitHub Actions**.
+### **Pull requests** should be opened in the source repository.
+
+
 - Source text is maintained in the `book_source/` directory of the PEcAn repository ([pecanproject/pecan](https://github.com/pecanproject/pecan)).
-- **Issues and pull requests** should be opened in the source repository.
+- The content here is compiled from the source repository via **GitHub Actions**.
 
-Thank you for your interest in contributing to PEcAn!
+### Thank you for your interest in contributing to PEcAn
+
+And in particular, for helping improve our documentation!
