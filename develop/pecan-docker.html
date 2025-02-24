@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2025-02-23" />
+<meta name="date" content="2025-02-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -949,6 +949,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
   docs:
     hostname: docs
     image: pecan/docs:${PECAN_VERSION:-latest}
+    platform: linux/amd64
     restart: unless-stopped
     networks: pecan
     labels:
@@ -993,6 +994,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     hostname: monitor
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/monitor:${PECAN_VERSION:-latest}
+    platform: linux/amd64
     restart: unless-stopped
     networks: pecan
     environment:
@@ -1019,6 +1021,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     hostname: executor
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/executor:${PECAN_VERSION:-latest}
+    platform: linux/amd64
     restart: unless-stopped
     networks: pecan
     environment:
@@ -1047,6 +1050,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     hostname: basgra
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-basgra-basgra_n_v1.0:${PECAN_VERSION:-latest}
+    platform: linux/amd64
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
@@ -1058,6 +1062,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     hostname: sipnet-git
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-sipnet-git:${PECAN_VERSION:-latest}
+    platform: linux/amd64
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
@@ -1091,6 +1096,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     hostname: biocro-0_95
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-biocro-0.95:${PECAN_VERSION:-latest}
+    platform: linux/amd64
     restart: unless-stopped
     networks: pecan
     environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
@@ -1443,6 +1449,7 @@ However, note that certain features of the PEcAn web interface do link to the BE
 <pre><code>docs:
   hostname: docs
   image: pecan/docs:${PECAN_VERSION:-latest}
+  platform: linux/amd64
   restart: unless-stopped
   networks: pecan
   labels:
@@ -1473,6 +1480,7 @@ However, it is <em>not</em> in charge of executing the models themselves – mod
   hostname: executor
   user: ${UID:-1001}:${GID:-1001}
   image: pecan/executor:${PECAN_VERSION:-latest}
+  platform: linux/amd64
   restart: unless-stopped
   networks: pecan
   environment:
@@ -1501,6 +1509,7 @@ Note that, unlike changes to the <code>web</code> image’s PHP code, changes to
   hostname: monitor
   user: ${UID:-1001}:${GID:-1001}
   image: pecan/monitor:${PECAN_VERSION:-latest}
+  platform: linux/amd64
   restart: unless-stopped
   networks: pecan
   environment:
@@ -1532,6 +1541,7 @@ In general, their configuration should be similar to the following configuration
   hostname: sipnet-git
   user: ${UID:-1001}:${GID:-1001}
   image: pecan/model-sipnet-git:${PECAN_VERSION:-latest}
+  platform: linux/amd64
   restart: unless-stopped
   networks: pecan
   environment: RABBITMQ_URI=${RABBITMQ_URI:-amqp://guest:guest@rabbitmq/%2F}
