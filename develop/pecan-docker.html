@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2025-02-26" />
+<meta name="date" content="2025-02-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -910,6 +910,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
       retries: 5
   rstudio:
     hostname: rstudio
+    platform: linux/amd64
     image: pecan/base:${PECAN_VERSION:-latest}
     command: /work/rstudio.sh
     restart: unless-stopped
@@ -1083,6 +1084,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     volumes: pecan:/data
   maespa:
     hostname: maespa-git
+    platform: linux/amd64
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/model-maespa-git:${PECAN_VERSION:-latest}
     restart: unless-stopped
@@ -1106,6 +1108,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     volumes: pecan:/data
   dbsync:
     hostname: dbsync
+    platform: linux/amd64
     image: pecan/shiny-dbsync:${PECAN_VERSION:-latest}
     restart: unless-stopped
     networks: pecan
@@ -1125,6 +1128,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
       retries: 5
   api:
     hostname: api
+    platform: linux/amd64
     user: ${UID:-1001}:${GID:-1001}
     image: pecan/api:${PECAN_VERSION:-latest}
     restart: unless-stopped
