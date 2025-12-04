@@ -334,7 +334,7 @@ install.packages('PEcAn.all')
   ..$ pft:List of 3
   .. ..$ name           : chr "temperate.coniferous"
   .. ..$ posterior.files: chr "pft/temperate.coniferous/prior.distns.Rdata"
-  .. ..$ outdir         : chr "pft/temperate.coniferous/pft/temperate.coniferous"
+  .. ..$ outdir         : chr "pft/temperate.coniferous"
  $ ensemble     :List of 5
   ..$ variable     : chr "NPP"
   ..$ size         : num 1
@@ -379,7 +379,7 @@ install.packages('PEcAn.all')
  $ database     :List of 1
   ..$ dbfiles: chr "/root/.pecan/dbfiles"
  $ workflow     :List of 1
-  ..$ id: chr "2025-12-03-04-53-11"
+  ..$ id: chr "2025-12-04-17-15-45"
  $ rundir       : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/run"
  $ modeloutdir  : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/out"
  - attr(*, "class")= chr [1:3] "Settings" "SafeList" "list"</code></pre>
@@ -395,16 +395,6 @@ install.packages('PEcAn.all')
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Editing the more interesting settings to change the PFT (<code>settings$pfts</code>) or extend the run (<code>settings$run$end.date</code>) is beyond the scope of this demo. You <em>could</em> change the pft or the end date, but you would need a new file containing parameters for that PFT (<code>settings$pfts$pft$posterior.files</code>), or a climate file (<code>settings$run$met$path$path1</code>) that extends to the desired simulation period.</p>
-</section>
-<section id="create-output-directory" class="level1">
-<h1>Create Output Directory</h1>
-<p>Before running the workflow, we need to ensure that the output directory specified in the settings exists. This directory will store all the model outputs, configuration files, and results from the simulation.</p>
-<blockquote class="blockquote">
-<p><strong>Note:</strong> All outputs will be written to <code>settings$outdir</code>. You can change this directory in your <code>pecan.xml</code> file or by modifying <code>settings$outdir</code> in the notebook before running the workflow. You can also put the <code>sipnet</code> executable anywhere you prefer, as long as you update <code>settings$model$binary</code>.</p>
-</blockquote>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(settings<span class="sc">$</span>outdir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>The directory structure created by PEcAn for this demo run will look like this:</p>
 <pre><code>demo_outdir/               # Root output directory
 ├── run/                   # Configuration &amp; execution metadata
@@ -425,8 +415,8 @@ install.packages('PEcAn.all')
 <li>Generating SIPNET configuration files using the <code>runModule.run.write.configs()</code> function.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Disable database operations for this demo</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Disable database operations for this demo</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in postgresqlNewConnection(drv, ...) : 
   RPosgreSQL error: could not connect root@/var/run/postgresql:5432 on dbname "root": connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
@@ -444,7 +434,7 @@ install.packages('PEcAn.all')
 <li><code>runModule_start_model_runs(settings)</code>: This function initiates the model runs based on your configuration. It manages the execution of your chosen ecosystem model, using the configuration files generated in the previous step.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>PEcAn.workflow<span class="sc">::</span><span class="fu">runModule_start_model_runs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>PEcAn.workflow<span class="sc">::</span><span class="fu">runModule_start_model_runs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   |                                                                            
@@ -466,20 +456,20 @@ install.packages('PEcAn.all')
 <li>Convert to a standard format</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>runid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">read.table</span>(<span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/run/"</span>, <span class="st">"runs.txt"</span>, <span class="at">sep =</span> <span class="st">""</span>))[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(settings<span class="sc">$</span>outdir, <span class="st">"/out/"</span>, runid)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span><span class="fu">read.output</span>(</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  runid,</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  outdir,</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  start.year,</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  end.year,</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="cn">NULL</span>,</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataframe =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bounds"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>runid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">read.table</span>(<span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/run/"</span>, <span class="st">"runs.txt"</span>, <span class="at">sep =</span> <span class="st">""</span>))[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(settings<span class="sc">$</span>outdir, <span class="st">"/out/"</span>, runid)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span><span class="fu">read.output</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  runid,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  outdir,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  start.year,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  end.year,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="cn">NULL</span>,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataframe =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bounds"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Running this code will convert model specific output files into a standardized netCDF ([year].nc) that can be downloaded for visualization and analysis (R, Matlab, ncview, panoply, etc). This is a key step, because this standardization enables PEcAn to apply downstream analyses to outputs from different ecosystem models.</p>
 </section>
@@ -604,16 +594,16 @@ install.packages('PEcAn.all')
 <section id="plot-carbon-fluxes" class="level2">
 <h2 class="anchored" data-anchor-id="plot-carbon-fluxes">Plot Carbon Fluxes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Gross Primary Productivity (GPP) and Net Primary Productivity (NPP)</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>GPP,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"green"</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Flux (kg C m-2 s-1)"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Fluxes Over Time"</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>NPP, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"GPP"</span>, <span class="st">"NPP"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Gross Primary Productivity (GPP) and Net Primary Productivity (NPP)</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>GPP,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"green"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Flux (kg C m-2 s-1)"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Fluxes Over Time"</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>NPP, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"GPP"</span>, <span class="st">"NPP"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -626,16 +616,16 @@ install.packages('PEcAn.all')
 <section id="plot-carbon-pools" class="level2">
 <h2 class="anchored" data-anchor-id="plot-carbon-pools">Plot Carbon Pools</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Total Live Biomass and Total Soil Carbon</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotLivBiom,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Pool (kg C m-2)"</span>,</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Pools Over Time"</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotSoilCarb, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Total Live Biomass"</span>, <span class="st">"Total Soil Carbon"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Total Live Biomass and Total Soil Carbon</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotLivBiom,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Pool (kg C m-2)"</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Pools Over Time"</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotSoilCarb, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Total Live Biomass"</span>, <span class="st">"Total Soil Carbon"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -648,16 +638,16 @@ install.packages('PEcAn.all')
 <section id="plot-water-variables" class="level2">
 <h2 class="anchored" data-anchor-id="plot-water-variables">Plot Water Variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Soil Moisture and Snow Water Equivalent</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SoilMoist,</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>,</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Soil Moisture (kg m-2)"</span>,</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Soil Moisture Over Time"</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SWE, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Soil Moisture"</span>, <span class="st">"Snow Water Equivalent"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"lightblue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Soil Moisture and Snow Water Equivalent</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SoilMoist,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Soil Moisture (kg m-2)"</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Soil Moisture Over Time"</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SWE, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Soil Moisture"</span>, <span class="st">"Snow Water Equivalent"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"lightblue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -670,16 +660,16 @@ install.packages('PEcAn.all')
 <section id="plot-lai-and-biomass" class="level2">
 <h2 class="anchored" data-anchor-id="plot-lai-and-biomass">Plot LAI and Biomass</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Leaf Area Index (LAI) and Above Ground Wood</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>LAI,</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"LAI (m2 m-2)"</span>,</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Leaf Area Index Over Time"</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>AbvGrndWood, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"LAI"</span>, <span class="st">"Above Ground Wood"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Leaf Area Index (LAI) and Above Ground Wood</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>LAI,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"LAI (m2 m-2)"</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Leaf Area Index Over Time"</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>AbvGrndWood, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"LAI"</span>, <span class="st">"Above Ground Wood"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -699,16 +689,16 @@ install.packages('PEcAn.all')
 <h1>Clean Up Workflow Output (Optional)</h1>
 <p>If you want to remove all files and directories created by this workflow and start fresh, you can run the following code. This will delete the entire output directory specified in your settings. <strong>Use with caution!</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to enable cleanup.</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to enable cleanup.</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="session-info-1" class="level1">
 <h1>Session Info</h1>
 <p>This section prints your R session information for reproducibility.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.3 (2025-02-28)
 Platform: x86_64-pc-linux-gnu
