@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aritra Dey">
+<meta name="author" content="David LeBauer">
+
+<title>Running Ecosystem Simulations Using PEcAn</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="run_pecan_files/libs/clipboard/clipboard.min.js"></script>
+<script src="run_pecan_files/libs/quarto-html/quarto.js"></script>
+<script src="run_pecan_files/libs/quarto-html/popper.min.js"></script>
+<script src="run_pecan_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="run_pecan_files/libs/quarto-html/anchor.min.js"></script>
+<link href="run_pecan_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="run_pecan_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="run_pecan_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="run_pecan_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="run_pecan_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../../run_pecan.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Running Ecosystem Simulations Using PEcAn</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aritra Dey </p>
+             <p>David LeBauer </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Welcome to this PEcAn workflow notebook! This notebook will guide you through running an ecosystem model using PEcAn’s programmatic interface.</p>
+<section id="what-is-pecan" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-pecan">What Is PEcAn?</h2>
+<p>PEcAn (Predictive Ecosystem Analyzer) is a scientific workflow system designed to make ecosystem modeling more transparent, repeatable, and accessible. It helps researchers:</p>
+<ul>
+<li>Run ecosystem models with standardized inputs and outputs</li>
+<li>Perform uncertainty analysis on model parameters</li>
+<li>Compare model predictions with observations</li>
+<li>Share and reproduce scientific workflows</li>
+</ul>
+</section>
+<section id="what-this-notebook-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-notebook-does">What This Notebook Does</h2>
+<p>This notebook demonstrates how to:</p>
+<ol type="1">
+<li>Set up and configure a PEcAn workflow</li>
+<li>Run an ecosystem model simulation</li>
+<li>Analyze and visualize the results</li>
+</ol>
+<section id="the-scenario-being-modeled" class="level3">
+<h3 class="anchored" data-anchor-id="the-scenario-being-modeled">The Scenario Being Modeled:</h3>
+<p>We are modeling carbon and productivity dynamics at the Niwot Ridge Forest AmeriFlux site (<a href="https://ameriflux.lbl.gov/sites/siteinfo/US-NR1">US-NR1</a>, a high-elevation temperate coniferous forest in Colorado. The model configuration uses the SIPNET process-based ecosystem model, parameterized with a temperate coniferous plant functional type (PFT).</p>
+<p>The simulation is run for the full year 2004 (January 1 – December 31) using AmeriFlux LBL meteorological drivers from the Niwot Ridge site. The ensemble setup specifies one model run focusing on net primary productivity (NPP) as the target output variable.</p>
+<p>This scenario is designed to be a minimal, reproducible example to demonstrate how to run SIPNET within the PEcAn workflow. In later steps, this same framework can be extended to include more ensemble members, additional PFTs, longer time periods, or alternative meteorological inputs.</p>
+<p>This run is based on a study by <a href="https://doi.org/10.1016/j.agrformet.2008.04.013">Moore et. al.&nbsp;(2007)</a> that uses SIPNET to understand the relationship between water and carbon balance at this site.</p>
+</section>
+</section>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<p>Before running this notebook, make sure you have:</p>
+<ul>
+<li>All the PEcAn packages installed. You can install all PEcAn packages and their dependencies by running the following command in the root of your PEcAn repository:</li>
+</ul>
+<pre><code>
+# Enable repository from pecanproject
+options(repos = c(
+  pecanproject = 'https://pecanproject.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
+# Download and install PEcAn.all in R
+install.packages('PEcAn.all')
+</code></pre>
+<ul>
+<li>A valid <code>pecan.xml</code> configuration file or use the example provided: <code>pecan/documentation/tutorials/Demo_1_Basic_Run/pecan.xml</code></li>
+</ul>
+</section>
+<section id="how-to-use-this-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-notebook">How to Use This Notebook</h2>
+<ol type="1">
+<li>Each section is clearly marked with a heading</li>
+<li>Code chunks are provided with explanations</li>
+<li>You can run the code chunks sequentially</li>
+<li>Once you have successfully run the demo, you can modify parameters to configure new runs and analyses</li>
+</ol>
+<p><strong>Objective:</strong></p>
+<p>This demo illustrates how to run a basic PEcAn workflow using an R-based Quarto notebook. It will cover loading settings, writing model configuration files, and running model simulations. This approach provides a programmatic alternative to the web-based PEcAn interface for executing ecosystem models.</p>
+</section>
+</section>
+<section id="session-info" class="level1">
+<h1>Session Info</h1>
+<p>This section prints your R session information for reproducibility. Having this information at the beginning helps with debugging even if the notebook encounters errors later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>PEcAn.all<span class="sc">::</span><span class="fu">pecan_version</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> package               v1.9.0 installed  source              
+ PEcAn.all             1.9.0  1.9.0.9000 local (/pecan/bas...
+ PEcAn.allometry       1.7.4  1.7.4.9000 local (/pecan/mod...
+ PEcAn.assim.batch     1.9.0  1.9.0.9000 local (/pecan/mod...
+ PEcAn.BASGRA          1.8.1  1.8.1.9000 local (/pecan/mod...
+ PEcAn.benchmark       1.7.4  1.7.4.9000 local (/pecan/mod...
+ PEcAn.BIOCRO          1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.CABLE           1.7.4  NA         NA                  
+ PEcAn.CLM45           1.7.4  1.7.4.9000 local (/pecan/mod...
+ PEcAn.DALEC           1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.data.atmosphere 1.9.0  1.9.1      local (/pecan/mod...
+ PEcAn.data.land       1.8.1  1.8.2      local (/pecan/mod...
+ PEcAn.data.mining     1.7.4  NA         NA                  
+ PEcAn.data.remote     1.9.0  1.9.1      local (/pecan/mod...
+ PEcAn.DB              1.8.1  1.8.1.9000 local (/pecan/bas...
+ PEcAn.dvmdostem       1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.ED2             1.8.1  1.8.2      local (/pecan/mod...
+ PEcAn.emulator        1.8.1  1.8.1.9000 local (/pecan/mod...
+ PEcAn.FATES           1.8.0  1.8.1      local (/pecan/mod...
+ PEcAn.GDAY            1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.JULES           1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.LDNDC           1.0.1  1.0.2      local (/pecan/mod...
+ PEcAn.LINKAGES        1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.logger          1.8.3  1.8.4      local (/pecan/bas...
+ PEcAn.LPJGUESS        1.8.0  1.8.1      local (/pecan/mod...
+ PEcAn.MA              1.7.4  1.7.4.9000 local (/pecan/mod...
+ PEcAn.MAAT            1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.MAESPA          1.7.4  1.7.5      local (/pecan/mod...
+ PEcAn.ModelName       1.8.1  1.8.1.9000 local (/pecan/mod...
+ PEcAn.photosynthesis  1.7.4  1.7.4.9000 local (/pecan/mod...
+ PEcAn.PRELES          1.7.4  NA         NA                  
+ PEcAn.priors          1.7.4  1.7.4.9000 local (/pecan/mod...
+ PEcAn.qaqc            1.7.4  1.7.4.9000 local (/pecan/bas...
+ PEcAn.remote          1.9.0  1.9.0.9000 local (/pecan/bas...
+ PEcAn.settings        1.9.0  1.9.1      local (/pecan/bas...
+ PEcAn.SIBCASA         0.0.2  0.0.3      local (/pecan/mod...
+ PEcAn.SIPNET          1.9.0  1.9.1      local (/pecan/mod...
+ PEcAn.STICS           1.8.1  1.8.2      local (/pecan/mod...
+ PEcAn.uncertainty     1.8.1  1.8.2      local (/pecan/mod...
+ PEcAn.utils           1.8.1  1.8.2      local (/pecan/bas...
+ PEcAn.visualization   1.8.1  1.8.1.9000 local (/pecan/bas...
+ PEcAn.workflow        1.9.0  1.9.0.9000 local (/pecan/bas...
+ PEcAnAssimSequential  1.9.0  1.9.0.9000 local (/pecan/mod...
+ PEcAnRTM              1.7.4  1.9.0.9000 local (/pecan/mod...</code></pre>
+</div>
+</div>
+</section>
+<section id="install-sipnet-v1.3.0" class="level1">
+<h1>Install SIPNET v1.3.0</h1>
+<p>If you haven’t already installed the SIPNET binary, you can do so by running the following code. This will download the SIPNET binary to <code>demo_outdir/sipnet</code> and make it executable.</p>
+<blockquote class="blockquote">
+<p>Note: The <code>demo_outdir</code> directory will be created in the root of your PEcAn installation (i.e., at <code>pecan/demo_outdir/</code>). This directory will contain the SIPNET binary as well as the output generated by PEcAn in this demo.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and install SIPNET v1.3.0</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"documentation/tutorials/Demo_1_Basic_Run/download_sipnet.R"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can find the most recent version of the SIPNET binary at: <a href="https://github.com/PecanProject/sipnet/releases">SIPNET GitHub Releases</a>, but this notebook is designed to work with SIPNET v1.3.0.</p>
+</blockquote>
+</section>
+<section id="load-pecan-packages" class="level1">
+<h1>Load PEcAn Packages</h1>
+<p>First, we need to load the PEcAn R packages. These packages provide all the functions we’ll use to run the workflow.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the PEcAn.all package, which includes all necessary PEcAn functionality</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PEcAn.all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.DB</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.settings</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.MA</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.logger</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.utils</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.uncertainty</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.data.atmosphere</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.data.land</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.data.remote</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.assim.batch</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.emulator</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.priors</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.benchmark</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.remote</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.workflow</code></pre>
+</div>
+</div>
+</section>
+<section id="load-pecan-settings-file" class="level1">
+<h1>Load PEcAn Settings File</h1>
+<p>PEcAn uses an XML-based settings file (pecan.xml) to configure model runs. This file defines key information about the run including: PFT(s), site location, time period of the run, the location of input files and where outputs will be saved. Other settings outside the scope of this demo include the types of analyses that will be performed, how to connect to a database, and how to run it on a high performance computing cluster (we are using the default single model run on a single computer).</p>
+<p>You can read more about the settings file in the <a href="https://pecanproject.github.io/pecan-documentation/develop/pecanXML.html#pecanXML">“PEcAn XML” chapter</a> of the documentation.</p>
+<p>There is an example <code>pecan.xml</code> that has been configured for this demonstration. You can find it at <code>pecan/documentation/tutorials/Demo_1_Basic_Run/pecan.xml</code>.</p>
+<p>This is how PEcAn loads the settings file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>settings_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"documentation/tutorials/Demo_1_Basic_Run/pecan.xml"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="prepare-and-validate-settings" class="level1">
+<h1>Prepare and Validate Settings</h1>
+<p>After specifying the path to the <code>pecan.xml</code> file, the next step involves reading and preparing these settings. PEcAn provides utilities to process and validate the configurations before execution begins.</p>
+<ul>
+<li><code>PEcAn.settings::read.settings(settings_path)</code>: Reads the <code>pecan.xml</code> file and converts it to an R list object.</li>
+<li><code>PEcAn.settings::prepare.settings(settings)</code>: Prepares and validates settings. It sets defaults for missing fields, changes file paths to absolute paths, and generally ensures consistency.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the settings from the pecan.xml file</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.settings<span class="sc">::</span><span class="fu">read.settings</span>(settings_path)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare and validate the settings</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.settings<span class="sc">::</span><span class="fu">prepare.settings</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="explore-the-settings-object" class="level1">
+<h1>Explore the Settings Object</h1>
+<p>Once the settings have been read and prepared, it is useful to inspect the structure of the <code>settings</code> object. This object is an R list containing all parameters and configurations for the PEcAn workflow.</p>
+<ul>
+<li><code>str(settings)</code> displays the internal structure of the <code>settings</code> object. This shows how the settings are represented in R and is useful for debugging and verifying settings.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 12
+ $ info         :List of 4
+  ..$ notes   : NULL
+  ..$ userid  : chr "-1"
+  ..$ username: NULL
+  ..$ date    : chr "2025-06-19-15-34-01"
+ $ outdir       : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir"
+ $ pfts         :List of 1
+  ..$ pft:List of 3
+  .. ..$ name           : chr "temperate.coniferous"
+  .. ..$ posterior.files: chr "pft/temperate.coniferous/prior.distns.Rdata"
+  .. ..$ outdir         : chr "pft/temperate.coniferous"
+ $ ensemble     :List of 5
+  ..$ variable     : chr "NPP"
+  ..$ size         : num 1
+  ..$ start.year   : num 2004
+  ..$ end.year     : num 2004
+  ..$ samplingspace:List of 2
+  .. ..$ parameters:List of 1
+  .. .. ..$ method: chr "uniform"
+  .. ..$ met       :List of 1
+  .. .. ..$ method: chr "sampling"
+ $ model        :List of 5
+  ..$ type      : chr "SIPNET"
+  ..$ revision  : chr "git"
+  ..$ delete.raw: chr "FALSE"
+  ..$ binary    : chr "demo_outdir/sipnet"
+  ..$ id        : num -1
+ $ run          :List of 4
+  ..$ site      :List of 6
+  .. ..$ met.start: chr "2004/01/01"
+  .. ..$ met.end  : chr "2004/12/31"
+  .. ..$ name     : chr "Niwot Ridge Forest/LTER NWT1 (US-NR1)"
+  .. ..$ lat      : chr "40.0329"
+  .. ..$ lon      : chr "-105.546"
+  .. ..$ id       : num -1
+  ..$ inputs    :List of 1
+  .. ..$ met:List of 4
+  .. .. ..$ source  : chr "AmerifluxLBL"
+  .. .. ..$ output  : chr "SIPNET"
+  .. .. ..$ username: chr "Aritra_2004"
+  .. .. ..$ path    :List of 1
+  .. .. .. ..$ path1: chr "dbfiles/AMF_US-NR1_BASE_HH_23-5.2004-01-01.2004-12-31.clim"
+  ..$ start.date: chr "2004/01/01"
+  ..$ end.date  : chr "2004/12/31"
+ $ host         :List of 3
+  ..$ name  : chr "localhost"
+  ..$ rundir: chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/run"
+  ..$ outdir: chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/out"
+ $ settings.info:List of 3
+  ..$ deprecated.settings.fixed: logi TRUE
+  ..$ settings.updated         : logi TRUE
+  ..$ checked                  : logi TRUE
+ $ database     :List of 1
+  ..$ dbfiles: chr "/root/.pecan/dbfiles"
+ $ workflow     :List of 1
+  ..$ id: chr "2025-12-05-18-09-25"
+ $ rundir       : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/run"
+ $ modeloutdir  : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/out"
+ - attr(*, "class")= chr [1:3] "Settings" "SafeList" "list"</code></pre>
+</div>
+</div>
+<p>Your turn: explore the <code>settings</code> object further using the following commands: * <code>names(settings)</code> to list the top-level keys in the settings object * Once you know the names, you can look at each component in detail, for example: * <code>settings$run</code> to access the run-specific settings, such as start and end dates, model type, and output directory * <code>settings$pfts</code> to explore the Plant Functional Types settings</p>
+<p>Now you can update each of these settings. Here is a simple example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>info <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">author =</span> <span class="st">"Aritra Dey"</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="fu">Sys.Date</span>(),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="st">"Demo run of PEcAn using SIPNET"</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Editing the more interesting settings to change the PFT (<code>settings$pfts</code>) or extend the run (<code>settings$run$end.date</code>) is beyond the scope of this demo. You <em>could</em> change the pft or the end date, but you would need a new file containing parameters for that PFT (<code>settings$pfts$pft$posterior.files</code>), or a climate file (<code>settings$run$met$path$path1</code>) that extends to the desired simulation period.</p>
+<p>The directory structure created by PEcAn for this demo run will look like this:</p>
+<pre><code>demo_outdir/               # Root output directory
+├── run/                   # Configuration &amp; execution metadata
+│   ├── runs.txt           # List of run IDs (one per model realization)
+│   ├── &lt;runid&gt;/           # Model-specific config copies (sometimes)
+│   └── config.*           # Generated model configs (e.g., SIPNET)
+├── out/                   # Raw model outputs by run ID
+│   └── &lt;runid&gt;/           # E.g., daily or sub-daily SIPNET output files</code></pre>
+<p>The root output directory is defined here as <code>demo_outdir/</code> by <code>settings$outdir</code>. This directory contains log and record files from the PEcAn workflow. They provide a detailed record of how data was generated and are key components of the analysis metadata and provenance. These can be useful for debugging as well as for downstream analysis.</p>
+<p>Key subdirectories include <code>run/</code> and <code>out/</code> that contain files used to configure and run the model, files generated by the underlying ecosystem model, and PEcAn standard outputs used in downstream analyses. These are described in subsequent sections.</p>
+<p>Additional outputs include logs, a <code>STATUS</code> file that records the steps of the workflow along with timestamps and whether each step was successful, and a copy of the <code>pecan.*.xml</code> file.</p>
+</section>
+<section id="write-model-configuration-files" class="level1">
+<h1>Write Model Configuration Files</h1>
+<p>This step generates the model-specific configuration files and scripts that will be used to run the ecosystem model. The process involves:</p>
+<ol type="1">
+<li>Disabling database write operations because we are not using a database</li>
+<li>Generating SIPNET configuration files using the <code>runModule.run.write.configs()</code> function.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Disable database operations for this demo</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error in postgresqlNewConnection(drv, ...) : 
+  RPosgreSQL error: could not connect root@/var/run/postgresql:5432 on dbname "root": connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+    Is the server running locally and accepting connections on that socket?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: PEcAn.SIPNET</code></pre>
+</div>
+</div>
+</section>
+<section id="run-model-simulations-and-fetch-results" class="level1">
+<h1>Run Model Simulations and Fetch Results</h1>
+<p>This section executes the actual model simulations and retrieves the results. The process is managed by PEcAn’s workflow system, which handles the execution of your chosen ecosystem model.</p>
+<ul>
+<li><code>runModule_start_model_runs(settings)</code>: This function initiates the model runs based on your configuration. It manages the execution of your chosen ecosystem model, using the configuration files generated in the previous step.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>PEcAn.workflow<span class="sc">::</span><span class="fu">runModule_start_model_runs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+</div>
+<p>This step generates raw model outputs in model-specific format (in this case, <code>sipnet.out</code>) as well as log files.</p>
+</section>
+<section id="extract-model-results-and-prepare-for-analysis" class="level1">
+<h1>Extract Model Results and Prepare for Analysis</h1>
+<p>After the model simulation completes, we need to extract the results and prepare them for analysis. This involves:</p>
+<ol type="1">
+<li>Reading the run ID</li>
+<li>Setting up output paths</li>
+<li>Defining time period</li>
+<li>Loading model output</li>
+<li>Convert to a standard format</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>runid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">read.table</span>(<span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/run/"</span>, <span class="st">"runs.txt"</span>, <span class="at">sep =</span> <span class="st">""</span>))[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(settings<span class="sc">$</span>outdir, <span class="st">"/out/"</span>, runid)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span><span class="fu">read.output</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  runid,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  outdir,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  start.year,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  end.year,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="cn">NULL</span>,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataframe =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bounds"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Running this code will convert model specific output files into a standardized netCDF ([year].nc) that can be downloaded for visualization and analysis (R, Matlab, ncview, panoply, etc). This is a key step, because this standardization enables PEcAn to apply downstream analyses to outputs from different ecosystem models.</p>
+</section>
+<section id="display-available-model-variables" class="level1">
+<h1>Display Available Model Variables</h1>
+<p>This section shows all the variables that are available in the model output. These variables represent different ecosystem processes and states that the model has simulated.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Model Output Variables and Descriptions</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">GPP</td>
+<td style="text-align: left;">Gross Primary Productivity</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NEE</td>
+<td style="text-align: left;">Net Ecosystem Exchange</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TotalResp</td>
+<td style="text-align: left;">Total Respiration</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AutoResp</td>
+<td style="text-align: left;">Autotrophic Respiration</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HeteroResp</td>
+<td style="text-align: left;">Heterotrophic Respiration</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SoilResp</td>
+<td style="text-align: left;">Soil Respiration</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NPP</td>
+<td style="text-align: left;">Net Primary Productivity</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GWBI</td>
+<td style="text-align: left;">Gross Woody Biomass Increment</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TotLivBiom</td>
+<td style="text-align: left;">Total living biomass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGB</td>
+<td style="text-align: left;">Total aboveground biomass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LAI</td>
+<td style="text-align: left;">Leaf Area Index</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">leaf_carbon_content</td>
+<td style="text-align: left;">Leaf Carbon Content</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fine_root_carbon_content</td>
+<td style="text-align: left;">Fine Root Carbon Content</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">coarse_root_carbon_content</td>
+<td style="text-align: left;">Coarse Root Carbon Content</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AbvGrndWood</td>
+<td style="text-align: left;">Above ground woody biomass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TotSoilCarb</td>
+<td style="text-align: left;">Total Soil Carbon</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">litter_carbon_content</td>
+<td style="text-align: left;">Litter Carbon Content</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Qle</td>
+<td style="text-align: left;">Latent heat</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Transp</td>
+<td style="text-align: left;">Total transpiration</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SoilMoist</td>
+<td style="text-align: left;">Average Layer Soil Moisture</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SoilMoistFrac</td>
+<td style="text-align: left;">Average Layer Fraction of Saturation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SWE</td>
+<td style="text-align: left;">Snow Water Equivalent</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">litter_mass_content_of_water</td>
+<td style="text-align: left;">Average layer litter moisture</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">Year</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="visualize-model-results" class="level1">
+<h1>Visualize Model Results</h1>
+<p>This section provides examples of how to create time series plots of different model variables. The examples cover various ecosystem processes including carbon fluxes, carbon pools, water variables, and structural variables like Leaf Area Index (LAI).</p>
+<section id="plot-carbon-fluxes" class="level2">
+<h2 class="anchored" data-anchor-id="plot-carbon-fluxes">Plot Carbon Fluxes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Gross Primary Productivity (GPP) and Net Primary Productivity (NPP)</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>GPP,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"green"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Flux (kg C m-2 s-1)"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Fluxes Over Time"</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>NPP, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"GPP"</span>, <span class="st">"NPP"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="run_pecan_files/figure-html/plot-carbon-fluxes-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-carbon-pools" class="level2">
+<h2 class="anchored" data-anchor-id="plot-carbon-pools">Plot Carbon Pools</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Total Live Biomass and Total Soil Carbon</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotLivBiom,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Pool (kg C m-2)"</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Pools Over Time"</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotSoilCarb, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Total Live Biomass"</span>, <span class="st">"Total Soil Carbon"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="run_pecan_files/figure-html/plot-carbon-pools-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-water-variables" class="level2">
+<h2 class="anchored" data-anchor-id="plot-water-variables">Plot Water Variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Soil Moisture and Snow Water Equivalent</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SoilMoist,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Soil Moisture (kg m-2)"</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Soil Moisture Over Time"</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SWE, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Soil Moisture"</span>, <span class="st">"Snow Water Equivalent"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"lightblue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="run_pecan_files/figure-html/plot-water-variables-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-lai-and-biomass" class="level2">
+<h2 class="anchored" data-anchor-id="plot-lai-and-biomass">Plot LAI and Biomass</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Leaf Area Index (LAI) and Above Ground Wood</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>LAI,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"LAI (m2 m-2)"</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Leaf Area Index Over Time"</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>AbvGrndWood, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"LAI"</span>, <span class="st">"Above Ground Wood"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="run_pecan_files/figure-html/plot-lai-biomass-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This notebook demonstrated how to set up, run, and analyze a PEcAn ecosystem model workflow programmatically. You can now modify parameters, try different models, or extend the analysis as needed.</p>
+<p>Try editing the <code>pecan.xml</code> file. Give it a new name and update the <strong>settings_path</strong> variable at the beginning of this Demo to point to the new file. See how the changes affect the model output!</p>
+</section>
+<section id="clean-up-workflow-output-optional" class="level1">
+<h1>Clean Up Workflow Output (Optional)</h1>
+<p>If you want to remove all files and directories created by this workflow and start fresh, you can run the following code. This will delete the entire output directory specified in your settings. <strong>Use with caution!</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to enable cleanup.</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="session-info-1" class="level1">
+<h1>Session Info</h1>
+<p>This section prints your R session information for reproducibility.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.3 (2025-02-28)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 24.04.2 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: Etc/UTC
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] PEcAn.SIPNET_1.9.1           PEcAn.all_1.9.0.9000        
+ [3] PEcAn.workflow_1.9.0.9000    PEcAn.remote_1.9.0.9000     
+ [5] PEcAn.benchmark_1.7.4.9000   PEcAn.priors_1.7.4.9000     
+ [7] PEcAn.emulator_1.8.1.9000    PEcAn.assim.batch_1.9.0.9000
+ [9] PEcAn.data.remote_1.9.1      PEcAn.data.land_1.8.2       
+[11] PEcAn.data.atmosphere_1.9.1  PEcAn.uncertainty_1.8.2     
+[13] PEcAn.utils_1.8.2            PEcAn.logger_1.8.4          
+[15] PEcAn.MA_1.7.4.9000          PEcAn.settings_1.9.1        
+[17] PEcAn.DB_1.8.1.9000         
+
+loaded via a namespace (and not attached):
+ [1] PEcAn.qaqc_1.7.4.9000           DBI_1.2.3                      
+ [3] PEcAn.allometry_1.7.4.9000      rlang_1.1.5                    
+ [5] magrittr_2.0.3                  furrr_0.3.1                    
+ [7] e1071_1.7-16                    compiler_4.4.3                 
+ [9] vctrs_0.6.5                     stringr_1.5.1                  
+[11] pkgconfig_2.0.3                 PEcAn.MAESPA_1.7.5             
+[13] fastmap_1.2.0                   PEcAn.ED2_1.8.2                
+[15] PEcAn.dvmdostem_1.7.5           PEcAn.ModelName_1.8.1.9000     
+[17] rmarkdown_2.29                  sessioninfo_1.2.3              
+[19] pracma_2.4.4                    purrr_1.0.4                    
+[21] xfun_0.52                       PEcAn.JULES_1.7.5              
+[23] jsonlite_2.0.0                  PEcAn.LINKAGES_1.7.5           
+[25] PEcAn.SIBCASA_0.0.3             parallel_4.4.3                 
+[27] R6_2.6.1                        PEcAn.DALEC_1.7.5              
+[29] stringi_1.8.7                   RPostgreSQL_0.7-8              
+[31] PEcAn.CLM45_1.7.4.9000          parallelly_1.43.0              
+[33] lubridate_1.9.4                 numDeriv_2016.8-1.1            
+[35] Rcpp_1.0.14                     iterators_1.0.14               
+[37] knitr_1.50                      PEcAnAssimSequential_1.9.0.9000
+[39] igraph_2.1.4                    timechange_0.3.0               
+[41] tidyselect_1.2.1                abind_1.4-8                    
+[43] yaml_2.3.10                     PEcAn.LPJGUESS_1.8.1           
+[45] codetools_0.2-20                listenv_0.9.1                  
+[47] lattice_0.22-6                  tibble_3.2.1                   
+[49] withr_3.0.2                     coda_0.19-4.1                  
+[51] evaluate_1.0.3                  future_1.34.0                  
+[53] sf_1.0-20                       units_0.8-7                    
+[55] proxy_0.4-27                    PEcAn.BASGRA_1.8.1.9000        
+[57] pillar_1.10.2                   PEcAn.BIOCRO_1.7.5             
+[59] KernSmooth_2.23-26              foreach_1.5.2                  
+[61] ncdf4_1.24                      generics_0.1.3                 
+[63] nimble_1.3.0                    rprojroot_2.0.4                
+[65] ggplot2_3.5.2                   munsell_0.5.1                  
+[67] scales_1.3.0                    globals_0.16.3                 
+[69] PEcAn.MAAT_1.7.5                PEcAn.STICS_1.8.2              
+[71] class_7.3-23                    glue_1.8.0                     
+[73] tools_4.4.3                     data.table_1.17.0              
+[75] XML_3.99-0.18                   grid_4.4.3                     
+[77] PEcAn.visualization_1.8.1.9000  PEcAn.photosynthesis_1.7.4.9000
+[79] colorspace_2.1-1                cli_3.6.4                      
+[81] PEcAnRTM_1.9.0.9000             dplyr_1.1.4                    
+[83] PEcAn.GDAY_1.7.5                gtable_0.3.6                   
+[85] PEcAn.FATES_1.8.1               digest_0.6.37                  
+[87] classInt_0.4-11                 PEcAn.LDNDC_1.0.2              
+[89] rjson_0.2.23                    htmlwidgets_1.6.4              
+[91] htmltools_0.5.8.1               lifecycle_1.0.4                
+[93] here_1.0.1                     </code></pre>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
