@@ -323,7 +323,7 @@ install.packages('PEcAn.all')
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>List of 12
+<pre><code>List of 11
  $ info         :List of 4
   ..$ notes   : NULL
   ..$ userid  : chr "-1"
@@ -376,10 +376,8 @@ install.packages('PEcAn.all')
   ..$ deprecated.settings.fixed: logi TRUE
   ..$ settings.updated         : logi TRUE
   ..$ checked                  : logi TRUE
- $ database     :List of 1
-  ..$ dbfiles: chr "/root/.pecan/dbfiles"
  $ workflow     :List of 1
-  ..$ id: chr "2025-12-09-18-11-01"
+  ..$ id: chr "2025-12-10-15-41-19"
  $ rundir       : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/run"
  $ modeloutdir  : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/out"
  - attr(*, "class")= chr [1:3] "Settings" "SafeList" "list"</code></pre>
@@ -409,14 +407,9 @@ install.packages('PEcAn.all')
 </section>
 <section id="write-model-configuration-files" class="level1">
 <h1>Write Model Configuration Files</h1>
-<p>This step generates the model-specific configuration files and scripts that will be used to run the ecosystem model. The process involves:</p>
-<ol type="1">
-<li>Disabling database write operations because we are not using a database</li>
-<li>Generating SIPNET configuration files using the <code>runModule.run.write.configs()</code> function.</li>
-</ol>
+<p>This step generates the model-specific configuration files and scripts that will be used to run the ecosystem model. The process involves generating SIPNET configuration files using the <code>runModule.run.write.configs()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>database <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Disable database operations for this demo</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in postgresqlNewConnection(drv, ...) : 
   RPosgreSQL error: could not connect root@/var/run/postgresql:5432 on dbname "root": connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
