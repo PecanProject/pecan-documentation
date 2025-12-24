@@ -77,7 +77,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../../uncertainty.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites"><span class="header-section-number">1.1</span> Prerequisites</a>
+  <ul class="collapse">
+  <li><a href="#pecan-packages-and-dependencies." id="toc-pecan-packages-and-dependencies." class="nav-link" data-scroll-target="#pecan-packages-and-dependencies."><span class="header-section-number">1.1.1</span> PEcAn packages and dependencies.</a></li>
+  <li><a href="#sipnet-v1.3.0" id="toc-sipnet-v1.3.0" class="nav-link" data-scroll-target="#sipnet-v1.3.0"><span class="header-section-number">1.1.2</span> SIPNET v1.3.0</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#load-pecan-packages" id="toc-load-pecan-packages" class="nav-link" data-scroll-target="#load-pecan-packages"><span class="header-section-number">2</span> Load PEcAn Packages</a></li>
+  <li><a href="#load-pecan-settings-file" id="toc-load-pecan-settings-file" class="nav-link" data-scroll-target="#load-pecan-settings-file"><span class="header-section-number">3</span> Load PEcAn Settings File</a>
+  <ul class="collapse">
+  <li><a href="#settings" id="toc-settings" class="nav-link" data-scroll-target="#settings"><span class="header-section-number">3.1</span> Settings</a></li>
+  <li><a href="#load-the-settings-file" id="toc-load-the-settings-file" class="nav-link" data-scroll-target="#load-the-settings-file"><span class="header-section-number">3.2</span> Load the settings file</a></li>
+  </ul></li>
+  <li><a href="#sec-write-configs" id="toc-sec-write-configs" class="nav-link" data-scroll-target="#sec-write-configs"><span class="header-section-number">4</span> Write Model Configuration Files</a></li>
+  <li><a href="#run-model-simulations" id="toc-run-model-simulations" class="nav-link" data-scroll-target="#run-model-simulations"><span class="header-section-number">5</span> Run Model Simulations</a></li>
+  <li><a href="#fetch-model-outputs" id="toc-fetch-model-outputs" class="nav-link" data-scroll-target="#fetch-model-outputs"><span class="header-section-number">6</span> Fetch Model Outputs</a></li>
+  <li><a href="#sec-run-uncertainty" id="toc-sec-run-uncertainty" class="nav-link" data-scroll-target="#sec-run-uncertainty"><span class="header-section-number">7</span> Ensemble and Sensitivity Analysis</a></li>
+  <li><a href="#sec-outputs" id="toc-sec-outputs" class="nav-link" data-scroll-target="#sec-outputs"><span class="header-section-number">8</span> PEcAn Outputs</a>
+  <ul class="collapse">
+  <li><a href="#output-directory-structure" id="toc-output-directory-structure" class="nav-link" data-scroll-target="#output-directory-structure"><span class="header-section-number">8.1</span> Output Directory Structure</a>
+  <ul class="collapse">
+  <li><a href="#model-outputs-and-logs" id="toc-model-outputs-and-logs" class="nav-link" data-scroll-target="#model-outputs-and-logs"><span class="header-section-number">8.1.1</span> Model outputs and logs</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#understanding-pecan-uncertainty-analysis-outputs" id="toc-understanding-pecan-uncertainty-analysis-outputs" class="nav-link" data-scroll-target="#understanding-pecan-uncertainty-analysis-outputs"><span class="header-section-number">9</span> Understanding PEcAn Uncertainty Analysis Outputs</a>
+  <ul class="collapse">
+  <li><a href="#ensemble-analysis-outputs" id="toc-ensemble-analysis-outputs" class="nav-link" data-scroll-target="#ensemble-analysis-outputs"><span class="header-section-number">9.1</span> Ensemble Analysis Outputs</a></li>
+  <li><a href="#sensitivity-analysis-outputs" id="toc-sensitivity-analysis-outputs" class="nav-link" data-scroll-target="#sensitivity-analysis-outputs"><span class="header-section-number">9.2</span> Sensitivity Analysis Outputs</a></li>
+  <li><a href="#variance-decomposition-outputs" id="toc-variance-decomposition-outputs" class="nav-link" data-scroll-target="#variance-decomposition-outputs"><span class="header-section-number">9.3</span> Variance Decomposition Outputs</a></li>
+  <li><a href="#interpreting-the-results" id="toc-interpreting-the-results" class="nav-link" data-scroll-target="#interpreting-the-results"><span class="header-section-number">9.4</span> Interpreting the Results</a></li>
+  </ul></li>
+  <li><a href="#sec-visualize" id="toc-sec-visualize" class="nav-link" data-scroll-target="#sec-visualize"><span class="header-section-number">10</span> Visualize Uncertainty Analysis Results</a>
+  <ul class="collapse">
+  <li><a href="#ensemble-analysis-visualization" id="toc-ensemble-analysis-visualization" class="nav-link" data-scroll-target="#ensemble-analysis-visualization"><span class="header-section-number">10.1</span> Ensemble Analysis Visualization</a></li>
+  <li><a href="#sensitivity-and-variance-decomposition-visualization" id="toc-sensitivity-and-variance-decomposition-visualization" class="nav-link" data-scroll-target="#sensitivity-and-variance-decomposition-visualization"><span class="header-section-number">10.2</span> Sensitivity and Variance Decomposition Visualization</a></li>
+  </ul></li>
+  <li><a href="#customizing-ensemble-analysis-parameters-optional" id="toc-customizing-ensemble-analysis-parameters-optional" class="nav-link" data-scroll-target="#customizing-ensemble-analysis-parameters-optional"><span class="header-section-number">11</span> Customizing Ensemble Analysis Parameters (Optional)</a>
+  <ul class="collapse">
+  <li><a href="#optional-use-this-section-only-if-you-want-to-override-the-default-ensemble-analysis-parameters.-skip-if-defaults-are-sufficient." id="toc-optional-use-this-section-only-if-you-want-to-override-the-default-ensemble-analysis-parameters.-skip-if-defaults-are-sufficient." class="nav-link" data-scroll-target="#optional-use-this-section-only-if-you-want-to-override-the-default-ensemble-analysis-parameters.-skip-if-defaults-are-sufficient."><span class="header-section-number">11.1</span> (Optional) Use this section only if you want to override the default ensemble analysis parameters. Skip if defaults are sufficient.</a></li>
+  </ul></li>
+  <li><a href="#customizing-sensitivity-analysis-parameters-optional" id="toc-customizing-sensitivity-analysis-parameters-optional" class="nav-link" data-scroll-target="#customizing-sensitivity-analysis-parameters-optional"><span class="header-section-number">12</span> Customizing Sensitivity Analysis Parameters (Optional)</a>
+  <ul class="collapse">
+  <li><a href="#optional-use-this-section-only-if-you-want-to-override-the-default-sensitivity-analysis-parameters.-skip-if-defaults-are-sufficient." id="toc-optional-use-this-section-only-if-you-want-to-override-the-default-sensitivity-analysis-parameters.-skip-if-defaults-are-sufficient." class="nav-link" data-scroll-target="#optional-use-this-section-only-if-you-want-to-override-the-default-sensitivity-analysis-parameters.-skip-if-defaults-are-sufficient."><span class="header-section-number">12.1</span> (Optional) Use this section only if you want to override the default sensitivity analysis parameters. Skip if defaults are sufficient.</a></li>
+  </ul></li>
+  <li><a href="#extract-model-results-and-prepare-for-analysis" id="toc-extract-model-results-and-prepare-for-analysis" class="nav-link" data-scroll-target="#extract-model-results-and-prepare-for-analysis"><span class="header-section-number">13</span> Extract Model Results and Prepare for Analysis</a></li>
+  <li><a href="#display-available-model-variables" id="toc-display-available-model-variables" class="nav-link" data-scroll-target="#display-available-model-variables"><span class="header-section-number">14</span> Display Available Model Variables</a></li>
+  <li><a href="#visualize-model-results" id="toc-visualize-model-results" class="nav-link" data-scroll-target="#visualize-model-results"><span class="header-section-number">15</span> Visualize Model Results</a>
+  <ul class="collapse">
+  <li><a href="#plot-carbon-fluxes" id="toc-plot-carbon-fluxes" class="nav-link" data-scroll-target="#plot-carbon-fluxes"><span class="header-section-number">15.1</span> Plot Carbon Fluxes</a></li>
+  <li><a href="#plot-carbon-pools" id="toc-plot-carbon-pools" class="nav-link" data-scroll-target="#plot-carbon-pools"><span class="header-section-number">15.2</span> Plot Carbon Pools</a></li>
+  <li><a href="#plot-water-variables" id="toc-plot-water-variables" class="nav-link" data-scroll-target="#plot-water-variables"><span class="header-section-number">15.3</span> Plot Water Variables</a></li>
+  <li><a href="#plot-lai-and-biomass" id="toc-plot-lai-and-biomass" class="nav-link" data-scroll-target="#plot-lai-and-biomass"><span class="header-section-number">15.4</span> Plot LAI and Biomass</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">16</span> Conclusion</a></li>
+  <li><a href="#further-exploration" id="toc-further-exploration" class="nav-link" data-scroll-target="#further-exploration"><span class="header-section-number">17</span> Further Exploration</a></li>
+  <li><a href="#clean-up-workflow-output-optional" id="toc-clean-up-workflow-output-optional" class="nav-link" data-scroll-target="#clean-up-workflow-output-optional"><span class="header-section-number">18</span> Clean Up Workflow Output (Optional)</a></li>
+  <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">19</span> Session Information</a>
+  <ul class="collapse">
+  <li><a href="#pecan-package-versions." id="toc-pecan-package-versions." class="nav-link" data-scroll-target="#pecan-package-versions."><span class="header-section-number">19.0.1</span> PEcAn package versions.</a></li>
+  <li><a href="#r-session-information" id="toc-r-session-information" class="nav-link" data-scroll-target="#r-session-information"><span class="header-section-number">19.0.2</span> R session information:</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../../uncertainty.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -106,8 +174,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>In Demo 2 we will be looking at how PEcAn can use information about parameter uncertainty to perform three automated analyses:</p>
 <ul>
 <li><strong>Ensemble Analysis</strong>: Repeat numerous model runs, each sampling from the parameter uncertainty, to generate a probability distribution of model projections. Allows us to put a confidence interval on the model.</li>
@@ -125,11 +193,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Visualize results to identify important parameters and how they influence model variance.</li>
 <li>Change configuration settings and re-run the workflow.</li>
 </ol>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<section id="prerequisites" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">1.1</span> Prerequisites</h2>
 <p>To run this notebook, you will need to install PEcAn and its dependencies, as well as download the SIPNET model binary.</p>
-<section id="pecan-packages-and-dependencies." class="level3">
-<h3 class="anchored" data-anchor-id="pecan-packages-and-dependencies.">PEcAn packages and dependencies.</h3>
+<section id="pecan-packages-and-dependencies." class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="pecan-packages-and-dependencies."><span class="header-section-number">1.1.1</span> PEcAn packages and dependencies.</h3>
 <pre><code># Enable repository from pecanproject
 options(repos = c(
   pecanproject = 'https://pecanproject.r-universe.dev',
@@ -137,8 +205,8 @@ options(repos = c(
 install.packages('PEcAn.all')</code></pre>
 <p>A valid <code>pecan.xml</code> configuration file. Start with the example at <code>pecan/documentation/tutorials/Demo_02_Uncertainty_Analysis/pecan.xml</code>.</p>
 </section>
-<section id="sipnet-v1.3.0" class="level3">
-<h3 class="anchored" data-anchor-id="sipnet-v1.3.0">SIPNET v1.3.0</h3>
+<section id="sipnet-v1.3.0" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="sipnet-v1.3.0"><span class="header-section-number">1.1.2</span> SIPNET v1.3.0</h3>
 <p>If you haven’t already installed the SIPNET model, you can do so by running the following code. This will download the SIPNET binary to <code>demo_outdir/sipnet</code> and make it executable.</p>
 <blockquote class="blockquote">
 <p>Note: The <code>demo_outdir</code> directory will be created inside of your PEcAn installation, at <code>documentation/tutorials/Demo_02_Uncertainty_Analysis/demo_outdir/</code>. This directory will contain the SIPNET binary as well as the output generated by PEcAn in this demo.</p>
@@ -157,8 +225,8 @@ install.packages('PEcAn.all')</code></pre>
 </section>
 </section>
 </section>
-<section id="load-pecan-packages" class="level1">
-<h1>Load PEcAn Packages</h1>
+<section id="load-pecan-packages" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Load PEcAn Packages</h1>
 <p>First, we need to load the PEcAn R packages. These packages provide all the functions we’ll use to run the workflow.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the PEcAn.all package, which includes all necessary PEcAn functionality</span></span>
@@ -210,11 +278,11 @@ install.packages('PEcAn.all')</code></pre>
 </div>
 </div>
 </section>
-<section id="load-pecan-settings-file" class="level1">
-<h1>Load PEcAn Settings File</h1>
+<section id="load-pecan-settings-file" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Load PEcAn Settings File</h1>
 <p>Use the XML settings file (<code>pecan.xml</code>) exactly as in the Demo 1 Basic Run tutorial. See the “Load PEcAn Settings File” section of Demo 1 for a more detailed walkthrough of fields and schema. In this tutorial we focus on settings relevant to this notebook and explain the additional options associated with uncertainty analysis.</p>
-<section id="settings" class="level2">
-<h2 class="anchored" data-anchor-id="settings">Settings</h2>
+<section id="settings" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="settings"><span class="header-section-number">3.1</span> Settings</h2>
 <p>Example settings for this demo live at <code>pecan/documentation/tutorials/Demo_02_Uncertainty_Analysis/pecan.xml</code> and you can read more about the settings in the <a href="https://pecanproject.github.io/pecan-documentation/develop/pecanXML.html#pecanXML">PEcAn Documentation</a>, and sections focused on <a href="https://pecanproject.github.io/pecan-documentation/develop/xml-advanced.html#xml-ensemble">ensemble</a> and <a href="https://pecanproject.github.io/pecan-documentation/develop/xml-advanced.html#xml-sensitivity-analysis">sensitivity analysis</a> settings in particular.</p>
 <p>Open that settings file and look at the ensemble and sensitivity analysis sections. You can modify these settings to change the number of ensemble members, the variable to analyze, and the sampling method. Some of the key settings in this demo include:</p>
 <p><strong>Ensemble size</strong></p>
@@ -227,8 +295,8 @@ install.packages('PEcAn.all')</code></pre>
 <p>PEcAn’s sensitivity analysis includes a handy shortcut that converts a specified standard deviation into its normal quantile equivalent. In the example pecan.xml, these are set to <strong>-1, 1</strong> (the median value, 0, occurs by default) which are converted internally to the 15.9th and 84.1th quantiles of the parameter distribution. You can add more quantiles to explore a wider range of parameter values: {-3, -2, -1, 1, 2, 3} is often used in practice.</p>
 <p>By working in quantiles relative to each parameter’s distribution, the sensitivity and variance decomposition reflect sensitivity across the range of parameter values. Many sensitivity analyses tools use a fixed perturbation size such as the mean +/- 10%. PEcAn’s SA does not take this approach because it does not capture the uncertainty across the parameter distribution and can not be used for variance decomposition.</p>
 </section>
-<section id="load-the-settings-file" class="level2">
-<h2 class="anchored" data-anchor-id="load-the-settings-file">Load the settings file</h2>
+<section id="load-the-settings-file" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="load-the-settings-file"><span class="header-section-number">3.2</span> Load the settings file</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>settings_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"documentation/tutorials/Demo_02_Uncertainty_Analysis/pecan.xml"</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -239,8 +307,8 @@ install.packages('PEcAn.all')</code></pre>
 <p>See Demo 1 Section 6 for details on what these functions do. Briefly, they read the XML file, convert it into an R list object that PEcAn can use, check that settings are valid, fill in defaults, and create the output directory.</p>
 </section>
 </section>
-<section id="sec-write-configs" class="level1">
-<h1>Write Model Configuration Files</h1>
+<section id="sec-write-configs" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Write Model Configuration Files</h1>
 <p>This step generates the model-specific configuration files that will be used to run the ecosystem model. The process involves:</p>
 <ol start="2" type="1">
 <li>Generating SIPNET configuration files using the <code>runModule.run.write.configs()</code> function.</li>
@@ -257,8 +325,8 @@ install.packages('PEcAn.all')</code></pre>
 </div>
 </div>
 </section>
-<section id="run-model-simulations" class="level1">
-<h1>Run Model Simulations</h1>
+<section id="run-model-simulations" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Run Model Simulations</h1>
 <p>This section executes the SIPNET simulations and retrieves the results.</p>
 <p>It uses the function <code>runModule_start_model_runs(settings)</code> to initiate the model runs using the configuration files generated in the previous step.</p>
 <div class="cell">
@@ -449,15 +517,15 @@ install.packages('PEcAn.all')</code></pre>
 </div>
 <p>The PEcAn workflow will take a longer time to complete than in Demo 1 because we have just asked for over a hundred model runs. Once the runs are complete we will continue.</p>
 </section>
-<section id="fetch-model-outputs" class="level1">
-<h1>Fetch Model Outputs</h1>
+<section id="fetch-model-outputs" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Fetch Model Outputs</h1>
 <p>Next we convert all of the model output from the previous run to a standard format that PEcAn can use for analysis. This is done using the <code>runModule.get.results()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runModule.get.results</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="sec-run-uncertainty" class="level1">
-<h1>Ensemble and Sensitivity Analysis</h1>
+<section id="sec-run-uncertainty" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Ensemble and Sensitivity Analysis</h1>
 <p>Next, we use the outputs from the previous step to perform ensemble and sensitivity analyses.</p>
 <p><strong>Ensemble Analysis</strong>: Quantifies uncertainty in model predictions by running multiple simulations with parameters sampled from their uncertainty distributions. This generates probability distributions of model outputs and confidence intervals.</p>
 <div class="cell">
@@ -615,10 +683,10 @@ coarse_root_respiration_Q10
 </div>
 </div>
 </section>
-<section id="sec-outputs" class="level1">
-<h1>PEcAn Outputs</h1>
-<section id="output-directory-structure" class="level2">
-<h2 class="anchored" data-anchor-id="output-directory-structure">Output Directory Structure</h2>
+<section id="sec-outputs" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> PEcAn Outputs</h1>
+<section id="output-directory-structure" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="output-directory-structure"><span class="header-section-number">8.1</span> Output Directory Structure</h2>
 <p>These are the key folders and files that will be created under the directory defined by <code>settings$outdir</code> (e.g., <code>demo_outdir</code> in the example). The file contents are described in the next section.</p>
 <p>We discussed the output directory in Demo 1 (Basic Run), but now we have three new folders that contain outputs from the sensitivity, ensemble, and variance decomposition analyses. Here we focus on the additional outputs generated by the ensemble and sensitivity analyses.</p>
 <pre><code>demo_outdir/
@@ -640,8 +708,8 @@ coarse_root_respiration_Q10
 ├── pft/                                  # Parameter (prior/posterior) files per PFT
 │   └── temperate.coniferous/
 └── sipnet                                # SIPNET binary (downloaded earlier)</code></pre>
-<section id="model-outputs-and-logs" class="level3">
-<h3 class="anchored" data-anchor-id="model-outputs-and-logs">Model outputs and logs</h3>
+<section id="model-outputs-and-logs" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="model-outputs-and-logs"><span class="header-section-number">8.1.1</span> Model outputs and logs</h3>
 <ul>
 <li>Standardized netCDF files (<code>[year].nc</code>) for analysis and visualization</li>
 <li>Raw model output (for SIPNET, e.g., <code>sipnet.out</code> per run)</li>
@@ -651,12 +719,12 @@ coarse_root_respiration_Q10
 </section>
 </section>
 </section>
-<section id="understanding-pecan-uncertainty-analysis-outputs" class="level1">
-<h1>Understanding PEcAn Uncertainty Analysis Outputs</h1>
+<section id="understanding-pecan-uncertainty-analysis-outputs" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Understanding PEcAn Uncertainty Analysis Outputs</h1>
 <p>After running ensemble and sensitivity analyses, PEcAn generates several important outputs that help you understand model uncertainty and parameter sensitivity.</p>
 <p>The <code>samples.Rdata</code> file contains the parameter values used in the sensitivity and ensemble runs. It stores two objects, <code>sa.samples</code> and <code>ensemble.samples</code>, which are the parameter values for the sensitivity analysis and ensemble runs, respectively.</p>
-<section id="ensemble-analysis-outputs" class="level2">
-<h2 class="anchored" data-anchor-id="ensemble-analysis-outputs">Ensemble Analysis Outputs</h2>
+<section id="ensemble-analysis-outputs" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="ensemble-analysis-outputs"><span class="header-section-number">9.1</span> Ensemble Analysis Outputs</h2>
 <p>The ensemble analysis produces:</p>
 <ul>
 <li><strong><code>ensemble.Rdata</code></strong>: Contains <code>ensemble.output</code> object with model predictions for all ensemble members</li>
@@ -664,8 +732,8 @@ coarse_root_respiration_Q10
 <li><strong><code>ensemble.ts.[RunID].[Variable].[StartYear].[EndYear].pdf</code></strong>: Time-series plot showing ensemble mean, median, and 95% confidence intervals</li>
 </ul>
 </section>
-<section id="sensitivity-analysis-outputs" class="level2">
-<h2 class="anchored" data-anchor-id="sensitivity-analysis-outputs">Sensitivity Analysis Outputs</h2>
+<section id="sensitivity-analysis-outputs" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sensitivity-analysis-outputs"><span class="header-section-number">9.2</span> Sensitivity Analysis Outputs</h2>
 <p>The sensitivity analysis generates:</p>
 <ul>
 <li><strong><code>sensitivity.analysis.[RunID].[Variable].[StartYear].[EndYear].pdf</code></strong>: Raw data points from univariate analyses with spline fits.</li>
@@ -673,8 +741,8 @@ coarse_root_respiration_Q10
 <li><code>sensitivity.analysis.[RunID].[Variable].[StartYear].[EndYear].pdf</code> shows the raw data points from univariate one-at-a-time analyses and spline fits through the points. <em>Open this file</em> to determine which parameters are most and least sensitive.</li>
 </ul>
 </section>
-<section id="variance-decomposition-outputs" class="level2">
-<h2 class="anchored" data-anchor-id="variance-decomposition-outputs">Variance Decomposition Outputs</h2>
+<section id="variance-decomposition-outputs" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="variance-decomposition-outputs"><span class="header-section-number">9.3</span> Variance Decomposition Outputs</h2>
 <p>The variance decomposition produces:</p>
 <ul>
 <li><strong><code>variance.decomposition.[RunID].[Variable].[StartYear].[EndYear].pdf</code></strong>: Three-column analysis showing:
@@ -685,8 +753,8 @@ coarse_root_respiration_Q10
 </ul></li>
 </ul>
 </section>
-<section id="interpreting-the-results" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-the-results">Interpreting the Results</h2>
+<section id="interpreting-the-results" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="interpreting-the-results"><span class="header-section-number">9.4</span> Interpreting the Results</h2>
 <p><strong>Variance Decomposition Analysis:</strong></p>
 <ul>
 <li>Parameters are sorted by their contribution to model output uncertainty (the right column).</li>
@@ -707,11 +775,11 @@ coarse_root_respiration_Q10
 <p><strong>Choose the parameter that you think provides the most efficient means of reducing model uncertainty and propose how you might best reduce uncertainty in this process</strong>. In making this choice remember that not all processes in models can be directly observed, and that the cost-per-sample for different measurements can vary tremendously (and thus the parameter you measure next is not always the one contributing the most to model variability). Also consider the role of parameter uncertainty versus model sensitivity in justifying your choice of what parameters to constrain.</p>
 </section>
 </section>
-<section id="sec-visualize" class="level1">
-<h1>Visualize Uncertainty Analysis Results</h1>
+<section id="sec-visualize" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Visualize Uncertainty Analysis Results</h1>
 <p>This section loads the results from the uncertainty analyses and generates plots directly in the notebook. This provides an immediate view of the ensemble time series, sensitivity plots, and variance decomposition.</p>
-<section id="ensemble-analysis-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="ensemble-analysis-visualization">Ensemble Analysis Visualization</h2>
+<section id="ensemble-analysis-visualization" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="ensemble-analysis-visualization"><span class="header-section-number">10.1</span> Ensemble Analysis Visualization</h2>
 <p>Here we visualize the results of the ensemble analysis. It shows the overall distribution of the model output and how the output and its uncertainty change over time.</p>
 <p>This section reproduces the plots saved in the <code>ensemble.analysis/</code> folder in order to show the user how to access and visualize the results programmatically so that they can further investigate output and customize plots.</p>
 <div class="cell">
@@ -827,14 +895,14 @@ coarse_root_respiration_Q10
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="uncertainty_files/figure-html/visualize-ensemble-results-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="uncertainty_files/figure-html/visualize-ensemble-results-1.png" class="img-fluid figure-img" width="3000"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="sensitivity-and-variance-decomposition-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="sensitivity-and-variance-decomposition-visualization">Sensitivity and Variance Decomposition Visualization</h2>
+<section id="sensitivity-and-variance-decomposition-visualization" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sensitivity-and-variance-decomposition-visualization"><span class="header-section-number">10.2</span> Sensitivity and Variance Decomposition Visualization</h2>
 <p>This block visualizes the results of the sensitivity analysis. The plots show how sensitive the model output is to changes in each parameter and which parameters contribute most to the overall uncertainty.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. Load Sensitivity Analysis Results ---</span></span>
@@ -874,10 +942,10 @@ coarse_root_respiration_Q10
 </div>
 </section>
 </section>
-<section id="customizing-ensemble-analysis-parameters-optional" class="level1">
-<h1>Customizing Ensemble Analysis Parameters (Optional)</h1>
-<section id="optional-use-this-section-only-if-you-want-to-override-the-default-ensemble-analysis-parameters.-skip-if-defaults-are-sufficient." class="level2">
-<h2 class="anchored" data-anchor-id="optional-use-this-section-only-if-you-want-to-override-the-default-ensemble-analysis-parameters.-skip-if-defaults-are-sufficient.">(Optional) Use this section only if you want to override the default ensemble analysis parameters. Skip if defaults are sufficient.</h2>
+<section id="customizing-ensemble-analysis-parameters-optional" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Customizing Ensemble Analysis Parameters (Optional)</h1>
+<section id="optional-use-this-section-only-if-you-want-to-override-the-default-ensemble-analysis-parameters.-skip-if-defaults-are-sufficient." class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="optional-use-this-section-only-if-you-want-to-override-the-default-ensemble-analysis-parameters.-skip-if-defaults-are-sufficient."><span class="header-section-number">11.1</span> (Optional) Use this section only if you want to override the default ensemble analysis parameters. Skip if defaults are sufficient.</h2>
 <blockquote class="blockquote">
 <p><strong>Important:</strong> If you modify the ensemble analysis parameters in this section, re-run Section <a href="#sec-run-uncertainty" class="quarto-xref">Section&nbsp;7</a> and then Section <a href="#sec-visualize" class="quarto-xref">Section&nbsp;10</a> to regenerate outputs and plots.</p>
 </blockquote>
@@ -896,10 +964,10 @@ coarse_root_respiration_Q10
 </div>
 </section>
 </section>
-<section id="customizing-sensitivity-analysis-parameters-optional" class="level1">
-<h1>Customizing Sensitivity Analysis Parameters (Optional)</h1>
-<section id="optional-use-this-section-only-if-you-want-to-override-the-default-sensitivity-analysis-parameters.-skip-if-defaults-are-sufficient." class="level2">
-<h2 class="anchored" data-anchor-id="optional-use-this-section-only-if-you-want-to-override-the-default-sensitivity-analysis-parameters.-skip-if-defaults-are-sufficient.">(Optional) Use this section only if you want to override the default sensitivity analysis parameters. Skip if defaults are sufficient.</h2>
+<section id="customizing-sensitivity-analysis-parameters-optional" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Customizing Sensitivity Analysis Parameters (Optional)</h1>
+<section id="optional-use-this-section-only-if-you-want-to-override-the-default-sensitivity-analysis-parameters.-skip-if-defaults-are-sufficient." class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="optional-use-this-section-only-if-you-want-to-override-the-default-sensitivity-analysis-parameters.-skip-if-defaults-are-sufficient."><span class="header-section-number">12.1</span> (Optional) Use this section only if you want to override the default sensitivity analysis parameters. Skip if defaults are sufficient.</h2>
 <blockquote class="blockquote">
 <p><strong>Important:</strong> If you modify the sensitivity analysis parameters in this section, re-run Section <a href="#sec-run-uncertainty" class="quarto-xref">Section&nbsp;7</a> and then Section <a href="#sec-visualize" class="quarto-xref">Section&nbsp;10</a> to regenerate outputs and plots.</p>
 </blockquote>
@@ -912,8 +980,8 @@ coarse_root_respiration_Q10
 </div>
 </section>
 </section>
-<section id="extract-model-results-and-prepare-for-analysis" class="level1">
-<h1>Extract Model Results and Prepare for Analysis</h1>
+<section id="extract-model-results-and-prepare-for-analysis" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Extract Model Results and Prepare for Analysis</h1>
 <p>After the model simulation completes, we need to extract the results and prepare them for analysis. This involves:</p>
 <ol type="1">
 <li>Reading the run ID</li>
@@ -940,8 +1008,8 @@ coarse_root_respiration_Q10
 <span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bounds"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="display-available-model-variables" class="level1">
-<h1>Display Available Model Variables</h1>
+<section id="display-available-model-variables" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Display Available Model Variables</h1>
 <p>This section shows all the variables that are available in the model output. These variables represent different ecosystem processes and states that the model has simulated.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>vars_df <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span>standard_vars <span class="sc">|&gt;</span></span>
@@ -1071,11 +1139,11 @@ coarse_root_respiration_Q10
 </div>
 </div>
 </section>
-<section id="visualize-model-results" class="level1">
-<h1>Visualize Model Results</h1>
+<section id="visualize-model-results" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Visualize Model Results</h1>
 <p>This section provides examples of how to create time series plots of different model variables. The examples cover various ecosystem processes including carbon fluxes, carbon pools, water variables, and structural variables like Leaf Area Index (LAI).</p>
-<section id="plot-carbon-fluxes" class="level2">
-<h2 class="anchored" data-anchor-id="plot-carbon-fluxes">Plot Carbon Fluxes</h2>
+<section id="plot-carbon-fluxes" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="plot-carbon-fluxes"><span class="header-section-number">15.1</span> Plot Carbon Fluxes</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Gross Primary Productivity (GPP) and Net Primary Productivity (NPP)</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>GPP,</span>
@@ -1090,14 +1158,14 @@ coarse_root_respiration_Q10
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="uncertainty_files/figure-html/plot-carbon-fluxes-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="uncertainty_files/figure-html/plot-carbon-fluxes-1.png" class="img-fluid figure-img" width="3000"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="plot-carbon-pools" class="level2">
-<h2 class="anchored" data-anchor-id="plot-carbon-pools">Plot Carbon Pools</h2>
+<section id="plot-carbon-pools" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="plot-carbon-pools"><span class="header-section-number">15.2</span> Plot Carbon Pools</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Total Live Biomass and Total Soil Carbon</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotLivBiom,</span>
@@ -1112,14 +1180,14 @@ coarse_root_respiration_Q10
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="uncertainty_files/figure-html/plot-carbon-pools-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="uncertainty_files/figure-html/plot-carbon-pools-1.png" class="img-fluid figure-img" width="3000"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="plot-water-variables" class="level2">
-<h2 class="anchored" data-anchor-id="plot-water-variables">Plot Water Variables</h2>
+<section id="plot-water-variables" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="plot-water-variables"><span class="header-section-number">15.3</span> Plot Water Variables</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Soil Moisture and Snow Water Equivalent</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SoilMoist,</span>
@@ -1134,14 +1202,14 @@ coarse_root_respiration_Q10
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="uncertainty_files/figure-html/plot-water-variables-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="uncertainty_files/figure-html/plot-water-variables-1.png" class="img-fluid figure-img" width="3000"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="plot-lai-and-biomass" class="level2">
-<h2 class="anchored" data-anchor-id="plot-lai-and-biomass">Plot LAI and Biomass</h2>
+<section id="plot-lai-and-biomass" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="plot-lai-and-biomass"><span class="header-section-number">15.4</span> Plot LAI and Biomass</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Leaf Area Index (LAI) and Above Ground Wood</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>LAI,</span>
@@ -1156,20 +1224,20 @@ coarse_root_respiration_Q10
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="uncertainty_files/figure-html/plot-lai-biomass-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="uncertainty_files/figure-html/plot-lai-biomass-1.png" class="img-fluid figure-img" width="3000"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<section id="conclusion" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Conclusion</h1>
 <p>This notebook demonstrated how to set up, run, and analyze a PEcAn ecosystem model workflow programmatically. You can now modify parameters, try different models, or extend the analysis as needed.</p>
 <p>Try editing the <code>pecan.xml</code> file. Give it a new name and update the <strong>settings_path</strong> variable at the beginning of this Demo to point to the new file. See how the changes affect the model output!</p>
 </section>
-<section id="further-exploration" class="level1">
-<h1>Further Exploration</h1>
+<section id="further-exploration" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Further Exploration</h1>
 <p>The <a href="#demo-table">next set of tutorials</a> will focus on the process of data assimilation and parameter estimation. The next two steps are in “.Rmd” files which can be viewed online.</p>
 <p><strong>Assimilation ‘by hand’</strong></p>
 <p><a href="https://github.com/PecanProject/pecan/blob/main/documentation/tutorials/sensitivity/PEcAn_sensitivity_tutorial_v1.0.Rmd">Explore</a> how model error changes as a function of parameter value (i.e.&nbsp;data assimilation ‘by hand’)</p>
@@ -1178,8 +1246,8 @@ coarse_root_respiration_Q10
 <p>Additional information about specific tasks (adding sites, models, data; software updates; etc.) and analyses (e.g.&nbsp;data assimilation) can be found in the PEcAn <a href="https://pecanproject.github.io/pecan-documentation/">documentation</a></p>
 <p>If you encounter a problem with PEcAn that’s not covered in the documentation, or if PEcAn is missing functionality you need, please search <a href="https://github.com/PecanProject/pecan/issues?q=">known bugs and issues</a>, submit a <a href="https://github.com/PecanProject/pecan/issues/new/choose">bug report</a>, or ask a question in our <a href="https://join.slack.com/t/pecanproject/shared_invite/enQtMzkyODUyMjQyNTgzLWEzOTM1ZjhmYWUxNzYwYzkxMWVlODAyZWQwYjliYzA0MDA0MjE4YmMyOTFhMjYyMjYzN2FjODE4N2Y4YWFhZmQ">chat room</a>.</p>
 </section>
-<section id="clean-up-workflow-output-optional" class="level1">
-<h1>Clean Up Workflow Output (Optional)</h1>
+<section id="clean-up-workflow-output-optional" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Clean Up Workflow Output (Optional)</h1>
 <p>If you want to remove all files and directories created by this workflow and start fresh, you can run the following code. This will delete the entire output directory specified in your settings. <strong>Use with caution!</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
@@ -1187,10 +1255,10 @@ coarse_root_respiration_Q10
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="session-information" class="level1">
-<h1>Session Information</h1>
-<section id="pecan-package-versions." class="level3">
-<h3 class="anchored" data-anchor-id="pecan-package-versions.">PEcAn package versions.</h3>
+<section id="session-information" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Session Information</h1>
+<section id="pecan-package-versions." class="level3" data-number="19.0.1">
+<h3 data-number="19.0.1" class="anchored" data-anchor-id="pecan-package-versions."><span class="header-section-number">19.0.1</span> PEcAn package versions.</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>PEcAn.all<span class="sc">::</span><span class="fu">pecan_version</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1242,8 +1310,8 @@ coarse_root_respiration_Q10
 </div>
 </div>
 </section>
-<section id="r-session-information" class="level3">
-<h3 class="anchored" data-anchor-id="r-session-information">R session information:</h3>
+<section id="r-session-information" class="level3" data-number="19.0.2">
+<h3 data-number="19.0.2" class="anchored" data-anchor-id="r-session-information"><span class="header-section-number">19.0.2</span> R session information:</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
