@@ -23,7 +23,7 @@
 <meta name="author" content="By: PEcAn Team" />
 
 
-<meta name="date" content="2025-05-25" />
+<meta name="date" content="2026-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1107,7 +1107,7 @@ For full <code>docker-compose</code> syntax, see the <a href="https://docs.docke
     - traefik.http.routers.dbsync.rule=Host(`${TRAEFIK_HOST:-pecan.localhost}`) &amp;&amp;
       PathPrefix(`/dbsync/`)
     - traefik.http.routers.dbsync.middlewares=dbsync-stripprefix
-    - traefik.http.middlewares.dbsync-stripprefix.stripprefix.prefixes=/monitor
+    - traefik.http.middlewares.dbsync-stripprefix.stripprefix.prefixes=/dbsync
     healthcheck:
       test: curl --silent --fail http://localhost:3838 &gt; /dev/null || exit 1
       interval: 10s
