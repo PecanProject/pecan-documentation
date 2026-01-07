@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.4 NARR | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="14.4 NARR | The Predictive Ecosystem Analyzer" />
+  <title>23.5 See Also | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="23.5 See Also | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.4 NARR | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="23.5 See Also | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.4 NARR | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="23.5 See Also | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="fluxnet2015.html"/>
-<link rel="next" href="cruncep.html"/>
+<link rel="prev" href="osinstall.html"/>
+<link rel="next" href="pecan-remote.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -778,19 +778,496 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="narr" class="section level2 hasAnchor" number="14.4">
-<h2><span class="header-section-number">14.4</span> NARR<a href="narr.html#narr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Scale: North America</p>
-<p>Resolution: 3 hr, approx. 32km <span class="math inline">\(Lambert conical projection\)</span></p>
-<p>Availability: 1979-present</p>
+<div id="see-also" class="section level2 hasAnchor" number="23.5">
+<h2><span class="header-section-number">23.5</span> See Also<a href="see-also.html#see-also" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>PEcAn Docker-based BETY installation (recommended)</li>
+<li>Official BETYdb documentation: <a href="https://pecan.gitbook.io/betydb-documentation" class="uri">https://pecan.gitbook.io/betydb-documentation</a></li>
+</ul>
+<div id="install-database-data" class="section level4 hasAnchor" number="23.5.0.1">
+<h4><span class="header-section-number">23.5.0.1</span> Install Database + Data<a href="see-also.html#install-database-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><em>note</em> To install BETYdb without PEcAn, first download the <a href="https://raw.githubusercontent.com/PecanProject/pecan/main/scripts/load.bety.sh"><code>load.bety.sh</code> script</a></li>
+</ul>
+<div class="sourceCode" id="cb423"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb423-1"><a href="see-also.html#cb423-1" tabindex="-1"></a><span class="co"># install database (code assumes password is bety)</span></span>
+<span id="cb423-2"><a href="see-also.html#cb423-2" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres createuser <span class="at">-d</span> <span class="at">-l</span> <span class="at">-P</span> <span class="at">-R</span> <span class="at">-S</span> bety</span>
+<span id="cb423-3"><a href="see-also.html#cb423-3" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres createdb <span class="at">-O</span> bety bety</span>
+<span id="cb423-4"><a href="see-also.html#cb423-4" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-c</span> YES <span class="at">-u</span> YES <span class="at">-r</span> 0</span>
+<span id="cb423-5"><a href="see-also.html#cb423-5" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-r</span> 1</span>
+<span id="cb423-6"><a href="see-also.html#cb423-6" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-u</span> postgres ./scripts/load.bety.sh <span class="at">-r</span> 2</span>
+<span id="cb423-7"><a href="see-also.html#cb423-7" tabindex="-1"></a></span>
+<span id="cb423-8"><a href="see-also.html#cb423-8" tabindex="-1"></a><span class="co"># configure for PEcAn web app (change password if needed)</span></span>
+<span id="cb423-9"><a href="see-also.html#cb423-9" tabindex="-1"></a><span class="fu">cp</span> web/config.example.php web/config.php </span>
+<span id="cb423-10"><a href="see-also.html#cb423-10" tabindex="-1"></a></span>
+<span id="cb423-11"><a href="see-also.html#cb423-11" tabindex="-1"></a><span class="co"># add models to database (VM only)</span></span>
+<span id="cb423-12"><a href="see-also.html#cb423-12" tabindex="-1"></a><span class="ex">./scripts/add.models.sh</span></span>
+<span id="cb423-13"><a href="see-also.html#cb423-13" tabindex="-1"></a></span>
+<span id="cb423-14"><a href="see-also.html#cb423-14" tabindex="-1"></a><span class="co"># add data to database</span></span>
+<span id="cb423-15"><a href="see-also.html#cb423-15" tabindex="-1"></a><span class="ex">./scripts/add.data.sh</span></span>
+<span id="cb423-16"><a href="see-also.html#cb423-16" tabindex="-1"></a></span>
+<span id="cb423-17"><a href="see-also.html#cb423-17" tabindex="-1"></a><span class="co"># create outputs folder</span></span>
+<span id="cb423-18"><a href="see-also.html#cb423-18" tabindex="-1"></a><span class="fu">mkdir</span> ~/output</span>
+<span id="cb423-19"><a href="see-also.html#cb423-19" tabindex="-1"></a><span class="fu">chmod</span> 777 ~/output</span></code></pre></div>
 </div>
+<div id="installing-betydb-web-application" class="section level4 hasAnchor" number="23.5.0.2">
+<h4><span class="header-section-number">23.5.0.2</span> Installing BETYdb Web Application<a href="see-also.html#installing-betydb-web-application" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<blockquote>
+<p>⚠️ <strong>Legacy (Deprecated)</strong></p>
+<p>This section documents <strong>manual PHP and Ruby-based BETYdb web application installations</strong>.
+These workflows are deprecated and are <strong>not recommended for new installations</strong>.
+New users should use the <strong>Docker-based BETY deployment</strong> described in the PEcAn Docker section
+or consult the official BETY documentation:
+<a href="https://pecan.gitbook.io/betydb-documentation" class="uri">https://pecan.gitbook.io/betydb-documentation</a></p>
+</blockquote>
+<p>There are two flavors of BETY, PHP and RUBY. The PHP version allows for a minimal interaction with the database while the RUBY version allows for full interaction with the database.</p>
+<div id="php-version" class="section level5 hasAnchor" number="23.5.0.2.1">
+<h5><span class="header-section-number">23.5.0.2.1</span> PHP version<a href="see-also.html#php-version" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>⚠️ This section describes a <strong>deprecated manual installation path</strong>.
+&gt;
+&gt; This PHP-based BETYdb web interface is part of a legacy workflow.
+&gt; New installations should use the Docker-based BETY deployment instead.</p>
+<p>The php version comes with PEcAn and is already configured.</p>
+</div>
+<div id="ruby-version" class="section level5 hasAnchor" number="23.5.0.2.2">
+<h5><span class="header-section-number">23.5.0.2.2</span> RUBY version<a href="see-also.html#ruby-version" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>⚠️ This section describes a <strong>deprecated manual installation path</strong>.
+&gt;
+&gt; This Ruby-based BETYdb web application setup is a legacy, manual workflow.
+&gt; It is retained for existing deployments and is not recommended for new installations.</p>
+<p>The RUBY version requires a few extra packages to be installed first.</p>
+<p>Next we install the web app.</p>
+<div class="sourceCode" id="cb424"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb424-1"><a href="see-also.html#cb424-1" tabindex="-1"></a><span class="co"># install bety</span></span>
+<span id="cb424-2"><a href="see-also.html#cb424-2" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb424-3"><a href="see-also.html#cb424-3" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/PecanProject/bety.git</span>
+<span id="cb424-4"><a href="see-also.html#cb424-4" tabindex="-1"></a></span>
+<span id="cb424-5"><a href="see-also.html#cb424-5" tabindex="-1"></a><span class="co"># install gems</span></span>
+<span id="cb424-6"><a href="see-also.html#cb424-6" tabindex="-1"></a><span class="bu">cd</span> bety</span>
+<span id="cb424-7"><a href="see-also.html#cb424-7" tabindex="-1"></a><span class="fu">sudo</span> gem2.0 install bundler</span>
+<span id="cb424-8"><a href="see-also.html#cb424-8" tabindex="-1"></a><span class="ex">bundle</span> install <span class="at">--without</span> development:test:javascript_testing:debug</span></code></pre></div>
+<p>and configure BETY</p>
+<div class="sourceCode" id="cb425"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb425-1"><a href="see-also.html#cb425-1" tabindex="-1"></a><span class="co"># create folders for upload folders</span></span>
+<span id="cb425-2"><a href="see-also.html#cb425-2" tabindex="-1"></a><span class="fu">mkdir</span> paperclip/files paperclip/file_names</span>
+<span id="cb425-3"><a href="see-also.html#cb425-3" tabindex="-1"></a><span class="fu">chmod</span> 777 paperclip/files paperclip/file_names</span>
+<span id="cb425-4"><a href="see-also.html#cb425-4" tabindex="-1"></a></span>
+<span id="cb425-5"><a href="see-also.html#cb425-5" tabindex="-1"></a><span class="co"># create folder for log files</span></span>
+<span id="cb425-6"><a href="see-also.html#cb425-6" tabindex="-1"></a><span class="fu">mkdir</span> log</span>
+<span id="cb425-7"><a href="see-also.html#cb425-7" tabindex="-1"></a><span class="fu">touch</span> log/production.log</span>
+<span id="cb425-8"><a href="see-also.html#cb425-8" tabindex="-1"></a><span class="fu">chmod</span> 0666 log/production.log</span>
+<span id="cb425-9"><a href="see-also.html#cb425-9" tabindex="-1"></a></span>
+<span id="cb425-10"><a href="see-also.html#cb425-10" tabindex="-1"></a><span class="co"># fix configuration for vm</span></span>
+<span id="cb425-11"><a href="see-also.html#cb425-11" tabindex="-1"></a><span class="fu">cp</span> config/additional_environment_vm.rb config/additional_environment.rb</span>
+<span id="cb425-12"><a href="see-also.html#cb425-12" tabindex="-1"></a><span class="fu">chmod</span> go+w public/javascripts/cache/</span>
+<span id="cb425-13"><a href="see-also.html#cb425-13" tabindex="-1"></a></span>
+<span id="cb425-14"><a href="see-also.html#cb425-14" tabindex="-1"></a><span class="co"># setup bety database configuration</span></span>
+<span id="cb425-15"><a href="see-also.html#cb425-15" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> config/database.yml <span class="op">&lt;&lt; EOF</span></span>
+<span id="cb425-16"><a href="see-also.html#cb425-16" tabindex="-1"></a><span class="st">production:</span></span>
+<span id="cb425-17"><a href="see-also.html#cb425-17" tabindex="-1"></a><span class="st">  adapter: postgis</span></span>
+<span id="cb425-18"><a href="see-also.html#cb425-18" tabindex="-1"></a><span class="st">  encoding: utf-8</span></span>
+<span id="cb425-19"><a href="see-also.html#cb425-19" tabindex="-1"></a><span class="st">  reconnect: false</span></span>
+<span id="cb425-20"><a href="see-also.html#cb425-20" tabindex="-1"></a><span class="st">  database: bety</span></span>
+<span id="cb425-21"><a href="see-also.html#cb425-21" tabindex="-1"></a><span class="st">  pool: 5</span></span>
+<span id="cb425-22"><a href="see-also.html#cb425-22" tabindex="-1"></a><span class="st">  username: bety</span></span>
+<span id="cb425-23"><a href="see-also.html#cb425-23" tabindex="-1"></a><span class="st">  password: bety</span></span>
+<span id="cb425-24"><a href="see-also.html#cb425-24" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb425-25"><a href="see-also.html#cb425-25" tabindex="-1"></a></span>
+<span id="cb425-26"><a href="see-also.html#cb425-26" tabindex="-1"></a><span class="co"># setup login tokens</span></span>
+<span id="cb425-27"><a href="see-also.html#cb425-27" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> config/initializers/site_keys.rb <span class="op">&lt;&lt; EOF</span></span>
+<span id="cb425-28"><a href="see-also.html#cb425-28" tabindex="-1"></a><span class="st">REST_AUTH_SITE_KEY         = &#39;thisisnotasecret&#39;</span></span>
+<span id="cb425-29"><a href="see-also.html#cb425-29" tabindex="-1"></a><span class="st">REST_AUTH_DIGEST_STRETCHES = 10</span></span>
+<span id="cb425-30"><a href="see-also.html#cb425-30" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div>
+
+</div>
+</div>
+<div id="install-models" class="section level3 hasAnchor" number="23.5.1">
+<h3><span class="header-section-number">23.5.1</span> Install Models<a href="see-also.html#install-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This page contains instructions on how to download and install ecosystem models that have been or are being coupled to PEcAn.
+These instructions have been tested on the PEcAn unbuntu VM. Commands may vary on other operating systems.
+Also, some model downloads require permissions before downloading, making them unavailable to the general public. Please contact the PEcAn team if you would like access to a model that is not already installed on the default PEcAn VM.</p>
+<ul>
+<li><a href="see-also.html#inst-biocro">BioCro</a></li>
+<li><a href="see-also.html#inst-clm45">CLM 4.5</a></li>
+<li><a href="see-also.html#inst-dalec">DALEC</a></li>
+<li><a href="see-also.html#inst-ed2">ED2</a></li>
+<li><a href="see-also.html#inst-fates">FATES</a></li>
+<li><a href="see-also.html#inst-gday">GDAY</a></li>
+<li><a href="see-also.html#inst-jules">JULES</a></li>
+<li><a href="see-also.html#inst-linkages">LINKAGES</a></li>
+<li><a href="see-also.html#inst-lpj-guess">LPJ-GUESS</a></li>
+<li><a href="see-also.html#inst-maespa">MAESPA</a></li>
+<li><a href="#inst-sipnet">SIPNET</a></li>
+</ul>
+
+<div id="inst-biocro" class="section level4 hasAnchor" number="23.5.1.1">
+<h4><span class="header-section-number">23.5.1.1</span> BioCro<a href="see-also.html#inst-biocro" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="see-also.html#cb426-1" tabindex="-1"></a><span class="co"># Version 0.951</span></span>
+<span id="cb426-2"><a href="see-also.html#cb426-2" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro@0.951&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span>
+<span id="cb426-3"><a href="see-also.html#cb426-3" tabindex="-1"></a><span class="co"># Version 1.x </span></span>
+<span id="cb426-4"><a href="see-also.html#cb426-4" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;ebimodeling/biocro-dev@26e0125b&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span></code></pre></div>
+<p><em>BioCro Developers:</em> request access from <a href="https://github.com/dlebauer"><span class="citation">@dlebauer</span> on GitHub</a></p>
+
+</div>
+<div id="inst-clm45" class="section level4 hasAnchor" number="23.5.1.2">
+<h4><span class="header-section-number">23.5.1.2</span> CLM 4.5<a href="see-also.html#inst-clm45" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The version of CLM installed on PEcAn is the ORNL branch provided by Dan Ricciuto. This version includes Dan’s point-level CLM processing scripts</p>
+<p>Download the code (~300M compressed), input data (1.7GB compressed and expands to 14 GB), and a few misc inputs.</p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb427-1"><a href="see-also.html#cb427-1" tabindex="-1"></a><span class="fu">mkdir</span> models</span>
+<span id="cb427-2"><a href="see-also.html#cb427-2" tabindex="-1"></a><span class="bu">cd</span> models</span>
+<span id="cb427-3"><a href="see-also.html#cb427-3" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm4_5_1_r085.tar.gz</span>
+<span id="cb427-4"><a href="see-also.html#cb427-4" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/ccsm_inputdata.tar.gz</span>
+<span id="cb427-5"><a href="see-also.html#cb427-5" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> clm4_5<span class="pp">*</span></span>
+<span id="cb427-6"><a href="see-also.html#cb427-6" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> ccsm_inputdata.tar.gz</span>
+<span id="cb427-7"><a href="see-also.html#cb427-7" tabindex="-1"></a></span>
+<span id="cb427-8"><a href="see-also.html#cb427-8" tabindex="-1"></a><span class="co">#Parameter file:</span></span>
+<span id="cb427-9"><a href="see-also.html#cb427-9" tabindex="-1"></a><span class="fu">mkdir</span> /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</span>
+<span id="cb427-10"><a href="see-also.html#cb427-10" tabindex="-1"></a><span class="bu">cd</span>  /home/carya/models/ccsm_inputdata/lnd/clm2/paramdata</span>
+<span id="cb427-11"><a href="see-also.html#cb427-11" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c130821.nc</span>
+<span id="cb427-12"><a href="see-also.html#cb427-12" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm_params.c140423.nc</span>
+<span id="cb427-13"><a href="see-also.html#cb427-13" tabindex="-1"></a></span>
+<span id="cb427-14"><a href="see-also.html#cb427-14" tabindex="-1"></a><span class="co">#Domain file:</span></span>
+<span id="cb427-15"><a href="see-also.html#cb427-15" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/share/domains/domain.clm/</span>
+<span id="cb427-16"><a href="see-also.html#cb427-16" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/domain.lnd.1x1pt_US-UMB_navy.nc</span>
+<span id="cb427-17"><a href="see-also.html#cb427-17" tabindex="-1"></a></span>
+<span id="cb427-18"><a href="see-also.html#cb427-18" tabindex="-1"></a><span class="co">#Aggregated met data file:</span></span>
+<span id="cb427-19"><a href="see-also.html#cb427-19" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/CLM1PT_data/1x1pt_US-UMB</span>
+<span id="cb427-20"><a href="see-also.html#cb427-20" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/all_hourly.nc </span>
+<span id="cb427-21"><a href="see-also.html#cb427-21" tabindex="-1"></a></span>
+<span id="cb427-22"><a href="see-also.html#cb427-22" tabindex="-1"></a><span class="co">## lightning database</span></span>
+<span id="cb427-23"><a href="see-also.html#cb427-23" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/atm/datm7/NASA_LIS/</span>
+<span id="cb427-24"><a href="see-also.html#cb427-24" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clmforc.Li_2012_climo1995-2011.T62.lnfm_Total_c140423.nc</span>
+<span id="cb427-25"><a href="see-also.html#cb427-25" tabindex="-1"></a></span>
+<span id="cb427-26"><a href="see-also.html#cb427-26" tabindex="-1"></a><span class="co">## surface data</span></span>
+<span id="cb427-27"><a href="see-also.html#cb427-27" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata</span>
+<span id="cb427-28"><a href="see-also.html#cb427-28" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_360x720cru_simyr1850_c130927.nc</span>
+<span id="cb427-29"><a href="see-also.html#cb427-29" tabindex="-1"></a><span class="bu">cd</span> /home/carya/models/ccsm_inputdata/lnd/clm2/surfdata_map</span>
+<span id="cb427-30"><a href="see-also.html#cb427-30" tabindex="-1"></a><span class="fu">wget</span> ftp://nacp.ornl.gov/synthesis/2008/firenze/site/clm/surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new</span>
+<span id="cb427-31"><a href="see-also.html#cb427-31" tabindex="-1"></a><span class="fu">mv</span> surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc_new surfdata_1x1pt_US-UMB_I1850CLM45CN_simyr1850.nc</span></code></pre></div>
+<p>Required libraries</p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb428-1"><a href="see-also.html#cb428-1" tabindex="-1"></a><span class="fu">sudo</span> apt-get install mercurial csh tcsh subversion cmake</span>
+<span id="cb428-2"><a href="see-also.html#cb428-2" tabindex="-1"></a></span>
+<span id="cb428-3"><a href="see-also.html#cb428-3" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /usr/bin/make /usr/bin/gmake</span></code></pre></div>
+<p>Compile and build default inputs</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb429-1"><a href="see-also.html#cb429-1" tabindex="-1"></a><span class="bu">cd</span> ~/carya/models/clm4_5_1_r085/scripts</span>
+<span id="cb429-2"><a href="see-also.html#cb429-2" tabindex="-1"></a><span class="ex">python</span> runCLM.py <span class="at">--site</span> US-UMB ––compset I1850CLM45CN <span class="at">--mach</span> ubuntu <span class="at">--ccsm_input</span> /home/carya/models/ccsm_inputdata <span class="at">--tstep</span> 1 <span class="at">--nopointdata</span> <span class="at">--coldstart</span> <span class="at">--cpl_bypass</span> <span class="at">--clean_build</span></span></code></pre></div>
+<div id="clm-test-run" class="section level5 hasAnchor" number="23.5.1.2.1">
+<h5><span class="header-section-number">23.5.1.2.1</span> CLM Test Run<a href="see-also.html#clm-test-run" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>You will see a new directory in scripts: US-UMB_I1850CLM45CN
+Enter this directory and run (you shouldn’t have to do this normally, but there is a bug with the python script and doing this ensures all files get to the right place):</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb430-1"><a href="see-also.html#cb430-1" tabindex="-1"></a><span class="ex">./US-UMB_I1850CLM45CN.build</span></span></code></pre></div>
+<p>Next you are ready to go to the run directory:</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb431-1"><a href="see-also.html#cb431-1" tabindex="-1"></a><span class="ex">/home/carya/models/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/run</span></span></code></pre></div>
+<p>Open to edit file: datm.streams.txt.CLM1PT.CLM_USRDAT and check file paths such that all paths start with /home/carya/models/ccsm_inputdata</p>
+<p>From this directory, launch the executable that resides in the bld directory:</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb432-1"><a href="see-also.html#cb432-1" tabindex="-1"></a><span class="ex">/home/carya/clm4_5_1_r085/run/US-UMB_I1850CLM45CN/bld/cesm.exe</span></span></code></pre></div>
+<p>not sure this was the right location, but wherever the executable is</p>
+<p>You should begin to see output files that look like this:
+US-UMB_I1850CLM45CN.clm2.h0.yyyy-mm.nc (yyyy is year, mm is month)
+These are netcdf files containing monthly averages of lots of variables.</p>
+<p>The lnd_in file in the run directory can be modified to change the output file frequency and variables.</p>
+
+</div>
+</div>
+<div id="inst-dalec" class="section level4 hasAnchor" number="23.5.1.3">
+<h4><span class="header-section-number">23.5.1.3</span> DALEC<a href="see-also.html#inst-dalec" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb433"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb433-1"><a href="see-also.html#cb433-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb433-2"><a href="see-also.html#cb433-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> dalec_EnKF_pub.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/dalec_EnKF_pub.tgz</span>
+<span id="cb433-3"><a href="see-also.html#cb433-3" tabindex="-1"></a><span class="fu">tar</span> zxf dalec_EnKF_pub.tgz</span>
+<span id="cb433-4"><a href="see-also.html#cb433-4" tabindex="-1"></a><span class="fu">rm</span> dalec_EnKF_pub.tgz</span>
+<span id="cb433-5"><a href="see-also.html#cb433-5" tabindex="-1"></a></span>
+<span id="cb433-6"><a href="see-also.html#cb433-6" tabindex="-1"></a><span class="bu">cd</span> dalec_EnKF_pub</span>
+<span id="cb433-7"><a href="see-also.html#cb433-7" tabindex="-1"></a><span class="fu">make</span> dalec_EnKF</span>
+<span id="cb433-8"><a href="see-also.html#cb433-8" tabindex="-1"></a><span class="fu">make</span> dalec_seqMH</span>
+<span id="cb433-9"><a href="see-also.html#cb433-9" tabindex="-1"></a><span class="fu">sudo</span> cp dalec_EnKF dalec_seqMH /usr/local/bin</span></code></pre></div>
+
+</div>
+<div id="inst-ed2" class="section level4 hasAnchor" number="23.5.1.4">
+<h4><span class="header-section-number">23.5.1.4</span> ED2<a href="see-also.html#inst-ed2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ed2.2-r46-used-in-pecan-manuscript" class="section level5 hasAnchor" number="23.5.1.4.1">
+<h5><span class="header-section-number">23.5.1.4.1</span> ED2.2 r46 (used in PEcAn manuscript)<a href="see-also.html#ed2.2-r46-used-in-pecan-manuscript" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb434"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb434-1"><a href="see-also.html#cb434-1" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb434-2"><a href="see-also.html#cb434-2" tabindex="-1"></a><span class="co"># Get version r46 with a few patches for ubuntu</span></span>
+<span id="cb434-3"><a href="see-also.html#cb434-3" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb434-4"><a href="see-also.html#cb434-4" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r46.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r46.tgz</span>
+<span id="cb434-5"><a href="see-also.html#cb434-5" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r46.tgz</span>
+<span id="cb434-6"><a href="see-also.html#cb434-6" tabindex="-1"></a><span class="fu">rm</span> ED.r46.tgz</span>
+<span id="cb434-7"><a href="see-also.html#cb434-7" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb434-8"><a href="see-also.html#cb434-8" tabindex="-1"></a><span class="co"># configure and compile ed</span></span>
+<span id="cb434-9"><a href="see-also.html#cb434-9" tabindex="-1"></a><span class="bu">cd</span> ~/ED.r46/ED/build/bin</span>
+<span id="cb434-10"><a href="see-also.html#cb434-10" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
+<span id="cb434-11"><a href="see-also.html#cb434-11" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
+<span id="cb434-12"><a href="see-also.html#cb434-12" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r46</span></code></pre></div>
+<p>Perform a test run using pre configured ED settings for ED2.2 r46</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb435-1"><a href="see-also.html#cb435-1" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------</span></span>
+<span id="cb435-2"><a href="see-also.html#cb435-2" tabindex="-1"></a><span class="co"># Create sample run</span></span>
+<span id="cb435-3"><a href="see-also.html#cb435-3" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb435-4"><a href="see-also.html#cb435-4" tabindex="-1"></a><span class="fu">mkdir</span> testrun.ed.r46</span>
+<span id="cb435-5"><a href="see-also.html#cb435-5" tabindex="-1"></a><span class="bu">cd</span> testrun.ed.r46</span>
+<span id="cb435-6"><a href="see-also.html#cb435-6" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r46</span>
+<span id="cb435-7"><a href="see-also.html#cb435-7" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</span>
+<span id="cb435-8"><a href="see-also.html#cb435-8" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r46.xml</span>
+<span id="cb435-9"><a href="see-also.html#cb435-9" tabindex="-1"></a><span class="co"># execute test run</span></span>
+<span id="cb435-10"><a href="see-also.html#cb435-10" tabindex="-1"></a><span class="bu">time</span> ed2.r46</span></code></pre></div>
+</div>
+<div id="ed-2.2-r82" class="section level5 hasAnchor" number="23.5.1.4.2">
+<h5><span class="header-section-number">23.5.1.4.2</span> ED 2.2 r82<a href="see-also.html#ed-2.2-r82" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb436"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb436-1"><a href="see-also.html#cb436-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb436-2"><a href="see-also.html#cb436-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.tgz</span>
+<span id="cb436-3"><a href="see-also.html#cb436-3" tabindex="-1"></a><span class="fu">tar</span> zxf ED.r82.tgz</span>
+<span id="cb436-4"><a href="see-also.html#cb436-4" tabindex="-1"></a><span class="fu">rm</span> ED.r82.tgz</span>
+<span id="cb436-5"><a href="see-also.html#cb436-5" tabindex="-1"></a></span>
+<span id="cb436-6"><a href="see-also.html#cb436-6" tabindex="-1"></a><span class="bu">cd</span> ED.r82</span>
+<span id="cb436-7"><a href="see-also.html#cb436-7" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED.r82.patch http://isda.ncsa.illinois.edu/~kooper/EBI/ED.r82.patch</span>
+<span id="cb436-8"><a href="see-also.html#cb436-8" tabindex="-1"></a><span class="fu">patch</span> <span class="at">-p1</span> <span class="op">&lt;</span> ED.r82.patch</span>
+<span id="cb436-9"><a href="see-also.html#cb436-9" tabindex="-1"></a><span class="bu">cd</span> ED/build/bin</span>
+<span id="cb436-10"><a href="see-also.html#cb436-10" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
+<span id="cb436-11"><a href="see-also.html#cb436-11" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
+<span id="cb436-12"><a href="see-also.html#cb436-12" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.r82</span></code></pre></div>
+<p>Perform a test run using pre configured ED settings for ED2.2 r82</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb437-1"><a href="see-also.html#cb437-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb437-2"><a href="see-also.html#cb437-2" tabindex="-1"></a><span class="fu">mkdir</span> testrun.ed.r82</span>
+<span id="cb437-3"><a href="see-also.html#cb437-3" tabindex="-1"></a><span class="bu">cd</span> testrun.ed.r82</span>
+<span id="cb437-4"><a href="see-also.html#cb437-4" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ED2IN http://isda.ncsa.illinois.edu/~kooper/EBI/ED2IN.r82</span>
+<span id="cb437-5"><a href="see-also.html#cb437-5" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#</span><span class="dt">\$</span><span class="st">HOME#</span><span class="va">$HOME</span><span class="st">#&quot;</span> ED2IN</span>
+<span id="cb437-6"><a href="see-also.html#cb437-6" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> config.xml  http://isda.ncsa.illinois.edu/~kooper/EBI/config.r82.xml</span>
+<span id="cb437-7"><a href="see-also.html#cb437-7" tabindex="-1"></a><span class="co"># execute test run</span></span>
+<span id="cb437-8"><a href="see-also.html#cb437-8" tabindex="-1"></a><span class="bu">time</span> ed2.r82</span></code></pre></div>
+</div>
+<div id="ed-2.2-bleeding-edge" class="section level5 hasAnchor" number="23.5.1.4.3">
+<h5><span class="header-section-number">23.5.1.4.3</span> ED 2.2 bleeding edge<a href="see-also.html#ed-2.2-bleeding-edge" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb438"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb438-1"><a href="see-also.html#cb438-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb438-2"><a href="see-also.html#cb438-2" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/EDmodel/ED2.git</span>
+<span id="cb438-3"><a href="see-also.html#cb438-3" tabindex="-1"></a></span>
+<span id="cb438-4"><a href="see-also.html#cb438-4" tabindex="-1"></a><span class="bu">cd</span> ED2/ED/build/bin</span>
+<span id="cb438-5"><a href="see-also.html#cb438-5" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> include.mk.VM http://isda.ncsa.illinois.edu/~kooper/EBI/include.mk.opt.<span class="kw">`</span><span class="fu">uname</span> <span class="at">-s</span><span class="kw">`</span></span>
+<span id="cb438-6"><a href="see-also.html#cb438-6" tabindex="-1"></a><span class="ex">./generate_deps.sh</span></span>
+<span id="cb438-7"><a href="see-also.html#cb438-7" tabindex="-1"></a><span class="fu">make</span> OPT=VM</span>
+<span id="cb438-8"><a href="see-also.html#cb438-8" tabindex="-1"></a><span class="fu">sudo</span> cp ../ed_2.1-VM /usr/local/bin/ed2.git</span></code></pre></div>
+
+</div>
+</div>
+<div id="inst-fates" class="section level4 hasAnchor" number="23.5.1.5">
+<h4><span class="header-section-number">23.5.1.5</span> CLM-FATES<a href="see-also.html#inst-fates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Prerequisites</p>
+<pre><code>sudo apt-get upgrade libnetcdf-dev
+sudo apt-get install subversion
+sudo apt-get install csh
+sudo apt-get install cmake
+sudo ln -s /usr/bin/make /usr/bin/gmake
+sudo rm /bin/sh
+sudo ln -s /bin/bash /bin/sh
+
+wget https://github.com/Unidata/netcdf-fortran/archive/v4.4.4.tar.gz
+cd netcdf-4.4.4
+./configure
+make
+sudo make install</code></pre>
+<p>you might need to mess around with installing netcdf and netcdf-fortran to get a version FATES likes…</p>
+<p>Get code from Github (currently private) and go to cime/scripts directory</p>
+<pre><code>git clone git@github.com:NGEET/ed-clm.git
+cd ed-clm/cime/scripts/</code></pre>
+<p>Within CLM-FATES, to be able to build an executable we need to create a reference run. We’ll also use this reference run to grab defaults from, so we’ll be registering the location of both the reference <strong>case</strong> (location of executable, scripts, etc) and the reference <strong>inputs</strong> with the PEcAn database. To begin, copy reference run script from pecan</p>
+<pre><code>cp ~/pecan/models/fates/inst/create_1x1_ref_case.sh .</code></pre>
+<p>Edit reference case script to set NETCDF_HOME, CROOT (reference run case), DIN_LOC_ROOT (reference run inputs). Also, make sure DIN_LOC_ROOT exists as FATES will not create it itself. Then run the script</p>
+<pre><code>./create_1x1_ref_case.sh</code></pre>
+<p>Be aware that this script WILL ask you for your password on the NCAR server to download the reference case input data (the guest password may work, haven’t tried this). If it gives an error at the pio stage check the log, but the most likely error is it being unable to find a version of netcdf it likes.</p>
+<p>Once FATES is installed, set the whole reference case directory as the Model path (leave filename blank) and set the whole inputs directory as an Input with format clm_defaults.</p>
+
+</div>
+<div id="inst-gday" class="section level4 hasAnchor" number="23.5.1.6">
+<h4><span class="header-section-number">23.5.1.6</span> GDAY<a href="see-also.html#inst-gday" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Navigate to a directory you would like to store GDAY and run the following:</p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb443-1"><a href="see-also.html#cb443-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/mdekauwe/GDAY.git</span>
+<span id="cb443-2"><a href="see-also.html#cb443-2" tabindex="-1"></a></span>
+<span id="cb443-3"><a href="see-also.html#cb443-3" tabindex="-1"></a><span class="bu">cd</span> GDAY</span>
+<span id="cb443-4"><a href="see-also.html#cb443-4" tabindex="-1"></a></span>
+<span id="cb443-5"><a href="see-also.html#cb443-5" tabindex="-1"></a><span class="bu">cd</span> src</span>
+<span id="cb443-6"><a href="see-also.html#cb443-6" tabindex="-1"></a></span>
+<span id="cb443-7"><a href="see-also.html#cb443-7" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
+<p><code>gday</code> is your executable.</p>
+
+</div>
+<div id="inst-jules" class="section level4 hasAnchor" number="23.5.1.7">
+<h4><span class="header-section-number">23.5.1.7</span> JULES<a href="see-also.html#inst-jules" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>INSTALL STEPS:
+1) Download JULES and FCM
+JULES:
+Model requires registration to download. Not to be put on PEcAn VM
+Getting Started documentation: <a href="https://jules.jchmr.org/content/getting-started" class="uri">https://jules.jchmr.org/content/getting-started</a>
+Registration: <a href="http://jules-lsm.github.io/access_req/JULES_access.html" class="uri">http://jules-lsm.github.io/access_req/JULES_access.html</a></p>
+<p>FCM:</p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb444-1"><a href="see-also.html#cb444-1" tabindex="-1"></a>    <span class="ex">https://github.com/metomi/fcm/</span></span>
+<span id="cb444-2"><a href="see-also.html#cb444-2" tabindex="-1"></a>    <span class="fu">wget</span> https://github.com/metomi/fcm/archive/2015.05.0.tar.gz</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>edit makefile</li>
+</ol>
+<div class="sourceCode" id="cb445"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb445-1"><a href="see-also.html#cb445-1" tabindex="-1"></a><span class="ex">open</span> etc/fcm-make/make.cfg</span>
+<span id="cb445-2"><a href="see-also.html#cb445-2" tabindex="-1"></a></span>
+<span id="cb445-3"><a href="see-also.html#cb445-3" tabindex="-1"></a><span class="bu">set</span> JULES_NETCDF = actual instead of dummy</span>
+<span id="cb445-4"><a href="see-also.html#cb445-4" tabindex="-1"></a><span class="bu">set</span> path <span class="er">(</span><span class="ex">e.g.</span> /usr/<span class="kw">)</span> <span class="ex">and</span> lib_path /lib64 to netCDF libraries</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>compile JULES</li>
+</ol>
+<div class="sourceCode" id="cb446"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb446-1"><a href="see-also.html#cb446-1" tabindex="-1"></a><span class="bu">cd</span> etc/fcm-make/</span>
+<span id="cb446-2"><a href="see-also.html#cb446-2" tabindex="-1"></a><span class="ex">{path.to.fcm}/fcm</span> make <span class="at">-f</span> etc/fcm-make/make.cfg <span class="at">--new</span></span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb447-1"><a href="see-also.html#cb447-1" tabindex="-1"></a><span class="ex">UBUNTU</span> VERSION: installed without having to add any perl libraries</span>
+<span id="cb447-2"><a href="see-also.html#cb447-2" tabindex="-1"></a><span class="co">#perl stuff that I had to install on pecan2 not PEcAN VM</span></span>
+<span id="cb447-3"><a href="see-also.html#cb447-3" tabindex="-1"></a><span class="fu">sudo</span> yum install perl-Digest-SHA</span>
+<span id="cb447-4"><a href="see-also.html#cb447-4" tabindex="-1"></a><span class="fu">sudo</span> yum install perl-Time-modules</span>
+<span id="cb447-5"><a href="see-also.html#cb447-5" tabindex="-1"></a><span class="fu">sudo</span> yum install cpan</span>
+<span id="cb447-6"><a href="see-also.html#cb447-6" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> http://cpanmin.us <span class="kw">|</span> <span class="fu">perl</span> <span class="at">-</span> <span class="at">--sudo</span> App::cpanminus</span>
+<span id="cb447-7"><a href="see-also.html#cb447-7" tabindex="-1"></a><span class="fu">sudo</span> cpanm Time/Piece.pm</span>
+<span id="cb447-8"><a href="see-also.html#cb447-8" tabindex="-1"></a><span class="fu">sudo</span> cpanm IO/Uncompress/Gunzip.pm</span></code></pre></div>
+<p>Executable is under build/bin/jules.exe</p>
+<p>Example rundir: examples/point_loobos</p>
+
+</div>
+<div id="inst-linkages" class="section level4 hasAnchor" number="23.5.1.8">
+<h4><span class="header-section-number">23.5.1.8</span> LINKAGES<a href="see-also.html#inst-linkages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="r-installation" class="section level5 hasAnchor" number="23.5.1.8.1">
+<h5><span class="header-section-number">23.5.1.8.1</span> R Installation<a href="see-also.html#r-installation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="see-also.html#cb448-1" tabindex="-1"></a><span class="co"># Public</span></span>
+<span id="cb448-2"><a href="see-also.html#cb448-2" tabindex="-1"></a>echo <span class="st">&#39;devtools::install_github(&quot;araiho/linkages_package&quot;)&#39;</span> <span class="sc">|</span> R <span class="sc">--</span>vanilla</span></code></pre></div>
+</div>
+<div id="fortran-version" class="section level5 hasAnchor" number="23.5.1.8.2">
+<h5><span class="header-section-number">23.5.1.8.2</span> FORTRAN VERSION<a href="see-also.html#fortran-version" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="see-also.html#cb449-1" tabindex="-1"></a><span class="co">#FORTRAN VERSION</span></span>
+<span id="cb449-2"><a href="see-also.html#cb449-2" tabindex="-1"></a>cd</span>
+<span id="cb449-3"><a href="see-also.html#cb449-3" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>araiho<span class="sc">/</span>Linkages.git</span>
+<span id="cb449-4"><a href="see-also.html#cb449-4" tabindex="-1"></a>cd Linkages</span>
+<span id="cb449-5"><a href="see-also.html#cb449-5" tabindex="-1"></a>gfortran <span class="sc">-</span>o linkages linkages.f</span>
+<span id="cb449-6"><a href="see-also.html#cb449-6" tabindex="-1"></a>sudo cp linkages <span class="sc">/</span>usr<span class="sc">/</span>local<span class="sc">/</span>bin<span class="sc">/</span>linkages.git</span></code></pre></div>
+
+</div>
+</div>
+<div id="inst-lpj-guess" class="section level4 hasAnchor" number="23.5.1.9">
+<h4><span class="header-section-number">23.5.1.9</span> LPJ-GUESS<a href="see-also.html#inst-lpj-guess" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Instructions to download source code</p>
+<p>Go to <a href="http://web.nateko.lu.se/lpj-guess/download.html">LPJ-GUESS website</a> for instructions to access code.</p>
+
+</div>
+<div id="inst-maespa" class="section level4 hasAnchor" number="23.5.1.10">
+<h4><span class="header-section-number">23.5.1.10</span> MAESPA<a href="see-also.html#inst-maespa" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Navigate to a directory you would like store MAESPA and run the following:</p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb450-1"><a href="see-also.html#cb450-1" tabindex="-1"></a><span class="fu">git</span> clone https://bitbucket.org/remkoduursma/maespa.git</span>
+<span id="cb450-2"><a href="see-also.html#cb450-2" tabindex="-1"></a></span>
+<span id="cb450-3"><a href="see-also.html#cb450-3" tabindex="-1"></a><span class="bu">cd</span> maespa</span>
+<span id="cb450-4"><a href="see-also.html#cb450-4" tabindex="-1"></a></span>
+<span id="cb450-5"><a href="see-also.html#cb450-5" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
+<p><code>maespa.out</code> is your executable. Example input files can be found in the <code>inpufiles</code> directory. Executing measpa.out from within one of the example directories will produce output.</p>
+<p>MAESPA developers have also developed a wrapper package called Maeswrap. The usual R package installation method <code>install.packages</code> may present issues with downloading an unpacking a dependency package called <code>rgl</code>. Here are a couple of solutions:</p>
+<div id="solution-1" class="section level5 hasAnchor" number="23.5.1.10.1">
+<h5><span class="header-section-number">23.5.1.10.1</span> Solution 1<a href="see-also.html#solution-1" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb451"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb451-1"><a href="see-also.html#cb451-1" tabindex="-1"></a><span class="co">### From the Command Line</span></span>
+<span id="cb451-2"><a href="see-also.html#cb451-2" tabindex="-1"></a><span class="fu">sudo</span> apt-get install r-cran-rgl</span></code></pre></div>
+<p>then from within R</p>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="see-also.html#cb452-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</span></code></pre></div>
+</div>
+<div id="solution-2" class="section level5 hasAnchor" number="23.5.1.10.2">
+<h5><span class="header-section-number">23.5.1.10.2</span> Solution 2<a href="see-also.html#solution-2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb453"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb453-1"><a href="see-also.html#cb453-1" tabindex="-1"></a><span class="co">### From the Command line </span></span>
+<span id="cb453-2"><a href="see-also.html#cb453-2" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libglu1-mesa-dev</span></code></pre></div>
+<p>then from within R</p>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="see-also.html#cb454-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Maeswrap&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+<div id="sipnet-inst-sipnet" class="section level4 hasAnchor" number="23.5.1.11">
+<h4><span class="header-section-number">23.5.1.11</span> SIPNET {inst-sipnet}<a href="see-also.html#sipnet-inst-sipnet" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb455"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb455-1"><a href="see-also.html#cb455-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb455-2"><a href="see-also.html#cb455-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_unk.tar.gz</span>
+<span id="cb455-3"><a href="see-also.html#cb455-3" tabindex="-1"></a><span class="fu">tar</span> zxf sipnet_unk.tar.gz</span>
+<span id="cb455-4"><a href="see-also.html#cb455-4" tabindex="-1"></a><span class="fu">rm</span> sipnet_unk.tar.gz</span>
+<span id="cb455-5"><a href="see-also.html#cb455-5" tabindex="-1"></a></span>
+<span id="cb455-6"><a href="see-also.html#cb455-6" tabindex="-1"></a><span class="bu">cd</span> sipnet_unk</span>
+<span id="cb455-7"><a href="see-also.html#cb455-7" tabindex="-1"></a><span class="fu">make</span></span>
+<span id="cb455-8"><a href="see-also.html#cb455-8" tabindex="-1"></a><span class="fu">sudo</span> cp sipnet /usr/local/bin/sipnet.runk</span></code></pre></div>
+<div id="sipnet-testrun" class="section level5 hasAnchor" number="23.5.1.11.1">
+<h5><span class="header-section-number">23.5.1.11.1</span> SIPNET testrun<a href="see-also.html#sipnet-testrun" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb456"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb456-1"><a href="see-also.html#cb456-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb456-2"><a href="see-also.html#cb456-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.sipnet.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.sipnet.tar.gz</span>
+<span id="cb456-3"><a href="see-also.html#cb456-3" tabindex="-1"></a><span class="fu">tar</span> zxf testrun.sipnet.tar.gz</span>
+<span id="cb456-4"><a href="see-also.html#cb456-4" tabindex="-1"></a><span class="fu">rm</span> testrun.sipnet.tar.gz</span>
+<span id="cb456-5"><a href="see-also.html#cb456-5" tabindex="-1"></a><span class="bu">cd</span> testrun.sipnet</span>
+<span id="cb456-6"><a href="see-also.html#cb456-6" tabindex="-1"></a><span class="ex">sipnet.runk</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+<div id="install-data" class="section level3 hasAnchor" number="23.5.2">
+<h3><span class="header-section-number">23.5.2</span> Installing data for PEcAn<a href="see-also.html#install-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>PEcAn assumes some of the data to be installed on the machine. This page will describe how to install this data.</p>
+<div id="site-information" class="section level4 hasAnchor" number="23.5.2.1">
+<h4><span class="header-section-number">23.5.2.1</span> Site Information<a href="see-also.html#site-information" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>These are large-ish files that contain data used with ED2 and SIPNET</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb457-1"><a href="see-also.html#cb457-1" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> sites</span>
+<span id="cb457-2"><a href="see-also.html#cb457-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> sites.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/sites.tgz</span>
+<span id="cb457-3"><a href="see-also.html#cb457-3" tabindex="-1"></a><span class="fu">tar</span> zxf sites.tgz</span>
+<span id="cb457-4"><a href="see-also.html#cb457-4" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/kooper/Projects/EBI#</span><span class="va">${PWD}</span><span class="st">#&quot;</span> sites/<span class="pp">*</span>/ED_MET_DRIVER_HEADER</span>
+<span id="cb457-5"><a href="see-also.html#cb457-5" tabindex="-1"></a><span class="fu">rm</span> sites.tgz</span>
+<span id="cb457-6"><a href="see-also.html#cb457-6" tabindex="-1"></a></span>
+<span id="cb457-7"><a href="see-also.html#cb457-7" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> inputs</span>
+<span id="cb457-8"><a href="see-also.html#cb457-8" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> inputs.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/inputs.tgz</span>
+<span id="cb457-9"><a href="see-also.html#cb457-9" tabindex="-1"></a><span class="fu">tar</span> zxf inputs.tgz</span>
+<span id="cb457-10"><a href="see-also.html#cb457-10" tabindex="-1"></a><span class="fu">rm</span> inputs.tgz</span></code></pre></div>
+</div>
+<div id="fia-database" class="section level4 hasAnchor" number="23.5.2.2">
+<h4><span class="header-section-number">23.5.2.2</span> FIA database<a href="see-also.html#fia-database" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>FIA database is large and will add an extra 10GB to the installation.</p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb458-1"><a href="see-also.html#cb458-1" tabindex="-1"></a><span class="co"># download and install database</span></span>
+<span id="cb458-2"><a href="see-also.html#cb458-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> fia5data.psql.gz http://isda.ncsa.illinois.edu/~kooper/EBI/fia5data.psql.gz</span>
+<span id="cb458-3"><a href="see-also.html#cb458-3" tabindex="-1"></a><span class="ex">dropdb</span> <span class="at">--if-exists</span> fia5data</span>
+<span id="cb458-4"><a href="see-also.html#cb458-4" tabindex="-1"></a><span class="ex">createdb</span> <span class="at">-O</span> bety fia5data</span>
+<span id="cb458-5"><a href="see-also.html#cb458-5" tabindex="-1"></a><span class="fu">gunzip</span> fia5data.psql.gz</span>
+<span id="cb458-6"><a href="see-also.html#cb458-6" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> bety <span class="at">-d</span> fia5data <span class="op">&lt;</span> fia5data.psql</span>
+<span id="cb458-7"><a href="see-also.html#cb458-7" tabindex="-1"></a><span class="fu">rm</span> fia5data.psql</span></code></pre></div>
+</div>
+<div id="flux-camp" class="section level4 hasAnchor" number="23.5.2.3">
+<h4><span class="header-section-number">23.5.2.3</span> Flux Camp<a href="see-also.html#flux-camp" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Following will install the data for flux camp (as well as the demo script for PEcAn).</p>
+<div class="sourceCode" id="cb459"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb459-1"><a href="see-also.html#cb459-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb459-2"><a href="see-also.html#cb459-2" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> plot.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/plot.tgz</span>
+<span id="cb459-3"><a href="see-also.html#cb459-3" tabindex="-1"></a><span class="fu">tar</span> zxf plot.tgz</span>
+<span id="cb459-4"><a href="see-also.html#cb459-4" tabindex="-1"></a><span class="fu">rm</span> plot.tgz</span></code></pre></div>
+</div>
+<div id="harvard-for-ed-tutorial" class="section level4 hasAnchor" number="23.5.2.4">
+<h4><span class="header-section-number">23.5.2.4</span> Harvard for ED tutorial<a href="see-also.html#harvard-for-ed-tutorial" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Add datasets and runs</p>
+<div class="sourceCode" id="cb460"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb460-1"><a href="see-also.html#cb460-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> Santarem_Km83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/Santarem_Km83.zip</span>
+<span id="cb460-2"><a href="see-also.html#cb460-2" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-d</span> sites Santarem_Km83.zip</span>
+<span id="cb460-3"><a href="see-also.html#cb460-3" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> sites/Santarem_Km83/ED_MET_DRIVER_HEADER</span>
+<span id="cb460-4"><a href="see-also.html#cb460-4" tabindex="-1"></a><span class="fu">rm</span> Santarem_Km83.zip</span>
+<span id="cb460-5"><a href="see-also.html#cb460-5" tabindex="-1"></a></span>
+<span id="cb460-6"><a href="see-also.html#cb460-6" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.s83.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.s83.zip</span>
+<span id="cb460-7"><a href="see-also.html#cb460-7" tabindex="-1"></a><span class="fu">unzip</span> testrun.s83.zip</span>
+<span id="cb460-8"><a href="see-also.html#cb460-8" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.s83/ED2IN</span>
+<span id="cb460-9"><a href="see-also.html#cb460-9" tabindex="-1"></a><span class="fu">rm</span> testrun.s83.zip</span>
+<span id="cb460-10"><a href="see-also.html#cb460-10" tabindex="-1"></a></span>
+<span id="cb460-11"><a href="see-also.html#cb460-11" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> ed2ws.harvard.tgz http://isda.ncsa.illinois.edu/~kooper/EBI/ed2ws.harvard.tgz</span>
+<span id="cb460-12"><a href="see-also.html#cb460-12" tabindex="-1"></a><span class="fu">tar</span> zxf ed2ws.harvard.tgz</span>
+<span id="cb460-13"><a href="see-also.html#cb460-13" tabindex="-1"></a><span class="fu">mkdir</span> ed2ws.harvard/analy ed2ws.harvard/histo</span>
+<span id="cb460-14"><a href="see-also.html#cb460-14" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#g&quot;</span> ed2ws.harvard/input_harvard/met_driver/HF_MET_HEADER ed2ws.harvard/ED2IN ed2ws.harvard/<span class="pp">*</span>.r</span>
+<span id="cb460-15"><a href="see-also.html#cb460-15" tabindex="-1"></a><span class="fu">rm</span> ed2ws.harvard.tgz</span>
+<span id="cb460-16"><a href="see-also.html#cb460-16" tabindex="-1"></a></span>
+<span id="cb460-17"><a href="see-also.html#cb460-17" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> testrun.PDG.zip http://isda.ncsa.illinois.edu/~kooper/EBI/testrun.PDG.zip</span>
+<span id="cb460-18"><a href="see-also.html#cb460-18" tabindex="-1"></a><span class="fu">unzip</span> testrun.PDG.zip</span>
+<span id="cb460-19"><a href="see-also.html#cb460-19" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&quot;s#/home/pecan#</span><span class="va">${HOME}</span><span class="st">#&quot;</span> testrun.PDG/Met/PDG_MET_DRIVER testrun.PDG/Template/ED2IN</span>
+<span id="cb460-20"><a href="see-also.html#cb460-20" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="at">-e</span> <span class="st">&#39;s#/n/scratch2/moorcroft_lab/kzhang/PDG/WFire_Pecan/##&#39;</span> testrun.PDG/Template/ED2IN</span>
+<span id="cb460-21"><a href="see-also.html#cb460-21" tabindex="-1"></a><span class="fu">rm</span> testrun.PDG.zip</span>
+<span id="cb460-22"><a href="see-also.html#cb460-22" tabindex="-1"></a></span>
+<span id="cb460-23"><a href="see-also.html#cb460-23" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> create_met_driver.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/create_met_driver.tar.gz</span>
+<span id="cb460-24"><a href="see-also.html#cb460-24" tabindex="-1"></a><span class="fu">tar</span> zxf create_met_driver.tar.gz</span>
+<span id="cb460-25"><a href="see-also.html#cb460-25" tabindex="-1"></a><span class="fu">rm</span> create_met_driver.tar.gz</span></code></pre></div>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="fluxnet2015.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cruncep.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="osinstall.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pecan-remote.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -821,7 +1298,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/PecanProject/pecan/edit/develop/book_source/03_topical_pages/06_data/01_meteorology.Rmd",
+    "link": "https://github.com/PecanProject/pecan/edit/develop/book_source/03_topical_pages/93_installation/03_install_OS/05_install_BETY.Rmd",
     "text": "Edit"
   },
   "history": {
