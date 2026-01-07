@@ -864,6 +864,58 @@ For the cases where we need simulations with a predefined set of parameters, met
 <li><code>PEcAn.&lt;MODEL&gt;::write.configs.&lt;MODEL&gt;</code> – See <a href="#pecan-write-configs">above</a></li>
 <li><code>PEcAn.uncertainty::run.sensitivity.analysis</code> – Executes the uncertainty analysis</li>
 </ul>
+<div id="xml-input-design" class="section level4 hasAnchor" number="11.2.2.1">
+<h4><span class="header-section-number">11.2.2.1</span> Coordinating inputs with the <code>input_design</code> design matrix<a href="xml-advanced.html#xml-input-design" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Multi-site ensembles that sample over input files use an <code>input_design</code>
+data.frame to keep parameter draws and input files aligned across runs. The
+design is created up front (typically via <code>generate_joint_ensemble_design()</code>)
+and passed to <code>runModule.run.write.configs()</code>. It is not saved automatically to
+<code>samples.Rdata</code>, so keep your copy if you need to reuse it.</p>
+<ul>
+<li><strong>Parameter column:</strong> <code>param</code> gives the index (i.e. row number) of the
+posterior draw to use for this run. For example, <code>param = 5</code> means use the 5th
+parameter sample from <code>samples.Rdata</code>.</li>
+<li><strong>Input columns:</strong> any name that matches a tag under <code>run/inputs</code> (for
+example <code>met</code>, <code>soil</code>, <code>veg</code>, <code>poolinitcond</code>). Values are indices into that
+input’s <code>path</code> list. Leaving a column out keeps that input fixed across runs.</li>
+<li><strong>Row count and order:</strong> must include exactly one row per run. For ensembles
+this means <code>ensemble.size</code> rows.</li>
+</ul>
+<p>Example layout (CSV or <code>data.frame</code>):</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">param</th>
+<th align="right">met</th>
+<th align="right">soil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<p>In this example, run 2 would reuse the second parameter draw and also switch to
+the second met driver while keeping the first soil file.</p>
+</div>
 </div>
 <div id="xml-parameter-data-assimilation" class="section level3 hasAnchor" number="11.2.3">
 <h3><span class="header-section-number">11.2.3</span> Parameter Data Assimilation<a href="xml-advanced.html#xml-parameter-data-assimilation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
