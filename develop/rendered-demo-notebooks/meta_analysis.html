@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aritra Dey">
+
+<title>Demo 03: Meta Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="meta_analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="meta_analysis_files/libs/quarto-html/quarto.js"></script>
+<script src="meta_analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="meta_analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="meta_analysis_files/libs/quarto-html/anchor.min.js"></script>
+<link href="meta_analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="meta_analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="meta_analysis_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="meta_analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="meta_analysis_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#what-this-notebook-does" id="toc-what-this-notebook-does" class="nav-link" data-scroll-target="#what-this-notebook-does"><span class="header-section-number">1.1</span> What This Notebook Does</a></li>
+  <li><a href="#the-scenario" id="toc-the-scenario" class="nav-link" data-scroll-target="#the-scenario"><span class="header-section-number">1.2</span> The Scenario</a></li>
+  </ul></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites"><span class="header-section-number">2</span> Prerequisites</a></li>
+  <li><a href="#load-pecan-packages" id="toc-load-pecan-packages" class="nav-link" data-scroll-target="#load-pecan-packages"><span class="header-section-number">3</span> Load PEcAn Packages</a></li>
+  <li><a href="#load-data-and-configuration" id="toc-load-data-and-configuration" class="nav-link" data-scroll-target="#load-data-and-configuration"><span class="header-section-number">4</span> Load Data and Configuration</a>
+  <ul class="collapse">
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">4.1</span> Load Data</a></li>
+  <li><a href="#configure-meta-analysis" id="toc-configure-meta-analysis" class="nav-link" data-scroll-target="#configure-meta-analysis"><span class="header-section-number">4.2</span> Configure Meta Analysis</a></li>
+  </ul></li>
+  <li><a href="#run-meta-analysis-standalone" id="toc-run-meta-analysis-standalone" class="nav-link" data-scroll-target="#run-meta-analysis-standalone"><span class="header-section-number">5</span> Run Meta Analysis (Standalone)</a></li>
+  <li><a href="#sec-outputs" id="toc-sec-outputs" class="nav-link" data-scroll-target="#sec-outputs"><span class="header-section-number">6</span> PEcAn Outputs</a>
+  <ul class="collapse">
+  <li><a href="#output-directory-structure" id="toc-output-directory-structure" class="nav-link" data-scroll-target="#output-directory-structure"><span class="header-section-number">6.1</span> Output Directory Structure</a></li>
+  <li><a href="#posterior-distributions" id="toc-posterior-distributions" class="nav-link" data-scroll-target="#posterior-distributions"><span class="header-section-number">6.2</span> Posterior Distributions</a></li>
+  </ul></li>
+  <li><a href="#sec-visualize" id="toc-sec-visualize" class="nav-link" data-scroll-target="#sec-visualize"><span class="header-section-number">7</span> Visualize Meta Analysis Results</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8</span> Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#using-these-posteriors" id="toc-using-these-posteriors" class="nav-link" data-scroll-target="#using-these-posteriors"><span class="header-section-number">8.1</span> Using these Posteriors</a></li>
+  </ul></li>
+  <li><a href="#alternative-running-as-part-of-a-workflow-pecan.xml" id="toc-alternative-running-as-part-of-a-workflow-pecan.xml" class="nav-link" data-scroll-target="#alternative-running-as-part-of-a-workflow-pecan.xml"><span class="header-section-number">9</span> Alternative: Running as part of a Workflow (pecan.xml)</a>
+  <ul class="collapse">
+  <li><a href="#load-pecan-settings-file" id="toc-load-pecan-settings-file" class="nav-link" data-scroll-target="#load-pecan-settings-file"><span class="header-section-number">9.1</span> Load PEcAn Settings File</a></li>
+  <li><a href="#run-meta-analysis-module" id="toc-run-meta-analysis-module" class="nav-link" data-scroll-target="#run-meta-analysis-module"><span class="header-section-number">9.2</span> Run Meta Analysis (Module)</a></li>
+  </ul></li>
+  <li><a href="#further-exploration" id="toc-further-exploration" class="nav-link" data-scroll-target="#further-exploration"><span class="header-section-number">10</span> Further Exploration</a></li>
+  <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">11</span> Session Information</a>
+  <ul class="collapse">
+  <li><a href="#pecan-package-versions." id="toc-pecan-package-versions." class="nav-link" data-scroll-target="#pecan-package-versions."><span class="header-section-number">11.0.1</span> PEcAn package versions.</a></li>
+  <li><a href="#r-session-information" id="toc-r-session-information" class="nav-link" data-scroll-target="#r-session-information"><span class="header-section-number">11.0.2</span> R session information:</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../../meta_analysis.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Demo 03: Meta Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aritra Dey </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Meta-analysis in PEcAn is a hierarchical Bayesian statistical approach that synthesizes plant trait data from literature to constrain ecosystem model parameters. The <strong>PEcAn.MA</strong> module implements this functionality to combine prior information with observational data, generating posterior distributions for model parameters.</p>
+<p>The PEcAn Meta-Analysis module runs on tabular data in a specific format. In a standard PEcAn workflow, this data is often obtained by querying the BETYdb database. However, you can also generate this format manually if you have other trait data (e.g., from the TRY database). For this demonstration, we will use pre-generated data files (originally from BETYdb) to simulate the workflow without requiring an active database connection during the notebook execution.</p>
+<section id="what-this-notebook-does" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-this-notebook-does"><span class="header-section-number">1.1</span> What This Notebook Does</h2>
+<p>This notebook demonstrates how to:</p>
+<ol type="1">
+<li>Load pre-generated trait data and priors.</li>
+<li>Configure meta-analysis settings directly in R.</li>
+<li>Run the <code>meta_analysis_standalone</code> function.</li>
+<li>Analyze and visualize the posterior distributions and MCMC diagnostics.</li>
+<li>(Optional) Run meta-analysis using <code>pecan.xml</code> configuration (Workflow approach).</li>
+</ol>
+</section>
+<section id="the-scenario" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="the-scenario"><span class="header-section-number">1.2</span> The Scenario</h2>
+<p><strong>Context &amp; modeling scenario:</strong></p>
+<p>This demo supports the modeling scenario introduced in <a href="../Demo_1_Basic_Run/run_pecan.qmd">Demo 01</a> and <a href="../Demo_02_Uncertainty_Analysis/uncertainty.qmd">Demo 02</a>, which simulated ecosystem carbon balance at the AmeriFlux Niwot Ridge Forest site (<a href="https://ameriflux.lbl.gov/sites/siteinfo/US-NR1">US‑NR1</a>) using the SIPNET model.</p>
+<p>While those demos focused on running the ecosystem model, this notebook zooms in on the <strong>Meta-Analysis</strong> step for the <strong>temperate coniferous</strong> Plant Functional Type (PFT). The goal is to estimate the probability distributions for key model parameters (e.g., SLA, leaf turnover rate) by combining:</p>
+<ul>
+<li><strong>Priors</strong>: Existing knowledge about the parameters.</li>
+<li><strong>Data</strong>: Observed trait data from the BETYdb database (pre-generated for this demo).</li>
+</ul>
+<p>These informative posterior distributions can then be used to constrain the parameters of the SIPNET model (or other models) to improve prediction accuracy.</p>
+</section>
+</section>
+<section id="prerequisites" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Prerequisites</h1>
+<p>Before running this notebook, make sure you have:</p>
+<ul>
+<li><strong>PEcAn packages installed</strong>:</li>
+<li><strong>For this demo</strong>: You only need a subset of PEcAn packages to run the meta-analysis.</li>
+</ul>
+<pre><code># Enable repository from pecanproject
+options(repos = c(
+  pecanproject = 'https://pecanproject.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
+# Install core packages for meta-analysis
+install.packages(c('PEcAn.MA', 'PEcAn.settings', 'PEcAn.utils', 'PEcAn.logger'))</code></pre>
+<ul>
+<li><strong>Pre-generated Data</strong>: This demo relies on <code>trait.data.Rdata</code> and <code>prior.distns.Rdata</code> files which are included in the <code>pft/temperate.coniferous</code> directory.</li>
+</ul>
+</section>
+<section id="load-pecan-packages" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Load PEcAn Packages</h1>
+<p>First, we need to load the PEcAn R packages. These packages provide all the functions we’ll use to run the workflow.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary PEcAn packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library("PEcAn.all") # Alternatively, load all packages if installed</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PEcAn.settings"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PEcAn.MA"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PEcAn.utils"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PEcAn.logger"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-data-and-configuration" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Load Data and Configuration</h1>
+<p>Instead of using a <code>pecan.xml</code> file, we will define the configuration directly in R and load the necessary data files.</p>
+<section id="load-data" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="load-data"><span class="header-section-number">4.1</span> Load Data</h2>
+<p>We need to load the <code>trait.data</code> (observations) and <code>prior.distns</code> (priors) for our PFT.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the path to the PFT directory containing the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pft_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"documentation/tutorials/Demo_03_Meta_Analysis/pft/temperate.coniferous"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load trait data</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">file.path</span>(pft_dir, <span class="st">"trait.data.Rdata"</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This loads an object named 'trait.data'</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load priors</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">file.path</span>(pft_dir, <span class="st">"prior.distns.Rdata"</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This loads an object named 'prior.distns'</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what we loaded</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(trait.data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Amax"                     "leafC"                   
+[3] "SLA"                      "leaf_turnover_rate"      
+[5] "leaf_respiration_rate_m2" "root_turnover_rate"      
+[7] "root_respiration_rate"   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(prior.distns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           distn parama paramb   n
+growth_resp_factor          beta   2.63   6.52   0
+leaf_turnover_rate       weibull   1.37   1.43 363
+root_respiration_rate       unif   0.00 100.00  NA
+root_turnover_rate          unif   0.00  10.00  NA
+Amax                        unif   0.00  40.00  NA
+leaf_respiration_rate_m2 weibull   2.00   6.00  NA</code></pre>
+</div>
+</div>
+</section>
+<section id="configure-meta-analysis" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="configure-meta-analysis"><span class="header-section-number">4.2</span> Configure Meta Analysis</h2>
+<p>We can define the settings for the meta-analysis as an R list. This structure mirrors the <code>meta.analysis</code> section of a <code>pecan.xml</code> file, making it easy to translate between the two.</p>
+<p>You can modify these settings to change the number of MCMC iterations, whether to include random effects, and the convergence threshold.</p>
+<p>Key settings include:</p>
+<ul>
+<li><strong>iter</strong>: MCMC (Markov Chain Monte Carlo) chain length, i.e.&nbsp;the total number of posterior samples in the meta-analysis, default is 3000. Smaller numbers will run faster but produce larger errors.</li>
+<li><strong>random.effects</strong>: Settings related to whether to include random effects (site, treatment) in meta-analysis model.
+<ul>
+<li><strong>on</strong>: Default is set to <code>FALSE</code> to work around convergence problems caused by an over parameterized model (e.g.&nbsp;too many sites, not enough data). Can be turned to <code>TRUE</code> for including hierarchical random effects.</li>
+<li><strong>use_ghs</strong>: Default is set to <code>TRUE</code> to include greenhouse measurements. Can be set to <code>FALSE</code> to exclude cases where all data is from greenhouse.</li>
+</ul></li>
+<li><strong>threshold</strong>: threshold for Gelman-Rubin convergence diagnostic (MGPRF); default is 1.2.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define configuration as a list</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ma_settings <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">3000</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">random.effects =</span> <span class="fu">list</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">on =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">use_ghs =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fl">1.2</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="run-meta-analysis-standalone" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Run Meta Analysis (Standalone)</h1>
+<p>We use the <code>meta_analysis_standalone</code> function to run the analysis. We pass the values from our <code>ma_settings</code> list to the function arguments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run standalone meta-analysis</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ma_results <span class="ot">&lt;-</span> PEcAn.MA<span class="sc">::</span><span class="fu">meta_analysis_standalone</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">trait_data =</span> trait.data,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">priors =</span> prior.distns,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">iterations =</span> ma_settings<span class="sc">$</span>iter,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> ma_settings<span class="sc">$</span>random.effects<span class="sc">$</span>on,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">use_ghs =</span> ma_settings<span class="sc">$</span>random.effects<span class="sc">$</span>use_ghs,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> ma_settings<span class="sc">$</span>threshold,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pft_name =</span> <span class="st">"temperate.coniferous"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdir =</span> pft_dir</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Each meta-analysis will be run with: 
+3000 total iterations,
+4 chains, 
+a burnin of 1500 samples,
+, 
+thus the total number of samples will be 6000
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ Amax 
+
+------------------------------------------------
+prior for Amax
+                     (using R parameterization):
+unif(0, 40)
+data max: 25.69 
+data min: 1.7845 
+mean: 10.3 
+n: 28
+stem plot of data points
+
+  The decimal point is at the |
+
+   0 | 88
+   2 | 37
+   4 | 0
+   6 | 523466
+   8 | 1235556
+  10 | 0
+  12 | 55
+  14 | 0
+  16 | 6
+  18 | 3939
+  20 | 
+  22 | 
+  24 | 7
+
+stem plot of obs.prec:
+
+  The decimal point is 2 digit(s) to the right of the |
+
+  0 | 0000000000125
+  2 | 
+  4 | 
+  6 | 5
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 42
+   Unobserved stochastic nodes: 16
+   Total graph size: 118
+
+Initializing model
+
+
+Iterations = 1002:4000
+Thinning interval = 2 
+Number of chains = 4 
+Sample size per chain = 1500 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+         Mean      SD  Naive SE Time-series SE
+beta.o 16.838 0.17786 0.0022961      0.0024648
+sd.y    3.843 0.04736 0.0006114      0.0006498
+
+2. Quantiles for each variable:
+
+         2.5%    25%    50%    75%  97.5%
+beta.o 16.491 16.720 16.840 16.958 17.185
+sd.y    3.752  3.811  3.842  3.875  3.936
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ leafC 
+
+------------------------------------------------
+prior for leafC
+                     (using R parameterization):
+norm(50.6, 1.32)
+data max: 53.7 
+data min: 47.7 
+mean: 50.5 
+n: 12
+stem plot of data points
+
+  The decimal point is at the |
+
+  46 | 7
+  48 | 349
+  50 | 55691
+  52 | 387
+
+stem plot of obs.prec:
+
+  The decimal point is 3 digit(s) to the right of the |
+
+  0 | 00000000002
+  0 | 
+  1 | 
+  1 | 
+  2 | 
+  2 | 5
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 24
+   Unobserved stochastic nodes: 2
+   Total graph size: 49
+
+Initializing model
+
+
+Iterations = 1002:4000
+Thinning interval = 2 
+Number of chains = 4 
+Sample size per chain = 1500 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+          Mean      SD  Naive SE Time-series SE
+beta.o 50.4789 0.18167 0.0023453      0.0024102
+sd.y    0.8932 0.04439 0.0005731      0.0006147
+
+2. Quantiles for each variable:
+
+          2.5%     25%    50%    75%   97.5%
+beta.o 50.1207 50.3574 50.480 50.602 50.8393
+sd.y    0.8096  0.8628  0.892  0.923  0.9835
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ SLA 
+
+------------------------------------------------
+prior for SLA
+                     (using R parameterization):
+lnorm(1.89, 0.61)
+data max: 17.7 
+data min: 2.73 
+mean: 7.41 
+n: 47
+stem plot of data points
+
+  The decimal point is at the |
+
+   2 | 78023345555559
+   4 | 015991789
+   6 | 77889134
+   8 | 0673
+  10 | 07
+  12 | 67748
+  14 | 344
+  16 | 87
+
+stem plot of obs.prec:
+
+  The decimal point is 3 digit(s) to the right of the |
+
+  0 | 0000000000000000000002224
+  1 | 12
+  2 | 
+  3 | 
+  4 | 
+  5 | 
+  6 | 
+  7 | 
+  8 | 6
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 75
+   Unobserved stochastic nodes: 22
+   Total graph size: 220
+
+Initializing model
+
+
+Iterations = 1002:4000
+Thinning interval = 2 
+Number of chains = 4 
+Sample size per chain = 1500 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+             Mean      SD Naive SE Time-series SE
+beta.ghs[2] 4.902 0.19502 0.002518      0.0032047
+beta.o      5.181 0.13054 0.001685      0.0023896
+sd.y        1.074 0.01812 0.000234      0.0002411
+
+2. Quantiles for each variable:
+
+             2.5%   25%   50%   75% 97.5%
+beta.ghs[2] 4.525 4.771 4.903 5.032 5.287
+beta.o      4.932 5.093 5.178 5.268 5.435
+sd.y        1.039 1.062 1.074 1.086 1.111
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ leaf_turnover_rate 
+
+------------------------------------------------
+prior for leaf_turnover_rate
+                     (using R parameterization):
+weibull(1.37, 1.43)
+data max: 0.769 
+data min: 0.12625 
+mean: 0.392 
+n: 15
+stem plot of data points
+
+  The decimal point is 1 digit(s) to the left of the |
+
+  0 | 3
+  2 | 3777928
+  4 | 12569
+  6 | 37
+
+stem plot of obs.prec:
+
+  The decimal point is 9 digit(s) to the right of the |
+
+  0 | 00000000000
+  0 | 
+  1 | 
+  1 | 
+  2 | 0
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 27
+   Unobserved stochastic nodes: 5
+   Total graph size: 80
+
+Initializing model
+
+
+Iterations = 1002:4000
+Thinning interval = 2 
+Number of chains = 4 
+Sample size per chain = 1500 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+          Mean        SD  Naive SE Time-series SE
+beta.o 0.33187 0.0049093 6.338e-05      6.670e-05
+sd.y   0.04802 0.0009105 1.175e-05      1.391e-05
+
+2. Quantiles for each variable:
+
+          2.5%     25%     50%     75%   97.5%
+beta.o 0.32228 0.32853 0.33188 0.33519 0.34136
+sd.y   0.04626 0.04742 0.04803 0.04865 0.04978
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ leaf_respiration_rate_m2 
+
+------------------------------------------------
+prior for leaf_respiration_rate_m2
+                     (using R parameterization):
+weibull(2, 6)
+data max: 1.8 
+data min: 0.583410488985368 
+mean: 1.13 
+n: 10
+stem plot of data points
+
+  The decimal point is at the |
+
+  0 | 679
+  1 | 00134
+  1 | 58
+
+stem plot of obs.prec:
+
+  The decimal point is 3 digit(s) to the right of the |
+
+  0 | 000012
+  0 | 
+  1 | 
+  1 | 
+  2 | 
+  2 | 55
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 18
+   Unobserved stochastic nodes: 4
+   Total graph size: 58
+
+Initializing model
+
+
+Iterations = 1002:4000
+Thinning interval = 2 
+Number of chains = 4 
+Sample size per chain = 1500 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+        Mean      SD  Naive SE Time-series SE
+beta.o 1.410 0.02528 0.0003264      0.0003482
+sd.y   0.333 0.01082 0.0001397      0.0001500
+
+2. Quantiles for each variable:
+
+         2.5%    25%    50%    75% 97.5%
+beta.o 1.3603 1.3925 1.4099 1.4269 1.460
+sd.y   0.3123 0.3256 0.3327 0.3403 0.355
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ root_turnover_rate 
+
+------------------------------------------------
+prior for root_turnover_rate
+                     (using R parameterization):
+unif(0, 10)
+data max: 0.98 
+data min: 0.42 
+mean: 0.597 
+n: 6
+stem plot of data points
+
+  The decimal point is 1 digit(s) to the left of the |
+
+  4 | 2376
+  6 | 2
+  8 | 8
+
+stem plot of obs.prec:
+
+  The decimal point is 4 digit(s) to the right of the |
+
+  2 | 
+  3 | 00000
+  4 | 
+  5 | 
+  6 | 7
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 12
+   Unobserved stochastic nodes: 2
+   Total graph size: 35
+
+Initializing model
+
+
+Iterations = 1002:4000
+Thinning interval = 2 
+Number of chains = 4 
+Sample size per chain = 1500 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+         Mean      SD  Naive SE Time-series SE
+beta.o 0.6033 0.03222 0.0004160      0.0004345
+sd.y   0.1308 0.00961 0.0001241      0.0001301
+
+2. Quantiles for each variable:
+
+        2.5%    25%    50%    75%  97.5%
+beta.o 0.540 0.5816 0.6038 0.6249 0.6666
+sd.y   0.113 0.1241 0.1305 0.1370 0.1507
+
+################################################
+------------------------------------------------
+starting meta-analysis for:
+
+ root_respiration_rate 
+
+------------------------------------------------
+prior for root_respiration_rate
+                     (using R parameterization):
+unif(0, 100)
+data max: 79.8 
+data min: 0.0967276868352595 
+mean: 10.6 
+n: 155
+stem plot of data points
+
+  The decimal point is 1 digit(s) to the right of the |
+
+  0 | 000000000000111111111222222233333333333334444444444444444
+  0 | 55555555555555666666666666777777778888888899999999
+  1 | 000001111122223333444
+  1 | 55555667799
+  2 | 4
+  2 | 8
+  3 | 3
+  3 | 67
+  4 | 004
+  4 | 78
+  5 | 03
+  5 | 9
+  6 | 
+  6 | 9
+  7 | 0
+  7 | 
+  8 | 0
+
+stem plot of obs.prec:
+
+  The decimal point is 7 digit(s) to the right of the |
+
+   0 | 00000000000000000000000000000000000000000000000000000000000000000000+22
+   2 | 
+   4 | 
+   6 | 0
+   8 | 
+  10 | 
+  12 | 
+  14 | 
+  16 | 
+  18 | 
+  20 | 
+  22 | 
+  24 | 
+  26 | 
+  28 | 
+  30 | 
+  32 | 1
+
+Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 259
+   Unobserved stochastic nodes: 54
+   Total graph size: 669
+
+Initializing model
+
+
+Iterations = 1002:4000
+Thinning interval = 2 
+Number of chains = 4 
+Sample size per chain = 1500 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+               Mean       SD  Naive SE Time-series SE
+beta.ghs[2] -10.798 0.070486 9.100e-04      0.0012463
+beta.o       17.794 0.049840 6.434e-04      0.0009578
+sd.y          1.042 0.001265 1.634e-05      0.0000174
+
+2. Quantiles for each variable:
+
+               2.5%     25%     50%     75%   97.5%
+beta.ghs[2] -10.935 -10.846 -10.798 -10.751 -10.661
+beta.o       17.695  17.762  17.795  17.827  17.892
+sd.y          1.039   1.041   1.042   1.043   1.044</code></pre>
+</div>
+</div>
+</section>
+<section id="sec-outputs" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> PEcAn Outputs</h1>
+<p>The <code>meta_analysis_standalone</code> function returns a list containing:</p>
+<ul>
+<li><code>trait.mcmc</code>: The raw MCMC samples.</li>
+<li><code>post.distns</code>: The fitted posterior distributions.</li>
+<li><code>jagged.data</code>: The formatted data used in the analysis.</li>
+</ul>
+<p>It also saves these results to the output directory (default is a temporary directory, or the one specified in <code>outdir</code>).</p>
+<section id="output-directory-structure" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="output-directory-structure"><span class="header-section-number">6.1</span> Output Directory Structure</h2>
+<p>The meta-analysis produces several output files in the PFT directory.</p>
+<p>The <code>pft</code> directory contains all the outputs for the Plant Functional Types included in the analysis. Inside the specific PFT directory (e.g., <code>temperate.coniferous</code>), you will find:</p>
+<ul>
+<li><strong>Data &amp; Priors</strong>:
+<ul>
+<li><code>trait.data.Rdata</code>: Contains the raw trait data points retrieved from the database.</li>
+<li><code>prior.distns.Rdata</code>: Contains the prior probability distributions for the traits.</li>
+<li><code>jagged.data.Rdata</code>: The trait data formatted for the JAGS model.</li>
+</ul></li>
+<li><strong>Model Files</strong>:
+<ul>
+<li><code>*.model.bug</code> (e.g., <code>SLA.model.bug</code>): The BUGS/JAGS model code generated for each trait. This defines the statistical model used for the meta-analysis.</li>
+</ul></li>
+<li><strong>Results</strong>:
+<ul>
+<li><code>trait.mcmc.Rdata</code>: The raw MCMC (Markov Chain Monte Carlo) samples from the Bayesian analysis. This contains the full posterior chains.</li>
+<li><code>post.distns.Rdata</code>: The posterior distributions fitted to the MCMC samples. These are the final parameters used by the ecosystem model.</li>
+<li><code>post.distns.MA.Rdata</code>: A specific version of the posterior distributions generated by the meta-analysis module.</li>
+</ul></li>
+<li><strong>Diagnostics &amp; Plots</strong>:
+<ul>
+<li><code>ma.summaryplots.*.pdf</code> (e.g., <code>ma.summaryplots.SLA.pdf</code>): Diagnostic plots for each trait, including trace plots (to check convergence) and density plots (comparing prior, data, and posterior).</li>
+<li><code>posteriors.pdf</code>: A summary PDF showing the posterior distributions for all traits.</li>
+<li><code>meta-analysis.log</code>: A log file recording the details of the meta-analysis execution.</li>
+</ul></li>
+</ul>
+</section>
+<section id="posterior-distributions" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="posterior-distributions"><span class="header-section-number">6.2</span> Posterior Distributions</h2>
+<p>We can inspect the <code>post.distns</code> element of the results to see the estimated parameters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ma_results<span class="sc">$</span>post.distns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            distn       parama       paramb   n
+growth_resp_factor           beta 2.630000e+00 6.520000e+00   0
+leaf_turnover_rate          gamma 4.599094e+03 1.385906e+04 363
+root_respiration_rate       gamma 1.305319e+05 7.335304e+03  NA
+root_turnover_rate           norm 6.032464e-01 3.218022e-02  NA
+Amax                         norm 1.683906e+01 1.773593e-01  NA
+leaf_respiration_rate_m2     norm 1.409835e+00 2.521562e-02  NA
+SLA                         gamma 1.571280e+03 3.033270e+02 455
+leafC                        norm 5.047843e+01 1.820358e-01 291
+Vm_low_temp                  norm 0.000000e+00 3.000000e+00  NA
+AmaxFrac                     unif 6.000000e-01 9.000000e-01  NA
+psnTOpt                      unif 5.000000e+00 4.000000e+01  NA
+stem_respiration_rate        unif 0.000000e+00 1.000000e+02  NA
+extinction_coefficient       unif 3.800000e-01 6.200000e-01  NA
+half_saturation_PAR          unif 4.000000e+00 2.700000e+01  NA
+dVPDSlope                    unif 1.000000e-02 2.500000e-01  NA
+dVpdExp                      unif 1.000000e+00 3.000000e+00  NA
+veg_respiration_Q10          unif 1.400000e+00 2.600000e+00  NA
+fine_root_respiration_Q10    unif 1.400000e+00 5.000000e+00  NA
+coarse_root_respiration_Q10  unif 1.400000e+00 5.000000e+00  NA</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-visualize" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Visualize Meta Analysis Results</h1>
+<p>It is important to check the MCMC chains for convergence. We can visualize the trace plots and density plots for each trait using the <code>trait.mcmc</code> object from our results.</p>
+<p>The <code>plot</code> function for MCMC objects typically produces two types of plots for each parameter:</p>
+<ol type="1">
+<li><strong>Trace Plot</strong>: Shows the value of the parameter at each iteration of the MCMC chain. We look for a “fuzzy caterpillar” shape, indicating good mixing and convergence. There should be no visible trend (drift) up or down.</li>
+<li><strong>Density Plot</strong>: Shows the estimated posterior probability distribution of the parameter. This represents our updated belief about the parameter value after combining the prior with the data.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust plot margins to prevent clipping</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate through each trait and plot the MCMC chains</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (trait <span class="cf">in</span> <span class="fu">names</span>(ma_results<span class="sc">$</span>trait.mcmc)) {</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Plotting"</span>, trait))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(ma_results<span class="sc">$</span>trait.mcmc[[trait]], <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"MCMC Plots for"</span>, trait))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plotting Amax"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meta_analysis_files/figure-html/plot_mcmc-1.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plotting leafC"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meta_analysis_files/figure-html/plot_mcmc-2.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plotting SLA"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meta_analysis_files/figure-html/plot_mcmc-3.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plotting leaf_turnover_rate"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meta_analysis_files/figure-html/plot_mcmc-4.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plotting leaf_respiration_rate_m2"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meta_analysis_files/figure-html/plot_mcmc-5.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plotting root_turnover_rate"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meta_analysis_files/figure-html/plot_mcmc-6.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Plotting root_respiration_rate"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meta_analysis_files/figure-html/plot_mcmc-7.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Conclusion</h1>
+<p>In this demo, we have successfully run a Bayesian meta-analysis to estimate the posterior distributions of plant traits for a temperate coniferous forest.</p>
+<section id="using-these-posteriors" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="using-these-posteriors"><span class="header-section-number">8.1</span> Using these Posteriors</h2>
+<p>Now that you have generated these posterior distributions, you can use them to constrain the parameters of an ecosystem model. To do this:</p>
+<ol type="1">
+<li><strong>Locate your output</strong>: Note the path to the <code>post.distns.Rdata</code> file generated in the <code>pft/temperate.coniferous</code> directory.</li>
+<li><strong>Update your <code>pecan.xml</code></strong>: In your model run configuration (e.g., from Demo 01 or Demo 02), update the <code>&lt;posterior.files&gt;</code> tag within the <code>&lt;pft&gt;</code> section to point to this file. <code>xml     &lt;pft&gt;       &lt;name&gt;temperate.coniferous&lt;/name&gt;       &lt;posterior.files&gt;/path/to/your/demo/pft/temperate.coniferous/post.distns.Rdata&lt;/posterior.files&gt;     &lt;/pft&gt;</code></li>
+<li><strong>Rerun the model</strong>: Execute your PEcAn workflow (e.g., Demo 01 or Demo 02).</li>
+<li><strong>Compare results</strong>: Observe how the width of the confidence intervals and the overall uncertainty analysis results change when using these informative priors compared to the default uninformative priors.</li>
+</ol>
+</section>
+</section>
+<section id="alternative-running-as-part-of-a-workflow-pecan.xml" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Alternative: Running as part of a Workflow (pecan.xml)</h1>
+<p>The standalone method shown above is great for quick analysis or debugging. However, when running the meta-analysis as part of a larger, automated PEcAn workflow (e.g., connecting to BETYdb, running ecosystem models), it is often more convenient to use the <code>pecan.xml</code> configuration file and the <code>runModule.run.meta.analysis</code> function.</p>
+<p>This approach ensures that all settings are centralized and that outputs are automatically managed and registered in the workflow.</p>
+<section id="load-pecan-settings-file" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="load-pecan-settings-file"><span class="header-section-number">9.1</span> Load PEcAn Settings File</h2>
+<p>Use the XML settings file (<code>pecan.xml</code>) exactly as in the Demo 1 Basic Run tutorial.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>settings_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"documentation/tutorials/Demo_03_Meta_Analysis/pecan.xml"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the settings from the pecan.xml file</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.settings<span class="sc">::</span><span class="fu">read.settings</span>(settings_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>meta.analysis</code> section in <code>pecan.xml</code> controls the behavior:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">meta.analysis</span>&gt;</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">iter</span>&gt;3000&lt;/<span class="kw">iter</span>&gt;</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">random.effects</span>&gt;</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">on</span>&gt;FALSE&lt;/<span class="kw">on</span>&gt;</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">use_ghs</span>&gt;TRUE&lt;/<span class="kw">use_ghs</span>&gt;</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">random.effects</span>&gt;</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">update</span>&gt;FALSE&lt;/<span class="kw">update</span>&gt;</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">meta.analysis</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Key tags include:</p>
+<ul>
+<li><strong>update</strong>: Should previous results of meta.analysis and get.traits be re-used. If set to <code>TRUE</code> the meta-analysis and get.trait.data will always be executed. Setting this to <code>FALSE</code> will try and reuse existing results. Future versions will allow for AUTO as well which will try and reuse if the PFT/traits have not changed. The default value is <code>FALSE</code>.</li>
+</ul>
+</section>
+<section id="run-meta-analysis-module" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="run-meta-analysis-module"><span class="header-section-number">9.2</span> Run Meta Analysis (Module)</h2>
+<p>The <code>runModule.run.meta.analysis</code> function handles the entire process: reading data from the PFT directory (which must be populated by <code>get.trait.data</code> in a full workflow), running the analysis, and saving results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run meta-analysis using settings</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>PEcAn.MA<span class="sc">::</span><span class="fu">runModule.run.meta.analysis</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will produce the same <code>trait.mcmc.Rdata</code> and <code>post.distns.Rdata</code> files in the output directory specified in the settings.</p>
+</section>
+</section>
+<section id="further-exploration" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Further Exploration</h1>
+<p>The <a href="#demo-table">next set of tutorials</a> will focus on the process of data assimilation and parameter estimation. The next two steps are in “.Rmd” files which can be viewed online.</p>
+<p><strong>Assimilation ‘by hand’</strong></p>
+<p><a href="https://github.com/PecanProject/pecan/blob/main/documentation/tutorials/sensitivity/PEcAn_sensitivity_tutorial_v1.0.Rmd">Explore</a> how model error changes as a function of parameter value (i.e.&nbsp;data assimilation ‘by hand’)</p>
+<p><strong>MCMC Concepts</strong> <a href="https://github.com/PecanProject/pecan/blob/main/documentation/tutorials/MCMC/MCMC_Concepts.Rmd">Explore</a> Bayesian MCMC concepts using the photosynthesis module</p>
+<p><strong>Parameter Data Assimilation (PDA)</strong></p>
+<p><a href="https://github.com/PecanProject/pecan/blob/main/documentation/tutorials/ParameterAssimilation/PDA.Rmd">Explore</a> how to perform Parameter Data Assimilation (calibration) in PEcAn. While meta-analysis constrains parameters using literature data, PDA constrains parameters by comparing model output directly against field observations (e.g., flux tower data).</p>
+<p><strong>State Data Assimilation (SDA)</strong></p>
+<p><a href="https://github.com/PecanProject/pecan/blob/main/documentation/tutorials/StateAssimilation/TreeRingSDA.Rmd">Explore</a> how to perform State Data Assimilation. This tutorial demonstrates how to update the internal states of the model (such as carbon pools) using observations, for example, assimilating tree ring widths to constrain biomass trajectories.</p>
+<p><strong>More info about tools, analyses, and specific tasks…</strong></p>
+<p>Additional information about specific tasks (adding sites, models, data; software updates; etc.) and analyses (e.g.&nbsp;data assimilation) can be found in the PEcAn <a href="https://pecanproject.github.io/pecan-documentation/">documentation</a></p>
+<p>If you encounter a problem with PEcAn that’s not covered in the documentation, or if PEcAn is missing functionality you need, please search <a href="https://github.com/PecanProject/pecan/issues?q=">known bugs and issues</a>, submit a <a href="https://github.com/PecanProject/pecan/issues/new/choose">bug report</a>, or ask a question in our <a href="https://join.slack.com/t/pecanproject/shared_invite/enQtMzkyODUyMjQyNTgzLWEzOTM1ZjhmYWUxNzYwYzkxMWVlODAyZWQwYjliYzA0MDA0MjE4YmMyOTFhMjYyMjYzN2FjODE4N2Y4YWFhZmQ">chat room</a>.</p>
+</section>
+<section id="session-information" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Session Information</h1>
+<section id="pecan-package-versions." class="level3" data-number="11.0.1">
+<h3 data-number="11.0.1" class="anchored" data-anchor-id="pecan-package-versions."><span class="header-section-number">11.0.1</span> PEcAn package versions.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">"PEcAn.all"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  PEcAn.all<span class="sc">::</span><span class="fu">pecan_version</span>()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"PEcAn.all not installed. See sessionInfo() below for package versions."</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> package               v1.10.0 installed   source              
+ PEcAn.all             1.10.0  1.10.0      local (/pecan/bas...
+ PEcAn.allometry       1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.assim.batch     1.9.1   1.9.1       local (/pecan/mod...
+ PEcAn.BASGRA          1.8.2   1.8.2       local (/pecan/mod...
+ PEcAn.benchmark       1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.BIOCRO          1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.CABLE           1.7.5   NA          NA                  
+ PEcAn.CLM45           1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.DALEC           1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.data.atmosphere 1.9.1   1.9.1.9000  local (/pecan/mod...
+ PEcAn.data.land       1.9.0   1.9.0       local (/pecan/mod...
+ PEcAn.data.mining     1.7.5   NA          NA                  
+ PEcAn.data.remote     1.9.1   1.9.1       local (/pecan/mod...
+ PEcAn.DB              1.8.2   1.8.2.9000  local (/pecan/bas...
+ PEcAn.dvmdostem       1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.ED2             1.8.2   1.8.2       local (/pecan/mod...
+ PEcAn.emulator        1.8.2   1.8.2       local (/pecan/mod...
+ PEcAn.FATES           1.8.1   1.8.1       local (/pecan/mod...
+ PEcAn.GDAY            1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.JULES           1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.LDNDC           1.0.2   1.0.2       local (/pecan/mod...
+ PEcAn.LINKAGES        1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.logger          1.8.4   1.8.4       local (/pecan/bas...
+ PEcAn.LPJGUESS        1.9.0   1.9.0       local (/pecan/mod...
+ PEcAn.MA              1.7.5   1.7.5.9000  local (/pecan/mod...
+ PEcAn.MAAT            1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.MAESPA          1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.ModelName       0.0.1   0.0.1       local (/pecan/mod...
+ PEcAn.photosynthesis  1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.PRELES          1.7.5   NA          NA                  
+ PEcAn.priors          1.7.5   1.7.5       local (/pecan/mod...
+ PEcAn.qaqc            1.7.5   1.7.5       local (/pecan/bas...
+ PEcAn.remote          1.9.1   1.9.1       local (/pecan/bas...
+ PEcAn.RothC           &lt;NA&gt;    0.0.0.9000  local (/pecan/mod...
+ PEcAn.settings        1.9.1   1.9.1.9000  local (/pecan/bas...
+ PEcAn.SIBCASA         0.0.3   0.0.3       local (/pecan/mod...
+ PEcAn.SIPNET          1.10.0  1.10.0      local (/pecan/mod...
+ PEcAn.STICS           1.8.2   1.8.2       local (/pecan/mod...
+ PEcAn.uncertainty     1.9.0   1.9.0.9000  local (/pecan/mod...
+ PEcAn.utils           1.8.2   1.8.2       local (/pecan/bas...
+ PEcAn.visualization   1.8.2   1.8.2       local (/pecan/bas...
+ PEcAn.workflow        1.10.0  1.10.0      local (/pecan/bas...
+ PEcAnAssimSequential  1.10.0  1.10.0.9000 local (/pecan/mod...
+ PEcAnRTM              1.9.1   1.9.1       local (/pecan/mod...</code></pre>
+</div>
+</div>
+</section>
+<section id="r-session-information" class="level3" data-number="11.0.2">
+<h3 data-number="11.0.2" class="anchored" data-anchor-id="r-session-information"><span class="header-section-number">11.0.2</span> R session information:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.3 (2025-02-28)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 24.04.3 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: Etc/UTC
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] PEcAn.logger_1.8.4        PEcAn.utils_1.8.2        
+[3] PEcAn.MA_1.7.5.9000       PEcAn.settings_1.9.1.9000
+
+loaded via a namespace (and not attached):
+  [1] PEcAn.qaqc_1.7.5                 DBI_1.2.3                       
+  [3] PEcAn.allometry_1.7.5            rlang_1.1.5                     
+  [5] magrittr_2.0.3                   PEcAn.data.land_1.9.0           
+  [7] furrr_0.3.1                      PEcAn.uncertainty_1.9.0.9000    
+  [9] e1071_1.7-16                     compiler_4.4.3                  
+ [11] vctrs_0.6.5                      stringr_1.5.1                   
+ [13] pkgconfig_2.0.3                  PEcAn.MAESPA_1.7.5              
+ [15] fastmap_1.2.0                    PEcAn.ED2_1.8.2                 
+ [17] PEcAn.dvmdostem_1.7.5            PEcAn.ModelName_0.0.1           
+ [19] rmarkdown_2.29                   pracma_2.4.4                    
+ [21] sessioninfo_1.2.3                purrr_1.0.4                     
+ [23] xfun_0.52                        PEcAn.JULES_1.7.5               
+ [25] jsonlite_2.0.0                   PEcAn.LINKAGES_1.7.5            
+ [27] PEcAn.SIBCASA_0.0.3              parallel_4.4.3                  
+ [29] R6_2.6.1                         PEcAn.DALEC_1.7.5               
+ [31] stringi_1.8.7                    PEcAn.workflow_1.10.0           
+ [33] PEcAn.CLM45_1.7.5                parallelly_1.43.0               
+ [35] rjags_4-17                       numDeriv_2016.8-1.1             
+ [37] lubridate_1.9.4                  Rcpp_1.0.14                     
+ [39] iterators_1.0.14                 knitr_1.50                      
+ [41] PEcAnAssimSequential_1.10.0.9000 igraph_2.1.4                    
+ [43] timechange_0.3.0                 tidyselect_1.2.1                
+ [45] PEcAn.remote_1.9.1               yaml_2.3.10                     
+ [47] PEcAn.LPJGUESS_1.9.0             codetools_0.2-20                
+ [49] PEcAn.data.atmosphere_1.9.1.9000 listenv_0.9.1                   
+ [51] PEcAn.emulator_1.8.2             lattice_0.22-6                  
+ [53] tibble_3.2.1                     coda_0.19-4.1                   
+ [55] evaluate_1.0.3                   future_1.34.0                   
+ [57] sf_1.0-20                        units_0.8-7                     
+ [59] proxy_0.4-27                     PEcAn.DB_1.8.2.9000             
+ [61] PEcAn.BASGRA_1.8.2               pillar_1.10.2                   
+ [63] PEcAn.BIOCRO_1.7.5               KernSmooth_2.23-26              
+ [65] foreach_1.5.2                    PEcAn.RothC_0.0.0.9000          
+ [67] ncdf4_1.24                       generics_0.1.3                  
+ [69] nimble_1.3.0                     rprojroot_2.0.4                 
+ [71] PEcAn.assim.batch_1.9.1          ggplot2_3.5.2                   
+ [73] munsell_0.5.1                    scales_1.3.0                    
+ [75] PEcAn.all_1.10.0                 globals_0.16.3                  
+ [77] PEcAn.MAAT_1.7.5                 PEcAn.STICS_1.8.2               
+ [79] class_7.3-23                     glue_1.8.0                      
+ [81] tools_4.4.3                      PEcAn.data.remote_1.9.1         
+ [83] data.table_1.17.0                PEcAn.priors_1.7.5              
+ [85] XML_3.99-0.18                    grid_4.4.3                      
+ [87] PEcAn.visualization_1.8.2        PEcAn.photosynthesis_1.7.5      
+ [89] PEcAn.SIPNET_1.10.0              colorspace_2.1-1                
+ [91] cli_3.6.4                        PEcAnRTM_1.9.1                  
+ [93] dplyr_1.1.4                      PEcAn.GDAY_1.7.5                
+ [95] gtable_0.3.6                     PEcAn.FATES_1.8.1               
+ [97] digest_0.6.37                    classInt_0.4-11                 
+ [99] PEcAn.LDNDC_1.0.2                rjson_0.2.23                    
+[101] htmlwidgets_1.6.4                PEcAn.benchmark_1.7.5           
+[103] htmltools_0.5.8.1                lifecycle_1.0.4                 
+[105] here_1.0.1                       MASS_7.3-64                     </code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
