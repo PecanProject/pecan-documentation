@@ -830,7 +830,9 @@ If no <code>outdir</code> is specified, PEcAn defaults to the working directory 
 <span id="cb190-11"><a href="xml-core-config.html#cb190-11" tabindex="-1"></a>    &lt;/<span class="kw">bety</span>&gt;</span>
 <span id="cb190-12"><a href="xml-core-config.html#cb190-12" tabindex="-1"></a>    ...</span>
 <span id="cb190-13"><a href="xml-core-config.html#cb190-13" tabindex="-1"></a>  &lt;/<span class="kw">database</span>&gt;</span></code></pre></div>
-<p>…will be translated (by way of <code>PEcAn.DB::db.open(settings$database$bety)</code>) into R code like the following:</p>
+<p>… will be translated (by way of
+<a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.DB/reference/db.open.html"><code>PEcAn.DB::db.open</code></a>
+(<code>settings$database$bety</code>)) into R code like the following:</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="xml-core-config.html#cb191-1" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
 <span id="cb191-2"><a href="xml-core-config.html#cb191-2" tabindex="-1"></a>  <span class="at">drv =</span> RPostgreSQL<span class="sc">::</span><span class="fu">PostgreSQL</span>(),</span>
 <span id="cb191-3"><a href="xml-core-config.html#cb191-3" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">&quot;bety&quot;</span>,</span>
@@ -853,7 +855,9 @@ If no <code>outdir</code> is specified, PEcAn defaults to the working directory 
 The default <code>config.php</code> settings on any given platform (VM, Docker, etc.) or in example files (e.g. <code>config.php.example</code>) are a good place to get default values for these fields if writing <code>pecan.xml</code> by hand.</p>
 <p>Key R functions using these parameters are as follows:</p>
 <ul>
-<li><code>PEcAn.DB::db.open</code> – Open a database connection and create a connection object, which is used by many other functions for communicating with the PEcAn database.</li>
+<li><a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.DB/reference/db.open.html"><code>PEcAn.DB::db.open</code></a>
+– Open a database connection and create a connection object,
+which is used by many other functions for communicating with the PEcAn database.</li>
 </ul>
 </div>
 <div id="xml-dbfiles" class="section level4 hasAnchor" number="11.1.4.2">
@@ -902,7 +906,10 @@ Stability not ensured as of 1.5.3.</p>
 </ul>
 <p>This information is currently used by the following PEcAn workflow function:</p>
 <ul>
-<li><code>get.traits</code> - ??????</li>
+<li><ul>
+<li><a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.DB/reference/get.trait.data.html"><code>PEcAn.DB::get.trait.data</code></a>
+— Retrieves trait data for selected PFTs from the database or posterior files</li>
+</ul></li>
 </ul>
 </div>
 <div id="xml-meta-analysis" class="section level3 hasAnchor" number="11.1.6">
@@ -927,7 +934,10 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 </ul>
 <p>This information is currently used by the following PEcAn workflow function:</p>
 <ul>
-<li><code>PEcAn.MA::run.meta.analysis</code> - ???</li>
+<li><ul>
+<li><a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.MA/reference/run.meta.analysis.html"><code>PEcAn.MA::run.meta.analysis</code></a>
+— Performs Bayesian meta-analysis of trait data to generate posterior distributions</li>
+</ul></li>
 </ul>
 </div>
 <div id="xml-model" class="section level3 hasAnchor" number="11.1.7">
@@ -1047,7 +1057,8 @@ Exact requirements differ from model to model, but common inputs include meteoro
 <p>The following are the most common types of inputs, along with their corresponding tags:</p>
 <div id="xml-run-inputs-met" class="section level5 hasAnchor" number="11.1.8.2.1">
 <h5><span class="header-section-number">11.1.8.2.1</span> <code>met</code>: Meteorological inputs<a href="xml-core-config.html#xml-run-inputs-met" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>(Under construction. See the <code>PEcAn.data.atmosphere</code> package, located in <code>modules/data.atmosphere</code>, for more details.)</p>
+<p>-(Under construction. See the
+-<a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.data.atmosphere/"><code>PEcAn.data.atmosphere</code> package documentation</a></p>
 </div>
 <div id="xml-run-inputs-soil" class="section level5 hasAnchor" number="11.1.8.2.2">
 <h5><span class="header-section-number">11.1.8.2.2</span> (Experimental) <code>soil</code>: Soil inputs<a href="xml-core-config.html#xml-run-inputs-soil" class="anchor-section" aria-label="Anchor link to header"></a></h5>
