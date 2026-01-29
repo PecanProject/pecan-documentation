@@ -457,6 +457,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="14" data-path="met-drivers.html"><a href="met-drivers.html"><i class="fa fa-check"></i><b>14</b> Available Meteorological Drivers</a>
 <ul>
+<li class="chapter" data-level="" data-path="met-drivers.html"><a href="met-drivers.html#how-to-choose-a-meteorological-driver"><i class="fa fa-check"></i>How to choose a meteorological driver</a></li>
+<li class="chapter" data-level="" data-path="met-drivers.html"><a href="met-drivers.html#summary-of-available-drivers"><i class="fa fa-check"></i>Summary of available drivers</a></li>
 <li class="chapter" data-level="14.1" data-path="ameriflux.html"><a href="ameriflux.html"><i class="fa fa-check"></i><b>14.1</b> Ameriflux</a></li>
 <li class="chapter" data-level="14.2" data-path="amerifluxlbl.html"><a href="amerifluxlbl.html"><i class="fa fa-check"></i><b>14.2</b> AmerifluxLBL</a></li>
 <li class="chapter" data-level="14.3" data-path="fluxnet2015.html"><a href="fluxnet2015.html"><i class="fa fa-check"></i><b>14.3</b> Fluxnet2015</a></li>
@@ -611,6 +613,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="20" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html"><i class="fa fa-check"></i><b>20</b> Troubleshooting and Debugging PEcAn</a>
 <ul>
+<li class="chapter" data-level="" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html#general-troubleshooting-approach"><i class="fa fa-check"></i>General troubleshooting approach</a></li>
+<li class="chapter" data-level="" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html#common-issues-covered-in-this-chapter"><i class="fa fa-check"></i>Common issues covered in this chapter</a></li>
 <li class="chapter" data-level="20.1" data-path="cookies-and-pecan-web-pages.html"><a href="cookies-and-pecan-web-pages.html"><i class="fa fa-check"></i><b>20.1</b> Cookies and pecan web pages</a></li>
 <li class="chapter" data-level="20.2" data-path="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><i class="fa fa-check"></i><b>20.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
 <li class="chapter" data-level="20.3" data-path="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><i class="fa fa-check"></i><b>20.3</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
@@ -780,6 +784,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="met-drivers" class="section level1 hasAnchor" number="14">
 <h1><span class="header-section-number">14</span> Available Meteorological Drivers<a href="met-drivers.html#met-drivers" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Meteorological (met) drivers provide the climate forcing data required by ecosystem models in PEcAn. Available drivers include site-level observations, regional and global reanalysis products, and climate model projections.</p>
+<div id="how-to-choose-a-meteorological-driver" class="section level3 unnumbered hasAnchor">
+<h3>How to choose a meteorological driver<a href="met-drivers.html#how-to-choose-a-meteorological-driver" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The appropriate meteorological driver depends on the study scale, site
+location, and time period of interest.</p>
+<p>General guidance:</p>
+<ul>
+<li><strong>Site-level analyses</strong> should use flux tower–based datasets (e.g. Ameriflux, Fluxnet, ICOS) when their goal is to precisely match observations from that tower and they are prepared to make analysis-specific choices on how to handle gaps or inconsistencies in the data. Site-level analyses where completeness and timeseries consistency is more important than matching specific days may prefer to use a gridded product.</li>
+<li><strong>Regional analyses</strong> commonly use gridded reanalysis or model outputs (such as NARR or NLDAS) whose coverage matches the scale of the analysis.</li>
+<li><strong>Global or long-term analyses</strong> typically rely on products with broad spatial and temporal coverage like CRUNCEP, ERA5, or GLDAS.</li>
+<li><strong>Future simulations</strong> require climate model outputs (e.g. CMIP5).</li>
+</ul>
+</div>
+<div id="summary-of-available-drivers" class="section level3 unnumbered hasAnchor">
+<h3>Summary of available drivers<a href="met-drivers.html#summary-of-available-drivers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="18%" />
+<col width="32%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Driver</th>
+<th align="center">Scale</th>
+<th align="center">Resolution</th>
+<th align="center">Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><a href="ameriflux.html#ameriflux">Ameriflux</a></td>
+<td align="center">Site</td>
+<td align="center">30–60 min</td>
+<td align="center">Varies by site</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="amerifluxlbl.html#amerifluxlbl">AmerifluxLBL</a></td>
+<td align="center">Site</td>
+<td align="center">30–60 min</td>
+<td align="center">Varies by site</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="fluxnet2015.html#fluxnet2015">Fluxnet2015</a></td>
+<td align="center">Site</td>
+<td align="center">30–60 min</td>
+<td align="center">Selected FLUXNET sites</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="fluxnetlathuile.html#fluxnetlathuile">FluxnetLaThuile</a></td>
+<td align="center">Site</td>
+<td align="center">30–60 min</td>
+<td align="center">Selected FLUXNET sites</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="icos-drought-2018.html#icos-drought-2018">ICOS Drought 2018</a></td>
+<td align="center">Site</td>
+<td align="center">30 min</td>
+<td align="center">Selected ICOS sites</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="icos-ecosystem-archive.html#icos-ecosystem-archive">ICOS Ecosystem Archive</a></td>
+<td align="center">Site</td>
+<td align="center">30 min</td>
+<td align="center">Selected ICOS sites</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="narr.html#narr">NARR</a></td>
+<td align="center">Regional (NA)</td>
+<td align="center">3 hr, ~32 km</td>
+<td align="center">1979–present</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="nldas.html#nldas">NLDAS</a></td>
+<td align="center">Regional (US)</td>
+<td align="center">1 hr, 0.125°</td>
+<td align="center">1980–present</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="cruncep.html#cruncep">CRUNCEP</a></td>
+<td align="center">Global</td>
+<td align="center">6 hr, 0.5°</td>
+<td align="center">1901–2010</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="era5.html#era5">ERA5</a></td>
+<td align="center">Global</td>
+<td align="center">3 hr, ~31 km</td>
+<td align="center">1950–present</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="gldas.html#gldas">GLDAS</a></td>
+<td align="center">Global</td>
+<td align="center">3 hr, 1°</td>
+<td align="center">1948–2010</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="cmip5.html#cmip5">CMIP5</a></td>
+<td align="center">Global</td>
+<td align="center">3 hr</td>
+<td align="center">2006–2100</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="paleon.html#paleon">PalEON</a></td>
+<td align="center">Regional</td>
+<td align="center">6 hr, 0.5°</td>
+<td align="center">850–2010</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="geostreams.html#geostreams">Geostreams</a></td>
+<td align="center">Site</td>
+<td align="center">Varies</td>
+<td align="center">Varies</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
             </section>
 
