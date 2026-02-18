@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="editing-records.html"/>
-<link rel="next" href="cookies-and-pecan-web-pages.html"/>
+<link rel="next" href="general-troubleshooting-approach.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -611,16 +611,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="19" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html"><i class="fa fa-check"></i><b>19</b> Troubleshooting and Debugging PEcAn</a>
 <ul>
-<li class="chapter" data-level="" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html#general-troubleshooting-approach"><i class="fa fa-check"></i>General troubleshooting approach</a></li>
-<li class="chapter" data-level="" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html#common-issues-covered-in-this-chapter"><i class="fa fa-check"></i>Common issues covered in this chapter</a></li>
-<li class="chapter" data-level="19.1" data-path="cookies-and-pecan-web-pages.html"><a href="cookies-and-pecan-web-pages.html"><i class="fa fa-check"></i><b>19.1</b> Cookies and pecan web pages</a></li>
-<li class="chapter" data-level="19.2" data-path="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><i class="fa fa-check"></i><b>19.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
-<li class="chapter" data-level="19.3" data-path="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><i class="fa fa-check"></i><b>19.3</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
-<li class="chapter" data-level="19.4" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>19.4</b> Debugging</a>
+<li class="chapter" data-level="" data-path="general-troubleshooting-approach.html"><a href="general-troubleshooting-approach.html"><i class="fa fa-check"></i>General troubleshooting approach</a></li>
+<li class="chapter" data-level="19.1" data-path="common-topics.html"><a href="common-topics.html"><i class="fa fa-check"></i><b>19.1</b> Common topics</a></li>
+<li class="chapter" data-level="19.2" data-path="cookies-and-pecan-web-pages.html"><a href="cookies-and-pecan-web-pages.html"><i class="fa fa-check"></i><b>19.2</b> Cookies and pecan web pages</a></li>
+<li class="chapter" data-level="19.3" data-path="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><i class="fa fa-check"></i><b>19.3</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
+<li class="chapter" data-level="19.4" data-path="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><i class="fa fa-check"></i><b>19.4</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
+<li class="chapter" data-level="19.5" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>19.5</b> Debugging</a>
 <ul>
-<li class="chapter" data-level="19.4.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>19.4.1</b> Using <code>tests/workflow.R</code></a></li>
+<li class="chapter" data-level="19.5.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>19.5.1</b> Using <code>tests/workflow.R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="19.5" data-path="useful-scripts.html"><a href="useful-scripts.html"><i class="fa fa-check"></i><b>19.5</b> Useful scripts</a></li>
+<li class="chapter" data-level="19.6" data-path="useful-scripts.html"><a href="useful-scripts.html"><i class="fa fa-check"></i><b>19.6</b> Useful scripts</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="database.html"><a href="database.html"><i class="fa fa-check"></i><b>20</b> BETY Database Administration</a>
 <ul>
@@ -782,29 +782,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="troubleshooting-and-debugging-pecan" class="section level1 hasAnchor" number="19">
 <h1><span class="header-section-number">19</span> Troubleshooting and Debugging PEcAn<a href="troubleshooting-and-debugging-pecan.html#troubleshooting-and-debugging-pecan" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter provides guidance for diagnosing and resolving common issues encountered when installing, configuring, and running PEcAn workflows. Problems may arise from web interface configuration, file system paths, model integration, or internal workflow execution.
-The sections below document frequently encountered errors as well as general debugging techniques that can help identify the source of a problem.</p>
-<div id="general-troubleshooting-approach" class="section level3 unnumbered hasAnchor">
-<h3>General troubleshooting approach<a href="troubleshooting-and-debugging-pecan.html#general-troubleshooting-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When troubleshooting PEcAn issues:</p>
-<ul>
-<li>Identify the error message and where it occurs (web, R, or model).</li>
-<li>Check logs and console output for details.</li>
-<li>Verify file paths, permissions, and dependencies.</li>
-<li>Reproduce the issue with a minimal workflow.</li>
-<li>Use R debugging tools such as <code>debug()</code>, <code>traceback()</code>, and <code>browser()</code>.</li>
-</ul>
-</div>
-<div id="common-issues-covered-in-this-chapter" class="section level3 unnumbered hasAnchor">
-<h3>Common issues covered in this chapter<a href="troubleshooting-and-debugging-pecan.html#common-issues-covered-in-this-chapter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><a href="cookies-and-pecan-web-pages.html#cookies-and-pecan-web-pages">Cookies and PEcAn web pages</a></li>
-<li><a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html#warning-mkdir-function.mkdir-no-such-file-or-directory"><code>mkdir()</code> warnings</a></li>
-<li><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html#after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed">PFT mapping issues in ED models</a></li>
-<li><a href="debugging.html#debugging">Debugging</a></li>
-<li><a href="useful-scripts.html#useful-scripts">Useful scripts</a></li>
-</ul>
-</div>
+<p>This chapter provides guidance for diagnosing and resolving common
+issues encountered when running PEcAn workflows. Problems may arise
+from configuration errors, data availability issues, model failures,
+or system-level dependencies.</p>
+<p>Start with the general troubleshooting guidance below, then refer to
+specific sections for detailed solutions.</p>
 </div>
             </section>
 
@@ -812,7 +795,7 @@ The sections below document frequently encountered errors as well as general deb
         </div>
       </div>
 <a href="editing-records.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cookies-and-pecan-web-pages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="general-troubleshooting-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

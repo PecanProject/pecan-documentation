@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.1 Additional web configuration | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="7.1 Additional web configuration | The Predictive Ecosystem Analyzer" />
+  <title>General troubleshooting approach | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="General troubleshooting approach | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.1 Additional web configuration | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="General troubleshooting approach | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.1 Additional web configuration | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="General troubleshooting approach | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intermediate-user.html"/>
-<link rel="next" href="settings-configured-analyses.html"/>
+<link rel="prev" href="troubleshooting-and-debugging-pecan.html"/>
+<link rel="next" href="common-topics.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -780,49 +780,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="additional-web-configuration" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Additional web configuration<a href="additional-web-configuration.html#additional-web-configuration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Additional settings for web configuration:</p>
+<div id="general-troubleshooting-approach" class="section level2 unnumbered hasAnchor">
+<h2>General troubleshooting approach<a href="general-troubleshooting-approach.html#general-troubleshooting-approach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When troubleshooting PEcAn issues:</p>
 <ul>
-<li><span id="intermediate-web-setup">Web interface setup</span></li>
-<li><span id="intermediate-advanced-setup">Advanced setup</span>
-<ul>
-<li>[Sensitivity analysis] (TODO)</li>
-<li>[Uncertainty analysis] (TODO)</li>
-</ul></li>
-<li><span id="intermediate-model-config">Editing model configuration files</span></li>
+<li>Identify the error message and where it occurs (web, R, or model).</li>
+<li>Check logs and console output for details.</li>
+<li>Verify file paths, permissions, and dependencies.</li>
+<li>Reproduce the issue with a minimal workflow.</li>
+<li>Use R debugging tools such as <code>debug()</code>, <code>traceback()</code>, and <code>browser()</code>.</li>
 </ul>
-<div id="intermediate-web-setup" class="section level3 hasAnchor" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Web interface setup<a href="additional-web-configuration.html#intermediate-web-setup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There are few options which you can change via web interface.</p>
-<p>To visit the configuration page either you can just click on the setups link on the introduction page alternatively can type <code>&lt;host&gt;/setups/</code>.</p>
-<p>The list of configuration available</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Database configuration</strong> : BETYdb(Biofuel Ecophysiological Traits and Yields database) configuration details, can be edited according to need.</p></li>
-<li><p><strong>FIA Database</strong> : FIA(Forest Inventory and Analysis) Database configuration details, Can be used to add additional data to models.</p></li>
-<li><p><strong>Google MapKey</strong> : Google Map key, used to access the google map by PEcAn.</p></li>
-<li><p><strong>Change Password</strong> : A small infomation to change the VM user password. (if using Docker image it won’t work)</p></li>
-<li><p><strong>Automatic Sync</strong> : If ON then it will sync the database between local machine and the remote servers. <strong>Still unders testing part might be buggy</strong>.</p></li>
-</ol>
-<p>Still work on the adding other editing feature going on, this page will be updated as new configuration will be available.</p>
-</div>
-<div id="intermediate-advanced-setup" class="section level3 hasAnchor" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Advanced Setup<a href="additional-web-configuration.html#intermediate-advanced-setup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>(TODO: Under construction…)</p>
-</div>
-<div id="intermediate-model-config" class="section level3 hasAnchor" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Editing model configurations<a href="additional-web-configuration.html#intermediate-model-config" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>(TODO: Under construction…)</p>
-
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intermediate-user.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="settings-configured-analyses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="troubleshooting-and-debugging-pecan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="common-topics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -853,7 +828,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/PecanProject/pecan/edit/develop/book_source/02_demos_tutorials_workflows/04_more_web_interface/01_additional_web_config.Rmd",
+    "link": "https://github.com/PecanProject/pecan/edit/develop/book_source/03_topical_pages/12_troubleshooting-pecan.Rmd",
     "text": "Edit"
   },
   "history": {

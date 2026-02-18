@@ -611,16 +611,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="19" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html"><i class="fa fa-check"></i><b>19</b> Troubleshooting and Debugging PEcAn</a>
 <ul>
-<li class="chapter" data-level="" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html#general-troubleshooting-approach"><i class="fa fa-check"></i>General troubleshooting approach</a></li>
-<li class="chapter" data-level="" data-path="troubleshooting-and-debugging-pecan.html"><a href="troubleshooting-and-debugging-pecan.html#common-issues-covered-in-this-chapter"><i class="fa fa-check"></i>Common issues covered in this chapter</a></li>
-<li class="chapter" data-level="19.1" data-path="cookies-and-pecan-web-pages.html"><a href="cookies-and-pecan-web-pages.html"><i class="fa fa-check"></i><b>19.1</b> Cookies and pecan web pages</a></li>
-<li class="chapter" data-level="19.2" data-path="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><i class="fa fa-check"></i><b>19.2</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
-<li class="chapter" data-level="19.3" data-path="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><i class="fa fa-check"></i><b>19.3</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
-<li class="chapter" data-level="19.4" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>19.4</b> Debugging</a>
+<li class="chapter" data-level="" data-path="general-troubleshooting-approach.html"><a href="general-troubleshooting-approach.html"><i class="fa fa-check"></i>General troubleshooting approach</a></li>
+<li class="chapter" data-level="19.1" data-path="common-topics.html"><a href="common-topics.html"><i class="fa fa-check"></i><b>19.1</b> Common topics</a></li>
+<li class="chapter" data-level="19.2" data-path="cookies-and-pecan-web-pages.html"><a href="cookies-and-pecan-web-pages.html"><i class="fa fa-check"></i><b>19.2</b> Cookies and pecan web pages</a></li>
+<li class="chapter" data-level="19.3" data-path="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><a href="warning-mkdir-function.mkdir-no-such-file-or-directory.html"><i class="fa fa-check"></i><b>19.3</b> <code>Warning: mkdir() [function.mkdir]: No such file or directory</code></a></li>
+<li class="chapter" data-level="19.4" data-path="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><a href="after-creating-a-new-pft-the-tag-for-pft-not-passed-to-config.xml-in-ed.html"><i class="fa fa-check"></i><b>19.4</b> After creating a new PFT the <num> tag for PFT not passed to config.xml in ED</a></li>
+<li class="chapter" data-level="19.5" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>19.5</b> Debugging</a>
 <ul>
-<li class="chapter" data-level="19.4.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>19.4.1</b> Using <code>tests/workflow.R</code></a></li>
+<li class="chapter" data-level="19.5.1" data-path="debugging.html"><a href="debugging.html#using-testsworkflow.r"><i class="fa fa-check"></i><b>19.5.1</b> Using <code>tests/workflow.R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="19.5" data-path="useful-scripts.html"><a href="useful-scripts.html"><i class="fa fa-check"></i><b>19.5</b> Useful scripts</a></li>
+<li class="chapter" data-level="19.6" data-path="useful-scripts.html"><a href="useful-scripts.html"><i class="fa fa-check"></i><b>19.6</b> Useful scripts</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="database.html"><a href="database.html"><i class="fa fa-check"></i><b>20</b> BETY Database Administration</a>
 <ul>
@@ -1059,15 +1059,34 @@ Exact requirements differ from model to model, but common inputs include meteoro
 <p>The following are the most common types of inputs, along with their corresponding tags:</p>
 <div id="xml-run-inputs-met" class="section level5 hasAnchor" number="10.1.8.2.1">
 <h5><span class="header-section-number">10.1.8.2.1</span> <code>met</code>: Meteorological inputs<a href="xml-core-config.html#xml-run-inputs-met" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>-(Under construction. See the
--<a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.data.atmosphere/"><code>PEcAn.data.atmosphere</code> package documentation</a></p>
+<p>See the <code>PEcAn.data.atmosphere</code> package documentation for more details.
+In particular, users working with meteorological inputs should focus on
+the data download functions and the <code>met2CF</code> conversion utilities, which
+handle retrieval of raw meteorological products and conversion to
+CF-compliant NetCDF files used by PEcAn.</p>
 </div>
 <div id="xml-run-inputs-soil" class="section level5 hasAnchor" number="10.1.8.2.2">
-<h5><span class="header-section-number">10.1.8.2.2</span> (Experimental) <code>soil</code>: Soil inputs<a href="xml-core-config.html#xml-run-inputs-soil" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>(Under construction. See the <code>PEcAn.data.land</code> package, located in <code>modules/data.land</code>, for more details).</p>
+<h5><span class="header-section-number">10.1.8.2.2</span> <code>soil</code>: Soil inputs<a href="xml-core-config.html#xml-run-inputs-soil" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Soil inputs are handled through the <code>PEcAn.data.land</code> module.
+For full technical details, see the
+<a href="https://pecan.ncsa.illinois.edu/pkgdocs/PEcAn.data.land/">PEcAn.data.land package documentation</a>.</p>
+<p>In practice, most PEcAn workflows do not rely on automated soil data
+processing at runtime. Instead, users typically preprocess soil data
+and provide standardized <code>soil.nc</code> files that are referenced directly
+in <code>pecan.xml</code>.</p>
+<p>Although automated soil processing is supported in principle, there are
+currently only two soil data products commonly used in PEcAn workflows:
+gSSURGO and SoilGrids.</p>
+<p>The <code>&lt;soil&gt;</code> element in <code>pecan.xml</code> is primarily used to specify paths to
+preprocessed soil inputs rather than to trigger on-the-fly data
+processing.</p>
+<p>Note that some models reference soil inputs using the <code>&lt;soil&gt;</code> tag,
+while others use <code>&lt;soilphysics&gt;</code>. This inconsistency is historical and
+can cause confusion; a future harmonization of these tags would be
+beneficial.</p>
 </div>
 <div id="xml-run-inputs-veg" class="section level5 hasAnchor" number="10.1.8.2.3">
-<h5><span class="header-section-number">10.1.8.2.3</span> (Experimental) <code>veg</code>: Vegetation initial conditions<a href="xml-core-config.html#xml-run-inputs-veg" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<h5><span class="header-section-number">10.1.8.2.3</span> <code>veg</code>: Vegetation initial conditions<a href="xml-core-config.html#xml-run-inputs-veg" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
 <div id="xml-run-inputs-poolinitcond" class="section level5 hasAnchor" number="10.1.8.2.4">
 <h5><span class="header-section-number">10.1.8.2.4</span> <code>poolinitcond</code>: initial condition inputs<a href="xml-core-config.html#xml-run-inputs-poolinitcond" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -1076,7 +1095,23 @@ Exact requirements differ from model to model, but common inputs include meteoro
 <li><code>output</code>: This tag can only must match the cooresponding tag in the modeltypes_formats table that matches with your model type ex for SIPNET model tag is poolinitcond.</li>
 <li><code>ensemble</code>: Number of initial conditions ensemble member files ex: 30.</li>
 </ul>
-<p>(Under construction. Follow developments in the <code>PEcAn.data.land</code> package, located in <code>modules/data.land</code> in the source code).</p>
+<div id="phenology" class="section level6 hasAnchor" number="10.1.8.2.4.1">
+<h6><span class="header-section-number">10.1.8.2.4.1</span> <code>phenology</code><a href="xml-core-config.html#phenology" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Defines the timing of vegetation growth and dormancy, such as leaf-out and
+senescence. Phenology information allows PEcAn to determine when vegetation
+is actively growing and interacting with climate drivers.</p>
+<p>Phenology inputs are typically derived from external datasets and help align
+model simulations with observed seasonal behavior.</p>
+</div>
+<div id="management" class="section level6 hasAnchor" number="10.1.8.2.4.2">
+<h6><span class="header-section-number">10.1.8.2.4.2</span> <code>management</code><a href="xml-core-config.html#management" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p>Specifies management activities applied to vegetation, such as planting,
+harvesting, fertilization, or irrigation. Management inputs allow PEcAn to
+represent human interventions that affect ecosystem processes.</p>
+<p>Management information may vary over time and is commonly linked to site- or
+crop-specific datasets.</p>
+<p>(Follow developments in the <code>PEcAn.data.land</code> package, located in <code>modules/data.land</code> in the source code).</p>
+</div>
 </div>
 <div id="pft.site-multi-site-site-pft-mapping" class="section level5 hasAnchor" number="10.1.8.2.5">
 <h5><span class="header-section-number">10.1.8.2.5</span> <code>pft.site</code> Multi-site site / PFT mapping<a href="xml-core-config.html#pft.site-multi-site-site-pft-mapping" class="anchor-section" aria-label="Anchor link to header"></a></h5>
