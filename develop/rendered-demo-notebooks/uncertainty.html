@@ -318,6 +318,10 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in postgresqlNewConnection(drv, ...) : 
   RPosgreSQL error: could not connect root@/var/run/postgresql:5432 on dbname "root": connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+    Is the server running locally and accepting connections on that socket?
+
+Error in postgresqlNewConnection(drv, ...) : 
+  RPosgreSQL error: could not connect root@/var/run/postgresql:5432 on dbname "root": connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
     Is the server running locally and accepting connections on that socket?</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -548,138 +552,138 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$coef.vars
          growth_resp_factor          leaf_turnover_rate 
-                 0.52314023                  0.88169612 
+                 0.52172706                  0.87766932 
       root_respiration_rate          root_turnover_rate 
-                 0.57750504                  0.57760373 
+                 0.58030856                  0.57490166 
                        Amax    leaf_respiration_rate_m2 
-                 0.57764863                  0.55600452 
+                 0.57508091                  0.55748539 
                         SLA                       leafC 
-                 0.80223473                  0.02607590 
+                 0.82044297                  0.02606805 
                 Vm_low_temp                    AmaxFrac 
-                 0.01097613                  0.11546966 
+                 0.01106287                  0.11508339 
                     psnTOpt       stem_respiration_rate 
-                 0.03417927                  0.57838935 
+                 0.03425779                  0.58093851 
      extinction_coefficient         half_saturation_PAR 
-                 0.13855053                  0.42885852 
+                 0.13801468                  0.42759220 
                   dVPDSlope                     dVpdExp 
-                 0.53356551                  0.28896893 
+                 0.53100321                  0.28734911 
         veg_respiration_Q10   fine_root_respiration_Q10 
-                 0.17324390                  0.32501552 
+                 0.17318986                  0.32570470 
 coarse_root_respiration_Q10 
-                 0.32534666 
+                 0.32511613 
 
 $elasticities
          growth_resp_factor          leaf_turnover_rate 
-                 0.00000000                  0.02320464 
+                 0.00000000                  0.02792072 
       root_respiration_rate          root_turnover_rate 
-                -0.02508999                  0.05192989 
+                -0.02288854                  0.05061758 
                        Amax    leaf_respiration_rate_m2 
-                 2.83476962                 -2.06513816 
+                 7.00048756                 -1.74893735 
                         SLA                       leafC 
-                 0.81446798                  0.15306831 
+                 0.13257518                  0.15315260 
                 Vm_low_temp                    AmaxFrac 
-                 1.01795920                  2.48502840 
+                 1.01949512                  2.45757917 
                     psnTOpt       stem_respiration_rate 
-                 1.01055079                 -1.43854509 
+                 1.07299987                 -1.37218478 
      extinction_coefficient         half_saturation_PAR 
-                -0.57229325                 -1.28681308 
+                -0.55062026                 -1.14293527 
                   dVPDSlope                     dVpdExp 
-                -0.18295933                  0.09271587 
+                -0.18167923                  0.09150215 
         veg_respiration_Q10   fine_root_respiration_Q10 
-                 6.50084187                  0.08360650 
+                 9.08366656                  0.08243293 
 coarse_root_respiration_Q10 
-                -0.23722866 
+                -0.22172860 
 
 $sensitivities
          growth_resp_factor          leaf_turnover_rate 
-               0.000000e+00                9.970835e-11 
+               0.000000e+00                1.205385e-10 
       root_respiration_rate          root_turnover_rate 
-              -2.359663e-12                4.884707e-11 
+              -2.248354e-12                4.848835e-11 
                        Amax    leaf_respiration_rate_m2 
-               6.666635e-10               -1.944744e-09 
+               6.674866e-10               -1.876472e-09 
                         SLA                       leafC 
-               2.732070e-10                1.422201e-11 
+               1.721966e-11                1.482277e-11 
                 Vm_low_temp                    AmaxFrac 
-              -9.748919e-10                1.557956e-08 
+              -8.765955e-10                1.568889e-08 
                     psnTOpt       stem_respiration_rate 
-               2.423273e-10               -1.355162e-10 
+               5.288301e-10               -1.356640e-10 
      extinction_coefficient         half_saturation_PAR 
-              -5.381744e-09               -3.907003e-10 
+              -5.383803e-09               -3.911301e-10 
                   dVPDSlope                     dVpdExp 
-              -6.624579e-09                2.181281e-10 
+              -6.676351e-09                2.215015e-10 
         veg_respiration_Q10   fine_root_respiration_Q10 
-               1.528495e-08                1.229585e-10 
+               1.540239e-08                1.238831e-10 
 coarse_root_respiration_Q10 
-              -3.491744e-10 
+              -3.400847e-10 
 
 $variances
          growth_resp_factor          leaf_turnover_rate 
-               5.983871e-50                1.785332e-20 
+               2.282014e-50                1.354703e-20 
       root_respiration_rate          root_turnover_rate 
-               4.672753e-21                2.193432e-20 
+               4.254991e-21                1.951719e-20 
                        Amax    leaf_respiration_rate_m2 
-               6.122857e-17                2.785313e-17 
+               5.935107e-17                2.731225e-17 
                         SLA                       leafC 
-               1.096593e-17                3.746338e-22 
+               8.684916e-21                3.823091e-22 
                 Vm_low_temp                    AmaxFrac 
-               8.542850e-18                1.822057e-18 
+               7.017470e-18                1.839793e-18 
                     psnTOpt       stem_respiration_rate 
-               5.995813e-18                1.530077e-17 
+               2.874505e-17                1.532542e-17 
      extinction_coefficient         half_saturation_PAR 
-               1.389601e-19                6.768366e-18 
+               1.385115e-19                6.733581e-18 
                   dVPDSlope                     dVpdExp 
-               2.123853e-19                1.622220e-20 
+               2.142332e-19                1.630313e-20 
         veg_respiration_Q10   fine_root_respiration_Q10 
-               2.851950e-17                1.785504e-20 
+               2.844450e-17                1.669605e-20 
 coarse_root_respiration_Q10 
-               1.316744e-19 
+               1.251806e-19 
 
 $partial.variances
          growth_resp_factor          leaf_turnover_rate 
-               3.571204e-34                1.065495e-04 
+               1.301580e-34                7.726745e-05 
       root_respiration_rate          root_turnover_rate 
-               2.788722e-05                1.309051e-04 
+               2.426897e-05                1.113191e-04 
                        Amax    leaf_respiration_rate_m2 
-               3.654152e-01                1.662288e-01 
+               3.385175e-01                1.557794e-01 
                         SLA                       leafC 
-               6.544522e-02                2.235833e-06 
+               4.953569e-05                2.180556e-06 
                 Vm_low_temp                    AmaxFrac 
-               5.098415e-02                1.087413e-02 
+               4.002517e-02                1.049353e-02 
                     psnTOpt       stem_respiration_rate 
-               3.578331e-02                9.131574e-02 
+               1.639516e-01                8.741076e-02 
      extinction_coefficient         half_saturation_PAR 
-               8.293210e-04                4.039395e-02 
+               7.900205e-04                3.840596e-02 
                   dVPDSlope                     dVpdExp 
-               1.267526e-03                9.681491e-05 
+               1.221911e-03                9.298731e-05 
         veg_respiration_Q10   fine_root_respiration_Q10 
-               1.702058e-01                1.065597e-04 
+               1.622374e-01                9.522835e-05 
 coarse_root_respiration_Q10 
-               7.858395e-04 
+               7.139856e-04 
 
        growth_resp_factor leaf_turnover_rate root_respiration_rate
-15.866       4.701256e-09       4.449915e-09          4.793975e-09
-50           4.701256e-09       4.701256e-09          4.701256e-09
-84.134       4.701256e-09       4.739615e-09          4.632887e-09
+15.866       4.898964e-09       4.665237e-09          4.988141e-09
+50                     NA                 NA                    NA
+84.134       4.898964e-09       4.888339e-09          4.833631e-09
        root_turnover_rate          Amax leaf_respiration_rate_m2          SLA
-15.866       4.437930e-09 -7.392576e-09             9.995320e-09 7.454526e-10
-50           4.701256e-09  4.701256e-09             4.701256e-09 4.701256e-09
-84.134       4.771365e-09  1.080759e-08            -8.726093e-10 4.574289e-10
+15.866       4.635606e-09 -7.235504e-09             1.004168e-08 8.049990e-10
+50                     NA            NA                       NA           NA
+84.134       4.965910e-09  1.098003e-08            -5.840796e-10 9.503706e-10
               leafC  Vm_low_temp     AmaxFrac       psnTOpt
-15.866 4.689967e-09 6.977459e-09 3.003852e-09 -5.232746e-09
-50     4.701256e-09 4.701256e-09 4.701256e-09  4.701256e-09
-84.134 4.727503e-09 1.776842e-09 6.194027e-09  7.597368e-09
+15.866 4.878124e-09 7.237243e-09 3.174680e-09 -5.051799e-09
+50               NA           NA           NA            NA
+84.134 4.917116e-09 1.941662e-09 6.384904e-09  7.634841e-09
        stem_respiration_rate extinction_coefficient half_saturation_PAR
-15.866          9.335914e-09           5.145403e-09        8.187772e-09
-50              4.701256e-09           4.701256e-09        4.701256e-09
-84.134          8.203046e-11           4.264066e-09        2.050097e-09
+15.866          9.524989e-09           5.337419e-09        8.352592e-09
+50                        NA                     NA                  NA
+84.134          2.767026e-10           4.460003e-09        2.230571e-09
           dVPDSlope      dVpdExp veg_respiration_Q10 fine_root_respiration_Q10
-15.866 5.155744e-09 4.511517e-09       -3.046701e-09              4.466264e-09
-50     4.701256e-09 4.701256e-09        4.701256e-09              4.701256e-09
-84.134 4.070785e-09 4.809312e-09        9.472557e-09              4.768234e-09
+15.866 5.349942e-09 4.703027e-09       -2.961413e-09              4.658470e-09
+50               NA           NA                  NA                        NA
+84.134 4.253567e-09 5.005502e-09        9.662739e-09              4.964392e-09
        coarse_root_respiration_Q10
-15.866                5.142842e-09
-50                    4.701256e-09
-84.134                4.284874e-09</code></pre>
+15.866                5.328027e-09
+50                              NA
+84.134                4.490266e-09</code></pre>
 </div>
 </div>
 </section>
