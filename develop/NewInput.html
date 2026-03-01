@@ -846,72 +846,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Perhaps you would like to obtain data from one of the sources coupled to PEcAn on its own. To do so you can run PEcAn functions on their own.</p>
 <p><strong>Example 1: Processing data from a database</strong></p>
 <p>Download Amerifluxlbl from Niwot Ridge for the year 2004:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="NewInput.html#cb357-1" tabindex="-1"></a>raw.file <span class="ot">&lt;-</span>PEcAn.data.atmosphere<span class="sc">::</span><span class="fu">download.AmerifluxLBL</span>(<span class="at">sitename =</span> <span class="st">&quot;US-NR1&quot;</span>,</span>
-<span id="cb357-2"><a href="NewInput.html#cb357-2" tabindex="-1"></a>                                             <span class="at">outfolder =</span> <span class="st">&quot;.&quot;</span>,</span>
-<span id="cb357-3"><a href="NewInput.html#cb357-3" tabindex="-1"></a>                                             <span class="at">start_date =</span> <span class="st">&quot;2004-01-01&quot;</span>,</span>
-<span id="cb357-4"><a href="NewInput.html#cb357-4" tabindex="-1"></a>                                             <span class="at">end_date =</span> <span class="st">&quot;2004-12-31&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="NewInput.html#cb358-1" tabindex="-1"></a>raw.file <span class="ot">&lt;-</span>PEcAn.data.atmosphere<span class="sc">::</span><span class="fu">download.AmerifluxLBL</span>(<span class="at">sitename =</span> <span class="st">&quot;US-NR1&quot;</span>,</span>
+<span id="cb358-2"><a href="NewInput.html#cb358-2" tabindex="-1"></a>                                             <span class="at">outfolder =</span> <span class="st">&quot;.&quot;</span>,</span>
+<span id="cb358-3"><a href="NewInput.html#cb358-3" tabindex="-1"></a>                                             <span class="at">start_date =</span> <span class="st">&quot;2004-01-01&quot;</span>,</span>
+<span id="cb358-4"><a href="NewInput.html#cb358-4" tabindex="-1"></a>                                             <span class="at">end_date =</span> <span class="st">&quot;2004-12-31&quot;</span>)</span></code></pre></div>
 <p>Using the information returned as the object <code>raw.file</code> you will then convert the raw files into a standard file.</p>
 <p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="NewInput.html#cb358-1" tabindex="-1"></a>con <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">db.open</span>(</span>
-<span id="cb358-2"><a href="NewInput.html#cb358-2" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
-<span id="cb358-3"><a href="NewInput.html#cb358-3" tabindex="-1"></a>    <span class="at">driver =</span> RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
-<span id="cb358-4"><a href="NewInput.html#cb358-4" tabindex="-1"></a>    <span class="at">dbname   =</span> <span class="st">&#39;bety&#39;</span>,</span>
-<span id="cb358-5"><a href="NewInput.html#cb358-5" tabindex="-1"></a>    <span class="at">host =</span><span class="st">&#39;localhost&#39;</span>,</span>
-<span id="cb358-6"><a href="NewInput.html#cb358-6" tabindex="-1"></a>    <span class="at">user     =</span> <span class="st">&quot;bety&quot;</span>,</span>
-<span id="cb358-7"><a href="NewInput.html#cb358-7" tabindex="-1"></a>    <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>)</span>
-<span id="cb358-8"><a href="NewInput.html#cb358-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="NewInput.html#cb359-1" tabindex="-1"></a>con <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">db.open</span>(</span>
+<span id="cb359-2"><a href="NewInput.html#cb359-2" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb359-3"><a href="NewInput.html#cb359-3" tabindex="-1"></a>    <span class="at">driver =</span> RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
+<span id="cb359-4"><a href="NewInput.html#cb359-4" tabindex="-1"></a>    <span class="at">dbname   =</span> <span class="st">&#39;bety&#39;</span>,</span>
+<span id="cb359-5"><a href="NewInput.html#cb359-5" tabindex="-1"></a>    <span class="at">host =</span><span class="st">&#39;localhost&#39;</span>,</span>
+<span id="cb359-6"><a href="NewInput.html#cb359-6" tabindex="-1"></a>    <span class="at">user     =</span> <span class="st">&quot;bety&quot;</span>,</span>
+<span id="cb359-7"><a href="NewInput.html#cb359-7" tabindex="-1"></a>    <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>)</span>
+<span id="cb359-8"><a href="NewInput.html#cb359-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Next you will set up the arguments for the function</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="NewInput.html#cb359-1" tabindex="-1"></a>in.path <span class="ot">&lt;-</span> <span class="st">&#39;.&#39;</span></span>
-<span id="cb359-2"><a href="NewInput.html#cb359-2" tabindex="-1"></a>in.prefix <span class="ot">&lt;-</span> raw.file<span class="sc">$</span>dbfile.name</span>
-<span id="cb359-3"><a href="NewInput.html#cb359-3" tabindex="-1"></a>outfolder <span class="ot">&lt;-</span> <span class="st">&#39;.&#39;</span></span>
-<span id="cb359-4"><a href="NewInput.html#cb359-4" tabindex="-1"></a>format.id <span class="ot">&lt;-</span> <span class="dv">5000000002</span></span>
-<span id="cb359-5"><a href="NewInput.html#cb359-5" tabindex="-1"></a>format <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.format.vars</span>(<span class="at">format.id=</span>format.id,<span class="at">bety =</span> con)</span>
-<span id="cb359-6"><a href="NewInput.html#cb359-6" tabindex="-1"></a>lon <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">105.54</span></span>
-<span id="cb359-7"><a href="NewInput.html#cb359-7" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fl">40.03</span></span>
-<span id="cb359-8"><a href="NewInput.html#cb359-8" tabindex="-1"></a>format<span class="sc">$</span>time_zone <span class="ot">&lt;-</span> <span class="st">&quot;America/Chicago&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="NewInput.html#cb360-1" tabindex="-1"></a>in.path <span class="ot">&lt;-</span> <span class="st">&#39;.&#39;</span></span>
+<span id="cb360-2"><a href="NewInput.html#cb360-2" tabindex="-1"></a>in.prefix <span class="ot">&lt;-</span> raw.file<span class="sc">$</span>dbfile.name</span>
+<span id="cb360-3"><a href="NewInput.html#cb360-3" tabindex="-1"></a>outfolder <span class="ot">&lt;-</span> <span class="st">&#39;.&#39;</span></span>
+<span id="cb360-4"><a href="NewInput.html#cb360-4" tabindex="-1"></a>format.id <span class="ot">&lt;-</span> <span class="dv">5000000002</span></span>
+<span id="cb360-5"><a href="NewInput.html#cb360-5" tabindex="-1"></a>format <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.format.vars</span>(<span class="at">format.id=</span>format.id,<span class="at">bety =</span> con)</span>
+<span id="cb360-6"><a href="NewInput.html#cb360-6" tabindex="-1"></a>lon <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">105.54</span></span>
+<span id="cb360-7"><a href="NewInput.html#cb360-7" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fl">40.03</span></span>
+<span id="cb360-8"><a href="NewInput.html#cb360-8" tabindex="-1"></a>format<span class="sc">$</span>time_zone <span class="ot">&lt;-</span> <span class="st">&quot;America/Chicago&quot;</span></span></code></pre></div>
 <p>Note: The format.id can be pulled from the BETY database if you know the format of the raw data.</p>
 <p>Once these arguments are defined you can execute the <code>met2CF.csv</code> function</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="NewInput.html#cb360-1" tabindex="-1"></a>PEcAn.data.atmosphere<span class="sc">::</span><span class="fu">met2CF.csv</span>(<span class="at">in.path =</span> in.path,</span>
-<span id="cb360-2"><a href="NewInput.html#cb360-2" tabindex="-1"></a>                                  <span class="at">in.prefix =</span>in.prefix,</span>
-<span id="cb360-3"><a href="NewInput.html#cb360-3" tabindex="-1"></a>                                  <span class="at">outfolder =</span> <span class="st">&quot;.&quot;</span>,</span>
-<span id="cb360-4"><a href="NewInput.html#cb360-4" tabindex="-1"></a>                                  <span class="at">start_date =</span><span class="st">&quot;2004-01-01&quot;</span>,</span>
-<span id="cb360-5"><a href="NewInput.html#cb360-5" tabindex="-1"></a>                                  <span class="at">end_date =</span> <span class="st">&quot;2004-12-01&quot;</span>,</span>
-<span id="cb360-6"><a href="NewInput.html#cb360-6" tabindex="-1"></a>                                  <span class="at">lat=</span> lat,</span>
-<span id="cb360-7"><a href="NewInput.html#cb360-7" tabindex="-1"></a>                                  <span class="at">lon =</span> lon,</span>
-<span id="cb360-8"><a href="NewInput.html#cb360-8" tabindex="-1"></a>                                  <span class="at">format =</span> format)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="NewInput.html#cb361-1" tabindex="-1"></a>PEcAn.data.atmosphere<span class="sc">::</span><span class="fu">met2CF.csv</span>(<span class="at">in.path =</span> in.path,</span>
+<span id="cb361-2"><a href="NewInput.html#cb361-2" tabindex="-1"></a>                                  <span class="at">in.prefix =</span>in.prefix,</span>
+<span id="cb361-3"><a href="NewInput.html#cb361-3" tabindex="-1"></a>                                  <span class="at">outfolder =</span> <span class="st">&quot;.&quot;</span>,</span>
+<span id="cb361-4"><a href="NewInput.html#cb361-4" tabindex="-1"></a>                                  <span class="at">start_date =</span><span class="st">&quot;2004-01-01&quot;</span>,</span>
+<span id="cb361-5"><a href="NewInput.html#cb361-5" tabindex="-1"></a>                                  <span class="at">end_date =</span> <span class="st">&quot;2004-12-01&quot;</span>,</span>
+<span id="cb361-6"><a href="NewInput.html#cb361-6" tabindex="-1"></a>                                  <span class="at">lat=</span> lat,</span>
+<span id="cb361-7"><a href="NewInput.html#cb361-7" tabindex="-1"></a>                                  <span class="at">lon =</span> lon,</span>
+<span id="cb361-8"><a href="NewInput.html#cb361-8" tabindex="-1"></a>                                  <span class="at">format =</span> format)</span></code></pre></div>
 <p><strong>Example 2: Processing data from data already in hand</strong></p>
 <p>If you have Met data already in hand and you would like to convert into the PEcAn standard follow these instructions.</p>
 <p>Update BETY with file record, format record and input record according to this page <a href="NewInput.html#NewInput">How to Insert new Input Data</a></p>
 <p>If your data is in a csv format you can use the <code>met2CF.csv</code>function to convert your data into a PEcAn standard file.</p>
 <p>Open a connection with BETY. You may need to change the host name depending on what machine you are hosting BETY. You can find the hostname listed in the machines table of BETY.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="NewInput.html#cb361-1" tabindex="-1"></a>con <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">db.open</span>(</span>
-<span id="cb361-2"><a href="NewInput.html#cb361-2" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
-<span id="cb361-3"><a href="NewInput.html#cb361-3" tabindex="-1"></a>    <span class="at">driver =</span> RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
-<span id="cb361-4"><a href="NewInput.html#cb361-4" tabindex="-1"></a>    <span class="at">dbname =</span> <span class="st">&#39;bety&#39;</span>,</span>
-<span id="cb361-5"><a href="NewInput.html#cb361-5" tabindex="-1"></a>    <span class="at">host =</span><span class="st">&#39;localhost&#39;</span>,</span>
-<span id="cb361-6"><a href="NewInput.html#cb361-6" tabindex="-1"></a>    <span class="at">user =</span> <span class="st">&quot;bety&quot;</span>,</span>
-<span id="cb361-7"><a href="NewInput.html#cb361-7" tabindex="-1"></a>    <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>)</span>
-<span id="cb361-8"><a href="NewInput.html#cb361-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="NewInput.html#cb362-1" tabindex="-1"></a>con <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">db.open</span>(</span>
+<span id="cb362-2"><a href="NewInput.html#cb362-2" tabindex="-1"></a>  <span class="at">params =</span> <span class="fu">list</span>(</span>
+<span id="cb362-3"><a href="NewInput.html#cb362-3" tabindex="-1"></a>    <span class="at">driver =</span> RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
+<span id="cb362-4"><a href="NewInput.html#cb362-4" tabindex="-1"></a>    <span class="at">dbname =</span> <span class="st">&#39;bety&#39;</span>,</span>
+<span id="cb362-5"><a href="NewInput.html#cb362-5" tabindex="-1"></a>    <span class="at">host =</span><span class="st">&#39;localhost&#39;</span>,</span>
+<span id="cb362-6"><a href="NewInput.html#cb362-6" tabindex="-1"></a>    <span class="at">user =</span> <span class="st">&quot;bety&quot;</span>,</span>
+<span id="cb362-7"><a href="NewInput.html#cb362-7" tabindex="-1"></a>    <span class="at">password =</span> <span class="st">&quot;bety&quot;</span>)</span>
+<span id="cb362-8"><a href="NewInput.html#cb362-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Prepare the arguments you need to execute the met2CF.csv function</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="NewInput.html#cb362-1" tabindex="-1"></a>in.path <span class="ot">&lt;-</span> <span class="st">&#39;path/where/the/raw/file/lives&#39;</span></span>
-<span id="cb362-2"><a href="NewInput.html#cb362-2" tabindex="-1"></a>in.prefix <span class="ot">&lt;-</span> <span class="st">&#39;prefix_of_the_raw_file&#39;</span></span>
-<span id="cb362-3"><a href="NewInput.html#cb362-3" tabindex="-1"></a>outfolder <span class="ot">&lt;-</span> <span class="st">&#39;path/to/where/you/want/to/output/thecsv/&#39;</span></span>
-<span id="cb362-4"><a href="NewInput.html#cb362-4" tabindex="-1"></a>format.id <span class="ot">&lt;-</span> formatid of the format your created</span>
-<span id="cb362-5"><a href="NewInput.html#cb362-5" tabindex="-1"></a>format <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.format.vars</span>(<span class="at">format.id=</span>format.id, <span class="at">bety =</span> con)</span>
-<span id="cb362-6"><a href="NewInput.html#cb362-6" tabindex="-1"></a>lon <span class="ot">&lt;-</span> longitude of your site</span>
-<span id="cb362-7"><a href="NewInput.html#cb362-7" tabindex="-1"></a>lat <span class="ot">&lt;-</span> latitude of your site</span>
-<span id="cb362-8"><a href="NewInput.html#cb362-8" tabindex="-1"></a>format<span class="sc">$</span>time_zone <span class="ot">&lt;-</span> time zone of your site</span>
-<span id="cb362-9"><a href="NewInput.html#cb362-9" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> Start date of your data <span class="cf">in</span> <span class="st">&quot;y-m-d&quot;</span></span>
-<span id="cb362-10"><a href="NewInput.html#cb362-10" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> End date of your data <span class="cf">in</span> <span class="st">&quot;y-m-d&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="NewInput.html#cb363-1" tabindex="-1"></a>in.path <span class="ot">&lt;-</span> <span class="st">&#39;path/where/the/raw/file/lives&#39;</span></span>
+<span id="cb363-2"><a href="NewInput.html#cb363-2" tabindex="-1"></a>in.prefix <span class="ot">&lt;-</span> <span class="st">&#39;prefix_of_the_raw_file&#39;</span></span>
+<span id="cb363-3"><a href="NewInput.html#cb363-3" tabindex="-1"></a>outfolder <span class="ot">&lt;-</span> <span class="st">&#39;path/to/where/you/want/to/output/thecsv/&#39;</span></span>
+<span id="cb363-4"><a href="NewInput.html#cb363-4" tabindex="-1"></a>format.id <span class="ot">&lt;-</span> formatid of the format your created</span>
+<span id="cb363-5"><a href="NewInput.html#cb363-5" tabindex="-1"></a>format <span class="ot">&lt;-</span> PEcAn.DB<span class="sc">::</span><span class="fu">query.format.vars</span>(<span class="at">format.id=</span>format.id, <span class="at">bety =</span> con)</span>
+<span id="cb363-6"><a href="NewInput.html#cb363-6" tabindex="-1"></a>lon <span class="ot">&lt;-</span> longitude of your site</span>
+<span id="cb363-7"><a href="NewInput.html#cb363-7" tabindex="-1"></a>lat <span class="ot">&lt;-</span> latitude of your site</span>
+<span id="cb363-8"><a href="NewInput.html#cb363-8" tabindex="-1"></a>format<span class="sc">$</span>time_zone <span class="ot">&lt;-</span> time zone of your site</span>
+<span id="cb363-9"><a href="NewInput.html#cb363-9" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> Start date of your data <span class="cf">in</span> <span class="st">&quot;y-m-d&quot;</span></span>
+<span id="cb363-10"><a href="NewInput.html#cb363-10" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> End date of your data <span class="cf">in</span> <span class="st">&quot;y-m-d&quot;</span></span></code></pre></div>
 <p>Next you can execute the function:</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="NewInput.html#cb363-1" tabindex="-1"></a>PEcAn.data.atmosphere<span class="sc">::</span><span class="fu">met2CF.csv</span>(<span class="at">in.path =</span> in.path,</span>
-<span id="cb363-2"><a href="NewInput.html#cb363-2" tabindex="-1"></a>                                  <span class="at">in.prefix =</span>in.prefix,</span>
-<span id="cb363-3"><a href="NewInput.html#cb363-3" tabindex="-1"></a>                                  <span class="at">outfolder =</span> <span class="st">&quot;.&quot;</span>,</span>
-<span id="cb363-4"><a href="NewInput.html#cb363-4" tabindex="-1"></a>                                  <span class="at">start_date =</span> start_date,</span>
-<span id="cb363-5"><a href="NewInput.html#cb363-5" tabindex="-1"></a>                                  <span class="at">end_date =</span> end_date,</span>
-<span id="cb363-6"><a href="NewInput.html#cb363-6" tabindex="-1"></a>                                  <span class="at">lat=</span> lat,</span>
-<span id="cb363-7"><a href="NewInput.html#cb363-7" tabindex="-1"></a>                                  <span class="at">lon =</span> lon,</span>
-<span id="cb363-8"><a href="NewInput.html#cb363-8" tabindex="-1"></a>                                  <span class="at">format =</span> format)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="NewInput.html#cb364-1" tabindex="-1"></a>PEcAn.data.atmosphere<span class="sc">::</span><span class="fu">met2CF.csv</span>(<span class="at">in.path =</span> in.path,</span>
+<span id="cb364-2"><a href="NewInput.html#cb364-2" tabindex="-1"></a>                                  <span class="at">in.prefix =</span>in.prefix,</span>
+<span id="cb364-3"><a href="NewInput.html#cb364-3" tabindex="-1"></a>                                  <span class="at">outfolder =</span> <span class="st">&quot;.&quot;</span>,</span>
+<span id="cb364-4"><a href="NewInput.html#cb364-4" tabindex="-1"></a>                                  <span class="at">start_date =</span> start_date,</span>
+<span id="cb364-5"><a href="NewInput.html#cb364-5" tabindex="-1"></a>                                  <span class="at">end_date =</span> end_date,</span>
+<span id="cb364-6"><a href="NewInput.html#cb364-6" tabindex="-1"></a>                                  <span class="at">lat=</span> lat,</span>
+<span id="cb364-7"><a href="NewInput.html#cb364-7" tabindex="-1"></a>                                  <span class="at">lon =</span> lon,</span>
+<span id="cb364-8"><a href="NewInput.html#cb364-8" tabindex="-1"></a>                                  <span class="at">format =</span> format)</span></code></pre></div>
 </div>
 <div id="vegetation-data-1" class="section level4 hasAnchor" number="18.2.4.2">
 <h4><span class="header-section-number">18.2.4.2</span> Vegetation Data<a href="NewInput.html#vegetation-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -922,140 +922,140 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First, you’ll need to create a input record in BETY that will have a file record and format record reflecting the location and format of your file. Instructions can be found in our <a href="NewInput.html#NewInput">How to Insert new Input Data</a> page.</p>
 <p>Once you have created an input record you must take note of the input id of your record. An easy way to take note of this is in the URL of the BETY webpage that shows your input record. In this example we use an input record with the id <code>1000013064</code> which can be found at this url: <a href="https://psql-pecan.bu.edu/bety/inputs/1000013064#" class="uri">https://psql-pecan.bu.edu/bety/inputs/1000013064#</a> . Note that this is the Boston University BETY database. If you are on a different machine, your url will be different.</p>
 <p>With the input id in hand you can now edit a pecan XML so that the PEcAn function <code>ic_process</code> will know where to look in order to process your data. The <code>inputs</code> section of your pecan XML will look like this. As of now ic_process is set up to work with the ED2 model so we will use ED2 settings and then grab the intermediary Rds data file that is created as the standard PEcAn file. For your Inputs section you will need to input your input id wherever you see the <code>useic</code> flag.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb364-1"><a href="NewInput.html#cb364-1" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
-<span id="cb364-2"><a href="NewInput.html#cb364-2" tabindex="-1"></a>      &lt;<span class="kw">css</span>&gt;</span>
-<span id="cb364-3"><a href="NewInput.html#cb364-3" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;FFT&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb364-4"><a href="NewInput.html#cb364-4" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;css&lt;/<span class="kw">output</span>&gt;</span>
-<span id="cb364-5"><a href="NewInput.html#cb364-5" tabindex="-1"></a>        &lt;<span class="kw">username</span>&gt;pecan&lt;/<span class="kw">username</span>&gt;</span>
-<span id="cb364-6"><a href="NewInput.html#cb364-6" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000013064&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb364-7"><a href="NewInput.html#cb364-7" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
-<span id="cb364-8"><a href="NewInput.html#cb364-8" tabindex="-1"></a>        &lt;<span class="kw">metadata</span>&gt;</span>
-<span id="cb364-9"><a href="NewInput.html#cb364-9" tabindex="-1"></a>          &lt;<span class="kw">trk</span>&gt;1&lt;/<span class="kw">trk</span>&gt;</span>
-<span id="cb364-10"><a href="NewInput.html#cb364-10" tabindex="-1"></a>          &lt;<span class="kw">age</span>&gt;70&lt;/<span class="kw">age</span>&gt;</span>
-<span id="cb364-11"><a href="NewInput.html#cb364-11" tabindex="-1"></a>          &lt;<span class="kw">area</span>&gt;400&lt;/<span class="kw">area</span>&gt;</span>
-<span id="cb364-12"><a href="NewInput.html#cb364-12" tabindex="-1"></a>        &lt;/<span class="kw">metadata</span>&gt;</span>
-<span id="cb364-13"><a href="NewInput.html#cb364-13" tabindex="-1"></a>      &lt;/<span class="kw">css</span>&gt;</span>
-<span id="cb364-14"><a href="NewInput.html#cb364-14" tabindex="-1"></a>      &lt;<span class="kw">pss</span>&gt;</span>
-<span id="cb364-15"><a href="NewInput.html#cb364-15" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;FFT&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb364-16"><a href="NewInput.html#cb364-16" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;pss&lt;/<span class="kw">output</span>&gt;</span>
-<span id="cb364-17"><a href="NewInput.html#cb364-17" tabindex="-1"></a>        &lt;<span class="kw">username</span>&gt;pecan&lt;/<span class="kw">username</span>&gt;</span>
-<span id="cb364-18"><a href="NewInput.html#cb364-18" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000013064&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb364-19"><a href="NewInput.html#cb364-19" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
-<span id="cb364-20"><a href="NewInput.html#cb364-20" tabindex="-1"></a>      &lt;/<span class="kw">pss</span>&gt;</span>
-<span id="cb364-21"><a href="NewInput.html#cb364-21" tabindex="-1"></a>      &lt;<span class="kw">site</span>&gt;</span>
-<span id="cb364-22"><a href="NewInput.html#cb364-22" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;FFT&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb364-23"><a href="NewInput.html#cb364-23" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;site&lt;/<span class="kw">output</span>&gt;</span>
-<span id="cb364-24"><a href="NewInput.html#cb364-24" tabindex="-1"></a>        &lt;<span class="kw">username</span>&gt;pecan&lt;/<span class="kw">username</span>&gt;</span>
-<span id="cb364-25"><a href="NewInput.html#cb364-25" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000013064&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb364-26"><a href="NewInput.html#cb364-26" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
-<span id="cb364-27"><a href="NewInput.html#cb364-27" tabindex="-1"></a>      &lt;/<span class="kw">site</span>&gt;</span>
-<span id="cb364-28"><a href="NewInput.html#cb364-28" tabindex="-1"></a>      &lt;<span class="kw">met</span>&gt;</span>
-<span id="cb364-29"><a href="NewInput.html#cb364-29" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;CRUNCEP&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb364-30"><a href="NewInput.html#cb364-30" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;ED2&lt;/<span class="kw">output</span>&gt;</span>
-<span id="cb364-31"><a href="NewInput.html#cb364-31" tabindex="-1"></a>      &lt;/<span class="kw">met</span>&gt;</span>
-<span id="cb364-32"><a href="NewInput.html#cb364-32" tabindex="-1"></a>      &lt;<span class="kw">lu</span>&gt;</span>
-<span id="cb364-33"><a href="NewInput.html#cb364-33" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;294&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb364-34"><a href="NewInput.html#cb364-34" tabindex="-1"></a>      &lt;/<span class="kw">lu</span>&gt;</span>
-<span id="cb364-35"><a href="NewInput.html#cb364-35" tabindex="-1"></a>      &lt;<span class="kw">soil</span>&gt;</span>
-<span id="cb364-36"><a href="NewInput.html#cb364-36" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;297&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb364-37"><a href="NewInput.html#cb364-37" tabindex="-1"></a>      &lt;/<span class="kw">soil</span>&gt;</span>
-<span id="cb364-38"><a href="NewInput.html#cb364-38" tabindex="-1"></a>      &lt;<span class="kw">thsum</span>&gt;</span>
-<span id="cb364-39"><a href="NewInput.html#cb364-39" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;295&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb364-40"><a href="NewInput.html#cb364-40" tabindex="-1"></a>      &lt;/<span class="kw">thsum</span>&gt;</span>
-<span id="cb364-41"><a href="NewInput.html#cb364-41" tabindex="-1"></a>      &lt;<span class="kw">veg</span>&gt;</span>
-<span id="cb364-42"><a href="NewInput.html#cb364-42" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;296&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb364-43"><a href="NewInput.html#cb364-43" tabindex="-1"></a>      &lt;/<span class="kw">veg</span>&gt;</span>
-<span id="cb364-44"><a href="NewInput.html#cb364-44" tabindex="-1"></a>    &lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb365-1"><a href="NewInput.html#cb365-1" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
+<span id="cb365-2"><a href="NewInput.html#cb365-2" tabindex="-1"></a>      &lt;<span class="kw">css</span>&gt;</span>
+<span id="cb365-3"><a href="NewInput.html#cb365-3" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;FFT&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb365-4"><a href="NewInput.html#cb365-4" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;css&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb365-5"><a href="NewInput.html#cb365-5" tabindex="-1"></a>        &lt;<span class="kw">username</span>&gt;pecan&lt;/<span class="kw">username</span>&gt;</span>
+<span id="cb365-6"><a href="NewInput.html#cb365-6" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000013064&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb365-7"><a href="NewInput.html#cb365-7" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
+<span id="cb365-8"><a href="NewInput.html#cb365-8" tabindex="-1"></a>        &lt;<span class="kw">metadata</span>&gt;</span>
+<span id="cb365-9"><a href="NewInput.html#cb365-9" tabindex="-1"></a>          &lt;<span class="kw">trk</span>&gt;1&lt;/<span class="kw">trk</span>&gt;</span>
+<span id="cb365-10"><a href="NewInput.html#cb365-10" tabindex="-1"></a>          &lt;<span class="kw">age</span>&gt;70&lt;/<span class="kw">age</span>&gt;</span>
+<span id="cb365-11"><a href="NewInput.html#cb365-11" tabindex="-1"></a>          &lt;<span class="kw">area</span>&gt;400&lt;/<span class="kw">area</span>&gt;</span>
+<span id="cb365-12"><a href="NewInput.html#cb365-12" tabindex="-1"></a>        &lt;/<span class="kw">metadata</span>&gt;</span>
+<span id="cb365-13"><a href="NewInput.html#cb365-13" tabindex="-1"></a>      &lt;/<span class="kw">css</span>&gt;</span>
+<span id="cb365-14"><a href="NewInput.html#cb365-14" tabindex="-1"></a>      &lt;<span class="kw">pss</span>&gt;</span>
+<span id="cb365-15"><a href="NewInput.html#cb365-15" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;FFT&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb365-16"><a href="NewInput.html#cb365-16" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;pss&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb365-17"><a href="NewInput.html#cb365-17" tabindex="-1"></a>        &lt;<span class="kw">username</span>&gt;pecan&lt;/<span class="kw">username</span>&gt;</span>
+<span id="cb365-18"><a href="NewInput.html#cb365-18" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000013064&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb365-19"><a href="NewInput.html#cb365-19" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
+<span id="cb365-20"><a href="NewInput.html#cb365-20" tabindex="-1"></a>      &lt;/<span class="kw">pss</span>&gt;</span>
+<span id="cb365-21"><a href="NewInput.html#cb365-21" tabindex="-1"></a>      &lt;<span class="kw">site</span>&gt;</span>
+<span id="cb365-22"><a href="NewInput.html#cb365-22" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;FFT&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb365-23"><a href="NewInput.html#cb365-23" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;site&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb365-24"><a href="NewInput.html#cb365-24" tabindex="-1"></a>        &lt;<span class="kw">username</span>&gt;pecan&lt;/<span class="kw">username</span>&gt;</span>
+<span id="cb365-25"><a href="NewInput.html#cb365-25" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000013064&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb365-26"><a href="NewInput.html#cb365-26" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
+<span id="cb365-27"><a href="NewInput.html#cb365-27" tabindex="-1"></a>      &lt;/<span class="kw">site</span>&gt;</span>
+<span id="cb365-28"><a href="NewInput.html#cb365-28" tabindex="-1"></a>      &lt;<span class="kw">met</span>&gt;</span>
+<span id="cb365-29"><a href="NewInput.html#cb365-29" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;CRUNCEP&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb365-30"><a href="NewInput.html#cb365-30" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;ED2&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb365-31"><a href="NewInput.html#cb365-31" tabindex="-1"></a>      &lt;/<span class="kw">met</span>&gt;</span>
+<span id="cb365-32"><a href="NewInput.html#cb365-32" tabindex="-1"></a>      &lt;<span class="kw">lu</span>&gt;</span>
+<span id="cb365-33"><a href="NewInput.html#cb365-33" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;294&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb365-34"><a href="NewInput.html#cb365-34" tabindex="-1"></a>      &lt;/<span class="kw">lu</span>&gt;</span>
+<span id="cb365-35"><a href="NewInput.html#cb365-35" tabindex="-1"></a>      &lt;<span class="kw">soil</span>&gt;</span>
+<span id="cb365-36"><a href="NewInput.html#cb365-36" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;297&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb365-37"><a href="NewInput.html#cb365-37" tabindex="-1"></a>      &lt;/<span class="kw">soil</span>&gt;</span>
+<span id="cb365-38"><a href="NewInput.html#cb365-38" tabindex="-1"></a>      &lt;<span class="kw">thsum</span>&gt;</span>
+<span id="cb365-39"><a href="NewInput.html#cb365-39" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;295&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb365-40"><a href="NewInput.html#cb365-40" tabindex="-1"></a>      &lt;/<span class="kw">thsum</span>&gt;</span>
+<span id="cb365-41"><a href="NewInput.html#cb365-41" tabindex="-1"></a>      &lt;<span class="kw">veg</span>&gt;</span>
+<span id="cb365-42"><a href="NewInput.html#cb365-42" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;296&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb365-43"><a href="NewInput.html#cb365-43" tabindex="-1"></a>      &lt;/<span class="kw">veg</span>&gt;</span>
+<span id="cb365-44"><a href="NewInput.html#cb365-44" tabindex="-1"></a>    &lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
 <p>This IC workflow also supports generating ensembles of initial conditions from posterior estimates of DBH. To do this the tags below can be inserted to the pecan.xml:</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb365-1"><a href="NewInput.html#cb365-1" tabindex="-1"></a>       &lt;<span class="kw">css</span>&gt;</span>
-<span id="cb365-2"><a href="NewInput.html#cb365-2" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;PalEON&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb365-3"><a href="NewInput.html#cb365-3" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;css&lt;/<span class="kw">output</span>&gt;</span>
-<span id="cb365-4"><a href="NewInput.html#cb365-4" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000015682&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb365-5"><a href="NewInput.html#cb365-5" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
-<span id="cb365-6"><a href="NewInput.html#cb365-6" tabindex="-1"></a>        &lt;<span class="kw">ensemble</span>&gt;20&lt;/<span class="kw">ensemble</span>&gt;</span>
-<span id="cb365-7"><a href="NewInput.html#cb365-7" tabindex="-1"></a>        &lt;<span class="kw">metadata</span>&gt;</span>
-<span id="cb365-8"><a href="NewInput.html#cb365-8" tabindex="-1"></a>          &lt;<span class="kw">area</span>&gt;1256.637&lt;/<span class="kw">area</span>&gt;</span>
-<span id="cb365-9"><a href="NewInput.html#cb365-9" tabindex="-1"></a>          &lt;<span class="kw">n.patch</span>&gt;3&lt;/<span class="kw">n.patch</span>&gt;</span>
-<span id="cb365-10"><a href="NewInput.html#cb365-10" tabindex="-1"></a>        &lt;/<span class="kw">metadata</span>&gt;</span>
-<span id="cb365-11"><a href="NewInput.html#cb365-11" tabindex="-1"></a>      &lt;/<span class="kw">css</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb366-1"><a href="NewInput.html#cb366-1" tabindex="-1"></a>       &lt;<span class="kw">css</span>&gt;</span>
+<span id="cb366-2"><a href="NewInput.html#cb366-2" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;PalEON&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb366-3"><a href="NewInput.html#cb366-3" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;css&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb366-4"><a href="NewInput.html#cb366-4" tabindex="-1"></a>        &lt;<span class="kw">id</span>&gt;1000015682&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb366-5"><a href="NewInput.html#cb366-5" tabindex="-1"></a>        &lt;<span class="kw">useic</span>&gt;TRUE&lt;/<span class="kw">useic</span>&gt;</span>
+<span id="cb366-6"><a href="NewInput.html#cb366-6" tabindex="-1"></a>        &lt;<span class="kw">ensemble</span>&gt;20&lt;/<span class="kw">ensemble</span>&gt;</span>
+<span id="cb366-7"><a href="NewInput.html#cb366-7" tabindex="-1"></a>        &lt;<span class="kw">metadata</span>&gt;</span>
+<span id="cb366-8"><a href="NewInput.html#cb366-8" tabindex="-1"></a>          &lt;<span class="kw">area</span>&gt;1256.637&lt;/<span class="kw">area</span>&gt;</span>
+<span id="cb366-9"><a href="NewInput.html#cb366-9" tabindex="-1"></a>          &lt;<span class="kw">n.patch</span>&gt;3&lt;/<span class="kw">n.patch</span>&gt;</span>
+<span id="cb366-10"><a href="NewInput.html#cb366-10" tabindex="-1"></a>        &lt;/<span class="kw">metadata</span>&gt;</span>
+<span id="cb366-11"><a href="NewInput.html#cb366-11" tabindex="-1"></a>      &lt;/<span class="kw">css</span>&gt;</span></code></pre></div>
 <p>Here the <code>id</code> should point to a file that has MCMC samples to generate the ensemble from. The number between the <code>&lt;ensemble&gt;</code> tag defines the number of ensembles requested. The workflow will populate the settings list <code>run$inputs</code> tag with ensemble member information. E.g.:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb366-1"><a href="NewInput.html#cb366-1" tabindex="-1"></a>  &lt;<span class="kw">inputs</span>&gt;</span>
-<span id="cb366-2"><a href="NewInput.html#cb366-2" tabindex="-1"></a>   &lt;<span class="kw">css</span>&gt;</span>
-<span id="cb366-3"><a href="NewInput.html#cb366-3" tabindex="-1"></a>    &lt;<span class="kw">path1</span>&gt;...&lt;/<span class="kw">path1</span>&gt;</span>
-<span id="cb366-4"><a href="NewInput.html#cb366-4" tabindex="-1"></a>    &lt;<span class="kw">path2</span>&gt;...&lt;/<span class="kw">path2</span>&gt;</span>
-<span id="cb366-5"><a href="NewInput.html#cb366-5" tabindex="-1"></a>    &lt;<span class="kw">path3</span>&gt;...&lt;/<span class="kw">path3</span>&gt;</span>
-<span id="cb366-6"><a href="NewInput.html#cb366-6" tabindex="-1"></a>    ...</span>
-<span id="cb366-7"><a href="NewInput.html#cb366-7" tabindex="-1"></a>    &lt;<span class="kw">pathN</span>&gt;...&lt;/<span class="kw">pathN</span>&gt;</span>
-<span id="cb366-8"><a href="NewInput.html#cb366-8" tabindex="-1"></a>   &lt;/<span class="kw">css</span>&gt;</span>
-<span id="cb366-9"><a href="NewInput.html#cb366-9" tabindex="-1"></a>   &lt;<span class="kw">pss</span>&gt;</span>
-<span id="cb366-10"><a href="NewInput.html#cb366-10" tabindex="-1"></a>    &lt;<span class="kw">path</span>&gt;</span>
-<span id="cb366-11"><a href="NewInput.html#cb366-11" tabindex="-1"></a>     &lt;<span class="kw">path1</span>&gt;...&lt;/<span class="kw">path1</span>&gt;</span>
-<span id="cb366-12"><a href="NewInput.html#cb366-12" tabindex="-1"></a>     &lt;<span class="kw">path2</span>&gt;...&lt;/<span class="kw">path2</span>&gt;</span>
-<span id="cb366-13"><a href="NewInput.html#cb366-13" tabindex="-1"></a>     &lt;<span class="kw">path3</span>&gt;...&lt;/<span class="kw">path3</span>&gt;</span>
-<span id="cb366-14"><a href="NewInput.html#cb366-14" tabindex="-1"></a>      ...</span>
-<span id="cb366-15"><a href="NewInput.html#cb366-15" tabindex="-1"></a>     &lt;<span class="kw">pathN</span>&gt;...&lt;/<span class="kw">pathN</span>&gt;</span>
-<span id="cb366-16"><a href="NewInput.html#cb366-16" tabindex="-1"></a>    &lt;/<span class="kw">path</span>&gt;</span>
-<span id="cb366-17"><a href="NewInput.html#cb366-17" tabindex="-1"></a>   &lt;/<span class="kw">pss</span>&gt;</span>
-<span id="cb366-18"><a href="NewInput.html#cb366-18" tabindex="-1"></a>   &lt;<span class="kw">site</span>&gt;</span>
-<span id="cb366-19"><a href="NewInput.html#cb366-19" tabindex="-1"></a>    &lt;<span class="kw">path</span>&gt;</span>
-<span id="cb366-20"><a href="NewInput.html#cb366-20" tabindex="-1"></a>     &lt;<span class="kw">path1</span>&gt;...&lt;/<span class="kw">path1</span>&gt;</span>
-<span id="cb366-21"><a href="NewInput.html#cb366-21" tabindex="-1"></a>     &lt;<span class="kw">path2</span>&gt;...&lt;/<span class="kw">path2</span>&gt;</span>
-<span id="cb366-22"><a href="NewInput.html#cb366-22" tabindex="-1"></a>     &lt;<span class="kw">path3</span>&gt;...&lt;/<span class="kw">path3</span>&gt;</span>
-<span id="cb366-23"><a href="NewInput.html#cb366-23" tabindex="-1"></a>      ...</span>
-<span id="cb366-24"><a href="NewInput.html#cb366-24" tabindex="-1"></a>     &lt;<span class="kw">pathN</span>&gt;...&lt;/<span class="kw">pathN</span>&gt;</span>
-<span id="cb366-25"><a href="NewInput.html#cb366-25" tabindex="-1"></a>    &lt;/<span class="kw">path</span>&gt;</span>
-<span id="cb366-26"><a href="NewInput.html#cb366-26" tabindex="-1"></a>   &lt;/<span class="kw">site</span>&gt;</span>
-<span id="cb366-27"><a href="NewInput.html#cb366-27" tabindex="-1"></a>   &lt;<span class="kw">met</span>&gt;...&lt;/<span class="kw">met</span>&gt;</span>
-<span id="cb366-28"><a href="NewInput.html#cb366-28" tabindex="-1"></a>   &lt;<span class="kw">lu</span>&gt;...&lt;/<span class="kw">lu</span>&gt;</span>
-<span id="cb366-29"><a href="NewInput.html#cb366-29" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;...&lt;/<span class="kw">soil</span>&gt;</span>
-<span id="cb366-30"><a href="NewInput.html#cb366-30" tabindex="-1"></a>   &lt;<span class="kw">thsum</span>&gt;...&lt;/<span class="kw">thsum</span>&gt;</span>
-<span id="cb366-31"><a href="NewInput.html#cb366-31" tabindex="-1"></a>   &lt;<span class="kw">veg</span>&gt;...&lt;/<span class="kw">veg</span>&gt;</span>
-<span id="cb366-32"><a href="NewInput.html#cb366-32" tabindex="-1"></a>  &lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb367-1"><a href="NewInput.html#cb367-1" tabindex="-1"></a>  &lt;<span class="kw">inputs</span>&gt;</span>
+<span id="cb367-2"><a href="NewInput.html#cb367-2" tabindex="-1"></a>   &lt;<span class="kw">css</span>&gt;</span>
+<span id="cb367-3"><a href="NewInput.html#cb367-3" tabindex="-1"></a>    &lt;<span class="kw">path1</span>&gt;...&lt;/<span class="kw">path1</span>&gt;</span>
+<span id="cb367-4"><a href="NewInput.html#cb367-4" tabindex="-1"></a>    &lt;<span class="kw">path2</span>&gt;...&lt;/<span class="kw">path2</span>&gt;</span>
+<span id="cb367-5"><a href="NewInput.html#cb367-5" tabindex="-1"></a>    &lt;<span class="kw">path3</span>&gt;...&lt;/<span class="kw">path3</span>&gt;</span>
+<span id="cb367-6"><a href="NewInput.html#cb367-6" tabindex="-1"></a>    ...</span>
+<span id="cb367-7"><a href="NewInput.html#cb367-7" tabindex="-1"></a>    &lt;<span class="kw">pathN</span>&gt;...&lt;/<span class="kw">pathN</span>&gt;</span>
+<span id="cb367-8"><a href="NewInput.html#cb367-8" tabindex="-1"></a>   &lt;/<span class="kw">css</span>&gt;</span>
+<span id="cb367-9"><a href="NewInput.html#cb367-9" tabindex="-1"></a>   &lt;<span class="kw">pss</span>&gt;</span>
+<span id="cb367-10"><a href="NewInput.html#cb367-10" tabindex="-1"></a>    &lt;<span class="kw">path</span>&gt;</span>
+<span id="cb367-11"><a href="NewInput.html#cb367-11" tabindex="-1"></a>     &lt;<span class="kw">path1</span>&gt;...&lt;/<span class="kw">path1</span>&gt;</span>
+<span id="cb367-12"><a href="NewInput.html#cb367-12" tabindex="-1"></a>     &lt;<span class="kw">path2</span>&gt;...&lt;/<span class="kw">path2</span>&gt;</span>
+<span id="cb367-13"><a href="NewInput.html#cb367-13" tabindex="-1"></a>     &lt;<span class="kw">path3</span>&gt;...&lt;/<span class="kw">path3</span>&gt;</span>
+<span id="cb367-14"><a href="NewInput.html#cb367-14" tabindex="-1"></a>      ...</span>
+<span id="cb367-15"><a href="NewInput.html#cb367-15" tabindex="-1"></a>     &lt;<span class="kw">pathN</span>&gt;...&lt;/<span class="kw">pathN</span>&gt;</span>
+<span id="cb367-16"><a href="NewInput.html#cb367-16" tabindex="-1"></a>    &lt;/<span class="kw">path</span>&gt;</span>
+<span id="cb367-17"><a href="NewInput.html#cb367-17" tabindex="-1"></a>   &lt;/<span class="kw">pss</span>&gt;</span>
+<span id="cb367-18"><a href="NewInput.html#cb367-18" tabindex="-1"></a>   &lt;<span class="kw">site</span>&gt;</span>
+<span id="cb367-19"><a href="NewInput.html#cb367-19" tabindex="-1"></a>    &lt;<span class="kw">path</span>&gt;</span>
+<span id="cb367-20"><a href="NewInput.html#cb367-20" tabindex="-1"></a>     &lt;<span class="kw">path1</span>&gt;...&lt;/<span class="kw">path1</span>&gt;</span>
+<span id="cb367-21"><a href="NewInput.html#cb367-21" tabindex="-1"></a>     &lt;<span class="kw">path2</span>&gt;...&lt;/<span class="kw">path2</span>&gt;</span>
+<span id="cb367-22"><a href="NewInput.html#cb367-22" tabindex="-1"></a>     &lt;<span class="kw">path3</span>&gt;...&lt;/<span class="kw">path3</span>&gt;</span>
+<span id="cb367-23"><a href="NewInput.html#cb367-23" tabindex="-1"></a>      ...</span>
+<span id="cb367-24"><a href="NewInput.html#cb367-24" tabindex="-1"></a>     &lt;<span class="kw">pathN</span>&gt;...&lt;/<span class="kw">pathN</span>&gt;</span>
+<span id="cb367-25"><a href="NewInput.html#cb367-25" tabindex="-1"></a>    &lt;/<span class="kw">path</span>&gt;</span>
+<span id="cb367-26"><a href="NewInput.html#cb367-26" tabindex="-1"></a>   &lt;/<span class="kw">site</span>&gt;</span>
+<span id="cb367-27"><a href="NewInput.html#cb367-27" tabindex="-1"></a>   &lt;<span class="kw">met</span>&gt;...&lt;/<span class="kw">met</span>&gt;</span>
+<span id="cb367-28"><a href="NewInput.html#cb367-28" tabindex="-1"></a>   &lt;<span class="kw">lu</span>&gt;...&lt;/<span class="kw">lu</span>&gt;</span>
+<span id="cb367-29"><a href="NewInput.html#cb367-29" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;...&lt;/<span class="kw">soil</span>&gt;</span>
+<span id="cb367-30"><a href="NewInput.html#cb367-30" tabindex="-1"></a>   &lt;<span class="kw">thsum</span>&gt;...&lt;/<span class="kw">thsum</span>&gt;</span>
+<span id="cb367-31"><a href="NewInput.html#cb367-31" tabindex="-1"></a>   &lt;<span class="kw">veg</span>&gt;...&lt;/<span class="kw">veg</span>&gt;</span>
+<span id="cb367-32"><a href="NewInput.html#cb367-32" tabindex="-1"></a>  &lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
 <p>Once you edit your PEcAn.xml you can than create a settings object using PEcAn functions. Your <code>pecan.xml</code> must be in your working directory.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="NewInput.html#cb367-1" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.settings<span class="sc">::</span><span class="fu">read.settings</span>(<span class="st">&quot;pecan.xml&quot;</span>)</span>
-<span id="cb367-2"><a href="NewInput.html#cb367-2" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.settings<span class="sc">::</span><span class="fu">prepare.settings</span>(settings, <span class="at">force=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="NewInput.html#cb368-1" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.settings<span class="sc">::</span><span class="fu">read.settings</span>(<span class="st">&quot;pecan.xml&quot;</span>)</span>
+<span id="cb368-2"><a href="NewInput.html#cb368-2" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.settings<span class="sc">::</span><span class="fu">prepare.settings</span>(settings, <span class="at">force=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p>You can then execute the <code>ic_process</code> function to convert data into a standard Rds file:</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="NewInput.html#cb368-1" tabindex="-1"></a>input <span class="ot">&lt;-</span> settings<span class="sc">$</span>run<span class="sc">$</span>inputs</span>
-<span id="cb368-2"><a href="NewInput.html#cb368-2" tabindex="-1"></a>dir <span class="ot">&lt;-</span> <span class="st">&quot;.&quot;</span></span>
-<span id="cb368-3"><a href="NewInput.html#cb368-3" tabindex="-1"></a><span class="fu">ic_process</span>(settings, input, dir, <span class="at">overwrite =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="NewInput.html#cb369-1" tabindex="-1"></a>input <span class="ot">&lt;-</span> settings<span class="sc">$</span>run<span class="sc">$</span>inputs</span>
+<span id="cb369-2"><a href="NewInput.html#cb369-2" tabindex="-1"></a>dir <span class="ot">&lt;-</span> <span class="st">&quot;.&quot;</span></span>
+<span id="cb369-3"><a href="NewInput.html#cb369-3" tabindex="-1"></a><span class="fu">ic_process</span>(settings, input, dir, <span class="at">overwrite =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Note that the argument <code>dir</code> is set to the current directory. You will find the final ED2 file there. More importantly though you will find the <code>.Rds</code> file within the same directory.</p>
 <p><strong>Example 3: Pool Initial Condition files</strong></p>
 <p>If you have pool vegetation data, you’ll need the <a href="https://github.com/PecanProject/pecan/blob/develop/modules/data.land/R/pool_ic_list2netcdf.R"><code>pool_ic_list2netcdf.R</code></a> function to convert the pool data into PEcAn standard.</p>
 <p>The function stands alone and requires that you provide a named list of netcdf dimensions and values, and a named list of variables and values. Names and units need to match the standard_vars.csv table found <a href="https://github.com/PecanProject/pecan/blob/develop/base/utils/data/standard_vars.csv">here</a>.</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="NewInput.html#cb369-1" tabindex="-1"></a><span class="co">#Create a list object with necessary dimensions for your site</span></span>
-<span id="cb369-2"><a href="NewInput.html#cb369-2" tabindex="-1"></a>input<span class="ot">&lt;-</span><span class="fu">list</span>()</span>
-<span id="cb369-3"><a href="NewInput.html#cb369-3" tabindex="-1"></a>dims<span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">lat=</span><span class="sc">-</span><span class="dv">115</span>,<span class="at">lon=</span><span class="dv">45</span>, <span class="at">time=</span> <span class="dv">1</span>)</span>
-<span id="cb369-4"><a href="NewInput.html#cb369-4" tabindex="-1"></a>variables<span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">SoilResp=</span><span class="dv">8</span>,<span class="at">TotLivBiom=</span><span class="dv">295</span>)</span>
-<span id="cb369-5"><a href="NewInput.html#cb369-5" tabindex="-1"></a>input<span class="sc">$</span>dims <span class="ot">&lt;-</span> dims</span>
-<span id="cb369-6"><a href="NewInput.html#cb369-6" tabindex="-1"></a>input<span class="sc">$</span>vals <span class="ot">&lt;-</span> variables</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="NewInput.html#cb370-1" tabindex="-1"></a><span class="co">#Create a list object with necessary dimensions for your site</span></span>
+<span id="cb370-2"><a href="NewInput.html#cb370-2" tabindex="-1"></a>input<span class="ot">&lt;-</span><span class="fu">list</span>()</span>
+<span id="cb370-3"><a href="NewInput.html#cb370-3" tabindex="-1"></a>dims<span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">lat=</span><span class="sc">-</span><span class="dv">115</span>,<span class="at">lon=</span><span class="dv">45</span>, <span class="at">time=</span> <span class="dv">1</span>)</span>
+<span id="cb370-4"><a href="NewInput.html#cb370-4" tabindex="-1"></a>variables<span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">SoilResp=</span><span class="dv">8</span>,<span class="at">TotLivBiom=</span><span class="dv">295</span>)</span>
+<span id="cb370-5"><a href="NewInput.html#cb370-5" tabindex="-1"></a>input<span class="sc">$</span>dims <span class="ot">&lt;-</span> dims</span>
+<span id="cb370-6"><a href="NewInput.html#cb370-6" tabindex="-1"></a>input<span class="sc">$</span>vals <span class="ot">&lt;-</span> variables</span></code></pre></div>
 <p>Once this is done, set <code>outdir</code> to where you’d like the file to write out to and a siteid. Siteid in this can be used as an file name identifier. Once part of the automated workflow siteid will reflect the site id within the BET db.</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="NewInput.html#cb370-1" tabindex="-1"></a>outdir  <span class="ot">&lt;-</span> <span class="st">&quot;.&quot;</span></span>
-<span id="cb370-2"><a href="NewInput.html#cb370-2" tabindex="-1"></a>siteid <span class="ot">&lt;-</span> <span class="dv">772</span></span>
-<span id="cb370-3"><a href="NewInput.html#cb370-3" tabindex="-1"></a><span class="fu">pool_ic_list2netcdf</span>(<span class="at">input =</span> input, <span class="at">outdir =</span> outdir, <span class="at">siteid =</span> siteid)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="NewInput.html#cb371-1" tabindex="-1"></a>outdir  <span class="ot">&lt;-</span> <span class="st">&quot;.&quot;</span></span>
+<span id="cb371-2"><a href="NewInput.html#cb371-2" tabindex="-1"></a>siteid <span class="ot">&lt;-</span> <span class="dv">772</span></span>
+<span id="cb371-3"><a href="NewInput.html#cb371-3" tabindex="-1"></a><span class="fu">pool_ic_list2netcdf</span>(<span class="at">input =</span> input, <span class="at">outdir =</span> outdir, <span class="at">siteid =</span> siteid)</span></code></pre></div>
 <p>You should now have a netcdf file with initial conditions.</p>
 </div>
 <div id="soil-data-1" class="section level4 hasAnchor" number="18.2.4.3">
 <h4><span class="header-section-number">18.2.4.3</span> Soil Data<a href="NewInput.html#soil-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>Example 1: Converting Data in hand</strong></p>
 <p>Local data that has the correct names and units can easily be written out in PEcAn standard using the function soil2netcdf.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="NewInput.html#cb371-1" tabindex="-1"></a>soil.data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">volume_fraction_of_sand_in_soil =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>),</span>
-<span id="cb371-2"><a href="NewInput.html#cb371-2" tabindex="-1"></a>                  <span class="at">volume_fraction_of_clay_in_soil =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.3</span>,<span class="fl">0.3</span>),</span>
-<span id="cb371-3"><a href="NewInput.html#cb371-3" tabindex="-1"></a>                  <span class="at">soil_depth =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>))</span>
-<span id="cb371-4"><a href="NewInput.html#cb371-4" tabindex="-1"></a><span class="fu">soil2netcdf</span>(soil.data,<span class="st">&quot;soil.nc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="NewInput.html#cb372-1" tabindex="-1"></a>soil.data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">volume_fraction_of_sand_in_soil =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>),</span>
+<span id="cb372-2"><a href="NewInput.html#cb372-2" tabindex="-1"></a>                  <span class="at">volume_fraction_of_clay_in_soil =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.3</span>,<span class="fl">0.3</span>),</span>
+<span id="cb372-3"><a href="NewInput.html#cb372-3" tabindex="-1"></a>                  <span class="at">soil_depth =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>))</span>
+<span id="cb372-4"><a href="NewInput.html#cb372-4" tabindex="-1"></a><span class="fu">soil2netcdf</span>(soil.data,<span class="st">&quot;soil.nc&quot;</span>)</span></code></pre></div>
 <p>At the moment this file would need to be inserted into Inputs manually. By default, this function also calls soil_params, which will estimate a number of hydraulic and thermal parameters from texture. Be aware that at the moment not all model couplers are yet set up to read this file and/or convert it to model-specific formats.</p>
 <p><strong>Example 2: Converting PalEON data</strong></p>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the PalEON regional soil product, which itself is a subset of the MsTMIP Unified North American Soil Map. If this product is installed on your machine, the appropriate step in the do_conversions workflow is enabled by adding the following tag under <code>&lt;inputs&gt;</code> in your pecan.xml</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb372-1"><a href="NewInput.html#cb372-1" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
-<span id="cb372-2"><a href="NewInput.html#cb372-2" tabindex="-1"></a>     &lt;<span class="kw">id</span>&gt;1000012896&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb372-3"><a href="NewInput.html#cb372-3" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb373-1"><a href="NewInput.html#cb373-1" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
+<span id="cb373-2"><a href="NewInput.html#cb373-2" tabindex="-1"></a>     &lt;<span class="kw">id</span>&gt;1000012896&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb373-3"><a href="NewInput.html#cb373-3" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span></code></pre></div>
 <p>In the future we aim to extend this extraction to a wider range of soil products.</p>
 <p><strong>Example 3: Extracting soil properties from gSSURGO database</strong></p>
 <p>In addition to location-specific soil data, PEcAn can extract soil texture information from the gSSURGO data product. This product needs no installation and it extract soil proeprties for the lower 48 states in U.S. In order to let the pecan know that you’re planning to use gSSURGO, you can the following XML tag under input in your pecan xml file.</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb373-1"><a href="NewInput.html#cb373-1" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
-<span id="cb373-2"><a href="NewInput.html#cb373-2" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
-<span id="cb373-3"><a href="NewInput.html#cb373-3" tabindex="-1"></a>     &lt;<span class="kw">source</span>&gt;gSSURGO&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb373-4"><a href="NewInput.html#cb373-4" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span>
-<span id="cb373-5"><a href="NewInput.html#cb373-5" tabindex="-1"></a>&lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb374-1"><a href="NewInput.html#cb374-1" tabindex="-1"></a>&lt;<span class="kw">inputs</span>&gt;</span>
+<span id="cb374-2"><a href="NewInput.html#cb374-2" tabindex="-1"></a>   &lt;<span class="kw">soil</span>&gt;</span>
+<span id="cb374-3"><a href="NewInput.html#cb374-3" tabindex="-1"></a>     &lt;<span class="kw">source</span>&gt;gSSURGO&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb374-4"><a href="NewInput.html#cb374-4" tabindex="-1"></a>   &lt;/<span class="kw">soil</span>&gt;</span>
+<span id="cb374-5"><a href="NewInput.html#cb374-5" tabindex="-1"></a>&lt;/<span class="kw">inputs</span>&gt;</span></code></pre></div>
 </div>
 </div>
 </div>

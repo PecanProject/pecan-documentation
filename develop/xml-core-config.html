@@ -1055,17 +1055,33 @@ Exact requirements differ from model to model, but common inputs include meteoro
 <p>The following are the most common types of inputs, along with their corresponding tags:</p>
 <div id="xml-run-inputs-met" class="section level5 hasAnchor" number="10.1.8.2.1">
 <h5><span class="header-section-number">10.1.8.2.1</span> <code>met</code>: Meteorological inputs<a href="xml-core-config.html#xml-run-inputs-met" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>See the <code>PEcAn.data.atmosphere</code> package documentation for more details.
-In particular, users working with meteorological inputs should focus on
-the data download functions and the <code>met2CF</code> conversion utilities, which
-handle retrieval of raw meteorological products and conversion to
-CF-compliant NetCDF files used by PEcAn.</p>
+<p>The <code>&lt;met&gt;</code> tag specifies the meteorological forcing data used to drive the model simulation.</p>
+<p>Users must define either:</p>
+<ul>
+<li><code>source</code> – the name of a supported meteorological dataset, or<br />
+</li>
+<li><code>path</code> – the location of a pre-processed meteorological file.</li>
+</ul>
+<p>Example:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb201-1"><a href="xml-core-config.html#cb201-1" tabindex="-1"></a>&lt;<span class="kw">met</span>&gt;</span>
+<span id="cb201-2"><a href="xml-core-config.html#cb201-2" tabindex="-1"></a>  &lt;<span class="kw">source</span>&gt;CRUNCEP&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb201-3"><a href="xml-core-config.html#cb201-3" tabindex="-1"></a>  &lt;<span class="kw">output</span>&gt;SIPNET&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb201-4"><a href="xml-core-config.html#cb201-4" tabindex="-1"></a>&lt;/<span class="kw">met</span>&gt;</span></code></pre></div>
+<p>Common sub-tags:</p>
+<ul>
+<li><code>id</code> – Database ID of the meteorological dataset.</li>
+<li><code>source</code> – Name of the meteorological product (e.g., <code>CRUNCEP</code>, <code>AmerifluxLBL</code>).</li>
+<li><code>path</code> – Direct path to an existing meteorological file.</li>
+<li><code>output</code> – Model format to convert the meteorological data into.</li>
+</ul>
+<p>If <code>source</code> is provided, PEcAn will automatically retrieve and process the dataset.<br />
+If <code>path</code> is provided, PEcAn will use the file directly.</p>
 </div>
 <div id="xml-run-inputs-soil" class="section level5 hasAnchor" number="10.1.8.2.2">
 <h5><span class="header-section-number">10.1.8.2.2</span> <code>soil</code>: Soil inputs<a href="xml-core-config.html#xml-run-inputs-soil" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Soil inputs are handled through the <code>PEcAn.data.land</code> module.
 For full technical details, see the
-<a href="https://pecan.ncsa.illinois.edu/pkgdocs/PEcAn.data.land/">PEcAn.data.land package documentation</a>.</p>
+<a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.data.land/">PEcAn.data.land package documentation</a></p>
 <p>In practice, most PEcAn workflows do not rely on automated soil data
 processing at runtime. Instead, users typically preprocess soil data
 and provide standardized <code>soil.nc</code> files that are referenced directly
@@ -1077,7 +1093,7 @@ gSSURGO and SoilGrids.</p>
 preprocessed soil inputs rather than to trigger on-the-fly data
 processing.</p>
 <p>Note that some models reference soil inputs using the <code>&lt;soil&gt;</code> tag,
-while others use <code>&lt;soilphysics&gt;</code>. This inconsistency is historical and
+while others use <code>&lt;soil_physics&gt;</code>. This inconsistency is historical and
 can cause confusion; a future harmonization of these tags would be
 beneficial.</p>
 </div>
@@ -1148,22 +1164,22 @@ If no <code>host</code> tag is provided, PEcAn assumes models are run on <code>l
 For detailed information on configuring this for RabbitMQ, see the <a href="rabbitmq.html#rabbitmq-xml">RabbitMQ</a> page.
 The following provides a quick overview of XML tags related to remote execution.</p>
 <p><strong>NOTE</strong>: Any paths specified in the <code>pecan.xml</code> refer to paths on the <code>host</code> specified in this section, /not/ the machine on which PEcAn is running (unless models are running on <code>localhost</code> or this section is omitted).</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb203-1"><a href="xml-core-config.html#cb203-1" tabindex="-1"></a>    &lt;<span class="kw">host</span>&gt;</span>
-<span id="cb203-2"><a href="xml-core-config.html#cb203-2" tabindex="-1"></a>        &lt;<span class="kw">name</span>&gt;pecan2.bu.edu&lt;/<span class="kw">name</span>&gt;</span>
-<span id="cb203-3"><a href="xml-core-config.html#cb203-3" tabindex="-1"></a>        &lt;<span class="kw">rundir</span>&gt;/fs/data3/guestuser/pecan/testworkflow/run&lt;/<span class="kw">rundir</span>&gt;</span>
-<span id="cb203-4"><a href="xml-core-config.html#cb203-4" tabindex="-1"></a>        &lt;<span class="kw">outdir</span>&gt;/fs/data3/guestuser/pecan/testworkflow/out&lt;/<span class="kw">outdir</span>&gt;</span>
-<span id="cb203-5"><a href="xml-core-config.html#cb203-5" tabindex="-1"></a>        &lt;<span class="kw">scratchdir</span>&gt;/tmp/carya&lt;/<span class="kw">scratchdir</span>&gt;</span>
-<span id="cb203-6"><a href="xml-core-config.html#cb203-6" tabindex="-1"></a>        &lt;<span class="kw">clearscratch</span>&gt;TRUE&lt;/<span class="kw">clearscratch</span>&gt;</span>
-<span id="cb203-7"><a href="xml-core-config.html#cb203-7" tabindex="-1"></a>        &lt;<span class="kw">qsub</span>&gt;qsub -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash&lt;/<span class="kw">qsub</span>&gt;</span>
-<span id="cb203-8"><a href="xml-core-config.html#cb203-8" tabindex="-1"></a>        &lt;<span class="kw">qsub.jobid</span>&gt;Your job ([0-9]+) .*&lt;/<span class="kw">qsub.jobid</span>&gt;</span>
-<span id="cb203-9"><a href="xml-core-config.html#cb203-9" tabindex="-1"></a>        &lt;<span class="kw">qstat</span>&gt;&#39;qstat -j @JOBID@ <span class="dv">&amp;amp;</span>&gt; /dev/null || echo DONE&#39;&lt;/<span class="kw">qstat</span>&gt;</span>
-<span id="cb203-10"><a href="xml-core-config.html#cb203-10" tabindex="-1"></a>        &lt;<span class="kw">prerun</span>&gt;module load udunits R/R-3.0.0_gnu-4.4.6&lt;/<span class="kw">prerun</span>&gt;</span>
-<span id="cb203-11"><a href="xml-core-config.html#cb203-11" tabindex="-1"></a>        &lt;<span class="kw">cdosetup</span>&gt;module load cdo/2.0.6&lt;/<span class="kw">cdosetup</span>&gt;</span>
-<span id="cb203-12"><a href="xml-core-config.html#cb203-12" tabindex="-1"></a>        &lt;<span class="kw">modellauncher</span>&gt;</span>
-<span id="cb203-13"><a href="xml-core-config.html#cb203-13" tabindex="-1"></a>      &lt;<span class="kw">binary</span>&gt;/usr/local/bin/modellauncher&lt;/<span class="kw">binary</span>&gt;</span>
-<span id="cb203-14"><a href="xml-core-config.html#cb203-14" tabindex="-1"></a>      &lt;<span class="kw">qsub.extra</span>&gt;-pe omp 20&lt;/<span class="kw">qsub.extra</span>&gt;</span>
-<span id="cb203-15"><a href="xml-core-config.html#cb203-15" tabindex="-1"></a>        &lt;/<span class="kw">modellauncher</span>&gt;</span>
-<span id="cb203-16"><a href="xml-core-config.html#cb203-16" tabindex="-1"></a>    &lt;/<span class="kw">host</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb204-1"><a href="xml-core-config.html#cb204-1" tabindex="-1"></a>    &lt;<span class="kw">host</span>&gt;</span>
+<span id="cb204-2"><a href="xml-core-config.html#cb204-2" tabindex="-1"></a>        &lt;<span class="kw">name</span>&gt;pecan2.bu.edu&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb204-3"><a href="xml-core-config.html#cb204-3" tabindex="-1"></a>        &lt;<span class="kw">rundir</span>&gt;/fs/data3/guestuser/pecan/testworkflow/run&lt;/<span class="kw">rundir</span>&gt;</span>
+<span id="cb204-4"><a href="xml-core-config.html#cb204-4" tabindex="-1"></a>        &lt;<span class="kw">outdir</span>&gt;/fs/data3/guestuser/pecan/testworkflow/out&lt;/<span class="kw">outdir</span>&gt;</span>
+<span id="cb204-5"><a href="xml-core-config.html#cb204-5" tabindex="-1"></a>        &lt;<span class="kw">scratchdir</span>&gt;/tmp/carya&lt;/<span class="kw">scratchdir</span>&gt;</span>
+<span id="cb204-6"><a href="xml-core-config.html#cb204-6" tabindex="-1"></a>        &lt;<span class="kw">clearscratch</span>&gt;TRUE&lt;/<span class="kw">clearscratch</span>&gt;</span>
+<span id="cb204-7"><a href="xml-core-config.html#cb204-7" tabindex="-1"></a>        &lt;<span class="kw">qsub</span>&gt;qsub -N @NAME@ -o @STDOUT@ -e @STDERR@ -S /bin/bash&lt;/<span class="kw">qsub</span>&gt;</span>
+<span id="cb204-8"><a href="xml-core-config.html#cb204-8" tabindex="-1"></a>        &lt;<span class="kw">qsub.jobid</span>&gt;Your job ([0-9]+) .*&lt;/<span class="kw">qsub.jobid</span>&gt;</span>
+<span id="cb204-9"><a href="xml-core-config.html#cb204-9" tabindex="-1"></a>        &lt;<span class="kw">qstat</span>&gt;&#39;qstat -j @JOBID@ <span class="dv">&amp;amp;</span>&gt; /dev/null || echo DONE&#39;&lt;/<span class="kw">qstat</span>&gt;</span>
+<span id="cb204-10"><a href="xml-core-config.html#cb204-10" tabindex="-1"></a>        &lt;<span class="kw">prerun</span>&gt;module load udunits R/R-3.0.0_gnu-4.4.6&lt;/<span class="kw">prerun</span>&gt;</span>
+<span id="cb204-11"><a href="xml-core-config.html#cb204-11" tabindex="-1"></a>        &lt;<span class="kw">cdosetup</span>&gt;module load cdo/2.0.6&lt;/<span class="kw">cdosetup</span>&gt;</span>
+<span id="cb204-12"><a href="xml-core-config.html#cb204-12" tabindex="-1"></a>        &lt;<span class="kw">modellauncher</span>&gt;</span>
+<span id="cb204-13"><a href="xml-core-config.html#cb204-13" tabindex="-1"></a>      &lt;<span class="kw">binary</span>&gt;/usr/local/bin/modellauncher&lt;/<span class="kw">binary</span>&gt;</span>
+<span id="cb204-14"><a href="xml-core-config.html#cb204-14" tabindex="-1"></a>      &lt;<span class="kw">qsub.extra</span>&gt;-pe omp 20&lt;/<span class="kw">qsub.extra</span>&gt;</span>
+<span id="cb204-15"><a href="xml-core-config.html#cb204-15" tabindex="-1"></a>        &lt;/<span class="kw">modellauncher</span>&gt;</span>
+<span id="cb204-16"><a href="xml-core-config.html#cb204-16" tabindex="-1"></a>    &lt;/<span class="kw">host</span>&gt;</span></code></pre></div>
 <p>The <code>host</code> section has the following tags:</p>
 <ul>
 <li><code>name</code>: [optional] name of host server where model is located and executed, if not specified localhost is assumed.</li>
