@@ -445,7 +445,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.9" data-path="models-maespa.html"><a href="models-maespa.html"><i class="fa fa-check"></i><b>12.9</b> MAESPA</a></li>
 <li class="chapter" data-level="12.10" data-path="models-preles.html"><a href="models-preles.html"><i class="fa fa-check"></i><b>12.10</b> PRELES</a></li>
 <li class="chapter" data-level="12.11" data-path="models-rothc.html"><a href="models-rothc.html"><i class="fa fa-check"></i><b>12.11</b> RothC</a></li>
-<li class="chapter" data-level="12.12" data-path="models-sipnet.html"><a href="models-sipnet.html"><i class="fa fa-check"></i><b>12.12</b> SiPNET</a></li>
+<li class="chapter" data-level="12.12" data-path="models-sipnet.html"><a href="models-sipnet.html"><i class="fa fa-check"></i><b>12.12</b> SIPNET</a></li>
 <li class="chapter" data-level="12.13" data-path="models-stics.html"><a href="models-stics.html"><i class="fa fa-check"></i><b>12.13</b> STICS</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="met-drivers.html"><a href="met-drivers.html"><i class="fa fa-check"></i><b>13</b> Available Meteorological Drivers</a>
@@ -791,13 +791,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">18.1.1.1</span> Setting up the module directory (required)<a href="adding-model.html#setting-up-the-module-directory-required" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>PEcAn assumes that the interface modules are available as an R package in the models directory named after the model in question. The simplest way to get started on that R package is to make a copy the <a href="https://github.com/PecanProject/pecan/tree/main/models/template"><em>template</em></a> directory in the pecan/models folder and re-name it to the name of your model. In the code, filenames, and examples below you will want to substitute the word <strong>MODEL</strong> for the name of your model (note: R is case-sensitive).</p>
 <p>If you do not want to write the interface modules in R then it is fairly simple to set up the R functions describe below to just call the script you want to run using R’s <code>system</code> command. Scripts that are not R functions should be placed in the <code>inst</code> folder and R can look up the location of these files using the function <code>system.file</code> which takes as arguments the <code>local</code> path of the file within the package folder and the name of the package (typically PEcAn.MODEL). For example</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="adding-model.html#cb356-1" tabindex="-1"></a><span class="do">## Example met conversion wrapper function</span></span>
-<span id="cb356-2"><a href="adding-model.html#cb356-2" tabindex="-1"></a>met2model.MODEL <span class="ot">&lt;-</span> <span class="cf">function</span>(in.path, in.prefix, outfolder, start_date, end_date){</span>
-<span id="cb356-3"><a href="adding-model.html#cb356-3" tabindex="-1"></a>   myMetScript <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;inst/met2model.MODEL.sh&quot;</span>, <span class="st">&quot;PEcAn.MODEL&quot;</span>)</span>
-<span id="cb356-4"><a href="adding-model.html#cb356-4" tabindex="-1"></a>   <span class="fu">system</span>(<span class="fu">paste</span>(myMetScript, <span class="fu">file.path</span>(in.path, in.prefix), outfolder, start_date, end_date))</span>
-<span id="cb356-5"><a href="adding-model.html#cb356-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="adding-model.html#cb354-1" tabindex="-1"></a><span class="do">## Example met conversion wrapper function</span></span>
+<span id="cb354-2"><a href="adding-model.html#cb354-2" tabindex="-1"></a>met2model.MODEL <span class="ot">&lt;-</span> <span class="cf">function</span>(in.path, in.prefix, outfolder, start_date, end_date){</span>
+<span id="cb354-3"><a href="adding-model.html#cb354-3" tabindex="-1"></a>   myMetScript <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;inst/met2model.MODEL.sh&quot;</span>, <span class="st">&quot;PEcAn.MODEL&quot;</span>)</span>
+<span id="cb354-4"><a href="adding-model.html#cb354-4" tabindex="-1"></a>   <span class="fu">system</span>(<span class="fu">paste</span>(myMetScript, <span class="fu">file.path</span>(in.path, in.prefix), outfolder, start_date, end_date))</span>
+<span id="cb354-5"><a href="adding-model.html#cb354-5" tabindex="-1"></a>}</span></code></pre></div>
 <p>would execute the following at the Linux command line</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb357-1"><a href="adding-model.html#cb357-1" tabindex="-1"></a><span class="ex">inst/met2model.MODEL.sh</span> in.path/in.prefix outfolder start_date end_date    <span class="kw">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb355-1"><a href="adding-model.html#cb355-1" tabindex="-1"></a><span class="ex">inst/met2model.MODEL.sh</span> in.path/in.prefix outfolder start_date end_date    <span class="kw">`</span></span></code></pre></div>
 </div>
 <div id="description-file" class="section level4 hasAnchor" number="18.1.1.2">
 <h4><span class="header-section-number">18.1.1.2</span> DESCRIPTION File<a href="adding-model.html#description-file" class="anchor-section" aria-label="Anchor link to header"></a></h4>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12.12 SiPNET | The Predictive Ecosystem Analyzer</title>
-  <meta name="description" content="12.12 SiPNET | The Predictive Ecosystem Analyzer" />
+  <title>12.12 SIPNET | The Predictive Ecosystem Analyzer</title>
+  <meta name="description" content="12.12 SIPNET | The Predictive Ecosystem Analyzer" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12.12 SiPNET | The Predictive Ecosystem Analyzer" />
+  <meta property="og:title" content="12.12 SIPNET | The Predictive Ecosystem Analyzer" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12.12 SiPNET | The Predictive Ecosystem Analyzer" />
+  <meta name="twitter:title" content="12.12 SIPNET | The Predictive Ecosystem Analyzer" />
   
   
   
@@ -445,7 +445,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.9" data-path="models-maespa.html"><a href="models-maespa.html"><i class="fa fa-check"></i><b>12.9</b> MAESPA</a></li>
 <li class="chapter" data-level="12.10" data-path="models-preles.html"><a href="models-preles.html"><i class="fa fa-check"></i><b>12.10</b> PRELES</a></li>
 <li class="chapter" data-level="12.11" data-path="models-rothc.html"><a href="models-rothc.html"><i class="fa fa-check"></i><b>12.11</b> RothC</a></li>
-<li class="chapter" data-level="12.12" data-path="models-sipnet.html"><a href="models-sipnet.html"><i class="fa fa-check"></i><b>12.12</b> SiPNET</a></li>
+<li class="chapter" data-level="12.12" data-path="models-sipnet.html"><a href="models-sipnet.html"><i class="fa fa-check"></i><b>12.12</b> SIPNET</a></li>
 <li class="chapter" data-level="12.13" data-path="models-stics.html"><a href="models-stics.html"><i class="fa fa-check"></i><b>12.13</b> STICS</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="met-drivers.html"><a href="met-drivers.html"><i class="fa fa-check"></i><b>13</b> Available Meteorological Drivers</a>
@@ -777,8 +777,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="models-sipnet" class="section level2 hasAnchor" number="12.12">
-<h2><span class="header-section-number">12.12</span> SiPNET<a href="models-sipnet.html#models-sipnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">12.12</span> SIPNET<a href="models-sipnet.html#models-sipnet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Model Information</th>
@@ -788,19 +792,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td>Home Page</td>
-<td></td>
+<td><a href="https://pecanproject.github.io/sipnet" class="uri">https://pecanproject.github.io/sipnet</a></td>
 </tr>
 <tr class="even">
 <td>Source Code</td>
-<td></td>
+<td><a href="https://github.com/PecanProject/sipnet" class="uri">https://github.com/PecanProject/sipnet</a></td>
 </tr>
 <tr class="odd">
 <td>License</td>
-<td></td>
+<td>BSD 3-Clause</td>
 </tr>
 <tr class="even">
 <td>Authors</td>
-<td></td>
+<td>Michael Longfritz, William Sacks, David Moore, John M. Zobitz, Bobby H. Braswell, David S. Schimel, Rob Kooper, Michael C. Dietze, Istem Fer, Chris Black, David S. LeBauer</td>
 </tr>
 <tr class="odd">
 <td>PEcAn Integration</td>
@@ -809,7 +813,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p><strong>Introduction</strong></p>
-<p>Introduction about model</p>
+<p>SIPNET (Simplified Photosynthesis and Evapotranspiration Model) is a lightweight ecosystem model designed to simulate complex environmental dynamics. It tracks carbon, water, nitrogen, and trace greenhouse-gas (N₂O, CH₄) interactions, supporting applications from forest carbon inventories to managed croplands.</p>
+<p>Key features include simulation of photosynthesis, respiration, allocation, soil water, soil temperature, and nitrogen cycling on sub-daily time steps. The model tracks vegetation, litter, soil, and mineral-N pools, and includes event-based management for agricultural processes.</p>
+<p>For model documentation including model structure, user guide, and developer guide, see the <a href="https://pecanproject.github.io/sipnet">SIPNET documentation</a>. For PEcAn.SIPNET documentation, see the <a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.SIPNET/">package website</a>.</p>
 <p><strong>PEcAn configuration file additions</strong></p>
 <p>Should list the model specific additions to the PEcAn file here</p>
 <p><strong>Model specific input files</strong></p>
@@ -824,33 +830,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>sipnet.param</strong> : template for this file is in models/sipnet/inst/template.param or it is specified in the &lt;model&gt; section as &lt;default.param&gt;. The values in this template are replaced by those computed in the earlier stages of PEcAN.</li>
 </ul>
 <p><strong>Installation notes</strong></p>
-<p>This section contains notes on how to compile the model. The notes for the VM might work on other machines or configurations as well.</p>
-<p>SIPNET version unk:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_unk ]; then
-  cd
-  curl -o sipnet_unk.tar.gz http://isda.ncsa.illinois.edu/~kooper/PEcAn/models/sipnet_unk.tar.gz
-  tar zxf sipnet_unk.tar.gz
-  rm sipnet_unk.tar.gz
-fi
-cd ${HOME}/sipnet_unk/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.runk
-make clean</code></pre>
-<p>SIPNET version 136:</p>
-<pre><code>if [ ! -e ${HOME}/sipnet_r136 ]; then
-  cd
-  curl -o sipnet_r136.tar.gz http://isda.ncsa.illinois.edu/~kooper/EBI/sipnet_r136.tar.gz
-  tar zxf sipnet_r136.tar.gz
-  rm sipnet_r136.tar.gz
-  sed -i &#39;s#$(LD) $(LIBLINKS) \(.*\)#$(LD) \1 $(LIBLINKS)#&#39; ${HOME}/sipnet_r136/Makefile
-fi
-cd ${HOME}/sipnet_r136/
-make clean
-make
-sudo cp sipnet /usr/local/bin/sipnet.r136
-make clean</code></pre>
-<p><strong>VM</strong></p>
+<p>For current SIPNET installation instructions, please see the <a href="https://pecanproject.github.io/sipnet/install.html">SIPNET Installation Guide</a> or install binaries from the official <a href="https://github.com/PecanProject/sipnet/releases">releases</a> page.</p>
 
 </div>
             </section>
