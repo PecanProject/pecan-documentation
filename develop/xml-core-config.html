@@ -945,17 +945,24 @@ Conversely, if you do not want to do a trait meta-analysis (e.g. if you want to
 <span id="cb197-2"><a href="xml-core-config.html#cb197-2" tabindex="-1"></a>    &lt;<span class="kw">id</span>&gt;7&lt;/<span class="kw">id</span>&gt;</span>
 <span id="cb197-3"><a href="xml-core-config.html#cb197-3" tabindex="-1"></a>    &lt;<span class="kw">type</span>&gt;ED2&lt;/<span class="kw">type</span>&gt;</span>
 <span id="cb197-4"><a href="xml-core-config.html#cb197-4" tabindex="-1"></a>    &lt;<span class="kw">binary</span>&gt;/usr/local/bin/ed2.r82&lt;/<span class="kw">binary</span>&gt;</span>
-<span id="cb197-5"><a href="xml-core-config.html#cb197-5" tabindex="-1"></a>    &lt;<span class="kw">prerun</span>&gt;module load hdf5&lt;/<span class="kw">prerun</span>&gt;</span>
-<span id="cb197-6"><a href="xml-core-config.html#cb197-6" tabindex="-1"></a>    &lt;<span class="kw">config.header</span>&gt;</span>
-<span id="cb197-7"><a href="xml-core-config.html#cb197-7" tabindex="-1"></a>        <span class="co">&lt;!--...xml code passed directly to config file...--&gt;</span></span>
-<span id="cb197-8"><a href="xml-core-config.html#cb197-8" tabindex="-1"></a>    &lt;/<span class="kw">config.header</span>&gt;</span>
-<span id="cb197-9"><a href="xml-core-config.html#cb197-9" tabindex="-1"></a>&lt;/<span class="kw">model</span>&gt;</span></code></pre></div>
+<span id="cb197-5"><a href="xml-core-config.html#cb197-5" tabindex="-1"></a>    &lt;<span class="kw">revision</span>&gt;82&lt;/<span class="kw">revision</span>&gt;</span>
+<span id="cb197-6"><a href="xml-core-config.html#cb197-6" tabindex="-1"></a>    &lt;<span class="kw">prerun</span>&gt;module load hdf5&lt;/<span class="kw">prerun</span>&gt;</span>
+<span id="cb197-7"><a href="xml-core-config.html#cb197-7" tabindex="-1"></a>    &lt;<span class="kw">config.header</span>&gt;</span>
+<span id="cb197-8"><a href="xml-core-config.html#cb197-8" tabindex="-1"></a>        <span class="co">&lt;!--...xml code passed directly to config file...--&gt;</span></span>
+<span id="cb197-9"><a href="xml-core-config.html#cb197-9" tabindex="-1"></a>    &lt;/<span class="kw">config.header</span>&gt;</span>
+<span id="cb197-10"><a href="xml-core-config.html#cb197-10" tabindex="-1"></a>&lt;/<span class="kw">model</span>&gt;</span></code></pre></div>
 <p>Some important tags are as follows:</p>
 <ul>
 <li><code>id</code> – The unique numeric ID of the model in the PEcAn database <code>models</code> table. If this is present, then <code>type</code> and <code>binary</code> are optional since they can be determined from the PEcAn database.</li>
 <li><code>type</code> – The model “type”, matching the PEcAn database <code>modeltypes</code> table <code>name</code> column. This also refers to which PEcAn model-specific package will be used. In PEcAn, a “model” refers to a specific version (e.g. release, git commit) of a specific model, and “model type” is used to link different releases of the same model. Model “types” also have specific PFT definitions and other requirements associated with them (e.g. the ED2 model “type” requires a global land cover database).</li>
 <li><code>binary</code> – The file path to the model executable. If omitted, PEcAn will use whatever path is registered in the PEcAn database for the current machine.</li>
+<li><code>revision</code> – A unique identifier for the model version of <code>binary</code>. Format is model-specific, but many models expect a semantic version (eg “2.12.3”) and rely on version comparisons (e.g. <code>revision &gt;= "2.0"</code>) to match PEcAn configuration behavior to model capabilities.</li>
 <li><code>prerun</code> – Additional options added to the <code>job.sh</code> script, which is used to execute the model. This is useful for setting specific environment variables, load modules, etc.</li>
+<li><code>options</code> – Additional configuration passed on to the model.
+Depending on the model these might be passed as a set of command flags (e.g. <code>&lt;options&gt;&lt;infile&gt;path/to/file&lt;/infile&gt;&lt;quiet&gt;FALSE&lt;/quiet&gt;&lt;options</code> becomes <code>./path/to/binary --no-quiet --inputfile=path/to/file</code>),
+entries in a configuration file (e.g. <code>&lt;options&gt;&lt;LOG_FILE&gt;path/to/file&lt;/LOG_FILE&gt;&lt;QUIET&gt;1&lt;/QUIET&gt;&lt;options</code> becomes <code>LOG_FILE = path/to/file</code> and <code>QUIET = 1</code>),
+or a more complicated transformation (e.g. a model that accepts some options as command flags and other as lines in a configuration file might take <code>&lt;options&gt;&lt;flags&gt;...&lt;/flags&gt;&lt;settings&gt;...&lt;/settings&gt;&lt;/options&gt;</code>).
+To avoid confusion, we recommend that the names in <code>model$options</code> be <em>identical</em> to the names the model recognizes: If the model expects <code>LONG_COMPLICATED_OPTION_NAME = "third_verbose_option"</code>, write that into the XML instead of making write.config.MODEL translate from <code>model$options$complic_opt = 3".</code></li>
 </ul>
 <p>This information is currently used by the following PEcAn workflow function:</p>
 <ul>
