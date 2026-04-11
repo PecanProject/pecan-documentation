@@ -290,17 +290,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.2" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-docker-compose"><i class="fa fa-check"></i><b>8.8.2</b> PEcAn’s <code>docker-compose</code></a></li>
 <li class="chapter" data-level="8.8.3" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-structure"><i class="fa fa-check"></i><b>8.8.3</b> Top-level structure</a></li>
 <li class="chapter" data-level="8.8.4" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-traefik"><i class="fa fa-check"></i><b>8.8.4</b> <code>traefik</code></a></li>
-<li class="chapter" data-level="8.8.5" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-portainer"><i class="fa fa-check"></i><b>8.8.5</b> <code>portainer</code></a></li>
-<li class="chapter" data-level="8.8.6" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-minio"><i class="fa fa-check"></i><b>8.8.6</b> <code>minio</code></a></li>
-<li class="chapter" data-level="8.8.7" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-thredds"><i class="fa fa-check"></i><b>8.8.7</b> <code>thredds</code></a></li>
-<li class="chapter" data-level="8.8.8" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-postgres"><i class="fa fa-check"></i><b>8.8.8</b> <code>postgres</code></a></li>
-<li class="chapter" data-level="8.8.9" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-rabbitmq"><i class="fa fa-check"></i><b>8.8.9</b> <code>rabbitmq</code></a></li>
-<li class="chapter" data-level="8.8.10" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-bety"><i class="fa fa-check"></i><b>8.8.10</b> <code>bety</code></a></li>
-<li class="chapter" data-level="8.8.11" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-docs"><i class="fa fa-check"></i><b>8.8.11</b> <code>docs</code></a></li>
-<li class="chapter" data-level="8.8.12" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-web"><i class="fa fa-check"></i><b>8.8.12</b> <code>web</code></a></li>
-<li class="chapter" data-level="8.8.13" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-executor"><i class="fa fa-check"></i><b>8.8.13</b> <code>executor</code></a></li>
-<li class="chapter" data-level="8.8.14" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-monitor"><i class="fa fa-check"></i><b>8.8.14</b> <code>monitor</code></a></li>
-<li class="chapter" data-level="8.8.15" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-models"><i class="fa fa-check"></i><b>8.8.15</b> Model-specific containers</a></li>
+<li class="chapter" data-level="8.8.5" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-postgres"><i class="fa fa-check"></i><b>8.8.5</b> <code>postgres</code></a></li>
+<li class="chapter" data-level="8.8.6" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-rabbitmq"><i class="fa fa-check"></i><b>8.8.6</b> <code>rabbitmq</code></a></li>
+<li class="chapter" data-level="8.8.7" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-bety"><i class="fa fa-check"></i><b>8.8.7</b> <code>bety</code></a></li>
+<li class="chapter" data-level="8.8.8" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-rstudio"><i class="fa fa-check"></i><b>8.8.8</b> <code>rstudio</code></a></li>
+<li class="chapter" data-level="8.8.9" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-docs"><i class="fa fa-check"></i><b>8.8.9</b> <code>docs</code></a></li>
+<li class="chapter" data-level="8.8.10" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-web"><i class="fa fa-check"></i><b>8.8.10</b> <code>pecan</code> (web)</a></li>
+<li class="chapter" data-level="8.8.11" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-executor"><i class="fa fa-check"></i><b>8.8.11</b> <code>executor</code></a></li>
+<li class="chapter" data-level="8.8.12" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-monitor"><i class="fa fa-check"></i><b>8.8.12</b> <code>monitor</code></a></li>
+<li class="chapter" data-level="8.8.13" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-api"><i class="fa fa-check"></i><b>8.8.13</b> <code>api</code></a></li>
+<li class="chapter" data-level="8.8.14" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-models"><i class="fa fa-check"></i><b>8.8.14</b> Model-specific containers</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="model-docker.html"><a href="model-docker.html"><i class="fa fa-check"></i><b>8.9</b> Models using Docker</a>
 <ul>
@@ -823,9 +822,9 @@ The following instructions provide details on how to build each image individual
 For more details, see <code>docker build --help</code> or the <a href="https://docs.docker.com/engine/reference/commandline/build/">online Docker build documentation</a>.</p>
 <p>First, in a terminal window, navigate (<code>cd</code>) into the PEcAn source code root directory.
 From there, the general syntax for building an image looks like the following:</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb150-1"><a href="docker-build-images.html#cb150-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pecan/<span class="op">&lt;</span>image name<span class="op">&gt;</span>:<span class="op">&lt;</span>image version<span class="op">&gt;</span> -f docker/base/Dockerfile.<span class="op">&lt;</span>image name<span class="op">&gt;</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb147-1"><a href="docker-build-images.html#cb147-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pecan/<span class="op">&lt;</span>image name<span class="op">&gt;</span>:<span class="op">&lt;</span>image version<span class="op">&gt;</span> -f docker/base/Dockerfile.<span class="op">&lt;</span>image name<span class="op">&gt;</span> .</span></code></pre></div>
 <p>For instance, to build a local version of the <code>pecan/depends:latest</code> image, you would run:</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb151-1"><a href="docker-build-images.html#cb151-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pecan/depends:latest <span class="at">-f</span> docker/depends/Dockerfile .</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="docker-build-images.html#cb148-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pecan/depends:latest <span class="at">-f</span> docker/depends/Dockerfile .</span></code></pre></div>
 <p>The breakdown of this command is as follows:</p>
 <ul>
 <li><p><code>docker build</code> – This is the core command.
@@ -856,11 +855,11 @@ The basic idea is to mount a local version of the PEcAn source code onto a runni
 NOTE: All commands assume you are working from the PEcAn source code root directory.</p>
 <ol style="list-style-type: decimal">
 <li><p>In the PEcAn source code directory, create a <code>docker-compose.override.yml</code> file with the following contents.:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb153-1"><a href="docker-build-images.html#cb153-1" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></span>
-<span id="cb153-2"><a href="docker-build-images.html#cb153-2" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
-<span id="cb153-3"><a href="docker-build-images.html#cb153-3" tabindex="-1"></a><span class="at">  </span><span class="fu">executor</span><span class="kw">:</span></span>
-<span id="cb153-4"><a href="docker-build-images.html#cb153-4" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
-<span id="cb153-5"><a href="docker-build-images.html#cb153-5" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> .:/pecan</span></span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb150-1"><a href="docker-build-images.html#cb150-1" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></span>
+<span id="cb150-2"><a href="docker-build-images.html#cb150-2" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb150-3"><a href="docker-build-images.html#cb150-3" tabindex="-1"></a><span class="at">  </span><span class="fu">executor</span><span class="kw">:</span></span>
+<span id="cb150-4"><a href="docker-build-images.html#cb150-4" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb150-5"><a href="docker-build-images.html#cb150-5" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> .:/pecan</span></span></code></pre></div>
 <p>This will mount the current directory <code>.</code> to the <code>/pecan</code> directory in the <code>executor</code> container.
 The special <code>docker-compose.override.yml</code> file is read automatically by <code>docker-compose</code> and overrides or extends any instructions set in the original <code>docker-compose.yml</code> file.
 It provides a convenient way to host server-specific configurations without having to modify the project-wide (and version-controlled) default configuration.
@@ -881,26 +880,26 @@ This can lead to two common issues:
 - Similarly, any installation artifacts from local builds will be carried over to the build. In particular, be wary of packages with compiled code, such as <code>modules/rtm</code> (<code>PEcAnRTM</code>) – the compiled <code>.o</code>, <code>.so</code>, <code>.mod</code>, etc. files from compilation of such packages will carry over into the build, which can cause conflicts if the package was also built locally.</p>
 <p>The <code>docker-compose.override.yml</code> is useful for some other local modifications.
 For instance, the following adds a custom ED2 “develop” model container.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb154-1"><a href="docker-build-images.html#cb154-1" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
-<span id="cb154-2"><a href="docker-build-images.html#cb154-2" tabindex="-1"></a><span class="co">  # ...</span></span>
-<span id="cb154-3"><a href="docker-build-images.html#cb154-3" tabindex="-1"></a><span class="at">  </span><span class="fu">ed2devel</span><span class="kw">:</span></span>
-<span id="cb154-4"><a href="docker-build-images.html#cb154-4" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> pecan/model-ed2-develop:latest</span></span>
-<span id="cb154-5"><a href="docker-build-images.html#cb154-5" tabindex="-1"></a><span class="at">    </span><span class="fu">build</span><span class="kw">:</span></span>
-<span id="cb154-6"><a href="docker-build-images.html#cb154-6" tabindex="-1"></a><span class="at">      </span><span class="fu">context</span><span class="kw">:</span><span class="at"> ../ED2</span><span class="co">  # Or wherever ED2 source code is found</span></span>
-<span id="cb154-7"><a href="docker-build-images.html#cb154-7" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
-<span id="cb154-8"><a href="docker-build-images.html#cb154-8" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan</span></span>
-<span id="cb154-9"><a href="docker-build-images.html#cb154-9" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
-<span id="cb154-10"><a href="docker-build-images.html#cb154-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> rabbitmq</span></span>
-<span id="cb154-11"><a href="docker-build-images.html#cb154-11" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
-<span id="cb154-12"><a href="docker-build-images.html#cb154-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan:/data</span></span>
-<span id="cb154-13"><a href="docker-build-images.html#cb154-13" tabindex="-1"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> unless-stopped</span></span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb151-1"><a href="docker-build-images.html#cb151-1" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb151-2"><a href="docker-build-images.html#cb151-2" tabindex="-1"></a><span class="co">  # ...</span></span>
+<span id="cb151-3"><a href="docker-build-images.html#cb151-3" tabindex="-1"></a><span class="at">  </span><span class="fu">ed2devel</span><span class="kw">:</span></span>
+<span id="cb151-4"><a href="docker-build-images.html#cb151-4" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> pecan/model-ed2-develop:latest</span></span>
+<span id="cb151-5"><a href="docker-build-images.html#cb151-5" tabindex="-1"></a><span class="at">    </span><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb151-6"><a href="docker-build-images.html#cb151-6" tabindex="-1"></a><span class="at">      </span><span class="fu">context</span><span class="kw">:</span><span class="at"> ../ED2</span><span class="co">  # Or wherever ED2 source code is found</span></span>
+<span id="cb151-7"><a href="docker-build-images.html#cb151-7" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb151-8"><a href="docker-build-images.html#cb151-8" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan</span></span>
+<span id="cb151-9"><a href="docker-build-images.html#cb151-9" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb151-10"><a href="docker-build-images.html#cb151-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> rabbitmq</span></span>
+<span id="cb151-11"><a href="docker-build-images.html#cb151-11" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb151-12"><a href="docker-build-images.html#cb151-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pecan:/data</span></span>
+<span id="cb151-13"><a href="docker-build-images.html#cb151-13" tabindex="-1"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> unless-stopped</span></span></code></pre></div>
 <p>Similarly, this snippet modifies the <code>pecan</code> network to use a custom IP subnet mask.
 This is required on the PNNL cluster because its servers’ IP addresses often clash with Docker’s default IP mask.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb155-1"><a href="docker-build-images.html#cb155-1" tabindex="-1"></a><span class="fu">networks</span><span class="kw">:</span></span>
-<span id="cb155-2"><a href="docker-build-images.html#cb155-2" tabindex="-1"></a><span class="at">  </span><span class="fu">pecan</span><span class="kw">:</span></span>
-<span id="cb155-3"><a href="docker-build-images.html#cb155-3" tabindex="-1"></a><span class="at">    </span><span class="fu">ipam</span><span class="kw">:</span></span>
-<span id="cb155-4"><a href="docker-build-images.html#cb155-4" tabindex="-1"></a><span class="at">      </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb155-5"><a href="docker-build-images.html#cb155-5" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">subnet</span><span class="kw">:</span><span class="at"> 10.17.1.0/24</span></span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb152-1"><a href="docker-build-images.html#cb152-1" tabindex="-1"></a><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb152-2"><a href="docker-build-images.html#cb152-2" tabindex="-1"></a><span class="at">  </span><span class="fu">pecan</span><span class="kw">:</span></span>
+<span id="cb152-3"><a href="docker-build-images.html#cb152-3" tabindex="-1"></a><span class="at">    </span><span class="fu">ipam</span><span class="kw">:</span></span>
+<span id="cb152-4"><a href="docker-build-images.html#cb152-4" tabindex="-1"></a><span class="at">      </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb152-5"><a href="docker-build-images.html#cb152-5" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">subnet</span><span class="kw">:</span><span class="at"> 10.17.1.0/24</span></span></code></pre></div>
 
 </div>
 </div>

@@ -290,17 +290,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.2" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-docker-compose"><i class="fa fa-check"></i><b>8.8.2</b> PEcAn’s <code>docker-compose</code></a></li>
 <li class="chapter" data-level="8.8.3" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-structure"><i class="fa fa-check"></i><b>8.8.3</b> Top-level structure</a></li>
 <li class="chapter" data-level="8.8.4" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-traefik"><i class="fa fa-check"></i><b>8.8.4</b> <code>traefik</code></a></li>
-<li class="chapter" data-level="8.8.5" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-portainer"><i class="fa fa-check"></i><b>8.8.5</b> <code>portainer</code></a></li>
-<li class="chapter" data-level="8.8.6" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-minio"><i class="fa fa-check"></i><b>8.8.6</b> <code>minio</code></a></li>
-<li class="chapter" data-level="8.8.7" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-thredds"><i class="fa fa-check"></i><b>8.8.7</b> <code>thredds</code></a></li>
-<li class="chapter" data-level="8.8.8" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-postgres"><i class="fa fa-check"></i><b>8.8.8</b> <code>postgres</code></a></li>
-<li class="chapter" data-level="8.8.9" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-rabbitmq"><i class="fa fa-check"></i><b>8.8.9</b> <code>rabbitmq</code></a></li>
-<li class="chapter" data-level="8.8.10" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-bety"><i class="fa fa-check"></i><b>8.8.10</b> <code>bety</code></a></li>
-<li class="chapter" data-level="8.8.11" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-docs"><i class="fa fa-check"></i><b>8.8.11</b> <code>docs</code></a></li>
-<li class="chapter" data-level="8.8.12" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-web"><i class="fa fa-check"></i><b>8.8.12</b> <code>web</code></a></li>
-<li class="chapter" data-level="8.8.13" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-executor"><i class="fa fa-check"></i><b>8.8.13</b> <code>executor</code></a></li>
-<li class="chapter" data-level="8.8.14" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-monitor"><i class="fa fa-check"></i><b>8.8.14</b> <code>monitor</code></a></li>
-<li class="chapter" data-level="8.8.15" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-models"><i class="fa fa-check"></i><b>8.8.15</b> Model-specific containers</a></li>
+<li class="chapter" data-level="8.8.5" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-postgres"><i class="fa fa-check"></i><b>8.8.5</b> <code>postgres</code></a></li>
+<li class="chapter" data-level="8.8.6" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-rabbitmq"><i class="fa fa-check"></i><b>8.8.6</b> <code>rabbitmq</code></a></li>
+<li class="chapter" data-level="8.8.7" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-bety"><i class="fa fa-check"></i><b>8.8.7</b> <code>bety</code></a></li>
+<li class="chapter" data-level="8.8.8" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-rstudio"><i class="fa fa-check"></i><b>8.8.8</b> <code>rstudio</code></a></li>
+<li class="chapter" data-level="8.8.9" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-docs"><i class="fa fa-check"></i><b>8.8.9</b> <code>docs</code></a></li>
+<li class="chapter" data-level="8.8.10" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-web"><i class="fa fa-check"></i><b>8.8.10</b> <code>pecan</code> (web)</a></li>
+<li class="chapter" data-level="8.8.11" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-executor"><i class="fa fa-check"></i><b>8.8.11</b> <code>executor</code></a></li>
+<li class="chapter" data-level="8.8.12" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-monitor"><i class="fa fa-check"></i><b>8.8.12</b> <code>monitor</code></a></li>
+<li class="chapter" data-level="8.8.13" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-api"><i class="fa fa-check"></i><b>8.8.13</b> <code>api</code></a></li>
+<li class="chapter" data-level="8.8.14" data-path="pecan-docker.html"><a href="pecan-docker.html#pecan-dc-models"><i class="fa fa-check"></i><b>8.8.14</b> Model-specific containers</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="model-docker.html"><a href="model-docker.html"><i class="fa fa-check"></i><b>8.9</b> Models using Docker</a>
 <ul>
@@ -805,82 +804,82 @@ It contains the following major sections (“nodes”):</p>
 </ul></li>
 </ul>
 <p>A basic example looks like this:</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb186-1"><a href="pecanXML.html#cb186-1" tabindex="-1"></a><span class="fu">&lt;?xml</span> <span class="ot">version=</span><span class="st">&quot;1.0&quot;</span> <span class="ot">encoding=</span><span class="st">&quot;UTF-8&quot;</span><span class="fu">?&gt;</span></span>
-<span id="cb186-2"><a href="pecanXML.html#cb186-2" tabindex="-1"></a>&lt;<span class="kw">pecan</span>&gt;</span>
-<span id="cb186-3"><a href="pecanXML.html#cb186-3" tabindex="-1"></a>  &lt;<span class="kw">info</span>&gt;</span>
-<span id="cb186-4"><a href="pecanXML.html#cb186-4" tabindex="-1"></a>    &lt;<span class="kw">notes</span>&gt;Example run&lt;/<span class="kw">notes</span>&gt;</span>
-<span id="cb186-5"><a href="pecanXML.html#cb186-5" tabindex="-1"></a>    &lt;<span class="kw">userid</span>&gt;-1&lt;/<span class="kw">userid</span>&gt;</span>
-<span id="cb186-6"><a href="pecanXML.html#cb186-6" tabindex="-1"></a>    &lt;<span class="kw">username</span>&gt;guestuser&lt;/<span class="kw">username</span>&gt;</span>
-<span id="cb186-7"><a href="pecanXML.html#cb186-7" tabindex="-1"></a>    &lt;<span class="kw">date</span>&gt;2018/09/18 19:12:28 +0000&lt;/<span class="kw">date</span>&gt;</span>
-<span id="cb186-8"><a href="pecanXML.html#cb186-8" tabindex="-1"></a>  &lt;/<span class="kw">info</span>&gt;</span>
-<span id="cb186-9"><a href="pecanXML.html#cb186-9" tabindex="-1"></a>  &lt;<span class="kw">outdir</span>&gt;/data/workflows/PEcAn_99000000006&lt;/<span class="kw">outdir</span>&gt;</span>
-<span id="cb186-10"><a href="pecanXML.html#cb186-10" tabindex="-1"></a>  &lt;<span class="kw">database</span>&gt;</span>
-<span id="cb186-11"><a href="pecanXML.html#cb186-11" tabindex="-1"></a>    &lt;<span class="kw">bety</span>&gt;</span>
-<span id="cb186-12"><a href="pecanXML.html#cb186-12" tabindex="-1"></a>      &lt;<span class="kw">user</span>&gt;bety&lt;/<span class="kw">user</span>&gt;</span>
-<span id="cb186-13"><a href="pecanXML.html#cb186-13" tabindex="-1"></a>      &lt;<span class="kw">password</span>&gt;bety&lt;/<span class="kw">password</span>&gt;</span>
-<span id="cb186-14"><a href="pecanXML.html#cb186-14" tabindex="-1"></a>      &lt;<span class="kw">host</span>&gt;postgres&lt;/<span class="kw">host</span>&gt;</span>
-<span id="cb186-15"><a href="pecanXML.html#cb186-15" tabindex="-1"></a>      &lt;<span class="kw">dbname</span>&gt;bety&lt;/<span class="kw">dbname</span>&gt;</span>
-<span id="cb186-16"><a href="pecanXML.html#cb186-16" tabindex="-1"></a>      &lt;<span class="kw">driver</span>&gt;PostgreSQL&lt;/<span class="kw">driver</span>&gt;</span>
-<span id="cb186-17"><a href="pecanXML.html#cb186-17" tabindex="-1"></a>      &lt;<span class="kw">write</span>&gt;true&lt;/<span class="kw">write</span>&gt;</span>
-<span id="cb186-18"><a href="pecanXML.html#cb186-18" tabindex="-1"></a>    &lt;/<span class="kw">bety</span>&gt;</span>
-<span id="cb186-19"><a href="pecanXML.html#cb186-19" tabindex="-1"></a>    &lt;<span class="kw">dbfiles</span>&gt;/data/dbfiles&lt;/<span class="kw">dbfiles</span>&gt;</span>
-<span id="cb186-20"><a href="pecanXML.html#cb186-20" tabindex="-1"></a>  &lt;/<span class="kw">database</span>&gt;</span>
-<span id="cb186-21"><a href="pecanXML.html#cb186-21" tabindex="-1"></a>  &lt;<span class="kw">pfts</span>&gt;</span>
-<span id="cb186-22"><a href="pecanXML.html#cb186-22" tabindex="-1"></a>    &lt;<span class="kw">pft</span>&gt;</span>
-<span id="cb186-23"><a href="pecanXML.html#cb186-23" tabindex="-1"></a>      &lt;<span class="kw">name</span>&gt;tundra.grasses&lt;/<span class="kw">name</span>&gt; </span>
-<span id="cb186-24"><a href="pecanXML.html#cb186-24" tabindex="-1"></a>      &lt;<span class="kw">constants</span>&gt;</span>
-<span id="cb186-25"><a href="pecanXML.html#cb186-25" tabindex="-1"></a>        &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
-<span id="cb186-26"><a href="pecanXML.html#cb186-26" tabindex="-1"></a>      &lt;/<span class="kw">constants</span>&gt;</span>
-<span id="cb186-27"><a href="pecanXML.html#cb186-27" tabindex="-1"></a>    &lt;/<span class="kw">pft</span>&gt;</span>
-<span id="cb186-28"><a href="pecanXML.html#cb186-28" tabindex="-1"></a>  &lt;/<span class="kw">pfts</span>&gt;</span>
-<span id="cb186-29"><a href="pecanXML.html#cb186-29" tabindex="-1"></a>  &lt;<span class="kw">meta.analysis</span>&gt;</span>
-<span id="cb186-30"><a href="pecanXML.html#cb186-30" tabindex="-1"></a>    &lt;<span class="kw">iter</span>&gt;3000&lt;/<span class="kw">iter</span>&gt;</span>
-<span id="cb186-31"><a href="pecanXML.html#cb186-31" tabindex="-1"></a>    &lt;<span class="kw">random.effects</span>&gt;</span>
-<span id="cb186-32"><a href="pecanXML.html#cb186-32" tabindex="-1"></a>     &lt;<span class="kw">on</span>&gt;FALSE&lt;/<span class="kw">on</span>&gt;</span>
-<span id="cb186-33"><a href="pecanXML.html#cb186-33" tabindex="-1"></a>     &lt;<span class="kw">use_ghs</span>&gt;TRUE&lt;/<span class="kw">use_ghs</span>&gt;</span>
-<span id="cb186-34"><a href="pecanXML.html#cb186-34" tabindex="-1"></a>    &lt;/<span class="kw">random.effects</span>&gt;</span>
-<span id="cb186-35"><a href="pecanXML.html#cb186-35" tabindex="-1"></a>  &lt;/<span class="kw">meta.analysis</span>&gt;</span>
-<span id="cb186-36"><a href="pecanXML.html#cb186-36" tabindex="-1"></a>  &lt;<span class="kw">ensemble</span>&gt;</span>
-<span id="cb186-37"><a href="pecanXML.html#cb186-37" tabindex="-1"></a>   &lt;<span class="kw">size</span>&gt;1&lt;/<span class="kw">size</span>&gt;</span>
-<span id="cb186-38"><a href="pecanXML.html#cb186-38" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;NPP&lt;/<span class="kw">variable</span>&gt;</span>
-<span id="cb186-39"><a href="pecanXML.html#cb186-39" tabindex="-1"></a>   &lt;<span class="kw">samplingspace</span>&gt;</span>
-<span id="cb186-40"><a href="pecanXML.html#cb186-40" tabindex="-1"></a>   &lt;<span class="kw">parameters</span>&gt;</span>
-<span id="cb186-41"><a href="pecanXML.html#cb186-41" tabindex="-1"></a>    &lt;<span class="kw">method</span>&gt;uniform&lt;/<span class="kw">method</span>&gt;</span>
-<span id="cb186-42"><a href="pecanXML.html#cb186-42" tabindex="-1"></a>   &lt;/<span class="kw">parameters</span>&gt;</span>
-<span id="cb186-43"><a href="pecanXML.html#cb186-43" tabindex="-1"></a>   &lt;<span class="kw">met</span>&gt;</span>
-<span id="cb186-44"><a href="pecanXML.html#cb186-44" tabindex="-1"></a>    &lt;<span class="kw">method</span>&gt;sampling&lt;/<span class="kw">method</span>&gt;</span>
-<span id="cb186-45"><a href="pecanXML.html#cb186-45" tabindex="-1"></a>    &lt;/<span class="kw">met</span>&gt;</span>
-<span id="cb186-46"><a href="pecanXML.html#cb186-46" tabindex="-1"></a>   &lt;/<span class="kw">samplingspace</span>&gt;</span>
-<span id="cb186-47"><a href="pecanXML.html#cb186-47" tabindex="-1"></a>  &lt;/<span class="kw">ensemble</span>&gt;</span>
-<span id="cb186-48"><a href="pecanXML.html#cb186-48" tabindex="-1"></a>  &lt;<span class="kw">model</span>&gt;</span>
-<span id="cb186-49"><a href="pecanXML.html#cb186-49" tabindex="-1"></a>    &lt;<span class="kw">id</span>&gt;5000000002&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb186-50"><a href="pecanXML.html#cb186-50" tabindex="-1"></a>  &lt;/<span class="kw">model</span>&gt;</span>
-<span id="cb186-51"><a href="pecanXML.html#cb186-51" tabindex="-1"></a>  &lt;<span class="kw">workflow</span>&gt;</span>
-<span id="cb186-52"><a href="pecanXML.html#cb186-52" tabindex="-1"></a>    &lt;<span class="kw">id</span>&gt;99000000006&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb186-53"><a href="pecanXML.html#cb186-53" tabindex="-1"></a>  &lt;/<span class="kw">workflow</span>&gt;</span>
-<span id="cb186-54"><a href="pecanXML.html#cb186-54" tabindex="-1"></a>  &lt;<span class="kw">run</span>&gt;</span>
-<span id="cb186-55"><a href="pecanXML.html#cb186-55" tabindex="-1"></a>    &lt;<span class="kw">site</span>&gt;</span>
-<span id="cb186-56"><a href="pecanXML.html#cb186-56" tabindex="-1"></a>      &lt;<span class="kw">id</span>&gt;1000000098&lt;/<span class="kw">id</span>&gt;</span>
-<span id="cb186-57"><a href="pecanXML.html#cb186-57" tabindex="-1"></a>      &lt;<span class="kw">met.start</span>&gt;2004/01/01&lt;/<span class="kw">met.start</span>&gt;</span>
-<span id="cb186-58"><a href="pecanXML.html#cb186-58" tabindex="-1"></a>      &lt;<span class="kw">met.end</span>&gt;2004/12/31&lt;/<span class="kw">met.end</span>&gt;</span>
-<span id="cb186-59"><a href="pecanXML.html#cb186-59" tabindex="-1"></a>    &lt;/<span class="kw">site</span>&gt;</span>
-<span id="cb186-60"><a href="pecanXML.html#cb186-60" tabindex="-1"></a>    &lt;<span class="kw">inputs</span>&gt;</span>
-<span id="cb186-61"><a href="pecanXML.html#cb186-61" tabindex="-1"></a>      &lt;<span class="kw">met</span>&gt;</span>
-<span id="cb186-62"><a href="pecanXML.html#cb186-62" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;CRUNCEP&lt;/<span class="kw">source</span>&gt;</span>
-<span id="cb186-63"><a href="pecanXML.html#cb186-63" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;SIPNET&lt;/<span class="kw">output</span>&gt;</span>
-<span id="cb186-64"><a href="pecanXML.html#cb186-64" tabindex="-1"></a>      &lt;/<span class="kw">met</span>&gt;</span>
-<span id="cb186-65"><a href="pecanXML.html#cb186-65" tabindex="-1"></a>    &lt;/<span class="kw">inputs</span>&gt;</span>
-<span id="cb186-66"><a href="pecanXML.html#cb186-66" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
-<span id="cb186-67"><a href="pecanXML.html#cb186-67" tabindex="-1"></a>    &lt;<span class="kw">end.date</span>&gt;2004/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
-<span id="cb186-68"><a href="pecanXML.html#cb186-68" tabindex="-1"></a>  &lt;/<span class="kw">run</span>&gt;</span>
-<span id="cb186-69"><a href="pecanXML.html#cb186-69" tabindex="-1"></a>  &lt;<span class="kw">host</span>&gt;</span>
-<span id="cb186-70"><a href="pecanXML.html#cb186-70" tabindex="-1"></a>    &lt;<span class="kw">name</span>&gt;localhost&lt;/<span class="kw">name</span>&gt;</span>
-<span id="cb186-71"><a href="pecanXML.html#cb186-71" tabindex="-1"></a>    &lt;<span class="kw">rabbitmq</span>&gt;</span>
-<span id="cb186-72"><a href="pecanXML.html#cb186-72" tabindex="-1"></a>      &lt;<span class="kw">uri</span>&gt;amqp://guest:guest@rabbitmq:5672/%2F&lt;/<span class="kw">uri</span>&gt;</span>
-<span id="cb186-73"><a href="pecanXML.html#cb186-73" tabindex="-1"></a>      &lt;<span class="kw">queue</span>&gt;SIPNET_136&lt;/<span class="kw">queue</span>&gt;</span>
-<span id="cb186-74"><a href="pecanXML.html#cb186-74" tabindex="-1"></a>    &lt;/<span class="kw">rabbitmq</span>&gt;</span>
-<span id="cb186-75"><a href="pecanXML.html#cb186-75" tabindex="-1"></a>  &lt;/<span class="kw">host</span>&gt;</span>
-<span id="cb186-76"><a href="pecanXML.html#cb186-76" tabindex="-1"></a>&lt;/<span class="kw">pecan</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb183-1"><a href="pecanXML.html#cb183-1" tabindex="-1"></a><span class="fu">&lt;?xml</span> <span class="ot">version=</span><span class="st">&quot;1.0&quot;</span> <span class="ot">encoding=</span><span class="st">&quot;UTF-8&quot;</span><span class="fu">?&gt;</span></span>
+<span id="cb183-2"><a href="pecanXML.html#cb183-2" tabindex="-1"></a>&lt;<span class="kw">pecan</span>&gt;</span>
+<span id="cb183-3"><a href="pecanXML.html#cb183-3" tabindex="-1"></a>  &lt;<span class="kw">info</span>&gt;</span>
+<span id="cb183-4"><a href="pecanXML.html#cb183-4" tabindex="-1"></a>    &lt;<span class="kw">notes</span>&gt;Example run&lt;/<span class="kw">notes</span>&gt;</span>
+<span id="cb183-5"><a href="pecanXML.html#cb183-5" tabindex="-1"></a>    &lt;<span class="kw">userid</span>&gt;-1&lt;/<span class="kw">userid</span>&gt;</span>
+<span id="cb183-6"><a href="pecanXML.html#cb183-6" tabindex="-1"></a>    &lt;<span class="kw">username</span>&gt;guestuser&lt;/<span class="kw">username</span>&gt;</span>
+<span id="cb183-7"><a href="pecanXML.html#cb183-7" tabindex="-1"></a>    &lt;<span class="kw">date</span>&gt;2018/09/18 19:12:28 +0000&lt;/<span class="kw">date</span>&gt;</span>
+<span id="cb183-8"><a href="pecanXML.html#cb183-8" tabindex="-1"></a>  &lt;/<span class="kw">info</span>&gt;</span>
+<span id="cb183-9"><a href="pecanXML.html#cb183-9" tabindex="-1"></a>  &lt;<span class="kw">outdir</span>&gt;/data/workflows/PEcAn_99000000006&lt;/<span class="kw">outdir</span>&gt;</span>
+<span id="cb183-10"><a href="pecanXML.html#cb183-10" tabindex="-1"></a>  &lt;<span class="kw">database</span>&gt;</span>
+<span id="cb183-11"><a href="pecanXML.html#cb183-11" tabindex="-1"></a>    &lt;<span class="kw">bety</span>&gt;</span>
+<span id="cb183-12"><a href="pecanXML.html#cb183-12" tabindex="-1"></a>      &lt;<span class="kw">user</span>&gt;bety&lt;/<span class="kw">user</span>&gt;</span>
+<span id="cb183-13"><a href="pecanXML.html#cb183-13" tabindex="-1"></a>      &lt;<span class="kw">password</span>&gt;bety&lt;/<span class="kw">password</span>&gt;</span>
+<span id="cb183-14"><a href="pecanXML.html#cb183-14" tabindex="-1"></a>      &lt;<span class="kw">host</span>&gt;postgres&lt;/<span class="kw">host</span>&gt;</span>
+<span id="cb183-15"><a href="pecanXML.html#cb183-15" tabindex="-1"></a>      &lt;<span class="kw">dbname</span>&gt;bety&lt;/<span class="kw">dbname</span>&gt;</span>
+<span id="cb183-16"><a href="pecanXML.html#cb183-16" tabindex="-1"></a>      &lt;<span class="kw">driver</span>&gt;PostgreSQL&lt;/<span class="kw">driver</span>&gt;</span>
+<span id="cb183-17"><a href="pecanXML.html#cb183-17" tabindex="-1"></a>      &lt;<span class="kw">write</span>&gt;true&lt;/<span class="kw">write</span>&gt;</span>
+<span id="cb183-18"><a href="pecanXML.html#cb183-18" tabindex="-1"></a>    &lt;/<span class="kw">bety</span>&gt;</span>
+<span id="cb183-19"><a href="pecanXML.html#cb183-19" tabindex="-1"></a>    &lt;<span class="kw">dbfiles</span>&gt;/data/dbfiles&lt;/<span class="kw">dbfiles</span>&gt;</span>
+<span id="cb183-20"><a href="pecanXML.html#cb183-20" tabindex="-1"></a>  &lt;/<span class="kw">database</span>&gt;</span>
+<span id="cb183-21"><a href="pecanXML.html#cb183-21" tabindex="-1"></a>  &lt;<span class="kw">pfts</span>&gt;</span>
+<span id="cb183-22"><a href="pecanXML.html#cb183-22" tabindex="-1"></a>    &lt;<span class="kw">pft</span>&gt;</span>
+<span id="cb183-23"><a href="pecanXML.html#cb183-23" tabindex="-1"></a>      &lt;<span class="kw">name</span>&gt;tundra.grasses&lt;/<span class="kw">name</span>&gt; </span>
+<span id="cb183-24"><a href="pecanXML.html#cb183-24" tabindex="-1"></a>      &lt;<span class="kw">constants</span>&gt;</span>
+<span id="cb183-25"><a href="pecanXML.html#cb183-25" tabindex="-1"></a>        &lt;<span class="kw">num</span>&gt;1&lt;/<span class="kw">num</span>&gt;</span>
+<span id="cb183-26"><a href="pecanXML.html#cb183-26" tabindex="-1"></a>      &lt;/<span class="kw">constants</span>&gt;</span>
+<span id="cb183-27"><a href="pecanXML.html#cb183-27" tabindex="-1"></a>    &lt;/<span class="kw">pft</span>&gt;</span>
+<span id="cb183-28"><a href="pecanXML.html#cb183-28" tabindex="-1"></a>  &lt;/<span class="kw">pfts</span>&gt;</span>
+<span id="cb183-29"><a href="pecanXML.html#cb183-29" tabindex="-1"></a>  &lt;<span class="kw">meta.analysis</span>&gt;</span>
+<span id="cb183-30"><a href="pecanXML.html#cb183-30" tabindex="-1"></a>    &lt;<span class="kw">iter</span>&gt;3000&lt;/<span class="kw">iter</span>&gt;</span>
+<span id="cb183-31"><a href="pecanXML.html#cb183-31" tabindex="-1"></a>    &lt;<span class="kw">random.effects</span>&gt;</span>
+<span id="cb183-32"><a href="pecanXML.html#cb183-32" tabindex="-1"></a>     &lt;<span class="kw">on</span>&gt;FALSE&lt;/<span class="kw">on</span>&gt;</span>
+<span id="cb183-33"><a href="pecanXML.html#cb183-33" tabindex="-1"></a>     &lt;<span class="kw">use_ghs</span>&gt;TRUE&lt;/<span class="kw">use_ghs</span>&gt;</span>
+<span id="cb183-34"><a href="pecanXML.html#cb183-34" tabindex="-1"></a>    &lt;/<span class="kw">random.effects</span>&gt;</span>
+<span id="cb183-35"><a href="pecanXML.html#cb183-35" tabindex="-1"></a>  &lt;/<span class="kw">meta.analysis</span>&gt;</span>
+<span id="cb183-36"><a href="pecanXML.html#cb183-36" tabindex="-1"></a>  &lt;<span class="kw">ensemble</span>&gt;</span>
+<span id="cb183-37"><a href="pecanXML.html#cb183-37" tabindex="-1"></a>   &lt;<span class="kw">size</span>&gt;1&lt;/<span class="kw">size</span>&gt;</span>
+<span id="cb183-38"><a href="pecanXML.html#cb183-38" tabindex="-1"></a>   &lt;<span class="kw">variable</span>&gt;NPP&lt;/<span class="kw">variable</span>&gt;</span>
+<span id="cb183-39"><a href="pecanXML.html#cb183-39" tabindex="-1"></a>   &lt;<span class="kw">samplingspace</span>&gt;</span>
+<span id="cb183-40"><a href="pecanXML.html#cb183-40" tabindex="-1"></a>   &lt;<span class="kw">parameters</span>&gt;</span>
+<span id="cb183-41"><a href="pecanXML.html#cb183-41" tabindex="-1"></a>    &lt;<span class="kw">method</span>&gt;uniform&lt;/<span class="kw">method</span>&gt;</span>
+<span id="cb183-42"><a href="pecanXML.html#cb183-42" tabindex="-1"></a>   &lt;/<span class="kw">parameters</span>&gt;</span>
+<span id="cb183-43"><a href="pecanXML.html#cb183-43" tabindex="-1"></a>   &lt;<span class="kw">met</span>&gt;</span>
+<span id="cb183-44"><a href="pecanXML.html#cb183-44" tabindex="-1"></a>    &lt;<span class="kw">method</span>&gt;sampling&lt;/<span class="kw">method</span>&gt;</span>
+<span id="cb183-45"><a href="pecanXML.html#cb183-45" tabindex="-1"></a>    &lt;/<span class="kw">met</span>&gt;</span>
+<span id="cb183-46"><a href="pecanXML.html#cb183-46" tabindex="-1"></a>   &lt;/<span class="kw">samplingspace</span>&gt;</span>
+<span id="cb183-47"><a href="pecanXML.html#cb183-47" tabindex="-1"></a>  &lt;/<span class="kw">ensemble</span>&gt;</span>
+<span id="cb183-48"><a href="pecanXML.html#cb183-48" tabindex="-1"></a>  &lt;<span class="kw">model</span>&gt;</span>
+<span id="cb183-49"><a href="pecanXML.html#cb183-49" tabindex="-1"></a>    &lt;<span class="kw">id</span>&gt;5000000002&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb183-50"><a href="pecanXML.html#cb183-50" tabindex="-1"></a>  &lt;/<span class="kw">model</span>&gt;</span>
+<span id="cb183-51"><a href="pecanXML.html#cb183-51" tabindex="-1"></a>  &lt;<span class="kw">workflow</span>&gt;</span>
+<span id="cb183-52"><a href="pecanXML.html#cb183-52" tabindex="-1"></a>    &lt;<span class="kw">id</span>&gt;99000000006&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb183-53"><a href="pecanXML.html#cb183-53" tabindex="-1"></a>  &lt;/<span class="kw">workflow</span>&gt;</span>
+<span id="cb183-54"><a href="pecanXML.html#cb183-54" tabindex="-1"></a>  &lt;<span class="kw">run</span>&gt;</span>
+<span id="cb183-55"><a href="pecanXML.html#cb183-55" tabindex="-1"></a>    &lt;<span class="kw">site</span>&gt;</span>
+<span id="cb183-56"><a href="pecanXML.html#cb183-56" tabindex="-1"></a>      &lt;<span class="kw">id</span>&gt;1000000098&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb183-57"><a href="pecanXML.html#cb183-57" tabindex="-1"></a>      &lt;<span class="kw">met.start</span>&gt;2004/01/01&lt;/<span class="kw">met.start</span>&gt;</span>
+<span id="cb183-58"><a href="pecanXML.html#cb183-58" tabindex="-1"></a>      &lt;<span class="kw">met.end</span>&gt;2004/12/31&lt;/<span class="kw">met.end</span>&gt;</span>
+<span id="cb183-59"><a href="pecanXML.html#cb183-59" tabindex="-1"></a>    &lt;/<span class="kw">site</span>&gt;</span>
+<span id="cb183-60"><a href="pecanXML.html#cb183-60" tabindex="-1"></a>    &lt;<span class="kw">inputs</span>&gt;</span>
+<span id="cb183-61"><a href="pecanXML.html#cb183-61" tabindex="-1"></a>      &lt;<span class="kw">met</span>&gt;</span>
+<span id="cb183-62"><a href="pecanXML.html#cb183-62" tabindex="-1"></a>        &lt;<span class="kw">source</span>&gt;CRUNCEP&lt;/<span class="kw">source</span>&gt;</span>
+<span id="cb183-63"><a href="pecanXML.html#cb183-63" tabindex="-1"></a>        &lt;<span class="kw">output</span>&gt;SIPNET&lt;/<span class="kw">output</span>&gt;</span>
+<span id="cb183-64"><a href="pecanXML.html#cb183-64" tabindex="-1"></a>      &lt;/<span class="kw">met</span>&gt;</span>
+<span id="cb183-65"><a href="pecanXML.html#cb183-65" tabindex="-1"></a>    &lt;/<span class="kw">inputs</span>&gt;</span>
+<span id="cb183-66"><a href="pecanXML.html#cb183-66" tabindex="-1"></a>    &lt;<span class="kw">start.date</span>&gt;2004/01/01&lt;/<span class="kw">start.date</span>&gt;</span>
+<span id="cb183-67"><a href="pecanXML.html#cb183-67" tabindex="-1"></a>    &lt;<span class="kw">end.date</span>&gt;2004/12/31&lt;/<span class="kw">end.date</span>&gt;</span>
+<span id="cb183-68"><a href="pecanXML.html#cb183-68" tabindex="-1"></a>  &lt;/<span class="kw">run</span>&gt;</span>
+<span id="cb183-69"><a href="pecanXML.html#cb183-69" tabindex="-1"></a>  &lt;<span class="kw">host</span>&gt;</span>
+<span id="cb183-70"><a href="pecanXML.html#cb183-70" tabindex="-1"></a>    &lt;<span class="kw">name</span>&gt;localhost&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb183-71"><a href="pecanXML.html#cb183-71" tabindex="-1"></a>    &lt;<span class="kw">rabbitmq</span>&gt;</span>
+<span id="cb183-72"><a href="pecanXML.html#cb183-72" tabindex="-1"></a>      &lt;<span class="kw">uri</span>&gt;amqp://guest:guest@rabbitmq:5672/%2F&lt;/<span class="kw">uri</span>&gt;</span>
+<span id="cb183-73"><a href="pecanXML.html#cb183-73" tabindex="-1"></a>      &lt;<span class="kw">queue</span>&gt;SIPNET_136&lt;/<span class="kw">queue</span>&gt;</span>
+<span id="cb183-74"><a href="pecanXML.html#cb183-74" tabindex="-1"></a>    &lt;/<span class="kw">rabbitmq</span>&gt;</span>
+<span id="cb183-75"><a href="pecanXML.html#cb183-75" tabindex="-1"></a>  &lt;/<span class="kw">host</span>&gt;</span>
+<span id="cb183-76"><a href="pecanXML.html#cb183-76" tabindex="-1"></a>&lt;/<span class="kw">pecan</span>&gt;</span></code></pre></div>
 <p>In the following sections, we step through each of these sections in detail.</p>
 </div>
             </section>
