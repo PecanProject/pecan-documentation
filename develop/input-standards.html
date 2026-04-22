@@ -357,6 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.1" data-path="input-standards.html"><a href="input-standards.html#meteorology-data"><i class="fa fa-check"></i><b>9.3.1</b> Meteorology Data</a></li>
 <li class="chapter" data-level="9.3.2" data-path="input-standards.html"><a href="input-standards.html#soil-data"><i class="fa fa-check"></i><b>9.3.2</b> Soil Data</a></li>
 <li class="chapter" data-level="9.3.3" data-path="input-standards.html"><a href="input-standards.html#vegetation-data"><i class="fa fa-check"></i><b>9.3.3</b> Vegetation Data</a></li>
+<li class="chapter" data-level="9.3.4" data-path="input-standards.html"><a href="input-standards.html#management-events"><i class="fa fa-check"></i><b>9.3.4</b> Management events</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="output-standards.html"><a href="output-standards.html"><i class="fa fa-check"></i><b>9.4</b> Output Standards</a></li>
 </ul></li>
@@ -832,6 +833,81 @@ We want to standardize the units as well as part of the <code>met2CF.&lt;product
 <div id="vegetation-data" class="section level3 hasAnchor" number="9.3.3">
 <h3><span class="header-section-number">9.3.3</span> Vegetation Data<a href="input-standards.html#vegetation-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>See the <a href="input-standards.html#vegetation-data">Vegetation Data</a> section on more info on creating a standard vegetation data file</p>
+</div>
+<div id="management-events" class="section level3 hasAnchor" number="9.3.4">
+<h3><span class="header-section-number">9.3.4</span> Management events<a href="input-standards.html#management-events" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Externally imposed changes in system state, such as planting and harvest or tillage of crop systems, are represented as a sequence of “events” that are each defined by a date, event type, and one or more event-specific properties that describe the kind and magnitude of change imposed. PEcAn passes the same representation of a given event to all models, but interpretation of all properties – including dates and event types – is necessarily model-specific and could include ignoring an event entirely.</p>
+<p>Event types are defined by the PEcAn events spec, which is currently provided as a JSON schema file bundled into the PEcAn.data.land package (TODO consider exposing this in a more linkable format?). Valid events files are stored as JSON, with each events file containing an array of sites. Each site contains an id, a schema version, and an array of events, usually recorded in date order. Each event has a date, an event type, and one or more values from the required and optional properties that are documented below for each event type. Any event is also allowed to contain arbitrary additional properties not mentioned in the spec; PEcAn will pass these on to models with no further validation.</p>
+<p>The currently supported event types are: planting, harvest, irrigation, fertilization, and tillage. Each of these is described briefly below. You will note that all of them are focused on agronomic management of croplands; future work will extend this framework to include disturbance of unmanaged systems such as fire, inundation or insect outbreaks.</p>
+<div id="planting" class="section level4 hasAnchor" number="9.3.4.1">
+<h4><span class="header-section-number">9.3.4.1</span> planting<a href="input-standards.html#planting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Addition of live biomass that is expected to grow according to the model’s plant growth rules. The current spec expects a “planting” to be a transplantation of leafed-out seedlings; models which represent planting as addition of unsprouted seeds might choose to adjust the date to account for germination time.</p>
+<p>Required properties:</p>
+<ul>
+<li><code>crop_code</code>: a machine-readable identifier that specifies what type of plant was added. Should preferably be short and use only characters that are safe in filenames.</li>
+<li><code>leaf_c_kg_m2</code>: Amount of leaf biomass added.</li>
+</ul>
+<p>Optional properties:</p>
+<ul>
+<li><code>wood_c_kg_m2</code>: Biomass added as aboveground stems. Assumed zero if not specified.</li>
+<li><code>fine_root_c_kg_m2</code>: Biomass added to belowground roots. Assumed zero if not specified.</li>
+<li><code>cultivar</code>: Identifier for finer-grainer plant type identifiers that will be meaningful to models with detailed growth parameterizations but likely ignored by PFT-based models.</li>
+<li><code>crop_display</code>: A human-readable name for the added plant type.</li>
+</ul>
+</div>
+<div id="harvest" class="section level4 hasAnchor" number="9.3.4.2">
+<h4><span class="header-section-number">9.3.4.2</span> harvest<a href="input-standards.html#harvest" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Removal of biomass from the living pool, either by transferring it to dead (litter) biomass or by removing it from the system. Specified as a fraction of live biomass.</p>
+<p>Required properties:
+* <code>frac_above_removed_0to1</code>: Fraction of existing aboveground biomass removed from the system.</p>
+<p>Optional properties:</p>
+<ul>
+<li><code>frac_below_removed_0to1</code>: Fraction of existing beloweground biomass removed from the system. Assumed zero if not specified.</li>
+<li><code>frac_above_to_litter_0to1</code>, <code>frac_below_to_litter_0to1</code>: fraction of existing above- or below-ground live biomass converted to dead litter. Assumed zero if not specified.</li>
+<li><code>crop_code</code>: A machine_readable identifier that specifies what type of plant was harvested.</li>
+<li><code>cultivar</code>: Identifier for finer-grainer plant type identifiers that will be meaningful to models with detailed growth parameterizations but likely ignored by PFT-based models.</li>
+<li><code>crop_display</code>: A human-readable name for the added plant type.</li>
+</ul>
+</div>
+<div id="irrigation" class="section level4 hasAnchor" number="9.3.4.3">
+<h4><span class="header-section-number">9.3.4.3</span> irrigation<a href="input-standards.html#irrigation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Addition of water to the system beyond that specified as precipitation in met files. Note that only the total amount of water is specified and not the application rate; assumptions about the duration of the event will be model-specific.</p>
+<p>Required properties:</p>
+<ul>
+<li><code>method</code>: How water was applied. One of “soil”, “canopy”, “flood”.</li>
+<li><code>amount_mm</code>: Amount of water applied.</li>
+</ul>
+<p>Optional properties:</p>
+<ul>
+<li><code>immed_evap_frac_0to1</code>: fraction of the applied water that evaporates before reaching the soil water pool.</li>
+</ul>
+</div>
+<div id="fertilization" class="section level4 hasAnchor" number="9.3.4.4">
+<h4><span class="header-section-number">9.3.4.4</span> fertilization<a href="input-standards.html#fertilization" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Addition of exogenous nutrients, including non-crop carbon (e.g. manure, compost). Nutrients other than N and C are not currently included but may be added in future schemas.</p>
+<p>Required properties:</p>
+<ul>
+<li>at least one of <code>org_c_kg_m2</code>, <code>nh4_n_kg_m2</code>, <code>no3_n_kg_m2</code>, which are respectively the amount of organic C, ammonium N, and nitrate N added.</li>
+</ul>
+<p>Optional properties:</p>
+<ul>
+<li>any of <code>org_c_kg_m2</code>, <code>nh4_n_kg_m2</code>, <code>no3_n_kg_m2</code> not already counted as required. All are assumed zero if not specified.</li>
+<li><code>org_n_kg_m2</code>: the amount of N added in organic compounds. Assumed zero if not specified. If specifying, you probably want to specify <code>org_c_kg_m2</code> as well but the schema does not enforce this.</li>
+</ul>
+</div>
+<div id="tillage" class="section level4 hasAnchor" number="9.3.4.5">
+<h4><span class="header-section-number">9.3.4.5</span> tillage<a href="input-standards.html#tillage" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Physical disturbance of the soil and litter pools. Models differ greatly in their representation of tillage effects and this spec intentionally limits its representation to a simple intensity score whose maximum should be interpreted as “the most complete possible mixing/disturbance.” Whether this is sufficient detail will be re-evaluated in future revisions.</p>
+<p>Required properties:</p>
+<ul>
+<li><code>tillage_eff_0to1</code>: Relative tillage intensity, with 0 meaning no disturbance at all and 1 meaning the most complete disturbance possible.</li>
+</ul>
+<p>Optional properties:</p>
+<ul>
+<li><code>intensity_category</code>: string giving additional information on the type or amount of tillage performed.</li>
+<li><code>depth_m</code>: Depth of soil affected by the event.</li>
+</ul>
+</div>
 </div>
 </div>
             </section>
