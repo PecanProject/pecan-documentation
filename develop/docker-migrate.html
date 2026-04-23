@@ -800,7 +800,7 @@ WantedBy=local.target</code></pre>
 <pre><code>ProxyPass                /bety/ http://pecan.localhost/bety/
 ProxyPassReverse         /bety/ http://pecan.localhost/bety/
 RedirectMatch permanent ^/bety$ /bety/</code></pre>
-<p>Once this modified we can restart apache using <code>systemctl restart apache2</code>. At this point BETY is running in a container and is accessable trough the webserver at <a href="http://server/bety/" class="uri">http://server/bety/</a>.</p>
+<p>Once this modified we can restart apache using <code>systemctl restart apache2</code>. At this point BETY is running in a container and is accessable trough the webserver at <code>http://server/bety/</code>.</p>
 <p>To upgrade to a new version of BETY you can now use the docker commands. You can use the following commands to stop BETY, pull the latest image down, migrate the database (you made a backup correct?) and start BETY again.</p>
 <pre><code>systemctl stop bety
 docker pull pecan/bety:latest

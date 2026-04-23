@@ -1267,8 +1267,8 @@ already installed (<a href="http://postgresapp.com/" class="uri">http://postgres
 <div id="option-2-install-udunits-2-on-macosx-is-done-from-source." class="section level5 hasAnchor" number="22.4.3.4.6">
 <h5><span class="header-section-number">22.4.3.4.6</span> Option 2: Install udunits-2 on MacOSX is done from source.<a href="osinstall.html#option-2-install-udunits-2-on-macosx-is-done-from-source." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <ul>
-<li>download most recent <a href="http://www.unidata.ucar.edu/downloads/udunits/index.jsp">version of Udunits here</a></li>
-<li>instructions for <a href="http://www.unidata.ucar.edu/software/udunits/udunits-2/udunits2.html#Obtain">compiling from source</a></li>
+<li>download most recent <a href="https://downloads.unidata.ucar.edu/udunits/">version of Udunits here</a></li>
+<li>instructions for <a href="https://docs.unidata.ucar.edu/udunits/current/">compiling from source</a></li>
 </ul>
 <div class="sourceCode" id="cb418"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb418-1"><a href="osinstall.html#cb418-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> udunits-2.1.24.tar.gz ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.24.tar.gz</span>
 <span id="cb418-2"><a href="osinstall.html#cb418-2" tabindex="-1"></a><span class="fu">tar</span> zxf udunits-2.1.24.tar.gz</span>
@@ -1280,7 +1280,7 @@ already installed (<a href="http://postgresapp.com/" class="uri">http://postgres
 </div>
 <div id="apache-configuration-optional" class="section level4 hasAnchor" number="22.4.3.5">
 <h4><span class="header-section-number">22.4.3.5</span> Apache Configuration (Optional)<a href="osinstall.html#apache-configuration-optional" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Mac does not support pdo/postgresql by default. The easiest way to install is use: <a href="http://php-osx.liip.ch/" class="uri">http://php-osx.liip.ch/</a></p>
+<p><em>Note: This section is out of date. Consult other sources to make sure your version of PHP supports the <code>pdo/postgres</code> driver before proceeding.</em></p>
 <p>To enable pecan to run from your webserver.</p>
 <div class="sourceCode" id="cb419"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb419-1"><a href="osinstall.html#cb419-1" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> /etc/apache2/others/pecan.conf <span class="op">&lt;&lt; EOF</span></span>
 <span id="cb419-2"><a href="osinstall.html#cb419-2" tabindex="-1"></a><span class="st">Alias /pecan </span><span class="va">${PWD}</span><span class="st">/pecan/web</span></span>

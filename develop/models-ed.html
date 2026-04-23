@@ -907,7 +907,7 @@ The following is the mapping as of ED2 commit <a href="https://github.com/EDmode
 However, most parameters can be modified via an XML file (determined by the <code>ED2IN</code> <code>IEDCNFGF</code> field; usually <code>config.xml</code> in the same directory as the <code>ED2IN</code> file).
 The complete record of all parameters (defaults and user overrides) used by a given ED2 run is stored in a <code>history.xml</code> file (usually in the same directory as the <code>ED2IN</code>) – this is the file to check to make sure that an ED2 run is parameterized as you expect.</p>
 <p>As with other models, PEcAn can set ED2 parameters using its built-in trait meta analysis.
-The function specifically responsible for writing the <code>config.xml</code> is <a href="https://pecanproject.github.io/models/ed/docs/reference/write.config.xml.ED2.html"><code>PEcAn.ED2::write.config.xml.ED2</code></a> (which is called as part of the more general <a href="https://pecanproject.github.io/models/ed/docs/reference/write.config.ED2.html"><code>PEcAn.ED2::write.config.ED2</code></a>).
+The function specifically responsible for writing the <code>config.xml</code> is <a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.ED2/reference/write.config.xml.ED2.html"><code>PEcAn.ED2::write.config.xml.ED2</code></a> (which is called as part of the more general <a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.ED2/reference/write.config.ED2.html"><code>PEcAn.ED2::write.config.ED2</code></a>).
 The configuration process proceeds as follows:</p>
 <p>First, the mappings between PEcAn PFT names and ED2 PFT numbers are determined according to the following logic:</p>
 <ul>
@@ -930,9 +930,9 @@ For example:</p>
 <span id="cb222-4"><a href="models-ed.html#cb222-4" tabindex="-1"></a>     &lt;<span class="kw">sla</span>&gt;36.3&lt;/<span class="kw">sla</span>&gt;</span>
 <span id="cb222-5"><a href="models-ed.html#cb222-5" tabindex="-1"></a>  &lt;/<span class="kw">constants</span>&gt;</span>
 <span id="cb222-6"><a href="models-ed.html#cb222-6" tabindex="-1"></a>&lt;/<span class="kw">pft</span>&gt;</span></code></pre></div>
-<p>Note that these values are passed through <a href="https://pecanproject.github.io/models/ed/docs/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>, so they should generally be given in PEcAn’s default units rather than ED2’s.</p></li>
+<p>Note that these values are passed through <a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.ED2/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>, so they should generally be given in PEcAn’s default units rather than ED2’s.</p></li>
 <li><p><strong>Samples from the PEcAn meta analysis</strong>.
-These are also converted via <a href="https://pecanproject.github.io/models/ed/docs/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>.</p></li>
+These are also converted via <a href="https://pecanproject.github.io/package-documentation/develop/PEcAn.ED2/reference/convert.samples.ED.html"><code>PEcAn.ED2::convert.samples.ED</code></a>.</p></li>
 <li><p><strong>ED2 defaults that PEcAn knows about</strong>.
 These are stored in the <code>edhistory.csv</code> file inside of <code>PEcAn.ED2</code>
 This file is re-generated manually whenever there is a new version of ED2, so while we try our best to keep it up to date, there is no guarantee that it is.</p></li>
