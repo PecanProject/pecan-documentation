@@ -838,7 +838,7 @@ We want to standardize the units as well as part of the <code>met2CF.&lt;product
 <h3><span class="header-section-number">9.3.4</span> Management events<a href="input-standards.html#management-events" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Externally imposed changes in system state, such as planting and harvest or tillage of crop systems, are represented as a sequence of “events” that are each defined by a date, event type, and one or more event-specific properties that describe the kind and magnitude of change imposed. PEcAn passes the same representation of a given event to all models, but interpretation of all properties – including dates and event types – is necessarily model-specific and could include ignoring an event entirely.</p>
 <p>Event types are defined by the PEcAn events spec, which is currently provided as a JSON schema file bundled into the PEcAn.data.land package (TODO consider exposing this in a more linkable format?). Valid events files are stored as JSON, with each events file containing an array of sites. Each site contains an id, a schema version, and an array of events, usually recorded in date order. Each event has a date, an event type, and one or more values from the required and optional properties that are documented below for each event type. Any event is also allowed to contain arbitrary additional properties not mentioned in the spec; PEcAn will pass these on to models with no further validation.</p>
-<p>The currently supported event types are: planting, harvest, irrigation, fertilization, and tillage. Each of these is described briefly below. You will note that all of them are focused on agronomic management of croplands; future work will extend this framework to include disturbance of unmanaged systems such as fire, inundation or insect outbreaks.</p>
+<p>The currently supported event types are: planting, harvest, irrigation, fertilization, tillage, and phenology (controlled by separate <code>leafon</code> and <code>leafoff</code> event types). Each of these is described briefly below. You will note that all of them are focused on agronomic management of croplands; future work will extend this framework to include disturbance of unmanaged systems such as fire, inundation or insect outbreaks.</p>
 <div id="planting" class="section level4 hasAnchor" number="9.3.4.1">
 <h4><span class="header-section-number">9.3.4.1</span> planting<a href="input-standards.html#planting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Addition of live biomass that is expected to grow according to the model’s plant growth rules. The current spec expects a “planting” to be a transplantation of leafed-out seedlings; models which represent planting as addition of unsprouted seeds might choose to adjust the date to account for germination time.</p>
@@ -907,6 +907,23 @@ We want to standardize the units as well as part of the <code>met2CF.&lt;product
 <li><code>intensity_category</code>: string giving additional information on the type or amount of tillage performed.</li>
 <li><code>depth_m</code>: Depth of soil affected by the event.</li>
 </ul>
+</div>
+<div id="phenology-leafon-leafoff" class="section level4 hasAnchor" number="9.3.4.6">
+<h4><span class="header-section-number">9.3.4.6</span> phenology (<code>leafon</code> / <code>leafoff</code>)<a href="input-standards.html#phenology-leafon-leafoff" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Prescribed dates of onset of leaf growth (<code>leafon</code>) and senescence (<code>leafoff</code>) phenological events. As with other events, the precise definition of these events varies significantly by model. Note also that the inclusion of leaf on / leaf off events <em>does not</em> guarantee that these will replace the internal model representation of these events; rather, models must be explicitly configured to turn off their internal representations of leaf phenology and to use prescribed events instead.</p>
+<p>These event types only take a date — there are (currently) no additional properties.</p>
+<p>This event type is available in schema versions &gt;= 0.1.2.</p>
+<p>Here is an example:</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb183-1"><a href="input-standards.html#cb183-1" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb183-2"><a href="input-standards.html#cb183-2" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb183-3"><a href="input-standards.html#cb183-3" tabindex="-1"></a>    <span class="dt">&quot;pecan_events_version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1.2&quot;</span><span class="fu">,</span></span>
+<span id="cb183-4"><a href="input-standards.html#cb183-4" tabindex="-1"></a>    <span class="dt">&quot;site_id&quot;</span><span class="fu">:</span> <span class="st">&quot;EX1&quot;</span><span class="fu">,</span></span>
+<span id="cb183-5"><a href="input-standards.html#cb183-5" tabindex="-1"></a>    <span class="dt">&quot;events&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb183-6"><a href="input-standards.html#cb183-6" tabindex="-1"></a>      <span class="fu">{</span><span class="dt">&quot;event_type&quot;</span><span class="fu">:</span> <span class="st">&quot;leafon&quot;</span><span class="fu">,</span> <span class="dt">&quot;date&quot;</span><span class="fu">:</span> <span class="st">&quot;2025-04-05&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb183-7"><a href="input-standards.html#cb183-7" tabindex="-1"></a>      <span class="fu">{</span><span class="dt">&quot;event_type&quot;</span><span class="fu">:</span> <span class="st">&quot;leafoff&quot;</span><span class="fu">,</span> <span class="dt">&quot;date&quot;</span><span class="fu">:</span> <span class="st">&quot;2025-10-08&quot;</span><span class="fu">}</span></span>
+<span id="cb183-8"><a href="input-standards.html#cb183-8" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb183-9"><a href="input-standards.html#cb183-9" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb183-10"><a href="input-standards.html#cb183-10" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
 </div>
 </div>
 </div>
