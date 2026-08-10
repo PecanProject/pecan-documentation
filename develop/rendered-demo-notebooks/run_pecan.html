@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#plot-carbon-fluxes" id="toc-plot-carbon-fluxes" class="nav-link" data-scroll-target="#plot-carbon-fluxes"><span class="header-section-number">12.1</span> Plot Carbon Fluxes</a></li>
   <li><a href="#plot-carbon-pools" id="toc-plot-carbon-pools" class="nav-link" data-scroll-target="#plot-carbon-pools"><span class="header-section-number">12.2</span> Plot Carbon Pools</a></li>
   <li><a href="#plot-water-variables" id="toc-plot-water-variables" class="nav-link" data-scroll-target="#plot-water-variables"><span class="header-section-number">12.3</span> Plot Water Variables</a></li>
-  <li><a href="#plot-lai-and-biomass" id="toc-plot-lai-and-biomass" class="nav-link" data-scroll-target="#plot-lai-and-biomass"><span class="header-section-number">12.4</span> Plot LAI and Biomass</a></li>
+  <li><a href="#plot-lai-and-above-ground-wood" id="toc-plot-lai-and-above-ground-wood" class="nav-link" data-scroll-target="#plot-lai-and-above-ground-wood"><span class="header-section-number">12.4</span> Plot LAI and Above Ground Wood</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">13</span> Conclusion</a></li>
   <li><a href="#clean-up-workflow-output-optional" id="toc-clean-up-workflow-output-optional" class="nav-link" data-scroll-target="#clean-up-workflow-output-optional"><span class="header-section-number">14</span> Clean Up Workflow Output (Optional)</a></li>
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-scenario-being-modeled" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="the-scenario-being-modeled"><span class="header-section-number">1.2.1</span> The Scenario Being Modeled:</h3>
 <p>We are modeling carbon and productivity dynamics at the Niwot Ridge Forest AmeriFlux site (<a href="https://ameriflux.lbl.gov/sites/siteinfo/US-NR1">US-NR1</a>, a high-elevation temperate coniferous forest in Colorado. The model configuration uses the SIPNET process-based ecosystem model, parameterized with a temperate coniferous plant functional type (PFT).</p>
-<p>The simulation is run for the full year 2004 (January 1 – December 31) using AmeriFlux LBL meteorological drivers from the Niwot Ridge site. The ensemble setup specifies one model run focusing on net primary productivity (NPP) as the target output variable.</p>
+<p>The simulation is run for the full year 2004 (January 1 – December 31) using AmeriFlux LBL meteorological drivers from the Niwot Ridge site. The ensemble setup specifies a small ten member ensemble focusing on net primary productivity (NPP) as the target output variable, so the plots later on show the spread across members rather than a single line.</p>
 <p>This scenario is designed to be a minimal, reproducible example to demonstrate how to run SIPNET within the PEcAn workflow. In later steps, this same framework can be extended to include more ensemble members, additional PFTs, longer time periods, or alternative meteorological inputs.</p>
 <p>This run is based on a study by <a href="https://doi.org/10.1016/j.agrformet.2008.04.013">Moore et. al.&nbsp;(2007)</a> that uses SIPNET to understand the relationship between water and carbon balance at this site.</p>
 </section>
@@ -378,8 +378,8 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
   .. ..$ posterior.files: chr "pft/temperate.coniferous/prior.distns.Rdata"
   .. ..$ outdir         : chr "pft/temperate.coniferous"
  $ ensemble     :List of 5
+  ..$ size         : chr "10"
   ..$ variable     : chr "NPP"
-  ..$ size         : num 1
   ..$ start.year   : num 2004
   ..$ end.year     : num 2004
   ..$ samplingspace:List of 2
@@ -419,7 +419,7 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
   ..$ settings.updated         : logi TRUE
   ..$ checked                  : logi TRUE
  $ workflow     :List of 1
-  ..$ id: chr "2026-08-10-17-52-47"
+  ..$ id: chr "2026-08-10-18-32-38"
  $ rundir       : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/run"
  $ modeloutdir  : chr "/work/documentation/tutorials/Demo_1_Basic_Run/demo_outdir/out"
  - attr(*, "class")= chr [1:3] "Settings" "SafeList" "list"</code></pre>
@@ -449,13 +449,24 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
 </section>
 <section id="write-model-configuration-files" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Write Model Configuration Files</h1>
-<p>This step generates the model-specific configuration files and scripts that will be used to run the ecosystem model. The process involves generating SIPNET configuration files using the <code>runModule.run.write.configs()</code> function.</p>
+<p>This step decides which model runs to do, then writes the configuration files for them.</p>
+<p><code>generate_joint_ensemble_design()</code> builds the design: one row per run, holding indices that say which parameter draw and which input file each run uses. It returns those samples alongside the design, since the indices only mean anything together with the samples they point into.</p>
+<p><code>runModule.run.write.configs()</code> then takes that whole object and writes the SIPNET configuration files.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">generate_joint_ensemble_design</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  settings,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ensemble_size =</span> settings<span class="sc">$</span>ensemble<span class="sc">$</span>size</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  settings,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">input_design =</span> design</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: PEcAn.SIPNET</code></pre>
 </div>
 </div>
+<p>You can call <code>runModule.run.write.configs()</code> without a design and it will build one for itself, but that path is deprecated and will warn. Generating the design yourself also lets you inspect it before any runs happen: <code>design$design_matrix</code> is the table of runs, and <code>design$samples</code> holds the parameter draws behind it.</p>
 </section>
 <section id="run-model-simulations-and-fetch-results" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Run Model Simulations and Fetch Results</h1>
@@ -470,6 +481,24 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
   |                                                                            
   |                                                                      |   0%
   |                                                                            
+  |=======                                                               |  10%
+  |                                                                            
+  |==============                                                        |  20%
+  |                                                                            
+  |=====================                                                 |  30%
+  |                                                                            
+  |============================                                          |  40%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |==========================================                            |  60%
+  |                                                                            
+  |=================================================                     |  70%
+  |                                                                            
+  |========================================================              |  80%
+  |                                                                            
+  |===============================================================       |  90%
+  |                                                                            
   |======================================================================| 100%</code></pre>
 </div>
 </div>
@@ -479,27 +508,68 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
 <h1 data-number="10"><span class="header-section-number">10</span> Extract Model Results and Prepare for Analysis</h1>
 <p>After the model simulation completes, we need to extract the results and prepare them for analysis. This involves:</p>
 <ol type="1">
-<li>Reading the run ID</li>
+<li>Reading the run IDs</li>
 <li>Setting up output paths</li>
 <li>Defining time period</li>
 <li>Loading model output</li>
 <li>Convert to a standard format</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>runid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">read.table</span>(<span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/run/"</span>, <span class="st">"runs.txt"</span>, <span class="at">sep =</span> <span class="st">""</span>))[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="co"># Note: if you are using an xml from a run with multiple ensembles this line will provide only the first run id</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(settings<span class="sc">$</span>outdir, <span class="st">"/out/"</span>, runid)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span><span class="fu">read.output</span>(</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  runid,</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  outdir,</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  start.year,</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  end.year,</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="cn">NULL</span>,</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataframe =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bounds"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>runids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">read.table</span>(<span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/run/"</span>, <span class="st">"runs.txt"</span>, <span class="at">sep =</span> <span class="st">""</span>))[, <span class="dv">1</span>])</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># one entry per ensemble member, keyed by run id</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>ensemble_output <span class="ot">&lt;-</span> <span class="fu">lapply</span>(runids, <span class="cf">function</span>(runid) {</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  PEcAn.utils<span class="sc">::</span><span class="fu">read.output</span>(</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    runid,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">file.path</span>(settings<span class="sc">$</span>outdir, <span class="st">"/out/"</span>, runid),</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    start.year,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    end.year,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">variables =</span> <span class="cn">NULL</span>,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">dataframe =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ensemble_output) <span class="ot">&lt;-</span> runids</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co"># the members share a variable set, so the first one describes them all</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> ensemble_output[[<span class="dv">1</span>]]</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bounds"</span>)]</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="co"># sub-daily fluxes are too spiky to read as ten overlaid lines, so keep a</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="co"># daily-averaged copy of each member for those plots</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>daily_output <span class="ot">&lt;-</span> <span class="fu">lapply</span>(ensemble_output, <span class="cf">function</span>(member) {</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>  day <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(member<span class="sc">$</span>posix)</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>  vars <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">names</span>(member), <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bounds"</span>))</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>  averaged <span class="ot">&lt;-</span> <span class="fu">lapply</span>(member[vars], <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">tapply</span>(x, day, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(averaged) <span class="ot">&lt;-</span> vars</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">list</span>(<span class="at">posix =</span> <span class="fu">as.POSIXct</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(day)), <span class="at">tz =</span> <span class="st">"UTC"</span>)), averaged)</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a><span class="co"># draw one line per ensemble member, so the spread across the ensemble is visible</span></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>plot_ensemble <span class="ot">&lt;-</span> <span class="cf">function</span>(vars, cols, ylab, main, <span class="at">labels =</span> vars, <span class="at">data =</span> ensemble_output) {</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>  yrange <span class="ot">&lt;-</span> <span class="fu">range</span>(</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>(<span class="fu">lapply</span>(data, <span class="cf">function</span>(member) <span class="fu">unlist</span>(member[vars]))),</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># empty plot drawn off the real time axis, so the x axis stays dates</span></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(</span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>    data[[<span class="dv">1</span>]]<span class="sc">$</span>posix,</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>    data[[<span class="dv">1</span>]][[vars[<span class="dv">1</span>]]],</span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"n"</span>,</span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> yrange,</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> ylab,</span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> main</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(vars)) {</span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (member <span class="cf">in</span> data) {</span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lines</span>(member<span class="sc">$</span>posix, member[[vars[i]]], <span class="at">col =</span> <span class="fu">adjustcolor</span>(cols[i], <span class="at">alpha.f =</span> <span class="fl">0.4</span>))</span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> labels, <span class="at">col =</span> cols, <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Running this code will convert model specific output files into a standardized netCDF ([year].nc) that can be downloaded for visualization and analysis (R, Matlab, ncview, panoply, etc). This is a key step, because this standardization enables PEcAn to apply downstream analyses to outputs from different ecosystem models.</p>
 </section>
@@ -621,19 +691,19 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
 <section id="visualize-model-results" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Visualize Model Results</h1>
 <p>This section provides examples of how to create time series plots of different model variables. The examples cover various ecosystem processes including carbon fluxes, carbon pools, water variables, and structural variables like Leaf Area Index (LAI).</p>
+<p>Each plot draws one line per ensemble member. The members differ only in their parameter draws, so the spread between the lines is the parameter uncertainty carried through the model.</p>
 <section id="plot-carbon-fluxes" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="plot-carbon-fluxes"><span class="header-section-number">12.1</span> Plot Carbon Fluxes</h2>
+<p>Some members run negative NPP even in the growing season. That happens when the drawn respiration parameters outweigh photosynthesis, and it shows up here because this demo samples from priors rather than from a meta-analysis, so the spread is wide. Demo 3 shows what constraining these parameters with data does to that spread.</p>
+<p>GPP and NPP are sub-daily fluxes, so ten overlaid members would just fill the panel. These are averaged to daily values first, which is enough to see the members apart.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Gross Primary Productivity (GPP) and Net Primary Productivity (NPP)</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>GPP,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"green"</span>,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Flux (kg C m-2 s-1)"</span>,</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Fluxes Over Time"</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>NPP, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"GPP"</span>, <span class="st">"NPP"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ensemble</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"GPP"</span>, <span class="st">"NPP"</span>),</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Flux (kg C m-2 s-1)"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Fluxes Over Time (daily average)"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> daily_output</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -646,16 +716,13 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
 <section id="plot-carbon-pools" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="plot-carbon-pools"><span class="header-section-number">12.2</span> Plot Carbon Pools</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Total Live Biomass and Total Soil Carbon</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotLivBiom,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Pool (kg C m-2)"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Pools Over Time"</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotSoilCarb, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Total Live Biomass"</span>, <span class="st">"Total Soil Carbon"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ensemble</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"TotLivBiom"</span>, <span class="st">"TotSoilCarb"</span>),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Total Live Biomass"</span>, <span class="st">"Total Soil Carbon"</span>),</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Pool (kg C m-2)"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Carbon Pools Over Time"</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -667,17 +734,15 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
 </section>
 <section id="plot-water-variables" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="plot-water-variables"><span class="header-section-number">12.3</span> Plot Water Variables</h2>
+<p>Soil moisture separates into ten lines once the growing season starts, but snow water equivalent stays a single line. That is expected: snow is driven by the met input, which is the same file for every member, while soil moisture responds to the sampled parameters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Soil Moisture and Snow Water Equivalent</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SoilMoist,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>,</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Soil Moisture (kg m-2)"</span>,</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Soil Moisture Over Time"</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SWE, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Soil Moisture"</span>, <span class="st">"Snow Water Equivalent"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"lightblue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ensemble</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SoilMoist"</span>, <span class="st">"SWE"</span>),</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"lightblue"</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Soil Moisture"</span>, <span class="st">"Snow Water Equivalent"</span>),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Water (kg m-2)"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Soil Moisture and Snow Water Equivalent Over Time"</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -687,23 +752,33 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
 </div>
 </div>
 </section>
-<section id="plot-lai-and-biomass" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="plot-lai-and-biomass"><span class="header-section-number">12.4</span> Plot LAI and Biomass</h2>
+<section id="plot-lai-and-above-ground-wood" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="plot-lai-and-above-ground-wood"><span class="header-section-number">12.4</span> Plot LAI and Above Ground Wood</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Leaf Area Index (LAI) and Above Ground Wood</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>LAI,</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"LAI (m2 m-2)"</span>,</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Leaf Area Index Over Time"</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>AbvGrndWood, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"LAI"</span>, <span class="st">"Above Ground Wood"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ensemble</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars =</span> <span class="st">"LAI"</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"LAI (m2 m-2)"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Leaf Area Index Over Time"</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="run_pecan_files/figure-html/plot-lai-biomass-1.png" class="img-fluid figure-img" width="3000"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ensemble</span>(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars =</span> <span class="st">"AbvGrndWood"</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="st">"brown"</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="st">"Above Ground Wood"</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Wood (kg C m-2)"</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Above Ground Wood Over Time"</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="run_pecan_files/figure-html/plot-lai-biomass-2.png" class="img-fluid figure-img" width="3000"></p>
 </figure>
 </div>
 </div>
@@ -719,16 +794,16 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))
 <h1 data-number="14"><span class="header-section-number">14</span> Clean Up Workflow Output (Optional)</h1>
 <p>If you want to remove all files and directories created by this workflow and start fresh, you can run the following code. This will delete the entire output directory specified in your settings. <strong>Use with caution!</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to enable cleanup.</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to enable cleanup.</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="session-info-1" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Session Info</h1>
 <p>This section prints your R session information for reproducibility.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.3 (2025-02-28)
 Platform: x86_64-pc-linux-gnu

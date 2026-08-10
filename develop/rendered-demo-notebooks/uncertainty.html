@@ -310,16 +310,23 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))</code></pre>
 </section>
 <section id="sec-write-configs" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Write Model Configuration Files</h1>
-<p>This step generates the model-specific configuration files that will be used to run the ecosystem model. The process involves:</p>
-<ol start="2" type="1">
-<li>Generating SIPNET configuration files using the <code>runModule.run.write.configs()</code> function.</li>
-</ol>
+<p>This step decides which model runs to do, then writes the configuration files for them.</p>
+<p><code>generate_joint_ensemble_design()</code> builds the ensemble design: one row per run, holding indices that say which parameter draw each run uses. It returns those samples alongside the design, since the indices only mean anything together with the samples they point into. Because this demo also runs a sensitivity analysis, the SA design is generated internally as well; passing one in yourself isn’t supported yet.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">generate_joint_ensemble_design</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  settings,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ensemble_size =</span> settings<span class="sc">$</span>ensemble<span class="sc">$</span>size</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>settings <span class="ot">&lt;-</span> PEcAn.workflow<span class="sc">::</span><span class="fu">runModule.run.write.configs</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  settings,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">input_design =</span> design</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: PEcAn.SIPNET</code></pre>
 </div>
 </div>
+<p>Generating the design yourself lets you inspect it before any runs happen: <code>design$design_matrix</code> is the table of runs, and <code>design$samples</code> holds the parameter draws behind it, which is what the sensitivity and variance decomposition steps later report on.</p>
 </section>
 <section id="run-model-simulations" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Run Model Simulations</h1>
