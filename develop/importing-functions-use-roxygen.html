@@ -696,11 +696,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.4.2" data-path="osinstall.html"><a href="osinstall.html#centosredhat"><i class="fa fa-check"></i><b>22.4.2</b> CentOS/RedHat</a></li>
 <li class="chapter" data-level="22.4.3" data-path="osinstall.html"><a href="osinstall.html#macosx"><i class="fa fa-check"></i><b>22.4.3</b> Mac OSX</a></li>
 <li class="chapter" data-level="22.4.4" data-path="osinstall.html"><a href="osinstall.html#install-bety"><i class="fa fa-check"></i><b>22.4.4</b> Installing BETY</a></li>
-</ul></li>
-<li class="chapter" data-level="22.5" data-path="see-also.html"><a href="see-also.html"><i class="fa fa-check"></i><b>22.5</b> See Also</a>
-<ul>
-<li class="chapter" data-level="22.5.1" data-path="see-also.html"><a href="see-also.html#install-models"><i class="fa fa-check"></i><b>22.5.1</b> Install Models</a></li>
-<li class="chapter" data-level="22.5.2" data-path="see-also.html"><a href="see-also.html#install-data"><i class="fa fa-check"></i><b>22.5.2</b> Installing data for PEcAn</a></li>
+<li class="chapter" data-level="22.4.5" data-path="osinstall.html"><a href="osinstall.html#install-models"><i class="fa fa-check"></i><b>22.4.5</b> Install Models</a></li>
+<li class="chapter" data-level="22.4.6" data-path="osinstall.html"><a href="osinstall.html#install-data"><i class="fa fa-check"></i><b>22.4.6</b> Installing data for PEcAn</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="pecan-remote.html"><a href="pecan-remote.html"><i class="fa fa-check"></i><b>23</b> Remote execution with PEcAn</a>
@@ -780,15 +777,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">28.4</span> Importing Functions: Use Roxygen<a href="importing-functions-use-roxygen.html#importing-functions-use-roxygen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>PEcAn style is to import very few functions and instead use fully namespaced function calls (<code>pkg::fn()</code>) everywhere it’s practical to do so. In cases where double-colon notation would be especially burdensome, such as when importing custom binary operators like <code>%&gt;%</code>, it’s acceptable to import specific functions into the package namespace. Do this by using Roxygen comments of the form <code>#' @importFrom pkg function</code>, not by hand-editing the NAMESPACE file.</p>
 <p>If the import is only used in one or a few functions, use an <code>@importFrom</code> in the documentation for each function that uses it. If it is used all over the package, use a single <code>@importFrom</code> in the Roxygen documentation block for the whole package, which probably lives in a file called either <code>zzz.R</code> or <code>&lt;your_package_name&gt;-package.R</code>:</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="importing-functions-use-roxygen.html#cb490-1" tabindex="-1"></a><span class="co">#&#39; What your package does</span></span>
-<span id="cb490-2"><a href="importing-functions-use-roxygen.html#cb490-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb490-3"><a href="importing-functions-use-roxygen.html#cb490-3" tabindex="-1"></a><span class="co">#&#39; Longer description of the package goes here.</span></span>
-<span id="cb490-4"><a href="importing-functions-use-roxygen.html#cb490-4" tabindex="-1"></a><span class="co">#&#39; Probably with links to other resources about it, citations, etc.</span></span>
-<span id="cb490-5"><a href="importing-functions-use-roxygen.html#cb490-5" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb490-6"><a href="importing-functions-use-roxygen.html#cb490-6" tabindex="-1"></a><span class="co">#&#39; @docType package</span></span>
-<span id="cb490-7"><a href="importing-functions-use-roxygen.html#cb490-7" tabindex="-1"></a><span class="co">#&#39; @name PEcAn.yourpkg</span></span>
-<span id="cb490-8"><a href="importing-functions-use-roxygen.html#cb490-8" tabindex="-1"></a><span class="co">#&#39; @importFrom magrittr %&gt;%</span></span>
-<span id="cb490-9"><a href="importing-functions-use-roxygen.html#cb490-9" tabindex="-1"></a><span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="importing-functions-use-roxygen.html#cb487-1" tabindex="-1"></a><span class="co">#&#39; What your package does</span></span>
+<span id="cb487-2"><a href="importing-functions-use-roxygen.html#cb487-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb487-3"><a href="importing-functions-use-roxygen.html#cb487-3" tabindex="-1"></a><span class="co">#&#39; Longer description of the package goes here.</span></span>
+<span id="cb487-4"><a href="importing-functions-use-roxygen.html#cb487-4" tabindex="-1"></a><span class="co">#&#39; Probably with links to other resources about it, citations, etc.</span></span>
+<span id="cb487-5"><a href="importing-functions-use-roxygen.html#cb487-5" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb487-6"><a href="importing-functions-use-roxygen.html#cb487-6" tabindex="-1"></a><span class="co">#&#39; @docType package</span></span>
+<span id="cb487-7"><a href="importing-functions-use-roxygen.html#cb487-7" tabindex="-1"></a><span class="co">#&#39; @name PEcAn.yourpkg</span></span>
+<span id="cb487-8"><a href="importing-functions-use-roxygen.html#cb487-8" tabindex="-1"></a><span class="co">#&#39; @importFrom magrittr %&gt;%</span></span>
+<span id="cb487-9"><a href="importing-functions-use-roxygen.html#cb487-9" tabindex="-1"></a><span class="cn">NULL</span></span></code></pre></div>
 <p>Roxygen will make sure there’s only one NAMESPACE entry per imported function no matter how many <code>importFrom</code> statements there are, but please pick a scheme (either import on every usage or once for the whole package), stick with it, and do not make function <code>x()</code> rely on an importFrom in the comments above function <code>y()</code>.</p>
 <p>Please do <em>not</em> import entire package namespaces (<code>#' @import pkg</code>); it increases the chance of function name collisions and makes it much harder to understand which package a given function was called from.</p>
 <p>A special note about importing functions from the <a href="https://tidyverse.org">tidyverse</a>: Be sure to import from the package(s) that actually contain the functions you want to use, e.g. <code>Imports: dplyr, magrittr, purrr</code> / <code>@importFrom magrittr %&gt;%</code> / <code>purrr::map(...)</code>, not <code>Imports: tidyverse</code> / <code>@importFrom tidyverse %&gt;%</code> / <code>tidyverse::map(...)</code>. The package named <code>tidyverse</code> is just a interactive shortcut that loads the whole collection of constituent packages; it doesn’t export any functions in its own namespace and therefore importing it into your package doesn’t make them available.</p>

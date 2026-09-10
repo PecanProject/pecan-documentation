@@ -696,11 +696,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.4.2" data-path="osinstall.html"><a href="osinstall.html#centosredhat"><i class="fa fa-check"></i><b>22.4.2</b> CentOS/RedHat</a></li>
 <li class="chapter" data-level="22.4.3" data-path="osinstall.html"><a href="osinstall.html#macosx"><i class="fa fa-check"></i><b>22.4.3</b> Mac OSX</a></li>
 <li class="chapter" data-level="22.4.4" data-path="osinstall.html"><a href="osinstall.html#install-bety"><i class="fa fa-check"></i><b>22.4.4</b> Installing BETY</a></li>
-</ul></li>
-<li class="chapter" data-level="22.5" data-path="see-also.html"><a href="see-also.html"><i class="fa fa-check"></i><b>22.5</b> See Also</a>
-<ul>
-<li class="chapter" data-level="22.5.1" data-path="see-also.html"><a href="see-also.html#install-models"><i class="fa fa-check"></i><b>22.5.1</b> Install Models</a></li>
-<li class="chapter" data-level="22.5.2" data-path="see-also.html"><a href="see-also.html#install-data"><i class="fa fa-check"></i><b>22.5.2</b> Installing data for PEcAn</a></li>
+<li class="chapter" data-level="22.4.5" data-path="osinstall.html"><a href="osinstall.html#install-models"><i class="fa fa-check"></i><b>22.4.5</b> Install Models</a></li>
+<li class="chapter" data-level="22.4.6" data-path="osinstall.html"><a href="osinstall.html#install-data"><i class="fa fa-check"></i><b>22.4.6</b> Installing data for PEcAn</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="pecan-remote.html"><a href="pecan-remote.html"><i class="fa fa-check"></i><b>23</b> Remote execution with PEcAn</a>
@@ -783,9 +780,9 @@ If working from the web interface, the tunnel will be opened for you by some und
 The best way to do this is to create the tunnel first, outside of R, as described above.
 (In the following examples, I’ll use my username <code>ashiklom</code> connecting to the <code>test-pecan</code> server with a socket stored in <code>/tmp/testpecan</code>.
 To follow along, replace these with your own username and designated server, respectively).</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb471-1"><a href="ssh-tunnels-and-pecan.html#cb471-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-nNf</span> <span class="at">-o</span> ControlMaster=yes <span class="at">-S</span> /tmp/testpecan ashiklom@test-pecan.bu.edu</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb468-1"><a href="ssh-tunnels-and-pecan.html#cb468-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-nNf</span> <span class="at">-o</span> ControlMaster=yes <span class="at">-S</span> /tmp/testpecan ashiklom@test-pecan.bu.edu</span></code></pre></div>
 <p>Then, in R, create a <code>host</code> object, which is just a list containing the elements <code>name</code> (hostname) and <code>tunnel</code> (path to tunnel file).</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="ssh-tunnels-and-pecan.html#cb472-1" tabindex="-1"></a>my_host <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="at">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="ssh-tunnels-and-pecan.html#cb469-1" tabindex="-1"></a>my_host <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;test-pecan.bu.edu&quot;</span>, <span class="at">tunnel =</span> <span class="st">&quot;/tmp/testpecan&quot;</span>)</span></code></pre></div>
 <p>This host object can then be used in any of the remote execution functions.</p>
 </div>
             </section>

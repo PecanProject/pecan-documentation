@@ -696,11 +696,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.4.2" data-path="osinstall.html"><a href="osinstall.html#centosredhat"><i class="fa fa-check"></i><b>22.4.2</b> CentOS/RedHat</a></li>
 <li class="chapter" data-level="22.4.3" data-path="osinstall.html"><a href="osinstall.html#macosx"><i class="fa fa-check"></i><b>22.4.3</b> Mac OSX</a></li>
 <li class="chapter" data-level="22.4.4" data-path="osinstall.html"><a href="osinstall.html#install-bety"><i class="fa fa-check"></i><b>22.4.4</b> Installing BETY</a></li>
-</ul></li>
-<li class="chapter" data-level="22.5" data-path="see-also.html"><a href="see-also.html"><i class="fa fa-check"></i><b>22.5</b> See Also</a>
-<ul>
-<li class="chapter" data-level="22.5.1" data-path="see-also.html"><a href="see-also.html#install-models"><i class="fa fa-check"></i><b>22.5.1</b> Install Models</a></li>
-<li class="chapter" data-level="22.5.2" data-path="see-also.html"><a href="see-also.html#install-data"><i class="fa fa-check"></i><b>22.5.2</b> Installing data for PEcAn</a></li>
+<li class="chapter" data-level="22.4.5" data-path="osinstall.html"><a href="osinstall.html#install-models"><i class="fa fa-check"></i><b>22.4.5</b> Install Models</a></li>
+<li class="chapter" data-level="22.4.6" data-path="osinstall.html"><a href="osinstall.html#install-data"><i class="fa fa-check"></i><b>22.4.6</b> Installing data for PEcAn</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="pecan-remote.html"><a href="pecan-remote.html"><i class="fa fa-check"></i><b>23</b> Remote execution with PEcAn</a>
@@ -783,25 +780,25 @@ Even simple password-protection can be tricky in scripts, since (by design) it i
 <p>A convenient and secure way to follow SSH security protocol, but prevent having to go through the full authentication process every time, is to use SSH tunnels (or “sockets”, which are effectively synonymous).
 Essentially, an SSH socket is a read- and write-protectected file that contains all of the information about an SSH connection.</p>
 <p>To create an SSH tunnel, use a command like the following:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb466-1"><a href="ssh-tunneling.html#cb466-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-n</span> <span class="at">-N</span> <span class="at">-f</span> <span class="at">-o</span> ControlMaster=yes <span class="at">-S</span> /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb463-1"><a href="ssh-tunneling.html#cb463-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-n</span> <span class="at">-N</span> <span class="at">-f</span> <span class="at">-o</span> ControlMaster=yes <span class="at">-S</span> /path/to/socket/file <span class="op">&lt;</span>username<span class="op">&gt;</span>@<span class="op">&lt;</span>hostname<span class="op">&gt;</span></span></code></pre></div>
 <p>If appropriate, this will prompt you for your password (if using password authentication), and then will drop you back to the command line (thanks to the <code>-N</code> flag, which runs SSH without executing a command, the <code>-f</code> flag, which pushes SSH into the background, and the <code>-n</code> flag, which prevents ssh from reading any input).
 It will also create the file <code>/path/to/socket/file</code>.</p>
 <p>To use this socket with another command, use the <code>-S /path/to/file</code> flag, pointing to the same tunnel file you just created.</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb467-1"><a href="ssh-tunneling.html#cb467-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-S</span> /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb464-1"><a href="ssh-tunneling.html#cb464-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-S</span> /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> <span class="op">&lt;</span>optional command<span class="op">&gt;</span></span></code></pre></div>
 <p>This will let you access the server without any sort of authentication step.
 As before, if <code>&lt;optional command&gt;</code> is blank, you will be dropped into an interactive shell on the remote, or if it’s a command, that command will be executed and the output returned.</p>
 <p>To close a socket, use the following:</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb468-1"><a href="ssh-tunneling.html#cb468-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-S</span> /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb465-1"><a href="ssh-tunneling.html#cb465-1" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-S</span> /path/to/socket/file <span class="op">&lt;</span>hostname<span class="op">&gt;</span> -O exit</span></code></pre></div>
 <p>This will delete the socket file and close the connection.
 Alternatively, a scorched earth approach to closing the SSH tunnel if you don’t remember where you put the socket file is something like the following:</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb469-1"><a href="ssh-tunneling.html#cb469-1" tabindex="-1"></a><span class="ex">pgrep</span> ssh   <span class="co"># See which processes will be killed</span></span>
-<span id="cb469-2"><a href="ssh-tunneling.html#cb469-2" tabindex="-1"></a><span class="ex">pkill</span> ssh   <span class="co"># Kill those processes</span></span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb466-1"><a href="ssh-tunneling.html#cb466-1" tabindex="-1"></a><span class="ex">pgrep</span> ssh   <span class="co"># See which processes will be killed</span></span>
+<span id="cb466-2"><a href="ssh-tunneling.html#cb466-2" tabindex="-1"></a><span class="ex">pkill</span> ssh   <span class="co"># Kill those processes</span></span></code></pre></div>
 <p>…which will kill all user processes called <code>ssh</code>.</p>
 <p>To automatically create tunnels following a specific pattern, you can add the following to your
 <code>~/.ssh/config</code></p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb470-1"><a href="ssh-tunneling.html#cb470-1" tabindex="-1"></a><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span></span>
-<span id="cb470-2"><a href="ssh-tunneling.html#cb470-2" tabindex="-1"></a> <span class="ex">ControlMaster</span> auto</span>
-<span id="cb470-3"><a href="ssh-tunneling.html#cb470-3" tabindex="-1"></a> <span class="ex">ControlPath</span> /tmp/%r@%h:%p</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb467-1"><a href="ssh-tunneling.html#cb467-1" tabindex="-1"></a><span class="ex">Host</span> <span class="op">&lt;</span>hostname goes here<span class="op">&gt;</span></span>
+<span id="cb467-2"><a href="ssh-tunneling.html#cb467-2" tabindex="-1"></a> <span class="ex">ControlMaster</span> auto</span>
+<span id="cb467-3"><a href="ssh-tunneling.html#cb467-3" tabindex="-1"></a> <span class="ex">ControlPath</span> /tmp/%r@%h:%p</span></code></pre></div>
 <p>For more information, see <code>man ssh</code>.</p>
 </div>
             </section>
