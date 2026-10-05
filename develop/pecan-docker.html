@@ -271,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.5" data-path="coding-practices.html"><a href="coding-practices.html#developer-roxygen"><i class="fa fa-check"></i><b>8.3.5</b> Documenting functions using <code>roxygen2</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="docker-index.html"><a href="docker-index.html"><i class="fa fa-check"></i><b>8.4</b> Docker</a></li>
-<li class="chapter" data-level="8.5" data-path="docker-intro.html"><a href="docker-intro.html"><i class="fa fa-check"></i><b>8.5</b> Introduction to Docker?</a>
+<li class="chapter" data-level="8.5" data-path="docker-intro.html"><a href="docker-intro.html"><i class="fa fa-check"></i><b>8.5</b> Introduction to Docker</a>
 <ul>
 <li class="chapter" data-level="8.5.1" data-path="docker-intro.html"><a href="docker-intro.html#what-is-docker"><i class="fa fa-check"></i><b>8.5.1</b> What is Docker?</a></li>
 <li class="chapter" data-level="8.5.2" data-path="docker-intro.html"><a href="docker-intro.html#working-with-docker"><i class="fa fa-check"></i><b>8.5.2</b> Working with Docker</a></li>
@@ -312,9 +312,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.10.1" data-path="docker-build-images.html"><a href="docker-build-images.html#docker-local-devel"><i class="fa fa-check"></i><b>8.10.1</b> Local development and testing with Docker</a></li>
 </ul></li>
-<li class="chapter" data-level="8.11" data-path="docker-index.html"><a href="docker-index.html#docker-troubleshooting"><i class="fa fa-check"></i><b>8.11</b> Troubleshooting Docker</a>
+<li class="chapter" data-level="8.11" data-path="docker-troubleshooting.html"><a href="docker-troubleshooting.html"><i class="fa fa-check"></i><b>8.11</b> Troubleshooting Docker</a>
 <ul>
-<li class="chapter" data-level="8.11.1" data-path="docker-troubleshooting.html"><a href="docker-troubleshooting.html"><i class="fa fa-check"></i><b>8.11.1</b> “Package not available” while building images</a></li>
+<li class="chapter" data-level="8.11.1" data-path="docker-troubleshooting.html"><a href="docker-troubleshooting.html#package-not-available-while-building-images"><i class="fa fa-check"></i><b>8.11.1</b> “Package not available” while building images</a></li>
 </ul></li>
 <li class="chapter" data-level="8.12" data-path="docker-migrate.html"><a href="docker-migrate.html"><i class="fa fa-check"></i><b>8.12</b> Migrating PEcAn from VM to Docker</a>
 <ul>
@@ -1497,7 +1497,7 @@ It is accessible at <a href="http://pecan.localhost/pecan/" class="uri">http://p
     timeout: 5s
     retries: 5</code></pre>
 <p>Its Dockerfile ships with the PEcAn source code, in <a href="https://github.com/PecanProject/pecan/blob/develop/docker/web/Dockerfile"><code>docker/web/Dockerfile</code></a>.</p>
-<p>In terms of <a href="#pecan-docker-develop">actively developing PEcAn using Docker</a>, this is the service to modify when making changes to the web interface (i.e. PHP, HTML, and JavaScript code located in the PEcAn <code>web</code> directory).</p>
+<p>In terms of <a href="docker-build-images.html#docker-local-devel">actively developing PEcAn using Docker</a>, this is the service to modify when making changes to the web interface (i.e. PHP, HTML, and JavaScript code located in the PEcAn <code>web</code> directory).</p>
 </div>
 <div id="pecan-dc-executor" class="section level3 hasAnchor" number="8.8.11">
 <h3><span class="header-section-number">8.8.11</span> <code>executor</code><a href="pecan-docker.html#pecan-dc-executor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1525,7 +1525,7 @@ However, it is <em>not</em> in charge of executing the models themselves – mod
 <p>Its Dockerfile ships with the PEcAn source code, in <a href="https://github.com/PecanProject/pecan/blob/develop/docker/executor/Dockerfile"><code>docker/executor/Dockerfile</code></a>.
 Its image is built on top of the <code>pecan/base</code> image (<a href="https://github.com/PecanProject/pecan/blob/develop/docker/base/Dockerfile"><code>docker/base/Dockerfile</code></a>), which contains the actual PEcAn source.
 To facilitate caching, the <code>pecan/base</code> image is itself built on top of the <code>pecan/depends</code> image (<a href="https://github.com/PecanProject/pecan/blob/develop/docker/depends/Dockerfile"><code>docker/depends/Dockerfile</code></a>), a large image that contains an R installation and PEcAn’s many system and R package dependencies (which usually take ~30 minutes or longer to install from scratch).</p>
-<p>In terms of <a href="#pecan-docker-develop">actively developing PEcAn using Docker</a>, this is the service to modify when making changes to the PEcAn R source code.
+<p>In terms of <a href="docker-build-images.html#docker-local-devel">actively developing PEcAn using Docker</a>, this is the service to modify when making changes to the PEcAn R source code.
 Note that, unlike changes to the <code>web</code> image’s PHP code, changes to the R source code do not immediately propagate to the PEcAn container; instead, you have to re-compile the code by running <code>make</code> inside the container.</p>
 </div>
 <div id="pecan-dc-monitor" class="section level3 hasAnchor" number="8.8.12">
