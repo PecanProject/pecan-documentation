@@ -311,9 +311,6 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))</code></pre>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  settings,</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">input_design =</span> design</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: PEcAn.SIPNET</code></pre>
-</div>
 </div>
 <p>The design carries labels saying what each run is, so it goes to the sensitivity runs without anything having to inspect the settings. An ensemble is a separate call with its own design, which is what Demo 1 does.</p>
 <p>You can call <code>runModule.run.write.configs()</code> without a design and it will build one itself, but that path is deprecated and will warn. Building it yourself also lets you look at it first: <code>design$design_matrix</code> is the table of runs, and <code>design$samples</code> holds the parameter draws behind it.</p>
@@ -323,7 +320,7 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))</code></pre>
 <p>This section executes the SIPNET simulations and retrieves the results.</p>
 <p>It uses the function <code>runModule_start_model_runs(settings)</code> to initiate the model runs using the configuration files generated in the previous step.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>PEcAn.workflow<span class="sc">::</span><span class="fu">runModule_start_model_runs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>PEcAn.workflow<span class="sc">::</span><span class="fu">runModule_start_model_runs</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   |                                                                            
@@ -414,7 +411,7 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))</code></pre>
 <h1 data-number="6"><span class="header-section-number">6</span> Fetch Model Outputs</h1>
 <p>Next we convert all of the model output from the previous run to a standard format that PEcAn can use for analysis. This is done using the <code>runModule.get.results()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runModule.get.results</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runModule.get.results</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-run-uncertainty" class="level1" data-number="7">
@@ -422,7 +419,7 @@ install.packages(c('PEcAn.all', 'PEcAn.SIPNET'))</code></pre>
 <p>Next, we use the outputs from the previous step to perform sensitivity analyses.</p>
 <p><strong>Sensitivity Analysis</strong>: Systematically varies individual parameters to assess their influence on model outputs. This identifies which parameters most strongly affect model predictions and helps prioritize parameter refinement efforts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runModule.run.sensitivity.analysis</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runModule.run.sensitivity.analysis</span>(settings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$coef.vars
          growth_resp_factor          leaf_turnover_rate 
@@ -646,57 +643,57 @@ coarse_root_respiration_Q10
 <h2 data-number="10.1" class="anchored" data-anchor-id="sensitivity-and-variance-decomposition-visualization"><span class="header-section-number">10.1</span> Sensitivity and Variance Decomposition Visualization</h2>
 <p>This block visualizes the results of the sensitivity analysis. The plots show how sensitive the model output is to changes in each parameter and which parameters contribute most to the overall uncertainty.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. Define Helper Variables ---</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract key variables from the settings object to simplify file path construction</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># and plotting. This makes the code cleaner and easier to read.</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>variable <span class="ot">&lt;-</span> settings<span class="sc">$</span>sensitivity.analysis<span class="sc">$</span>variable</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>pft <span class="ot">&lt;-</span> settings<span class="sc">$</span>pfts[[<span class="dv">1</span>]]</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. Load Sensitivity Analysis Results ---</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> settings<span class="sc">$</span>sensitivity.analysis[<span class="fu">names</span>(settings<span class="sc">$</span>sensitivity.analysis) <span class="sc">==</span> <span class="st">"variable"</span>]</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">unlist</span>(vars)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="cf">in</span> variables) {</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Construct the path to the sensitivity analysis results file</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  sens_file <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">sensitivity.filename</span>(</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    settings,</span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">prefix =</span> <span class="st">"sensitivity.results"</span>,</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">all.var.yr =</span> <span class="cn">FALSE</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">file.exists</span>(sens_file)) {</span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    PEcAn.logger<span class="sc">::</span><span class="fu">logger.info</span>(<span class="fu">paste</span>(<span class="st">"Plotting sensitivity results for variable:"</span>, var, <span class="st">"from"</span>, <span class="fu">basename</span>(sens_file)))</span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    sens_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>()</span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">load</span>(sens_file, <span class="at">envir =</span> sens_env)</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    sensitivity.results <span class="ot">&lt;-</span> sens_env<span class="sc">$</span>sensitivity.results</span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- 3. Generate Sensitivity Plots ---</span></span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>sensitivity.output)) {</span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>      sa_plots <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">plot_sensitivities</span>(</span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>        sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>sensitivity.output</span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Explicitly print the plot</span></span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>      gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">grobs =</span> sa_plots, <span class="at">ncol =</span> <span class="fu">floor</span>(<span class="fu">sqrt</span>(<span class="fu">length</span>(sa_plots))),</span>
-<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">top =</span> <span class="fu">paste</span>(<span class="st">"Sensitivity Analysis:"</span>, var)</span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- 4. Generate Variance Decomposition Plots ---</span></span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>variance.decomposition.output)) {</span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>      vd_plots <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">plot_variance_decomposition</span>(</span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>        sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>variance.decomposition.output</span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Explicitly print the plot</span></span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>      vd_plots <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">"Variance Decomposition:"</span>, var))</span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>    PEcAn.logger<span class="sc">::</span><span class="fu">logger.warn</span>(<span class="fu">paste</span>(<span class="st">"Could not find sensitivity results file for variable:"</span>, var))</span>
-<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. Define Helper Variables ---</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract key variables from the settings object to simplify file path construction</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># and plotting. This makes the code cleaner and easier to read.</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>variable <span class="ot">&lt;-</span> settings<span class="sc">$</span>sensitivity.analysis<span class="sc">$</span>variable</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>pft <span class="ot">&lt;-</span> settings<span class="sc">$</span>pfts[[<span class="dv">1</span>]]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. Load Sensitivity Analysis Results ---</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> settings<span class="sc">$</span>sensitivity.analysis[<span class="fu">names</span>(settings<span class="sc">$</span>sensitivity.analysis) <span class="sc">==</span> <span class="st">"variable"</span>]</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">unlist</span>(vars)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="cf">in</span> variables) {</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Construct the path to the sensitivity analysis results file</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  sens_file <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">sensitivity.filename</span>(</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    settings,</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">prefix =</span> <span class="st">"sensitivity.results"</span>,</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">all.var.yr =</span> <span class="cn">FALSE</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">file.exists</span>(sens_file)) {</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    PEcAn.logger<span class="sc">::</span><span class="fu">logger.info</span>(<span class="fu">paste</span>(<span class="st">"Plotting sensitivity results for variable:"</span>, var, <span class="st">"from"</span>, <span class="fu">basename</span>(sens_file)))</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    sens_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>()</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">load</span>(sens_file, <span class="at">envir =</span> sens_env)</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>    sensitivity.results <span class="ot">&lt;-</span> sens_env<span class="sc">$</span>sensitivity.results</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- 3. Generate Sensitivity Plots ---</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>sensitivity.output)) {</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>      sa_plots <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">plot_sensitivities</span>(</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>        sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>sensitivity.output</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Explicitly print the plot</span></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>      gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">grobs =</span> sa_plots, <span class="at">ncol =</span> <span class="fu">floor</span>(<span class="fu">sqrt</span>(<span class="fu">length</span>(sa_plots))),</span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">top =</span> <span class="fu">paste</span>(<span class="st">"Sensitivity Analysis:"</span>, var)</span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- 4. Generate Variance Decomposition Plots ---</span></span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>variance.decomposition.output)) {</span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>      vd_plots <span class="ot">&lt;-</span> PEcAn.uncertainty<span class="sc">::</span><span class="fu">plot_variance_decomposition</span>(</span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>        sensitivity.results[[pft<span class="sc">$</span>name]]<span class="sc">$</span>variance.decomposition.output</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Explicitly print the plot</span></span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>      vd_plots <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">"Variance Decomposition:"</span>, var))</span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>    PEcAn.logger<span class="sc">::</span><span class="fu">logger.warn</span>(<span class="fu">paste</span>(<span class="st">"Could not find sensitivity results file for variable:"</span>, var))</span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -715,11 +712,11 @@ coarse_root_respiration_Q10
 <p><strong>Important:</strong> If you modify the sensitivity analysis parameters in this section, re-run Section <a href="#sec-run-uncertainty" class="quarto-xref">Section&nbsp;7</a> and then Section <a href="#sec-visualize" class="quarto-xref">Section&nbsp;10</a> to regenerate outputs and plots.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the quantiles (in standard deviations) for parameter distribution in sensitivity analysis</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>sensitivity.analysis<span class="sc">$</span>quantiles<span class="sc">$</span>sigma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the variable to be analyzed in sensitivity analysis</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>sensitivity.analysis<span class="sc">$</span>variable <span class="ot">&lt;-</span> <span class="st">"NEE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the quantiles (in standard deviations) for parameter distribution in sensitivity analysis</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>sensitivity.analysis<span class="sc">$</span>quantiles<span class="sc">$</span>sigma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the variable to be analyzed in sensitivity analysis</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>settings<span class="sc">$</span>sensitivity.analysis<span class="sc">$</span>variable <span class="ot">&lt;-</span> <span class="st">"NEE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -733,44 +730,44 @@ coarse_root_respiration_Q10
 <li>Loading model output</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>runid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">read.table</span>(<span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/run/"</span>, <span class="st">"runs.txt"</span>, <span class="at">sep =</span> <span class="st">""</span>))[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="co"># takes the first run id; change [1, 1] to pick a different row</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You can change [1,1] to [10,1], [5,1], etc. to select different run IDs from runs.txt</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For example: [10,1] selects the 10th run ID, [5,1] selects the 5th run ID</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/out/"</span>, runid, <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date))</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date))</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span><span class="fu">read.output</span>(</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  runid,</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  outdir,</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  start.year,</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  end.year,</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="cn">NULL</span>,</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataframe =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bnds"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>runid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">read.table</span>(<span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/run/"</span>, <span class="st">"runs.txt"</span>, <span class="at">sep =</span> <span class="st">""</span>))[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="co"># takes the first run id; change [1, 1] to pick a different row</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You can change [1,1] to [10,1], [5,1], etc. to select different run IDs from runs.txt</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For example: [10,1] selects the 10th run ID, [5,1] selects the 5th run ID</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="fu">paste</span>(settings<span class="sc">$</span>outdir, <span class="st">"/out/"</span>, runid, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>start.year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>start.date))</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>end.year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(settings<span class="sc">$</span>run<span class="sc">$</span>end.date))</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span><span class="fu">read.output</span>(</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  runid,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  outdir,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  start.year,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  end.year,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="cn">NULL</span>,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataframe =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>available_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(model_output)[<span class="sc">!</span><span class="fu">names</span>(model_output) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"posix"</span>, <span class="st">"time_bnds"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="display-available-model-variables" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> Display Available Model Variables</h1>
 <p>This section shows all the variables that are available in the model output. These variables represent different ecosystem processes and states that the model has simulated.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>vars_df <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span>standard_vars <span class="sc">|&gt;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Variable =</span> Variable.Name,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Description =</span> Long.name</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Variable <span class="sc">%in%</span> available_vars) <span class="sc">|&gt;</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">TODO</span><span class="co">: add year to PEcAn.utils::standard vars</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">Variable =</span> <span class="st">"year"</span>,</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">Description =</span> <span class="st">"Year"</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>vars_df<span class="sc">$</span>Description[<span class="fu">is.na</span>(vars_df<span class="sc">$</span>Description)] <span class="ot">&lt;-</span> <span class="st">"(No description available)"</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(vars_df, <span class="at">caption =</span> <span class="st">"Model Output Variables and Descriptions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>vars_df <span class="ot">&lt;-</span> PEcAn.utils<span class="sc">::</span>standard_vars <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Variable =</span> Variable.Name,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Description =</span> Long.name</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Variable <span class="sc">%in%</span> available_vars) <span class="sc">|&gt;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">TODO</span><span class="co">: add year to PEcAn.utils::standard vars</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">Variable =</span> <span class="st">"year"</span>,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">Description =</span> <span class="st">"Year"</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>vars_df<span class="sc">$</span>Description[<span class="fu">is.na</span>(vars_df<span class="sc">$</span>Description)] <span class="ot">&lt;-</span> <span class="st">"(No description available)"</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(vars_df, <span class="at">caption =</span> <span class="st">"Model Output Variables and Descriptions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>Model Output Variables and Descriptions</caption>
@@ -892,16 +889,16 @@ coarse_root_respiration_Q10
 <section id="plot-carbon-fluxes" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="plot-carbon-fluxes"><span class="header-section-number">14.1</span> Plot Carbon Fluxes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Gross Primary Productivity (GPP) and Net Primary Productivity (NPP)</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>GPP,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"green"</span>,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Flux (kg C m-2 s-1)"</span>,</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Carbon Fluxes Over Time — PEcAn"</span>, runid)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>NPP, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"GPP"</span>, <span class="st">"NPP"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Gross Primary Productivity (GPP) and Net Primary Productivity (NPP)</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>GPP,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"green"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Flux (kg C m-2 s-1)"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Carbon Fluxes Over Time — PEcAn"</span>, runid)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>NPP, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"GPP"</span>, <span class="st">"NPP"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -914,16 +911,16 @@ coarse_root_respiration_Q10
 <section id="plot-carbon-pools" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="plot-carbon-pools"><span class="header-section-number">14.2</span> Plot Carbon Pools</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Total Live Biomass and Total Soil Carbon</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotLivBiom,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Pool (kg C m-2)"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Carbon Pools Over Time — PEcAn"</span>, runid)</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotSoilCarb, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Total Live Biomass"</span>, <span class="st">"Total Soil Carbon"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Total Live Biomass and Total Soil Carbon</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotLivBiom,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Carbon Pool (kg C m-2)"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Carbon Pools Over Time — PEcAn"</span>, runid)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>TotSoilCarb, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Total Live Biomass"</span>, <span class="st">"Total Soil Carbon"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -936,16 +933,16 @@ coarse_root_respiration_Q10
 <section id="plot-water-variables" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="plot-water-variables"><span class="header-section-number">14.3</span> Plot Water Variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Soil Moisture and Snow Water Equivalent</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SoilMoist,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>,</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Soil Moisture (kg m-2)"</span>,</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Soil Moisture Over Time — PEcAn"</span>, runid)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SWE, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Soil Moisture"</span>, <span class="st">"Snow Water Equivalent"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"lightblue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Soil Moisture and Snow Water Equivalent</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SoilMoist,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Soil Moisture (kg m-2)"</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Soil Moisture Over Time — PEcAn"</span>, runid)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>SWE, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Soil Moisture"</span>, <span class="st">"Snow Water Equivalent"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"lightblue"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -958,16 +955,16 @@ coarse_root_respiration_Q10
 <section id="plot-lai-and-biomass" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="plot-lai-and-biomass"><span class="header-section-number">14.4</span> Plot LAI and Biomass</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Leaf Area Index (LAI) and Above Ground Wood</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>LAI,</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"LAI (m2 m-2)"</span>,</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Leaf Area Index Over Time — PEcAn"</span>, runid)</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>AbvGrndWood, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"LAI"</span>, <span class="st">"Above Ground Wood"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Leaf Area Index (LAI) and Above Ground Wood</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>LAI,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Date"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"LAI (m2 m-2)"</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Leaf Area Index Over Time — PEcAn"</span>, runid)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(model_output<span class="sc">$</span>posix, model_output<span class="sc">$</span>AbvGrndWood, <span class="at">col =</span> <span class="st">"brown"</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"LAI"</span>, <span class="st">"Above Ground Wood"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"brown"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -997,9 +994,9 @@ coarse_root_respiration_Q10
 <h1 data-number="17"><span class="header-section-number">17</span> Clean Up Workflow Output (Optional)</h1>
 <p>If you want to remove all files and directories created by this workflow and start fresh, you can run the following code. This will delete the entire output directory specified in your settings. <strong>Use with caution!</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to enable cleanup.</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">WARNING</span><span class="co">: This will permanently delete all workflow output files!</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to enable cleanup.</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fs::dir_delete(settings$outdir)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="session-information" class="level1" data-number="18">
@@ -1007,7 +1004,7 @@ coarse_root_respiration_Q10
 <section id="pecan-package-versions." class="level3" data-number="18.0.1">
 <h3 data-number="18.0.1" class="anchored" data-anchor-id="pecan-package-versions."><span class="header-section-number">18.0.1</span> PEcAn package versions.</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>PEcAn.all<span class="sc">::</span><span class="fu">pecan_version</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>PEcAn.all<span class="sc">::</span><span class="fu">pecan_version</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> package               v1.10.0 installed   source              
  PEcAn.all             1.10.0  1.10.0.9000 local (/pecan/bas...
@@ -1061,7 +1058,7 @@ coarse_root_respiration_Q10
 <section id="r-session-information" class="level3" data-number="18.0.2">
 <h3 data-number="18.0.2" class="anchored" data-anchor-id="r-session-information"><span class="header-section-number">18.0.2</span> R session information:</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.3 (2025-02-28)
 Platform: x86_64-pc-linux-gnu
